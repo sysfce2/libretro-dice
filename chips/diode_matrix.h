@@ -1,0 +1,17 @@
+#ifndef DIODE_MATRIX_H
+#define DIODE_MATRIX_H
+
+#include "../chip_desc.h"
+
+enum DIODE_MATRIX_PINS
+{
+	ROW0 = 1, ROW1, ROW2, ROW3, ROW4, ROW5, ROW6, ROW7,
+	ROW8, ROW9, ROW10, ROW11, ROW12, ROW13, ROW14, ROW15,
+	COL0, COL1, COL2, COL3, COL4, COL5, COL6, COL7
+};
+
+typedef int DIODE_LAYOUT[16][8];
+
+extern CHIP_DESC( DIODE_MATRIX );
+
+#endif
