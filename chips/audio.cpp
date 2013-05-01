@@ -19,11 +19,13 @@ static CUSTOM_LOGIC( audio_timer )
     chip->state = ACTIVE;
     chip->activation_time = chip->circuit->global_time;
 
-    chip->output_events.resize(2);
-    chip->output_events[0] = chip->delay[0];
-    chip->output_events[1] = chip->delay[1];
+    chip->output_events.clear();
+    chip->output_events.push_back(chip->circuit->global_time);
+    chip->output_events.push_back(chip->circuit->global_time + chip->delay[0]);
     chip->cycle_time = chip->delay[0] + chip->delay[1];
-    chip->current_output_event = 0;
+    chip->first_output_event = chip->output_events.begin();
+    chip->current_output_event = chip->output_events.begin();
+    chip->end_time = ~0ull;
 
     if(chip->output_links.size())
         chip->output_links[0].mask = 0;
@@ -43,13 +45,16 @@ CHIP_DESC( AUDIO ) =
 	CHIP_DESC_END
 };
 
-Audio::Audio() : current_buffer(0), current_pos(0), last_sample_time(0), sample_period(0.0)
+Audio::Audio() : last_sample_time(0), sample_period(0.0), gain(1 << 8)
 { }
 
 void Audio::audio_init(Circuit* circuit)
 {
+    
     static const int FREQUENCY[] = { 22050, 44100, 48000, 96000 }; 
-    int buffer_size = FREQUENCY[circuit->settings.audio.frequency] / 20; // 50 ms, TODO: Make configurable?
+    //int buffer_size = FREQUENCY[circuit->settings.audio.frequency] / 50; // 20 ms, TODO: Make configurable?
+    // Hardcoded 2048 buffer size now TODO: Make configurable?
+    int buffer_size = 2048;
 
     SDL_AudioSpec as;
 	as.freq = FREQUENCY[circuit->settings.audio.frequency];
@@ -67,14 +72,62 @@ void Audio::audio_init(Circuit* circuit)
 		exit(1);
 	}
 
-    audio_buffer[0].resize(as.samples);
-    audio_buffer[1].resize(as.samples);
     sample_period = uint64_t(1.0 / (Circuit::timescale * as.freq));
-
-    current_buffer = current_pos = 0;
     last_sample_time = circuit->global_time;
 
     SDL_PauseAudio(circuit->settings.audio.mute);
+
+    // Initialize gain array
+    if(desc)
+    {
+        for(int i = 0; i < gain.size(); i++)
+        {
+            double r_hi = 0.0, r_lo = 0.0;
+
+            for(int j = 0; j < 8; j++)
+            {
+                if(desc->r[j] < 1.0) continue; // Assume 1 Ohm minimum
+
+                if(i & (1 << j))
+                    r_hi += 1.0 / desc->r[j];
+                else
+                    r_lo += 1.0 / desc->r[j];
+            }
+
+            double val;
+            if(r_lo < 1.0e-6)
+            {
+                val = 1.0;
+            }
+            else if(r_hi < 1.0e-6)
+            {
+                val = 0.0;
+            }
+            else
+            {
+                r_hi = 1.0 / r_hi;
+                r_lo = 1.0 / r_lo;
+                val = r_lo / (r_hi + r_lo);
+            }
+
+            // Scale (0,1) to (-1,1)
+            gain[i] = 2 * val * desc->gain - 1.0;
+            //gain[i] = val * desc->gain;
+
+            if(gain[i] > 1.0) gain[i] = 1.0;
+            if(gain[i] < -1.0) gain[i] = -1.0;
+
+            //printf("Gain %d: %g %g %g %g\n", i, r_lo, r_hi, val, gain[i]);
+        }
+    }
+    else
+    {
+        gain[0] = -1.0;
+
+        // Any input high = max gain
+        for(int i = 1; i < gain.size(); i++)
+            gain[i] = 1.0;
+    }
 }
 
 Audio::~Audio()
@@ -89,20 +142,14 @@ CUSTOM_LOGIC( Audio::audio )
 
     int16_t vol = 30 * chip->circuit->settings.audio.volume; 
 
+    SDL_LockAudio();
     while(audio->last_sample_time + audio->sample_period < chip->circuit->global_time)
     {
-        audio->audio_buffer[audio->current_buffer][audio->current_pos++] = chip->inputs ? vol : 0;
+        //audio->audio_buffer.push_back(chip->inputs ? vol : -vol);
+        audio->audio_buffer.push_back(audio->gain[chip->inputs] * vol);
         audio->last_sample_time += audio->sample_period;
-        if(audio->current_pos == audio->audio_buffer[audio->current_buffer].size())
-        {
-            SDL_LockAudio();
-
-            audio->current_buffer ^= 1;
-            audio->current_pos = 0;
-
-            SDL_UnlockAudio();
-        }        
     }
+    SDL_UnlockAudio();
 
     chip->inputs ^= mask;
 }
@@ -110,12 +157,24 @@ CUSTOM_LOGIC( Audio::audio )
 void Audio::callback(void* userdata, uint8_t* str, int len)
 {
     Audio* audio = (Audio*)userdata;
-    std::vector<int16_t>& buffer = audio->audio_buffer[audio->current_buffer ^ 1];
+    cirque<int16_t, 4096>& buffer = audio->audio_buffer;
     
     int16_t* stream = (int16_t*)str;
     int length = len >> 1;
+    
+    static int16_t last_val = 0;
 
     for(int i = 0; i < length; i++)
-        stream[i] = buffer[i];
+    {
+        if(!buffer.empty())
+        {
+            last_val = stream[i] = buffer.front();
+            buffer.pop_front();
+        }
+        else 
+        {
+            stream[i] = last_val;
+        }
+    }
 }
 

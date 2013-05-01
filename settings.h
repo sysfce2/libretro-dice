@@ -83,7 +83,7 @@ struct Settings : configuration
 
         struct Button
         {
-            KeyAssignment button1, button2;
+            KeyAssignment button1, button2, button3;
         };
 
         struct CoinStart

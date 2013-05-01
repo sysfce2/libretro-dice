@@ -16,8 +16,8 @@
      +----------+
 */
 
-static const int SR_PINS[] = { 2, 15, 14, 13 };
-static const int SL_PINS[] = { 14, 13, 12, 7 };
+static const uint8_t SR_PINS[] = { 2, 15, 14, 13 };
+static const uint8_t SL_PINS[] = { 14, 13, 12, 7 };
 
 template <int N>
 CHIP_LOGIC( 74194 )
@@ -29,7 +29,7 @@ CHIP_LOGIC( 74194 )
     
     if(!pin[1])
         pin[Q] = 0;
-    else if(pin[11] && !prev_pin[11])
+    else if(POS_EDGE_PIN(11))
     {
         if(pin[10] && pin[9])
             pin[Q] = pin[P];
@@ -51,28 +51,28 @@ CHIP_DESC( 74194 ) =
 	CHIP_START( 74194<0> )
 		INPUT_PINS( 1, 9, 10, 11, 3, SR_PINS[0], SL_PINS[0] )
 		OUTPUT_PIN( 15 )
-		PREV_INPUT_PIN( 11 )
+		EVENT_PINS( 11 )
 		PREV_OUTPUT_PIN( 15 )
 		OUTPUT_DELAY_NS( 14.0, 17.0 ),
 
     CHIP_START( 74194<1> )
 		INPUT_PINS( 1, 9, 10, 11, 4, SR_PINS[1], SL_PINS[1] )
 		OUTPUT_PIN( 14 )
-		PREV_INPUT_PIN( 11 )
+		EVENT_PINS( 11 )
 		PREV_OUTPUT_PIN( 14 )
 		OUTPUT_DELAY_NS( 14.0, 17.0 ),
 
 	CHIP_START( 74194<2> )
 		INPUT_PINS( 1, 9, 10, 11, 5, SR_PINS[2], SL_PINS[2] )
 		OUTPUT_PIN( 13 )
-		PREV_INPUT_PIN( 11 )
+		EVENT_PINS( 11 )
 		PREV_OUTPUT_PIN( 13 )
 		OUTPUT_DELAY_NS( 14.0, 17.0 ),
 
 	CHIP_START( 74194<3> )
 	    INPUT_PINS( 1, 9, 10, 11, 6, SR_PINS[3], SL_PINS[3] )
 		OUTPUT_PIN( 12 )
-		PREV_INPUT_PIN( 11 )
+		EVENT_PINS( 11 )
 		PREV_OUTPUT_PIN( 12 )
 		OUTPUT_DELAY_NS( 14.0, 17.0 ),
 

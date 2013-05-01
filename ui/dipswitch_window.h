@@ -171,14 +171,14 @@ struct DipswitchWindow : Window
         exit_layout.append(exit_button, {350, 240 - exit_button.minimumGeometry().height, 90, exit_button.minimumGeometry().height});
     }
 
-    void create(const Position& pos)
+    void create(const Position& pos, int sel)
     {
         setGeometry({pos.x, pos.y, 450, 250});
         setTitle("DIP Switch Configuration");
         setResizable(false);
         setModal(true);
         
-        game_view.setSelection(0);
+        game_view.setSelection(sel);
         game_view.setSelected(true);
         game_view.onChange();
 

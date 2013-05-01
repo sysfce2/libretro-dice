@@ -30,8 +30,8 @@ static Mono555Desc b9_555_desc(K_OHM(70.0), U_FARAD(0.1));
 static Mono555Desc f4_555_desc(K_OHM(330.0), U_FARAD(4.7));
 static Mono555Desc g4_555_desc(K_OHM(220.0), U_FARAD(1.0));
 
-static Paddle1VerticalDesc pad1_desc(16000.0, 145000.0, &a9_555_desc);
-static Paddle2VerticalDesc pad2_desc(16000.0, 145000.0, &b9_555_desc);
+static Paddle1VerticalDesc pad1_desc(17000.0, 145000.0, &a9_555_desc);
+static Paddle2VerticalDesc pad2_desc(17000.0, 145000.0, &b9_555_desc);
 
 static DipswitchDesc dipswitch1_desc("winning_score", "Winning Score", 0, "11", "15");
 
@@ -152,6 +152,14 @@ CIRCUIT_LAYOUT( pong ) =
     CONNECTION(VCC, "F6", 1),
     CONNECTION(VCC, "F6", 4),
     CONNECTION(VCC, "F6", 13),
+
+    /*NET("TEST1", GND),
+
+    CONNECTION("CLOCK", 1, "F6", 12),
+    NET("VCC1", VCC),
+    NET("VCC1", "F6", 1),
+    NET("VCC1", "F6", 4),
+    NET("VCC1", "F6", 13),*/
 
     #define CLK "F6", 3
 

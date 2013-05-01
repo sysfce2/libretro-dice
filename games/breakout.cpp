@@ -49,7 +49,27 @@ static VIDEO_DESC( breakout )
     //VIDEO_RESISTANCE(Video::HBLANK_PIN, K_OHM(0.0))
     VIDEO_ORIENTATION(ROTATE_90)
     VIDEO_CONTRAST(4.0)
+
+    // Values guessed based on screenshots. TODO: Make more accurate
+    //             X,         Y,   W,        H,    R,    G,    B
+    VIDEO_OVERLAY( 15.570e-6, 0.0, 1.911e-6, -1.0, 0.80, 0.15, 0.05 ) // Red Bricks
+    VIDEO_OVERLAY( 17.481e-6, 0.0, 1.956e-6, -1.0, 0.95, 0.65, 0.05 ) // Amber Bricks
+    VIDEO_OVERLAY( 19.437e-6, 0.0, 1.956e-6, -1.0, 0.05, 0.65, 0.25 ) // Green Bricks
+    VIDEO_OVERLAY( 21.393e-6, 0.0, 1.955e-6, -1.0, 0.95, 0.95, 0.20 ) // Yellow Bricks
+    VIDEO_OVERLAY( 51.345e-6, 0.0, 1.956e-6, -1.0, 0.05, 0.65, 0.95 ) // Blue Paddle
+
+    // TODO: Different overlays for cocktail cabinet
 VIDEO_DESC_END
+
+
+static AUDIO_DESC( breakout )
+    AUDIO_RESISTANCE(1, K_OHM(47.0))
+    AUDIO_RESISTANCE(2, K_OHM(47.0))
+    AUDIO_RESISTANCE(3, K_OHM(47.0))
+    AUDIO_RESISTANCE(4, K_OHM(47.0))
+    AUDIO_GAIN(3.0)
+VIDEO_DESC_END
+
 
 static Mono9602Desc n8_desc(K_OHM(33.0), U_FARAD(100.0), K_OHM(5.6), P_FARAD(0.0)); // No capacitor on 2nd 9602.
 static Mono9602Desc f3_desc(K_OHM(47.0), U_FARAD(1.0), K_OHM(47.0), U_FARAD(1.0));
@@ -211,6 +231,7 @@ CIRCUIT_LAYOUT( breakout ) =
     //TODO: coin2 and start 2
 
     VIDEO(breakout),
+    AUDIO(breakout),
 
 #ifdef DEBUG
 	CHIP("LOG1", VCD_LOG, &vcd_log_desc),
@@ -446,14 +467,14 @@ CIRCUIT_LAYOUT( breakout ) =
    CONNECTION("A7", 6, "B9", 4),
    CONNECTION(VB_HIT_SOUND, "B9", 5),
 
-   CONNECTION(P, "S1", 1),
-   CONNECTION(GND, "S1", 2),
-   CONNECTION(P, "S1", 4),
-   CONNECTION(GND, "S1", 3),
-   CONNECTION(P, "S1", 12),
-   CONNECTION(GND, "S1", 11),
-   CONNECTION(P, "S1", 9),
-   CONNECTION(GND, "S1", 10),
+   CONNECTION(GND, "S1", 1),
+   CONNECTION(P, "S1", 2),
+   CONNECTION(GND, "S1", 4),
+   CONNECTION(P, "S1", 3),
+   CONNECTION(GND, "S1", 12),
+   CONNECTION(P, "S1", 11),
+   CONNECTION(GND, "S1", 9),
+   CONNECTION(P, "S1", 10),
 
    //Free Game Selector
    CONNECTION(I1, "K7", 2),
@@ -480,10 +501,10 @@ CIRCUIT_LAYOUT( breakout ) =
    CONNECTION("K7", 6, "J7", 10),
    CONNECTION("K7", 8, "J7", 9),
 
-   CONNECTION("K7", 3, "J7", 1),
-   CONNECTION("K7", 11, "J7", 2),
-   CONNECTION("K7", 6, "J7", 4),
-   CONNECTION("K7", 8, "J7", 5),
+   CONNECTION("L7", 3, "J7", 1),
+   CONNECTION("L7", 11, "J7", 2),
+   CONNECTION("L7", 6, "J7", 4),
+   CONNECTION("L7", 8, "J7", 5),
 
    CONNECTION(START_GAME1_n, "J8", 12),
    CONNECTION(BG1_n, "J8", 11),
@@ -1334,15 +1355,14 @@ CIRCUIT_LAYOUT( breakout ) =
  
  
    //CREDIT_COUNTER
-   CONNECTION(GND, "E7", 8), //TODO: put bonus coin here
+   CONNECTION(BONUS_COIN, "E7", 8),
    CONNECTION(COIN, "E7", 9), 
    CONNECTION(CR_START1_n, "H7", 2),
    CONNECTION(V8, "D8", 1),
    CONNECTION(CR_START2, "D8", 2),
    CONNECTION("D8", 3, "H7", 1),
 
-   //CONNECTION(Q, "L8", 11), //TODO: not on schematic, on rollover load 16, keeps you from losing all credits "L8", 12 here?
-   CONNECTION("L8", 12, "L8", 11),
+   CONNECTION("L8", 12, "L8", 11), // not on schematic, on rollover load 16, keeps you from losing all credits
    CONNECTION(P, "L8", 15),
    CONNECTION(P, "L8", 1),
    CONNECTION(P, "L8", 10),

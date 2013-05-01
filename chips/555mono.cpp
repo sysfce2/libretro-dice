@@ -25,10 +25,8 @@ CUSTOM_LOGIC( Mono555Desc::mono_555 )
     // Update tp_hl in standard portion based on rc value
     if(chip->output_links.size())
     {
-        chip->output_links[0].chip->active_inputs |= chip->output_links[0].mask; // TODO: is this necessary?
-
-        chip->deactivate_outputs(); // TODO: is this necessary?
-        //chip->state = PASSIVE;
+        if(chip->state != PASSIVE)
+            chip->deactivate_outputs(); // TODO: is this necessary?
 
         chip->output_links[0].chip->delay[0] = uint64_t(LN_3*desc->r*desc->c / Circuit::timescale);
 

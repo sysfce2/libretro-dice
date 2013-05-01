@@ -31,25 +31,23 @@ static CHIP_LOGIC( 7411C )
     pin[8] = pin[9] & pin[10] & pin[11];
 }
 
-/* TI Datasheet only lists 74H11.
- * Using Fairchild 7411 datasheet propogation delay values.
- * Accurate? */
+// TI Datasheet only lists 74H11, so using H11 timing values
 CHIP_DESC( 7411 ) =
 {
 	CHIP_START( 7411A )
         INPUT_PINS( 1, 2, 13 )
         OUTPUT_PIN( 12 )
-        OUTPUT_DELAY_NS( 18.0, 14.0 ),
+        OUTPUT_DELAY_NS( 7.6, 8.8 ),
 
 	CHIP_START( 7411B )
         INPUT_PINS( 3, 4, 5 )
         OUTPUT_PIN( 6 )
-        OUTPUT_DELAY_NS( 18.0, 14.0 ),
+        OUTPUT_DELAY_NS( 7.6, 8.8 ),
 
 	CHIP_START( 7411C )
         INPUT_PINS( 9, 10, 11 )
         OUTPUT_PIN( 8 )
-        OUTPUT_DELAY_NS( 18.0, 14.0 ),
+        OUTPUT_DELAY_NS( 7.6, 8.8 ),
 
     CHIP_DESC_END
 };

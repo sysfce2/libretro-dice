@@ -3,6 +3,8 @@
 #define DEBUG
 #undef DEBUG
 
+#define USE_CLK_GATES
+
 // TODO: Fix start/coin to reset game time properly?
 
 #ifdef DEBUG
@@ -16,7 +18,14 @@ static VcdLogDesc vcd_log_desc
     5, "e",
     6, "f",
     7, "g",
-    8, "h"
+    8, "h",
+    9, "i",
+    10, "j",
+    11, "k",
+    12, "l",
+    13, "m",
+    14, "n",
+    15, "o"
 );
 #endif
 
@@ -157,11 +166,12 @@ CIRCUIT_LAYOUT( spacerace ) =
 #endif
 
     // Speed hack
+#ifdef USE_CLK_GATES
     CHIP("CLK_GATE1", CLK_GATE),
     CHIP("CLK_GATE2", CLK_GATE),
     CHIP("CLK_GATE3", CLK_GATE),
     CHIP("CLK_GATE4", CLK_GATE),
-
+#endif
 
 	/**************************************************************************
 		Defines
@@ -561,25 +571,34 @@ CIRCUIT_LAYOUT( spacerace ) =
 	CONNECTION("DIODES", COL6, "L5", 7),
 	CONNECTION("DIODES", COL7, "L5", 9),
 	CONNECTION(GND, "L5", 10),
-	//CONNECTION("L6", 6, "L5", 11),
+#ifdef USE_CLK_GATES
 	CONNECTION(ROCKET_WINDOW, "CLK_GATE2", 1),
     CONNECTION("L6", 6, "CLK_GATE2", 2),
     CONNECTION("CLK_GATE2", 3, "L5", 11),
-	//CONNECTION("L6", 8, "L5", 12),
-	CONNECTION(ROCKET_WINDOW, "CLK_GATE3", 1),
+    
+    CONNECTION(ROCKET_WINDOW, "CLK_GATE3", 1),
     CONNECTION("L6", 8, "CLK_GATE3", 2),
     CONNECTION("CLK_GATE3", 3, "L5", 12),
-	//CONNECTION("L6", 11, "L5", 13),
-	CONNECTION(ROCKET_WINDOW, "CLK_GATE4", 1),
+
+    CONNECTION(ROCKET_WINDOW, "CLK_GATE4", 1),
     CONNECTION("L6", 11, "CLK_GATE4", 2),
     CONNECTION("CLK_GATE4", 3, "L5", 13),
+#else
+	CONNECTION("L6", 6, "L5", 11),
+    CONNECTION("L6", 8, "L5", 12),
+    CONNECTION("L6", 11, "L5", 13),
+#endif
 
     CONNECTION("L5", 14, "C7", 2),
 	CONNECTION(VCC, "C7", 4),
-	//CONNECTION(CLK_n, "C7", 3),
+
+#ifdef USE_CLK_GATES
 	CONNECTION(ROCKET_WINDOW, "CLK_GATE1", 1),
     CONNECTION(CLK_n, "CLK_GATE1", 2),
     CONNECTION("CLK_GATE1", 3, "C7", 3),
+#else
+    CONNECTION(CLK_n, "C7", 3),
+#endif
     CONNECTION(ROCKET_WINDOW, "C7", 1),
 
 
@@ -983,6 +1002,20 @@ CIRCUIT_LAYOUT( spacerace ) =
     CONNECTION("VIDEO", Video::VBLANK_PIN, VBLANK),
 
     // TODO: Sound
+
+#ifdef DEBUG
+    /*CONNECTION("LOG1", 1, CLK),
+    CONNECTION("LOG1", 2, "A2", 15),
+    CONNECTION("LOG1", 3, "B2", 15),
+    CONNECTION("LOG1", 4, "C2", 5),
+    CONNECTION("LOG1", 5, "B1", 6),
+    CONNECTION("LOG1", 6, VRESET),
+    CONNECTION("LOG1", 7, VRESET_n),
+    CONNECTION("LOG1", 8, "A2", 14),
+    CONNECTION("LOG1", 9, "A2", 13),
+    CONNECTION("LOG1", 10, "A2", 12),
+    CONNECTION("LOG1", 11, "A2", 11),*/
+#endif
 
 	CIRCUIT_LAYOUT_END
 };

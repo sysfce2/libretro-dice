@@ -4,6 +4,8 @@
 #define DEBUG
 #undef DEBUG
 
+#define USE_CLK_GATES
+
 #ifdef DEBUG
 static VcdLogDesc vcd_log_desc
 (
@@ -55,8 +57,6 @@ static Throttle1Desc throttle_desc(&stunt_cycle_throttle_desc.throttle_pos);
 
 static CapacitorDesc c57_desc(P_FARAD(220.0), OHM(330.0)); // 330 Ohm resistor in serires
 static CapacitorDesc c58_desc(P_FARAD(220.0));
-
-static BufferDesc buf_desc(DELAY_NS(25.0), DELAY_NS(12.5)); // Arbitrary
 
 static Mono9602Desc n6_desc(K_OHM(47.0), U_FARAD(100.0), K_OHM(47.0), U_FARAD(1.0));
 static SeriesRCDesc c13_desc(K_OHM(2.2), P_FARAD(470.0));
@@ -210,7 +210,6 @@ CIRCUIT_LAYOUT( stuntcycle ) =
 	CHIP("C57", CAPACITOR, &c57_desc),
 	CHIP("C58", CAPACITOR, &c58_desc),
     CHIP("C13", SERIES_RC, &c13_desc),
-    CHIP("BUF", BUFFER, &buf_desc),
 	
     CHIP("START", START_INPUT),
     CHIP("COIN", COIN_INPUT),
@@ -230,11 +229,20 @@ CIRCUIT_LAYOUT( stuntcycle ) =
 	CHIP("LOG1", VCD_LOG, &vcd_log_desc),
 #endif
 
+#ifdef USE_CLK_GATES
     CHIP("CLK_GATE1", CLK_GATE),
     CHIP("CLK_GATE2", CLK_GATE),
     CHIP("CLK_GATE3", CLK_GATE),
     CHIP("CLK_GATE4", CLK_GATE),
     CHIP("CLK_GATE5", CLK_GATE),
+
+    DISABLE_OPTIMIZATION("N2", 9),
+    DISABLE_OPTIMIZATION("M2", 9),
+    DISABLE_OPTIMIZATION("F2", 1),
+    DISABLE_OPTIMIZATION("F2", i8),
+    DISABLE_OPTIMIZATION("E1", 11),
+    DISABLE_OPTIMIZATION("E2", 11),
+#endif
 
 	/**************************************************************************
 		Lines
@@ -802,12 +810,7 @@ CIRCUIT_LAYOUT( stuntcycle ) =
 	CONNECTION(VCC, "F6", 4),
 	CONNECTION("E6", 6, "F6", 2),
 	CONNECTION(CLOCK_n, "F6", 3),
-	//CONNECTION(_128H_xor_256H, "F6", 1),
-    // Glitches on 128H xor 256H cause problems with
-    // optimization on this flop, so smooth them out.
-    // This causes an issue with the ramp display when there are 12 busses, due to the delay? Fix somehow.
-    CONNECTION(_128H_xor_256H, "BUF", 1),
-	CONNECTION("BUF", 2, "F6", 1),
+	CONNECTION(_128H_xor_256H, "F6", 1),
 
 	CONNECTION("H7", 15, "H6", 1),
 	
@@ -866,15 +869,21 @@ CIRCUIT_LAYOUT( stuntcycle ) =
 	CONNECTION("H5", 8, "M2", 10),
 	
     // Speed Hack
+#ifdef USE_CLK_GATES    
     CONNECTION(VRAMP, "CLK_GATE4", 1),
     CONNECTION(_1H, "CLK_GATE4", 2),
+#endif
 
 	CONNECTION(VCC, "M1", 10),
 	CONNECTION("M2", 8, "M1", 12),
-	//CONNECTION(_1H, "M1", 11),
+#ifdef USE_CLK_GATES    
     CONNECTION("CLK_GATE4", 3, "M1", 11),
+#else
+	CONNECTION(_1H, "M1", 11),
+#endif
 	CONNECTION("N3", 8, "M1", 13),
-	
+
+
 	CONNECTION(FIXED_RAMP_ZONE, "H6", 3),
 	
 	CONNECTION(VCC, "J7", 10),
@@ -1259,18 +1268,27 @@ CIRCUIT_LAYOUT( stuntcycle ) =
     CONNECTION("B5", 3, "D4", 12),
 
     // Speed hack
+#ifdef USE_CLK_GATES
     CONNECTION(VWINDOW, "CLK_GATE3", 1),
     CONNECTION(H5, "CLK_GATE3", 2),
     CONNECTION(VWINDOW, "CLK_GATE5", 1),
     CONNECTION("D4", 13, "CLK_GATE5", 2),
+#endif
 
-    //CONNECTION("D4", 13, "H2", 1),
+    
+#ifdef USE_CLK_GATES    
     CONNECTION("CLK_GATE5", 3, "H2", 1),
+#else
+    CONNECTION("D4", 13, "H2", 1),
+#endif
     CONNECTION(HSYNC_n, "H2", 2),
 
     CONNECTION(HSYNC_n, "H2", 4),
-    //CONNECTION(H5, "H2", 5),
+#ifdef USE_CLK_GATES
     CONNECTION("CLK_GATE3", 3, "H2", 5),
+#else
+    CONNECTION(H5, "H2", 5),
+#endif
         
     CONNECTION(VCC, "J1", 3),
     CONNECTION(V4, "J1", 2),
@@ -1294,17 +1312,22 @@ CIRCUIT_LAYOUT( stuntcycle ) =
     CONNECTION("J1", 9, "HF1", 21),
 
     // Speed hack
+#ifdef USE_CLK_GATES
     CONNECTION(VWINDOW, "CLK_GATE2", 1),
-    CONNECTION(H1, "CLK_GATE2", 2),
+    CONNECTION("D3", 10, "CLK_GATE2", 2),
+#endif
 
-    //CONNECTION(H1, "D3", 11),
-    CONNECTION("CLK_GATE2", 3, "D3", 11),
-    
+    CONNECTION(H1, "D3", 11),
+
     CONNECTION("HF1", 7, "E1", 3),
     CONNECTION("HF1", 8, "E1", 4),
     CONNECTION("HF1", 9, "E1", 5),
     CONNECTION("HF1", 10, "E1", 6),
+#ifdef USE_CLK_GATES
+    CONNECTION("CLK_GATE2", 3, "E1", 11),
+#else
     CONNECTION("D3", 10, "E1", 11),
+#endif
     CONNECTION(CYCLE_RESET_A_n, "E1", 1),
     CONNECTION(MS1, "E1", 9),
     CONNECTION(MS2, "E1", 10),
@@ -1315,7 +1338,11 @@ CIRCUIT_LAYOUT( stuntcycle ) =
     CONNECTION("HF1", 15, "E2", 4),
     CONNECTION("HF1", 16, "E2", 5),
     CONNECTION("HF1", 17, "E2", 6),
+#ifdef USE_CLK_GATES
+    CONNECTION("CLK_GATE2", 3, "E2", 11),
+#else
     CONNECTION("D3", 10, "E2", 11),
+#endif
     CONNECTION(CYCLE_RESET_A_n, "E2", 1),
     CONNECTION(MS1, "E2", 9),
     CONNECTION(MS2, "E2", 10),
@@ -1329,14 +1356,18 @@ CIRCUIT_LAYOUT( stuntcycle ) =
 
     CONNECTION(VWINDOW, "D2", 10),
     CONNECTION("D1", 6, "D2", 12),
-    //CONNECTION(H1, "D2", 11),
+#ifdef USE_CLK_GATES
     CONNECTION("CLK_GATE2", 3, "D2", 11),
+#else
+    CONNECTION(H1, "D2", 11),
+#endif
     CONNECTION(VCC, "D2", 13),
 
     // Speed hack
+#ifdef USE_CLK_GATES   
     CONNECTION(OBJECT_ZONE, "CLK_GATE1", 1),
     CONNECTION(CLOCK, "CLK_GATE1", 2),
-
+#endif
     CONNECTION("HF1", 7, "F2", 11),
     CONNECTION("HF1", 8, "F2", 12),
     CONNECTION("HF1", 9, "F2", 13),
@@ -1345,16 +1376,21 @@ CIRCUIT_LAYOUT( stuntcycle ) =
     CONNECTION("HF1", 15, "F2", 4),
     CONNECTION("HF1", 16, "F2", 5),
     CONNECTION("HF1", 17, "F2", 6),
-    //CONNECTION(CLOCK, "F2", 2),
+#ifdef USE_CLK_GATES
     CONNECTION("CLK_GATE1", 3, "F2", 2),
+#else
+    CONNECTION(CLOCK, "F2", 2),
+#endif
     CONNECTION(HSYNC_n, "F2", 1),
     CONNECTION("F2", 9, "F2", 10),
     CONNECTION(GND, "F2", 15),
-
     CONNECTION(VCC, "D2", 4),
     CONNECTION("F2", 9, "D2", 2),
-    //CONNECTION(CLOCK, "D2", 3),
+#ifdef USE_CLK_GATES
     CONNECTION("CLK_GATE1", 3, "D2", 3),
+#else
+    CONNECTION(CLOCK, "D2", 3),
+#endif
     CONNECTION(OBJECT_ZONE, "D2", 1),
 
 
@@ -1523,28 +1559,8 @@ CIRCUIT_LAYOUT( stuntcycle ) =
     CONNECTION("VIDEO", 1, "E3", 12),
     CONNECTION("VIDEO", 2, "E4", 6),
     
-    //CONNECTION("VIDEO", 2, RAMPS),
-    //CONNECTION("VIDEO", 2, "F6", 6),
-    
     CONNECTION("VIDEO", Video::HBLANK_PIN, HSYNC),
     CONNECTION("VIDEO", Video::VBLANK_PIN, VSYNC),
-
-
-
-#ifdef DEBUG
-    /*CONNECTION("LOG1", 1, "C3", 14),
-    CONNECTION("LOG1", 2, "C3", 13),
-    CONNECTION("LOG1", 3, "C3", 12),
-    CONNECTION("LOG1", 4, "C3", 11),
-    CONNECTION("LOG1", 5, "B3", 14),
-    CONNECTION("LOG1", 6, "B3", 13),
-    CONNECTION("LOG1", 7, "B3", 12),
-    CONNECTION("LOG1", 8, "B3", 11),
-    CONNECTION("LOG1", 9, "B4", 5),
-    CONNECTION("LOG1", 10, "B4", 3),
-    CONNECTION("LOG1", 11, HCOUNTER_RESET_n),
-    CONNECTION("LOG1", 12, "A3", 6),*/
-#endif
 
 	CIRCUIT_LAYOUT_END
 };
@@ -1598,15 +1614,20 @@ CUSTOM_LOGIC( StuntCycleThrottleDesc::stuntcycle_throttle )
 
         // Update speed pulse period
         Chip* c = chip->output_links[0].chip;
-        c->state = PASSIVE; // Saves pending_event
+        uint64_t pend = c->pending_event;
         c->deactivate_outputs();
+        c->pending_event = pend;
         c->state = ACTIVE;
-        c->output_events.resize(2);
+        c->output_events.clear();
         c->activation_time = chip->circuit->global_time;
+        c->end_time = ~0ull;
 
         uint64_t pulse_time = uint64_t(period / 2.0 / Circuit::timescale);
-        c->output_events[0] = c->output_events[1] = pulse_time;
+        c->output_events.push_back(Event(chip->activation_time, 0));
+        c->output_events.push_back(Event(chip->activation_time + pulse_time, 0));
         c->cycle_time = 2*pulse_time;
+        c->first_output_event = c->output_events.begin();
+        c->current_output_event = c->output_events.begin();
 
         if(c->pending_event == 0) c->pending_event = c->circuit->queue_push(c, pulse_time);
     }
@@ -1614,7 +1635,6 @@ CUSTOM_LOGIC( StuntCycleThrottleDesc::stuntcycle_throttle )
     // Calculate op-amp outputs. TODO: Determine correct behavior?
     int new_out = 0;
     Chip* c = chip->output_links[1].chip;
-    c->deactivate_outputs();
 
     if(desc->cap_voltage > pos + 1.5) 
         new_out = 1;
@@ -1624,14 +1644,12 @@ CUSTOM_LOGIC( StuntCycleThrottleDesc::stuntcycle_throttle )
 
     new_out = 0;
     c = chip->output_links[2].chip;
-    c->deactivate_outputs();
 
     if(desc->cap_voltage > pos + 0.75)
         new_out = 1;
 
     if(c->output != new_out) 
         c->pending_event = c->circuit->queue_push(c, c->delay[c->output]);
-
 
     desc->last_event_time = chip->circuit->global_time;
 }
@@ -1641,7 +1659,7 @@ static CHIP_LOGIC( SPEED_PULSES )
     // Do nothing...
 }
 
-static CHIP_LOGIC( OP_AMP )
+static CUSTOM_LOGIC( OP_AMP )
 {
     // Do nothing...
 }
@@ -1665,12 +1683,12 @@ CHIP_DESC( STUNTCYCLE_THROTTLE ) =
         OUTPUT_PIN( i2 )
         OUTPUT_DELAY_NS( 1.0, 1.0 ),
 
-    CHIP_START( OP_AMP )
+    CUSTOM_CHIP_START( OP_AMP )
         INPUT_PINS( i1 )
         OUTPUT_PIN( 12 )
         OUTPUT_DELAY_NS( 10.0, 10.0 ),
 
-    CHIP_START( OP_AMP )
+    CUSTOM_CHIP_START( OP_AMP )
         INPUT_PINS( i1 )
         OUTPUT_PIN( 10 )
         OUTPUT_DELAY_NS( 10.0, 10.0 ),

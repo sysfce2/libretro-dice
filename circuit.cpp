@@ -8,16 +8,31 @@
 CHIP_DESC( _VCC ) = 
 {
 	CUSTOM_CHIP_START(NULL)
-	OUTPUT_PIN(0)
+	OUTPUT_PIN(1)
 };
 
 CHIP_DESC( _GND ) = 
 {
 	CUSTOM_CHIP_START(NULL)
-	OUTPUT_PIN(0)
+	OUTPUT_PIN(1)
 };
 
-extern CIRCUIT_LAYOUT( stuntcycle );
+// Option to disable optimizations
+// on chips where they do not perform well
+CUSTOM_LOGIC( deoptimize )
+{
+    for(ChipLink& cl : chip->output_links)
+    {
+        printf("Deoptimizing %p\n", cl.chip);
+        cl.chip->optimization_disabled = true;
+    }
+}
+
+CHIP_DESC( _DEOPTIMIZER ) = 
+{
+	CUSTOM_CHIP_START(deoptimize)
+	OUTPUT_PIN(1)
+};
 
 const double Circuit::timescale = 1.0e-12; // 1 ps
 
@@ -26,9 +41,12 @@ Circuit::Circuit(Settings& s, Input& i, const CircuitDesc* desc, const char* nam
 {
 	typedef std::pair<Chip*, ChipDesc*> ChipDescPair;
 	typedef std::pair<uint8_t, ChipDescPair> Connection;
+    typedef std::pair<std::string, uint8_t> Net;
     typedef std::multimap<std::string, ChipDescPair>::iterator ChipMapIterator;
+    typedef std::multimap<std::string, Net>::iterator NetListIterator;
 
     std::multimap<std::string, ChipDescPair> chip_map;
+    std::multimap<std::string, Net> net_list;
     std::vector<Connection> connection_list_out, connection_list_in;
 
     const CircuitDesc* desc_start = desc;
@@ -39,6 +57,9 @@ Circuit::Circuit(Settings& s, Input& i, const CircuitDesc* desc, const char* nam
 
 	chips.push_back(new Chip(this, chip__GND));
     chip_map.insert( std::pair<std::string, ChipDescPair>("_GND", ChipDescPair(chips.back(), chip__GND)) );
+
+	chips.push_back(new Chip(this, chip__DEOPTIMIZER));
+    chip_map.insert( std::pair<std::string, ChipDescPair>("_DEOPTIMIZER", ChipDescPair(chips.back(), chip__DEOPTIMIZER)) );
 
 	// Create Video chip TODO: TEMP HACK?
 	{
@@ -117,15 +138,6 @@ Circuit::Circuit(Settings& s, Input& i, const CircuitDesc* desc, const char* nam
 				{
 					chips.push_back(new Chip(this, d, instance.custom_data));
                     //desc_map[d] = chips.back();
-                    
-                    // For some circuits, use static/dynamic optimization, which allows
-                    // longer cycles for static logic (driven only by clock).
-                    if(desc_start == circuit_stuntcycle)
-                    {
-                        chips.back()->dynamic = false;
-                        chips.back()->MAX_INPUT_EVENTS = 524288;
-                        chips.back()->MAX_CYCLE_TIME = 50.0e-3 / 1.0e-12;
-                    }
 				}
 
 				ChipDescPair cd(chips.back(), d);
@@ -145,6 +157,62 @@ Circuit::Circuit(Settings& s, Input& i, const CircuitDesc* desc, const char* nam
                     }
 		}
 	}
+
+    // Create list of nets
+    for(desc = desc_start; desc->type != CIRCUIT_END; desc++)
+    {
+        if(desc->type == NET)
+        {
+            Net n = { desc->u.net.chip, desc->u.net.pin };
+            net_list.insert(std::pair<std::string, Net>(desc->u.net.name, n));
+        }
+    }
+
+    // Convert nets to connections
+    for(NetListIterator it1 = net_list.begin(); it1 != net_list.end();)
+    {
+        NetListIterator it2 = net_list.upper_bound(it1->first);
+        Connection output;
+
+        // Find output
+        for(NetListIterator it = it1; it != it2; ++it)
+        {
+            if(chip_map.count(it->second.first) == 0)
+            {
+                printf("WARNING: Cannot connect non-existant chip %s to net %s\n", it->second.first.c_str(), it->first.c_str());
+                continue;
+            }           
+
+            for(ChipMapIterator cmi = chip_map.lower_bound(it->second.first); cmi != chip_map.upper_bound(it->second.first); ++cmi)
+                if(it->second.second == cmi->second.second->output_pin)
+                {
+                    if(output.first != 0) // Output already found
+                        printf("WARNING: Net %s contains multiple output ports, skipping output %s.%d\n", it->first.c_str(), it->second.first.c_str(), it->second.second);
+                    else
+                        output = Connection(it->second.second, cmi->second);
+
+                    break;
+                }
+        }
+        
+        if(output.first == 0) // Output not found
+        {
+            printf("WARNING: Net %s contains no output ports\n", it1->first.c_str());
+        }
+        else for(NetListIterator it = it1; it != it2; ++it) // Create connections from output to all inputs
+        {
+            for(ChipMapIterator cmi = chip_map.lower_bound(it->second.first); cmi != chip_map.upper_bound(it->second.first); ++cmi)
+                for(int i = 0; cmi->second.second->input_pins[i]; i++)
+                    if(it->second.second == cmi->second.second->input_pins[i])
+                    {
+                        connection_list_out.push_back(output);
+                        connection_list_in.push_back(Connection(it->second.second, cmi->second));
+                    }
+        }
+            
+        it1 = it2;
+    }
+    
 
     // Create list of connections
     for(desc = desc_start; desc->type != CIRCUIT_END; desc++)
@@ -171,7 +239,7 @@ Circuit::Circuit(Settings& s, Input& i, const CircuitDesc* desc, const char* nam
                                 {
                                     printf("WARNING: Attempted multiple connections to input: %s.%d\n", connection.name2, connection.pin2);
                                 }
-                                else
+                                //else
                                 {
                                     connected = true;
                                     connection_list_out.push_back(Connection(connection.pin1, it1->second));
@@ -192,7 +260,7 @@ Circuit::Circuit(Settings& s, Input& i, const CircuitDesc* desc, const char* nam
                                 {
                                     printf("WARNING: Attempted multiple connections to input: %s.%d\n", connection.name1, connection.pin1);
                                 }
-                                else
+                                //else
                                 {
                                     connected = true;
                                     connection_list_out.push_back(Connection(connection.pin2, it2->second));
@@ -228,7 +296,13 @@ Circuit::Circuit(Settings& s, Input& i, const CircuitDesc* desc, const char* nam
     
             if(!found)
             {
-                printf("Removing unused chip %p\n", *it);
+                for(auto x : chip_map)
+                    if(x.second.first == *it)
+                    {
+                        printf("Removing unused chip %s.%d\n", x.first.c_str(), x.second.second->output_pin);
+                        break;
+                    }
+
                 removed = true;
                 
                 // Remove all connections to this chip
@@ -242,10 +316,9 @@ Circuit::Circuit(Settings& s, Input& i, const CircuitDesc* desc, const char* nam
                 
                 if((*it)->type == BASIC_CHIP)
                     delete (*it)->lut;
-    
+ 
                 delete *it;
-                it = chips.erase(it);
-                --it;
+                it = chips.erase(it) - 1;
             }
         }
     } while(removed);
@@ -292,6 +365,11 @@ Circuit::Circuit(Settings& s, Input& i, const CircuitDesc* desc, const char* nam
         if(desc->type == VIDEO_INST)
             video.desc = desc->u.video;
 
+    // Find audio descriptor
+    audio.desc = NULL;
+    for(desc = desc_start; desc->type != CIRCUIT_END; desc++)
+        if(desc->type == AUDIO_INST)
+            audio.desc = desc->u.audio;
 
     audio.audio_init(this);
 

@@ -86,6 +86,40 @@ static SeriesRCDesc rc2_desc(OHM(220.0), U_FARAD(470.0));
 
 static PotentimeterAstable555Desc pot1_desc("playtime", "Play Time", K_OHM(35.0), K_OHM(10.0), K_OHM(60.0), _9d_555_desc);
 
+static BufferDesc buf1_desc(DELAY_NS(15.0), DELAY_NS(0.1));
+
+// Hack to improve performance
+CHIP_LOGIC( diode_matrix_custom_n )
+{
+    DIODE_LAYOUT* d_l = (DIODE_LAYOUT*)custom_data;
+
+    int y = 4*pin[i5] + 2*pin[i4] + pin[i3];
+    int x = 2*pin[i2] + pin[i1];
+
+    pin[6] = (*d_l)[y][x];
+}
+
+static CHIP_LOGIC( inv )
+{
+    pin[5] = pin[6] ^ 1;
+}
+
+
+CHIP_DESC( DIODE_MATRIX_CUSTOM ) = 
+{
+    CHIP_START( diode_matrix_custom_n )
+        INPUT_PINS( i1, i2, i3, i4, i5 )
+        OUTPUT_PIN( 6 )
+        OUTPUT_DELAY_NS( 35.0, 36.0 ),
+
+	CHIP_START( inv )
+        INPUT_PINS( 6 )
+        OUTPUT_PIN( 5 )
+        OUTPUT_DELAY_NS( 7.0, 7.0 ),
+
+   	CHIP_DESC_END
+};
+
 
 CIRCUIT_LAYOUT( tvbasketball ) =
 {
@@ -95,8 +129,8 @@ CIRCUIT_LAYOUT( tvbasketball ) =
 	CHIP("CLOCK", CLOCK_14_318_MHZ),
 
 	CHIP("BASKET", DIODE_MATRIX, &basket_layout),  
-	CHIP("DUMMY", DIODE_MATRIX, &dummy_layout),  
-
+	CHIP("DUMMY", DIODE_MATRIX, &dummy_layout),
+    
     CHIP("4A", 7408),
     CHIP("5A", 74151),
     CHIP("6A", 7490),
@@ -151,7 +185,8 @@ CIRCUIT_LAYOUT( tvbasketball ) =
     CHIP("15D", 7404),
 
     CHIP("1E", 74155),
-    CHIP("2E", 74151),
+    //CHIP("2E", 74151),
+    CHIP("2E", DIODE_MATRIX_CUSTOM, &dummy_layout), 
     CHIP("3E", 7404),
     CHIP("4E", 7454),
     CHIP("6E", 7404),
@@ -252,9 +287,17 @@ CIRCUIT_LAYOUT( tvbasketball ) =
 
     VIDEO(tvbasketball),
 
-    CHIP("CLK_GATE1", CLK_GATE),
+    /*CHIP("CLK_GATE1", CLK_GATE),
     CHIP("CLK_GATE2", CLK_GATE),
-    CHIP("CLK_GATE3", CLK_GATE),
+    CHIP("CLK_GATE3", CLK_GATE),*/
+
+    DISABLE_OPTIMIZATION("15D", 11),
+    DISABLE_OPTIMIZATION("VIDEO", 4),
+
+     DISABLE_OPTIMIZATION("9A", 1),
+     DISABLE_OPTIMIZATION("8A", 9),
+     DISABLE_OPTIMIZATION("11C", 9),
+     DISABLE_OPTIMIZATION("8C", 3),
 
 #ifdef DEBUG
 	CHIP("LOG1", VCD_LOG, &vcd_log_desc),
@@ -966,7 +1009,7 @@ CIRCUIT_LAYOUT( tvbasketball ) =
     CONNECTION("4D", 8, "7E", 1),
     CONNECTION("4C", 8, "7E", 11),
 
-	CONNECTION("7E", 12, "1E", 13),
+	/*CONNECTION("7E", 12, "1E", 13),
 	CONNECTION("7E", 2, "1E", 3),
 	CONNECTION("7E", 10, "1E", 1),
 	CONNECTION("7E", 10, "1E", 15),
@@ -993,7 +1036,14 @@ CIRCUIT_LAYOUT( tvbasketball ) =
 	CONNECTION("5J", 11, "2E", 11),
 	CONNECTION("5J", 8, "2E", 10),
 	CONNECTION(GND, "2E", 9),
-	CONNECTION(GND, "2E", 7),
+	CONNECTION(GND, "2E", 7),*/
+
+    CONNECTION("7E", 10, "2E", i5),
+    CONNECTION("7E", 2, "2E", i4),
+    CONNECTION("7E", 12, "2E", i3),
+    CONNECTION("5J", 8, "2E", i2),
+	CONNECTION("5J", 11, "2E", i1),
+
 
     CONNECTION("11A", 13, "9B", 11),
     CONNECTION(H16_n, "9B", 12),

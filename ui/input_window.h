@@ -256,26 +256,30 @@ struct InputWindow : Window
     struct ButtonLayout : VerticalLayout
     {
         // Keyboard / Joystick ///////////////////////////////////
-        AssignmentSelector button_1, button_2;
+        AssignmentSelector button_1, button_2, button_3;
 
         ButtonLayout(InputWindow& w, Settings::Input::Button& b) : 
             button_1(w, b.button1, "Button 1", 80, 100),
-            button_2(w, b.button2, "Button 2", 80, 100)
+            button_2(w, b.button2, "Button 2", 80, 100),
+            button_3(w, b.button3, "Button 3", 80, 100)
         {
             append(button_1, {0, 0}, 10);
             append(button_2, {0, 0}, 10);
+            append(button_3, {0, 0}, 10);
         }
 
         void create()
         {
             button_1.create();
             button_2.create();
+            button_3.create();
         }
 
         void setEnabled(bool e = true)
         {
             button_1.button.setEnabled(e);
             button_2.button.setEnabled(e);
+            button_3.button.setEnabled(e);
         }
     };
 

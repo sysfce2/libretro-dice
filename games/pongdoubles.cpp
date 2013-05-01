@@ -31,10 +31,10 @@ static Mono555Desc g5_555_desc(K_OHM(220.0), U_FARAD(1.0));
 
 static SeriesRCDesc c33_desc(K_OHM(1.0), U_FARAD(0.1)); // Capacitor C33, Resistor R30
 
-static Paddle1VerticalDesc pad1_desc(16000.0, 145000.0, &a10_555_desc);
-static Paddle2VerticalDesc pad2_desc(16000.0, 145000.0, &b10_555_desc);
-static Paddle3VerticalDesc pad3_desc(16000.0, 145000.0, &b9b_555_desc);
-static Paddle4VerticalDesc pad4_desc(16000.0, 145000.0, &b9a_555_desc);
+static Paddle1VerticalDesc pad1_desc(17000.0, 145000.0, &a10_555_desc);
+static Paddle2VerticalDesc pad2_desc(17000.0, 145000.0, &b10_555_desc);
+static Paddle3VerticalDesc pad3_desc(17000.0, 145000.0, &b9b_555_desc);
+static Paddle4VerticalDesc pad4_desc(17000.0, 145000.0, &b9a_555_desc);
 
 static DipswitchDesc dipswitch1_desc("winning_score", "Winning Score", 0, "11", "15");
 

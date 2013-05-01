@@ -141,8 +141,12 @@ Settings::Settings() : num_mice(0), pause(false), throttle(true), fullscreen(fal
     // Buttons
     appendKey(input.buttons1.button1 = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::ControlLeft), "input.player1.button1");
     appendKey(input.buttons1.button2 = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::AltLeft), "input.player1.button2");
-    appendKey(input.buttons2.button1 = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::Z), "input.player2.button1");
-    appendKey(input.buttons2.button2 = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::X), "input.player2.button2");
+    appendKey(input.buttons1.button3 = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::Space), "input.player1.button3");
+
+    appendKey(input.buttons2.button1 = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::J), "input.player2.button1");
+    appendKey(input.buttons2.button2 = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::K), "input.player2.button2");
+    appendKey(input.buttons2.button3 = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::L), "input.player2.button3");
+
     appendKey(input.coin_start.coin = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::Number5), "input.coin");
     appendKey(input.coin_start.start1 = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::Number1), "input.start1");
     appendKey(input.coin_start.start2 = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::Number2), "input.start2");

@@ -17,6 +17,9 @@ public:
     static CUSTOM_LOGIC( mono_9602B );
 };
 
+typedef Mono9602Desc Mono74123Desc;
+
 extern CHIP_DESC( 9602 );
+extern CHIP_DESC( 74123 );
 
 #endif

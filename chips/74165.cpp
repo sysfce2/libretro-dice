@@ -19,8 +19,8 @@ SH//LD |1  +--+ 16| VCC
 // TODO: Counts as 8 inputs on clock chip, change this?
 // Change behavior of clock inhibit such that toggling it clocks the registers?
 
-static const int P_PINS[]  = { 11, 12, 13, 14, 3, 4, 5, 6 };
-static const int S_PINS[]  = { 10, i1, i2, i3, i4, i5, i6, i7 };
+static const uint8_t P_PINS[]  = { 11, 12, 13, 14, 3, 4, 5, 6 };
+static const uint8_t S_PINS[]  = { 10, i1, i2, i3, i4, i5, i6, i7 };
 
 template <int N>
 CHIP_LOGIC( 74165 )
@@ -31,7 +31,7 @@ CHIP_LOGIC( 74165 )
     
     if(!pin[1])
         pin[Q] = pin[P];
-    else if(!pin[15] && pin[2] && !prev_pin[2])
+    else if(!pin[15] && POS_EDGE_PIN(2))
         pin[Q] = pin[S];
     else
         pin[Q] = prev_pin[Q];
@@ -54,28 +54,28 @@ CHIP_DESC( 74165 ) =
 	CHIP_START( 74165<0> )
 		INPUT_PINS( 1, 2, 15, P_PINS[0], S_PINS[0] )
 		OUTPUT_PIN( i1 )
-		PREV_INPUT_PIN( 2 )
+		EVENT_PINS( 2 )
 		PREV_OUTPUT_PIN( i1 )
 		OUTPUT_DELAY_NS( 10.0, 10.0 ),
 
     CHIP_START( 74165<1> )
 		INPUT_PINS( 1, 2, 15, P_PINS[1], S_PINS[1] )
 		OUTPUT_PIN( i2 )
-		PREV_INPUT_PIN( 2 )
+		EVENT_PINS( 2 )
 		PREV_OUTPUT_PIN( i2 )
 		OUTPUT_DELAY_NS( 10.0, 10.0 ),
 
 	CHIP_START( 74165<2> )
 		INPUT_PINS( 1, 2, 15, P_PINS[2], S_PINS[2] )
 		OUTPUT_PIN( i3 )
-		PREV_INPUT_PIN( 2 )
+		EVENT_PINS( 2 )
 		PREV_OUTPUT_PIN( i3 )
 		OUTPUT_DELAY_NS( 10.0, 10.0 ),
 
 	CHIP_START( 74165<3> )
 		INPUT_PINS( 1, 2, 15, P_PINS[3], S_PINS[3] )
 		OUTPUT_PIN( i4 )
-		PREV_INPUT_PIN( 2 )
+		EVENT_PINS( 2 )
 		PREV_OUTPUT_PIN( i4 )
 		OUTPUT_DELAY_NS( 10.0, 10.0 ),
 
@@ -83,28 +83,28 @@ CHIP_DESC( 74165 ) =
 	CHIP_START( 74165<4> )
 		INPUT_PINS( 1, 2, 15, P_PINS[4], S_PINS[4] )
 		OUTPUT_PIN( i5 )
-		PREV_INPUT_PIN( 2 )
+		EVENT_PINS( 2 )
 		PREV_OUTPUT_PIN( i5 )
 		OUTPUT_DELAY_NS( 10.0, 10.0 ),
 
     CHIP_START( 74165<5> )
 		INPUT_PINS( 1, 2, 15, P_PINS[5], S_PINS[5] )
 		OUTPUT_PIN( i6 )
-		PREV_INPUT_PIN( 2 )
+		EVENT_PINS( 2 )
 		PREV_OUTPUT_PIN( i6 )
 		OUTPUT_DELAY_NS( 10.0, 10.0 ),
 
 	CHIP_START( 74165<6> )
 		INPUT_PINS( 1, 2, 15, P_PINS[6], S_PINS[6] )
 		OUTPUT_PIN( i7 )
-		PREV_INPUT_PIN( 2 )
+		EVENT_PINS( 2 )
 		PREV_OUTPUT_PIN( i7 )
 		OUTPUT_DELAY_NS( 10.0, 10.0 ),
 
 	CHIP_START( 74165<7> )
 		INPUT_PINS( 1, 2, 15, P_PINS[7], S_PINS[7] )
 		OUTPUT_PIN( i8 )
-		PREV_INPUT_PIN( 2 )
+		EVENT_PINS( 2 )
 		PREV_OUTPUT_PIN( i8 )
 		OUTPUT_DELAY_NS( 10.0, 10.0 ),
 

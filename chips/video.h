@@ -20,6 +20,7 @@ private:
 
     void adjust_screen_params();
     void draw(Chip* chip);
+    void draw_overlays();
 
 public:
     VideoDesc* desc;

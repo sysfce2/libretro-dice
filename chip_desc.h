@@ -1,6 +1,7 @@
 #ifndef CHIPDESC_H
 #define CHIPDESC_H
 
+#include <array>
 #include <stdint.h>
 #include "chip.h"
 
@@ -8,13 +9,14 @@
 #define MAX_EXTERNAL_PINS 	24
 #define MAX_INTERNAL_PINS 	8
 #define MAX_INPUT_PINS      23
+#define MAX_EVENT_PINS      7
 
 enum InternalPin
 {
 	i1 = 25, i2 = 26, i3 = 27, i4 = 28, i5 = 29, i6 = 30, i7 = 31, i8 = 32
 };
 
-typedef void (*ChipLogic)(int* pin, int* prev_pin, void* custom_data);
+typedef void (*ChipLogic)(int* pin, int* prev_pin, int* event_pin, void* custom_data);
 typedef void (*CustomLogic)(Chip* chip, int mask);
 
 struct ChipDesc
@@ -22,62 +24,40 @@ struct ChipDesc
     ChipLogic logic_func;
 	CustomLogic custom_logic;
     
-    double output_delay[2];
+    std::array<double, 2> output_delay;
 
-    uint8_t input_pins[MAX_INPUT_PINS+1];
+    std::array<uint8_t, MAX_INPUT_PINS+1> input_pins;
+    std::array<uint8_t, MAX_EVENT_PINS+1> event_pins;
     uint8_t output_pin;
-    uint8_t prev_input_pin;
     uint8_t prev_output_pin;
 
-    ChipDesc(ChipLogic cl) : logic_func(cl), custom_logic(NULL), 
-                             output_pin(0), prev_input_pin(0), prev_output_pin(0)
-    {
-        set_input_pins(0);
-        set_output_delay(0.0, 0.0);
-    }
-    ChipDesc(CustomLogic cl) : logic_func(NULL), custom_logic(cl), 
-                               output_pin(0), prev_input_pin(0), prev_output_pin(0)
-    {
-        set_input_pins(0);
-        set_output_delay(0.0, 0.0);
-    }
+    constexpr ChipDesc(ChipLogic cl) : logic_func(cl), custom_logic(NULL), output_delay{{0.0, 0.0}},
+        input_pins{{0}}, event_pins{{0}}, output_pin(0), prev_output_pin(0) { }
 
-    ChipDesc& set_input_pins(uint8_t p1,      uint8_t p2  = 0, uint8_t p3  = 0, uint8_t p4 = 0,
-                             uint8_t p5  = 0, uint8_t p6  = 0, uint8_t p7  = 0, uint8_t p8 = 0,
-                             uint8_t p9  = 0, uint8_t p10 = 0, uint8_t p11 = 0, uint8_t p12 = 0,
-                             uint8_t p13 = 0, uint8_t p14 = 0, uint8_t p15 = 0, uint8_t p16 = 0,
-                             uint8_t p17 = 0, uint8_t p18 = 0, uint8_t p19 = 0, uint8_t p20 = 0,
-                             uint8_t p21 = 0, uint8_t p22 = 0, uint8_t p23 = 0)
-    {
-        input_pins[0] = p1;   input_pins[1] = p2;   input_pins[2] = p3;   input_pins[3] = p4;
-        input_pins[4] = p5;   input_pins[5] = p6;   input_pins[6] = p7;   input_pins[7] = p8;
-        input_pins[8] = p9;   input_pins[9] = p10;  input_pins[10] = p11; input_pins[11] = p12;
-        input_pins[12] = p13; input_pins[13] = p14; input_pins[14] = p15; input_pins[15] = p16;
-        input_pins[16] = p17; input_pins[17] = p18; input_pins[18] = p19; input_pins[19] = p20;
-        input_pins[20] = p21; input_pins[21] = p22; input_pins[22] = p23; input_pins[23] = 0;
-        return *this;
-    }
-    ChipDesc& set_output_pin(uint8_t p)
-    {
-        output_pin = p;
-        return *this;
-    }
-    ChipDesc& set_prev_input_pin(uint8_t p)
-    {
-        prev_input_pin = p;
-        return *this;
-    }
-    ChipDesc& set_prev_output_pin(uint8_t p)
-    {
-        prev_output_pin = p;
-        return *this;
-    }
-    ChipDesc& set_output_delay(double tp_lh, double tp_hl)
-    {
-        output_delay[0] = tp_lh;
-        output_delay[1] = tp_hl;
-        return *this;
-    }
+    constexpr ChipDesc(CustomLogic cl) : logic_func(NULL), custom_logic(cl), output_delay{{0.0, 0.0}},
+        input_pins{{0}}, event_pins{{0}}, output_pin(0), prev_output_pin(0) { }
+    
+    constexpr ChipDesc(ChipLogic chip_l, CustomLogic cust_l, std::array<double, 2> delay, 
+        std::array<uint8_t, MAX_INPUT_PINS+1> in, std::array<uint8_t, MAX_EVENT_PINS+1> ev,
+        uint8_t out, uint8_t prev_out) : 
+        logic_func(chip_l), custom_logic(cust_l), output_delay(delay), input_pins(in), 
+        event_pins(ev), output_pin(out), prev_output_pin(prev_out) { }
+
+    constexpr ChipDesc set_input_pins(std::array<uint8_t, MAX_INPUT_PINS+1> p)
+    { return ChipDesc(logic_func, custom_logic, output_delay, p, event_pins, output_pin, prev_output_pin); }
+
+    constexpr ChipDesc set_event_pins(std::array<uint8_t, MAX_EVENT_PINS+1> p)
+    { return ChipDesc(logic_func, custom_logic, output_delay, input_pins, p, output_pin, prev_output_pin); }
+
+    constexpr ChipDesc set_output_pin(uint8_t p)
+    { return ChipDesc(logic_func, custom_logic, output_delay, input_pins, event_pins, p, prev_output_pin); }
+
+    constexpr ChipDesc set_prev_output_pin(uint8_t p)
+    { return ChipDesc(logic_func, custom_logic, output_delay, input_pins, event_pins, output_pin, p); }
+
+    constexpr ChipDesc set_output_delay(double tp_lh, double tp_hl)
+    { return ChipDesc(logic_func, custom_logic, {{tp_lh, tp_hl}}, input_pins, event_pins, output_pin, prev_output_pin); }
+
     bool endOfDesc()
     {
         return logic_func == NULL && custom_logic == NULL;
@@ -89,9 +69,9 @@ struct ChipDesc
 
 #define CHIP_START( name ) 				ChipDesc(ChipLogic(&logic_##name))
 #define CUSTOM_CHIP_START( name )	    ChipDesc(CustomLogic(name))
-#define INPUT_PINS( pins... ) 			.set_input_pins(pins)
+#define INPUT_PINS( pins... ) 			.set_input_pins({{pins}})
+#define EVENT_PINS( pins... )           .set_event_pins({{pins}})
 #define OUTPUT_PIN( pin ) 				.set_output_pin(pin)
-#define PREV_INPUT_PIN( pin ) 			.set_prev_input_pin(pin)
 #define PREV_OUTPUT_PIN( pin ) 			.set_prev_output_pin(pin)
 #define OUTPUT_DELAY_S( tp_lh, tp_hl )  .set_output_delay(double(tp_lh), double(tp_hl))
 #define OUTPUT_DELAY_MS( tp_lh, tp_hl ) .set_output_delay(double(tp_lh)*1e-3, double(tp_hl)*1e-3)
@@ -100,7 +80,10 @@ struct ChipDesc
 #define OUTPUT_DELAY_PS( tp_lh, tp_hl ) .set_output_delay(double(tp_lh)*1e-12, double(tp_hl)*1e-12)
 #define CHIP_DESC_END                   ChipDesc(ChipLogic(NULL))
 
-#define CHIP_LOGIC( name ) void logic_##name(int* pin, int* prev_pin, void* custom_data)
+#define POS_EDGE_PIN( p ) (pin[p] && event_pin[p])
+#define NEG_EDGE_PIN( p ) (!pin[p] && event_pin[p])
+
+#define CHIP_LOGIC( name ) void logic_##name(int* pin, int* prev_pin, int* event_pin, void* custom_data)
 #define CUSTOM_LOGIC( name ) void name(Chip* chip, int mask)
 
 #define CHIP_ALIAS( name, desc ) constexpr ChipDesc* chip_##name = chip_##desc

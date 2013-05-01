@@ -1,27 +1,109 @@
 #include "../circuit_desc.h"
+#include "../circuit.h"
 
 #define DEBUG
 #undef DEBUG
 
 static Mono555Desc b8_555_desc(K_OHM(82.0), U_FARAD(1.0));
 static Mono555Desc c8_555_desc(K_OHM(82.0), U_FARAD(1.0));
-
 static Mono555Desc k10_555_desc(K_OHM(100.0), U_FARAD(1.0));
 
 static Astable555Desc d8_555_desc(K_OHM(297.0), K_OHM(2.0), U_FARAD(5.0));
+static Astable555Desc e8_555_desc(K_OHM(200.0), K_OHM(100.0), U_FARAD(1.0));
 
 static Mono9602Desc b7_desc(K_OHM(47.0), U_FARAD(0.5), K_OHM(47.0), U_FARAD(50.0));
 
-static BufferDesc buf1_desc(DELAY_NS(15.0), DELAY_NS(15.0));
+static BufferDesc buf1_desc(DELAY_NS(30.0), DELAY_NS(30.0));
 
 static PotentimeterAstable555Desc pot1_desc("playtime", "Play Time", K_OHM(297.0), K_OHM(47.0), K_OHM(297.0), d8_555_desc);
 
 #ifdef DEBUG
 static VcdLogDesc vcd_log_desc
 (
-    "output_gotcha.vcd"
+    "output_gotcha.vcd",
+    1, "A",
+    2, "B",
+    3, "C",
+    4, "D",
+    5, "E",
+    6, "F",
+    7, "G",
+    8, "H",
+    9, "I",
+    10, "J",
+    11, "K",
+    12, "L",
+    13, "M",
+    14, "N",
+    15, "O"
 );
 #endif
+
+static AUDIO_DESC( gotcha )
+    AUDIO_RESISTANCE(1, K_OHM(1.0))
+    AUDIO_RESISTANCE(2, K_OHM(4.0)) // TODO: Proper mixing w/ GND
+    AUDIO_GAIN(1.0)
+VIDEO_DESC_END
+
+extern CUSTOM_LOGIC( clock );
+
+static CUSTOM_LOGIC( proximity )
+{
+    static uint64_t x[2] = { 0, 0 };
+    static uint64_t y[2] = { 0, 0 };
+    static uint64_t last_x_event = 0, last_y_event = 0;
+
+    if(mask == 4)
+    {
+        x[chip->inputs & 1] += chip->circuit->global_time - last_x_event;
+        last_x_event = chip->circuit->global_time; 
+
+        y[(chip->inputs >> 1) & 1] += chip->circuit->global_time - last_y_event;
+        last_y_event = chip->circuit->global_time;
+
+        // Scale from 2-5 V,  2/3 X, 1/3 Y
+        double x_avg = 0.0;
+        if(x[0] + x[1] != 0) x_avg = double(x[1]) / (x[0] + x[1]);
+        
+        double y_avg = 0.0;
+        if(y[0] + y[1] != 0) y_avg = double(y[1]) / (y[0] + y[1]);
+
+        double avg = 2.0 + 3.0 * (2.0*x_avg + y_avg) / 3.0;
+
+        //printf("x:%g y:%g %g\n", x_avg, y_avg, avg);
+
+        e8_555_desc.ctrl = avg;
+        chip->pending_event = chip->circuit->queue_push(chip, 1);
+
+        x[0] = x[1] = y[0] = y[1] = 0;
+    }
+    else if(mask == 2)
+    {
+        y[(chip->inputs >> 1) & 1] += chip->circuit->global_time - last_y_event;
+        last_y_event = chip->circuit->global_time; 
+    }
+    else
+    {
+        x[chip->inputs & 1] += chip->circuit->global_time - last_x_event;
+        last_x_event = chip->circuit->global_time; 
+    }
+
+    chip->inputs ^= mask;
+}
+
+static CHIP_DESC( PROXIMITY ) = 
+{
+    // Timer to handle capacitor charging
+    CUSTOM_CHIP_START(&clock)
+        OUTPUT_PIN( i1 )
+        OUTPUT_DELAY_MS( 50.0, 50.0 ),
+
+    CUSTOM_CHIP_START(&proximity)
+        INPUT_PINS( 1, 2, i1 )
+        OUTPUT_PIN( i3 ),
+
+   	CHIP_DESC_END
+}; 
 
 CIRCUIT_LAYOUT( gotcha ) =
 {                  
@@ -57,8 +139,7 @@ CIRCUIT_LAYOUT( gotcha ) =
     CHIP("D5",74107),
     CHIP("D6",7400),
     CHIP("D7",7404),
-	CHIP("D8", 555_Astable, &d8_555_desc),
-	
+	CHIP("D8", 555_Astable, &d8_555_desc),	
 	    
     CHIP("E1",7400),
     CHIP("E2",7400),
@@ -67,6 +148,7 @@ CIRCUIT_LAYOUT( gotcha ) =
     CHIP("E5",7430),
     CHIP("E6",7427),
     CHIP("E7",7410),
+    CHIP("E8", 555_Astable, &e8_555_desc),
     
     CHIP("F1",7402),
     CHIP("F2",7474),
@@ -142,8 +224,13 @@ CIRCUIT_LAYOUT( gotcha ) =
     CHIP("POT1", POT_555_ASTABLE, &pot1_desc),
     POTENTIOMETER_CONNECTION("POT1", "D8"), 
 
+    CHIP("PROXIMITY", PROXIMITY),
+    POTENTIOMETER_CONNECTION("PROXIMITY", "E8"), 
+
     CHIP("CLK_GATE1", CLK_GATE), // Speed hack
-    CHIP("CLK_GATE2", CLK_GATE),
+    //CHIP("CLK_GATE2", CLK_GATE),
+
+    AUDIO(gotcha),
 
 #ifdef DEBUG
 	CHIP("LOG1", VCD_LOG, &vcd_log_desc),
@@ -943,7 +1030,6 @@ CIRCUIT_LAYOUT( gotcha ) =
     CONNECTION("F1", 4, "CLK_GATE1", 1),
     CONNECTION(MAZE, "CLK_GATE1", 2),
     CONNECTION("CLK_GATE1", 3, "J1",9),
-    //CONNECTION("CLK_GATE1", 4, "J1",11),
        
     //CONNECTION(VIDEO2,"J10", 12),
     //CONNECTION(MHBLANK_n,"J10", 13),
@@ -993,13 +1079,46 @@ CIRCUIT_LAYOUT( gotcha ) =
 
     
     // Sound
+    CONNECTION("J2", 3, "D2", 2),
+    CONNECTION(Y, "D2", 1),
+            
+    CONNECTION("K1", 11, "D2", 12),
+    CONNECTION(X, "D2", 13),
+
+    CONNECTION("D2", 11, "PROXIMITY", 1),
+    CONNECTION("D2", 3, "PROXIMITY", 2),
+
+    CONNECTION(ATTRACT_n, "E8", 4),
+
+    CONNECTION(ATTRACT, "L4", 3),
+    CONNECTION("E8", 3, "L4", 2),
+
+    CONNECTION(V8, "M4", 2),
+    CONNECTION("L4", 1, "M4", 1),
+
     CONNECTION(V8, "M4", 4),
     CONNECTION(CATCHOS, "M4", 5),
 
-    // TODO: Proximity beep circuit
-
     CONNECTION("M4", 6, "AUDIO", 1),
-    
+    CONNECTION("M4", 3, "AUDIO", 2),
+
+
+#ifdef DEBUG
+    CONNECTION("D2", 11, "LOG1", 1),
+    CONNECTION("D2", 3, "LOG1", 2),
+
+    /*CONNECTION("LOG1", 1, "H7", 12),
+    CONNECTION("LOG1", 2, "H7", 8),
+    CONNECTION("LOG1", 3, "F7", 6),
+    CONNECTION("LOG1", 4, "H7", 6),
+    CONNECTION("LOG1", 5, "E7", 12),
+    CONNECTION("LOG1", 6, "F7", 12),
+    CONNECTION("LOG1", 7, "F7", 8),
+    CONNECTION("LOG1", 8, "F8", 8),
+    //CONNECTION("LOG1", 9, "H8", 10),
+    CONNECTION("LOG1", 10, VBLANK_n),*/
+#endif
 
     CIRCUIT_LAYOUT_END
 };
+  

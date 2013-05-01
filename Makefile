@@ -3,13 +3,14 @@ CC   = gcc
 RM   = rm -f
 
 CHIP_OBJ := chips/7400.o chips/7402.o chips/7404.o chips/7408.o chips/7410.o chips/7411.o chips/7420.o chips/7425.o chips/7427.o chips/7430.o chips/7432.o \
-			chips/7437.o chips/7448.o chips/7450.o chips/7454.o chips/7474.o chips/7476.o chips/7483.o chips/7485.o chips/7486.o chips/7490.o chips/7493.o \
-			chips/74107.o chips/74151.o chips/74153.o chips/74155.o chips/74165.o chips/74175.o chips/74192.o chips/74193.o chips/74194.o chips/74279.o \
+			chips/7437.o chips/7448.o chips/7450.o chips/7454.o chips/7474.o chips/7476.o chips/7483.o chips/7485.o chips/7486.o chips/7490.o chips/7493.o chips/7495.o chips/7496.o \
+			chips/74107.o chips/74151.o chips/74153.o chips/74155.o chips/74165.o chips/74175.o chips/74191.o chips/74192.o chips/74193.o chips/74194.o chips/74279.o \
 			chips/9310.o chips/9311.o chips/9312.o chips/9316.o chips/9322.o chips/9602.o chips/555astable.o chips/555mono.o chips/555pwm.o \
-			chips/82S16.o chips/82S115.o chips/82S123.o chips/clock.o chips/capacitor.o chips/diode_matrix.o chips/latch.o chips/clk_gate.o \
+			chips/74S287.o chips/82S16.o chips/82S115.o chips/82S123.o chips/clock.o chips/capacitor.o chips/diode_matrix.o chips/latch.o chips/clk_gate.o \
 			chips/input.o chips/audio.o chips/video.o chips/dipswitch.o chips/rom.o chips/vcd_log.o
 
-GAME_OBJ := games/pong.o games/rebound.o games/gotcha.o games/spacerace.o games/stuntcycle.o games/pongdoubles.o games/tvbasketball.o games/breakout.o
+GAME_OBJ := games/pong.o games/rebound.o games/gotcha.o games/spacerace.o games/stuntcycle.o games/pongdoubles.o \
+   			games/tvbasketball.o games/breakout.o games/antiaircraft.o games/attack.o
 
 MANYMOUSE_OBJ := manymouse/manymouse.o manymouse/windows_wminput.o manymouse/linux_evdev.o \
 				 manymouse/macosx_hidmanager.o manymouse/macosx_hidutilities.o manymouse/x11_xinput2.o
@@ -48,6 +49,9 @@ endif
 #LIBS += -pg 
 #CFLAGS += -pg 
 
+# For gcov
+#CFLAGS += -fprofile-arcs -ftest-coverage
+
 all: $(BIN)
 
 clean:
@@ -71,3 +75,7 @@ dumpasm: $(BIN)
 profile: $(BIN)
 	$(BIN)
 	gprof $(BIN) > prof.txt
+
+coverage: $(BIN)
+	$(BIN)
+	gcov chip.cpp

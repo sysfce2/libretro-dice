@@ -2,19 +2,19 @@
 #include "../circuit.h"
 
 /*
-9602
+9602/74123
 Dual retriggerable monostable multivibrators with overriding reset.
 
-       +---+--+---+
- 1Cext |1  +--+ 16| VCC
-1RCext |2       15| 2RCext
- /1RST |3       14| 2Cext
-   1TR |4  9602 13| /2RST
-  /1TR |5       12| 2TR
-    1Q |6       11| /2TR
-   /1Q |7       10| Q2
-   GND |8        9| /2Q
-       +----------+
+       +---+--+---+                        +---+--+---+
+ 1Cext |1  +--+ 16| VCC               /1TR |1  +--+ 16| VCC
+1RCext |2       15| 2RCext             1TR |2       15| 1RCext
+ /1RST |3       14| 2Cext            /1RST |3       14| 1Cext
+   1TR |4  9602 13| /2RST              /1Q |4   74  13| 1Q
+  /1TR |5       12| 2TR                 2Q |5  123  12| /2Q
+    1Q |6       11| /2TR             2Cext |6       11| /2RST
+   /1Q |7       10| Q2              2RCext |7       10| 2TR
+   GND |8        9| /2Q                GND |8        9| /2TR
+       +----------+                        +----------+        
 */
 
 /*
@@ -25,10 +25,14 @@ and then begin charging through external resistor.
 The second latch is set by first latch, and cleared when capacitor finishes charging, or by reset signal.
 
 TODO: Fix delay equation, only holds for C > 1000 pF
+TODO: Fix 74123 delay equation, determine if 74123 functionality is identical to 9602?
 */
 
 struct A { enum { TRIG1 = 4, TRIG2 = 5, RST = 3, Q = 6, Q_n = 7, TRIG = i3, LATCH1 = i4, BUF = i5, CAP = 2 }; };
 struct B { enum { TRIG1 = 12, TRIG2 = 11, RST = 13, Q = 10, Q_n = 9, TRIG = i6, LATCH1 = i7, BUF = i8, CAP = 14 }; };
+
+struct C { enum { TRIG1 = 2, TRIG2 = 1, RST = 3, Q = 13, Q_n = 4, TRIG = i3, LATCH1 = i4, BUF = i5, CAP = 14 }; };
+struct D { enum { TRIG1 = 10, TRIG2 = 9, RST = 11, Q = 5, Q_n = 12, TRIG = i6, LATCH1 = i7, BUF = i8, CAP = 6 }; };
 
 const double Mono9602Desc::TIME_CONSTANT = 0.31;
 
@@ -63,7 +67,7 @@ template<typename T> CHIP_LOGIC( 9602_OR )
 
 template<typename T> CHIP_LOGIC( 9602_LATCH1 )
 {
-    if(pin[T::TRIG] && !prev_pin[T::TRIG])
+    if(POS_EDGE_PIN(T::TRIG))
         pin[T::LATCH1] = 1;
     else if(pin[T::BUF])
         pin[T::LATCH1] = 0;
@@ -85,7 +89,7 @@ template<typename T> CHIP_LOGIC( 9602_Q )
 {
     if(!pin[T::RST])
         pin[T::Q] = 0;
-    else if(pin[T::CAP] && !prev_pin[T::CAP])
+    else if(POS_EDGE_PIN(T::CAP))
         pin[T::Q] = 0;
     else if(pin[T::LATCH1])
         pin[T::Q] = 1;
@@ -112,7 +116,7 @@ CHIP_DESC( 9602 ) =
 
 	CHIP_START( 9602_LATCH1<A> )
         INPUT_PINS( A::TRIG, A::BUF )
-        PREV_INPUT_PIN( A::TRIG )
+        EVENT_PINS( A::TRIG )
         OUTPUT_PIN( A::LATCH1 )
         PREV_OUTPUT_PIN( A::LATCH1 )
         OUTPUT_DELAY_NS( 2.5, 2.5 ), 
@@ -129,7 +133,7 @@ CHIP_DESC( 9602 ) =
 
     CHIP_START( 9602_Q<A> )
         INPUT_PINS( A::RST, A::LATCH1, A::CAP )
-        PREV_INPUT_PIN( A::CAP )
+        EVENT_PINS( A::CAP )
         OUTPUT_PIN( A::Q )
         PREV_OUTPUT_PIN( A::Q )
         OUTPUT_DELAY_NS( 2.5, 2.5 ), 
@@ -152,7 +156,7 @@ CHIP_DESC( 9602 ) =
 
 	CHIP_START( 9602_LATCH1<B> )
         INPUT_PINS( B::TRIG, B::BUF )
-        PREV_INPUT_PIN( B::TRIG )
+        EVENT_PINS( B::TRIG )
         OUTPUT_PIN( B::LATCH1 )
         PREV_OUTPUT_PIN( B::LATCH1 )
         OUTPUT_DELAY_NS( 2.5, 2.5 ), 
@@ -169,7 +173,7 @@ CHIP_DESC( 9602 ) =
 
     CHIP_START( 9602_Q<B> )
         INPUT_PINS( B::RST, B::LATCH1, B::CAP )
-        PREV_INPUT_PIN( B::CAP )
+        EVENT_PINS( B::CAP )
         OUTPUT_PIN( B::Q )
         PREV_OUTPUT_PIN( B::Q )
         OUTPUT_DELAY_NS( 2.5, 2.5 ), 
@@ -177,6 +181,96 @@ CHIP_DESC( 9602 ) =
     CHIP_START( 9602_Q_n<B> )
         INPUT_PINS( B::Q )
         OUTPUT_PIN( B::Q_n )
+        OUTPUT_DELAY_NS( 4.0, 4.0 ),
+
+	CHIP_DESC_END
+};
+
+
+
+template<typename T> CHIP_LOGIC( 74123_AND )
+{
+    pin[T::TRIG] = pin[T::TRIG1] && !pin[T::TRIG2];
+}
+
+CHIP_DESC( 74123 ) = 
+{
+	CUSTOM_CHIP_START(&Mono9602Desc::mono_9602A)
+        OUTPUT_PIN( i1 ),
+
+    CHIP_START( 74123_AND<C> )
+        INPUT_PINS( C::TRIG1, C::TRIG2 )
+        OUTPUT_PIN( C::TRIG )
+        OUTPUT_DELAY_NS( 20.0, 20.0 ),
+        // pulses < 25 ns should not trigger the chip? Or is it < 40 ns?
+
+	CHIP_START( 9602_LATCH1<C> )
+        INPUT_PINS( C::TRIG, C::BUF )
+        EVENT_PINS( C::TRIG )
+        OUTPUT_PIN( C::LATCH1 )
+        PREV_OUTPUT_PIN( C::LATCH1 )
+        OUTPUT_DELAY_NS( 2.5, 2.5 ), 
+
+    CHIP_START( 9602_BUF<C> )
+        INPUT_PINS( C::LATCH1 )
+        OUTPUT_PIN( C::BUF )
+        OUTPUT_DELAY_NS( 30.0, 30.0 ),
+
+    CHIP_START( 9602_CAP<C> )
+        INPUT_PINS( C::LATCH1, i1 )
+        OUTPUT_PIN( C::CAP )
+        OUTPUT_DELAY_NS( 20.0, 20.0 ), // tp_lh will be overwritten
+
+    CHIP_START( 9602_Q<C> )
+        INPUT_PINS( C::RST, C::LATCH1, C::CAP )
+        EVENT_PINS( C::CAP )
+        OUTPUT_PIN( C::Q )
+        PREV_OUTPUT_PIN( C::Q )
+        OUTPUT_DELAY_NS( 2.5, 2.5 ), 
+
+    CHIP_START( 9602_Q_n<C> )
+        INPUT_PINS( C::Q )
+        OUTPUT_PIN( C::Q_n )
+        OUTPUT_DELAY_NS( 4.0, 4.0 ),
+
+
+
+	CUSTOM_CHIP_START(&Mono9602Desc::mono_9602B)
+        OUTPUT_PIN( i2 ),
+
+    CHIP_START( 74123_AND<D> )
+        INPUT_PINS( D::TRIG1, D::TRIG2 )
+        OUTPUT_PIN( D::TRIG )
+        OUTPUT_DELAY_NS( 20.0, 20.0 ),
+        // pulses < 25 ns should not trigger the chip? Or is it < 40 ns?
+
+	CHIP_START( 9602_LATCH1<D> )
+        INPUT_PINS( D::TRIG, D::BUF )
+        EVENT_PINS( D::TRIG )
+        OUTPUT_PIN( D::LATCH1 )
+        PREV_OUTPUT_PIN( D::LATCH1 )
+        OUTPUT_DELAY_NS( 2.5, 2.5 ), 
+
+    CHIP_START( 9602_BUF<D> )
+        INPUT_PINS( D::LATCH1 )
+        OUTPUT_PIN( D::BUF )
+        OUTPUT_DELAY_NS( 30.0, 30.0 ),
+
+    CHIP_START( 9602_CAP<D> )
+        INPUT_PINS( D::LATCH1, i2 )
+        OUTPUT_PIN( D::CAP )
+        OUTPUT_DELAY_NS( 20.0, 20.0 ), // tp_lh will be overwritten
+
+    CHIP_START( 9602_Q<D> )
+        INPUT_PINS( D::RST, D::LATCH1, D::CAP )
+        EVENT_PINS( D::CAP )
+        OUTPUT_PIN( D::Q )
+        PREV_OUTPUT_PIN( D::Q )
+        OUTPUT_DELAY_NS( 2.5, 2.5 ), 
+
+    CHIP_START( 9602_Q_n<D> )
+        INPUT_PINS( D::Q )
+        OUTPUT_PIN( D::Q_n )
         OUTPUT_DELAY_NS( 4.0, 4.0 ),
 
 	CHIP_DESC_END

@@ -113,6 +113,8 @@ void Video::video_init(int width, int height, Circuit* circuit)
 
 void Video::adjust_screen_params()
 {
+    printf("adjust screen params\n");
+
     glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
     if(desc)
@@ -201,6 +203,33 @@ void Video::draw(Chip* chip)
     }
 }
 
+void Video::draw_overlays()
+{
+    if(!desc || desc->overlays.empty()) return;
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_ZERO, GL_SRC_COLOR);
+
+    for(const VideoOverlay& o : desc->overlays)
+    {
+        double end_x = (o.width < 0.0) ? scanline_time : (o.x + o.width) / Circuit::timescale;
+        double end_y = (o.height < 0.0) ? v_size : o.y + o.height;
+        double start_x = o.x / Circuit::timescale;
+        double start_y = o.y;
+
+        glBegin(GL_QUADS);
+            glColor3f(o.r, o.g, o.b);
+
+	        glVertex3f(start_x, start_y, 0.0);
+	        glVertex3f(end_x,   start_y, 0.0);
+	        glVertex3f(end_x,   end_y,   0.0);
+	        glVertex3f(start_x, end_y,   0.0);
+	    glEnd();
+    }
+
+    glDisable(GL_BLEND);
+}
+
 CUSTOM_LOGIC( Video::video )
 {
     Video* video = (Video*)chip->custom_data;
@@ -213,6 +242,7 @@ CUSTOM_LOGIC( Video::video )
             video->v_size = video->v_pos;
             video->adjust_screen_params();
         }
+        video->draw_overlays();
         SDL_GL_SwapBuffers();
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
         video->frame_count++;

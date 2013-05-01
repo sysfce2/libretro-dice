@@ -21,10 +21,16 @@ spacerace
 stuntcycle
 tvbasketball
 breakout
+antiaircraft
+attack
 
 This will launch DICE in fullscreen mode without the GUI. When launching from
-the command line, press the Escape key to exit the emulator.
+the command line, press the Exit key to exit the emulator.
 
+
+ROM files should be placed in a subfolder named "roms" in the directory where 
+the DICE executable is located. Please do not attempt to contact the DICE team 
+to request ROM files.
 
 
 2) Compiling

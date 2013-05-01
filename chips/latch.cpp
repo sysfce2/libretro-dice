@@ -29,7 +29,7 @@ static CHIP_LOGIC( latch )
 {
     if(!pin[i1])
         pin[3] = 0;
-    else if(pin[i1] && !prev_pin[i1])
+    else if(POS_EDGE_PIN(i1))
         pin[3] = 1;
     else if(!pin[2])
         pin[3] = 0;
@@ -47,7 +47,7 @@ CHIP_DESC( LATCH ) =
 
     CHIP_START( latch )
         INPUT_PINS( 1, 2, i1 )
-        PREV_INPUT_PIN( i1 )
+        EVENT_PINS( i1 )
         OUTPUT_PIN( 3 )
         PREV_OUTPUT_PIN( 3 )
         OUTPUT_DELAY_NS( 100.0, 100.0 ),

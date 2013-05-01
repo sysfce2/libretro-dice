@@ -23,6 +23,8 @@ struct GameConfig : configuration
     {
         return configuration::save(filename);
     }
+
+    bool operator==(const GameConfig& g) { return filename == g.filename; }
 };
 
 #endif

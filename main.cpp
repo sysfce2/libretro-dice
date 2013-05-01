@@ -18,12 +18,13 @@ using namespace phoenix;
 #include "ui/audio_window.h"
 #include "ui/input_window.h"
 #include "ui/dipswitch_window.h"
+#include "ui/game_window.h"
 #include "ui/logo.h"
 
 #define DEBUG
 #undef DEBUG
 
-static const char VERSION_STRING[] = "DICE 0.5";
+static const char VERSION_STRING[] = "DICE 0.6";
 
 struct Application : Window 
 {
@@ -32,9 +33,9 @@ struct Application : Window
     Circuit* circuit;
     
     // Game menu
-    Menu game_menu;  
-    RadioItem game_item[1 + sizeof(game_list)/sizeof(GameDesc)];
-    nall::set<RadioItem&> game_set;
+    Menu game_menu;
+    GameWindow game_window;  
+    Item new_game_item, end_game_item;
     Separator game_sep[2];
     CheckItem pause_item, throttle_item;
     Item exit_item;
@@ -83,8 +84,24 @@ struct Application : Window
         // Game menu
         game_menu.setText("Game");
 
-        game_item[0].setText("None");
-        game_item[0].onActivate = [&] 
+        new_game_item.setText("New Game...");
+        new_game_item.onActivate = [&] { game_window.create(geometry().position()); };
+        game_window.cancel_button.onActivate = [&] { game_window.setVisible(false); setFocused(); };
+        
+        game_window.start_button.onActivate = [&]
+        {
+            GameDesc& g = game_list[game_window.game_view.selection()];
+            if(circuit) delete circuit; 
+            circuit = new Circuit(settings, input, g.desc, g.command_line);
+            game_window.setVisible(false);
+            setFocused();
+            onSize();
+        };
+
+        game_menu.append(new_game_item);
+
+        end_game_item.setText("End Game");
+        end_game_item.onActivate = [&] 
         { 
             if(circuit) 
             {
@@ -93,27 +110,7 @@ struct Application : Window
             }
             onSize();
         };
-        game_menu.append(game_item[0]);
-        game_set.append(game_item[0]);
-
-        for(int i = 0; i < sizeof(game_list)/sizeof(GameDesc); i++)
-        {
-            game_item[i+1].setText(game_list[i].name);
-            game_item[i+1].onActivate = [&]
-            {
-                if(circuit) delete circuit;
-                for(int j = 0; j < sizeof(game_list)/sizeof(GameDesc); j++)
-                    if(game_item[j+1].checked())
-                    {
-                        circuit = new Circuit(settings, input, game_list[j].desc, game_list[j].command_line);
-                        onSize();
-                    }
-            };
-            game_menu.append(game_item[i+1]);
-            game_set.append(game_item[i+1]);
-        }
-
-        RadioItem::group(game_set);
+        game_menu.append(end_game_item);
 
         game_menu.append(game_sep[0]);
         pause_item.setText("Pause");
@@ -195,7 +192,19 @@ struct Application : Window
         settings_menu.append(input_item);
 
         dipswitch_item.setText("Configure DIP Switches...");
-        dipswitch_item.onActivate = [&] { dipswitch_window.create(geometry().position()); };
+        dipswitch_item.onActivate = [&] 
+        { 
+            int selection = 0;
+            if(circuit) for(int i = 0; i < dipswitch_window.game_configs.size(); i++)
+            {            
+                if(circuit->game_config == dipswitch_window.game_configs[i])
+                {
+                    selection = i;
+                    break;
+                }
+            }
+            dipswitch_window.create(geometry().position(), selection); 
+        };
         dipswitch_window.onClose = dipswitch_window.exit_button.onActivate = [&] 
         {
             dipswitch_window.game_configs[dipswitch_window.current_config].save();
@@ -243,6 +252,8 @@ struct Application : Window
             {
                 circuit->video.video_init(geometry().width, geometry().height, circuit);
             }
+
+            viewport.setFocused();
         };
 
         setTitle(VERSION_STRING);
@@ -358,13 +369,13 @@ struct Application : Window
                     real_time += 1000000;
                 }
 
-                //if(emu_time > 1.5e6) return;
+                //if(emu_time > 3.040e6) break;
             }
             else
             {
-                SDL_Delay(10);
-                if(settings.pause) setStatusText("Paused");
-                else setStatusText(VERSION_STRING);   
+                SDL_Delay(5);
+                if(settings.pause && statusText() != "Paused") setStatusText("Paused");
+                else if(!settings.pause && statusText() != VERSION_STRING) setStatusText(VERSION_STRING);   
             }
 
             if(input_window.active_selector)
@@ -408,9 +419,9 @@ struct Application : Window
                         //else if(settings.fullscreen)
                         //    toggleFullscreen(false);
                         //else
-                            onClose();
+                            //onClose();
 
-                        //return;
+                        return;
                     }
                     if(ui_state.pause && !prev_ui_state.pause)
                     {
@@ -451,11 +462,17 @@ Window& application_window()
 #undef main
 int main(int argc, char** argv)
 {
+    // Sort the game list
+    std::sort(game_list, game_list + game_list_size);
+    
     Application application;
 
     // Init application path/window for ROM loader
     app_ptr = &application;
     app_path = dir(realpath(argv[0]));
+
+    // Seed random number generator
+    srand(time(NULL));
 
     if(argc > 1)
     {
@@ -475,23 +492,34 @@ int main(int argc, char** argv)
 #ifdef DEBUG
     printf("chips: %d\n", application.circuit->chips.size());
     uint64_t total_event_count = 0;
+    uint64_t total_loop_count[8] = { 0 };
 	for(int i = 0; i < application.circuit->chips.size(); i++)
 	{
 		total_event_count += application.circuit->chips[i]->total_event_count;
-        printf("%p LUT=%x, event_count=%lld, count:%d act_count=%lld, state=%d act_in:%d act_out:%d init_time:%lld, cyc_time:%lld, dyn:%d\n",
+        printf("%p LUT=%llx, event_count=%lld, act_count=%lld, state=%d act_out:%d cyc_time:%lld act_time:%lld\n",
                application.circuit->chips[i],
 			   (uint32_t)application.circuit->chips[i]->lut_data, 
 			   application.circuit->chips[i]->total_event_count,
-               application.circuit->chips[i]->event_count,
                application.circuit->chips[i]->activation_count,
 			   application.circuit->chips[i]->state,
-               application.circuit->chips[i]->active_inputs,
                application.circuit->chips[i]->active_outputs,
-               application.circuit->chips[i]->initial_time[0],
                application.circuit->chips[i]->cycle_time,
-               int(application.circuit->chips[i]->dynamic));
+               application.circuit->chips[i]->activation_time);
+        application.circuit->chips[i]->print_input_events();
+        application.circuit->chips[i]->print_output_events();
+        for(int j = 0; j < 8; j++) 
+        {
+            printf("loop_count%d:%lld, ", j, application.circuit->chips[i]->loop_count[j]);
+            total_loop_count[j] += application.circuit->chips[i]->loop_count[j];
+        }
+        printf("\n");
 	}
     printf("total event count:%lld\n", total_event_count);
+    for(int j = 0; j < 8; j++) 
+    {
+        printf("total_loop_count%d:%lld, ", j, total_loop_count[j]);
+    }
+    printf("\n");
 #endif
 
     return 0;

@@ -7,26 +7,11 @@
 
 static const double INPUT_POLL_RATE = 10.0e-3; // 10 ms poll rate
 
-//extern CUSTOM_LOGIC( clock );
-
-static CUSTOM_LOGIC( input_timer )
-{
-    chip->make_dynamic();
-    chip->state = ACTIVE;
-    chip->activation_time = chip->circuit->global_time;
-
-    chip->output_events.resize(2);
-    chip->output_events[0] = chip->delay[0];
-    chip->output_events[1] = chip->delay[1];
-    chip->cycle_time = chip->delay[0] + chip->delay[1];
-    chip->current_output_event = 0;
-    
-    chip->pending_event = chip->circuit->queue_push(chip, chip->delay[0]);
-}
+extern CUSTOM_LOGIC( clock );
 
 CHIP_DESC( PADDLE1_HORIZONTAL_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&input_timer)
+	CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i1 ),
     
@@ -39,7 +24,7 @@ CHIP_DESC( PADDLE1_HORIZONTAL_INPUT ) =
 
 CHIP_DESC( PADDLE2_HORIZONTAL_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&input_timer)
+	CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i1 ),
     
@@ -52,7 +37,7 @@ CHIP_DESC( PADDLE2_HORIZONTAL_INPUT ) =
 
 CHIP_DESC( PADDLE1_VERTICAL_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&input_timer)
+	CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i1 ),
     
@@ -65,7 +50,7 @@ CHIP_DESC( PADDLE1_VERTICAL_INPUT ) =
 
 CHIP_DESC( PADDLE2_VERTICAL_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&input_timer)
+	CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i1 ),
 
@@ -78,7 +63,7 @@ CHIP_DESC( PADDLE2_VERTICAL_INPUT ) =
 
 CHIP_DESC( PADDLE3_VERTICAL_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&input_timer)
+	CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i1 ),
     
@@ -91,7 +76,7 @@ CHIP_DESC( PADDLE3_VERTICAL_INPUT ) =
 
 CHIP_DESC( PADDLE4_VERTICAL_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&input_timer)
+	CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i1 ),
 
@@ -238,7 +223,7 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
     {
         desc->mono_555->r = desc->current_val;
         
-        chip->deactivate_outputs(); // TODO: does this improve things?
+        //chip->deactivate_outputs(); // TODO: does this improve things?
         //chip->state = PASSIVE;
         //chip->active_outputs = (1 << chip->output_links.size()) - 1;
         
@@ -260,8 +245,8 @@ CUSTOM_LOGIC( digital_input )
     if(new_out != chip->output)
     {
         //chip->deactivate_outputs();
-        chip->state = PASSIVE;
-        chip->active_outputs = (1 << chip->output_links.size()) - 1;   
+        //chip->state = PASSIVE;
+        //chip->active_outputs = (1 << chip->output_links.size()) - 1;   
 
         // Generate output event
         chip->pending_event = chip->circuit->queue_push(chip, 0);
@@ -275,23 +260,28 @@ template <int N> CHIP_LOGIC( button_inv )
 
 CHIP_DESC( COIN_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&input_timer)
+	CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
-        OUTPUT_PIN( i1 ),
+        OUTPUT_PIN( i7 ),
 
+    // Normally Open (Active Low) Output
     ChipDesc(&digital_input<Settings::Input::CoinStart, &Settings::Input::coin_start, &Settings::Input::CoinStart::coin>)
-        INPUT_PINS( i1 )
+        INPUT_PINS( i7 )
         OUTPUT_PIN( 1 ),
+
+    // Normally Closed (Active High) Outputs
+    CHIP_START(button_inv<1>) INPUT_PINS( 1 ) OUTPUT_PIN( i1 ),
 
 	CHIP_DESC_END
 };
 
 CHIP_DESC( START_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&input_timer)
+	CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i7 ),
 
+    // Normally Open (Active Low) Outputs
     ChipDesc(&digital_input<Settings::Input::CoinStart, &Settings::Input::coin_start, &Settings::Input::CoinStart::start1>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 1 ),
@@ -300,37 +290,34 @@ CHIP_DESC( START_INPUT ) =
         INPUT_PINS( i7 )
         OUTPUT_PIN( 2 ),
 
-    CHIP_START(button_inv<1>) // Inverted outputs, active high
-        INPUT_PINS( 1 )
-        OUTPUT_PIN( i1 ),
-
-    CHIP_START(button_inv<2>)
-        INPUT_PINS( 2 )
-        OUTPUT_PIN( i2 ),
+    // Normally Closed (Active High) Outputs
+    CHIP_START(button_inv<1>) INPUT_PINS( 1 ) OUTPUT_PIN( i1 ),
+    CHIP_START(button_inv<2>) INPUT_PINS( 2 ) OUTPUT_PIN( i2 ),
 
 	CHIP_DESC_END
 };
 
 CHIP_DESC( JOYSTICK1_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&input_timer)
+	CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
-        OUTPUT_PIN( i1 ),
+        OUTPUT_PIN( i7 ),
 
+    // Normally Open (Active Low) Outputs
     ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::Input::joystick1, &Settings::Input::Joystick::up>)
-        INPUT_PINS( i1 )
+        INPUT_PINS( i7 )
         OUTPUT_PIN( Joystick::UP ),
 
 	ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::Input::joystick1, &Settings::Input::Joystick::down>)
-        INPUT_PINS( i1 )
+        INPUT_PINS( i7 )
         OUTPUT_PIN( Joystick::DOWN ),
 
 	ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::Input::joystick1, &Settings::Input::Joystick::left>)
-        INPUT_PINS( i1 )
+        INPUT_PINS( i7 )
         OUTPUT_PIN( Joystick::LEFT ),
 
 	ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::Input::joystick1, &Settings::Input::Joystick::right>)
-        INPUT_PINS( i1 )
+        INPUT_PINS( i7 )
         OUTPUT_PIN( Joystick::RIGHT ),
 
 	CHIP_DESC_END
@@ -338,24 +325,25 @@ CHIP_DESC( JOYSTICK1_INPUT ) =
 
 CHIP_DESC( JOYSTICK2_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&input_timer)
+	CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
-        OUTPUT_PIN( i1 ),
+        OUTPUT_PIN( i7 ),
 
+    // Normally Open (Active Low) Outputs
     ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::Input::joystick2, &Settings::Input::Joystick::up>)
-        INPUT_PINS( i1 )
+        INPUT_PINS( i7 )
         OUTPUT_PIN( Joystick::UP ),
 
 	ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::Input::joystick2, &Settings::Input::Joystick::down>)
-        INPUT_PINS( i1 )
+        INPUT_PINS( i7 )
         OUTPUT_PIN( Joystick::DOWN ),
 
 	ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::Input::joystick2, &Settings::Input::Joystick::left>)
-        INPUT_PINS( i1 )
+        INPUT_PINS( i7 )
         OUTPUT_PIN( Joystick::LEFT ),
 
 	ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::Input::joystick2, &Settings::Input::Joystick::right>)
-        INPUT_PINS( i1 )
+        INPUT_PINS( i7 )
         OUTPUT_PIN( Joystick::RIGHT ),
 
 	CHIP_DESC_END
@@ -363,17 +351,27 @@ CHIP_DESC( JOYSTICK2_INPUT ) =
 
 CHIP_DESC( BUTTONS1_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&input_timer)
+	CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
-        OUTPUT_PIN( i1 ),
+        OUTPUT_PIN( i7 ),
 
+    // Normally Open (Active Low) Outputs
     ChipDesc(&digital_input<Settings::Input::Button, &Settings::Input::buttons1, &Settings::Input::Button::button1>)
-        INPUT_PINS( i1 )
+        INPUT_PINS( i7 )
         OUTPUT_PIN( 1 ),
 
 	ChipDesc(&digital_input<Settings::Input::Button, &Settings::Input::buttons1, &Settings::Input::Button::button2>)
-        INPUT_PINS( i1 )
+        INPUT_PINS( i7 )
         OUTPUT_PIN( 2 ),
+
+	ChipDesc(&digital_input<Settings::Input::Button, &Settings::Input::buttons1, &Settings::Input::Button::button3>)
+        INPUT_PINS( i7 )
+        OUTPUT_PIN( 3 ),
+
+    // Normally Closed (Active High) Outputs
+    CHIP_START(button_inv<1>) INPUT_PINS( 1 ) OUTPUT_PIN( i1 ),
+    CHIP_START(button_inv<2>) INPUT_PINS( 2 ) OUTPUT_PIN( i2 ),
+    CHIP_START(button_inv<3>) INPUT_PINS( 3 ) OUTPUT_PIN( i3 ),
 
 	CHIP_DESC_END
 };
@@ -381,17 +379,27 @@ CHIP_DESC( BUTTONS1_INPUT ) =
 
 CHIP_DESC( BUTTONS2_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&input_timer)
+	CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
-        OUTPUT_PIN( i1 ),
+        OUTPUT_PIN( i7 ),
 
+    // Normally Open (Active Low) Outputs
     ChipDesc(&digital_input<Settings::Input::Button, &Settings::Input::buttons2, &Settings::Input::Button::button1>)
-        INPUT_PINS( i1 )
+        INPUT_PINS( i7 )
         OUTPUT_PIN( 1 ),
 
 	ChipDesc(&digital_input<Settings::Input::Button, &Settings::Input::buttons2, &Settings::Input::Button::button2>)
-        INPUT_PINS( i1 )
+        INPUT_PINS( i7 )
         OUTPUT_PIN( 2 ),
+
+	ChipDesc(&digital_input<Settings::Input::Button, &Settings::Input::buttons2, &Settings::Input::Button::button3>)
+        INPUT_PINS( i7 )
+        OUTPUT_PIN( 3 ),
+
+    // Normally Closed (Active High) Outputs
+    CHIP_START(button_inv<1>) INPUT_PINS( 1 ) OUTPUT_PIN( i1 ),
+    CHIP_START(button_inv<2>) INPUT_PINS( 2 ) OUTPUT_PIN( i2 ),
+    CHIP_START(button_inv<3>) INPUT_PINS( 3 ) OUTPUT_PIN( i3 ),
 
 	CHIP_DESC_END
 };
@@ -442,7 +450,7 @@ void ThrottleDesc<THROTTLE>::throttle_input(Chip* chip, int mask)
 
 CHIP_DESC( THROTTLE1_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&input_timer)
+	CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i1 ),
     

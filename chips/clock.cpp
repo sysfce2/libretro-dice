@@ -14,11 +14,13 @@ CUSTOM_LOGIC( clock )
     chip->state = ACTIVE;
     chip->activation_time = chip->circuit->global_time;
 
-    chip->output_events.resize(2);
-    chip->output_events[0] = chip->delay[0];
-    chip->output_events[1] = chip->delay[1];
+    chip->output_events.clear();
+    chip->output_events.push_back(chip->circuit->global_time);
+    chip->output_events.push_back(chip->circuit->global_time + chip->delay[0]);
     chip->cycle_time = chip->delay[0] + chip->delay[1];
-    chip->current_output_event = 0;
+    chip->first_output_event = chip->output_events.begin();
+    chip->current_output_event = chip->output_events.begin();
+    chip->end_time = ~0ull;
     
     chip->pending_event = chip->circuit->queue_push(chip, chip->delay[0]);
 }
@@ -28,6 +30,15 @@ CHIP_DESC( CLOCK_14_318_MHZ ) =
 	CUSTOM_CHIP_START(&clock)
         OUTPUT_PIN( 1 )
         OUTPUT_DELAY_US( 0.5/14.31818, 0.5/14.31818 ),
+
+	CHIP_DESC_END
+};
+
+CHIP_DESC( CLOCK_8_MHZ ) = 
+{
+	CUSTOM_CHIP_START(&clock)
+        OUTPUT_PIN( 1 )
+        OUTPUT_DELAY_US( 0.5/8.0, 0.5/8.0 ),
 
 	CHIP_DESC_END
 };

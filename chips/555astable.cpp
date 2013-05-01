@@ -16,13 +16,11 @@ When CV is not connected it is held at 2/3.VCC through a 5k/10k divider.
                              +------+--------+------*---+-----+
 */
 
-const double Astable555Desc::LN_2 = 0.69314718056;
-
 CUSTOM_LOGIC( Astable555Desc::astable_555 )
 {
     Astable555Desc* desc = (Astable555Desc*)chip->custom_data;
 
-    if(chip->state == ACTIVE)
+    if(chip->state != PASSIVE)
         chip->deactivate_outputs();
 
     chip->inputs ^= mask;
@@ -35,28 +33,54 @@ CUSTOM_LOGIC( Astable555Desc::astable_555 )
     }
     else if(chip->inputs & 1) // Posedge /RST (reset being de-asserted)
     {
-        uint64_t hi_time = uint64_t(LN_2 * (desc->r1 + desc->r2) * desc->c / Circuit::timescale);
-        uint64_t lo_time = uint64_t(LN_2 * desc->r2 * desc->c / Circuit::timescale);
+        double TC = -log((5.0 - desc->ctrl) / (5.0 - 0.5*desc->ctrl));
+        uint64_t hi_time = uint64_t(TC * (desc->r1 + desc->r2) * desc->c / Circuit::timescale);
+        uint64_t lo_time = uint64_t(TC * desc->r2 * desc->c / Circuit::timescale);
 
         chip->state = ACTIVE;
-        chip->output_events.resize(2);
         chip->cycle_time = hi_time + lo_time;
         chip->activation_time = chip->circuit->global_time;
+        chip->end_time = ~0ull;
+        chip->output_events.clear();
 
+        uint64_t delay = 1;
         if(chip->output)
         {
-            chip->output_events[0] = hi_time;
-            chip->output_events[1] = lo_time;
-            chip->current_output_event = 1;
+            if(chip->last_output_event + hi_time > chip->circuit->global_time)
+                delay = chip->last_output_event + hi_time - chip->circuit->global_time;
+
+            chip->output_events.push_back(Event(chip->activation_time, 0));
+            chip->output_events.push_back(Event(chip->activation_time + hi_time, 1));
+            chip->pending_event = chip->circuit->queue_push(chip, delay);
+        }
+        else
+        {
+            if(chip->last_output_event + lo_time > chip->circuit->global_time)
+                delay = chip->last_output_event + lo_time - chip->circuit->global_time;
+
+            chip->output_events.push_back(Event(chip->activation_time, 0));
+            chip->output_events.push_back(Event(chip->activation_time + lo_time, 1));
+            chip->pending_event = chip->circuit->queue_push(chip, delay);
+        }
+
+        //printf("t:%lld pend:%lld del:%lld 1:%lld 2:%lld hi:%lld lo:%lld TC:%g\n", chip->circuit->global_time, chip->pending_event, delay, chip->output_events.front().time, chip->output_events.back().time, hi_time, lo_time, TC);
+
+        /*if(chip->output)
+        {
+            chip->output_events.push_back(Event(chip->activation_time, 0));
+            chip->output_events.push_back(Event(chip->activation_time + hi_time, 1));
             chip->pending_event = chip->circuit->queue_push(chip, hi_time);
         }
         else
         {
-            chip->output_events[0] = lo_time;
-            chip->output_events[1] = hi_time;
-            chip->current_output_event = 1;
+            chip->output_events.push_back(Event(chip->activation_time, 0));
+            chip->output_events.push_back(Event(chip->activation_time + lo_time, 1));
             chip->pending_event = chip->circuit->queue_push(chip, lo_time);
-        }
+        }*/
+
+        chip->first_output_event = chip->output_events.begin();
+        chip->current_output_event = chip->output_events.begin();
+        
     }
 }
 

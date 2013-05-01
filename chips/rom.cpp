@@ -26,9 +26,9 @@ uint8_t RomDesc::get_data(const RomDesc* rom, unsigned offset)
     {
         filename = rom->file_name.c_str();
         
-        if(zip_file.open({application_path(), "roms/", filename, ".zip"}) == false)
+        if(zip_file.open({application_path(), "roms\\", filename, ".zip"}) == false)
         {
-            MessageWindow::critical(application_window(), {"ROM File ", filename, ".zip not found.\n"
+            MessageWindow::critical(application_window(), {"ROM File roms/", filename, ".zip not found.\n"
                                                    "Game will not function correctly!"});
 
             romname = rom->rom_name.c_str();

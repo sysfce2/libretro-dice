@@ -104,7 +104,7 @@ CUSTOM_LOGIC( SeriesRCDesc::series_rc )
 
 CHIP_LOGIC( series_rc ) // > 0 rise / fall time
 {
-    if(pin[1] != pin[2] && prev_pin[1] == pin[2])
+    if(pin[1] != pin[2] && event_pin[1])
         pin[3] = pin[1];
     else if(pin[1] == pin[2] || !pin[i2])
         pin[3] = pin[2];
@@ -114,7 +114,7 @@ CHIP_LOGIC( series_rc ) // > 0 rise / fall time
 
 CHIP_LOGIC( series_cap ) // 0 rise time, long fall time
 {
-    if(pin[1] != pin[2] && prev_pin[1] == pin[2])
+    if(pin[1] != pin[2] && event_pin[1])
         pin[i2] = 1;
     else if(pin[3] != pin[2])
         pin[i2] = 0;
@@ -129,17 +129,17 @@ CHIP_DESC( SERIES_RC ) =
 
 	CHIP_START( series_rc )
         INPUT_PINS( 1, 2, i2 )
-        PREV_INPUT_PIN( 1 )
+        EVENT_PINS( 1 )
         OUTPUT_PIN( 3 )
         PREV_OUTPUT_PIN( 3 )
         OUTPUT_DELAY_NS( 5.0, 5.0 ),
 
 	CHIP_START( series_cap )
         INPUT_PINS( i1, 1, 2, 3 )
-        PREV_INPUT_PIN( 1 )
+        EVENT_PINS( 1 )
         OUTPUT_PIN( i2 )
         PREV_OUTPUT_PIN( i2 )
-        OUTPUT_DELAY_NS( 0.0, 1.0 ), // tp_hl will be overwritten
+        OUTPUT_DELAY_NS( 1.0, 1.0 ), // tp_hl will be overwritten
 
 	CHIP_DESC_END
 };

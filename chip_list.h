@@ -16,6 +16,7 @@
 #include "chips/rom.h"
 
 extern CHIP_DESC( CLOCK_14_318_MHZ );
+extern CHIP_DESC( CLOCK_8_MHZ );
 extern CHIP_DESC( CLOCK_6_MHZ );
 
 extern CHIP_DESC( 7400 );
@@ -42,12 +43,15 @@ extern CHIP_DESC( 7486 );
 extern CHIP_DESC( 7490 );
 extern CHIP_DESC( 7493 );
 extern CHIP_DESC( 7493A );
+extern CHIP_DESC( 7495 );
+extern CHIP_DESC( 7496 );
 extern CHIP_DESC( 74107 );
 extern CHIP_DESC( 74151 );
 extern CHIP_DESC( 74153 );
 extern CHIP_DESC( 74155 );
 extern CHIP_DESC( 74165 );
 extern CHIP_DESC( 74175 );
+extern CHIP_DESC( 74191 );
 extern CHIP_DESC( 74192 );
 extern CHIP_DESC( 74193 );
 extern CHIP_DESC( 74194 );
@@ -58,6 +62,7 @@ extern CHIP_DESC( 9312 );
 extern CHIP_DESC( 9316 );
 extern CHIP_DESC( 9322 );
 
+extern CHIP_DESC( 74S287 );
 extern CHIP_DESC( 82S16 );
 extern CHIP_DESC( 82S115 );
 extern CHIP_DESC( 82S123 );
@@ -65,7 +70,9 @@ extern CHIP_DESC( 82S123 );
 extern CHIP_DESC( LATCH );
 
 extern CHIP_DESC( CLK_GATE );
+extern CHIP_DESC( CLK_GATE_n );
 
 static CHIP_ALIAS( 74154, 9311 );
 static CHIP_ALIAS( 74161, 9316 );
 static CHIP_ALIAS( 74157, 9322 );
+static CHIP_ALIAS( 82S129, 74S287 );

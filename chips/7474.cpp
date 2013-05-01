@@ -24,7 +24,7 @@ static CHIP_LOGIC( 7474A1 )
 		pin[i1] = 1;	
 	else if(pin[4] && !pin[1])
 		pin[i1] = 0;
-	else if(pin[3] && !prev_pin[3])
+	else if(POS_EDGE_PIN(3))
 		pin[i1] = pin[2];
 	else
 		pin[i1] = prev_pin[i1];
@@ -46,7 +46,7 @@ static CHIP_LOGIC( 7474B1 )
 		pin[i2] = 1;	
 	else if(pin[10] && !pin[13])
 		pin[i2] = 0;
-	else if(pin[11] && !prev_pin[11])
+	else if(POS_EDGE_PIN(11))
 		pin[i2] = pin[12];
 	else
 		pin[i2] = prev_pin[i2];
@@ -75,8 +75,8 @@ CHIP_DESC( 7474 ) =
 {
 	CHIP_START( 7474A1 )
 		INPUT_PINS( 1, 2, 3, 4 )
-		OUTPUT_PIN( i1 )
-		PREV_INPUT_PIN( 3 )
+		EVENT_PINS( 3 )
+        OUTPUT_PIN( i1 )
 		PREV_OUTPUT_PIN( i1 )
 		OUTPUT_DELAY_NS( 10.0, 10.0 ),
 
@@ -92,8 +92,8 @@ CHIP_DESC( 7474 ) =
 
 	CHIP_START( 7474B1 )
 		INPUT_PINS( 10, 11, 12, 13 )
-		OUTPUT_PIN( i2 )
-		PREV_INPUT_PIN( 11 )
+		EVENT_PINS( 11 )
+        OUTPUT_PIN( i2 )
 		PREV_OUTPUT_PIN( i2 )
 		OUTPUT_DELAY_NS( 10.0, 10.0 ),
 
