@@ -24,13 +24,14 @@ using namespace phoenix;
 #define DEBUG
 #undef DEBUG
 
-static const char VERSION_STRING[] = "DICE 0.6";
+static const char VERSION_STRING[] = "DICE 0.7";
 
-struct Application : Window 
+struct MainWindow : Window 
 {
     Settings settings;
     Input input;
     Circuit* circuit;
+    RealTimeClock real_time;
     
     // Game menu
     Menu game_menu;
@@ -59,17 +60,17 @@ struct Application : Window
     {
         bool pause, throttle, fullscreen, quit;
 
-        static UserInterfaceState getCurrent(Application& application)
+        static UserInterfaceState getCurrent(MainWindow& main_window)
         {
-            return { application.input.getKeyPressed(application.settings.input.ui.pause),
-                     application.input.getKeyPressed(application.settings.input.ui.throttle),
-                     application.input.getKeyPressed(application.settings.input.ui.fullscreen),
-                     application.input.getKeyPressed(application.settings.input.ui.quit) };
+            return { main_window.input.getKeyPressed(main_window.settings.input.ui.pause),
+                     main_window.input.getKeyPressed(main_window.settings.input.ui.throttle),
+                     main_window.input.getKeyPressed(main_window.settings.input.ui.fullscreen),
+                     main_window.input.getKeyPressed(main_window.settings.input.ui.quit) };
         }
     };
     UserInterfaceState prev_ui_state;
 
-    Application() : audio_window(settings, mute_item), input_window(settings), circuit(nullptr), prev_ui_state{false, false, false, false}
+    MainWindow() : audio_window(settings, mute_item), input_window(settings, input, [&]{ run(); }), circuit(nullptr), prev_ui_state{false, false, false, false}
     {
         // Load config file
         nall::string config_path = configpath();
@@ -79,22 +80,22 @@ struct Application : Window
         settings.filename = {config_path, "settings.cfg"};
         settings.load();
         
-        onClose = [&] { &OS::quit; SDL_Quit(); exit(0); };
+        onClose = [&] { Application::quit(); };
 
         // Game menu
         game_menu.setText("Game");
 
         new_game_item.setText("New Game...");
         new_game_item.onActivate = [&] { game_window.create(geometry().position()); };
-        game_window.cancel_button.onActivate = [&] { game_window.setVisible(false); setFocused(); };
+        game_window.cancel_button.onActivate = [&] { game_window.setModal(false); game_window.setVisible(false); };
         
         game_window.start_button.onActivate = [&]
         {
             GameDesc& g = game_list[game_window.game_view.selection()];
             if(circuit) delete circuit; 
             circuit = new Circuit(settings, input, g.desc, g.command_line);
+            game_window.setModal(false);
             game_window.setVisible(false);
-            setFocused();
             onSize();
         };
 
@@ -145,13 +146,18 @@ struct Application : Window
         {
             mute_item.setChecked(settings.audio.mute);
             settings.save();
+            audio_window.setModal(false);
             audio_window.setVisible(false);
-            setFocused();
-            if(circuit) circuit->audio.audio_init(circuit);
+            if(circuit) circuit->audio.toggle_mute();
         };
         mute_item.setText("Mute Audio");
         mute_item.setChecked(settings.audio.mute);
-        mute_item.onToggle = [&] { settings.audio.mute = mute_item.checked(); if(circuit) circuit->audio.audio_init(circuit); };
+        mute_item.onToggle = [&] 
+        { 
+            settings.audio.mute = mute_item.checked(); 
+            settings.save();
+            if(circuit) circuit->audio.toggle_mute(); 
+        };
 
         settings_menu.append(mute_item);
         settings_menu.append(settings_sep[0]);
@@ -174,8 +180,8 @@ struct Application : Window
         {
             if(input_window.active_selector) input_window.active_selector->assign(KeyAssignment::None);
             settings.save(); 
+            input_window.setModal(false);
             input_window.setVisible(false);
-            setFocused();
         };
         input_window.exit_button.onActivate = [&]
         {
@@ -184,8 +190,8 @@ struct Application : Window
             else
             {
                 settings.save(); 
+                input_window.setModal(false);
                 input_window.setVisible(false);
-                setFocused();
             }
         };
 
@@ -208,8 +214,8 @@ struct Application : Window
         dipswitch_window.onClose = dipswitch_window.exit_button.onActivate = [&] 
         {
             dipswitch_window.game_configs[dipswitch_window.current_config].save();
+            dipswitch_window.setModal(false);
             dipswitch_window.setVisible(false);
-            setFocused();
         };
         settings_menu.append(settings_sep[2]);
         settings_menu.append(dipswitch_item);
@@ -235,9 +241,9 @@ struct Application : Window
 	        printf("Unable to init SDL:\n%s\n", SDL_GetError());
 		    exit(1);
 	    }
+        atexit(SDL_Quit);
 
         input.init();
-
 
         onSize = [&] {
 
@@ -342,112 +348,110 @@ struct Application : Window
 
     void run()
     {
-        RealTimeClock real_time;
-        
-        while(1)
+        input.poll_input();
+
+        if(circuit && !settings.pause)
         {
-            input.poll_input();
+            circuit->run(2.5e-3 / Circuit::timescale); // Run 2.5 ms
+            //circuit->run(100.0e-6 / Circuit::timescale); // Run 100 us
 
-            if(circuit && !settings.pause)
+            uint64_t emu_time = circuit->global_time * 1000000.0 * Circuit::timescale;
+            
+            // Make sure real time is at least mostly caught up
+            if(settings.throttle)
+                while(circuit->rtc.get_usecs() + 50000 < emu_time);
+
+            // If real time is too far ahead, adjust timer
+            if(circuit->rtc.get_usecs() > emu_time + 100000)
+                circuit->rtc += (circuit->rtc.get_usecs() - emu_time - 100000);
+
+            if(real_time.get_usecs() > 1000000)
             {
-                circuit->run(2.5e-3 / Circuit::timescale); // Run 2.5 ms
-
-                uint64_t emu_time = circuit->global_time * 1000000.0 * Circuit::timescale;
-                
-                // Make sure real time is at least mostly caught up
-                if(settings.throttle)
-                    while(circuit->rtc.get_usecs() + 50000 < emu_time);
-
-                // If real time is too far ahead, adjust timer
-                if(circuit->rtc.get_usecs() > emu_time + 100000)
-                    circuit->rtc += (circuit->rtc.get_usecs() - emu_time - 100000);
-
-                if(real_time.get_usecs() > 1000000)
-                {
-                    setStatusText({"FPS: ", circuit->video.frame_count});
-                    circuit->video.frame_count = 0;
-                    real_time += 1000000;
-                }
-
-                //if(emu_time > 3.040e6) break;
-            }
-            else
-            {
-                SDL_Delay(5);
-                if(settings.pause && statusText() != "Paused") setStatusText("Paused");
-                else if(!settings.pause && statusText() != VERSION_STRING) setStatusText(VERSION_STRING);   
+                setStatusText({"FPS: ", circuit->video.frame_count});
+                circuit->video.frame_count = 0;
+                real_time += 1000000;
             }
 
-            if(input_window.active_selector)
-            {
-                auto key_state = Keyboard::state();
-        
-                for(unsigned i = 0; i < key_state.size(); i++)
-                    if(key_state[i]) input_window.active_selector->assign({KeyAssignment::KEYBOARD, i});
+            //if(emu_time > 3.0e6) onClose();
+        }
+        else
+        {
+            SDL_Delay(10);
+            if(settings.pause && statusText() != "Paused") setStatusText("Paused");
+            else if(!settings.pause && statusText() != VERSION_STRING) setStatusText(VERSION_STRING);
+            if(circuit == nullptr && focused()) drawLogo();
+        }
 
-                //Check Joystick Events
-                SDL_Event event;
-                while(SDL_PollEvent(&event))
-                {
-                    switch(event.type)
-                    {   
-                        case SDL_JOYBUTTONDOWN:
-                            input_window.active_selector->assign({KeyAssignment::JOYSTICK_BUTTON, event.jbutton.button, event.jbutton.which});
-                            break;
-                        case SDL_JOYAXISMOTION:
-                            if(abs(event.jaxis.value) > 8192)
-                            {
-                                unsigned axis = (event.jaxis.axis << 1) | (event.jaxis.value > 0);
-                                input_window.active_selector->assign({KeyAssignment::JOYSTICK_AXIS, axis, event.jaxis.which});
-                            }
-                        default:
-                            break;
-                    }
+        if(input_window.active_selector)
+        {
+            auto key_state = Keyboard::state();
+    
+            for(unsigned i = 0; i < key_state.size(); i++)
+                if(key_state[i]) input_window.active_selector->assign({KeyAssignment::KEYBOARD, i});
+
+            //Check Joystick Events
+            SDL_Event event;
+            while(SDL_PollEvent(&event))
+            {
+                switch(event.type)
+                {   
+                    case SDL_JOYBUTTONDOWN:
+                        input_window.active_selector->assign({KeyAssignment::JOYSTICK_BUTTON, event.jbutton.button, event.jbutton.which});
+                        break;
+                    case SDL_JOYAXISMOTION:
+                        if(!input_window.active_selector->allow_joystick) break;
+                        if(abs(event.jaxis.value) > 8192)
+                        {
+                            unsigned axis = (event.jaxis.axis << 1) | (event.jaxis.value > 0);
+                            input_window.active_selector->assign({KeyAssignment::JOYSTICK_AXIS, axis, event.jaxis.which});
+                        }
+                    default:
+                        break;
                 }
             }
-            else // Handle user interface inputs
+        }
+        else // Handle user interface inputs
+        {            
+            UserInterfaceState ui_state = UserInterfaceState::getCurrent(*this);
+
+            // Don't update ui inputs while main window is in the background
+            if(focused())
             {            
-                UserInterfaceState ui_state = UserInterfaceState::getCurrent(*this);
+                if(ui_state.quit && !prev_ui_state.quit)
+                {
+                    //if(settings.no_gui)
+                    //    onClose();
+                    //else if(settings.fullscreen)
+                    //    toggleFullscreen(false);
+                    //else
+                        //onClose();
 
-                // Don't update ui inputs while main window is in the background
-                if(focused())
-                {            
-                    if(ui_state.quit && !prev_ui_state.quit)
-                    {
-                        //if(settings.no_gui)
-                        //    onClose();
-                        //else if(settings.fullscreen)
-                        //    toggleFullscreen(false);
-                        //else
-                            //onClose();
-
-                        return;
-                    }
-                    if(ui_state.pause && !prev_ui_state.pause)
-                    {
-                        settings.pause = !settings.pause;
-                        pause_item.setChecked(settings.pause);
-                    }
-                    if(ui_state.fullscreen && !prev_ui_state.fullscreen)
-                    {
-                        fullscreen_item.setChecked(!settings.fullscreen);
-                        fullscreen_item.onToggle();
-                    }
-                    if(ui_state.throttle && !prev_ui_state.throttle)
-                    {
-                        throttle_item.setChecked(!settings.throttle);
-                        throttle_item.onToggle();
-                    }
+                    onClose();
                 }
-
-                prev_ui_state = ui_state;
+                if(ui_state.pause && !prev_ui_state.pause)
+                {
+                    settings.pause = !settings.pause;
+                    pause_item.setChecked(settings.pause);
+                }
+                if(ui_state.fullscreen && !prev_ui_state.fullscreen)
+                {
+                    fullscreen_item.setChecked(!settings.fullscreen);
+                    fullscreen_item.onToggle();
+                }
+                if(ui_state.throttle && !prev_ui_state.throttle)
+                {
+                    throttle_item.setChecked(!settings.throttle);
+                    throttle_item.onToggle();
+                }
             }
+
+            prev_ui_state = ui_state;
         }
     }
 };
 
 static nall::string app_path;
-static Application* app_ptr;
+static MainWindow* window_ptr;
 
 const nall::string& application_path()
 {
@@ -456,7 +460,7 @@ const nall::string& application_path()
 
 Window& application_window()
 {
-    return *app_ptr;
+    return *window_ptr;
 }
 
 #undef main
@@ -465,12 +469,17 @@ int main(int argc, char** argv)
     // Sort the game list
     std::sort(game_list, game_list + game_list_size);
     
-    Application application;
+    MainWindow main_window;
 
-    // Init application path/window for ROM loader
-    app_ptr = &application;
+    Application::setName("DICE");
+    Application::Cocoa::onQuit = &Application::quit;
+    Application::main = [&] { main_window.run(); };
+    
+
+    // Init main_window path/window for ROM loader
+    window_ptr = &main_window;
     app_path = dir(realpath(argv[0]));
-
+    
     // Seed random number generator
     srand(time(NULL));
 
@@ -480,37 +489,40 @@ int main(int argc, char** argv)
         {
             if(strcmp(argv[1], g.command_line) == 0)
             {
-                application.circuit = new Circuit(application.settings, application.input, g.desc, g.command_line);
-                application.settings.no_gui = true;
-                application.toggleFullscreen(true);
+                main_window.circuit = new Circuit(main_window.settings, main_window.input, g.desc, g.command_line);
+                main_window.settings.no_gui = true;
+                main_window.toggleFullscreen(true);
             }
         }
     }
 
-    application.run();
+    Application::run();
 
 #ifdef DEBUG
-    printf("chips: %d\n", application.circuit->chips.size());
+    printf("chip size:%d\n", sizeof(Chip));    
+    printf("chips: %d\n", main_window.circuit->chips.size());
     uint64_t total_event_count = 0;
     uint64_t total_loop_count[8] = { 0 };
-	for(int i = 0; i < application.circuit->chips.size(); i++)
+	for(int i = 0; i < main_window.circuit->chips.size(); i++)
 	{
-		total_event_count += application.circuit->chips[i]->total_event_count;
-        printf("%p LUT=%llx, event_count=%lld, act_count=%lld, state=%d act_out:%d cyc_time:%lld act_time:%lld\n",
-               application.circuit->chips[i],
-			   (uint32_t)application.circuit->chips[i]->lut_data, 
-			   application.circuit->chips[i]->total_event_count,
-               application.circuit->chips[i]->activation_count,
-			   application.circuit->chips[i]->state,
-               application.circuit->chips[i]->active_outputs,
-               application.circuit->chips[i]->cycle_time,
-               application.circuit->chips[i]->activation_time);
-        application.circuit->chips[i]->print_input_events();
-        application.circuit->chips[i]->print_output_events();
+		total_event_count += main_window.circuit->chips[i]->total_event_count;
+        printf("%p LUT=%llx, event_count=%lld, act_count=%lld, state=%d act_out:%d cyc_time:%lld act_time:%lld, max_cyc:%lld max_sub:%lld\n",
+               main_window.circuit->chips[i],
+			   (uint32_t)main_window.circuit->chips[i]->lut_data, 
+			   main_window.circuit->chips[i]->total_event_count,
+               main_window.circuit->chips[i]->activation_count,
+			   main_window.circuit->chips[i]->state,
+               main_window.circuit->chips[i]->active_outputs,
+               main_window.circuit->chips[i]->cycle_time,
+               main_window.circuit->chips[i]->activation_time,
+               main_window.circuit->chips[i]->max_cycle_length,
+               main_window.circuit->chips[i]->max_subcycle_length);
+        main_window.circuit->chips[i]->print_input_events();
+        main_window.circuit->chips[i]->print_output_events();
         for(int j = 0; j < 8; j++) 
         {
-            printf("loop_count%d:%lld, ", j, application.circuit->chips[i]->loop_count[j]);
-            total_loop_count[j] += application.circuit->chips[i]->loop_count[j];
+            printf("loop_count%d:%lld, ", j, main_window.circuit->chips[i]->loop_count[j]);
+            total_loop_count[j] += main_window.circuit->chips[i]->loop_count[j];
         }
         printf("\n");
 	}

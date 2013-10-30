@@ -7,15 +7,18 @@ struct AudioWindow : Window
     Label freq_label, vol_label;
     LineEdit vol_val;
     HorizontalSlider vol_slider;
-    CheckBox mute_checkbox;
+    CheckButton mute_checkbox;
     HorizontalLayout exit_layout;
     Button exit_button;
     Widget offset;
 
-    RadioBox freq_options[4];
+    RadioButton freq_options[4];
 
     AudioWindow(Settings& s, CheckItem& i) : settings(s)
     {
+        setTitle("Audio Settings");
+        setResizable(false);
+
         layout.setMargin(10);
         
         freq_label.setText("Frequency:");
@@ -29,9 +32,9 @@ struct AudioWindow : Window
         freq_layout.append(freq_options[1], {0, 0}, 10);
         freq_layout.append(freq_options[2], {0, 0}, 10);
         freq_layout.append(freq_options[3], {0, 0});
-        RadioBox::group(freq_options[0], freq_options[1], freq_options[2], freq_options[3]);
+        RadioButton::group(freq_options[0], freq_options[1], freq_options[2], freq_options[3]);
 
-        for(RadioBox& x : freq_options)
+        for(RadioButton& x : freq_options)
         {
             x.onActivate = [&] 
             {
@@ -68,21 +71,16 @@ struct AudioWindow : Window
         layout.append(mute_checkbox, {0, 0}, 10);
 
         exit_button.setText("Exit");
-        //exit_button.onActivate = onClose = [&] { settings.save(); setVisible(false); };
-        //exit_button.onActivate = onClose;
         exit_layout.append(offset, {315, 0});
         exit_layout.append(exit_button, {~0, 0});
         layout.append(exit_layout, {~0, 0});
-
+        append(layout);
     }
     
     void create(const Position& pos)
     {
-        setGeometry({pos.x, pos.y, 425, layout.minimumGeometry().height});
-        setTitle("Audio Settings");
-        setResizable(false);
-        setModal(true);
-
+        setGeometry({pos.x, pos.y, 425, layout.minimumSize().height});
+        
         if(settings.audio.frequency <= 3)
             freq_options[settings.audio.frequency].setChecked();
 
@@ -92,10 +90,9 @@ struct AudioWindow : Window
 
         vol_slider.setPosition(settings.audio.volume);
         vol_val.setText({settings.audio.volume / 10, "%"});
-       
-        append(layout);
 
         setVisible(true);
+        setModal(true);
     }
 };
 

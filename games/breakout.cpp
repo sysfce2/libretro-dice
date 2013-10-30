@@ -31,6 +31,8 @@ static Astable555Desc b2_555_desc(OHM(560.0), M_OHM(1.8), U_FARAD(0.1));
 
 static Mono555Desc c9_555_desc(OHM(47.0), U_FARAD(1.0));	// R33, C21
 
+static MixerDesc mixer_desc({K_OHM(47.0), K_OHM(47.0), K_OHM(47.0), K_OHM(47.0)}, K_OHM(10.0), U_FARAD(0.01), U_FARAD(0.1));
+
 //check these values
 static Paddle1HorizontalDesc pad1_desc(15047.0, 47.0, &c9_555_desc);
 
@@ -63,12 +65,19 @@ VIDEO_DESC_END
 
 
 static AUDIO_DESC( breakout )
-    AUDIO_RESISTANCE(1, K_OHM(47.0))
-    AUDIO_RESISTANCE(2, K_OHM(47.0))
-    AUDIO_RESISTANCE(3, K_OHM(47.0))
-    AUDIO_RESISTANCE(4, K_OHM(47.0))
-    AUDIO_GAIN(3.0)
-VIDEO_DESC_END
+    AUDIO_GAIN(80.0)
+    AUDIO_SPEAKER_CONFIG(MONO)
+AUDIO_DESC_END
+
+
+static INPUT_DESC( breakout )
+    INPUT_INFO(PADDLE1_HORIZONTAL_INPUT, "Move Paddle")
+    INPUT_INFO(BUTTONS1_INPUT, {{ 1 }}, "Serve Ball")
+
+    INPUT_INFO(COIN_INPUT, {{ 1 }}, "Insert Coin")
+    INPUT_INFO(START_INPUT, {{ 1 }}, "Start 1-Player Game")
+    INPUT_INFO(START_INPUT, {{ 2 }}, "Start 2-Player Game")
+INPUT_DESC_END
 
 
 static Mono9602Desc n8_desc(K_OHM(33.0), U_FARAD(100.0), K_OHM(5.6), P_FARAD(0.0)); // No capacitor on 2nd 9602.
@@ -227,11 +236,18 @@ CIRCUIT_LAYOUT( breakout ) =
     CHIP("START", START_INPUT),
 
     CHIP("SERVE", BUTTONS1_INPUT),
-	
+
+    CHIP("MIXER", MIXER, &mixer_desc),
+
     //TODO: coin2 and start 2
 
     VIDEO(breakout),
     AUDIO(breakout),
+    INPUT(breakout),
+
+    OPTIMIZATION_HINT("E3", 8, 64),
+    OPTIMIZATION_HINT("E1", 8, 64),
+    OPTIMIZATION_HINT("C36", 8, 64),
 
 #ifdef DEBUG
 	CHIP("LOG1", VCD_LOG, &vcd_log_desc),
@@ -1449,6 +1465,12 @@ CIRCUIT_LAYOUT( breakout ) =
    CONNECTION("AUDIO", 3, FREE_GAME_TONE),
    CONNECTION("AUDIO", 4, "B9", 6),
 
+   CONNECTION("AUDIO", i1, "MIXER", 1),
+   CONNECTION("AUDIO", i2, "MIXER", 2),
+   CONNECTION("AUDIO", i3, "MIXER", 3),
+   CONNECTION("AUDIO", i4, "MIXER", 4),
+
+   CONNECTION("AUDIO", Audio::OUTPUT_MONO, "MIXER", i1),
 
 #ifdef DEBUG
     // RAM access

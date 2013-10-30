@@ -1,17 +1,42 @@
+namespace phoenix {
+
 static LRESULT CALLBACK Viewport_windowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
-  Object *object = (Object*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+  Object* object = (Object*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
   if(object == nullptr) return DefWindowProc(hwnd, msg, wparam, lparam);
   if(!dynamic_cast<Viewport*>(object)) return DefWindowProc(hwnd, msg, wparam, lparam);
-  Viewport &viewport = (Viewport&)*object;
+  Viewport& viewport = (Viewport&)*object;
+
+  if(msg == WM_DROPFILES) {
+    auto dropList = HDROP(wparam);
+    auto fileCount = DragQueryFile(dropList, ~0u, nullptr, 0);
+
+    lstring result;
+    for(unsigned n = 0; n < fileCount; n++) {
+      auto length = DragQueryFile(dropList, n, nullptr, 0);
+      auto buffer = new wchar_t[length + 1];
+
+      if(DragQueryFile(dropList, n, buffer, length + 1)) {
+        string path = (const char*)utf8_t(buffer);
+        path.transform("\\", "/");
+        if(directory::exists(path) && !path.endswith("/")) path.append("/");
+        result.append(path);
+      }
+
+      delete[] buffer;
+    }
+
+    if(viewport.onDrop) viewport.onDrop(result);
+    return FALSE;
+  }
 
   if(msg == WM_GETDLGCODE) {
     return DLGC_STATIC | DLGC_WANTCHARS;
   }
 
   if(msg == WM_MOUSEMOVE) {
-    TRACKMOUSEEVENT tracker = { sizeof(TRACKMOUSEEVENT), TME_LEAVE, hwnd };
+    TRACKMOUSEEVENT tracker = {sizeof(TRACKMOUSEEVENT), TME_LEAVE, hwnd};
     TrackMouseEvent(&tracker);
-    if(viewport.onMouseMove) viewport.onMouseMove({ (int16_t)LOWORD(lparam), (int16_t)HIWORD(lparam) });
+    if(viewport.onMouseMove) viewport.onMouseMove({(int16_t)LOWORD(lparam), (int16_t)HIWORD(lparam)});
   }
 
   if(msg == WM_MOUSELEAVE) {
@@ -41,9 +66,14 @@ uintptr_t pViewport::handle() {
   return (uintptr_t)hwnd;
 }
 
+void pViewport::setDroppable(bool droppable) {
+  DragAcceptFiles(hwnd, droppable);
+}
+
 void pViewport::constructor() {
   hwnd = CreateWindow(L"phoenix_viewport", L"", WS_CHILD | WS_DISABLED, 0, 0, 0, 0, parentWindow->p.hwnd, (HMENU)id, GetModuleHandle(0), 0);
   SetWindowLongPtr(hwnd, GWLP_USERDATA, (LONG_PTR)&viewport);
+  setDroppable(viewport.state.droppable);
   synchronize();
 }
 
@@ -54,4 +84,6 @@ void pViewport::destructor() {
 void pViewport::orphan() {
   destructor();
   constructor();
+}
+
 }

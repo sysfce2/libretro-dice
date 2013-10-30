@@ -1,3 +1,5 @@
+namespace phoenix {
+
 void pTextEdit::setCursorPosition(unsigned position) {
   QTextCursor cursor = qtTextEdit->textCursor();
   unsigned lastCharacter = strlen(qtTextEdit->toPlainText().toUtf8().constData());
@@ -9,7 +11,7 @@ void pTextEdit::setEditable(bool editable) {
   qtTextEdit->setReadOnly(!editable);
 }
 
-void pTextEdit::setText(const string &text) {
+void pTextEdit::setText(string text) {
   qtTextEdit->setPlainText(QString::fromUtf8(text));
 }
 
@@ -36,7 +38,7 @@ void pTextEdit::constructor() {
 void pTextEdit::destructor() {
   if(sizable.state.layout) sizable.state.layout->remove(textEdit);
   delete qtTextEdit;
-  qtWidget = qtTextEdit = 0;
+  qtWidget = qtTextEdit = nullptr;
 }
 
 void pTextEdit::orphan() {
@@ -47,4 +49,6 @@ void pTextEdit::orphan() {
 void pTextEdit::onChange() {
   textEdit.state.text = text();
   if(textEdit.onChange) textEdit.onChange();
+}
+
 }

@@ -80,9 +80,18 @@ CUSTOM_LOGIC( VcdLogDesc::vcd_log )
 	if(desc == NULL) return;
 
     if(mask == 0) return;
+    
+    fprintf(desc->file, "#%lld\n", chip->circuit->global_time);
 
-	fprintf(desc->file, "#%lld\n", chip->circuit->global_time);
-	fprintf(desc->file, "%d%c\n", (chip->inputs & mask) ? 1 : 0, desc->vars[mask]);
+    for(int m = ~0; mask & m;)
+    {
+        int i = 1 << __builtin_ctz(mask & m);
+        fprintf(desc->file, "%d%c\n", (chip->inputs & i) ? 1 : 0, desc->vars[i]);
+        m &= ~i;
+    }
+
+	//fprintf(desc->file, "#%lld\n", chip->circuit->global_time);
+	//fprintf(desc->file, "%d%c\n", (chip->inputs & mask) ? 1 : 0, desc->vars[mask]);
 }
 
 

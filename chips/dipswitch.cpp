@@ -78,6 +78,71 @@ CHIP_DESC( DIPSWITCH ) =
 
 
 /*
+SP4T Switch. Assumes outputs are tied high when not selected by switch.
+
+Inputs: Pin 1 (connected to output pin 2 when state = 0,
+               connected to output pin 3 when state = 1,
+               connected to output pin 4 when state = 2,
+               connected to output pin 5 when state = 3)
+
+Outputs: Pin 2 (First throw)
+         Pin 3 (Second throw)
+         Pin 4 (Third throw)
+         Pin 5 (Forth throw)
+
+ 2 ---O\
+        \
+         \
+ 3 ---O   \
+           O---- 1      (when state = 0)
+ 
+ 4 ---O        
+                   
+         
+ 5 ---O 
+*/
+
+
+template<int T> CUSTOM_LOGIC( DipswitchSP4TDesc::logic )
+{
+    DipswitchSP4TDesc* desc = (DipswitchSP4TDesc*)chip->custom_data;
+
+    chip->state = PASSIVE;
+
+    int x = desc->state == T;
+
+    if(x != chip->output)
+        chip->pending_event = chip->circuit->queue_push(chip, 0);
+}
+
+template<int T> CHIP_LOGIC( sp4t )
+{
+    pin[2+T] = pin[i2+T] ? pin[1] : 1;
+}
+
+CHIP_DESC( DIPSWITCH_SP4T ) = 
+{
+    // Timer to refresh dipswitches if state has been changed in GUI.
+    CUSTOM_CHIP_START(&clock) OUTPUT_PIN(i1) OUTPUT_DELAY_MS(250.0, 250.0),
+    
+    CUSTOM_CHIP_START(DipswitchSP4TDesc::logic<0>) INPUT_PINS(i1) OUTPUT_PIN(i2),
+    CUSTOM_CHIP_START(DipswitchSP4TDesc::logic<1>) INPUT_PINS(i1) OUTPUT_PIN(i3),
+    CUSTOM_CHIP_START(DipswitchSP4TDesc::logic<2>) INPUT_PINS(i1) OUTPUT_PIN(i4),
+    CUSTOM_CHIP_START(DipswitchSP4TDesc::logic<3>) INPUT_PINS(i1) OUTPUT_PIN(i5),
+
+	CHIP_START(sp4t<0>) INPUT_PINS(1, i2) OUTPUT_PIN(2) OUTPUT_DELAY_NS(0.1, 0.1),
+    CHIP_START(sp4t<1>) INPUT_PINS(1, i3) OUTPUT_PIN(3) OUTPUT_DELAY_NS(0.1, 0.1),
+    CHIP_START(sp4t<2>) INPUT_PINS(1, i4) OUTPUT_PIN(4) OUTPUT_DELAY_NS(0.1, 0.1),
+    CHIP_START(sp4t<3>) INPUT_PINS(1, i5) OUTPUT_PIN(5) OUTPUT_DELAY_NS(0.1, 0.1),
+
+	CHIP_DESC_END
+};
+
+
+
+
+
+/*
 AMP 53137
 4-bit Rotary Hex DIP Switch
 
@@ -163,6 +228,115 @@ CHIP_DESC( 53137 ) =
 	CHIP_DESC_END
 };
 
+
+
+
+/*
+4SPST 4-bit Hex DIP Switch.
+
+Inputs: Pin 1 (connected to output pin 9  when state = 0)
+        Pin 2 (connected to output pin 9  when state = 1)
+        Pin 3 (connected to output pin 10 when state = 0)
+        Pin 4 (connected to output pin 10 when state = 1)
+        Pin 5 (connected to output pin 11 when state = 0)
+        Pin 6 (connected to output pin 11 when state = 1)
+        Pin 7 (connected to output pin 12 when state = 0)
+        Pin 8 (connected to output pin 12 when state = 1)
+
+Outputs: Pin 9  (First pole)
+         Pin 10 (Second pole)
+         Pin 11 (Third pole)
+         Pin 12 (Fourth pole)
+
+ 1 ---O
+        
+         O---- 9    
+        /
+ 2 ---O/ 
+         
+                   
+         
+ 3 ---O\
+        \
+         O---- 10
+ 
+ 4 ---O
+
+                   (when state = 5)
+
+ 5 ---O  
+         
+         O---- 11
+        /
+ 6 ---O/
+
+
+
+ 7 ---O\
+        \
+         O---- 12
+ 
+ 8 ---O
+
+*/
+template<int BIT>
+CHIP_LOGIC( DIPSWITCH_4SPST )
+{
+    static const int in_low[] = { 1, 3, 5, 7 };
+    static const int in_hi[] = { 2, 4, 6, 8 };
+    static const int out[] = { 9, 10, 11, 12 };
+    static const int sw[] = { i2, i3, i4, i5 };
+
+    pin[out[BIT]] = pin[sw[BIT]] ? pin[in_hi[BIT]] : pin[in_low[BIT]];
+}
+
+CHIP_DESC( DIPSWITCH_4SPST ) = 
+{
+    // Timer to refresh dipswitches if state has been changed in GUI.
+    CUSTOM_CHIP_START(&clock)
+        OUTPUT_PIN( i1 )
+        OUTPUT_DELAY_MS( 250.0, 250.0 ),
+    
+
+    CUSTOM_CHIP_START(Dipswitch4SP4TDesc::logic<0>)
+        INPUT_PINS( i1 )
+        OUTPUT_PIN( i2 ),
+
+    CUSTOM_CHIP_START(Dipswitch4SP4TDesc::logic<1>)
+        INPUT_PINS( i1 )
+        OUTPUT_PIN( i3 ),
+
+    CUSTOM_CHIP_START(Dipswitch4SP4TDesc::logic<2>)
+        INPUT_PINS( i1 )
+        OUTPUT_PIN( i4 ),
+
+    CUSTOM_CHIP_START(Dipswitch4SP4TDesc::logic<3>)
+        INPUT_PINS( i1 )
+        OUTPUT_PIN( i5 ),
+
+
+    CHIP_START( DIPSWITCH_4SPST<0> )
+        INPUT_PINS( 1, 2, i2 )
+        OUTPUT_PIN( 9 )
+        OUTPUT_DELAY_NS( 0.1, 0.1 ),
+
+	CHIP_START( DIPSWITCH_4SPST<1> )
+        INPUT_PINS( 3, 4, i3 )
+        OUTPUT_PIN( 10 )
+        OUTPUT_DELAY_NS( 0.1, 0.1 ),
+
+	CHIP_START( DIPSWITCH_4SPST<2> )
+        INPUT_PINS( 5, 6, i4 )
+        OUTPUT_PIN( 11 )
+        OUTPUT_DELAY_NS( 0.1, 0.1 ),
+
+	CHIP_START( DIPSWITCH_4SPST<3> )
+        INPUT_PINS(7, 8, i5 )
+        OUTPUT_PIN( 12 )
+        OUTPUT_DELAY_NS( 0.1, 0.1 ),
+
+	CHIP_DESC_END
+};
 
 
 

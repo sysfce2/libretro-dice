@@ -1,3 +1,5 @@
+namespace phoenix {
+
 bool pCheckItem::checked() {
   return false;
 }
@@ -5,11 +7,13 @@ bool pCheckItem::checked() {
 void pCheckItem::setChecked(bool checked) {
 }
 
-void pCheckItem::setText(const string &text) {
+void pCheckItem::setText(string text) {
 }
 
 void pCheckItem::constructor() {
 }
 
 void pCheckItem::destructor() {
+}
+
 }

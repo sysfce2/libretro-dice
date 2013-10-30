@@ -5,15 +5,17 @@
 #include <stdint.h>
 #include "chip.h"
 
-#define MAX_PINS			32
+#define MAX_PINS			48
 #define MAX_EXTERNAL_PINS 	24
-#define MAX_INTERNAL_PINS 	8
+#define MAX_INTERNAL_PINS 	24
 #define MAX_INPUT_PINS      23
 #define MAX_EVENT_PINS      7
 
 enum InternalPin
 {
-	i1 = 25, i2 = 26, i3 = 27, i4 = 28, i5 = 29, i6 = 30, i7 = 31, i8 = 32
+	i1 = 25, i2 = 26, i3 = 27, i4 = 28, i5 = 29, i6 = 30, i7 = 31, i8 = 32,
+	i9 = 33, i10 = 34, i11 = 35, i12 = 36, i13 = 37, i14 = 38, i15 = 39, i16 = 40,
+	i17 = 41, i18 = 42, i19 = 43, i20 = 44, i21 = 45, i22 = 46, i23 = 47, i24 = 48
 };
 
 typedef void (*ChipLogic)(int* pin, int* prev_pin, int* event_pin, void* custom_data);

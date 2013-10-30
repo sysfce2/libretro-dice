@@ -26,13 +26,33 @@ static SeriesRCDesc c31_desc(K_OHM(0.33), P_FARAD(330.0));
 static SeriesRCDesc c39_desc(K_OHM(0.33), P_FARAD(330.0));
 static SeriesRCDesc c42_desc(K_OHM(0.33), P_FARAD(330.0));
 
-// Note - ROMs appear to be overdumped (size is 512 bytes and upper 256 bytes are all 0)
-static RomDesc a1_desc("attack", "attack.a1", 0x5AFD5AFF);
-static RomDesc b1_desc("attack", "attack.b1", 0x92D0FBF4);
-static RomDesc c1_desc("attack", "attack.c1", 0x25625D6E);
-static RomDesc d1_desc("attack", "attack.d1", 0x2FF8DD6B);
-static RomDesc j6_desc("attack", "attack.j6", 0x21F87C1A);
-static RomDesc k6_desc("attack", "attack.k6", 0xBA5115B3);
+// Note - 2nd set of ROMs appear to be overdumped (size is 512 bytes and upper 256 bytes are all 0)
+// 1st set is sized 256 bytes and is likely the correct dump
+static RomDesc a1_desc("attack", "attack.a1", 0xD9B116B8, 0x5AFD5AFF);
+static RomDesc b1_desc("attack", "attack.b1", 0x2317197F, 0x92D0FBF4);
+static RomDesc c1_desc("attack", "attack.c1", 0x7391E44C, 0x25625D6E);
+static RomDesc d1_desc("attack", "attack.d1", 0xD4A06439, 0x2FF8DD6B);
+static RomDesc j6_desc("attack", "attack.j6", 0x1CE2921C, 0x21F87C1A);
+static RomDesc k6_desc("attack", "attack.k6", 0xE120839F, 0xBA5115B3);
+
+static MixerDesc mixer_desc({K_OHM(3.3), K_OHM(3.3)});
+
+static AUDIO_DESC( attack )
+    AUDIO_GAIN(15.0)
+    AUDIO_SPEAKER_CONFIG(MONO)
+AUDIO_DESC_END
+
+static INPUT_DESC( attack )
+    INPUT_INFO(JOYSTICK1_INPUT, {{ Joystick::LEFT, Joystick::RIGHT }}, "Move Ship")
+    INPUT_INFO(JOYSTICK1_INPUT, {{ Joystick::UP, Joystick::DOWN }}, "Rotate Gun")
+    INPUT_INFO(BUTTONS1_INPUT, {{ 1 }}, "Fire Gun")
+    
+    INPUT_INFO(JOYSTICK2_INPUT, {{ Joystick::LEFT, Joystick::RIGHT }}, "Rotate Plane")
+    INPUT_INFO(BUTTONS2_INPUT, {{ 1 }}, "Fire Gun")
+    INPUT_INFO(BUTTONS2_INPUT, {{ 2 }}, "Increase Speed")
+
+    INPUT_INFO(COIN_INPUT, {{ 1 }}, "Insert Coin and Start Game")
+INPUT_DESC_END
 
 static VIDEO_DESC( attack )
     VIDEO_RESISTANCE(1, K_OHM(0.33))
@@ -262,7 +282,11 @@ CHIP("STICK2", JOYSTICK2_INPUT),
 CHIP("SHPFIRE", BUTTONS1_INPUT),
 CHIP("PLNFIRE", BUTTONS2_INPUT),
 
+CHIP("MIXER", MIXER, &mixer_desc),
+
 VIDEO(attack),
+AUDIO(attack),
+INPUT(attack),
 
 #ifdef DEBUG
 	CHIP("LOG1", VCD_LOG, &vcd_log_desc),
@@ -2011,7 +2035,11 @@ CONNECTION("J13", 8, "K13", 9),
 CONNECTION("AUDIO", 1, "M13", 4),
 CONNECTION("AUDIO", 2, "K13", 8),  
               
-              
+CONNECTION("AUDIO", i1, "MIXER", 1),
+CONNECTION("AUDIO", i2, "MIXER", 2),
+
+CONNECTION("MIXER", i1, "AUDIO", Audio::OUTPUT_MONO),
+
 	CIRCUIT_LAYOUT_END
 };
             

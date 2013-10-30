@@ -60,3 +60,30 @@ CHIP_DESC( 7408 ) =
 	CHIP_DESC_END
 };
 
+
+// Timing from Fairchild 9H08.  TI never made a 74H08 ?
+CHIP_DESC( 74H08 ) =
+{
+	CHIP_START( 7408A )
+        INPUT_PINS( 1, 2 )
+        OUTPUT_PIN( 3 )
+        OUTPUT_DELAY_NS( 7.6, 8.8 ),
+
+	CHIP_START( 7408B )
+        INPUT_PINS( 4, 5 )
+        OUTPUT_PIN( 6 )
+        OUTPUT_DELAY_NS( 7.6, 8.8 ),
+
+	CHIP_START( 7408C )
+        INPUT_PINS( 9, 10 )
+        OUTPUT_PIN( 8 )
+        OUTPUT_DELAY_NS( 7.6, 8.8 ),
+
+	CHIP_START( 7408D )
+        INPUT_PINS( 12, 13 )
+        OUTPUT_PIN( 11 )
+        OUTPUT_DELAY_NS( 7.6, 8.8 ),
+
+	CHIP_DESC_END
+};
+

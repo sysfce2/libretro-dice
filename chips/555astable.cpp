@@ -16,6 +16,9 @@ When CV is not connected it is held at 2/3.VCC through a 5k/10k divider.
                              +------+--------+------*---+-----+
 */
 
+// TODO: Fix delay when exiting reset,
+// should be the time to reach CV from 0 V?
+
 CUSTOM_LOGIC( Astable555Desc::astable_555 )
 {
     Astable555Desc* desc = (Astable555Desc*)chip->custom_data;

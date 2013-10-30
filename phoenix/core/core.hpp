@@ -1,3 +1,18 @@
+#include <nall/platform.hpp>
+#include <nall/config.hpp>
+#include <nall/directory.hpp>
+#include <nall/function.hpp>
+#include <nall/group.hpp>
+#include <nall/image.hpp>
+#include <nall/map.hpp>
+#include <nall/stdint.hpp>
+#include <nall/string.hpp>
+#include <nall/utility.hpp>
+#include <nall/vector.hpp>
+
+namespace phoenix {
+
+struct Application;
 struct Font;
 struct Window;
 struct Menu;
@@ -5,9 +20,9 @@ struct Sizable;
 struct Layout;
 struct Widget;
 
+struct pApplication;
 struct pFont;
 struct pObject;
-struct pOS;
 struct pTimer;
 struct pWindow;
 struct pAction;
@@ -21,20 +36,43 @@ struct pLayout;
 struct pWidget;
 struct pButton;
 struct pCanvas;
-struct pCheckBox;
-struct pComboBox;
+struct pCheckButton;
+struct pComboButton;
 struct pHexEdit;
-struct pHorizontalScrollBar;
+struct pHorizontalScroller;
 struct pHorizontalSlider;
 struct pLabel;
 struct pLineEdit;
 struct pListView;
 struct pProgressBar;
-struct pRadioBox;
+struct pRadioButton;
 struct pTextEdit;
-struct pVerticalScrollBar;
+struct pVerticalScroller;
 struct pVerticalSlider;
 struct pViewport;
+
+struct Application {
+  static nall::function<void ()> main;
+
+  static void run();
+  static bool pendingEvents();
+  static void processEvents();
+  static void quit();
+  static void setName(nall::string name);
+
+  Application() = delete;
+  struct State;
+  static void initialize();
+
+  struct Cocoa {
+    static nall::function<void ()> onAbout;
+    static nall::function<void ()> onActivate;
+    static nall::function<void ()> onPreferences;
+    static nall::function<void ()> onQuit;
+  };
+};
+
+typedef Application App;
 
 enum : unsigned {
   MaximumSize = ~0u,
@@ -68,17 +106,19 @@ struct Geometry {
   Size size() const;
   nall::string text() const;
   inline Geometry() : x(0), y(0), width(0), height(0) {}
-  inline Geometry(const Position& position, const Size& size) : x(position.x), y(position.y), width(size.width), height(size.height) {}
+  inline Geometry(Position position, Size size) : x(position.x), y(position.y), width(size.width), height(size.height) {}
   template<typename X, typename Y, typename W, typename H> inline Geometry(X x, Y y, W width, H height) : x(x), y(y), width(width), height(height) {}
-  Geometry(const nall::string &text);
+  Geometry(nall::string text);
 };
 
 enum class Orientation : unsigned { Horizontal, Vertical };
 
 struct Font {
-  nall::string description;
-  Geometry geometry(const nall::string &text);
-  Font(const nall::string &description = "");
+  static nall::string serif(unsigned size = 0, nall::string style = "");
+  static nall::string sans(unsigned size = 0, nall::string style = "");
+  static nall::string monospace(unsigned size = 0, nall::string style = "");
+  static Size size(nall::string font, nall::string text);
+  Font() = delete;
 };
 
 struct Desktop {
@@ -103,15 +143,21 @@ struct Mouse {
   Mouse() = delete;
 };
 
-struct DialogWindow {
-  template<typename... Args> static nall::string fileOpen(Window &parent, const nall::string &path, const Args&... args) { return fileOpen_(parent, path, { args... }); }
-  template<typename... Args> static nall::string fileSave(Window &parent, const nall::string &path, const Args&... args) { return fileSave_(parent, path, { args... }); }
-  static nall::string folderSelect(Window &parent, const nall::string &path);
-  DialogWindow() = delete;
+struct BrowserWindow {
+  template<typename... Args> BrowserWindow& setFilters(Args&&... args) { return setFilters_({args...}); }
 
-private:
-  static nall::string fileOpen_(Window &parent, const nall::string &path, const nall::lstring& filter);
-  static nall::string fileSave_(Window &parent, const nall::string &path, const nall::lstring& filter);
+  nall::string directory();
+  nall::string open();
+  nall::string save();
+  BrowserWindow& setFilters_(const nall::lstring& filters);
+  BrowserWindow& setParent(Window& parent);
+  BrowserWindow& setPath(nall::string path);
+  BrowserWindow& setTitle(nall::string title);
+
+  BrowserWindow();
+  ~BrowserWindow();
+  struct State;
+  State& state;
 };
 
 struct MessageWindow {
@@ -119,6 +165,7 @@ struct MessageWindow {
     Ok,
     OkCancel,
     YesNo,
+    YesNoCancel,
   };
 
   enum class Response : unsigned {
@@ -128,33 +175,30 @@ struct MessageWindow {
     No,
   };
 
-  static Response information(Window &parent, const nall::string &text, Buttons = Buttons::Ok);
-  static Response question(Window &parent, const nall::string &text, Buttons = Buttons::YesNo);
-  static Response warning(Window &parent, const nall::string &text, Buttons = Buttons::Ok);
-  static Response critical(Window &parent, const nall::string &text, Buttons = Buttons::Ok);
-  MessageWindow() = delete;
+  Response error(Buttons = Buttons::Ok);
+  Response information(Buttons = Buttons::Ok);
+  Response question(Buttons = Buttons::YesNo);
+  MessageWindow& setParent(Window& parent);
+  MessageWindow& setText(nall::string text);
+  MessageWindow& setTitle(nall::string title);
+  Response warning(Buttons = Buttons::Ok);
+
+  MessageWindow(nall::string text = "");
+  ~MessageWindow();
+  struct State;
+  State& state;
 };
 
 struct Object {
-  Object(pObject &p);
+  Object(pObject& p);
   Object& operator=(const Object&) = delete;
   Object(const Object&) = delete;
   virtual ~Object();
-  pObject &p;
-};
-
-struct OS : Object {
-  static void main();
-  static bool pendingEvents();
-  static void processEvents();
-  static void quit();
-
-  OS();
-  static void initialize();
+  pObject& p;
 };
 
 struct Timer : private nall::base_from_member<pTimer&>, Object {
-  nall::function<void ()> onTimeout;
+  nall::function<void ()> onActivate;
 
   void setEnabled(bool enabled = true);
   void setInterval(unsigned milliseconds);
@@ -162,8 +206,8 @@ struct Timer : private nall::base_from_member<pTimer&>, Object {
   Timer();
   ~Timer();
   struct State;
-  State &state;
-  pTimer &p;
+  State& state;
+  pTimer& p;
 };
 
 struct Window : private nall::base_from_member<pWindow&>, Object {
@@ -177,37 +221,37 @@ struct Window : private nall::base_from_member<pWindow&>, Object {
 
   inline void append() {}
   inline void remove() {}
-  template<typename T, typename... Args> void append(T &arg, Args&... args) { append_(arg); append(args...); }
-  template<typename T, typename... Args> void remove(T &arg, Args&... args) { remove_(arg); remove(args...); }
+  template<typename T, typename... Args> void append(T& arg, Args&&... args) { append_(arg); append(args...); }
+  template<typename T, typename... Args> void remove(T& arg, Args&&... args) { remove_(arg); remove(args...); }
 
-  void append_(Layout &layout);
-  void append_(Menu &menu);
-  void append_(Widget &widget);
+  void append_(Layout& layout);
+  void append_(Menu& menu);
+  void append_(Widget& widget);
   Color backgroundColor();
   Geometry frameGeometry();
   Geometry frameMargin();
   bool focused();
   bool fullScreen();
   Geometry geometry();
-  void ignore();
-  void remove_(Layout &layout);
-  void remove_(Menu &menu);
-  void remove_(Widget &widget);
-  void setBackgroundColor(const Color &color);
-  void setFrameGeometry(const Geometry &geometry);
+  void remove_(Layout& layout);
+  void remove_(Menu& menu);
+  void remove_(Widget& widget);
+  void setBackgroundColor(Color color);
+  void setFrameGeometry(Geometry geometry);
   void setFocused();
   void setFullScreen(bool fullScreen = true);
-  void setGeometry(const Geometry &geometry);
-  void setMenuFont(const nall::string &font);
+  void setGeometry(Geometry geometry);
+  void setMenuFont(nall::string font);
   void setMenuVisible(bool visible = true);
   void setModal(bool modal = true);
   void setResizable(bool resizable = true);
-  void setStatusFont(const nall::string &font);
-  void setStatusText(const nall::string &text);
+  void setSmartGeometry(Geometry geometry);
+  void setStatusFont(nall::string font);
+  void setStatusText(nall::string text);
   void setStatusVisible(bool visible = true);
-  void setTitle(const nall::string &text);
+  void setTitle(nall::string text);
   void setVisible(bool visible = true);
-  void setWidgetFont(const nall::string &font);
+  void setWidgetFont(nall::string font);
   nall::string statusText();
   void synchronizeLayout();
   bool visible();
@@ -215,8 +259,8 @@ struct Window : private nall::base_from_member<pWindow&>, Object {
   Window();
   ~Window();
   struct State;
-  State &state;
-  pWindow &p;
+  State& state;
+  pWindow& p;
 };
 
 struct Action : Object {
@@ -225,46 +269,46 @@ struct Action : Object {
   void setVisible(bool visible = true);
   bool visible();
 
-  Action(pAction &p);
+  Action(pAction& p);
   ~Action();
   struct State;
-  State &state;
-  pAction &p;
+  State& state;
+  pAction& p;
 };
 
 struct Menu : private nall::base_from_member<pMenu&>, Action {
-  template<typename... Args> void append(Args&... args) { append({args...}); }
-  template<typename... Args> void remove(Args&... args) { remove({args...}); }
+  template<typename... Args> void append(Args&&... args) { append({std::forward<Args>(args)...}); }
+  template<typename... Args> void remove(Args&&... args) { remove({std::forward<Args>(args)...}); }
 
-  void append(const nall::set<Action&> &list);
-  void remove(const nall::set<Action&> &list);
-  void setImage(const nall::image &image = nall::image{});
-  void setText(const nall::string &text);
+  void append(const nall::group<Action>& list);
+  void remove(const nall::group<Action>& list);
+  void setImage(const nall::image& image = nall::image{});
+  void setText(nall::string text);
 
   Menu();
   ~Menu();
   struct State;
-  State &state;
-  pMenu &p;
+  State& state;
+  pMenu& p;
 };
 
 struct Separator : private nall::base_from_member<pSeparator&>, Action {
   Separator();
   ~Separator();
-  pSeparator &p;
+  pSeparator& p;
 };
 
 struct Item : private nall::base_from_member<pItem&>, Action {
   nall::function<void ()> onActivate;
 
-  void setImage(const nall::image &image = nall::image{});
-  void setText(const nall::string &text);
+  void setImage(const nall::image& image = nall::image{});
+  void setText(nall::string text);
 
   Item();
   ~Item();
   struct State;
-  State &state;
-  pItem &p;
+  State& state;
+  pItem& p;
 };
 
 struct CheckItem : private nall::base_from_member<pCheckItem&>, Action {
@@ -272,95 +316,96 @@ struct CheckItem : private nall::base_from_member<pCheckItem&>, Action {
 
   bool checked();
   void setChecked(bool checked = true);
-  void setText(const nall::string &text);
+  void setText(nall::string text);
 
   CheckItem();
   ~CheckItem();
   struct State;
-  State &state;
-  pCheckItem &p;
+  State& state;
+  pCheckItem& p;
 };
 
 struct RadioItem : private nall::base_from_member<pRadioItem&>, Action {
-  template<typename... Args> static void group(Args&... args) { group({args...}); }
-  static void group(const nall::set<RadioItem&> &list);
+  template<typename... Args> static void group(Args&&... args) { group({std::forward<Args>(args)...}); }
+  static void group(const nall::group<RadioItem>& list);
 
   nall::function<void ()> onActivate;
 
   bool checked();
   void setChecked();
-  void setText(const nall::string &text);
+  void setText(nall::string text);
   nall::string text();
 
   RadioItem();
   ~RadioItem();
   struct State;
-  State &state;
-  pRadioItem &p;
+  State& state;
+  pRadioItem& p;
 };
 
 struct Sizable : Object {
   virtual bool enabled() = 0;
   Layout* layout();
-  virtual Geometry minimumGeometry() = 0;
+  virtual Size minimumSize() = 0;
   virtual void setEnabled(bool enabled = true) = 0;
-  virtual void setGeometry(const Geometry &geometry) = 0;
+  virtual void setGeometry(Geometry geometry) = 0;
   virtual void setVisible(bool visible = true) = 0;
   virtual bool visible() = 0;
   Window* window();
 
-  Sizable(pSizable &p);
+  Sizable(pSizable& p);
   ~Sizable();
   struct State;
-  State &state;
-  pSizable &p;
+  State& state;
+  pSizable& p;
 };
 
 struct Layout : private nall::base_from_member<pLayout&>, Sizable {
-  virtual void append(Sizable &sizable);
-  virtual void remove(Sizable &sizable);
+  virtual void append(Sizable& sizable);
+  virtual void remove(Sizable& sizable);
   virtual void reset() {}
   virtual void synchronizeLayout() = 0;
 
   Layout();
-  Layout(pLayout &p);
+  Layout(pLayout& p);
   ~Layout();
   struct State;
-  State &state;
-  pLayout &p;
+  State& state;
+  pLayout& p;
 };
 
 struct Widget : private nall::base_from_member<pWidget&>, Sizable {
   bool enabled();
+  bool focused();
   nall::string font();
   Geometry geometry();
-  Geometry minimumGeometry();
+  Size minimumSize();
   void setEnabled(bool enabled = true);
   void setFocused();
-  void setFont(const nall::string &font);
-  void setGeometry(const Geometry &geometry);
+  void setFont(nall::string font);
+  void setGeometry(Geometry geometry);
   void setVisible(bool visible = true);
   bool visible();
 
   Widget();
-  Widget(pWidget &p);
+  Widget(pWidget& p);
   ~Widget();
   struct State;
-  State &state;
-  pWidget &p;
+  State& state;
+  pWidget& p;
 };
 
 struct Button : private nall::base_from_member<pButton&>, Widget {
   nall::function<void ()> onActivate;
 
-  void setImage(const nall::image &image = nall::image{}, Orientation = Orientation::Horizontal);
-  void setText(const nall::string &text);
+  void setImage(const nall::image& image = nall::image{}, Orientation = Orientation::Horizontal);
+  void setText(nall::string text);
 
   Button();
   ~Button();
   struct State;
-  State &state;
-  pButton &p;
+  State& state;
+  pButton& p;
 };
 
 struct Canvas : private nall::base_from_member<pCanvas&>, Widget {
@@ -370,39 +415,39 @@ struct Canvas : private nall::base_from_member<pCanvas&>, Widget {
   nall::function<void (Mouse::Button)> onMouseRelease;
 
   uint32_t* data();
-  bool setImage(const nall::image &image);
-  void setSize(const Size &size);
+  bool setImage(const nall::image& image);
+  void setSize(Size size);
   Size size();
   void update();
 
   Canvas();
   ~Canvas();
   struct State;
-  State &state;
-  pCanvas &p;
+  State& state;
+  pCanvas& p;
 };
 
-struct CheckBox : private nall::base_from_member<pCheckBox&>, Widget {
+struct CheckButton : private nall::base_from_member<pCheckButton&>, Widget {
   nall::function<void ()> onToggle;
 
   bool checked();
   void setChecked(bool checked = true);
-  void setText(const nall::string &text);
+  void setText(nall::string text);
 
-  CheckBox();
-  ~CheckBox();
+  CheckButton();
+  ~CheckButton();
   struct State;
-  State &state;
-  pCheckBox &p;
+  State& state;
+  pCheckButton& p;
 };
 
-struct ComboBox : private nall::base_from_member<pComboBox&>, Widget {
+struct ComboButton : private nall::base_from_member<pComboButton&>, Widget {
   nall::function<void ()> onChange;
 
-  template<typename... Args> void append(const Args&... args) { append_({args...}); }
+  template<typename... Args> void append(Args&&... args) { append_({args...}); }
 
-  void append_(const nall::lstring &list);
-  void modify(unsigned row, const nall::string &text);
+  void append_(const nall::lstring& list);
+  void modify(unsigned row, nall::string text);
   void remove(unsigned row);
   void reset();
   unsigned selection();
@@ -410,11 +455,11 @@ struct ComboBox : private nall::base_from_member<pComboBox&>, Widget {
   nall::string text();
   nall::string text(unsigned row);
 
-  ComboBox();
-  ~ComboBox();
+  ComboButton();
+  ~ComboButton();
   struct State;
-  State &state;
-  pComboBox &p;
+  State& state;
+  pComboButton& p;
 };
 
 struct HexEdit : private nall::base_from_member<pHexEdit&>, Widget {
@@ -430,11 +475,11 @@ struct HexEdit : private nall::base_from_member<pHexEdit&>, Widget {
   HexEdit();
   ~HexEdit();
   struct State;
-  State &state;
-  pHexEdit &p;
+  State& state;
+  pHexEdit& p;
 };
 
-struct HorizontalScrollBar : private nall::base_from_member<pHorizontalScrollBar&>, Widget {
+struct HorizontalScroller : private nall::base_from_member<pHorizontalScroller&>, Widget {
   nall::function<void ()> onChange;
 
   unsigned length();
@@ -442,11 +487,11 @@ struct HorizontalScrollBar : private nall::base_from_member<pHorizontalScrollBar
   void setLength(unsigned length);
   void setPosition(unsigned position);
 
-  HorizontalScrollBar();
-  ~HorizontalScrollBar();
+  HorizontalScroller();
+  ~HorizontalScroller();
   struct State;
-  State &state;
-  pHorizontalScrollBar &p;
+  State& state;
+  pHorizontalScroller& p;
 };
 
 struct HorizontalSlider : private nall::base_from_member<pHorizontalSlider&>, Widget {
@@ -460,18 +505,18 @@ struct HorizontalSlider : private nall::base_from_member<pHorizontalSlider&>, Wi
   HorizontalSlider();
   ~HorizontalSlider();
   struct State;
-  State &state;
-  pHorizontalSlider &p;
+  State& state;
+  pHorizontalSlider& p;
 };
 
 struct Label : private nall::base_from_member<pLabel&>, Widget {
-  void setText(const nall::string &text);
+  void setText(nall::string text);
 
   Label();
   ~Label();
   struct State;
-  State &state;
-  pLabel &p;
+  State& state;
+  pLabel& p;
 };
 
 struct LineEdit : private nall::base_from_member<pLineEdit&>, Widget {
@@ -479,14 +524,14 @@ struct LineEdit : private nall::base_from_member<pLineEdit&>, Widget {
   nall::function<void ()> onChange;
 
   void setEditable(bool editable = true);
-  void setText(const nall::string &text);
+  void setText(nall::string text);
   nall::string text();
 
   LineEdit();
   ~LineEdit();
   struct State;
-  State &state;
-  pLineEdit &p;
+  State& state;
+  pLineEdit& p;
 };
 
 struct ListView : private nall::base_from_member<pListView&>, Widget {
@@ -494,31 +539,31 @@ struct ListView : private nall::base_from_member<pListView&>, Widget {
   nall::function<void ()> onChange;
   nall::function<void (unsigned)> onToggle;
 
-  template<typename... Args> void append(const Args&... args) { append_({args...}); }
-  template<typename... Args> void modify(unsigned row, const Args&... args) { modify_(row, {args...}); }
-  template<typename... Args> void setHeaderText(const Args&... args) { setHeaderText_({args...}); }
+  template<typename... Args> void append(Args&&... args) { append_({args...}); }
+  template<typename... Args> void modify(unsigned row, Args&&... args) { modify_(row, {args...}); }
+  template<typename... Args> void setHeaderText(Args&&... args) { setHeaderText_({args...}); }
 
-  void append_(const nall::lstring &list);
+  void append_(const nall::lstring& list);
   void autoSizeColumns();
   bool checked(unsigned row);
-  void modify_(unsigned row, const nall::lstring &list);
+  void modify_(unsigned row, const nall::lstring& list);
   void remove(unsigned row);
   void reset();
   bool selected();
   unsigned selection();
   void setCheckable(bool checkable = true);
   void setChecked(unsigned row, bool checked = true);
-  void setHeaderText_(const nall::lstring &list);
+  void setHeaderText_(const nall::lstring& list);
   void setHeaderVisible(bool visible = true);
-  void setImage(unsigned row, unsigned column, const nall::image &image = nall::image{});
+  void setImage(unsigned row, unsigned column, const nall::image& image = nall::image{});
   void setSelected(bool selected = true);
   void setSelection(unsigned row);
 
   ListView();
   ~ListView();
   struct State;
-  State &state;
-  pListView &p;
+  State& state;
+  pListView& p;
 };
 
 struct ProgressBar : private nall::base_from_member<pProgressBar&>, Widget {
@@ -527,25 +572,25 @@ struct ProgressBar : private nall::base_from_member<pProgressBar&>, Widget {
   ProgressBar();
   ~ProgressBar();
   struct State;
-  State &state;
-  pProgressBar &p;
+  State& state;
+  pProgressBar& p;
 };
 
-struct RadioBox : private nall::base_from_member<pRadioBox&>, Widget {
-  template<typename... Args> static void group(Args&... args) { group({args...}); }
-  static void group(const nall::set<RadioBox&> &list);
+struct RadioButton : private nall::base_from_member<pRadioButton&>, Widget {
+  template<typename... Args> static void group(Args&&... args) { group({std::forward<Args>(args)...}); }
+  static void group(const nall::group<RadioButton>& list);
 
   nall::function<void ()> onActivate;
 
   bool checked();
   void setChecked();
-  void setText(const nall::string &text);
+  void setText(nall::string text);
 
-  RadioBox();
-  ~RadioBox();
+  RadioButton();
+  ~RadioButton();
   struct State;
-  State &state;
-  pRadioBox &p;
+  State& state;
+  pRadioButton& p;
 };
 
 struct TextEdit : private nall::base_from_member<pTextEdit&>, Widget {
@@ -553,18 +598,19 @@ struct TextEdit : private nall::base_from_member<pTextEdit&>, Widget {
 
   void setCursorPosition(unsigned position);
   void setEditable(bool editable = true);
-  void setText(const nall::string &text);
+  void setText(nall::string text);
   void setWordWrap(bool wordWrap = true);
   nall::string text();
+  bool wordWrap();
 
   TextEdit();
   ~TextEdit();
   struct State;
-  State &state;
-  pTextEdit &p;
+  State& state;
+  pTextEdit& p;
 };
 
-struct VerticalScrollBar : private nall::base_from_member<pVerticalScrollBar&>, Widget {
+struct VerticalScroller : private nall::base_from_member<pVerticalScroller&>, Widget {
   nall::function<void ()> onChange;
 
   unsigned length();
@@ -572,11 +618,11 @@ struct VerticalScrollBar : private nall::base_from_member<pVerticalScrollBar&>, 
   void setLength(unsigned length);
   void setPosition(unsigned position);
 
-  VerticalScrollBar();
-  ~VerticalScrollBar();
+  VerticalScroller();
+  ~VerticalScroller();
   struct State;
-  State &state;
-  pVerticalScrollBar &p;
+  State& state;
+  pVerticalScroller& p;
 };
 
 struct VerticalSlider : private nall::base_from_member<pVerticalSlider&>, Widget {
@@ -590,23 +636,29 @@ struct VerticalSlider : private nall::base_from_member<pVerticalSlider&>, Widget
   VerticalSlider();
   ~VerticalSlider();
   struct State;
-  State &state;
-  pVerticalSlider &p;
+  State& state;
+  pVerticalSlider& p;
 };
 
 struct Viewport : private nall::base_from_member<pViewport&>, Widget {
+  nall::function<void (nall::lstring)> onDrop;
   nall::function<void ()> onMouseLeave;
   nall::function<void (Position)> onMouseMove;
   nall::function<void (Mouse::Button)> onMousePress;
   nall::function<void (Mouse::Button)> onMouseRelease;
 
   uintptr_t handle();
+  void setDroppable(bool droppable = true);
 
   Viewport();
   ~Viewport();
-  pViewport &p;
+  struct State;
+  State& state;
+  pViewport& p;
 };
 
 #include "layout/fixed-layout.hpp"
 #include "layout/horizontal-layout.hpp"
 #include "layout/vertical-layout.hpp"
+
+}

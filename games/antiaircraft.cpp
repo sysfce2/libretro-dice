@@ -37,7 +37,48 @@ static PotentimeterMono555Desc pot1_desc("playtime", "Play Time", K_OHM(830.0), 
 
 static RomDesc k1_desc("antiaircraft", "aa.k1", 0x9DE772D5);
 
-extern CHIP_DESC(RANDOM_CLOCK_GEN);
+// 100 ms period +/- 25% (Guess). TODO: Determine actual functionality
+static CUSTOM_LOGIC( RANDOM_CLOCK_GEN )
+{
+    // Output should be high at start, so push event immediately
+    if(chip->circuit->global_time == 0)
+    {
+        chip->pending_event = chip->circuit->queue_push(chip, 1);
+    }
+    else
+    {
+        double r = 1.0 + (double(rand()) / RAND_MAX - 0.5) / 2.0;
+        uint64_t delay = uint64_t(100.0e-3 * r / Circuit::timescale);
+
+        chip->pending_event = chip->circuit->queue_push(chip, delay);
+    }
+}
+
+static CHIP_LOGIC( RANDOM_CLOCK_BUF )
+{
+    pin[i1] = pin[1];
+}
+
+static CHIP_DESC( RANDOM_CLOCK_GEN ) = 
+{
+	CUSTOM_CHIP_START( &RANDOM_CLOCK_GEN )
+        INPUT_PINS( i1 )
+        OUTPUT_PIN( 1 ),
+
+    CHIP_START( RANDOM_CLOCK_BUF )
+        INPUT_PINS( 1 )
+        OUTPUT_PIN( i1 )
+        OUTPUT_DELAY_NS( 1.0, 1.0 ),
+
+    CHIP_DESC_END
+};
+
+static INPUT_DESC( antiaircraft )
+    INPUT_INFO(BUTTONS1_INPUT, {{ 1, 2, 3 }}, "Fire Left Cannon")
+    INPUT_INFO(BUTTONS2_INPUT, {{ 1, 2, 3 }}, "Fire Right Cannon")
+    INPUT_INFO(COIN_INPUT, {{ 1 }}, "Insert Coin")
+    INPUT_INFO(START_INPUT, {{ 1 }}, "Start Game")
+INPUT_DESC_END
 
 CIRCUIT_LAYOUT( antiaircraft ) =
 {
@@ -167,6 +208,12 @@ CIRCUIT_LAYOUT( antiaircraft ) =
     CHIP("DSW2", DIPSWITCH, &dipswitch2_desc),
     CHIP("POT1", POT_555_MONO, &pot1_desc),
     POTENTIOMETER_CONNECTION("POT1", "D9"),
+
+    INPUT(antiaircraft),
+
+    OPTIMIZATION_HINT("M3", 64, 64),
+    OPTIMIZATION_HINT("M4", 64, 64),
+    OPTIMIZATION_HINT("L1", 256, 64),
 
 #ifdef DEBUG
 	CHIP("LOG1", VCD_LOG, &vcd_log_desc),
@@ -1437,39 +1484,3 @@ CIRCUIT_LAYOUT( antiaircraft ) =
 	CIRCUIT_LAYOUT_END
 };
 
-
-// 100 ms period +/- 25% (Guess). TODO: Determine actual functionality
-CUSTOM_LOGIC( RANDOM_CLOCK_GEN )
-{
-    // Output should be high at start, so push event immediately
-    if(chip->circuit->global_time == 0)
-    {
-        chip->pending_event = chip->circuit->queue_push(chip, 1);
-    }
-    else
-    {
-        double r = 1.0 + (double(rand()) / RAND_MAX - 0.5) / 2.0;
-        uint64_t delay = uint64_t(100.0e-3 * r / Circuit::timescale);
-
-        chip->pending_event = chip->circuit->queue_push(chip, delay);
-    }
-}
-
-CHIP_LOGIC( RANDOM_CLOCK_BUF )
-{
-    pin[i1] = pin[1];
-}
-
-CHIP_DESC( RANDOM_CLOCK_GEN ) = 
-{
-	CUSTOM_CHIP_START( &RANDOM_CLOCK_GEN )
-        INPUT_PINS( i1 )
-        OUTPUT_PIN( 1 ),
-
-    CHIP_START( RANDOM_CLOCK_BUF )
-        INPUT_PINS( 1 )
-        OUTPUT_PIN( i1 )
-        OUTPUT_DELAY_NS( 1.0, 1.0 ),
-
-    CHIP_DESC_END
-};

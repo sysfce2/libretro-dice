@@ -5,6 +5,12 @@
 #include <string>
 #include <cstdio>
 
+#define DEBUG
+#undef DEBUG
+
+#define EVENT_QUEUE_SIZE 128
+#define SUBCYCLE_SIZE 64
+
 CHIP_DESC( _VCC ) = 
 {
 	CUSTOM_CHIP_START(NULL)
@@ -52,13 +58,13 @@ Circuit::Circuit(Settings& s, Input& i, const CircuitDesc* desc, const char* nam
     const CircuitDesc* desc_start = desc;
 
     // Construct special chips
-    chips.push_back(new Chip(this, chip__VCC));
+    chips.push_back(new Chip(1, 64, this, chip__VCC));
     chip_map.insert( std::pair<std::string, ChipDescPair>("_VCC", ChipDescPair(chips.back(), chip__VCC)) );
 
-	chips.push_back(new Chip(this, chip__GND));
+	chips.push_back(new Chip(1, 64, this, chip__GND));
     chip_map.insert( std::pair<std::string, ChipDescPair>("_GND", ChipDescPair(chips.back(), chip__GND)) );
 
-	chips.push_back(new Chip(this, chip__DEOPTIMIZER));
+	chips.push_back(new Chip(1, 64, this, chip__DEOPTIMIZER));
     chip_map.insert( std::pair<std::string, ChipDescPair>("_DEOPTIMIZER", ChipDescPair(chips.back(), chip__DEOPTIMIZER)) );
 
 	// Create Video chip TODO: TEMP HACK?
@@ -68,7 +74,7 @@ Circuit::Circuit(Settings& s, Input& i, const CircuitDesc* desc, const char* nam
 
 		for(ChipDesc* d = chip_VIDEO; !d->endOfDesc(); d++)
 		{
-    		chips.push_back(new Chip(this, d, &video));
+    		chips.push_back(new Chip(8, 64, this, d, &video));
 
 			ChipDescPair cd(chips.back(), d);
             chip_map.insert( std::pair<std::string, ChipDescPair>("VIDEO", cd) );
@@ -94,7 +100,7 @@ Circuit::Circuit(Settings& s, Input& i, const CircuitDesc* desc, const char* nam
 
 		for(ChipDesc* d = chip_AUDIO; !d->endOfDesc(); d++)
 		{
-    		chips.push_back(new Chip(this, d, &audio));
+    		chips.push_back(new Chip(8, 64, this, d, &audio));
 
 			ChipDescPair cd(chips.back(), d);
             chip_map.insert( std::pair<std::string, ChipDescPair>("AUDIO", cd) );
@@ -114,6 +120,16 @@ Circuit::Circuit(Settings& s, Input& i, const CircuitDesc* desc, const char* nam
 	}
 
 
+    // Search for simulator optimization hints
+    std::map<const char*, OptimizationHintDesc> hint_list;
+    for(desc = desc_start; desc->type != CIRCUIT_END; desc++)
+    {
+        if(desc->type == OPTIMIZATION_HINT)
+        {
+            printf("Hinting %s\n", desc->u.hint.chip);
+            hint_list[desc->u.hint.chip] = desc->u.hint;
+        }
+    }
 
 	// Find and construct all chips
     //std::map<ChipDesc*, Chip*> desc_map; // Doesn't work with custom chips, TODO: fix
@@ -136,7 +152,14 @@ Circuit::Circuit(Settings& s, Input& i, const CircuitDesc* desc, const char* nam
 				}
 				else*/
 				{
-					chips.push_back(new Chip(this, d, instance.custom_data));
+					if(hint_list.find(instance.name) != hint_list.end())
+                        chips.push_back(new Chip(hint_list[instance.name].queue_size, hint_list[instance.name].subycle_size, this, d, instance.custom_data));   
+                    else // Use defaults
+                        chips.push_back(new Chip(EVENT_QUEUE_SIZE, SUBCYCLE_SIZE, this, d, instance.custom_data));
+
+                    #ifdef DEBUG
+                    printf("chip name:%s p:%p\n", instance.name, chips.back());
+                    #endif
                     //desc_map[d] = chips.back();
 				}
 
@@ -315,7 +338,7 @@ Circuit::Circuit(Settings& s, Input& i, const CircuitDesc* desc, const char* nam
                     }
                 
                 if((*it)->type == BASIC_CHIP)
-                    delete (*it)->lut;
+                    delete[] (*it)->lut;
  
                 delete *it;
                 it = chips.erase(it) - 1;
@@ -332,6 +355,21 @@ Circuit::Circuit(Settings& s, Input& i, const CircuitDesc* desc, const char* nam
         uint8_t pin    = connection_list_in[i].first;
         
         c_out->connect(c_in, desc, pin);
+
+        if(c_out->output_links.size() > 64) 
+        {
+            std::string name = "";
+            
+            for(auto x : chip_map)
+                if(x.second.first == c_out)
+                {
+                    name = x.first;
+                    break;
+                }
+            
+            if(name != "_VCC" && name != "_GND")
+                printf("ERROR: Maximum output connection limit reached, chip:%s, cout:%d\n", name.c_str(), c_out->output_links.size());
+        }
     }
 
 
@@ -360,10 +398,14 @@ Circuit::Circuit(Settings& s, Input& i, const CircuitDesc* desc, const char* nam
 
 
     // Find video descriptor
-    video.desc = NULL;
+    video.desc = &VideoDesc::DEFAULT;
     for(desc = desc_start; desc->type != CIRCUIT_END; desc++)
         if(desc->type == VIDEO_INST)
             video.desc = desc->u.video;
+
+    // Set up VCC & GND for analog
+    chips[0]->analog_output = 5.0;
+    chips[1]->analog_output = 0.0;
 
     // Find audio descriptor
     audio.desc = NULL;
@@ -387,7 +429,7 @@ Circuit::~Circuit()
     for(std::vector<Chip*>::iterator it = chips.begin(); it != chips.end(); ++it)
     {
         if((*it)->type == BASIC_CHIP)
-            delete (*it)->lut;
+            delete[] (*it)->lut;
 
         delete *it;
     }
@@ -396,7 +438,7 @@ Circuit::~Circuit()
 uint64_t Circuit::queue_push(Chip* chip, uint64_t delay)
 {
     int i;
-	QueueEntry qe(chip->circuit->global_time + delay, chip);
+	QueueEntry qe(global_time + delay, chip);
 
     queue_size++;
 

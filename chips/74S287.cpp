@@ -17,7 +17,7 @@ GND |8        9| Q3
     +----------+
 */
 
-// TODO: Chip enables
+// TODO: Chip enables assume outputs are pulled up... add tri-state logic?
 
 template <int BIT>
 CHIP_LOGIC( 74S287 )
@@ -28,29 +28,34 @@ CHIP_LOGIC( 74S287 )
                (pin[4] << 3) | (pin[7] << 2) | (pin[6] << 1) | pin[5];
 
     int P = 12 - BIT;
-
-    pin[P] = (RomDesc::get_data(rom, addr) >> BIT) & 1;
+    
+    if(pin[13] || pin[14])
+        pin[P] = 1;
+    else
+        pin[P] = (RomDesc::get_data(rom, addr) >> BIT) & 1;
 }
+
+// TODO: Delay from chip enable should be lower?
 
 CHIP_DESC( 74S287 ) = 
 {
     CHIP_START( 74S287<0> )
-        INPUT_PINS( 5, 6, 7, 4, 3, 2, 1, 15 )
+        INPUT_PINS( 5, 6, 7, 4, 3, 2, 1, 13, 14, 15 )
         OUTPUT_PIN( 12 )
         OUTPUT_DELAY_NS( 35.0, 35.0 ),
 
     CHIP_START( 74S287<1> )
-        INPUT_PINS( 5, 6, 7, 4, 3, 2, 1, 15 )
+        INPUT_PINS( 5, 6, 7, 4, 3, 2, 1, 13, 14, 15 )
         OUTPUT_PIN( 11 )
         OUTPUT_DELAY_NS( 35.0, 35.0 ),
 
     CHIP_START( 74S287<2> )
-        INPUT_PINS( 5, 6, 7, 4, 3, 2, 1, 15 )
+        INPUT_PINS( 5, 6, 7, 4, 3, 2, 1, 13, 14, 15 )
         OUTPUT_PIN( 10 )
         OUTPUT_DELAY_NS( 35.0, 35.0 ),
 
     CHIP_START( 74S287<3> )
-        INPUT_PINS( 5, 6, 7, 4, 3, 2, 1, 15 )
+        INPUT_PINS( 5, 6, 7, 4, 3, 2, 1, 13, 14, 15 )
         OUTPUT_PIN( 9 )
         OUTPUT_DELAY_NS( 35.0, 35.0 ),
 

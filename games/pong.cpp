@@ -30,10 +30,16 @@ static Mono555Desc b9_555_desc(K_OHM(70.0), U_FARAD(0.1));
 static Mono555Desc f4_555_desc(K_OHM(330.0), U_FARAD(4.7));
 static Mono555Desc g4_555_desc(K_OHM(220.0), U_FARAD(1.0));
 
-static Paddle1VerticalDesc pad1_desc(17000.0, 145000.0, &a9_555_desc);
-static Paddle2VerticalDesc pad2_desc(17000.0, 145000.0, &b9_555_desc);
+static Paddle1VerticalDesc pad1_desc(17000.0, 145000.0, &b9_555_desc);
+static Paddle2VerticalDesc pad2_desc(17000.0, 145000.0, &a9_555_desc);
 
 static DipswitchDesc dipswitch1_desc("winning_score", "Winning Score", 0, "11", "15");
+
+static INPUT_DESC( pong )
+    INPUT_INFO(PADDLE1_VERTICAL_INPUT, "Move Left Paddle")
+    INPUT_INFO(PADDLE2_VERTICAL_INPUT, "Move Right Paddle")
+    INPUT_INFO(COIN_INPUT, {{ 1 }}, "Insert Coin and Start Game")
+INPUT_DESC_END
 
 static VIDEO_DESC( pong )
     VIDEO_RESISTANCE(1, K_OHM(1.0))
@@ -130,22 +136,21 @@ CIRCUIT_LAYOUT( pong ) =
     CHIP("C8", 74107),
 
     CHIP("PAD1", PADDLE1_VERTICAL_INPUT, &pad1_desc),
-    PADDLE_CONNECTION("PAD1", "A9"),
+    PADDLE_CONNECTION("PAD1", "B9"),
 
     CHIP("PAD2", PADDLE2_VERTICAL_INPUT, &pad2_desc),
-    PADDLE_CONNECTION("PAD2", "B9"),
+    PADDLE_CONNECTION("PAD2", "A9"),
 
     CHIP("LATCH", LATCH),
     CHIP("COIN1", COIN_INPUT),
     CHIP("DIPSW1", DIPSWITCH, &dipswitch1_desc),
 
     VIDEO(pong),
+    INPUT(pong),
 
 #ifdef DEBUG
 	CHIP("LOG1", VCD_LOG, &vcd_log_desc),
 #endif
-
-
 
     // HRESET Circuit
     CONNECTION("CLOCK", 1, "F6", 12),
@@ -867,6 +872,7 @@ CIRCUIT_LAYOUT( pong ) =
     CONNECTION("C4", 6, "C1", 5),
 
     CONNECTION("AUDIO", 1, "C1", 6),
+    CONNECTION("AUDIO", i1, "AUDIO", Audio::OUTPUT_MONO),
 
 #ifdef DEBUG
     // Horizontal ball counter

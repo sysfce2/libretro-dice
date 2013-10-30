@@ -13,7 +13,7 @@
 #include "chips/audio.h"
 #include "chips/input.h"
 
-#define MAX_QUEUE_SIZE 1024
+#define MAX_QUEUE_SIZE 4096
 
 class CircuitDesc;
 
@@ -39,7 +39,7 @@ public:
     RealTimeClock rtc;
    
     int queue_size;
-    QueueEntry queue[MAX_QUEUE_SIZE];
+    QueueEntry queue[MAX_QUEUE_SIZE]; // TODO: Replace with vector?
 
 	Circuit(Settings& s, Input& i, const CircuitDesc* desc, const char* name);
     ~Circuit();

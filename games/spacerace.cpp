@@ -29,6 +29,7 @@ static VcdLogDesc vcd_log_desc
 );
 #endif
 
+static Mono555Desc a3_555_desc(K_OHM(6.8) + K_OHM(6.8), U_FARAD(4.7));
 static Mono555Desc a6_555_desc(K_OHM(330.0), U_FARAD(4.7));
 static Mono555Desc a9_555_desc(K_OHM(100.0), U_FARAD(0.1));
 static Mono555Desc b6_555_desc(K_OHM(330.0), U_FARAD(4.7));
@@ -37,7 +38,20 @@ static PWM555Desc d9_555_desc(K_OHM(151.0), U_FARAD(0.1));
 
 static Mono9602Desc l4_desc(K_OHM(10.0), P_FARAD(100.0), K_OHM(10.0), P_FARAD(100.0));
 
+static DipswitchDesc dipswitch1_desc("coinage", "Coinage", 0, "1 Coin / 1 Credit", "1 Coin / 2 Credits");
 static PotentimeterMono555Desc pot1_desc("playtime", "Play Time", K_OHM(970.0), K_OHM(470.0), K_OHM(1470.0), c9_555_desc);
+
+static SeriesRCDesc coin_cap_desc(K_OHM(1.0), U_FARAD(0.1)); // Not shown, but needed to make coin work? TODO: Investigate
+
+RCFilterDesc c25_filter_desc(K_OHM(470.0), K_OHM(470.0), U_FARAD(0.1));
+RCFilterDesc c19_filter_desc(K_OHM(470.0), K_OHM(470.0), U_FARAD(0.1));
+RCFilterDesc c32_filter_desc(K_OHM(25.2), K_OHM(25.2), U_FARAD(4.7)); // TODO: Include C33? Fix resistance values
+
+NE566Desc a4_566_desc(K_OHM(6.8), U_FARAD(0.1)); // TODO: Extra capacitance from C42?
+NE566Desc b4_566_desc(K_OHM(10.0), U_FARAD(0.1));
+NE566Desc c4_566_desc(K_OHM(10.0), U_FARAD(0.1));
+
+MixerDesc mixer_desc({K_OHM(10.0), K_OHM(10.0), K_OHM(4.7)}, 0.0, U_FARAD(0.1));
 
 static DIODE_LAYOUT rocket_gfx =
 {
@@ -59,6 +73,36 @@ static DIODE_LAYOUT rocket_gfx =
 	{ 0, 0, 0, 1, 1, 1, 0, 0 }
 };
 
+static AUDIO_DESC( spacerace )
+    AUDIO_GAIN(50.0)
+    AUDIO_SPEAKER_CONFIG(MONO)
+AUDIO_DESC_END
+
+static INPUT_DESC( spacerace )
+    INPUT_INFO(JOYSTICK1_INPUT, {{ Joystick::UP, Joystick::DOWN }}, "Move Left Rocket")
+    INPUT_INFO(JOYSTICK2_INPUT, {{ Joystick::UP, Joystick::DOWN }}, "Move Right Rocket")
+
+    INPUT_INFO(COIN_INPUT, {{ 1 }}, "Insert Coin")
+    INPUT_INFO(START_INPUT, {{ 1 }}, "Start Game")
+INPUT_DESC_END
+
+// Transistor used to enable/disable 566 outputs
+// TODO: Figure out how to simulate more accurately
+static CHIP_DESC( SPACERACE_PNP )
+{
+    CUSTOM_CHIP_START([](Chip* chip, int mask) {
+        double sw = chip->analog_input(1);
+        if(sw > 2.0)
+            chip->analog_output = 0.0;
+        else
+            chip->analog_output = chip->analog_input(0) + 2.30;
+    })
+    INPUT_PINS( 1, 2 )
+    OUTPUT_PIN( i1 ),
+    
+    CHIP_DESC_END
+};
+
 CIRCUIT_LAYOUT( spacerace ) =
 {
 	/**************************************************************************
@@ -70,6 +114,8 @@ CIRCUIT_LAYOUT( spacerace ) =
 
 	CHIP("A1", 7402),
 	CHIP("A2", 9316),
+    CHIP("A3", 555_Mono, &a3_555_desc),
+    CHIP("A4", 566, &a4_566_desc),
     CHIP("A6", 555_Mono, &a6_555_desc),
 	CHIP("A7", 7400),
     CHIP("A8", 7474),
@@ -77,6 +123,8 @@ CIRCUIT_LAYOUT( spacerace ) =
 
 	CHIP("B1", 7400),
 	CHIP("B2", 9316),
+    CHIP("B3", 7474),
+    CHIP("B4", 566, &b4_566_desc),
     CHIP("B6", 555_Mono, &b6_555_desc),
 	CHIP("B7", 7402),
 	CHIP("B8", 7474),
@@ -84,6 +132,8 @@ CIRCUIT_LAYOUT( spacerace ) =
 
 	CHIP("C1", 7427),
 	CHIP("C2", 74107),
+    CHIP("C3", 7493),
+    CHIP("C4", 566, &c4_566_desc),
 	CHIP("C6", 7420),
 	CHIP("C7", 7474),
 	CHIP("C8", 7410),
@@ -109,6 +159,7 @@ CIRCUIT_LAYOUT( spacerace ) =
     CHIP("E8", 7410),
 	CHIP("E9", 7404),
 
+    CHIP("F2", 7400),
 	CHIP("F3", 7402),
 	CHIP("F4", 74107),
 	CHIP("F5", 9316),
@@ -158,14 +209,33 @@ CIRCUIT_LAYOUT( spacerace ) =
     CHIP("STICK1", JOYSTICK1_INPUT),
     CHIP("STICK2", JOYSTICK2_INPUT),
 
+    CHIP("DSW1", DIPSWITCH, &dipswitch1_desc),
     CHIP("POT1", POT_555_MONO, &pot1_desc),
     POTENTIOMETER_CONNECTION("POT1", "C9"), 
+
+    CHIP("CAP?", SERIES_RC, &coin_cap_desc),
+
+    CHIP("C25", RC_FILTER, &c25_filter_desc),
+    CHIP("C19", RC_FILTER, &c19_filter_desc),
+    CHIP("C32", RC_FILTER, &c32_filter_desc),
+
+    CHIP("Q3", SPACERACE_PNP),
+    CHIP("Q6", SPACERACE_PNP),
+    CHIP("Q9", SPACERACE_PNP),
+
+    CHIP("MIXER", MIXER, &mixer_desc),
+
+    AUDIO(spacerace),
+    INPUT(spacerace),
 
 #ifdef DEBUG
 	CHIP("LOG1", VCD_LOG, &vcd_log_desc),
 #endif
 
     // Speed hack
+    OPTIMIZATION_HINT("F5", 64, 64),
+    OPTIMIZATION_HINT("E5", 64, 64),
+
 #ifdef USE_CLK_GATES
     CHIP("CLK_GATE1", CLK_GATE),
     CHIP("CLK_GATE2", CLK_GATE),
@@ -790,7 +860,12 @@ CIRCUIT_LAYOUT( spacerace ) =
 	// Credit / Start Circuit //
     CONNECTION("COIN", 1, "B9", 13),
 
-    CONNECTION("COIN", 1, "A9", 2),
+    // Not shown, but needed to make coin work? TODO: Investigate
+    CONNECTION("COIN", 1, "CAP?", 1),
+    CONNECTION(VCC, "CAP?", 2),
+
+    //CONNECTION("COIN", 1, "A9", 2),
+    CONNECTION("CAP?", 3, "A9", 2),
     CONNECTION(VCC, "A9", 4),    
     CONNECTION("A9", 3, "B9", 9),
 
@@ -799,10 +874,16 @@ CIRCUIT_LAYOUT( spacerace ) =
     CONNECTION("B9", 12, "B8", 12),
     CONNECTION("B9", 12, "B8", 13),
 
-    CONNECTION(GND, "A8", 10), // TODO: add dipswitches
+    CONNECTION(GND, "DSW1", 1),
+    CONNECTION(VCC, "DSW1", 2),
+
+    CONNECTION(VCC, "DSW1", 4),
+    CONNECTION("B8", 8, "DSW1", 5),
+
+    CONNECTION("DSW1", 3, "A8", 10),
     CONNECTION("B9", 2, "A8", 11),
     CONNECTION(VCC, "A8", 12),
-    CONNECTION(VCC, "A8", 13),
+    CONNECTION("DSW1", 6, "A8", 13),
 
     CONNECTION(VCC, "A8", 4),
     CONNECTION("B9", 2, "A8", 3),
@@ -817,7 +898,9 @@ CIRCUIT_LAYOUT( spacerace ) =
 
     CONNECTION("LATCH", 3, "C9", 4),
     CONNECTION("C8", 8, "C9", 2),
+
     CONNECTION("C9", 3, "B9", 1),
+    
     CONNECTION("C8", 8, "E9", 3),
     
     CONNECTION("B9", 2, "D8", 12),
@@ -1001,7 +1084,81 @@ CIRCUIT_LAYOUT( spacerace ) =
     CONNECTION("VIDEO", Video::HBLANK_PIN, HBLANK),
     CONNECTION("VIDEO", Video::VBLANK_PIN, VBLANK),
 
-    // TODO: Sound
+
+
+
+    // Sound
+    CONNECTION(VCC, "B3", 10),
+    CONNECTION(VCC, "B3", 12),
+    CONNECTION("K3", 15, "B3", 11),
+    CONNECTION(VRESET_n, "B3", 13),
+
+    CONNECTION(VCC, "B3", 4),
+    CONNECTION(VCC, "B3", 2),
+    CONNECTION("H3", 15, "B3", 3),
+    CONNECTION(VRESET_n, "B3", 1),
+
+    CONNECTION(VRESET_n, "C3", 14),
+    CONNECTION("C3", 12, "C3", 1),
+    CONNECTION(GND, "C3", 2),
+    CONNECTION(GND, "C3", 3),
+
+    CONNECTION("L2", 6, "E3", 1),
+
+    CONNECTION("E3", 2, "F2", 12),
+    CONNECTION("C3", 11, "F2", 13),
+
+    CONNECTION("J2", 6, "D5", 1),
+
+    CONNECTION("D5", 2, "D4", 13),
+    CONNECTION("C3", 8, "D4", 12),
+
+    CONNECTION("A1", 13, "A1", 2),
+    CONNECTION("A1", 13, "A1", 3),
+
+    CONNECTION(VCC, "A3", 4),
+    CONNECTION("A1", 1, "A3", 2),
+    
+    CONNECTION("A3", 3, "D5", 13),
+
+
+
+    // Analog Sound
+    CONNECTION("B3", 8, "AUDIO", 1),
+    CONNECTION("F2", 11, "AUDIO", 2),
+
+    CONNECTION("AUDIO", i1, "C25", 1),
+    CONNECTION("C25", i1, "B4", 5),
+
+    CONNECTION("B4", 4, "Q6", 1),
+    CONNECTION("AUDIO", i2, "Q6", 2),
+
+
+    CONNECTION("B3", 6, "AUDIO", 3),
+    CONNECTION("D4", 11, "AUDIO", 4),
+
+    CONNECTION("AUDIO", i3, "C19", 1),
+    CONNECTION("C19", i1, "C4", 5),
+
+    CONNECTION("C4", 4, "Q3", 1),
+    CONNECTION("AUDIO", i4, "Q3", 2),
+
+
+    CONNECTION("A3", 3, "AUDIO", 5),
+    CONNECTION("D5", 12, "AUDIO", 6),
+
+    CONNECTION("AUDIO", i5, "C32", 1),
+    CONNECTION("C32", i1, "A4", 5),
+
+    CONNECTION("A4", 4, "Q9", 1),
+    CONNECTION("AUDIO", i6, "Q9", 2),
+
+
+    CONNECTION("Q6", i1, "MIXER", 1),
+    CONNECTION("Q3", i1, "MIXER", 2),
+    CONNECTION("Q9", i1, "MIXER", 3),
+
+    CONNECTION("MIXER", i1, "AUDIO", Audio::OUTPUT_MONO),
 
 #ifdef DEBUG
     /*CONNECTION("LOG1", 1, CLK),
@@ -1015,6 +1172,18 @@ CIRCUIT_LAYOUT( spacerace ) =
     CONNECTION("LOG1", 9, "A2", 13),
     CONNECTION("LOG1", 10, "A2", 12),
     CONNECTION("LOG1", 11, "A2", 11),*/
+    CONNECTION("LOG1", 1, "D8", 11),
+    CONNECTION("LOG1", 2, "B8", 8),
+    CONNECTION("LOG1", 3, "LATCH", 3),
+    CONNECTION("LOG1", 4, "C8", 8),
+    CONNECTION("LOG1", 5, "C9", 3),
+    CONNECTION("LOG1", 6, VBLANK),
+    CONNECTION("LOG1", 7, "B9", 2),
+    CONNECTION("LOG1", 8, "A8", 6),
+    CONNECTION("LOG1", 9, "A8", 9),
+    CONNECTION("LOG1", 10, "B9", 8),
+    CONNECTION("LOG1", 11, "B9", 12),
+    CONNECTION("LOG1", 12, "A8", 5),
 #endif
 
 	CIRCUIT_LAYOUT_END

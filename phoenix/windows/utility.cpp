@@ -1,16 +1,18 @@
+namespace phoenix {
+
 static const unsigned Windows2000  = 0x0500;
 static const unsigned WindowsXP    = 0x0501;
 static const unsigned WindowsVista = 0x0600;
 static const unsigned Windows7     = 0x0601;
 
 static unsigned OsVersion() {
-  OSVERSIONINFO versionInfo = { 0 };
+  OSVERSIONINFO versionInfo = {0};
   versionInfo.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
   GetVersionEx(&versionInfo);
   return (versionInfo.dwMajorVersion << 8) + (versionInfo.dwMajorVersion << 0);
 }
 
-static HBITMAP CreateBitmap(const image &image) {
+static HBITMAP CreateBitmap(const image& image) {
   HDC hdc = GetDC(0);
   BITMAPINFO bitmapInfo;
   memset(&bitmapInfo, 0, sizeof(BITMAPINFO));
@@ -21,11 +23,17 @@ static HBITMAP CreateBitmap(const image &image) {
   bitmapInfo.bmiHeader.biBitCount = 32;
   bitmapInfo.bmiHeader.biCompression = BI_RGB;
   bitmapInfo.bmiHeader.biSizeImage = image.width * image.height * 4;
-  void *bits = nullptr;
+  void* bits = nullptr;
   HBITMAP hbitmap = CreateDIBSection(hdc, &bitmapInfo, DIB_RGB_COLORS, &bits, NULL, 0);
   if(bits) memcpy(bits, image.data, image.width * image.height * 4);
   ReleaseDC(0, hdc);
   return hbitmap;
+}
+
+static unsigned GetWindowZOrder(HWND hwnd) {
+  unsigned z = 0;
+  for(HWND next = hwnd; next != NULL; next = GetWindow(next, GW_HWNDPREV)) z++;
+  return z;
 }
 
 static Keyboard::Keycode Keysym(unsigned keysym, unsigned keyflags) {
@@ -147,4 +155,6 @@ static Keyboard::Keycode Keysym(unsigned keysym, unsigned keyflags) {
   #undef enabled
   #undef shifted
   #undef extended
+}
+
 }

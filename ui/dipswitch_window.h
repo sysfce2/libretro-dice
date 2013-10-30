@@ -5,7 +5,7 @@ struct DipswitchWindow : Window
     struct DipswitchSelector : HorizontalLayout
     {
         Label name;
-        RadioBox settings[2];
+        RadioButton settings[2];
         unsigned& state;
 
         DipswitchSelector(const char* n, unsigned& sta, const char* set[2]) : state(sta)
@@ -14,7 +14,7 @@ struct DipswitchWindow : Window
             settings[0].setText(set[0]);
             settings[1].setText(set[1]);
 
-            RadioBox::group(settings[0], settings[1]);
+            RadioButton::group(settings[0], settings[1]);
             settings[state].setChecked();
 
             settings[0].onActivate = settings[1].onActivate = [&]
@@ -31,7 +31,7 @@ struct DipswitchWindow : Window
     struct HexDipswitchSelector : HorizontalLayout
     {
         Label name;
-        ComboBox settings;
+        ComboButton settings;
         unsigned& state;
 
         HexDipswitchSelector(const char* n, unsigned& sta, const char* set[16]) : state(sta)
@@ -96,6 +96,9 @@ struct DipswitchWindow : Window
 
     DipswitchWindow() : current_config(0)
     {
+        setTitle("DIP Switch Configuration");
+        setResizable(false);
+        
         layout.setMargin(10);
 
         // Search all circuit descriptors for DIP switches, add to layouts
@@ -107,6 +110,7 @@ struct DipswitchWindow : Window
             {
                 if(desc->u.instance.chip == chip_DIPSWITCH ||
                    desc->u.instance.chip == chip_53137 || 
+                   desc->u.instance.chip == chip_DIPSWITCH_4SPST ||
                    desc->u.instance.chip == chip_POT_555_ASTABLE ||
                    desc->u.instance.chip == chip_POT_555_MONO)
                 {
@@ -139,6 +143,12 @@ struct DipswitchWindow : Window
                     Layout* l = new HexDipswitchSelector(d->desc, d->state, d->settings);
                     game_layout->append(*l, {~0, 0}, 10);
                 }
+                else if(desc->u.instance.chip == chip_DIPSWITCH_4SPST)
+                {
+                    Dipswitch4SP4TDesc* d = (Dipswitch4SP4TDesc*)desc->u.instance.custom_data;
+                    Layout* l = new HexDipswitchSelector(d->desc, d->state, d->settings);
+                    game_layout->append(*l, {~0, 0}, 10);
+                }
                 else if(desc->u.instance.chip == chip_POT_555_ASTABLE)
                 {
                     PotentimeterAstable555Desc* d = (PotentimeterAstable555Desc*)desc->u.instance.custom_data;
@@ -168,15 +178,12 @@ struct DipswitchWindow : Window
         layout.append(game_view, { 110, ~0 }, 10);
 
         exit_button.setText("Exit");
-        exit_layout.append(exit_button, {350, 240 - exit_button.minimumGeometry().height, 90, exit_button.minimumGeometry().height});
+        exit_layout.append(exit_button, {350, 270 - exit_button.minimumSize().height, 90, exit_button.minimumSize().height});
     }
 
     void create(const Position& pos, int sel)
     {
-        setGeometry({pos.x, pos.y, 450, 250});
-        setTitle("DIP Switch Configuration");
-        setResizable(false);
-        setModal(true);
+        setGeometry({pos.x, pos.y, 450, 280});
         
         game_view.setSelection(sel);
         game_view.setSelected(true);
@@ -185,7 +192,7 @@ struct DipswitchWindow : Window
         append(layout);
         append(exit_layout);
         setVisible(true);
-
         game_view.setFocused();
+        setModal(true);
     }
 };

@@ -1,5 +1,11 @@
-Geometry pWidget::minimumGeometry() {
-  return { 0, 0, 0, 0 };
+namespace phoenix {
+
+bool pWidget::focused() {
+  return qtWidget->hasFocus();
+}
+
+Size pWidget::minimumSize() {
+  return {0, 0};
 }
 
 void pWidget::setEnabled(bool enabled) {
@@ -12,11 +18,11 @@ void pWidget::setFocused() {
   qtWidget->setFocus(Qt::OtherFocusReason);
 }
 
-void pWidget::setFont(const string &font) {
+void pWidget::setFont(string font) {
   qtWidget->setFont(pFont::create(font));
 }
 
-void pWidget::setGeometry(const Geometry &geometry) {
+void pWidget::setGeometry(Geometry geometry) {
   qtWidget->setGeometry(geometry.x, geometry.y, geometry.width, geometry.height);
 }
 
@@ -42,11 +48,13 @@ void pWidget::synchronizeState() {
 void pWidget::destructor() {
   if(widget.state.abstract) {
     delete qtWidget;
-    qtWidget = 0;
+    qtWidget = nullptr;
   }
 }
 
 void pWidget::orphan() {
   destructor();
   constructor();
+}
+
 }

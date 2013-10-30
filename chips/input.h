@@ -13,6 +13,11 @@ struct Joystick
     enum LIMIT { BUTTON_THRESHOLD = 8192 }; // TODO: make configurable?
 };
 
+struct Wheel
+{
+    enum OUTPUT { A = 1, B = 2 };
+};
+
 template <unsigned PADDLE, bool HORIZONTAL>
 class AnalogInputDesc
 {
@@ -26,6 +31,15 @@ public:
     static CUSTOM_LOGIC( analog_input );
 };
 
+template <unsigned WHEEL>
+class WheelDesc
+{
+public:
+    double angle; // Wheel position, 0.0 to 360.0
+    cirque<double> wheel_events[2];
+
+    WheelDesc() : angle(0.0), wheel_events{cirque<double>(32), cirque<double>(32)} { }
+};
 
 template <unsigned THROTTLE>
 class ThrottleDesc
@@ -41,16 +55,23 @@ public:
 
 typedef AnalogInputDesc<0, true> Paddle1HorizontalDesc; 
 typedef AnalogInputDesc<1, true> Paddle2HorizontalDesc;
+typedef AnalogInputDesc<2, true> Paddle3HorizontalDesc;
+typedef AnalogInputDesc<3, true> Paddle4HorizontalDesc;
 
 typedef AnalogInputDesc<0, false> Paddle1VerticalDesc; 
 typedef AnalogInputDesc<1, false> Paddle2VerticalDesc; 
 typedef AnalogInputDesc<2, false> Paddle3VerticalDesc; 
 typedef AnalogInputDesc<3, false> Paddle4VerticalDesc; 
 
+typedef WheelDesc<0> Wheel1Desc;
+typedef WheelDesc<1> Wheel2Desc;
+
 typedef ThrottleDesc<0> Throttle1Desc;
 
 extern CHIP_DESC( PADDLE1_HORIZONTAL_INPUT );
 extern CHIP_DESC( PADDLE2_HORIZONTAL_INPUT );
+extern CHIP_DESC( PADDLE3_HORIZONTAL_INPUT );
+extern CHIP_DESC( PADDLE4_HORIZONTAL_INPUT );
 
 extern CHIP_DESC( PADDLE1_VERTICAL_INPUT );
 extern CHIP_DESC( PADDLE2_VERTICAL_INPUT );
@@ -64,6 +85,9 @@ extern CHIP_DESC( START_INPUT );
 
 extern CHIP_DESC( JOYSTICK1_INPUT );
 extern CHIP_DESC( JOYSTICK2_INPUT );
+
+extern CHIP_DESC( WHEEL1_INPUT );
+extern CHIP_DESC( WHEEL2_INPUT );
 
 extern CHIP_DESC( BUTTONS1_INPUT );
 extern CHIP_DESC( BUTTONS2_INPUT );
@@ -88,6 +112,8 @@ public:
     bool getKeyboardState(unsigned scancode);
     bool getJoystickButton(unsigned joystick, unsigned button);
     int16_t getJoystickAxis(unsigned joystick, unsigned axis);
+    int getNumJoysticks();
+    int getNumJoystickAxes(int joystick);
     bool getKeyPressed(const KeyAssignment& key_assignment);
 };
 

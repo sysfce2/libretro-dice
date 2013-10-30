@@ -43,4 +43,25 @@ public:
 extern CHIP_DESC( BUFFER );
 
 
+
+class RCFilterDesc
+{
+public:
+    RCFilterDesc(double r1, double r2, double c1);
+
+    static CUSTOM_LOGIC( rc_filter );
+    static CUSTOM_LOGIC( init );
+
+private:
+    double r1;
+    double c1;
+    double v_cap;
+    double i_bias;
+    double r_total;
+    double rc_exp;
+};
+
+extern CHIP_DESC( RC_FILTER );
+
+
 #endif

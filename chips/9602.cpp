@@ -24,8 +24,7 @@ shortly after. (Differentiator circuit). This causes capacitor to discharge rapi
 and then begin charging through external resistor.
 The second latch is set by first latch, and cleared when capacitor finishes charging, or by reset signal.
 
-TODO: Fix delay equation, only holds for C > 1000 pF
-TODO: Fix 74123 delay equation, determine if 74123 functionality is identical to 9602?
+TODO: Fix delay equations, only hold for C > 1000 pF
 */
 
 struct A { enum { TRIG1 = 4, TRIG2 = 5, RST = 3, Q = 6, Q_n = 7, TRIG = i3, LATCH1 = i4, BUF = i5, CAP = 2 }; };
@@ -35,6 +34,7 @@ struct C { enum { TRIG1 = 2, TRIG2 = 1, RST = 3, Q = 13, Q_n = 4, TRIG = i3, LAT
 struct D { enum { TRIG1 = 10, TRIG2 = 9, RST = 11, Q = 5, Q_n = 12, TRIG = i6, LATCH1 = i7, BUF = i8, CAP = 6 }; };
 
 const double Mono9602Desc::TIME_CONSTANT = 0.31;
+const double Mono74123Desc::TIME_CONSTANT = 0.28;
 
 CUSTOM_LOGIC( Mono9602Desc::mono_9602A )
 {
@@ -188,6 +188,30 @@ CHIP_DESC( 9602 ) =
 
 
 
+
+CUSTOM_LOGIC( Mono74123Desc::mono_74123A )
+{
+    Mono74123Desc* desc = (Mono74123Desc*)chip->custom_data;
+
+    // Update tp_hl in standard portion based on rc value
+    if(chip->output_links.size())
+    {
+        // Attempted curve fit - needs to be made more accurate
+        chip->output_links[0].chip->delay[0] = uint64_t((TIME_CONSTANT*desc->r1*desc->c1*(1.0 + 700.0 / desc->r1) + 8.0e-12*desc->r1) / Circuit::timescale);
+    }
+}
+
+CUSTOM_LOGIC( Mono74123Desc::mono_74123B )
+{
+    Mono74123Desc* desc = (Mono74123Desc*)chip->custom_data;
+
+    // Update tp_hl in standard portion based on rc value
+    if(chip->output_links.size())
+    {
+        chip->output_links[0].chip->delay[0] = uint64_t((TIME_CONSTANT*desc->r2*desc->c2*(1.0 + 700.0 / desc->r2) + 8.0e-12*desc->r2) / Circuit::timescale);
+    }
+}
+
 template<typename T> CHIP_LOGIC( 74123_AND )
 {
     pin[T::TRIG] = pin[T::TRIG1] && !pin[T::TRIG2];
@@ -195,7 +219,7 @@ template<typename T> CHIP_LOGIC( 74123_AND )
 
 CHIP_DESC( 74123 ) = 
 {
-	CUSTOM_CHIP_START(&Mono9602Desc::mono_9602A)
+	CUSTOM_CHIP_START(&Mono74123Desc::mono_74123A)
         OUTPUT_PIN( i1 ),
 
     CHIP_START( 74123_AND<C> )
@@ -235,7 +259,7 @@ CHIP_DESC( 74123 ) =
 
 
 
-	CUSTOM_CHIP_START(&Mono9602Desc::mono_9602B)
+	CUSTOM_CHIP_START(&Mono74123Desc::mono_74123B)
         OUTPUT_PIN( i2 ),
 
     CHIP_START( 74123_AND<D> )

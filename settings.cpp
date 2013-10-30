@@ -18,6 +18,8 @@ const char KeyAssignment::ScancodeName[][16] = {
 
 const KeyAssignment KeyAssignment::None(KeyAssignment::NONE, 0, 0);
 
+const int Settings::Audio::FREQUENCIES[] = { 22500, 44100, 48000, 96000 };
+
 nall::string KeyAssignment::name()
 {
     if(type == KEYBOARD)
@@ -56,7 +58,7 @@ void Settings::appendKey(KeyAssignment& k, string name)
 
 Settings::Settings() : num_mice(0), pause(false), throttle(true), fullscreen(false), no_gui(false)
 {
-    append(audio.frequency = Audio::Frequency::FREQ_44100, "audio.frequency");
+    append(audio.frequency = Audio::Frequency::FREQ_48000, "audio.frequency");
     append(audio.volume = 500, "audio.volume");
     append(audio.mute = false, "audio.mute");
 
@@ -77,6 +79,14 @@ Settings::Settings() : num_mice(0), pause(false), throttle(true), fullscreen(fal
     appendKey(input.paddle[0].right = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::Right), "input.paddle1.right");
     append(input.paddle[0].keyboard_sensitivity = 250, "input.paddle1.keyboard_sensitivity");
 
+    append(input.paddle[0].use_joystick = false,       "input.paddle1.use_joystick");
+    append(input.paddle[0].joy_x_axis.joystick = 0,    "input.paddle1.joy_x_axis.joystick");
+    append(input.paddle[0].joy_x_axis.axis = 0,        "input.paddle1.joy_x_axis.axis");
+    append(input.paddle[0].joy_y_axis.joystick = 0,    "input.paddle1.joy_y_axis.joystick");
+    append(input.paddle[0].joy_y_axis.axis = 1,        "input.paddle1.joy_y_axis.axis");
+    append(input.paddle[0].joystick_mode = 0,          "input.paddle1.joystick_mode");
+    append(input.paddle[0].joystick_sensitivity = 500, "input.paddle1.joystick_sensitivity");
+
     // Paddle 2
     append(input.paddle[1].use_mouse = false, "input.paddle2.use_mouse");
     append(input.paddle[1].x_axis.mouse = 0, "input.paddle2.x_axis.mouse");
@@ -91,6 +101,14 @@ Settings::Settings() : num_mice(0), pause(false), throttle(true), fullscreen(fal
     appendKey(input.paddle[1].left = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::A), "input.paddle2.left");
     appendKey(input.paddle[1].right = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::D), "input.paddle2.right");
     append(input.paddle[1].keyboard_sensitivity = 250, "input.paddle2.keyboard_sensitivity");
+
+    append(input.paddle[1].use_joystick = false,       "input.paddle2.use_joystick");
+    append(input.paddle[1].joy_x_axis.joystick = 0,    "input.paddle2.joy_x_axis.joystick");
+    append(input.paddle[1].joy_x_axis.axis = 0,        "input.paddle2.joy_x_axis.axis");
+    append(input.paddle[1].joy_y_axis.joystick = 0,    "input.paddle2.joy_y_axis.joystick");
+    append(input.paddle[1].joy_y_axis.axis = 1,        "input.paddle2.joy_y_axis.axis");
+    append(input.paddle[1].joystick_mode = 0,          "input.paddle2.joystick_mode");
+    append(input.paddle[1].joystick_sensitivity = 500, "input.paddle2.joystick_sensitivity");
 
     // Paddle 3
     append(input.paddle[2].use_mouse = false, "input.paddle3.use_mouse");
@@ -107,6 +125,14 @@ Settings::Settings() : num_mice(0), pause(false), throttle(true), fullscreen(fal
     appendKey(input.paddle[2].right = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::L), "input.paddle3.right");
     append(input.paddle[2].keyboard_sensitivity = 250, "input.paddle3.keyboard_sensitivity");
 
+    append(input.paddle[2].use_joystick = false,       "input.paddle3.use_joystick");
+    append(input.paddle[2].joy_x_axis.joystick = 0,    "input.paddle3.joy_x_axis.joystick");
+    append(input.paddle[2].joy_x_axis.axis = 0,        "input.paddle3.joy_x_axis.axis");
+    append(input.paddle[2].joy_y_axis.joystick = 0,    "input.paddle3.joy_y_axis.joystick");
+    append(input.paddle[2].joy_y_axis.axis = 1,        "input.paddle3.joy_y_axis.axis");
+    append(input.paddle[2].joystick_mode = 0,          "input.paddle3.joystick_mode");
+    append(input.paddle[2].joystick_sensitivity = 500, "input.paddle3.joystick_sensitivity");
+
     // Paddle 4
     append(input.paddle[3].use_mouse = false, "input.paddle4.use_mouse");
     append(input.paddle[3].x_axis.mouse = 0, "input.paddle4.x_axis.mouse");
@@ -121,6 +147,14 @@ Settings::Settings() : num_mice(0), pause(false), throttle(true), fullscreen(fal
     appendKey(input.paddle[3].left = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::F), "input.paddle4.left");
     appendKey(input.paddle[3].right = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::H), "input.paddle4.right");
     append(input.paddle[3].keyboard_sensitivity = 250, "input.paddle4.keyboard_sensitivity");
+
+    append(input.paddle[3].use_joystick = false,       "input.paddle4.use_joystick");
+    append(input.paddle[3].joy_x_axis.joystick = 0,    "input.paddle4.joy_x_axis.joystick");
+    append(input.paddle[3].joy_x_axis.axis = 0,        "input.paddle4.joy_x_axis.axis");
+    append(input.paddle[3].joy_y_axis.joystick = 0,    "input.paddle4.joy_y_axis.joystick");
+    append(input.paddle[3].joy_y_axis.axis = 1,        "input.paddle4.joy_y_axis.axis");
+    append(input.paddle[3].joystick_mode = 0,          "input.paddle4.joystick_mode");
+    append(input.paddle[3].joystick_sensitivity = 500, "input.paddle4.joystick_sensitivity");
 
     // Throttle 1
     appendKey(input.throttle[0].key = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::Up), "input.throttle1.key");
@@ -137,6 +171,28 @@ Settings::Settings() : num_mice(0), pause(false), throttle(true), fullscreen(fal
     appendKey(input.joystick2.down = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::S), "input.joystick2.down");
     appendKey(input.joystick2.left = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::A), "input.joystick2.left");
     appendKey(input.joystick2.right = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::D), "input.joystick2.right");
+
+    // Wheel 1
+    append(input.wheel[0].use_mouse = true, "input.wheel1.use_mouse");
+    append(input.wheel[0].axis.mouse = 0, "input.wheel1.axis.mouse");
+    append(input.wheel[0].axis.axis = 0, "input.wheel1.axis.axis");
+    append(input.wheel[0].mouse_sensitivity = 500, "input.wheel1.mouse_sensitivity");
+
+    append(input.wheel[0].use_keyboard = true, "input.wheel1.use_keyboard");
+    appendKey(input.wheel[0].left = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::Left), "input.wheel1.left");
+    appendKey(input.wheel[0].right = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::Right), "input.wheel1.right");
+    append(input.wheel[0].keyboard_sensitivity = 500, "input.wheel1.keyboard_sensitivity");
+
+    // Wheel 2
+    append(input.wheel[1].use_mouse = false, "input.wheel2.use_mouse");
+    append(input.wheel[1].axis.mouse = 0, "input.wheel2.axis.mouse");
+    append(input.wheel[1].axis.axis = 0, "input.wheel2.axis.axis");
+    append(input.wheel[1].mouse_sensitivity = 500, "input.wheel2.mouse_sensitivity");
+
+    append(input.wheel[1].use_keyboard = true, "input.wheel2.use_keyboard");
+    appendKey(input.wheel[1].left = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::A), "input.wheel2.left");
+    appendKey(input.wheel[1].right = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::D), "input.wheel2.right");
+    append(input.wheel[1].keyboard_sensitivity = 500, "input.wheel2.keyboard_sensitivity");
 
     // Buttons
     appendKey(input.buttons1.button1 = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::ControlLeft), "input.player1.button1");

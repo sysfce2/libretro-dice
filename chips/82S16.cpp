@@ -22,7 +22,7 @@
 
 enum { ADDR_MASK = 0xff, CE_MASK = 0x700, WE_MASK = 0x800, D_SHIFT = 12 }; 
 
-CUSTOM_LOGIC( RAM_82S16 )
+static CUSTOM_LOGIC( RAM_82S16 )
 {
     static char data[WORD_SIZE];
 

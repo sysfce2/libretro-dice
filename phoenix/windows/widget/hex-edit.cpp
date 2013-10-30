@@ -1,5 +1,7 @@
+namespace phoenix {
+
 static LRESULT CALLBACK HexEdit_windowProc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam) {
-  HexEdit &hexEdit = *(HexEdit*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+  HexEdit& hexEdit = *(HexEdit*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
   if(msg == WM_CHAR) {
     if(hexEdit.p.keyPress(wparam)) return 0;
   }
@@ -43,7 +45,7 @@ void pHexEdit::update() {
         uint8_t data = hexEdit.onRead(offset++);
         hexdata.append(hex<2>(data));
         hexdata.append(" ");
-        char buffer[2] = { data >= 0x20 && data <= 0x7e ? (char)data : '.', 0 };
+        char buffer[2] = {data >= 0x20 && data <= 0x7e ? (char)data : '.', 0};
         ansidata.append(buffer);
       } else {
         hexdata.append("   ");
@@ -133,4 +135,6 @@ bool pHexEdit::keyPress(unsigned scancode) {
   }
 
   return true;
+}
+
 }

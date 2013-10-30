@@ -38,7 +38,8 @@ struct Settings : configuration
     struct Audio
     {
         enum Frequency { FREQ_22500 = 0, FREQ_44100, FREQ_48000, FREQ_96000 };
-        
+        static const int FREQUENCIES[];
+
         unsigned frequency;
         unsigned volume; // Fixed point, tenths of percent
         bool mute;
@@ -54,6 +55,33 @@ struct Settings : configuration
     {
         struct Paddle
         {
+            struct MouseAxis
+            {
+                unsigned mouse;
+                unsigned axis;
+            };
+            bool use_mouse;
+            MouseAxis x_axis, y_axis;
+            unsigned mouse_sensitivity;
+
+            bool use_keyboard;
+            unsigned keyboard_sensitivity;
+            KeyAssignment up, down, left, right;
+
+            struct JoystickAxis
+            {
+                unsigned joystick;
+                unsigned axis;
+            };
+            enum JoystickMode { JOYSTICK_RELATIVE = 0, JOYSTICK_ABSOLUTE = 1 };
+            bool use_joystick;
+            JoystickAxis joy_x_axis, joy_y_axis;
+            unsigned joystick_mode;
+            unsigned joystick_sensitivity;
+        };
+
+        struct Wheel
+        {
             bool use_mouse;
 
             struct Axis
@@ -61,13 +89,13 @@ struct Settings : configuration
                 unsigned mouse;
                 unsigned axis;
             };
-            Axis x_axis, y_axis;
+            Axis axis;
             unsigned mouse_sensitivity;
 
             bool use_keyboard;
             unsigned keyboard_sensitivity;
 
-            KeyAssignment up, down, left, right;
+            KeyAssignment left, right;
         };
 
         struct Throttle
@@ -99,6 +127,7 @@ struct Settings : configuration
         Paddle paddle[4];
         Throttle throttle[1];
         Joystick joystick1, joystick2;
+        Wheel wheel[2];
         Button buttons1, buttons2;
         CoinStart coin_start;
         UserInterface ui;

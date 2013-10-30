@@ -39,71 +39,66 @@ static VcdLogDesc vcd_log_desc
 );
 #endif
 
-static AUDIO_DESC( gotcha )
-    AUDIO_RESISTANCE(1, K_OHM(1.0))
-    AUDIO_RESISTANCE(2, K_OHM(4.0)) // TODO: Proper mixing w/ GND
-    AUDIO_GAIN(1.0)
-VIDEO_DESC_END
-
-extern CUSTOM_LOGIC( clock );
+MixerDesc mixer1_desc({K_OHM(1.0)}, K_OHM(1.0));
+MixerDesc mixer2_desc({K_OHM(1.0), K_OHM(1.5) /*Thevenin resistance*/});
 
 static CUSTOM_LOGIC( proximity )
 {
-    static uint64_t x[2] = { 0, 0 };
-    static uint64_t y[2] = { 0, 0 };
-    static uint64_t last_x_event = 0, last_y_event = 0;
+    // Thevenin voltage + resistance
+    static const double v_th[4] = { 1.337, 1.521, 2.737, 3.815 };
+    static const double r_th = K_OHM(1.5); // TODO: Figure this out more accurately?
+    static const double rc = r_th*U_FARAD(0.1);
+
+    static double v_cap = 0.0;
+    static const double v_base = 2.0; // TODO: Make adjustable?
+
+    double v = v_th[chip->inputs & 3]; 
+    if(v > v_base) // Cutoff
+        v = 4.8;
+
+    double dt = double(chip->circuit->global_time - chip->last_output_event) * Circuit::timescale;
+    double rc_exp = 1.0 - exp(-dt / rc);
+    
+    v_cap += (v - v_cap) * rc_exp;
 
     if(mask == 4)
     {
-        x[chip->inputs & 1] += chip->circuit->global_time - last_x_event;
-        last_x_event = chip->circuit->global_time; 
-
-        y[(chip->inputs >> 1) & 1] += chip->circuit->global_time - last_y_event;
-        last_y_event = chip->circuit->global_time;
-
-        // Scale from 2-5 V,  2/3 X, 1/3 Y
-        double x_avg = 0.0;
-        if(x[0] + x[1] != 0) x_avg = double(x[1]) / (x[0] + x[1]);
-        
-        double y_avg = 0.0;
-        if(y[0] + y[1] != 0) y_avg = double(y[1]) / (y[0] + y[1]);
-
-        double avg = 2.0 + 3.0 * (2.0*x_avg + y_avg) / 3.0;
-
-        //printf("x:%g y:%g %g\n", x_avg, y_avg, avg);
-
-        e8_555_desc.ctrl = avg;
+        e8_555_desc.ctrl = v_cap;
         chip->pending_event = chip->circuit->queue_push(chip, 1);
-
-        x[0] = x[1] = y[0] = y[1] = 0;
-    }
-    else if(mask == 2)
-    {
-        y[(chip->inputs >> 1) & 1] += chip->circuit->global_time - last_y_event;
-        last_y_event = chip->circuit->global_time; 
-    }
-    else
-    {
-        x[chip->inputs & 1] += chip->circuit->global_time - last_x_event;
-        last_x_event = chip->circuit->global_time; 
     }
 
+    chip->last_output_event = chip->circuit->global_time;
     chip->inputs ^= mask;
 }
+
+extern CUSTOM_LOGIC( clock );
 
 static CHIP_DESC( PROXIMITY ) = 
 {
     // Timer to handle capacitor charging
     CUSTOM_CHIP_START(&clock)
         OUTPUT_PIN( i1 )
-        OUTPUT_DELAY_MS( 50.0, 50.0 ),
+        OUTPUT_DELAY_MS( 2.0, 2.0 ),
 
     CUSTOM_CHIP_START(&proximity)
         INPUT_PINS( 1, 2, i1 )
         OUTPUT_PIN( i3 ),
 
    	CHIP_DESC_END
-}; 
+};
+
+static AUDIO_DESC( gotcha )
+    AUDIO_GAIN(10.0)
+    AUDIO_SPEAKER_CONFIG(MONO)
+AUDIO_DESC_END
+
+static INPUT_DESC( gotcha )
+    INPUT_INFO(JOYSTICK1_INPUT, "Move Cross")
+    INPUT_INFO(JOYSTICK2_INPUT, "Move Square")
+
+    INPUT_INFO(COIN_INPUT, {{ 1 }}, "Insert Coin")
+    INPUT_INFO(START_INPUT, {{ 1 }}, "Start Game")
+INPUT_DESC_END
 
 CIRCUIT_LAYOUT( gotcha ) =
 {                  
@@ -227,10 +222,16 @@ CIRCUIT_LAYOUT( gotcha ) =
     CHIP("PROXIMITY", PROXIMITY),
     POTENTIOMETER_CONNECTION("PROXIMITY", "E8"), 
 
+    CHIP("MIXER1", MIXER, &mixer1_desc),
+    CHIP("MIXER2", MIXER, &mixer2_desc),
+
     CHIP("CLK_GATE1", CLK_GATE), // Speed hack
     //CHIP("CLK_GATE2", CLK_GATE),
 
+    OPTIMIZATION_HINT("J4", 64, 64),
+
     AUDIO(gotcha),
+    INPUT(gotcha),
 
 #ifdef DEBUG
 	CHIP("LOG1", VCD_LOG, &vcd_log_desc),
@@ -1102,6 +1103,13 @@ CIRCUIT_LAYOUT( gotcha ) =
     CONNECTION("M4", 6, "AUDIO", 1),
     CONNECTION("M4", 3, "AUDIO", 2),
 
+    CONNECTION("AUDIO", i2, "MIXER1", 1),
+    CONNECTION(GND, "MIXER1", 2),
+
+    CONNECTION("AUDIO", i1, "MIXER2", 1),
+    CONNECTION("MIXER1", i1, "MIXER2", 2),
+
+    CONNECTION("MIXER2", i1, "AUDIO", Audio::OUTPUT_MONO),
 
 #ifdef DEBUG
     CONNECTION("D2", 11, "LOG1", 1),

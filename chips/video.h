@@ -23,7 +23,7 @@ private:
     void draw_overlays();
 
 public:
-    VideoDesc* desc;
+    const VideoDesc* desc;
     uint32_t frame_count;
     enum VideoPins { HBLANK_PIN = 9, VBLANK_PIN = 10 };
     

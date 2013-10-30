@@ -1,22 +1,24 @@
-static gboolean Canvas_expose(GtkWidget *widget, GdkEvent *event, pCanvas *self) {
-  cairo_t *context = gdk_cairo_create(gtk_widget_get_window(widget));
+namespace phoenix {
+
+static gboolean Canvas_expose(GtkWidget* widget, GdkEvent* event, pCanvas* self) {
+  cairo_t* context = gdk_cairo_create(gtk_widget_get_window(widget));
   cairo_set_source_surface(context, self->surface, 0, 0);
   cairo_paint(context);
   cairo_destroy(context);
   return true;
 }
 
-static gboolean Canvas_mouseLeave(GtkWidget *widget, GdkEventButton *event, pCanvas *self) {
+static gboolean Canvas_mouseLeave(GtkWidget* widget, GdkEventButton* event, pCanvas* self) {
   if(self->canvas.onMouseLeave) self->canvas.onMouseLeave();
   return true;
 }
 
-static gboolean Canvas_mouseMove(GtkWidget *widget, GdkEventButton *event, pCanvas *self) {
-  if(self->canvas.onMouseMove) self->canvas.onMouseMove({ (signed)event->x, (signed)event->y });
+static gboolean Canvas_mouseMove(GtkWidget* widget, GdkEventButton* event, pCanvas* self) {
+  if(self->canvas.onMouseMove) self->canvas.onMouseMove({(signed)event->x, (signed)event->y});
   return true;
 }
 
-static gboolean Canvas_mousePress(GtkWidget *widget, GdkEventButton *event, pCanvas *self) {
+static gboolean Canvas_mousePress(GtkWidget* widget, GdkEventButton* event, pCanvas* self) {
   if(self->canvas.onMousePress) switch(event->button) {
   case 1: self->canvas.onMousePress(Mouse::Button::Left); break;
   case 2: self->canvas.onMousePress(Mouse::Button::Middle); break;
@@ -25,7 +27,7 @@ static gboolean Canvas_mousePress(GtkWidget *widget, GdkEventButton *event, pCan
   return true;
 }
 
-static gboolean Canvas_mouseRelease(GtkWidget *widget, GdkEventButton *event, pCanvas *self) {
+static gboolean Canvas_mouseRelease(GtkWidget* widget, GdkEventButton* event, pCanvas* self) {
   if(self->canvas.onMouseRelease) switch(event->button) {
   case 1: self->canvas.onMouseRelease(Mouse::Button::Left); break;
   case 2: self->canvas.onMouseRelease(Mouse::Button::Middle); break;
@@ -34,7 +36,7 @@ static gboolean Canvas_mouseRelease(GtkWidget *widget, GdkEventButton *event, pC
   return true;
 }
 
-void pCanvas::setSize(const Size &size) {
+void pCanvas::setSize(Size size) {
   cairo_surface_destroy(surface);
   surface = cairo_image_surface_create(CAIRO_FORMAT_RGB24, canvas.state.width, canvas.state.height);
 }
@@ -42,7 +44,7 @@ void pCanvas::setSize(const Size &size) {
 void pCanvas::update() {
   memcpy(cairo_image_surface_get_data(surface), canvas.state.data, canvas.state.width * canvas.state.height * sizeof(uint32_t));
   if(gtk_widget_get_realized(gtkWidget) == false) return;
-  gdk_window_invalidate_rect(gtk_widget_get_window(gtkWidget), 0, true);
+  gdk_window_invalidate_rect(gtk_widget_get_window(gtkWidget), nullptr, true);
 }
 
 void pCanvas::constructor() {
@@ -67,4 +69,6 @@ void pCanvas::destructor() {
 void pCanvas::orphan() {
   destructor();
   constructor();
+}
+
 }

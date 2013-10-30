@@ -27,6 +27,31 @@ extern CHIP_DESC( DIPSWITCH );
 
 
 
+/* SP4T Switch. Assumes outputs are tied high when not selected by switch. */
+class DipswitchSP4TDesc
+{
+public:
+    
+    unsigned state;
+
+    const char* name;
+    const char* desc;
+    const char* settings[4];
+
+    DipswitchSP4TDesc(const char* n, const char* d, int default_state,
+                      const char* setting1, const char* setting2,
+                      const char* setting3, const char* setting4) 
+        : name(n), desc(d), state(default_state), 
+          settings{setting1, setting2, setting3, setting4} { }
+    
+    template<int T> static CUSTOM_LOGIC( logic );
+};
+
+extern CHIP_DESC( DIPSWITCH_SP4T );
+
+
+
+
 /* AMP 53137. 4-bit Rotary Hex DIP Switch. */
 class Dipswitch53137Desc
 {
@@ -57,6 +82,15 @@ public:
 };
 
 extern CHIP_DESC( 53137 );
+
+
+
+/* 4SPST 4-bit Hex DIP Switch. */
+typedef Dipswitch53137Desc Dipswitch4SP4TDesc;
+
+extern CHIP_DESC( DIPSWITCH_4SPST );
+
+
 
 
 

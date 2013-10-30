@@ -1,9 +1,15 @@
+namespace phoenix {
+
 bool pWidget::enabled() {
   return IsWindowEnabled(hwnd);
 }
 
-Geometry pWidget::minimumGeometry() {
-  return { 0, 0, 0, 0 };
+bool pWidget::focused() {
+  return GetFocus() == hwnd;
+}
+
+Size pWidget::minimumSize() {
+  return {0, 0};
 }
 
 void pWidget::setEnabled(bool enabled) {
@@ -16,13 +22,13 @@ void pWidget::setFocused() {
   SetFocus(hwnd);
 }
 
-void pWidget::setFont(const string &font) {
+void pWidget::setFont(string font) {
   if(hfont) DeleteObject(hfont);
   hfont = pFont::create(font);
   SendMessage(hwnd, WM_SETFONT, (WPARAM)hfont, 0);
 }
 
-void pWidget::setGeometry(const Geometry &geometry) {
+void pWidget::setGeometry(Geometry geometry) {
   SetWindowPos(hwnd, NULL, geometry.x, geometry.y, geometry.width, geometry.height, SWP_NOZORDER);
 }
 
@@ -53,7 +59,7 @@ void pWidget::orphan() {
 
 void pWidget::setDefaultFont() {
   string description = widget.state.font;
-  if(description == "") description = "Tahoma, 8";
+  if(description.empty()) description = "Tahoma, 8";
   hfont = pFont::create(description);
   SendMessage(hwnd, WM_SETFONT, (WPARAM)hfont, 0);
 }
@@ -63,4 +69,6 @@ void pWidget::setDefaultFont() {
 void pWidget::synchronize() {
   widget.setEnabled(widget.enabled());
   widget.setVisible(widget.visible());
+}
+
 }

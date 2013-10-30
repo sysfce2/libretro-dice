@@ -15,6 +15,14 @@ static Paddle1HorizontalDesc pad1_desc(42000.0, 132000.0, &c9_555_desc);
 static DipswitchDesc dipswitch1_desc("winning_score", "Winning Score", 0, "11", "15");
 static DipswitchDesc dipswitch2_desc("coinage", "Coinage", 0, "1 Coin / 1 Credit", "1 Coin / 2 Credits");
 
+static INPUT_DESC( rebound )
+    INPUT_INFO(PADDLE1_HORIZONTAL_INPUT, "Move Left Paddle")
+    INPUT_INFO(PADDLE2_HORIZONTAL_INPUT, "Move Right Paddle")
+    INPUT_INFO(COIN_INPUT, {{ 1 }}, "Insert Coin")
+    INPUT_INFO(START_INPUT, {{ 1 }}, "Start Game")
+INPUT_DESC_END
+
+
 #ifdef DEBUG
 static VcdLogDesc vcd_log_desc
 (
@@ -135,6 +143,8 @@ CIRCUIT_LAYOUT( rebound ) =
 
     CHIP("DSW1", DIPSWITCH, &dipswitch1_desc),
     CHIP("DSW2", DIPSWITCH, &dipswitch2_desc),
+
+    INPUT(rebound),
 
 #ifdef DEBUG
 	CHIP("LOG1", VCD_LOG, &vcd_log_desc),
@@ -992,6 +1002,7 @@ CIRCUIT_LAYOUT( rebound ) =
 
     // Audio Summing
     CONNECTION("AUDIO", 1, "E1", 6),
+    CONNECTION("AUDIO", i1, "AUDIO", Audio::OUTPUT_MONO),
 
 
 #ifdef DEBUG

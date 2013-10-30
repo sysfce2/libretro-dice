@@ -1,7 +1,5 @@
 #include "../circuit_desc.h"
 
-// TODO: Fix issues with right wall collision (ball sometimes bounces in wrong vertical direction)
-
 #define DEBUG
 #undef DEBUG
 
@@ -20,7 +18,11 @@ static VcdLogDesc vcd_log_desc
     9, "I",
     10, "J",
     11, "K",
-    12, "L"
+    12, "L",
+    13, "M",
+    14, "N",
+    15, "O",
+    16, "P"
 );
 #endif
 
@@ -57,6 +59,15 @@ static VIDEO_DESC( tvbasketball )
     VIDEO_CONTRAST(1.5)
 VIDEO_DESC_END
 
+static INPUT_DESC( tvbasketball )
+    INPUT_INFO(PADDLE1_VERTICAL_INPUT, "Move Left Striped Player")
+    INPUT_INFO(PADDLE2_VERTICAL_INPUT, "Move Right Solid Player")
+    INPUT_INFO(PADDLE3_VERTICAL_INPUT, "Move Right Striped Player")
+    INPUT_INFO(PADDLE4_VERTICAL_INPUT, "Move Left Solid Player")
+    INPUT_INFO(COIN_INPUT, {{ 1 }}, "Insert Coin")
+    INPUT_INFO(START_INPUT, {{ 1 }}, "Start Game")
+INPUT_DESC_END
+
 static Mono555Desc _5h_555_desc(K_OHM(100.0), U_FARAD(0.1));
 static Mono555Desc _5f_555_desc(K_OHM(100.0), U_FARAD(0.1));
 static Mono555Desc _3h_555_desc(K_OHM(100.0), U_FARAD(0.1));
@@ -77,16 +88,16 @@ static CapacitorDesc c2_desc(U_FARAD(0.001));
 static CapacitorDesc c3_desc(U_FARAD(0.001));
 static CapacitorDesc c4_desc(U_FARAD(0.001));
 static CapacitorDesc c5_desc(U_FARAD(0.001));
-//static CapacitorDesc c6_desc(P_FARAD(100.0));
-static CapacitorDesc c6_desc(P_FARAD(1000.0)); // Needs to be larger due to 68ns pulse out of 13C.8? TODO: investigate
+static CapacitorDesc c6_desc(P_FARAD(100.0));
 static CapacitorDesc c7_desc(U_FARAD(0.01));
+
+static BufferDesc buf1_desc(DELAY_NS(25.0), DELAY_NS(25.0)); // 25 ns buffer to prevent resonance in RC circuits
+static BufferDesc buf2_desc(DELAY_NS(25.0), DELAY_NS(25.0)); // 25 ns buffer to prevent resonance in RC circuits
 
 static SeriesRCDesc rc1_desc(OHM(220.0), U_FARAD(350.0));
 static SeriesRCDesc rc2_desc(OHM(220.0), U_FARAD(470.0));
 
 static PotentimeterAstable555Desc pot1_desc("playtime", "Play Time", K_OHM(35.0), K_OHM(10.0), K_OHM(60.0), _9d_555_desc);
-
-static BufferDesc buf1_desc(DELAY_NS(15.0), DELAY_NS(0.1));
 
 // Hack to improve performance
 CHIP_LOGIC( diode_matrix_custom_n )
@@ -119,6 +130,7 @@ CHIP_DESC( DIODE_MATRIX_CUSTOM ) =
 
    	CHIP_DESC_END
 };
+
 
 
 CIRCUIT_LAYOUT( tvbasketball ) =
@@ -273,6 +285,9 @@ CIRCUIT_LAYOUT( tvbasketball ) =
     CHIP("POT1", POT_555_ASTABLE, &pot1_desc),
     POTENTIOMETER_CONNECTION("POT1", "9D"), 
 
+    CHIP("BUF1", BUFFER, &buf1_desc),
+    CHIP("BUF2", BUFFER, &buf2_desc),
+
     CHIP("RC1", SERIES_RC, &rc1_desc),
     CHIP("RC2", SERIES_RC, &rc2_desc),
 
@@ -286,18 +301,26 @@ CIRCUIT_LAYOUT( tvbasketball ) =
     CHIP("C7", CAPACITOR, &c7_desc),
 
     VIDEO(tvbasketball),
+    INPUT(tvbasketball),
+
+    OPTIMIZATION_HINT("8A", 256, 256),
+    OPTIMIZATION_HINT("8B", 256, 256),
+    OPTIMIZATION_HINT("8C", 256, 256),
+    OPTIMIZATION_HINT("9A", 256, 384),
+
+    OPTIMIZATION_HINT("7E", 16, 64),
+
+    DISABLE_OPTIMIZATION("15D", 11),
+    DISABLE_OPTIMIZATION("VIDEO", 4),
+    DISABLE_OPTIMIZATION("14C", 9),
+
+   
+
+    //OPTIMIZATION_HINT("2E", 128, 128),
 
     /*CHIP("CLK_GATE1", CLK_GATE),
     CHIP("CLK_GATE2", CLK_GATE),
     CHIP("CLK_GATE3", CLK_GATE),*/
-
-    DISABLE_OPTIMIZATION("15D", 11),
-    DISABLE_OPTIMIZATION("VIDEO", 4),
-
-     DISABLE_OPTIMIZATION("9A", 1),
-     DISABLE_OPTIMIZATION("8A", 9),
-     DISABLE_OPTIMIZATION("11C", 9),
-     DISABLE_OPTIMIZATION("8C", 3),
 
 #ifdef DEBUG
 	CHIP("LOG1", VCD_LOG, &vcd_log_desc),
@@ -815,12 +838,15 @@ CIRCUIT_LAYOUT( tvbasketball ) =
     CONNECTION("14D", 8, "14E", 8),
     CONNECTION("14D", 6, "14E", 9),
 
-    CONNECTION("14E", 10, "C3", 1), // Optional capacitor?
+    // Including the optional capacitor breaks right wall collisions.
+    //CONNECTION("14E", 10, "C3", 1), // Optional capacitor?
 
     CONNECTION("15F", 7, "14E", 12),
-    CONNECTION("C3", 2, "14E", 11),
+    //CONNECTION("C3", 2, "14E", 11),
+    CONNECTION("14E", 10, "14E", 11),
 
-    CONNECTION("C3", 2, "15D", 13),
+    //CONNECTION("C3", 2, "15D", 13),
+    CONNECTION("14E", 10, "15D", 13),
 
     CONNECTION("15F", 7, "15C", 1),
     CONNECTION("15D", 12, "15C", 2),
@@ -867,7 +893,9 @@ CIRCUIT_LAYOUT( tvbasketball ) =
 
     CONNECTION("RC1", 3, "15D", 3),
 
-    CONNECTION("15D", 4, "15C", 12),
+    //CONNECTION("15D", 4, "15C", 12),
+    CONNECTION("15D", 4, "BUF1", 1), // Prevents resonance in rc circuit
+    CONNECTION("BUF1", 2, "15C", 12),
     CONNECTION("15D", 2, "15C", 13),
     
 
@@ -878,7 +906,9 @@ CIRCUIT_LAYOUT( tvbasketball ) =
 
     CONNECTION("RC2", 3, "15D", 5),
 
-    CONNECTION("15D", 6, "15C", 9),
+    //CONNECTION("15D", 6, "15C", 9),
+    CONNECTION("15D", 6, "BUF2", 1), // Prevents resonance in rc circuit
+    CONNECTION("BUF2", 2, "15C", 9),
     CONNECTION("C6", 2, "15C", 10),
 
 
@@ -1336,6 +1366,8 @@ CIRCUIT_LAYOUT( tvbasketball ) =
 
     CONNECTION("13F", 3, "AUDIO", 1),
 
+    CONNECTION("AUDIO", i1, "AUDIO", Audio::OUTPUT_MONO),
+
 
 
 
@@ -1610,11 +1642,16 @@ CIRCUIT_LAYOUT( tvbasketball ) =
 #ifdef DEBUG
     CONNECTION("LOG1", 1, "13C", 8),
     CONNECTION("LOG1", 2, "C6", 2),
-    CONNECTION("LOG1", 3, "15C", 8),
-    CONNECTION("LOG1", 4, "15D", 6),
-    CONNECTION("LOG1", 5, "15D", 2),
-    CONNECTION("LOG1", 6, "15C", 11),
-    CONNECTION("LOG1", 7, "15D", 4),    
+    CONNECTION("LOG1", 3, "12C", 8),
+    CONNECTION("LOG1", 4, "12C", 6),
+    CONNECTION("LOG1", 5, "13C", 11),
+    CONNECTION("LOG1", 6, "13C", 3),
+    CONNECTION("LOG1", 7, "15C", 3),    
+    CONNECTION("LOG1", 8, VBLANK),    
+    CONNECTION("LOG1", 9, "13C", 6),    
+    CONNECTION("LOG1", 10, "10J", 1),    
+    CONNECTION("LOG1", 11, "14E", 10),    
+    CONNECTION("LOG1", 12, "C3", 2),    
 #endif
 
 

@@ -83,6 +83,14 @@ static VIDEO_DESC( stuntcycle )
     VIDEO_CONTRAST(1.0)
 VIDEO_DESC_END
 
+static INPUT_DESC( stuntcycle )
+    INPUT_INFO(THROTTLE1_INPUT, "Adjust Motorcycle Speed")
+
+    INPUT_INFO(COIN_INPUT, {{ 1 }}, "Insert Coin")
+    INPUT_INFO(START_INPUT, {{ 1 }}, "Start 1-Player Game")
+    INPUT_INFO(START_INPUT, {{ 2 }}, "Start 2-Player Game")
+INPUT_DESC_END
+
 extern CHIP_DESC( STUNTCYCLE_THROTTLE );
 
 CIRCUIT_LAYOUT( stuntcycle ) =
@@ -219,6 +227,7 @@ CIRCUIT_LAYOUT( stuntcycle ) =
     CHIP("DSW2", DIPSWITCH, &dipswitch2_desc),
 
     VIDEO(stuntcycle),
+    INPUT(stuntcycle),
 
     // Throttle
     CHIP("THROTTLE", THROTTLE1_INPUT, &throttle_desc),
@@ -229,15 +238,20 @@ CIRCUIT_LAYOUT( stuntcycle ) =
 	CHIP("LOG1", VCD_LOG, &vcd_log_desc),
 #endif
 
+    OPTIMIZATION_HINT("N2", 256, 64),
+    OPTIMIZATION_HINT("M1", 256, 64),
+    OPTIMIZATION_HINT("B3", 64, 64),
+    OPTIMIZATION_HINT("C3", 64, 64),
+    OPTIMIZATION_HINT("B4", 16, 64),
+    OPTIMIZATION_HINT("C4", 16, 64),
+    OPTIMIZATION_HINT("D2", 8, 64),
+
 #ifdef USE_CLK_GATES
     CHIP("CLK_GATE1", CLK_GATE),
     CHIP("CLK_GATE2", CLK_GATE),
     CHIP("CLK_GATE3", CLK_GATE),
     CHIP("CLK_GATE4", CLK_GATE),
-    CHIP("CLK_GATE5", CLK_GATE),
 
-    DISABLE_OPTIMIZATION("N2", 9),
-    DISABLE_OPTIMIZATION("M2", 9),
     DISABLE_OPTIMIZATION("F2", 1),
     DISABLE_OPTIMIZATION("F2", i8),
     DISABLE_OPTIMIZATION("E1", 11),
@@ -757,6 +771,7 @@ CIRCUIT_LAYOUT( stuntcycle ) =
 	CONNECTION("B7", 12, "D7", 12),
 	CONNECTION("B7", 9, "D7", 13),
 	CONNECTION("A7", 4, "D7", 14),
+    CONNECTION(GND, "D7", 15),
 	
 	CONNECTION("D7", 5,  "C8", 5),
 	CONNECTION("D6", 12, "C8", 4),
@@ -868,19 +883,9 @@ CIRCUIT_LAYOUT( stuntcycle ) =
 	CONNECTION("N2", 5, "M2", 9),
 	CONNECTION("H5", 8, "M2", 10),
 	
-    // Speed Hack
-#ifdef USE_CLK_GATES    
-    CONNECTION(VRAMP, "CLK_GATE4", 1),
-    CONNECTION(_1H, "CLK_GATE4", 2),
-#endif
-
 	CONNECTION(VCC, "M1", 10),
 	CONNECTION("M2", 8, "M1", 12),
-#ifdef USE_CLK_GATES    
-    CONNECTION("CLK_GATE4", 3, "M1", 11),
-#else
 	CONNECTION(_1H, "M1", 11),
-#endif
 	CONNECTION("N3", 8, "M1", 13),
 
 
@@ -1271,13 +1276,13 @@ CIRCUIT_LAYOUT( stuntcycle ) =
 #ifdef USE_CLK_GATES
     CONNECTION(VWINDOW, "CLK_GATE3", 1),
     CONNECTION(H5, "CLK_GATE3", 2),
-    CONNECTION(VWINDOW, "CLK_GATE5", 1),
-    CONNECTION("D4", 13, "CLK_GATE5", 2),
+    CONNECTION(VWINDOW, "CLK_GATE4", 1),
+    CONNECTION("D4", 13, "CLK_GATE4", 2),
 #endif
 
     
 #ifdef USE_CLK_GATES    
-    CONNECTION("CLK_GATE5", 3, "H2", 1),
+    CONNECTION("CLK_GATE4", 3, "H2", 1),
 #else
     CONNECTION("D4", 13, "H2", 1),
 #endif
@@ -1310,6 +1315,7 @@ CIRCUIT_LAYOUT( stuntcycle ) =
     CONNECTION("J1", 7, "HF1", 23),
     CONNECTION("J1", 12, "HF1", 22),
     CONNECTION("J1", 9, "HF1", 21),
+    CONNECTION(VCC, "HF1", 18),
 
     // Speed hack
 #ifdef USE_CLK_GATES

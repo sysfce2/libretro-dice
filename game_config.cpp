@@ -34,6 +34,12 @@ GameConfig::GameConfig(const CircuitDesc* desc, const char* name)
                 append(d->state, d->name);
                 has_config = true;
             }
+            else if(desc->u.instance.chip == chip_DIPSWITCH_4SPST)
+            {
+                Dipswitch4SP4TDesc* d = (Dipswitch4SP4TDesc*)desc->u.instance.custom_data;
+                append(d->state, d->name);
+                has_config = true;
+            }
             else if(desc->u.instance.chip == chip_POT_555_ASTABLE)
             {
                 PotentimeterAstable555Desc* d = (PotentimeterAstable555Desc*)desc->u.instance.custom_data;
@@ -50,6 +56,6 @@ GameConfig::GameConfig(const CircuitDesc* desc, const char* name)
 
         desc++;
     }
-    
+
     if(has_config) load();
 }

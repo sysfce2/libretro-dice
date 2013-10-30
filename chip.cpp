@@ -10,9 +10,10 @@
 
 #ifdef DEBUG
 //#define debug_printf(args...) printf(args)
-#define DEBUG_START_TIME (0.000e12)
-//#define debug_printf(args...) do { if(circuit->global_time > DEBUG_START_TIME ) printf(args); }while(0)
-#define debug_printf(args...) do { if(this && circuit && circuit->chips.size() > 187 && circuit->chips[187] && (this == circuit->chips[187] || this == circuit->chips[187]->input_links[0].chip) /*->input_links[0].chip*/) printf(args); }while(0)
+//#define debug_printf(args...) do { printf(args); fflush(stdout); } while(0)
+#define DEBUG_START_TIME (5268305775720)
+#define debug_printf(args...) do { if(circuit->global_time > DEBUG_START_TIME ) printf(args); }while(0)
+//#define debug_printf(args...) do { if(this && circuit && circuit->chips.size() > 187 && circuit->chips[187] && (this == circuit->chips[187] || this == circuit->chips[187]->input_links[0].chip) /*->input_links[0].chip*/) printf(args); }while(0)
 //#define debug_printf(args...)
 #else
 #define debug_printf(args...)
@@ -56,10 +57,12 @@ void Chip::initialize()
 	}
 }
 
-Chip::Chip(Circuit* cir, ChipDesc* desc, void* custom) : 
-	circuit(cir), custom_data(custom), inputs(0), output(0), event_mask(~0), prev_output_mask(0), deactive_inputs(0), optimization_disabled(false),
+Chip::Chip(int QUEUE_SIZE, int SUBCYCLE_SIZE, Circuit* cir, ChipDesc* desc, void* custom) : Cycle(QUEUE_SIZE, SUBCYCLE_SIZE),
+	circuit(cir), custom_data(custom), inputs(0), output(0), event_mask(~0), prev_output_mask(0), /*deactive_inputs(0),*/ optimization_disabled(false),
     pending_event(0), state(PASSIVE), /*input_event_type(0),*/ sleep_time(0), current_cycle(this), last_output_event(0), visited(false), 
-    total_event_count(0), activation_count(0), loop_count{{0}}
+    total_event_count(0), activation_count(0), loop_count{{0}}, analog_output(0.0),
+    input_events(QUEUE_SIZE), input_event_end_time(QUEUE_SIZE), first_input_event(QUEUE_SIZE), first_input_table_pos(QUEUE_SIZE),
+    sub_cycles(SUBCYCLE_SIZE, nullptr)
 {
     if(desc->logic_func == NULL && desc->custom_logic == NULL)
     {
@@ -113,7 +116,7 @@ Chip::Chip(Circuit* cir, ChipDesc* desc, void* custom) :
 		memset(lut, 0, sizeof(uint32_t)*(1 << (lut_size-5)));
 	}
 
-    input_event_table.resize(1 << lut_size);
+    //input_event_table.resize(1 << lut_size);
 
 	// Fill the LUT
 	for(int i = 0; i < (1 << lut_size); i++)
@@ -233,7 +236,7 @@ void Chip::connect(Chip* chip, ChipDesc* desc, uint8_t pin)
             else
             {
                 output_links.push_back(ChipLink(chip, 1 << i));
-                active_outputs |= (1 << x);
+                active_outputs |= (1ull << x);
             }
 
             // Add event bit to mask if this is an event pin
@@ -242,18 +245,53 @@ void Chip::connect(Chip* chip, ChipDesc* desc, uint8_t pin)
                     output_links[x].mask |= (1 << (chip->input_links.size() + j));
 
             // Don't connect deoptimizer to input
-            if(custom_update != deoptimize)
-                chip->input_links[i] = ChipLink(this, 1 << x);
+            if(type != CUSTOM_CHIP || custom_update != deoptimize)
+                chip->input_links[i] = ChipLink(this, 1ull << x);
 
             return;
         }
 }
 
+int Chip::get_next_output(uint64_t time)
+{
+#ifdef DEBUG
+    debug_printf("get next output c:%p t:%lld\n", this, time);
+    if(circuit->global_time > DEBUG_START_TIME )
+        print_output_events();
+#endif
+    
+    current_output_event = output_events.begin();
+    Cycle* c = this;
 
+    // TODO: Always assumes next event is second event in lowest subcycle? Is this correct???
+    if(output_events.empty()) return output ^ 1;
+    
+    while(c->current_output_event != c->output_events.end() && c->output_events[c->current_output_event].time < time)
+    {
+        Event& e = c->output_events[c->current_output_event];
+
+        if(e.type == 1 && e.time + c->cycle_duration > time)
+        {
+            c = e.sub_cycle;
+            c->current_output_event = c->output_events.begin();
+        }
+        else c->current_output_event++;
+    }
+
+    if(c->current_output_event == c->output_events.end()) return output ^ 1;
+
+    while(c->output_events[c->current_output_event].type == 1)
+    {
+        c = c->output_events[c->current_output_event].sub_cycle;
+        c->current_output_event = c->output_events.begin();
+    }
+
+    return c->output_events[c->current_output_event].state;
+}
 
 void Chip::wake_up()
 {
-    debug_printf("waking up %x\n", this);
+    debug_printf("waking up %p\n", this);
 
     state = ACTIVE;
 
@@ -270,7 +308,7 @@ void Chip::wake_up()
         current_cycle->activation_time += cycle_time*sleep_cycles; // TODO: is this correct?
     }
     
-    int act_out = current_cycle->active_outputs;
+    uint64_t act_out = current_cycle->active_outputs;
 
     while(global_time - time + delay >= current_cycle->end_time) // TODO: > or >= ?
     {
@@ -303,11 +341,13 @@ void Chip::wake_up()
     pending_event = circuit->queue_push(this, delay - time);
     current_cycle = current_cycle->next_output_cycle(global_time - time + delay); // TODO: is parameter correct?
     
-    for(int m = ~act_out & current_cycle->active_outputs; m;)
+    debug_printf("chip:%p curr:%p a1:%llx a2:%llx\n", this, current_cycle, act_out, current_cycle->active_outputs);
+
+    for(uint64_t m = ~act_out & current_cycle->active_outputs; m;)
     {
-        int i = Chip::next_bit(m);
+        int i = Chip::next_bit64(m);
         output_links[i].chip->deactivate_outputs();
-        m &= ~(1 << i);
+        m &= ~(1ull << i);
     }
 }
 
@@ -321,7 +361,7 @@ void Chip::update_inputs(uint32_t mask)
     
     const uint64_t global_time = circuit->global_time;
 
-    debug_printf("UPDATE INPUTS: chip: %x mask: %d inp: %d t: %lld\n", this, mask, inputs, circuit->global_time);
+    //debug_printf("UPDATE INPUTS: chip: %x mask: %d inp: %d t: %lld\n", this, mask, inputs, circuit->global_time);
 
     if(type == CUSTOM_CHIP)
 	{
@@ -358,6 +398,7 @@ void Chip::update_inputs(uint32_t mask)
 
     // Make sure input chip is not ahead of us
     Chip* input_chip = input_links[next_bit(mask)].chip;
+
     //if(input_chip->state == PASSIVE)
     if(!input_chip->input_events.empty())
     {
@@ -444,21 +485,44 @@ void Chip::update_inputs(uint32_t mask)
     }
     else if(pending_event && new_out == output)
     {
-        debug_printf("remove_event: t:%lld %x %lld\n", global_time,  this, output_events.back().time);
-        
-        pending_event = 0;
-        inputs ^= prev_output_mask;
-        
-        // TODO: Check allocated_sub_cycles of last event? (Should not have any though)
+        /*if(pending_event == global_time) // Pending event for current time. Run event now?
+        {
+            update_output();
 
-        if(!output_events.empty()) // TODO: !empty check still needed?
-            output_events.pop_back();
+            // Now push new event
+            pending_event = circuit->queue_push(this, delay[output]);
+            inputs ^= prev_output_mask;
+
+            if(output_events.full())
+            {
+                if(output_events.front().type)
+                    allocated_sub_cycles.deallocate(output_events.front().sub_cycle->allocated_sub_cycles);
+                    //allocated_sub_cycles &= ~output_events.front().sub_cycle->allocated_sub_cycles;
+            }
+
+            output_events.push_back(Event(global_time + delay[output], new_out));
+
+            debug_printf("new_event: t:%lld %x %lld\n", global_time, this, output_events.back().time);
+        }       
+        else*/
+        {
+            debug_printf("remove_event: t:%lld %x %lld\n", global_time,  this, output_events.back().time);
+        
+            pending_event = 0;
+            inputs ^= prev_output_mask;
+        
+            // TODO: Check allocated_sub_cycles of last event? (Should not have any though)
+
+            if(!output_events.empty()) // TODO: !empty check still needed?
+                output_events.pop_back();
+        }
     }
 
     inputs &= event_mask;
 
-    //first_input_event = input_events.begin();
-    first_input_event = input_event_table[inputs].begin();
+    if(inputs >= input_event_table.size()) input_event_table.resize(inputs+1, cirque<uint16_t>(first_output_event.getQueueSize()));
+
+    first_input_table_pos = input_event_table[inputs].begin();
     first_input_mask = active_inputs = (1 << input_links.size()) - 1;
 
     // TODO: use empty check? sort of not needed
@@ -478,7 +542,7 @@ void Chip::update_inputs(uint32_t mask)
         input_event_table[input_events.front().state].pop_front();
 
     //input_event_type &= ~(1ull << input_events.end());
-    input_event_table[inputs].push_back(input_events.end());
+    input_event_table[inputs].push_back(input_events.end().getRawIndex());
     input_events.push_back(Event(global_time, inputs));
     
     /*deactive_inputs = deactivation_table[inputs];
@@ -534,11 +598,11 @@ void Chip::update_inputs_simple(Chip* chip, int mask)
         chip->pending_event = chip->circuit->queue_push(chip, chip->delay[chip->output]);
         chip->inputs ^= chip->prev_output_mask;
 
-        debug_printf("new_event: %p %lld\n", chip, chip->pending_event);
+        //debug_printf("new_event: %p %lld\n", chip, chip->pending_event);
     }
     else if(chip->pending_event && new_out == chip->output)
 	{
-		debug_printf("remove_event: %p %lld\n", chip, pending_event);
+		//debug_printf("remove_event: %p %lld\n", chip, chip->pending_event);
         
         chip->pending_event = 0;
         chip->inputs ^= chip->prev_output_mask;
@@ -564,7 +628,7 @@ void Chip::update_output()
 
         //print_output_events();
 
-        int act_out = current_cycle->active_outputs;
+        uint64_t act_out = current_cycle->active_outputs;
         
         // TODO: Use simplified & faster version of wake_up()
 #if 0
@@ -598,11 +662,11 @@ void Chip::update_output()
         
         last_output_event = global_time; // TODO: FIX!
 #endif
-        for(int m = ~act_out & current_cycle->active_outputs; m;)
+        for(uint64_t m = ~act_out & current_cycle->active_outputs; m;)
         {
-            int i = Chip::next_bit(m);
+            int i = Chip::next_bit64(m);
             output_links[i].chip->deactivate_outputs();
-            m &= ~(1 << i);
+            m &= ~(1ull << i);
         }
 
         debug_printf("Was asleep, out:%d, pend:%lld\n", output, pending_event);
@@ -614,12 +678,12 @@ void Chip::update_output()
 
     // Don't just iterate through this the normal way -
     // active_outputs can be modified through update_inputs().
-    for(int mask = ~0; current_cycle->active_outputs & mask;)
+    for(uint64_t mask = ~0ull; current_cycle->active_outputs & mask;)
     {
-        int i = Chip::next_bit(current_cycle->active_outputs & mask);
+        int i = Chip::next_bit64(current_cycle->active_outputs & mask);
         ChipLink* link = &output_links[i];
         link->chip->update_inputs(link->mask);
-        mask &= ~(1 << i);
+        mask &= ~(1ull << i);
     }
 
 	output ^= 1;
@@ -655,13 +719,20 @@ void Chip::update_output()
                 delay = current_cycle->parent_cycle->next_output_event_delay() - (global_time - current_cycle->activation_time);
             
             // Deactivate all outputs only disconnected from sub-cycle
-            for(int m = ~current_cycle->active_outputs & current_cycle->parent_cycle->active_outputs; m;)
+            for(uint64_t m = ~current_cycle->active_outputs & current_cycle->parent_cycle->active_outputs; m;)
             {
-                int i = Chip::next_bit(m);
+                int i = Chip::next_bit64(m);
                 output_links[i].chip->deactivate_outputs();
-                m &= ~(1 << i);
+                m &= ~(1ull << i);
             }
             
+            // May have been deactivated above?
+            if(state != ACTIVE) 
+            {
+                debug_printf("DEACT %p\n", this);
+                return;
+            }
+
             current_cycle = current_cycle->parent_cycle;
         }
 
@@ -675,9 +746,10 @@ void Chip::update_output()
 
 uint64_t Chip::activation_check(uint64_t min_time, uint64_t max_time)
 {
+#ifdef DEBUG
     debug_printf("activation check new: %p in:%d min:%lld max:%lld\n", this, inputs, min_time, max_time);
-    
-    //print_input_events();
+    print_input_events();
+#endif
 
     visited = true;      
     //int active_inputs = (1 << input_links.size()) - 1;
@@ -686,7 +758,7 @@ uint64_t Chip::activation_check(uint64_t min_time, uint64_t max_time)
     
     int curr_loop_count = 0;
 
-    const cirque<uint8_t>& input_event_list = input_event_table[inputs];
+    const cirque<uint16_t>& input_event_list = input_event_table[inputs];
 
 #if 0
     // Update last input event from deactive inputs
@@ -709,15 +781,16 @@ uint64_t Chip::activation_check(uint64_t min_time, uint64_t max_time)
 
     //for(cirque<uint64_t>::index i = input_events.begin() + (input_events.size() & 1); i != input_events.end(); i += 2)//++i)
     //for(cirque<Event, 64>::index i = input_events.begin(); i != input_events.end(); i++)
-    //for(cirque<Event>::index i = first_input_event; i != input_events.end(); i++, first_input_event++)
+    //for(cirque<Event>::index i = first_input_table_pos; i != input_events.end(); i++, first_input_table_pos++)
     //for(cirque<uint8_t>::index x = input_event_list.begin(); x != input_event_list.end(); x++)
-    for(cirque<uint8_t>::index x = first_input_event; x != input_event_list.end(); x++, first_input_event++)
+    for(cirque<uint16_t>::index x = first_input_table_pos; x != input_event_list.end(); x++, first_input_table_pos++)
     {
         //if(curr_loop_count++ >= 64) break;
         
         loop_count[0]++;
 
-        cirque<Event>::index i = input_event_list[x];
+        //cirque<Event>::index i = input_event_list[x];
+        cirque<Event>::index i = x.makeIndex(input_event_list[x]);
 
         //if(global_time < next_check_time[i]) continue;
 
@@ -729,14 +802,14 @@ uint64_t Chip::activation_check(uint64_t min_time, uint64_t max_time)
 
         if(input_events[i].type) // sub cycle
         {
-            debug_printf("subcycle, in:%d, state:%d t:%lld end:%lld\n", inputs, input_events[i].state, input_events[i].time, input_event_end_time[i]);
+            //debug_printf("subcycle, in:%d, state:%d t:%lld end:%lld\n", inputs, input_events[i].state, input_events[i].time, input_event_end_time[i]);
             start_time = input_events[i].time;
             end_time = input_event_end_time[i];
             //end_time = (cirque<Event>::index(i+1) != input_events.end()) ? input_events[i+1].time : global_time;
         }
         else
         {
-            debug_printf("cycle, in:%d, state:%d t:%lld\n", inputs, input_events[i].state, input_events[i].time);
+            //debug_printf("cycle, in:%d, state:%d t:%lld\n", inputs, input_events[i].state, input_events[i].time);
 
             start_time = input_events[i].time;
             end_time = (cirque<Event>::index(i+1) != input_events.end()) ? input_events[i+1].time : global_time;
@@ -765,7 +838,7 @@ uint64_t Chip::activation_check(uint64_t min_time, uint64_t max_time)
                 max = max_time;
         }*/
 
-        debug_printf("min:%lld max:%lld\n", min, max);
+        //debug_printf("min:%lld max:%lld\n", min, max);
 
         if(min >= max_time) 
         {
@@ -844,7 +917,7 @@ uint64_t Chip::activation_check(uint64_t min_time, uint64_t max_time)
                         loop_count[7]++;
                         
                         min = min_save;
-                        
+
                         if(c->activation_time > min)
                             min = c->activation_time;
                         
@@ -852,11 +925,11 @@ uint64_t Chip::activation_check(uint64_t min_time, uint64_t max_time)
 
                         if(min >= max)
                         {
-                            debug_printf("act_check fail3: active chip %p, act:%lld, cyc:%lld\n", chip, c->activation_time, c->cycle_time);
+                            debug_printf("act_check fail3: active chip %p, cyc:%p, act:%lld, cyc:%lld\n", chip, c, c->activation_time, c->cycle_time);
                             loop_count[6]++;
                             continue;
                         }
-                        
+
                         activation_time = min + ((global_time - min) % c->cycle_time);
                         
                         if(activation_time < act_min) act_min = activation_time;
@@ -894,9 +967,9 @@ uint64_t Chip::activation_check(uint64_t min_time, uint64_t max_time)
 
                 if((first_input_mask >> j) & 1)
                 {
-                    //chip->first_input_event = chip->input_events.begin();
-                    chip->first_input_event = chip->input_event_table[chip->inputs].begin();
-                    //chip->first_input_event = chip->input_events.binary_search(chip->input_events.begin(), chip->input_events.end(), min);
+                    //chip->first_input_table_pos = chip->input_events.begin();
+                    chip->first_input_table_pos = chip->input_event_table[chip->inputs].begin();
+                    //chip->first_input_table_pos = chip->input_events.binary_search(chip->input_events.begin(), chip->input_events.end(), min);
                     chip->first_input_mask = chip->active_inputs = (1 << chip->input_links.size()) - 1;
                     first_input_mask &= ~(1 << j);
                 }
@@ -940,6 +1013,7 @@ uint64_t Chip::activation_check(uint64_t min_time, uint64_t max_time)
         debug_printf("chip:%p cyc: %lld del:%lld %lld\n", this, global_time - activation_time, delay[0], delay[1]);
         if(global_time - activation_time < delay[0] + delay[1]) { debug_printf("CYC_LESS\n"); continue; }
 
+#if 0
         // Inputs match, perform output check
         current_output_event = output_events.begin();
 
@@ -959,7 +1033,7 @@ uint64_t Chip::activation_check(uint64_t min_time, uint64_t max_time)
             else
                 next_out = output_events[current_output_event].state;
             
-            debug_printf("output check: curr:%d next:%d out:%d pend:%lld time:%lld time2:%lld\n", int(current_output_event), next_out, output, pending_event, output_events[current_output_event].time, output_events[current_output_event].time + global_time - activation_time);
+            debug_printf("output check: curr:%d next:%d out:%d pend:%lld time:%lld time2:%lld\n", int(current_output_event.getRawIndex()), next_out, output, pending_event, output_events[current_output_event].time, output_events[current_output_event].time + global_time - activation_time);
 
             if(next_out == output) continue;
         
@@ -970,6 +1044,20 @@ uint64_t Chip::activation_check(uint64_t min_time, uint64_t max_time)
             //if(cycle_time >= output_events[first_output_event] + global_time - activation_time)
             //    continue;
         }
+#endif
+        if(get_next_output(activation_time) == output) 
+        {
+            debug_printf("act_check fail5: chip %p, act:%lld out:%d\n", this, activation_time, output);
+            continue;
+        }
+
+         // Check that pending event matches first event in cycle
+         if(pending_event && pending_event != current_cycle->output_events[current_cycle->current_output_event].time + global_time - activation_time) continue;
+
+         // TODO: Check cases where propagation delays have been modified, i.e., 555 mono timers?
+         //if(cycle_time >= output_events[first_output_event] + global_time - activation_time)
+         //    continue;
+
 
         debug_printf("activation check new: %p result:%d\n", this, (int)true);
 
@@ -979,7 +1067,7 @@ uint64_t Chip::activation_check(uint64_t min_time, uint64_t max_time)
         return activation_time;
     }
 
-    debug_printf("activation check new: %p result:%d %lld\n", this, (int)false, max_time);
+    //debug_printf("activation check new: %p result:%d %lld\n", this, (int)false, max_time);
     
     visited = false;
     //if(input_events.size() && first_input_event == input_events.end()) return global_time;
@@ -1026,6 +1114,12 @@ void Chip::activate_inputs()
     }
     deactive_inputs = 0;
 #endif
+    
+#ifdef DEBUG
+    cirque<Event>::index diff = input_events.end() - first_input_event.getRawIndex();
+    if(diff.getRawIndex() > max_cycle_length)
+        max_cycle_length = diff.getRawIndex();
+#endif
 
     for(int i = 0; i < input_links.size(); i++)
     {
@@ -1044,6 +1138,7 @@ void Chip::activate_inputs()
         }
     }
 
+#if 0
     // Scan output events for all events that occured during this time
     // TODO: Does this need to be done? Also done in activation_check
     current_output_event = output_events.begin();
@@ -1054,6 +1149,7 @@ void Chip::activate_inputs()
     {
         current_output_event++;
     }
+#endif
     first_output_event = current_output_event;
 
     if(first_output_event != output_events.end())
@@ -1072,10 +1168,13 @@ void Chip::activate_inputs()
 
         current_cycle = next_output_cycle(cycle_time + output_events[current_output_event].time);
 
-        //print_output_events();
+#ifdef DEBUG
+        if(circuit->global_time > DEBUG_START_TIME )
+            print_output_events();
+#endif
     }
 
-    debug_printf("first:%d end:%d\n", first_output_event,  output_events.end());
+    debug_printf("first:%d end:%d\n", (int)first_output_event.getRawIndex(), (int)output_events.end().getRawIndex());
 }
 
 
@@ -1137,29 +1236,43 @@ void Chip::deactivate_outputs()
 
     for(int i = 0; i < input_links.size(); i++)
     {
-        //for(Cycle* c = input_links[i].chip->current_cycle; c != activation_cycles[i]->parent_cycle; c = c->parent_cycle)
-        //    c->active_outputs |= input_links[i].mask;
-        
         for(Cycle* c = input_links[i].chip->current_cycle; c; c = c->parent_cycle)
             c->active_outputs |= input_links[i].mask;
-
+    }
+    for(int i = 0; i < input_links.size(); i++)
+    {
         if(input_links[i].chip->state == ASLEEP)
             input_links[i].chip->wake_up();
 
         inputs |= input_links[i].chip->output << i;
     }
+    /*for(int i = 0; i < input_links.size(); i++)
+    {
+        //for(Cycle* c = input_links[i].chip->current_cycle; c != activation_cycles[i]->parent_cycle; c = c->parent_cycle)
+        //    c->active_outputs |= input_links[i].mask;
+        
+        for(Cycle* c = input_links[i].chip->current_cycle; c; c = c->parent_cycle)
+        {
+            c->active_outputs |= input_links[i].mask;
+            debug_printf("cyc:%p act:%lld m:%lld\n", c, c->active_outputs, input_links[i].mask);
+        }
+
+        if(input_links[i].chip->state == ASLEEP)
+            input_links[i].chip->wake_up();
+
+        inputs |= input_links[i].chip->output << i;
+    }*/
     inputs &= event_mask;
 
     debug_printf("inputs_after:%d\n", inputs);
 
-
-    if(type == CUSTOM_CHIP || optimization_disabled)
+    if(type == CUSTOM_CHIP || optimization_disabled || input_events.empty())
     {
         // TODO: use iterator?
         for(int i = 0; i < output_links.size(); i++)
         {
             //if((output_links[i].chip->active_inputs & output_links[i].mask) && output_links[i].chip->event_count)
-            if(!(current_cycle->active_outputs & (1 << i)) && output_links[i].chip->state != PASSIVE) // output_links[i].chip->state != PASSIVE)
+            if(!(current_cycle->active_outputs & (1ull << i)) && output_links[i].chip->state != PASSIVE) // output_links[i].chip->state != PASSIVE)
             //if(output_links[i].chip->state != PASSIVE)
                 output_links[i].chip->deactivate_outputs();
         }       
@@ -1167,9 +1280,20 @@ void Chip::deactivate_outputs()
         return;
     }
 
+#ifdef DEBUG
     debug_printf("BEFORE:\n");
-    //print_output_events();
-    //print_input_events();
+    if(circuit->global_time > DEBUG_START_TIME )
+    {
+        print_output_events();
+        print_input_events();
+    }
+#endif
+
+#ifdef DEBUG
+    cirque<Event>::index diff = input_events.end() - first_input_event.getRawIndex();
+    if(diff.getRawIndex() > max_cycle_length)
+        max_cycle_length = diff.getRawIndex();
+#endif
 
     if(!input_events[first_input_event].type)
     //if(!(input_event_type & (1ull << first_input_event)))
@@ -1185,7 +1309,7 @@ void Chip::deactivate_outputs()
         input_event_table[input_events.back().state].pop_back();
         input_events.pop_back();
     }
-    
+
     // Save 1 full cycle of input events?
    /* cirque<Event>::index idx = input_events.end() - 1;
     input_event_type |= (1ull << idx);
@@ -1193,7 +1317,9 @@ void Chip::deactivate_outputs()
 
     //input_event_type &= ~(1ull << input_events.end());
     
-    input_event_table[inputs].push_back(input_events.end());
+    if(inputs >= input_event_table.size()) input_event_table.resize(inputs+1, cirque<uint16_t>(first_output_event.getQueueSize()));
+
+    input_event_table[inputs].push_back(input_events.end().getRawIndex());
     input_events.push_back(Event(circuit->global_time, inputs));
 
     //while(~allocated_sub_cycles == 0)
@@ -1215,7 +1341,7 @@ void Chip::deactivate_outputs()
             for(int i = 0; i < input_event_table.size(); i++) input_event_table[i].clear();
 
             //allocated_sub_cycles = 0;
-            allocated_sub_cycles = SubcycleAllocator<>();
+            allocated_sub_cycles.clear();
             //input_event_type = 0;
             //output_event_type = 0;
             cycle_time = 0;
@@ -1259,12 +1385,22 @@ void Chip::deactivate_outputs()
         //allocated_sub_cycles |= 1ull << cycle_num;
         int cycle_num = allocated_sub_cycles.allocate();
         
-        Cycle& cycle = sub_cycles[cycle_num];
+#ifdef DEBUG
+        if(cycle_num > max_subcycle_length)
+            max_subcycle_length = cycle_num;
+#endif
+
+        if(sub_cycles[cycle_num] == NULL)
+            sub_cycles[cycle_num] = new Cycle(first_output_event.getQueueSize(), allocated_sub_cycles.size());
+
+        //Cycle& cycle = sub_cycles[cycle_num];
+        Cycle& cycle = *sub_cycles[cycle_num];
 
         cycle.output_events.clear();
         //cycle.output_event_type = 0;
         //cycle.allocated_sub_cycles = 1ull << cycle_num;
-        cycle.allocated_sub_cycles = SubcycleAllocator<>(cycle_num);
+        cycle.allocated_sub_cycles.clear();
+        cycle.allocated_sub_cycles.set(cycle_num);
         cycle.parent_cycle = this;
     
         for(cirque<Event>::index i = first_output_event; i != output_events.end(); i++)
@@ -1288,27 +1424,31 @@ void Chip::deactivate_outputs()
         output_events[first_output_event].type = 1;
         output_events[first_output_event].sub_cycle = &cycle;
         output_events.erase_back(first_output_event);
-        debug_printf("chip:%p first:%d end:%d\n", this, first_output_event, int(output_events.end()));
+        debug_printf("chip:%p first:%d end:%d\n", this, (int)first_output_event.getRawIndex(), int(output_events.end().getRawIndex()));
     }
 
     // TODO: Clear all output events occuring before first input event?
 
-
+#ifdef DEBUG
     debug_printf("AFTER:\n");
-    //print_output_events();
-    //print_input_events();
+    if(circuit->global_time > DEBUG_START_TIME )
+    {
+        print_output_events();
+        print_input_events();
+    }
+#endif
 
     // TODO: use iterator?
     for(int i = 0; i < output_links.size(); i++)
     {
         //if((output_links[i].chip->active_inputs & output_links[i].mask) && output_links[i].chip->event_count)
-        if(!(current_cycle->active_outputs & (1 << i)) && output_links[i].chip->state != PASSIVE) // output_links[i].chip->state != PASSIVE)
+        if(!(current_cycle->active_outputs & (1ull << i)) && output_links[i].chip->state != PASSIVE) // output_links[i].chip->state != PASSIVE)
         //if(output_links[i].chip->state != PASSIVE)
             output_links[i].chip->deactivate_outputs();
     }
 
     current_cycle = this;
-    active_outputs = (1 << output_links.size()) - 1;
+    active_outputs = (1ull << output_links.size()) - 1;
 
     // If there is a pending event, add to output events
     if(pending_event && pending_event != circuit->global_time) // TODO: is skip when pending event == global_time accurate??? 

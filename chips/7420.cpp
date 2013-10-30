@@ -41,3 +41,20 @@ CHIP_DESC( 7420 ) =
 	CHIP_DESC_END
 };
 
+
+// TODO: Propagation delay is (3, 3) or (4.5, 5) depending on load capacitance?
+CHIP_DESC( 74S20 ) =
+{
+	CHIP_START( 7420A )
+        INPUT_PINS( 1, 2, 4, 5 )
+        OUTPUT_PIN( 6 )
+        OUTPUT_DELAY_NS( 3.0, 3.0 ),
+
+	CHIP_START( 7420B )
+        INPUT_PINS( 9, 10, 12, 13 )
+        OUTPUT_PIN( 8 )
+        OUTPUT_DELAY_NS( 3.0, 3.0 ),
+
+	CHIP_DESC_END
+};
+

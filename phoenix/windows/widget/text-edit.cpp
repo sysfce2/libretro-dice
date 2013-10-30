@@ -1,3 +1,5 @@
+namespace phoenix {
+
 void pTextEdit::setCursorPosition(unsigned position) {
   if(position == ~0) position >>= 1;  //Edit_SetSel takes signed type
   Edit_SetSel(hwnd, position, position);
@@ -8,7 +10,7 @@ void pTextEdit::setEditable(bool editable) {
   SendMessage(hwnd, EM_SETREADONLY, editable == false, (LPARAM)0);
 }
 
-void pTextEdit::setText(const string &text) {
+void pTextEdit::setText(string text) {
   locked = true;
   string output = text;
   output.replace("\r", "");
@@ -55,4 +57,6 @@ void pTextEdit::destructor() {
 void pTextEdit::orphan() {
   destructor();
   constructor();
+}
+
 }

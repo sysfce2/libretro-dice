@@ -1,3 +1,5 @@
+namespace phoenix {
+
 bool pRadioItem::checked() {
   return radioItem.state.checked;
 }
@@ -11,10 +13,10 @@ void pRadioItem::setChecked() {
   }
 }
 
-void pRadioItem::setGroup(const set<RadioItem&> &group) {
+void pRadioItem::setGroup(const group<RadioItem>& group) {
 }
 
-void pRadioItem::setText(const string &text) {
+void pRadioItem::setText(string text) {
   if(parentWindow) parentWindow->p.updateMenu();
 }
 
@@ -23,4 +25,6 @@ void pRadioItem::constructor() {
 
 void pRadioItem::destructor() {
   if(parentMenu) parentMenu->remove(radioItem);
+}
+
 }

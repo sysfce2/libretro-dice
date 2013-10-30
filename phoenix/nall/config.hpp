@@ -48,7 +48,7 @@ namespace nall {
           case boolean_t:  *(bool*)data = (s == "true");     break;
           case signed_t:   *(signed*)data = integer(s);      break;
           case unsigned_t: *(unsigned*)data = decimal(s);    break;
-          case double_t:   *(double*)data = fp(s);           break;
+          case double_t:   *(double*)data = real(s);         break;
           case string_t:   s.trim("\""); *(string*)data = s; break;
         }
       }
@@ -74,8 +74,8 @@ namespace nall {
     }
 
     inline virtual bool load(const string &filename) {
-      string data;
-      if(data.readfile(filename) == true) {
+      string data = string::read(filename);
+      if(!data.empty()) {
         data.replace("\r", "");
         lstring line;
         line.split("\n", data);

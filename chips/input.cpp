@@ -35,6 +35,35 @@ CHIP_DESC( PADDLE2_HORIZONTAL_INPUT ) =
 	CHIP_DESC_END
 };
 
+CHIP_DESC( PADDLE3_HORIZONTAL_INPUT ) = 
+{
+	CUSTOM_CHIP_START(&clock)
+        OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
+        OUTPUT_PIN( i1 ),
+    
+    ChipDesc((&AnalogInputDesc<2, true>::analog_input))
+        INPUT_PINS( i1 )
+        OUTPUT_PIN( i3 ),
+
+	CHIP_DESC_END
+};
+
+CHIP_DESC( PADDLE4_HORIZONTAL_INPUT ) = 
+{
+	CUSTOM_CHIP_START(&clock)
+        OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
+        OUTPUT_PIN( i1 ),
+    
+    ChipDesc(&AnalogInputDesc<3, true>::analog_input)
+        INPUT_PINS( i1 )
+        OUTPUT_PIN( i3 ),
+
+	CHIP_DESC_END
+};
+
+
+
+
 CHIP_DESC( PADDLE1_VERTICAL_INPUT ) = 
 {
 	CUSTOM_CHIP_START(&clock)
@@ -88,7 +117,9 @@ CHIP_DESC( PADDLE4_VERTICAL_INPUT ) =
 };
 
 
-static const double ANALOG_THRESHOLD = 0.125; // Joystick dead zone, TODO: make configurable?
+
+static const double ANALOG_THRESHOLD = 0.20; // Joystick dead zone, TODO: make configurable?
+static const double ANALOG_SCALE = 1.0 / (1.0 - ANALOG_THRESHOLD);
 
 template <unsigned PADDLE, bool HORIZONTAL>
 void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
@@ -128,15 +159,15 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
             case KeyAssignment::JOYSTICK_BUTTON:
                 delta -= circuit->input.getJoystickButton(settings.left.joystick, settings.left.button) * dt * sensitivity;
                 break;
-            case KeyAssignment::JOYSTICK_AXIS:
+            /*case KeyAssignment::JOYSTICK_AXIS:
             {
                 double val = circuit->input.getJoystickAxis(settings.left.joystick, settings.left.button >> 1) / 32768.0;
                 if(val > ANALOG_THRESHOLD && (settings.left.button & 1))
-                    delta -= val * dt * sensitivity;
+                    delta -= (val - ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
                 else if(val < -ANALOG_THRESHOLD && !(settings.left.button & 1))
-                    delta += val * dt * sensitivity;
+                    delta += (val + ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
                 break;
-            }
+            }*/
             default: break;
         }
         switch(settings.right.type)
@@ -147,15 +178,15 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
             case KeyAssignment::JOYSTICK_BUTTON:
                 delta += circuit->input.getJoystickButton(settings.right.joystick, settings.right.button) * dt * sensitivity;
                 break;
-            case KeyAssignment::JOYSTICK_AXIS:
+            /*case KeyAssignment::JOYSTICK_AXIS:
             {
                 double val = circuit->input.getJoystickAxis(settings.right.joystick, settings.right.button >> 1) / 32768.0;
                 if(val > ANALOG_THRESHOLD && (settings.right.button & 1))
-                    delta += val * dt * sensitivity;
+                    delta += (val - ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
                 else if(val < -ANALOG_THRESHOLD && !(settings.right.button & 1))
-                    delta -= val * dt * sensitivity;
+                    delta -= (val + ANALOG_THRESHOLD) * dt * sensitivity;
                 break;
-            }
+            }*/
             default: break;
         }
     }
@@ -172,15 +203,15 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
             case KeyAssignment::JOYSTICK_BUTTON:
                 delta += circuit->input.getJoystickButton(settings.down.joystick, settings.down.button) * dt *sensitivity;
                 break;
-            case KeyAssignment::JOYSTICK_AXIS:
+            /*case KeyAssignment::JOYSTICK_AXIS:
             {
                 double val = circuit->input.getJoystickAxis(settings.down.joystick, settings.down.button >> 1) / 32768.0;
                 if(val > ANALOG_THRESHOLD && (settings.down.button & 1))
-                    delta += val * dt * sensitivity;
+                    delta += (val - ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
                 else if(val < -ANALOG_THRESHOLD && !(settings.down.button & 1))
-                    delta -= val * dt * sensitivity;
+                    delta -= (val + ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
                 break;
-            }
+            }*/
             default: break;
         }
         switch(settings.up.type)
@@ -191,17 +222,31 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
             case KeyAssignment::JOYSTICK_BUTTON:
                 delta -= circuit->input.getJoystickButton(settings.up.joystick, settings.up.button) * dt * sensitivity;
                 break;
-            case KeyAssignment::JOYSTICK_AXIS:
+            /*case KeyAssignment::JOYSTICK_AXIS:
             {
                 double val = circuit->input.getJoystickAxis(settings.up.joystick, settings.up.button >> 1) / 32768.0;
                 if(val > ANALOG_THRESHOLD && (settings.up.button & 1))
-                    delta -= val * dt * sensitivity;
+                    delta -= (val - ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
                 else if(val < -ANALOG_THRESHOLD && !(settings.up.button & 1))
-                    delta += val * dt * sensitivity;
+                    delta += (val + ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
                 break;
-            }
+            }*/
             default: break;
         }
+    }
+
+    if(settings.use_joystick && settings.joystick_mode == Settings::Input::Paddle::JOYSTICK_RELATIVE)
+    {
+        double dt = (INPUT_POLL_RATE / Circuit::timescale) / 1000000000.0;
+        double sensitivity = double(settings.joystick_sensitivity) * fabs(desc->max_val - desc->min_val) / 100000.0;
+
+        Settings::Input::Paddle::JoystickAxis joystick = HORIZONTAL ? settings.joy_x_axis : settings.joy_y_axis;
+
+        double val = circuit->input.getJoystickAxis(joystick.joystick, joystick.axis) / 32768.0;
+        if(val > ANALOG_THRESHOLD)
+            delta += (val - ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
+        else if(val < -ANALOG_THRESHOLD)
+            delta += (val + ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
     }
 
     double prev_val = desc->current_val;
@@ -217,6 +262,21 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
         desc->current_val -= delta;
         if(desc->current_val < desc->max_val)      desc->current_val = desc->max_val;
         else if(desc->current_val > desc->min_val) desc->current_val = desc->min_val;
+    }
+
+    // Absolute Joystick - Overrides deltas
+    if(settings.use_joystick && settings.joystick_mode == Settings::Input::Paddle::JOYSTICK_ABSOLUTE)
+    {
+        double sensitivity = 0.25 + 0.00075 * (1000.0 - double(settings.joystick_sensitivity)); // Inverse scale from 0.25..1.0
+        Settings::Input::Paddle::JoystickAxis joystick = HORIZONTAL ? settings.joy_x_axis : settings.joy_y_axis;
+        double val = circuit->input.getJoystickAxis(joystick.joystick, joystick.axis) / (65536.0 * sensitivity) + 0.5; // 0..1
+        if(val < 0.0) val = 0.0;
+        else if(val > 1.0) val = 1.0;
+        
+        if(desc->max_val > desc->min_val)
+            desc->current_val = val * (desc->max_val - desc->min_val) + desc->min_val;
+        else
+            desc->current_val = (1.0 - val) * (desc->min_val - desc->max_val) + desc->max_val;
     }
 
     //if(desc->current_val != prev_val && desc->mono_555) // Update resistance value in 555
@@ -405,6 +465,167 @@ CHIP_DESC( BUTTONS2_INPUT ) =
 };
 
 
+
+
+
+template <unsigned WHEEL>
+void wheel_input(Chip* chip, int mask)
+{
+    Circuit* circuit = chip->circuit;
+    Settings::Input::Wheel& settings = circuit->settings.input.wheel[WHEEL];
+
+    WheelDesc<WHEEL>* wheel = (WheelDesc<WHEEL>*)chip->custom_data;
+    
+    static const double MAX_ANGLE = 15.0;
+
+    double delta = 0.0;
+    
+    if(settings.use_mouse)
+    {
+        double sensitivity = double(settings.mouse_sensitivity) / 1000.0;
+
+        if(settings.axis.axis == 0) // Using mouse x-axis
+            delta += circuit->input.getRelativeMouseX(settings.axis.mouse) * sensitivity;
+        else // Using mouse y-axis
+            delta += circuit->input.getRelativeMouseY(settings.axis.mouse) * sensitivity;
+    }
+
+    if(settings.use_keyboard)
+    {
+        double dt = (INPUT_POLL_RATE / Circuit::timescale) / 1000000000.0;
+        double sensitivity = double(settings.keyboard_sensitivity) / 1000.0; 
+
+        switch(settings.left.type)
+        {
+            case KeyAssignment::KEYBOARD:
+                delta -= circuit->input.getKeyboardState(settings.left.button) * dt * sensitivity;
+                break;
+            case KeyAssignment::JOYSTICK_BUTTON:
+                delta -= circuit->input.getJoystickButton(settings.left.joystick, settings.left.button) * dt * sensitivity;
+                break;
+            case KeyAssignment::JOYSTICK_AXIS:
+            {
+                double val = circuit->input.getJoystickAxis(settings.left.joystick, settings.left.button >> 1) / 32768.0;
+                if(val > ANALOG_THRESHOLD && (settings.left.button & 1))
+                    delta -= (val - ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
+                else if(val < -ANALOG_THRESHOLD && !(settings.left.button & 1))
+                    delta += (val + ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
+                break;
+            }
+            default: break;
+        }
+        switch(settings.right.type)
+        {
+            case KeyAssignment::KEYBOARD:
+                delta += circuit->input.getKeyboardState(settings.right.button) * dt * sensitivity;
+                break;
+            case KeyAssignment::JOYSTICK_BUTTON:
+                delta += circuit->input.getJoystickButton(settings.right.joystick, settings.right.button) * dt * sensitivity;
+                break;
+            case KeyAssignment::JOYSTICK_AXIS:
+            {
+                double val = circuit->input.getJoystickAxis(settings.right.joystick, settings.right.button >> 1) / 32768.0;
+                if(val > ANALOG_THRESHOLD && (settings.right.button & 1))
+                    delta += (val - ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
+                else if(val < -ANALOG_THRESHOLD && !(settings.right.button & 1))
+                    delta -= (val + ANALOG_THRESHOLD) * dt * sensitivity;
+                break;
+            }
+            default: break;
+        }
+    }
+        
+    if(delta > MAX_ANGLE)       delta = MAX_ANGLE;
+    else if(delta < -MAX_ANGLE) delta = -MAX_ANGLE;
+
+    delta /= -10.0;
+
+    for(int i = 0; i < 10; i++)
+    {
+        wheel->angle = fmod(wheel->angle + delta, 360.0);
+        if(wheel->angle < 0.0) wheel->angle += 360.0;
+
+        wheel->wheel_events[0].push_back(wheel->angle);
+        wheel->wheel_events[1].push_back(wheel->angle);
+    }
+}
+
+template <unsigned WHEEL, Wheel::OUTPUT output>
+void wheel_event_gen(Chip* chip, int mask)
+{
+    WheelDesc<WHEEL>* wheel = (WheelDesc<WHEEL>*)chip->custom_data;
+    cirque<double>& wheel_events = wheel->wheel_events[output-1];
+    
+    static const double ENCODER_ANGLE = 5.0;
+
+    if(wheel_events.empty()) return;
+
+    double angle = wheel_events.front();
+    wheel_events.pop_front();
+
+    int new_out;
+
+    if(output == Wheel::A)
+    {
+        new_out = fmod(angle, ENCODER_ANGLE) < ENCODER_ANGLE*0.5 ? 0 : 1;
+    }
+    else
+    {
+        double g = fmod(angle, ENCODER_ANGLE);
+        new_out = (g <  ENCODER_ANGLE*0.25 || g >= ENCODER_ANGLE*0.75) ? 0 : 1;
+    }
+    
+    if(new_out != chip->output)
+        chip->pending_event = chip->circuit->queue_push(chip, 0);
+}
+
+CHIP_DESC( WHEEL1_INPUT ) = 
+{
+	CUSTOM_CHIP_START(&clock)
+        OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
+        OUTPUT_PIN( i1 ),
+
+	CUSTOM_CHIP_START(&clock)
+        OUTPUT_DELAY_S( INPUT_POLL_RATE / 10.0, INPUT_POLL_RATE / 10.0 )
+        OUTPUT_PIN( i2 ),
+
+    ChipDesc(&wheel_input<0>)
+        INPUT_PINS( i1 ),
+
+    ChipDesc(&wheel_event_gen<0, Wheel::A>)
+        INPUT_PINS( i2 ) OUTPUT_PIN( Wheel::A ),
+
+    ChipDesc(&wheel_event_gen<0, Wheel::B>)
+        INPUT_PINS( i2 ) OUTPUT_PIN( Wheel::B ),
+
+	CHIP_DESC_END
+};
+
+CHIP_DESC( WHEEL2_INPUT ) = 
+{
+	CUSTOM_CHIP_START(&clock)
+        OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
+        OUTPUT_PIN( i1 ),
+    
+	CUSTOM_CHIP_START(&clock)
+        OUTPUT_DELAY_S( INPUT_POLL_RATE / 10.0, INPUT_POLL_RATE / 10.0 )
+        OUTPUT_PIN( i2 ),
+
+    ChipDesc(&wheel_input<1>)
+        INPUT_PINS( i1 ),
+
+    ChipDesc(&wheel_event_gen<1, Wheel::A>)
+        INPUT_PINS( i2 ) OUTPUT_PIN( Wheel::A ),
+
+    ChipDesc(&wheel_event_gen<1, Wheel::B>)
+        INPUT_PINS( i2 ) OUTPUT_PIN( Wheel::B ),
+
+	CHIP_DESC_END
+};
+
+
+
+
 template <unsigned THROTTLE>
 void ThrottleDesc<THROTTLE>::throttle_input(Chip* chip, int mask)
 {
@@ -454,7 +675,7 @@ CHIP_DESC( THROTTLE1_INPUT ) =
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i1 ),
     
-    ChipDesc((&ThrottleDesc<0>::throttle_input))
+    ChipDesc(&ThrottleDesc<0>::throttle_input)
         INPUT_PINS( i1 )
         OUTPUT_PIN( i3 ),
 
@@ -488,7 +709,7 @@ void Input::poll_input()
 {
     SDL_JoystickUpdate();
 
-    OS::processEvents();
+    Application::processEvents();
 
     ManyMouseEvent mouse_event;
     while (ManyMouse_PollEvent(&mouse_event))
@@ -560,6 +781,16 @@ bool Input::getJoystickButton(unsigned joystick, unsigned button)
 int16_t Input::getJoystickAxis(unsigned joystick, unsigned axis)
 {
     return SDL_JoystickGetAxis(joysticks[joystick], axis);
+}
+
+int Input::getNumJoysticks()
+{
+    return joysticks.size();
+}
+
+int Input::getNumJoystickAxes(int joystick)
+{
+    return SDL_JoystickNumAxes(joysticks[joystick]);
 }
 
 bool Input::getKeyPressed(const KeyAssignment& key_assignment)

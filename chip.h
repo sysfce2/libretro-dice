@@ -4,6 +4,7 @@
 #include <cstddef>
 #include <stdint.h>
 #include <vector>
+#include <array>
 #include "cirque.h"
 
 // TODO: remove
@@ -20,9 +21,9 @@ enum ChipState { ACTIVE = 0, PASSIVE, ASLEEP };
 struct ChipLink
 {
     Chip* chip;
-    uint32_t mask;
+    uint64_t mask;
 
-    ChipLink(Chip* c = NULL, uint32_t m = 0) : chip(c), mask(m) {}
+    ChipLink(Chip* c = NULL, uint64_t m = 0) : chip(c), mask(m) {}
 };
 
 struct Cycle;
@@ -103,16 +104,19 @@ public:
 
 };
 
-template <int N = 1> struct SubcycleAllocator
+struct SubcycleAllocator
 {
-    uint64_t bits[N];
+    uint64_t* bits;
+    int N;
 
-    SubcycleAllocator() : bits{{0}} { }
-    SubcycleAllocator(unsigned n) : bits{{0}} 
+    SubcycleAllocator(int SIZE) : N(SIZE >> 6)
     { 
-        bits[n >> 6] |= (1ull << (n & 63));
+        bits = new uint64_t[N]; 
+        memset(bits, 0, sizeof(uint64_t)*N);
     }
+    ~SubcycleAllocator() { delete[] bits; }
 
+    int size() const { return N << 6; }
     bool full() const
     {
         uint64_t result = bits[0];
@@ -141,13 +145,21 @@ template <int N = 1> struct SubcycleAllocator
     {
         for(int i = 0; i < N; i++) bits[i] |= a.bits[i];
     }
+    void clear()
+    {
+        for(int i = 0; i < N; i++) bits[i] = 0;
+    }
+    void set(int n)
+    {
+        bits[n >> 6] |= (1ull << (n & 63));
+    }
 };
 
 struct Cycle
 {
     Cycle* parent_cycle;
     //uint64_t allocated_sub_cycles; // or 128 bit?
-    SubcycleAllocator<> allocated_sub_cycles;
+    SubcycleAllocator allocated_sub_cycles;
 
     cirque<Event> output_events;
     //uint64_t output_event_type;
@@ -158,10 +170,12 @@ struct Cycle
     uint64_t cycle_time;
     uint64_t cycle_duration;
     uint64_t end_time;
-    int active_outputs;
+    uint64_t active_outputs;
 
-    Cycle() : parent_cycle(NULL), /*allocated_sub_cycles(0),*/ /*output_event_type(0),*/ activation_time(0), cycle_time(0), active_outputs(0), end_time(0), cycle_duration(0) { }
-
+    Cycle(int QUEUE_SIZE, int SUBCYCLE_SIZE) : parent_cycle(NULL), /*allocated_sub_cycles(0),*/ /*output_event_type(0),*/ activation_time(0), cycle_time(0), active_outputs(0), end_time(0), cycle_duration(0),
+        output_events(QUEUE_SIZE), first_output_event(QUEUE_SIZE), current_output_event(QUEUE_SIZE), allocated_sub_cycles(SUBCYCLE_SIZE)
+    { }
+        
     uint64_t next_output_event_delay()
     {
         if(current_output_event == first_output_event)
@@ -212,11 +226,11 @@ struct Cycle
 
             if(output_events[i].type) // Sub-cycle
             {
-                printf("i:%d t:%lld, sub-cycle\n", int(i), output_events[i].time);
+                printf("i:%d t:%lld, sub-cycle\n", int(i.getRawIndex()), output_events[i].time);
                 output_events[i].sub_cycle->print_output_events(level+1);
             }
             else
-                printf("i:%d t:%lld, state:%d\n", int(i), output_events[i].time, output_events[i].state);
+                printf("i:%d t:%lld, state:%d\n", int(i.getRawIndex()), output_events[i].time, output_events[i].state);
         }*/
     }
 };
@@ -230,6 +244,8 @@ class debug_var
 public:
     debug_var(uint64_t v = 0) : val(v) { }
     void operator++(int) { val++; }
+    void operator=(uint64_t x) { val = x; }
+    operator uint64_t() const { return val; } 
 };
 #else
 class debug_var
@@ -237,15 +253,56 @@ class debug_var
 public:
     debug_var(uint64_t v = 0) { }
     void operator++(int) { }
+    void operator=(uint64_t x) { }
+    operator uint64_t() const { return 0; } 
 };
 #endif
+
+/* 
+class Chip
+{
+public:
+    Circuit* circuit;
+	
+    uint32_t inputs;
+    uint32_t output;
+
+    uint64_t active_outputs;
+
+    std::vector<ChipLink> output_links;
+    std::vector<ChipLink> input_links;
+
+    virtual void update_inputs(uint32_t mask) = 0;
+	virtual void update_output() = 0;
+
+    virtual void activate_inputs() = 0;
+    virtual void deactivate_outputs() = 0;
+    virtual void wake_up(uint32_t mask) = 0;
+    uint64_t (Chip::*activation_check)(uint64_t min, uint64_t max);
+    // void (Chip::*wake_up)(uint32_t mask); // ??????????
+
+    static int next_bit(uint32_t x);
+    static int next_bit64(uint64_t x);
+};
+
+class BasicChip : public Chip, public Cycle
+{
+
+}
+
+class CustomChip : public Chip
+{
+    virtual void update_inputs(uint32_t mask) = 0;
+}
+
+*/
 
 class Chip : public Cycle
 {
 public:
     Circuit* circuit;
 	
-	int inputs;
+    int inputs;
     int output;
 
 	int event_mask;
@@ -253,7 +310,7 @@ public:
 
 	uint64_t delay[2];
 
-	uint64_t pending_event;
+  	uint64_t pending_event;
 
     std::vector<ChipLink> output_links;
     std::vector<ChipLink> input_links;
@@ -274,12 +331,14 @@ public:
 
     cirque<Event> input_events;
     cirque<uint64_t> input_event_end_time;
-    cirque<uint64_t> next_check_time; 
+    //cirque<uint64_t> next_check_time; 
     //std::vector<cirque<uint8_t, EVENT_QUEUE_SIZE/2>> input_event_table;
-    std::vector<cirque<uint8_t>> input_event_table;
+    std::vector<cirque<uint16_t>> input_event_table;
+    cirque<uint16_t>::index first_input_table_pos;
+    //std::unordered_map<int,cirque<uint8_t>> input_event_table;
     
-    std::vector<int> deactivation_table;
-    int deactive_inputs;
+    //std::vector<int> deactivation_table;
+    //int deactive_inputs;
 
     //uint64_t input_event_type;
     cirque<Event>::index first_input_event;
@@ -287,8 +346,14 @@ public:
     int active_inputs;
 
     uint64_t sleep_time;
-    
-    Cycle sub_cycles[sizeof(allocated_sub_cycles) * 8]; // TODO: Make into vector and autosize to reduce memory usage
+
+    std::vector<Cycle*> sub_cycles;
+    ~Chip()
+    {
+        for(Cycle* c : sub_cycles) if(c != NULL) delete c;
+    }
+    //std::vector<Cycle> sub_cycles;
+    //Cycle sub_cycles[sizeof(allocated_sub_cycles) * 8]; // TODO: Make into vector and autosize to reduce memory usage
     Cycle* current_cycle;
 
     std::vector<Cycle*> activation_cycles;
@@ -299,7 +364,7 @@ public:
     bool visited;
     // End new stuff
 	
-	Chip(Circuit* cir, ChipDesc* desc, void* custom = NULL);
+	Chip(int QUEUE_SIZE, int SUBCYCLE_SIZE, Circuit* cir, ChipDesc* desc, void* custom = NULL);
     void connect(Chip* chip, ChipDesc* desc, uint8_t pin);
 	void initialize();
 
@@ -313,16 +378,23 @@ public:
     //void activate_outputs();
     void deactivate_outputs();
     void wake_up();
+    int get_next_output(uint64_t time);
 
     static int next_bit(uint32_t x);
     static int next_bit64(uint64_t x);
 
     static void update_inputs_simple(Chip* chip, int mask);
 
+    double analog_output;
+
     //For debugging
     debug_var total_event_count;
     debug_var activation_count;
     debug_var loop_count[8];
+    debug_var max_cycle_length;
+    debug_var max_subcycle_length;
+    
+    double analog_input(int n) { return input_links[n].chip->analog_output; }
 
     void print_input_events()
     {
@@ -332,10 +404,10 @@ public:
         {
             if(input_events[i].type) // Sub-cycle
             {
-                printf("i:%d t:%lld end:%lld state:%d, sub-cycle\n", int(i), input_events[i].time, input_event_end_time[i], input_events[i].state);
+                printf("i:%d t:%lld end:%lld state:%d, sub-cycle\n", int(i.getRawIndex()), input_events[i].time, input_event_end_time[i], input_events[i].state);
             }
             else
-                printf("i:%d t:%lld, state:%d\n", int(i), input_events[i].time, input_events[i].state);
+                printf("i:%d t:%lld, state:%d\n", int(i.getRawIndex()), input_events[i].time, input_events[i].state);
         }*/
     }
 };

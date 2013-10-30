@@ -44,11 +44,15 @@ CUSTOM_LOGIC( CapacitorDesc::capacitor )
         chip->output_links[0].chip->delay[0] = chip->output_links[0].chip->delay[1] =
             uint64_t(TIME_CONSTANT * (130.0 + desc->r) * desc->c / Circuit::timescale);
     }
+
+    // Generate output event, called once at init
+    chip->pending_event = chip->circuit->queue_push(chip, 1);
 }
 
 static CHIP_LOGIC( cap )
 {
-    pin[2] = pin[1];
+    if(!pin[i1]) pin[2] = 0;
+    else pin[2] = pin[1];
 }
 
 CHIP_DESC( CAPACITOR ) = 
@@ -188,4 +192,67 @@ CHIP_DESC( BUFFER ) =
 	CHIP_DESC_END
 };
 
+
+
+
+/* 
+RC Filter
+
+Analog RC Filter for discrete sound.
+
+Input: Pin 1
+Output: Pin i1
+
+              VCC
+               |
+               \
+            R2 /
+               \
+               /
+        R1     |
+1 ----/\/\/----+---- i1
+               |
+           C1 ---
+              ---
+               |
+               |
+              ---
+               -
+*/
+
+RCFilterDesc::RCFilterDesc(double _r1, double r2, double _c1) : r1(_r1), c1(_c1), v_cap(0.0) 
+{ 
+    i_bias = 5.0 / r2;
+    r_total = 1.0 / (1.0 / r1 + 1.0 / r2);
+}
+
+CUSTOM_LOGIC( RCFilterDesc::init )
+{
+    RCFilterDesc* desc = (RCFilterDesc*)chip->custom_data;
+
+    desc->v_cap = 0.0;
+    desc->rc_exp = chip->circuit->audio.rc_charge_exponent(desc->r_total * desc->c1);
+
+    chip->custom_update = rc_filter;
+}
+
+CUSTOM_LOGIC( RCFilterDesc::rc_filter )
+{
+    RCFilterDesc* desc = (RCFilterDesc*)chip->custom_data;
+    
+    double i = desc->i_bias + chip->analog_input(0) / desc->r1;
+    double v = i * desc->r_total;
+    desc->v_cap += (v - desc->v_cap) * desc->rc_exp;
+
+    chip->analog_output = desc->v_cap;
+}
+
+CHIP_DESC( RC_FILTER ) = 
+{
+	CUSTOM_CHIP_START(&RCFilterDesc::init)
+        INPUT_PINS( 1 )
+        OUTPUT_PIN( i1 ),
+
+	CHIP_DESC_END
+};
 
