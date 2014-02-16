@@ -28,8 +28,9 @@ static VcdLogDesc vcd_log_desc
 
 //2 555 timers
 static Astable555Desc b2_555_desc(OHM(560.0), M_OHM(1.8), U_FARAD(0.1));
-
 static Mono555Desc c9_555_desc(OHM(47.0), U_FARAD(1.0));	// R33, C21
+
+static Ram82S16Desc l3_desc;
 
 static MixerDesc mixer_desc({K_OHM(47.0), K_OHM(47.0), K_OHM(47.0), K_OHM(47.0)}, K_OHM(10.0), U_FARAD(0.01), U_FARAD(0.1));
 
@@ -191,7 +192,7 @@ CIRCUIT_LAYOUT( breakout ) =
 
 	CHIP("L1", 9316),
 	CHIP("L2", 7486),
-	CHIP("L3", 82S16),	//RAM
+	CHIP("L3", 82S16, &l3_desc),	//RAM
 	CHIP("L4", 7411),
 	CHIP("L5", 9312),
 	CHIP("L6", 9310),

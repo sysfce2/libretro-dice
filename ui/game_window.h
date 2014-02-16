@@ -2,51 +2,36 @@
 
 struct GameWindow : Window
 {
-    VerticalLayout layout;
-    HorizontalLayout inner_layout;
+    HorizontalLayout layout;
     
     ListView game_view;
-    
-    VerticalLayout control_layout;
-    Label control_label;
     
     struct TextLayout : HorizontalLayout
     {
         Widget spacer;
         Label label;
-        std::vector<TextLayout*> sub_layouts;
 
         TextLayout(unsigned font_size, int space, nall::string text)
         {
-            if(font_size != 0) label.setFont({"Sans, ", font_size});
+            if(font_size != 0) label.setFont(Font::sans(font_size, ""));
             label.setText(text);
             append(spacer, {space, 0});
             append(label, {0, 0});
         }
-
-        void append_all(VerticalLayout& layout)
-        {
-            layout.append(*this, {0, 0}, 2);
-            for(TextLayout* l : sub_layouts)
-                l->append_all(layout);
-        }
-
-        void remove_all(VerticalLayout& layout)
-        {
-            for(TextLayout* l : sub_layouts)
-                l->remove_all(layout);
-            layout.remove(*this);
-        }
     };
 
-    std::vector<TextLayout*> game_layouts;
+    VerticalLayout side_layout;
+    VerticalLayout control_layout;
+    TextLayout control_label;
+
+    std::vector<VerticalLayout*> game_layouts;
 
     HorizontalLayout button_layout;
     Button start_button;
     Button cancel_button;
     Label spacer;
 
-    GameWindow()
+    GameWindow() : control_label(11, 0, "Controls")
     {
         setTitle("New Game");
         setResizable(false);
@@ -58,10 +43,9 @@ struct GameWindow : Window
         for(const GameDesc& g : game_list)
         {
             game_view.append(g.name, g.manufacturer, g.year);
-
-            game_layouts.push_back(new TextLayout(11, 0, "Controls"));
-            std::vector<TextLayout*>& player_layouts = game_layouts.back()->sub_layouts;
-            player_layouts.push_back(new TextLayout(9, 20, "Coin / Start"));
+            
+            std::vector<std::vector<TextLayout*>> player_layouts(1);
+            player_layouts.back().push_back(new TextLayout(9, 20, "Coin / Start"));
 
             for(CircuitDesc* desc = g.desc; desc->type != CIRCUIT_END; desc++)
             {
@@ -71,18 +55,22 @@ struct GameWindow : Window
                 {
                     int player = get_player(input->chip);
                     while(player >= player_layouts.size())
-                        player_layouts.push_back(new TextLayout(9, 20, {"Player ", player_layouts.size()}));
+                        player_layouts.push_back(std::vector<TextLayout*>(1, new TextLayout(9, 20, {"Player ", player_layouts.size()})));
 
-                    std::vector<TextLayout*>& current_player = player_layouts[player]->sub_layouts;
+                    std::vector<TextLayout*>& current_player = player_layouts[player];
                     current_player.push_back(new TextLayout(8, 40, {get_name(input->chip), 
                                                                     get_pin_name(input->chip, input->pins), 
                                                                     ": ", input->info}));
                 }
+            }
 
-                // Rotate Coin/Start to end
-                TextLayout* t = player_layouts.front();
-                player_layouts.erase(player_layouts.begin());
-                player_layouts.push_back(t);
+            game_layouts.push_back(new VerticalLayout());
+
+            // Rotate Coin/Start to end
+            for(int i = 1; i <= player_layouts.size(); i++)
+            {
+                for(TextLayout* t : player_layouts[i % player_layouts.size()])
+                    game_layouts.back()->append(*t, {0, 0}, 2);
             }
         }
 
@@ -90,26 +78,27 @@ struct GameWindow : Window
 
         start_button.setText("Start Game");
         cancel_button.setText("Cancel");
-        //cancel_button.onActivate = [&] { setVisible(false); };
 
         button_layout.append(start_button, {100, 0});
-        button_layout.append(spacer, {~0, ~0});
+        button_layout.append(spacer, {~0, 0});
         button_layout.append(cancel_button, {100, 0});
 
-        inner_layout.append(game_view, {300, ~0}, 10);
+        layout.append(game_view, {300, ~0}, 10);
         
+        side_layout.append(control_label, {0, 0}, 2);
+        side_layout.append(control_layout, {~0, ~0});
+        side_layout.append(button_layout, {~0, 0});
+
         game_view.onChange = [&]
         {
-            for(auto x : game_layouts)
-                x->remove_all(control_layout);
+            for(VerticalLayout* x : game_layouts)
+                control_layout.remove(*x);
 
             int current_config = game_view.selection();
-            game_layouts[current_config]->append_all(control_layout);
+            control_layout.append(*game_layouts[current_config], {~0, 0});
         };
 
-        inner_layout.append(control_layout, {~0, ~0}, 10);
-        layout.append(inner_layout, {~0, ~0}, 10);
-        layout.append(button_layout, {~0, 0});
+        layout.append(side_layout, {~0, ~0});
         append(layout);
 
         game_view.onChange();
@@ -117,7 +106,7 @@ struct GameWindow : Window
 
     void create(const Position& pos)
     {
-        setGeometry({pos.x, pos.y, 560, 350});
+        setGeometry({pos.x, pos.y, 560, 360});
 
         game_view.setSelection(0);
         game_view.setSelected(true);

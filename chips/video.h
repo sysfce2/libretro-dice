@@ -8,7 +8,7 @@ class Video;
 
 class Video
 {
-private:
+protected:
     uint64_t scanline_time;
     uint64_t current_time;
     uint64_t initial_time;
@@ -28,8 +28,12 @@ public:
     enum VideoPins { HBLANK_PIN = 9, VBLANK_PIN = 10 };
     
     Video();
-    void video_init(int width, int height, Circuit* circuit);
+    virtual void video_init(int width, int height, Circuit* circuit);
+    virtual void swap_buffers() = 0;
+    virtual void show_cursor(bool show) = 0;
     static CUSTOM_LOGIC( video );
+
+    static Video* createDefault(uintptr_t handle);
 };
 
 extern CHIP_DESC( VIDEO );

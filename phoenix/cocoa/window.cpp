@@ -159,7 +159,7 @@ void pWindow::append(Widget& widget) {
 
   @autoreleasepool {
     [widget.p.cocoaView removeFromSuperview];
-    [[cocoaWindow contentView] addSubview:widget.p.cocoaView positioned:NSWindowBelow relativeTo:nil];
+    [[cocoaWindow contentView] addSubview:widget.p.cocoaView positioned:NSWindowAbove relativeTo:nil];
     widget.p.setGeometry(widget.geometry());
     [[cocoaWindow contentView] setNeedsDisplay:YES];
   }
@@ -317,8 +317,10 @@ void pWindow::setStatusText(string text) {
 
 void pWindow::setStatusVisible(bool visible) {
   @autoreleasepool {
+    Geometry g = geometry();
+    g.height += statusBarHeight();
     [[cocoaWindow statusBar] setHidden:!visible];
-    setGeometry(geometry());
+    setGeometry(g);
   }
 }
 

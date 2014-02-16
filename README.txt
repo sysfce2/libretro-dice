@@ -5,20 +5,27 @@ that lack any type of CPU, consisting only of discrete logic components.
 1) Usage
 
 By default, the DICE executable will launch in GUI mode, which allows
-the user to configure the emulator and load a circuit. Additionaly, DICE
-can be run from the command line by navigating to the directory where
-DICE is installed and typing:
+the user to configure the emulator and load a circuit. Additionally, DICE
+can be run from the command line, which by default will launch the emulator
+in fullscreen mode without the GUI and start a game immediately. When launching
+from the command line, press the Exit key to exit the emulator. 
 
-dice gamename
+Launching DICE from the command line can be accomplished by navigating to the
+directory where DICE is installed and typing:
 
-where "gamename" is the name of the game to be run:
+dice gamename [parameters]
+
+Where "gamename" is the name of the game to be run:
 
 antiaircraft
 attack
 breakout
+cleansweep
 crashnscore
+crossfire
 gotcha
 jetfighter
+pinpong
 pong
 pongdoubles
 quadrapong
@@ -27,10 +34,12 @@ sharkjaws
 spacerace
 stuntcycle
 tvbasketball
+wipeout
 
+And parameters is any optional combination of the following:
 
-This will launch DICE in fullscreen mode without the GUI. When launching from
-the command line, press the Exit key to exit the emulator.
+-window : Start the emulator in a window instead of fullscreen mode.
+
 
 
 ROM files should be placed in a subfolder named "roms" in the directory where 
@@ -44,7 +53,7 @@ to request ROM files.
 DICE makes use of some C++11 features, so GCC 4.7 or newer is needed to compile.
 The SDL headers are also required, available at http://www.libsdl.org.
 
-Currently DICE supports Windows (using MinGW to compile) and Linux.
+Currently DICE supports Windows (using MinGW to compile), Linux, and OS X (preliminarily).
 
 
 
@@ -57,7 +66,7 @@ Email: dice.emulator@gmail.com
 
 4) License
 
-Copyright (C) 2008-2013 DICE Team
+Copyright (C) 2008-2014 DICE Team
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

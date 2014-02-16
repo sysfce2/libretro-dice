@@ -742,7 +742,6 @@ struct InputWindow : Window
         layout.append(input_view, { 110, ~0 }, 10);
 
         exit_button.setText("Exit");
-        exit_layout.append(exit_button, {440, 370 - exit_button.minimumSize().height, 90, exit_button.minimumSize().height});
     }
 
     void setEnabled(bool e = true)
@@ -776,9 +775,11 @@ struct InputWindow : Window
         input_view.setSelected(true);
         input_view.onChange();
 
+        setStatusVisible();
+        exit_layout.append(exit_button, {440, 370 - exit_button.minimumSize().height, 90, exit_button.minimumSize().height});
+
         append(layout);
         append(exit_layout);
-        setStatusVisible();
         setVisible(true);
         input_view.setFocused();
         setModal(true);

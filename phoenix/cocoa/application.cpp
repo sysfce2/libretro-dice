@@ -79,6 +79,8 @@ void pApplication::quit() {
 }
 
 void pApplication::initialize() {
+  pKeyboard::initialize();
+
   @autoreleasepool {
     [NSApplication sharedApplication];
     cocoaDelegate = [[CocoaDelegate alloc] init];

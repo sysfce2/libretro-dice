@@ -16,8 +16,7 @@ When CV is not connected it is held at 2/3.VCC through a 5k/10k divider.
                              +------+--------+------*---+-----+
 */
 
-// TODO: Fix delay when exiting reset,
-// should be the time to reach CV from 0 V?
+const double Astable555Desc::LN_2 = 0.6931471805599453;
 
 CUSTOM_LOGIC( Astable555Desc::astable_555 )
 {
@@ -38,52 +37,53 @@ CUSTOM_LOGIC( Astable555Desc::astable_555 )
     {
         double TC = -log((5.0 - desc->ctrl) / (5.0 - 0.5*desc->ctrl));
         uint64_t hi_time = uint64_t(TC * (desc->r1 + desc->r2) * desc->c / Circuit::timescale);
-        uint64_t lo_time = uint64_t(TC * desc->r2 * desc->c / Circuit::timescale);
+        uint64_t lo_time = uint64_t(LN_2 * desc->r2 * desc->c / Circuit::timescale);
 
-        chip->state = ACTIVE;
-        chip->cycle_time = hi_time + lo_time;
-        chip->activation_time = chip->circuit->global_time;
-        chip->end_time = ~0ull;
         chip->output_events.clear();
 
-        uint64_t delay = 1;
-        if(chip->output)
+        uint64_t delay = 0;
+        if(mask == 1) // Coming out of reset
+        {
+            TC = -log((5.0 - desc->ctrl) / 5.0);
+            delay = uint64_t(TC * (desc->r1 + desc->r2) * desc->c / Circuit::timescale);
+            //printf("first:%lld hi:%lld\n", delay, hi_time);
+
+            chip->update_output(); // TODO: Should be delayed by several ns
+
+            chip->activation_time = chip->circuit->global_time + delay;
+            chip->output_events.push_back(Event(chip->activation_time, 0));
+            chip->output_events.push_back(Event(chip->activation_time + hi_time, 1));
+        }
+        else if(chip->output)
         {
             if(chip->last_output_event + hi_time > chip->circuit->global_time)
                 delay = chip->last_output_event + hi_time - chip->circuit->global_time;
+            
+            // TODO: Adjust delay exponentially based on time remaining?
 
+            chip->activation_time = chip->circuit->global_time + delay;
             chip->output_events.push_back(Event(chip->activation_time, 0));
             chip->output_events.push_back(Event(chip->activation_time + hi_time, 1));
-            chip->pending_event = chip->circuit->queue_push(chip, delay);
         }
         else
         {
             if(chip->last_output_event + lo_time > chip->circuit->global_time)
                 delay = chip->last_output_event + lo_time - chip->circuit->global_time;
 
+            chip->activation_time = chip->circuit->global_time + delay;
             chip->output_events.push_back(Event(chip->activation_time, 0));
             chip->output_events.push_back(Event(chip->activation_time + lo_time, 1));
-            chip->pending_event = chip->circuit->queue_push(chip, delay);
         }
-
-        //printf("t:%lld pend:%lld del:%lld 1:%lld 2:%lld hi:%lld lo:%lld TC:%g\n", chip->circuit->global_time, chip->pending_event, delay, chip->output_events.front().time, chip->output_events.back().time, hi_time, lo_time, TC);
-
-        /*if(chip->output)
-        {
-            chip->output_events.push_back(Event(chip->activation_time, 0));
-            chip->output_events.push_back(Event(chip->activation_time + hi_time, 1));
-            chip->pending_event = chip->circuit->queue_push(chip, hi_time);
-        }
-        else
-        {
-            chip->output_events.push_back(Event(chip->activation_time, 0));
-            chip->output_events.push_back(Event(chip->activation_time + lo_time, 1));
-            chip->pending_event = chip->circuit->queue_push(chip, lo_time);
-        }*/
-
+        
+        chip->state = ACTIVE;
+        chip->cycle_time = hi_time + lo_time;
+        chip->end_time = ~0ull;
         chip->first_output_event = chip->output_events.begin();
         chip->current_output_event = chip->output_events.begin();
-        
+
+        chip->pending_event = chip->circuit->queue_push(chip, delay);
+
+        //printf("t:%lld pend:%lld del:%lld 1:%lld 2:%lld hi:%lld lo:%lld TC:%g\n", chip->circuit->global_time, chip->pending_event, delay, chip->output_events.front().time, chip->output_events.back().time, hi_time, lo_time, TC);
     }
 }
 

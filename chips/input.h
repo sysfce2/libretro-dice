@@ -96,6 +96,10 @@ extern CHIP_DESC( BUTTONS2_INPUT );
 #define PADDLE_CONNECTION( c1, c2 ) CircuitDesc(c1, i3, c2, i3)
 #define THROTTLE_CONNECTION( c1, c2 ) CircuitDesc(c1, i3, c2, i3)
 
+// Suffix operators! For Buttons -- NO = Normally Open, NC = Normally Closed
+inline constexpr uint8_t operator"" _NO ( unsigned long long pin ) { return pin; }
+inline constexpr uint8_t operator"" _NC ( unsigned long long pin ) { return pin + i1 - 1; }
+
 class Input
 {
 private:

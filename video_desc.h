@@ -16,18 +16,24 @@ struct VideoOverlay
 struct VideoDesc
 {
     double r[9];
+    double brightness;
     double contrast;
     VideoOrientation orientation;
     VideoScanMode scan_mode;
     std::vector<VideoOverlay> overlays;
 
-    VideoDesc() : contrast(1.0), orientation(ROTATE_0), scan_mode(PROGRESSIVE)
+    VideoDesc() : brightness(0.0), contrast(1.0), orientation(ROTATE_0), scan_mode(PROGRESSIVE)
     {
         for(int i = 0; i < 9; i++) r[i] = 0.0;
     }
     VideoDesc& set_r(unsigned pin, double val) 
     { 
         if(pin > 0 && pin <= 9) r[pin-1] = val;
+        return *this;
+    }
+    VideoDesc& set_brightness(double b) 
+    { 
+        brightness = b;
         return *this;
     }
     VideoDesc& set_contrast(double c) 
@@ -56,6 +62,7 @@ struct VideoDesc
 
 #define VIDEO_DESC( name ) VideoDesc video_##name = VideoDesc()
 #define VIDEO_RESISTANCE( p, r ) .set_r(p, r)
+#define VIDEO_BRIGHTNESS( b ) .set_brightness(b)
 #define VIDEO_CONTRAST( c ) .set_contrast(c)
 #define VIDEO_ORIENTATION( o ) .set_orientation(o)
 #define VIDEO_SCAN_MODE( s ) .set_scan_mode(s)

@@ -69,3 +69,19 @@ CHIP_DESC( 74151 ) =
    	CHIP_DESC_END
 };
 
+
+CHIP_DESC( 74S151 ) =
+{
+	CHIP_START( 74151 )
+        INPUT_PINS( 6 )
+        OUTPUT_PIN( 5 )
+        OUTPUT_DELAY_NS( 2.0, 3.0 ),
+
+	CHIP_START( 74151_n )
+        INPUT_PINS( 1, 2, 3, 4, 7, 9, 10, 11, 12, 13, 14, 15 )
+        OUTPUT_PIN( 6 )
+        OUTPUT_DELAY_NS( 9.0, 8.5 ),
+
+   	CHIP_DESC_END
+};
+

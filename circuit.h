@@ -34,14 +34,14 @@ public:
     Settings& settings; // TODO: make const?
     GameConfig game_config;
     Input& input;
-    Video video;
+    Video& video;
     Audio audio;
     RealTimeClock rtc;
    
     int queue_size;
     QueueEntry queue[MAX_QUEUE_SIZE]; // TODO: Replace with vector?
 
-	Circuit(Settings& s, Input& i, const CircuitDesc* desc, const char* name);
+	Circuit(Settings& s, Input& i, Video& v, const CircuitDesc* desc, const char* name);
     ~Circuit();
 
 	uint64_t queue_push(Chip* chip, uint64_t delay);

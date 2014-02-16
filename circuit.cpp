@@ -42,8 +42,8 @@ CHIP_DESC( _DEOPTIMIZER ) =
 
 const double Circuit::timescale = 1.0e-12; // 1 ps
 
-Circuit::Circuit(Settings& s, Input& i, const CircuitDesc* desc, const char* name) 
-    : settings(s), game_config(desc, name), input(i), global_time(0), queue_size(0)
+Circuit::Circuit(Settings& s, Input& i, Video& v, const CircuitDesc* desc, const char* name) 
+    : settings(s), game_config(desc, name), input(i), video(v), global_time(0), queue_size(0)
 {
 	typedef std::pair<Chip*, ChipDesc*> ChipDescPair;
 	typedef std::pair<uint8_t, ChipDescPair> Connection;
@@ -153,9 +153,9 @@ Circuit::Circuit(Settings& s, Input& i, const CircuitDesc* desc, const char* nam
 				else*/
 				{
 					if(hint_list.find(instance.name) != hint_list.end())
-                        chips.push_back(new Chip(hint_list[instance.name].queue_size, hint_list[instance.name].subycle_size, this, d, instance.custom_data));   
+                        chips.push_back(new Chip(hint_list[instance.name].queue_size, hint_list[instance.name].subycle_size, this, d, (void*)instance.custom_data));   
                     else // Use defaults
-                        chips.push_back(new Chip(EVENT_QUEUE_SIZE, SUBCYCLE_SIZE, this, d, instance.custom_data));
+                        chips.push_back(new Chip(EVENT_QUEUE_SIZE, SUBCYCLE_SIZE, this, d, (void*)instance.custom_data));
 
                     #ifdef DEBUG
                     printf("chip name:%s p:%p\n", instance.name, chips.back());

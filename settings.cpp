@@ -1,5 +1,7 @@
 #include "settings.h"
 
+using namespace phoenix;
+
 const char KeyAssignment::ScancodeName[][16] = {
     "None",
     "Escape", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12",
@@ -56,7 +58,7 @@ void Settings::appendKey(KeyAssignment& k, string name)
     append(k.joystick, string{name, ".joystick"});
 }
 
-Settings::Settings() : num_mice(0), pause(false), throttle(true), fullscreen(false), no_gui(false)
+Settings::Settings() : num_mice(0), pause(false), throttle(true), fullscreen(false)
 {
     append(audio.frequency = Audio::Frequency::FREQ_48000, "audio.frequency");
     append(audio.volume = 500, "audio.volume");

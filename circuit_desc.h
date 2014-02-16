@@ -23,7 +23,7 @@ struct ChipInstance
 {
     const char* name;
     ChipDesc* chip;
-	void* custom_data;
+	uintptr_t custom_data;
 };
 
 struct ConnectionDesc
@@ -69,7 +69,7 @@ struct CircuitDesc
         InputDesc* input;
         OptimizationHintDesc hint;
 
-        constexpr U(const char* n, ChipDesc* c, void* d) : instance({n, c, d}) { }
+        constexpr U(const char* n, ChipDesc* c, uintptr_t d) : instance({n, c, d}) { }
         constexpr U(const char* n1, uint8_t p1, const char* n2, uint8_t p2) : connection({n1, n2, p1, p2}) { }
         constexpr U(const char* n, const char* c, uint8_t p) : net({n, c, p}) { }
         constexpr U(VideoDesc* v) : video(v) { }
@@ -78,8 +78,9 @@ struct CircuitDesc
         constexpr U(const char* c, OptimizationHintDesc::HintType h, int q, int s) : hint({c, h, q, s}) { }
 	} u;
 
-    constexpr CircuitDesc(const char* n, ChipDesc* c) : type(CHIP_INST), u(n, c, NULL) { }
-    template<typename T> constexpr CircuitDesc(const char* n, ChipDesc* c, T* d) : type(CHIP_INST), u(n, c, d) { }
+    constexpr CircuitDesc(const char* n, ChipDesc* c) : type(CHIP_INST), u(n, c, 0) { }
+    template<typename T> constexpr CircuitDesc(const char* n, ChipDesc* c, T* d) : type(CHIP_INST), u(n, c, (uintptr_t)d) { }
+    constexpr CircuitDesc(const char* n, ChipDesc* c, uintptr_t d) : type(CHIP_INST), u(n, c, d) { }
 	constexpr CircuitDesc(const char* n1, uint8_t p1, const char* n2, uint8_t p2) : type(CONNECTION), u(n1, p1, n2, p2) { }
     constexpr CircuitDesc(const char* n, const char* c, uint8_t p) : type(NET), u(n, c, p) { }
     constexpr CircuitDesc(const char* c, OptimizationHintDesc::HintType h, int q, int s) : type(OPTIMIZATION_HINT), u(c, h, q, s) { }

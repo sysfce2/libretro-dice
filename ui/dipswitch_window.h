@@ -34,10 +34,10 @@ struct DipswitchWindow : Window
         ComboButton settings;
         unsigned& state;
 
-        HexDipswitchSelector(const char* n, unsigned& sta, const char* set[16]) : state(sta)
+        HexDipswitchSelector(const char* n, unsigned& sta, const char* set[], int size = 16) : state(sta)
         {
             name.setText({n, ":"});
-            for(int i = 0; i < 16; i++) 
+            for(int i = 0; i < size; i++) 
                 if(set[i] != NULL) settings.append(set[i]);
 
             settings.setSelection(state);
@@ -109,6 +109,7 @@ struct DipswitchWindow : Window
             for(CircuitDesc* desc = g.desc; desc->type != CIRCUIT_END; desc++)
             {
                 if(desc->u.instance.chip == chip_DIPSWITCH ||
+                   desc->u.instance.chip == chip_DIPSWITCH_SP4T ||
                    desc->u.instance.chip == chip_53137 || 
                    desc->u.instance.chip == chip_DIPSWITCH_4SPST ||
                    desc->u.instance.chip == chip_POT_555_ASTABLE ||
@@ -135,6 +136,12 @@ struct DipswitchWindow : Window
                 {
                     DipswitchDesc* d = (DipswitchDesc*)desc->u.instance.custom_data;
                     Layout* l = new DipswitchSelector(d->desc, d->state, d->settings);
+                    game_layout->append(*l, {~0, 0}, 10);
+                }
+                else if(desc->u.instance.chip == chip_DIPSWITCH_SP4T)
+                {
+                    DipswitchSP4TDesc* d = (DipswitchSP4TDesc*)desc->u.instance.custom_data;
+                    Layout* l = new HexDipswitchSelector(d->desc, d->state, d->settings, 4);
                     game_layout->append(*l, {~0, 0}, 10);
                 }
                 else if(desc->u.instance.chip == chip_53137)
@@ -193,6 +200,6 @@ struct DipswitchWindow : Window
         append(exit_layout);
         setVisible(true);
         game_view.setFocused();
-        setModal(true);
+        //setModal(true);
     }
 };

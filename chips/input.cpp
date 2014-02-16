@@ -5,6 +5,8 @@
 #include "../manymouse/manymouse.h"
 #include <SDL/SDL.h>
 
+using namespace phoenix;
+
 static const double INPUT_POLL_RATE = 10.0e-3; // 10 ms poll rate
 
 extern CUSTOM_LOGIC( clock );
@@ -775,11 +777,13 @@ bool Input::getKeyboardState(unsigned scancode)
 
 bool Input::getJoystickButton(unsigned joystick, unsigned button)
 {
+    if(joystick >= joysticks.size()) return 0;
     return SDL_JoystickGetButton(joysticks[joystick], button);
 }
 
 int16_t Input::getJoystickAxis(unsigned joystick, unsigned axis)
 {
+    if(joystick >= joysticks.size()) return 0;
     return SDL_JoystickGetAxis(joysticks[joystick], axis);
 }
 

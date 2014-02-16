@@ -1,8 +1,11 @@
 #include "video.h"
 #include "../circuit.h"
 
-#include <SDL/SDL.h>
-#include <SDL/SDL_opengl.h>
+#ifdef __APPLE__
+#include <OpenGL/gl.h> // Think different
+#else
+#include <GL/gl.h>
+#endif
 
 /* 
 	Inputs:
@@ -56,23 +59,6 @@ Video::Video() : scanline_time(0), current_time(0), initial_time(0),
 
 void Video::video_init(int width, int height, Circuit* circuit)
 {
-    //Set OpenGL Parameters
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
-	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
-	SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
-	SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
-
-	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
-	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);
-	//SDL_GL_SetAttribute(SDL_GL_SWAP_CONTROL, 1);
-
-    if(SDL_SetVideoMode(width, height, 32, SDL_OPENGL) == NULL)
-	{
-		printf("Unable to set video mode:\n%s\n", SDL_GetError());
-		exit(1);
-	}
-
     // Keep aspect ratio
     unsigned x = 0;
     unsigned y = 0;
@@ -81,7 +67,7 @@ void Video::video_init(int width, int height, Circuit* circuit)
     if(desc->orientation == ROTATE_90 || desc->orientation == ROTATE_270)
         horizontal = false;        
 
-    if(circuit->settings.video.keep_aspect && horizontal)
+    if(circuit && circuit->settings.video.keep_aspect && horizontal)
     {
         if(width > 4*height/3)
         {
@@ -94,7 +80,7 @@ void Video::video_init(int width, int height, Circuit* circuit)
             height = 3*width/4;
         }
     }
-    else if(circuit->settings.video.keep_aspect) // vertical
+    else if(circuit && circuit->settings.video.keep_aspect) // vertical
     {
         if(width > 3*height/4)
         {
@@ -162,9 +148,9 @@ void Video::adjust_screen_params()
 	glLoadIdentity();
 
     // Clear screen
-	glClearColor(0,0,0,0);
+	glClearColor(0, 0, 0, 0);
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-	SDL_GL_SwapBuffers();
+	swap_buffers();
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
     // Initialize color array
@@ -198,7 +184,7 @@ void Video::adjust_screen_params()
             val = r_lo / (r_hi + r_lo);
         }
 
-        color[i] = val * desc->contrast; // TODO: user configurable brightness/contrast?
+        color[i] = (val + desc->brightness) * desc->contrast ; // TODO: user configurable brightness/contrast?
         //printf("Color %d: %g %g %g %g\n", i, r_lo, r_hi, val, color[i]);
     }
 }
@@ -267,7 +253,7 @@ CUSTOM_LOGIC( Video::video )
             video->adjust_screen_params();
         }
         video->draw_overlays();
-        SDL_GL_SwapBuffers();
+        video->swap_buffers();
         if(video->desc->scan_mode == PROGRESSIVE)
             glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
         video->frame_count++;
@@ -318,4 +304,24 @@ CUSTOM_LOGIC( Video::video )
     chip->inputs ^= mask;
     video->current_time = global_time;
 }
+
+
+#ifdef _WIN32
+
+//#include "video_wgl.h"
+//Video* Video::createDefault(uintptr_t handle) { return new VideoWgl(handle); }
+#include "video_sdl.h"
+Video* Video::createDefault(uintptr_t handle) { return new VideoSdl(handle); }
+
+#elif defined(__APPLE__)
+
+#include "video_cgl.h"
+Video* Video::createDefault(uintptr_t handle) { return new VideoCgl(handle); }
+
+#else
+
+#include "video_sdl.h"
+Video* Video::createDefault(uintptr_t handle) { return new VideoSdl(handle); }
+
+#endif
 

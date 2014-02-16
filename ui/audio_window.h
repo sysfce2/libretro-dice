@@ -79,7 +79,7 @@ struct AudioWindow : Window
     
     void create(const Position& pos)
     {
-        setGeometry({pos.x, pos.y, 425, layout.minimumSize().height});
+        setGeometry({pos.x, pos.y, 435, layout.minimumSize().height});
         
         if(settings.audio.frequency <= 3)
             freq_options[settings.audio.frequency].setChecked();

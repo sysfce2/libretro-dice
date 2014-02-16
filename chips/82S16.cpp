@@ -1,6 +1,5 @@
 #include "../circuit.h"
-
-#define WORD_SIZE 256
+#include "82S16.h"
 
 /*
 82S16
@@ -18,13 +17,17 @@
        +------+
 */
 
-// TODO: Replace static data array with a class so that multiple 82S16s can be instantiated
-
 enum { ADDR_MASK = 0xff, CE_MASK = 0x700, WE_MASK = 0x800, D_SHIFT = 12 }; 
 
 static CUSTOM_LOGIC( RAM_82S16 )
 {
-    static char data[WORD_SIZE];
+    if(chip->custom_data == NULL)
+    {
+        printf("ERROR: Missing Ram82S16Desc for chip %p\n", chip);\
+        return;
+    }
+
+    Ram82S16Desc& data = *(Ram82S16Desc*)chip->custom_data;
 
     chip->state = PASSIVE;
     chip->inputs ^= mask;
@@ -42,7 +45,7 @@ static CUSTOM_LOGIC( RAM_82S16 )
         }
         else //read mode
         {
-            new_out = !data[addr]; //TODO: check datasheet about data getting stored inverted?
+            new_out = !data[addr];
             //printf("read addr:%d data:%d t:%lld inputs:%d\n", addr, data[addr], chip->circuit->global_time, chip->inputs);
         }
     }

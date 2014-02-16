@@ -63,6 +63,7 @@ static VIDEO_DESC( sharkjaws )
     VIDEO_RESISTANCE(2, OHM(330))
     VIDEO_RESISTANCE(3, OHM(330))
     VIDEO_RESISTANCE(4, OHM(330))
+    //VIDEO_RESISTANCE(5, K_OHM(1.5)) // Use this?
     VIDEO_CONTRAST(4.0)
 
     // Values guessed based on screenshots. TODO: Make more accurate
@@ -1527,6 +1528,7 @@ CONNECTION("VIDEO", 1, _SCORE),
 CONNECTION("VIDEO", 2, _DIVERVID),  //medium fish=diver=player 
 CONNECTION("VIDEO", 3, _LRGFISHVID),  //large fish=shark
 CONNECTION("VIDEO", 4, _SMLFISHVID), 
+CONNECTION("VIDEO", 5, VCC), 
 CONNECTION("VIDEO", Video::VBLANK_PIN, "4A", 3),
 CONNECTION("VIDEO", Video::HBLANK_PIN, "5A", 6), 
 

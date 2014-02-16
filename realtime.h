@@ -60,6 +60,35 @@ public:
     }
 };
 
+#elif defined(__APPLE__)
+
+#include <mach/mach.h>
+#include <mach/mach_time.h>
+
+class RealTimeClock
+{
+private:
+    mach_timebase_info_data_t timebase_info;
+    uint64_t start;
+
+public:
+    RealTimeClock()
+    {
+        mach_timebase_info(&timebase_info);
+	    start = mach_absolute_time();
+    }
+    void operator +=(int64_t usecs)
+    {
+        start += usecs * 1000 * timebase_info.denom / timebase_info.numer;
+    }
+    uint64_t get_usecs()
+    {
+        uint64_t time = mach_absolute_time();
+	    
+        return (time - start) * timebase_info.numer / (timebase_info.denom * 1000);
+    }
+};
+
 #else
 	#error "realtime.h not implemented for this platform"
 #endif

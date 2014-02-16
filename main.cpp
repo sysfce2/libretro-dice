@@ -24,12 +24,13 @@ using namespace phoenix;
 #define DEBUG
 #undef DEBUG
 
-static const char VERSION_STRING[] = "DICE 0.7";
+static const char VERSION_STRING[] = "DICE 0.8";
 
 struct MainWindow : Window 
 {
     Settings settings;
     Input input;
+    Video* video;
     Circuit* circuit;
     RealTimeClock real_time;
     
@@ -80,7 +81,7 @@ struct MainWindow : Window
         settings.filename = {config_path, "settings.cfg"};
         settings.load();
         
-        onClose = [&] { Application::quit(); };
+        onClose = &Application::quit;
 
         // Game menu
         game_menu.setText("Game");
@@ -93,7 +94,7 @@ struct MainWindow : Window
         {
             GameDesc& g = game_list[game_window.game_view.selection()];
             if(circuit) delete circuit; 
-            circuit = new Circuit(settings, input, g.desc, g.command_line);
+            circuit = new Circuit(settings, input, *video, g.desc, g.command_line);
             game_window.setModal(false);
             game_window.setVisible(false);
             onSize();
@@ -232,31 +233,25 @@ struct MainWindow : Window
         // Initialize SDL, input, etc.
         settings.num_mice = ManyMouse_Init();
 
-        char env[256];
-        sprintf(env, "SDL_WINDOWID=%lld", (uint64_t)viewport.handle());
-        putenv(env);
-
-        if(SDL_Init(SDL_INIT_AUDIO|SDL_INIT_VIDEO|SDL_INIT_JOYSTICK) < 0)
+        if(SDL_Init(SDL_INIT_AUDIO|SDL_INIT_JOYSTICK) < 0)
 	    {
 	        printf("Unable to init SDL:\n%s\n", SDL_GetError());
 		    exit(1);
 	    }
-        atexit(SDL_Quit);
 
         input.init();
+        video = Video::createDefault(viewport.handle());
 
         onSize = [&] {
 
             if((signed)geometry().height < 0 || (signed)geometry().width < 0)
                 return;
             
+            video->video_init(geometry().width, geometry().height, circuit);
+
             if(circuit == nullptr)
             {
                 drawLogo();
-            }
-            else
-            {
-                circuit->video.video_init(geometry().width, geometry().height, circuit);
             }
 
             viewport.setFocused();
@@ -270,6 +265,11 @@ struct MainWindow : Window
         onSize();
     }
 
+    ~MainWindow()
+    {
+        SDL_Quit();
+    }
+
     void toggleFullscreen(bool fullscreen)
     {
         settings.fullscreen = fullscreen;
@@ -277,31 +277,12 @@ struct MainWindow : Window
         setStatusVisible(!fullscreen);
         setMenuVisible(!fullscreen);
         setFullScreen(fullscreen);
-        SDL_ShowCursor(!fullscreen);
+        video->show_cursor(!fullscreen);
         onSize();
     }
 
     void drawLogo()
     {
-        //Set OpenGL Parameters
-	    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-	    SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
-	    SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
-	    SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
-	    SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
-
-    	SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
-	    SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);
-	    //SDL_GL_SetAttribute(SDL_GL_SWAP_CONTROL, 1);
-        
-        if(SDL_SetVideoMode(geometry().width, geometry().height, 32, SDL_OPENGL) == NULL)
-	    {
-		    printf("Unable to set video mode:\n%s\n", SDL_GetError());
-		    exit(1);
-	    }
-
-  	    glViewport(0, 0, geometry().width, geometry().height);
-
         glMatrixMode(GL_PROJECTION);
 	    glLoadIdentity();
 	    glOrtho(0.0, geometry().width, geometry().height, 0.0, -1.0, 1.0);
@@ -342,8 +323,7 @@ struct MainWindow : Window
             glVertex3f(logo_x + 0.0, logo_y + logo_height*4, 0.0);
         glEnd();
 
-        SDL_GL_SwapBuffers();
-        glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+        video->swap_buffers();
     }
 
     void run()
@@ -372,7 +352,7 @@ struct MainWindow : Window
                 real_time += 1000000;
             }
 
-            //if(emu_time > 3.0e6) onClose();
+            //if(emu_time > 10.0e6) onClose();
         }
         else
         {
@@ -419,13 +399,6 @@ struct MainWindow : Window
             {            
                 if(ui_state.quit && !prev_ui_state.quit)
                 {
-                    //if(settings.no_gui)
-                    //    onClose();
-                    //else if(settings.fullscreen)
-                    //    toggleFullscreen(false);
-                    //else
-                        //onClose();
-
                     onClose();
                 }
                 if(ui_state.pause && !prev_ui_state.pause)
@@ -485,13 +458,18 @@ int main(int argc, char** argv)
 
     if(argc > 1)
     {
+        bool start_fullscreen = true;
+        
+        // Parse options
+        for(int i = 2; i < argc; i++)
+            if(strcmp(argv[i], "-window") == 0) start_fullscreen = false;
+
         for(const GameDesc& g : game_list)
         {
             if(strcmp(argv[1], g.command_line) == 0)
             {
-                main_window.circuit = new Circuit(main_window.settings, main_window.input, g.desc, g.command_line);
-                main_window.settings.no_gui = true;
-                main_window.toggleFullscreen(true);
+                main_window.circuit = new Circuit(main_window.settings, main_window.input, *main_window.video, g.desc, g.command_line);
+                main_window.toggleFullscreen(start_fullscreen);
             }
         }
     }

@@ -14,6 +14,10 @@ extern CIRCUIT_LAYOUT( sharkjaws );
 extern CIRCUIT_LAYOUT( quadrapong );
 extern CIRCUIT_LAYOUT( jetfighter );
 extern CIRCUIT_LAYOUT( crashnscore );
+extern CIRCUIT_LAYOUT( crossfire );
+extern CIRCUIT_LAYOUT( pinpong );
+extern CIRCUIT_LAYOUT( cleansweep );
+extern CIRCUIT_LAYOUT( wipeout );
 
 
 struct GameDesc
@@ -43,7 +47,11 @@ static GameDesc game_list[] =
     { "Shark Jaws",     circuit_sharkjaws,      "sharkjaws",        "Atari",     1975 },
     { "Quadrapong",     circuit_quadrapong,     "quadrapong",       "Atari",     1974 },
     { "Jet Fighter",    circuit_jetfighter,     "jetfighter",       "Atari",     1975 },
-    { "Crash 'N Score", circuit_crashnscore,    "crashnscore",      "Atari",     1975 }
+    { "Crash 'N Score", circuit_crashnscore,    "crashnscore",      "Atari",     1975 },
+    { "Crossfire",      circuit_crossfire,      "crossfire",        "Atari",     1975 },
+    { "Pin Pong",       circuit_pinpong,        "pinpong",          "Atari",     1974 },
+    { "Clean Sweep",    circuit_cleansweep,     "cleansweep",       "Ramtek",    1974 },
+    { "Wipe Out",       circuit_wipeout,        "wipeout",          "Ramtek",    1974 }
 };
 
 static const int game_list_size = sizeof(game_list) / sizeof(GameDesc);

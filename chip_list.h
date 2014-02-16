@@ -10,8 +10,11 @@
 #include "chips/555astable.h"
 #include "chips/555mono.h"
 #include "chips/555pwm.h"
+#include "chips/74121.h"
+#include "chips/82S16.h"
 #include "chips/8225.h"
 #include "chips/9602.h"
+#include "chips/2533.h"
 
 #include "chips/capacitor.h"
 #include "chips/diode_matrix.h"
@@ -22,6 +25,7 @@
 
 extern CHIP_DESC( CLOCK_14_318_MHZ );
 extern CHIP_DESC( CLOCK_12_096_MHZ );
+extern CHIP_DESC( CLOCK_10_733_MHZ );
 extern CHIP_DESC( CLOCK_8_MHZ );
 extern CHIP_DESC( CLOCK_6_MHZ );
 
@@ -63,6 +67,8 @@ extern CHIP_DESC( 74107 );
 extern CHIP_DESC( 74109 );
 extern CHIP_DESC( 74S112 );
 extern CHIP_DESC( 74116 );
+extern CHIP_DESC( 74150 );
+extern CHIP_DESC( 74S151 );
 extern CHIP_DESC( 74151 );
 extern CHIP_DESC( 74153 );
 extern CHIP_DESC( 74155 );
@@ -70,6 +76,7 @@ extern CHIP_DESC( 74164 );
 extern CHIP_DESC( 74165 );
 extern CHIP_DESC( 74166 );
 extern CHIP_DESC( 74174 );
+extern CHIP_DESC( 74S174 );
 extern CHIP_DESC( 74175 );
 extern CHIP_DESC( 74191 );
 extern CHIP_DESC( 74192 );
@@ -97,13 +104,19 @@ extern CHIP_DESC( LATCH );
 extern CHIP_DESC( CLK_GATE );
 extern CHIP_DESC( CLK_GATE_n );
 
+extern CHIP_DESC( WIRED_AND );
+extern CHIP_DESC( WIRED_OR );
+
 static CHIP_ALIAS( 7406, 7404 );
 static CHIP_ALIAS( 7413, 7420 );
 static CHIP_ALIAS( 7414, 7404 );
+static CHIP_ALIAS( 7453, 7454 );
 static CHIP_ALIAS( 74154, 9311 );
 static CHIP_ALIAS( 74161, 9316 );
 static CHIP_ALIAS( 74157, 9322 );
 static CHIP_ALIAS( 8574, 74S287 );
 static CHIP_ALIAS( 82S129, 74S287 );
 static CHIP_ALIAS( 74S200, 82S16 );
+static CHIP_ALIAS( 74145, 7442 );
 
+typedef Ram82S16Desc Ram74S200Desc;

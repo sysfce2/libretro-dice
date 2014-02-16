@@ -4,7 +4,6 @@
 #include <phoenix.hpp>
 
 using namespace nall;
-using namespace phoenix;
 
 struct KeyAssignment
 {
@@ -17,7 +16,7 @@ struct KeyAssignment
     KeyAssignment(unsigned t = NONE, unsigned b = 0, unsigned j = 0) :
         type(t), button(b), joystick(j) { }
 
-    KeyAssignment(unsigned t, Keyboard::Scancode s) :
+    KeyAssignment(unsigned t, phoenix::Keyboard::Scancode s) :
         type(t), button((unsigned)s), joystick(0) { }
 
     nall::string name();
@@ -33,7 +32,6 @@ struct Settings : configuration
 
     bool pause, throttle;
     bool fullscreen;
-    bool no_gui;
     
     struct Audio
     {

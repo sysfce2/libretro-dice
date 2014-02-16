@@ -28,6 +28,12 @@ GameConfig::GameConfig(const CircuitDesc* desc, const char* name)
                 append(d->state, d->name);
                 has_config = true;
             }
+            else if(desc->u.instance.chip == chip_DIPSWITCH_SP4T)
+            {
+                DipswitchSP4TDesc* d = (DipswitchSP4TDesc*)desc->u.instance.custom_data;
+                append(d->state, d->name);
+                has_config = true;
+            }
             else if(desc->u.instance.chip == chip_53137)
             {
                 Dipswitch53137Desc* d = (Dipswitch53137Desc*)desc->u.instance.custom_data;

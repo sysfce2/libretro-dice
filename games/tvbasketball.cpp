@@ -100,7 +100,7 @@ static SeriesRCDesc rc2_desc(OHM(220.0), U_FARAD(470.0));
 static PotentimeterAstable555Desc pot1_desc("playtime", "Play Time", K_OHM(35.0), K_OHM(10.0), K_OHM(60.0), _9d_555_desc);
 
 // Hack to improve performance
-CHIP_LOGIC( diode_matrix_custom_n )
+static CHIP_LOGIC( diode_matrix_custom_n )
 {
     DIODE_LAYOUT* d_l = (DIODE_LAYOUT*)custom_data;
 
@@ -116,7 +116,7 @@ static CHIP_LOGIC( inv )
 }
 
 
-CHIP_DESC( DIODE_MATRIX_CUSTOM ) = 
+static CHIP_DESC( DIODE_MATRIX_CUSTOM ) = 
 {
     CHIP_START( diode_matrix_custom_n )
         INPUT_PINS( i1, i2, i3, i4, i5 )

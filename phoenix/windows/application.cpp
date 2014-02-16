@@ -250,6 +250,12 @@ static LRESULT CALLBACK Application_windowProc(HWND hwnd, UINT msg, WPARAM wpara
       break;
     }
 
+    // prevent ALT from opening menu
+    case WM_SYSCOMMAND: {
+        if(wparam == SC_KEYMENU && (lparam>>16) <= 0) return TRUE;
+        break;
+    }
+
     case WM_ERASEBKGND: {
       if(window.p.brush == 0) break;
       RECT rc;
