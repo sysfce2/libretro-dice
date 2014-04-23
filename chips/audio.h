@@ -10,8 +10,8 @@
 class Audio
 {
 public:
-    AudioDesc* desc;
-    Settings::Audio* settings;
+    const AudioDesc* desc;
+    const Settings::Audio* settings;
 
     Audio();
     ~Audio();
@@ -29,6 +29,8 @@ public:
     double rc_charge_exponent(double rc) { return 1.0 - exp(-sample_time() / rc); }
     double rc_discharge_exponent(double rc) { return exp(-sample_time() / rc); }
 
+    static double rc_charge_exponent(double dt, double rc) { return 1.0 - exp(-dt / rc); }
+    static double rc_discharge_exponent(double dt, double rc) { return exp(-dt / rc); }
 private:
     std::vector<Chip*> audio_nodes;
     cirque<int16_t> audio_buffer;

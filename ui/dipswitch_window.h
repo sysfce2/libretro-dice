@@ -8,7 +8,7 @@ struct DipswitchWindow : Window
         RadioButton settings[2];
         unsigned& state;
 
-        DipswitchSelector(const char* n, unsigned& sta, const char* set[2]) : state(sta)
+        DipswitchSelector(const char* n, unsigned& sta, const char* const set[2]) : state(sta)
         {
             name.setText({n, ":"});
             settings[0].setText(set[0]);
@@ -34,7 +34,7 @@ struct DipswitchWindow : Window
         ComboButton settings;
         unsigned& state;
 
-        HexDipswitchSelector(const char* n, unsigned& sta, const char* set[], int size = 16) : state(sta)
+        HexDipswitchSelector(const char* n, unsigned& sta, const char* const set[], int size = 16) : state(sta)
         {
             name.setText({n, ":"});
             for(int i = 0; i < size; i++) 
@@ -106,14 +106,10 @@ struct DipswitchWindow : Window
         {
             bool has_config = false;
             
-            for(CircuitDesc* desc = g.desc; desc->type != CIRCUIT_END; desc++)
+            for(const ChipInstance& instance : g.desc->get_chips())
             {
-                if(desc->u.instance.chip == chip_DIPSWITCH ||
-                   desc->u.instance.chip == chip_DIPSWITCH_SP4T ||
-                   desc->u.instance.chip == chip_53137 || 
-                   desc->u.instance.chip == chip_DIPSWITCH_4SPST ||
-                   desc->u.instance.chip == chip_POT_555_ASTABLE ||
-                   desc->u.instance.chip == chip_POT_555_MONO)
+                if(GameConfig::isDipswitch(instance.chip) ||
+                   GameConfig::isPotentiometer(instance.chip))
                 {
                     has_config = true;
                     break;
@@ -130,41 +126,19 @@ struct DipswitchWindow : Window
             VerticalLayout* game_layout = new VerticalLayout();
             game_layouts.push_back(game_layout);
             
-            for(CircuitDesc* desc = g.desc; desc->type != CIRCUIT_END; desc++)
+            for(const ChipInstance& instance : g.desc->get_chips())
             {
-                if(desc->u.instance.chip == chip_DIPSWITCH)
+                if(GameConfig::isDipswitch(instance.chip))
                 {
-                    DipswitchDesc* d = (DipswitchDesc*)desc->u.instance.custom_data;
-                    Layout* l = new DipswitchSelector(d->desc, d->state, d->settings);
+                    DipswitchBase* d = (DipswitchBase*)instance.custom_data;
+                    Layout* l;
+                    if(d->settingsSize() == 2) l = new DipswitchSelector(d->desc, d->state, d->getSettings());
+                    else l = new HexDipswitchSelector(d->desc, d->state, d->getSettings(), d->settingsSize());
                     game_layout->append(*l, {~0, 0}, 10);
                 }
-                else if(desc->u.instance.chip == chip_DIPSWITCH_SP4T)
+                else if(GameConfig::isPotentiometer(instance.chip))
                 {
-                    DipswitchSP4TDesc* d = (DipswitchSP4TDesc*)desc->u.instance.custom_data;
-                    Layout* l = new HexDipswitchSelector(d->desc, d->state, d->settings, 4);
-                    game_layout->append(*l, {~0, 0}, 10);
-                }
-                else if(desc->u.instance.chip == chip_53137)
-                {
-                    Dipswitch53137Desc* d = (Dipswitch53137Desc*)desc->u.instance.custom_data;
-                    Layout* l = new HexDipswitchSelector(d->desc, d->state, d->settings);
-                    game_layout->append(*l, {~0, 0}, 10);
-                }
-                else if(desc->u.instance.chip == chip_DIPSWITCH_4SPST)
-                {
-                    Dipswitch4SP4TDesc* d = (Dipswitch4SP4TDesc*)desc->u.instance.custom_data;
-                    Layout* l = new HexDipswitchSelector(d->desc, d->state, d->settings);
-                    game_layout->append(*l, {~0, 0}, 10);
-                }
-                else if(desc->u.instance.chip == chip_POT_555_ASTABLE)
-                {
-                    PotentimeterAstable555Desc* d = (PotentimeterAstable555Desc*)desc->u.instance.custom_data;
-                    Layout* l = new PotentiometerSelector(d->desc, d->current_val, d->min_val, d->max_val);
-                    game_layout->append(*l, {~0, 0}, 10);
-                }
-                else if(desc->u.instance.chip == chip_POT_555_MONO)
-                {
-                    PotentimeterMono555Desc* d = (PotentimeterMono555Desc*)desc->u.instance.custom_data;
+                    PotentiometerBase* d = (PotentiometerBase*)instance.custom_data;
                     Layout* l = new PotentiometerSelector(d->desc, d->current_val, d->min_val, d->max_val);
                     game_layout->append(*l, {~0, 0}, 10);
                 }

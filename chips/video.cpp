@@ -1,11 +1,15 @@
 #include "video.h"
 #include "../circuit.h"
+#include <phoenix.hpp>
 
 #ifdef __APPLE__
 #include <OpenGL/gl.h> // Think different
 #else
 #include <GL/gl.h>
 #endif
+
+using phoenix::VerticalLayout;
+using phoenix::Viewport;
 
 /* 
 	Inputs:
@@ -54,10 +58,10 @@ CHIP_DESC( VIDEO ) =
 const VideoDesc VideoDesc::DEFAULT = VideoDesc();
 
 Video::Video() : scanline_time(0), current_time(0), initial_time(0), 
-    v_size(0), v_pos(0), frame_count(0), desc(&VideoDesc::DEFAULT), color(1 << 8)
+    v_size(0), v_pos(0), frame_count(0), desc(&VideoDesc::DEFAULT), color(3 << 8)
 { }
 
-void Video::video_init(int width, int height, Circuit* circuit)
+void Video::video_init(int width, int height, const Settings::Video& settings)
 {
     // Keep aspect ratio
     unsigned x = 0;
@@ -67,7 +71,7 @@ void Video::video_init(int width, int height, Circuit* circuit)
     if(desc->orientation == ROTATE_90 || desc->orientation == ROTATE_270)
         horizontal = false;        
 
-    if(circuit && circuit->settings.video.keep_aspect && horizontal)
+    if(settings.keep_aspect && horizontal)
     {
         if(width > 4*height/3)
         {
@@ -80,7 +84,7 @@ void Video::video_init(int width, int height, Circuit* circuit)
             height = 3*width/4;
         }
     }
-    else if(circuit && circuit->settings.video.keep_aspect) // vertical
+    else if(settings.keep_aspect) // vertical
     {
         if(width > 3*height/4)
         {
@@ -93,37 +97,6 @@ void Video::video_init(int width, int height, Circuit* circuit)
             height = 4*width/3;
         }
     }
-
-    // TODO: Finish render to texture code?
-    /*PFNGLGENFRAMEBUFFERSEXTPROC glGenFramebuffersEXT = (PFNGLGENFRAMEBUFFERSEXTPROC)SDL_GL_GetProcAddress("glGenFramebuffersEXT");;
-    PFNGLBINDFRAMEBUFFEREXTPROC glBindFramebufferEXT;
-    PFNGLFRAMEBUFFERTEXTURE2DEXTPROC glFramebufferTexture2DEXT;
-    PFNGLCHECKFRAMEBUFFERSTATUSEXTPROC glCheckFramebufferStatusEXT;
-    PFNGLDELETEFRAMEBUFFERSEXTPROC glDeleteFramebuffersEXT;
-
-    GLuint frame_buffer = 0;
-    glGenFramebuffersEXT(1, &frame_buffer);
-    glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, frame_buffer);
-
-    // The texture we're going to render to
-    GLuint rendered_texture;
-    glGenTextures(1, &rendered_texture);
- 
-    // "Bind" the newly created texture : all future texture functions will modify this texture
-    glBindTexture(GL_TEXTURE_2D, rendered_texture);
- 
-    // Give an empty image to OpenGL ( the last "0" )
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, 0);
-
-    // Poor filtering. Needed !
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-
-    // Set "renderedTexture" as our colour attachement #0
-    //glFramebufferTexture(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, rendered_texture, 0);
-    glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, rendered_texture, 0);
-
-    glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, frame_buffer);*/
 
    	glViewport(x, y, width, height);
 
@@ -153,19 +126,38 @@ void Video::adjust_screen_params()
 	swap_buffers();
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
-    // Initialize color array
-    for(int i = 1; i < color.size(); i++)
+    if(desc->monitor_type == COLOR)
     {
+        init_color_lut(desc->r_color);
+    }
+    else
+    {
+        VIDEO_RESISTOR_MATRIX temp;
+        for(int i = 0; i < 8; i++)
+            temp[i][0] = temp[i][1] = temp[i][2] = desc->r[i];
+
+        init_color_lut(temp);
+    }
+}
+
+void Video::init_color_lut(const double (*r)[3])
+{
+    // Initialize color array
+    for(int i = 3; i < color.size(); i++)
+    {
+        int v = i / 3;
+        int c = i % 3;
+        
         double r_hi = 0.0, r_lo = 0.0;
 
         for(int j = 0; j < 8; j++)
         {
-            if(desc->r[j] < 1.0) continue; // Assume 1 Ohm minimum
+            if(r[j][c] < 1.0) continue; // Assume 1 Ohm minimum
 
-            if(i & (1 << j))
-                r_hi += 1.0 / desc->r[j];
+            if(v & (1 << j))
+                r_hi += 1.0 / r[j][c];
             else
-                r_lo += 1.0 / desc->r[j];
+                r_lo += 1.0 / r[j][c];
         }
 
         double val;
@@ -184,7 +176,8 @@ void Video::adjust_screen_params()
             val = r_lo / (r_hi + r_lo);
         }
 
-        color[i] = (val + desc->brightness) * desc->contrast ; // TODO: user configurable brightness/contrast?
+        color[i] = (val + desc->brightness) * desc->contrast; // TODO: user configurable brightness/contrast?
+        
         //printf("Color %d: %g %g %g %g\n", i, r_lo, r_hi, val, color[i]);
     }
 }
@@ -196,10 +189,10 @@ void Video::draw(Chip* chip)
 
     if((chip->inputs & VIDEO_MASK) || desc->scan_mode == INTERLACED) // Falling edge
     {
-        float c = color[chip->inputs & VIDEO_MASK];
+        float* c = &color[(chip->inputs & VIDEO_MASK) * 3];
 
         glBegin(GL_QUADS);
-            glColor3f(c, c, c);
+            glColor3fv(c);
 
 	        glVertex3f(start_time, v_pos,     0.0);
 	        glVertex3f(end_time,   v_pos,     0.0);
@@ -265,12 +258,12 @@ CUSTOM_LOGIC( Video::video )
     // HBLANK rising edge, go to next line
     else if(mask == HBLANK_MASK && !(chip->inputs & HBLANK_MASK)) 
     {
-        // Skip length check on first/last line, since some games
+        // Skip length check on first/last line and during vblank, since some games
         // use a different horizontal count on the first or last scanline
-        if(video->v_pos != 0 && video->v_pos != video->v_size && (global_time - video->initial_time) != video->scanline_time)
+        if(video->v_pos > 0 && video->v_pos < video->v_size && (global_time - video->initial_time) != video->scanline_time)
         {
+            //printf("Adjust screen params old:%lld new:%lld pos:%d\n", video->scanline_time, global_time - video->initial_time, video->v_pos);
             video->scanline_time = global_time - video->initial_time;
-            //printf("Adjust screen params t:%lld\n", global_time);
             video->adjust_screen_params();
         }
 
@@ -308,20 +301,20 @@ CUSTOM_LOGIC( Video::video )
 
 #ifdef _WIN32
 
-//#include "video_wgl.h"
-//Video* Video::createDefault(uintptr_t handle) { return new VideoWgl(handle); }
-#include "video_sdl.h"
-Video* Video::createDefault(uintptr_t handle) { return new VideoSdl(handle); }
+#include "video_wgl.h"
+Video* Video::createDefault(VerticalLayout& layout, Viewport*& viewport) { return new VideoWgl(layout, viewport); }
+//#include "video_sdl.h"
+//Video* Video::createDefault(uintptr_t handle) { return new VideoSdl(handle); }
 
 #elif defined(__APPLE__)
 
 #include "video_cgl.h"
-Video* Video::createDefault(uintptr_t handle) { return new VideoCgl(handle); }
+Video* Video::createDefault(VerticalLayout& layout, Viewport*& viewport) { return new VideoCgl(viewport->handle()); }
 
 #else
 
 #include "video_sdl.h"
-Video* Video::createDefault(uintptr_t handle) { return new VideoSdl(handle); }
+Video* Video::createDefault(VerticalLayout& layout, Viewport*& viewport) { return new VideoSdl(viewport->handle()); }
 
 #endif
 

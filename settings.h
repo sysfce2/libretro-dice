@@ -46,18 +46,33 @@ struct Settings : configuration
 
     struct Video
     {
+        enum Multisampling { NONE = 0, TWO_X, FOUR_X, EIGHT_X };
+
+        unsigned multisampling;
+        unsigned brightness, contrast;
         bool keep_aspect;
+        bool vsync;
+        bool status_visible;
     } video;
 
     struct Input
     {
+        struct MouseAxis
+        {
+            unsigned mouse;
+            unsigned axis;
+        };
+
+        struct JoystickAxis
+        {
+            unsigned joystick;
+            unsigned axis;
+        };
+
+        enum JoystickMode { JOYSTICK_RELATIVE = 0, JOYSTICK_ABSOLUTE = 1 };
+
         struct Paddle
         {
-            struct MouseAxis
-            {
-                unsigned mouse;
-                unsigned axis;
-            };
             bool use_mouse;
             MouseAxis x_axis, y_axis;
             unsigned mouse_sensitivity;
@@ -66,71 +81,60 @@ struct Settings : configuration
             unsigned keyboard_sensitivity;
             KeyAssignment up, down, left, right;
 
-            struct JoystickAxis
-            {
-                unsigned joystick;
-                unsigned axis;
-            };
-            enum JoystickMode { JOYSTICK_RELATIVE = 0, JOYSTICK_ABSOLUTE = 1 };
             bool use_joystick;
             JoystickAxis joy_x_axis, joy_y_axis;
             unsigned joystick_mode;
             unsigned joystick_sensitivity;
-        };
+        } paddle[4];
 
         struct Wheel
         {
             bool use_mouse;
-
-            struct Axis
-            {
-                unsigned mouse;
-                unsigned axis;
-            };
-            Axis axis;
+            MouseAxis axis;
             unsigned mouse_sensitivity;
 
             bool use_keyboard;
             unsigned keyboard_sensitivity;
 
             KeyAssignment left, right;
-        };
+        } wheel[4];
 
         struct Throttle
         {
             KeyAssignment key;
             unsigned keyboard_sensitivity;
-        };
+        } throttle[1];
 
         struct Joystick
         {
             KeyAssignment up, down, left, right;
-        };
+        } joystick[2];
 
         struct Button
         {
             KeyAssignment button1, button2, button3;
-        };
+        } buttons[6];
 
         struct CoinStart
         {
-            KeyAssignment coin, start1, start2;
-        };
+            KeyAssignment coin1, coin2, coin3, coin4, dollar, start1, start2;
+        } coin_start;
 
         struct UserInterface
         {
             KeyAssignment pause, throttle, fullscreen, quit;
-        };
-
-        Paddle paddle[4];
-        Throttle throttle[1];
-        Joystick joystick1, joystick2;
-        Wheel wheel[2];
-        Button buttons1, buttons2;
-        CoinStart coin_start;
-        UserInterface ui;
+        } ui;
 
     } input;
+
+    struct DefaultKeys
+    {
+        static phoenix::Keyboard::Scancode Up(int player);
+        static phoenix::Keyboard::Scancode Down(int player);
+        static phoenix::Keyboard::Scancode Left(int player);
+        static phoenix::Keyboard::Scancode Right(int player);
+        template <int> static phoenix::Keyboard::Scancode Button(int player);
+    };
 
     Settings();
 
@@ -146,6 +150,11 @@ struct Settings : configuration
     {
         return configuration::save(filename);
     }
+
+    template<size_t N> const Input::Joystick& joystick() const { return input.joystick[N]; }
+    template<size_t N> const Input::Button& buttons() const { return input.buttons[N]; }
+    const Input::CoinStart& coinStart() const { return input.coin_start; }
+    const Input::UserInterface& ui() const { return input.ui; }
 };
 
 #endif

@@ -98,7 +98,7 @@ struct InputWindow : Window
         Label joystick_sensitivity_label;
         LineEdit joystick_sensitivity_val;
         HorizontalSlider joystick_sensitivity_slider;
-        std::vector<Settings::Input::Paddle::JoystickAxis> joystick_axes;
+        std::vector<Settings::Input::JoystickAxis> joystick_axes;
 
         void setEnabled(bool e = true)
         {
@@ -165,9 +165,9 @@ struct InputWindow : Window
             joystick_axis_box[0].reset();
             joystick_axis_box[1].reset();
             joystick_axes.clear();
-            for(unsigned i = 0; i < up_assignment.window.input.getNumJoysticks(); i++)
+            for(unsigned i = 0; i < up_assignment.window.input->getNumJoysticks(); i++)
             {
-                unsigned num_axes = up_assignment.window.input.getNumJoystickAxes(i); 
+                unsigned num_axes = up_assignment.window.input->getNumJoystickAxes(i); 
 
                 for(unsigned j = 0; j < num_axes; j++)
                 {
@@ -294,8 +294,8 @@ struct InputWindow : Window
             joystick_mode_label.setText("Mode:");
             joystick_mode_box[0].setText("Relative");
             joystick_mode_box[1].setText("Absolute");
-            joystick_mode_box[0].onActivate = [&] { paddle_settings.joystick_mode = Settings::Input::Paddle::JOYSTICK_RELATIVE; setEnabled(true); };
-            joystick_mode_box[1].onActivate = [&] { paddle_settings.joystick_mode = Settings::Input::Paddle::JOYSTICK_ABSOLUTE; setEnabled(true); };
+            joystick_mode_box[0].onActivate = [&] { paddle_settings.joystick_mode = Settings::Input::JOYSTICK_RELATIVE; setEnabled(true); };
+            joystick_mode_box[1].onActivate = [&] { paddle_settings.joystick_mode = Settings::Input::JOYSTICK_ABSOLUTE; setEnabled(true); };
             RadioButton::group(joystick_mode_box[0], joystick_mode_box[1]);
             joystick_mode_layout.append(joystick_mode_label, {0, 0}, 10);
             joystick_mode_layout.append(joystick_mode_box[0], {0, 0}, 10);
@@ -385,6 +385,7 @@ struct InputWindow : Window
         }
     };
 
+    template<int N>
     struct ButtonLayout : VerticalLayout
     {
         // Keyboard / Joystick ///////////////////////////////////
@@ -396,52 +397,69 @@ struct InputWindow : Window
             button_3(w, b.button3, "Button 3", 80, 100)
         {
             append(button_1, {0, 0}, 10);
-            append(button_2, {0, 0}, 10);
-            append(button_3, {0, 0}, 10);
+            if(N > 1) append(button_2, {0, 0}, 10);
+            if(N > 2) append(button_3, {0, 0}, 10);
         }
 
         void create()
         {
             button_1.create();
-            button_2.create();
-            button_3.create();
+            if(N > 1) button_2.create();
+            if(N > 2) button_3.create();
         }
 
         void setEnabled(bool e = true)
         {
             button_1.button.setEnabled(e);
-            button_2.button.setEnabled(e);
-            button_3.button.setEnabled(e);
+            if(N > 1) button_2.button.setEnabled(e);
+            if(N > 2) button_3.button.setEnabled(e);
         }
     };
 
     struct CoinStartLayout : VerticalLayout
     {
         // Keyboard / Joystick ///////////////////////////////////
-        AssignmentSelector coin, start1, start2;
+        AssignmentSelector start1, start2;
+        AssignmentSelector coin1, coin2, coin3, coin4, dollar;
 
         CoinStartLayout(InputWindow& w, Settings::Input::CoinStart& c) : 
-            start1(w, c.start1, "Start Button 1", 100, 100),
-            start2(w, c.start2, "Start Button 2", 100, 100),
-            coin(w, c.coin, "Insert Coin", 100, 100)            
+            start1(w, c.start1, "Start Button 1", 110, 100),
+            start2(w, c.start2, "Start Button 2", 110, 100),
+            coin1(w, c.coin1, "Insert Coin 1", 110, 100),
+            coin2(w, c.coin2, "Insert Coin 2", 110, 100),
+            coin3(w, c.coin3, "Insert Coin 3", 110, 100),
+            coin4(w, c.coin4, "Insert Coin 4", 110, 100),
+            dollar(w, c.dollar, "Insert Dollar Bill", 110, 100)
         {
             append(start1, {0, 0}, 10);
             append(start2, {0, 0}, 10);
-            append(coin, {0, 0}, 10);            
+            append(coin1, {0, 0}, 10);            
+            append(coin2, {0, 0}, 10);            
+            append(coin3, {0, 0}, 10);            
+            append(coin4, {0, 0}, 10);            
+            append(dollar, {0, 0}, 10);            
         }
 
         void create()
         {
             start1.create();
             start2.create();
-            coin.create();
+            coin1.create();
+            coin2.create();
+            coin3.create();
+            coin4.create();
+            dollar.create();
         }
 
         void setEnabled(bool e = true)
         {
             start1.button.setEnabled(e);
             start2.button.setEnabled(e);
-            coin.button.setEnabled(e);
+            coin1.button.setEnabled(e);
+            coin2.button.setEnabled(e);
+            coin3.button.setEnabled(e);
+            coin4.button.setEnabled(e);
+            dollar.button.setEnabled(e);
         }
     };
 
@@ -675,20 +693,22 @@ struct InputWindow : Window
     };
 
     Settings& settings;
-    Input& input;
+    Input*& input;
 
     HorizontalLayout layout;
     ListView input_view;
     
     PaddleLayout paddle_layout_1, paddle_layout_2, paddle_layout_3, paddle_layout_4;
     JoystickLayout joystick_layout_1, joystick_layout_2;
-    WheelLayout wheel_layout_1, wheel_layout_2;
+    WheelLayout wheel_layout_1, wheel_layout_2, wheel_layout_3, wheel_layout_4;
     ThrottleLayout throttle_layout_1;
-    ButtonLayout button_layout_1, button_layout_2;
+    ButtonLayout<3> button_layout_1, button_layout_2;
+    ButtonLayout<2> button_layout_3, button_layout_4;
+    ButtonLayout<1> button_layout_5, button_layout_6;
     CoinStartLayout coin_start_layout;
     UserInterfaceLayout ui_layout;
 
-    Layout* input_layouts[13];
+    Layout* input_layouts[19];
 
     FixedLayout exit_layout;
     Button exit_button;
@@ -696,18 +716,24 @@ struct InputWindow : Window
     AssignmentSelector* active_selector;
     nall::function<void()> poll_input;
 
-    InputWindow(Settings& s, Input& i, nall::function<void()> p) : 
+    InputWindow(Settings& s, Input*& i, nall::function<void()> p) : 
         settings(s), input(i), active_selector(nullptr), poll_input(p),
         paddle_layout_1(*this, s.input.paddle[0]), paddle_layout_2(*this, s.input.paddle[1]),
         paddle_layout_3(*this, s.input.paddle[2]), paddle_layout_4(*this, s.input.paddle[3]),
-        joystick_layout_1(*this, s.input.joystick1), joystick_layout_2(*this, s.input.joystick2),
+        joystick_layout_1(*this, s.input.joystick[0]), joystick_layout_2(*this, s.input.joystick[1]),
         wheel_layout_1(*this, s.input.wheel[0]), wheel_layout_2(*this, s.input.wheel[1]),
+        wheel_layout_3(*this, s.input.wheel[2]), wheel_layout_4(*this, s.input.wheel[3]),
         throttle_layout_1(*this, s.input.throttle[0]),
-        button_layout_1(*this, s.input.buttons1), button_layout_2(*this, s.input.buttons2),
+        button_layout_1(*this, s.input.buttons[0]), button_layout_2(*this, s.input.buttons[1]),
+        button_layout_3(*this, s.input.buttons[2]), button_layout_4(*this, s.input.buttons[3]),
+        button_layout_5(*this, s.input.buttons[4]), button_layout_6(*this, s.input.buttons[5]),
         coin_start_layout(*this, s.input.coin_start), ui_layout(*this, s.input.ui),
         input_layouts{&paddle_layout_1, &joystick_layout_1, &wheel_layout_1, &throttle_layout_1, &button_layout_1,
                       &paddle_layout_2, &joystick_layout_2, &wheel_layout_2, &button_layout_2,
-                      &paddle_layout_3, &paddle_layout_4, &coin_start_layout, &ui_layout}
+                      &paddle_layout_3, &wheel_layout_3, &button_layout_3, 
+                      &paddle_layout_4, &wheel_layout_4, &button_layout_4, 
+                      &button_layout_5, &button_layout_6,
+                      &coin_start_layout, &ui_layout}
     {
         setTitle("Input Configuration");
         setResizable(false);
@@ -726,7 +752,15 @@ struct InputWindow : Window
         input_view.append("Player 2 Buttons");
 
         input_view.append("Player 3 Paddle");
+        input_view.append("Player 3 Wheel");
+        input_view.append("Player 3 Buttons");
+
         input_view.append("Player 4 Paddle");
+        input_view.append("Player 4 Wheel");
+        input_view.append("Player 4 Buttons");
+
+        input_view.append("Player 5 Buttons");
+        input_view.append("Player 6 Buttons");
 
         input_view.append("Coin / Start");
         input_view.append("User Interface");
@@ -762,12 +796,23 @@ struct InputWindow : Window
         wheel_layout_1.create();
         throttle_layout_1.create();
         button_layout_1.create();
+
         paddle_layout_2.create();
         joystick_layout_2.create();
         wheel_layout_2.create();
         button_layout_2.create();
+
         paddle_layout_3.create();
+        wheel_layout_3.create();
+        button_layout_3.create();
+
         paddle_layout_4.create();
+        wheel_layout_4.create();
+        button_layout_4.create();
+        
+        button_layout_5.create();
+        button_layout_6.create();
+
         coin_start_layout.create();
         ui_layout.create();
 

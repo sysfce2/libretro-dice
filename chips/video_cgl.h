@@ -18,7 +18,16 @@ private:
 public:
     VideoCgl(uintptr_t h) : Video(), handle((NSView*)h), view(nil) { }
 
-    void video_init(int width, int height, Circuit* circuit)
+    ~VideoCgl()
+    {
+        @autoreleasepool
+        {
+            [view removeFromSuperview];
+            [view release];
+        }
+    }
+
+    void video_init(int width, int height, const Settings::Video& settings)
     {
         @autoreleasepool
         {
@@ -29,12 +38,18 @@ public:
                 NSOpenGLPFAColorSize, 24,
                 NSOpenGLPFAAlphaSize, 8,
                 NSOpenGLPFADoubleBuffer,
+                settings.multisampling ? NSOpenGLPFAMultisample : (NSOpenGLPixelFormatAttribute)0,
+                NSOpenGLPFASampleBuffers, (NSOpenGLPixelFormatAttribute)1,
+                NSOpenGLPFASamples, (NSOpenGLPixelFormatAttribute)(1 << settings.multisampling),
                 0
             };
 
             auto format = [[[NSOpenGLPixelFormat alloc] initWithAttributes:attributes] autorelease];
             auto context = [[[NSOpenGLContext alloc] initWithFormat:format shareContext:nil] autorelease];
             
+            GLint swap = settings.vsync;
+            [context setValues:&swap forParameter:NSOpenGLCPSwapInterval];
+
             view = [[NSOpenGLView alloc] initWithFrame:NSMakeRect(0, 0, width, height) pixelFormat:format];
             [view setOpenGLContext:context];
             [handle addSubview:view];
@@ -42,7 +57,7 @@ public:
             
             [view lockFocus];
 
-            Video::video_init(width, height, circuit);
+            Video::video_init(width, height, settings);
 
             [view unlockFocus];
         }
@@ -62,7 +77,8 @@ public:
 
     void show_cursor(bool show)
     {
-        // TODO: Implement
+        if(show) [NSCursor unhide];
+        else     [NSCursor hide];
     }
 };
 

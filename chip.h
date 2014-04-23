@@ -364,8 +364,8 @@ public:
     bool visited;
     // End new stuff
 	
-	Chip(int QUEUE_SIZE, int SUBCYCLE_SIZE, Circuit* cir, ChipDesc* desc, void* custom = NULL);
-    void connect(Chip* chip, ChipDesc* desc, uint8_t pin);
+	Chip(int QUEUE_SIZE, int SUBCYCLE_SIZE, Circuit* cir, const ChipDesc* desc, void* custom = NULL);
+    void connect(Chip* chip, const ChipDesc* desc, uint8_t pin);
 	void initialize();
 
     void update_inputs(uint32_t mask);

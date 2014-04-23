@@ -68,6 +68,8 @@ void pWidget::constructor() {
 }
 
 void pWidget::destructor() {
+  if(!widget.state.abstract) return;
+
   @autoreleasepool {
     [cocoaView release];
   }

@@ -65,7 +65,7 @@ CHIP_DESC( 9312 ) =
 	CHIP_START( 9312_n )
         INPUT_PINS( 1, 2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13 )
         OUTPUT_PIN( 14 )
-        OUTPUT_DELAY_NS( 17.0, 17.0 ),
+        OUTPUT_DELAY_NS( 10.0, 10.0 ),
 
    	CHIP_DESC_END
 };

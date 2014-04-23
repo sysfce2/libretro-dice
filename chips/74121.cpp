@@ -1,4 +1,4 @@
-#include "9602.h"
+#include "74121.h"
 #include "../circuit.h"
 
 /*

@@ -11,7 +11,7 @@ public:
     uint8_t data[_2533_BIT_COUNT];
     uint32_t addr;
 
-    Ram2533Desc() : data{{0}}, addr(0) { }
+    Ram2533Desc() : data{0}, addr(0) { }
 };
 
 extern CHIP_DESC( 2533 );

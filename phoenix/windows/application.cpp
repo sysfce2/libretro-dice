@@ -25,12 +25,10 @@ bool pApplication::pendingEvents() {
 }
 
 void pApplication::processEvents() {
-  while(pendingEvents()) {
     MSG msg;
-    if(PeekMessage(&msg, 0, 0, 0, PM_REMOVE)) {
-      Application_processDialogMessage(msg);
+    while(PeekMessage(&msg, 0, 0, 0, PM_REMOVE)) {
+        Application_processDialogMessage(msg);
     }
-  }
 }
 
 void Application_processDialogMessage(MSG& msg) {
@@ -55,6 +53,10 @@ void pApplication::quit() {
 void pApplication::initialize() {
   CoInitialize(0);
   InitCommonControls();
+
+  // Fixes app flickering?
+  // TODO: Cause still unknown
+  DisableProcessWindowsGhosting();
 
   WNDCLASS wc;
   wc.cbClsExtra = 0;

@@ -1,29 +1,31 @@
 #include "circuit_desc.h"
 
-extern CIRCUIT_LAYOUT( pong );
-extern CIRCUIT_LAYOUT( rebound );
-extern CIRCUIT_LAYOUT( gotcha );
-extern CIRCUIT_LAYOUT( spacerace );
-extern CIRCUIT_LAYOUT( stuntcycle );
-extern CIRCUIT_LAYOUT( pongdoubles );
-extern CIRCUIT_LAYOUT( tvbasketball );
-extern CIRCUIT_LAYOUT( breakout );
-extern CIRCUIT_LAYOUT( antiaircraft );
-extern CIRCUIT_LAYOUT( attack );
-extern CIRCUIT_LAYOUT( sharkjaws );
-extern CIRCUIT_LAYOUT( quadrapong );
-extern CIRCUIT_LAYOUT( jetfighter );
-extern CIRCUIT_LAYOUT( crashnscore );
-extern CIRCUIT_LAYOUT( crossfire );
-extern CIRCUIT_LAYOUT( pinpong );
-extern CIRCUIT_LAYOUT( cleansweep );
-extern CIRCUIT_LAYOUT( wipeout );
-
+EXTERN_CIRCUIT_LAYOUT( pong );
+EXTERN_CIRCUIT_LAYOUT( rebound );
+EXTERN_CIRCUIT_LAYOUT( gotcha );
+EXTERN_CIRCUIT_LAYOUT( spacerace );
+EXTERN_CIRCUIT_LAYOUT( stuntcycle );
+EXTERN_CIRCUIT_LAYOUT( pongdoubles );
+EXTERN_CIRCUIT_LAYOUT( tvbasketball );
+EXTERN_CIRCUIT_LAYOUT( breakout );
+EXTERN_CIRCUIT_LAYOUT( antiaircraft );
+EXTERN_CIRCUIT_LAYOUT( attack );
+EXTERN_CIRCUIT_LAYOUT( sharkjaws );
+EXTERN_CIRCUIT_LAYOUT( quadrapong );
+EXTERN_CIRCUIT_LAYOUT( jetfighter );
+EXTERN_CIRCUIT_LAYOUT( crashnscore );
+EXTERN_CIRCUIT_LAYOUT( crossfire );
+EXTERN_CIRCUIT_LAYOUT( pinpong );
+EXTERN_CIRCUIT_LAYOUT( cleansweep );
+EXTERN_CIRCUIT_LAYOUT( wipeout );
+EXTERN_CIRCUIT_LAYOUT( hiway );
+EXTERN_CIRCUIT_LAYOUT( steeplechase );
+EXTERN_CIRCUIT_LAYOUT( indy4 );
 
 struct GameDesc
 {
     const char* name;
-    CircuitDesc* desc;
+    const CircuitDesc* desc;
     const char* command_line;
     
     const char* manufacturer;
@@ -32,26 +34,33 @@ struct GameDesc
     bool operator<(const GameDesc& g) const { return strcmp(name, g.name) < 0; }
 };
 
+#define GAME( name, id, manufacturer, year ) { name, circuit_##id(), #id, manufacturer, year }
+
 static GameDesc game_list[] =
 {
-    { "Pong",           circuit_pong,           "pong",             "Atari",     1972 },
-    { "Pong Doubles",   circuit_pongdoubles,    "pongdoubles",      "Atari",     1973 },
-    { "Rebound",        circuit_rebound,        "rebound",          "Atari",     1974 },
-    { "Gotcha",         circuit_gotcha,         "gotcha",           "Atari",     1973 },
-    { "Space Race",     circuit_spacerace,      "spacerace",        "Atari",     1973 },
-    { "Stunt Cycle",    circuit_stuntcycle,     "stuntcycle",       "Atari",     1976 },
-    { "TV Basketball",  circuit_tvbasketball,   "tvbasketball",     "Midway",    1974 },
-    { "Breakout",       circuit_breakout,       "breakout",         "Atari",     1976 },
-    { "Anti-Aircraft",  circuit_antiaircraft,   "antiaircraft",     "Atari",     1975 },
-    { "Attack",         circuit_attack,         "attack",           "Exidy",     1977 },
-    { "Shark Jaws",     circuit_sharkjaws,      "sharkjaws",        "Atari",     1975 },
-    { "Quadrapong",     circuit_quadrapong,     "quadrapong",       "Atari",     1974 },
-    { "Jet Fighter",    circuit_jetfighter,     "jetfighter",       "Atari",     1975 },
-    { "Crash 'N Score", circuit_crashnscore,    "crashnscore",      "Atari",     1975 },
-    { "Crossfire",      circuit_crossfire,      "crossfire",        "Atari",     1975 },
-    { "Pin Pong",       circuit_pinpong,        "pinpong",          "Atari",     1974 },
-    { "Clean Sweep",    circuit_cleansweep,     "cleansweep",       "Ramtek",    1974 },
-    { "Wipe Out",       circuit_wipeout,        "wipeout",          "Ramtek",    1974 }
+    GAME( "Pong",               pong,            "Atari",              1972 ),
+    GAME( "Pong Doubles",       pongdoubles,     "Atari",              1973 ),
+    GAME( "Rebound",            rebound,         "Atari",              1974 ),
+    GAME( "Gotcha",             gotcha,          "Atari",              1973 ),
+    GAME( "Space Race",         spacerace,       "Atari",              1973 ),
+    GAME( "Stunt Cycle",        stuntcycle,      "Atari",              1976 ),
+    GAME( "TV Basketball",      tvbasketball,    "Midway",             1974 ),
+    GAME( "Breakout",           breakout,        "Atari",              1976 ),
+    GAME( "Anti-Aircraft",      antiaircraft,    "Atari",              1975 ),
+    GAME( "Attack",             attack,          "Exidy",              1977 ),
+    GAME( "Shark Jaws",         sharkjaws,       "Atari",              1975 ),
+    GAME( "Quadrapong",         quadrapong,      "Atari",              1974 ),
+    GAME( "Jet Fighter",        jetfighter,      "Atari",              1975 ),
+    GAME( "Crash 'N Score",     crashnscore,     "Atari",              1975 ),
+    GAME( "Crossfire",          crossfire,       "Atari",              1975 ),
+    GAME( "Pin Pong",           pinpong,         "Atari",              1974 ),
+    GAME( "Clean Sweep",        cleansweep,      "Ramtek",             1974 ),
+    GAME( "Wipe Out",           wipeout,         "Ramtek",             1974 ),
+    GAME( "Hi-Way",             hiway,           "Atari",              1975 ),
+    GAME( "Steeplechase",       steeplechase,    "Atari",              1975 ),
+    GAME( "Indy 4",             indy4,           "Atari",              1976 )
 };
 
+
 static const int game_list_size = sizeof(game_list) / sizeof(GameDesc);
+

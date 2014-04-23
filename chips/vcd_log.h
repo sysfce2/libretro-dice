@@ -35,7 +35,22 @@ public:
 			   int num13 = 13, const char* name13 = NULL,
 			   int num14 = 14, const char* name14 = NULL,
 			   int num15 = 15, const char* name15 = NULL,
-               int num16 = 16, const char* name16 = NULL);
+               int num16 = 16, const char* name16 = NULL,
+               int num17 = 17, const char* name17 = NULL,
+			   int num18 = 18, const char* name18 = NULL,
+			   int num19 = 19, const char* name19 = NULL,
+			   int num20 = 20, const char* name20 = NULL,
+			   int num21 = 21, const char* name21 = NULL,
+			   int num22 = 22, const char* name22 = NULL,
+			   int num23 = 23, const char* name23 = NULL,
+			   int num24 = 24, const char* name24 = NULL,
+			   int num25 = 25, const char* name25 = NULL,
+			   int num26 = 26, const char* name26 = NULL,
+			   int num27 = 27, const char* name27 = NULL,
+			   int num28 = 28, const char* name28 = NULL,
+			   int num29 = 29, const char* name29 = NULL,
+			   int num30 = 30, const char* name30 = NULL,
+			   int num31 = 31, const char* name31 = NULL);
 
     ~VcdLogDesc();
 

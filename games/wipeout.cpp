@@ -74,155 +74,154 @@ static AUDIO_DESC( wipeout )
     AUDIO_SPEAKER_CONFIG(MONO) 
 AUDIO_DESC_END
 
-CIRCUIT_LAYOUT( wipeout ) =
-{  
+CIRCUIT_LAYOUT( wipeout )
 /* * * CHIPS * * */
 
 //note all 7421 are actually 74H21 on diagram
 
-CHIP("CRYSTAL", CLOCK_10_733_MHZ),  //0A
-CHIP("0B",  7404),    //unused out 2 4 6 8 (clock and T999) 
-CHIP("0C",  74S112),  //unused out 6
-CHIP("0D",  7437),    
-CHIP("0E",  7486),    
-CHIP("0F",  7402),    
-CHIP("0G",  74S112),
-CHIP("0H",  7402),    //unused 2;3->1 
-CHIP("0J",  7420),    
+CHIP("CRYSTAL", CLOCK_10_733_MHZ)  //0A
+CHIP("0B",  7404)    //unused out 2 4 6 8 (clock and T999) 
+CHIP("0C",  74S112)  //unused out 6
+CHIP("0D",  7437)    
+CHIP("0E",  7486)    
+CHIP("0F",  7402)    
+CHIP("0G",  74S112)
+CHIP("0H",  7402)    //unused 2;3->1 
+CHIP("0J",  7420)    
 
-CHIP("1A",  74161),   //unused out 12 13
-CHIP("1B",  74161),
-CHIP("1C",  74S112),
-CHIP("1D",  7400),    
-CHIP("1E",  7427),    
-CHIP("1F",  7400),    
-CHIP("1G",  7408),    
-CHIP("1H",  7402),    
-CHIP("1J",  7427),    
-//CHIP("1K",  7405),
+CHIP("1A",  74161)   //unused out 12 13
+CHIP("1B",  74161)
+CHIP("1C",  74S112)
+CHIP("1D",  7400)    
+CHIP("1E",  7427)    
+CHIP("1F",  7400)    
+CHIP("1G",  7408)    
+CHIP("1H",  7402)    
+CHIP("1J",  7427)    
+//CHIP("1K",  7405)
 
-CHIP("2A",  74161),   //unused out 13
-CHIP("2B",  74161),
-CHIP("2C",  7404),    
-CHIP("2D",  7400),    
-CHIP("2E",  7421),    
-CHIP("2F",  7421),    
-CHIP("2G",  7408),    
-CHIP("2H",  7404),    //unused out 10 (sync)    
-CHIP("2J",  7408),    
-CHIP("2K",  74S112),
-CHIP("2M",  7402),    
+CHIP("2A",  74161)   //unused out 13
+CHIP("2B",  74161)
+CHIP("2C",  7404)    
+CHIP("2D",  7400)    
+CHIP("2E",  7421)    
+CHIP("2F",  7421)    
+CHIP("2G",  7408)    
+CHIP("2H",  7404)    //unused out 10 (sync)    
+CHIP("2J",  7408)    
+CHIP("2K",  74S112)
+CHIP("2M",  7402)    
 
-CHIP("3A",  74161),   //unused out 11
-CHIP("3B",  74161),   //unused out 11
-CHIP("3C",  74161),   //unused out 11
-CHIP("3D",  74161),   //unused out 11
-CHIP("3E",  74161),   //unused out 14 15
-CHIP("3F",  7427),    
-CHIP("3G",  7420),    
-CHIP("3H",  7486),    
-CHIP("3J",  7402),    
+CHIP("3A",  74161)   //unused out 11
+CHIP("3B",  74161)   //unused out 11
+CHIP("3C",  74161)   //unused out 11
+CHIP("3D",  74161)   //unused out 11
+CHIP("3E",  74161)   //unused out 14 15
+CHIP("3F",  7427)    
+CHIP("3G",  7420)    
+CHIP("3H",  7486)    
+CHIP("3J",  7402)    
 
-CHIP("4A",  74153),
-CHIP("4B",  74153),
-CHIP("4C",  7404),    //unused out 12 (N999)    
-CHIP("4D",  82S123, &d4_desc),  //I5610 unused out 1 2 character generator ROM
-CHIP("4E",  74166),
-CHIP("4F",  7427),    
-CHIP("4G",  7402),     
-CHIP("4H",  7400),    
-CHIP("4J",  7427),    
+CHIP("4A",  74153)
+CHIP("4B",  74153)
+CHIP("4C",  7404)    //unused out 12 (N999)    
+CHIP("4D",  82S123, &d4_desc)  //I5610 unused out 1 2 character generator ROM
+CHIP("4E",  74166)
+CHIP("4F",  7427)    
+CHIP("4G",  7402)     
+CHIP("4H",  7400)    
+CHIP("4J",  7427)    
 
-CHIP("5A",  74174),
-CHIP("5B",  74153),
-CHIP("5C",  74153),
-CHIP("5D",  7421),    
-CHIP("5E",  7400),    
-CHIP("5F",  7427),    
-CHIP("5G",  74174),
-CHIP("5H",  74S112),  //unused out 9 (lamp)
-CHIP("5J",  74S112),
-//CHIP("5K",  75453),
+CHIP("5A",  74174)
+CHIP("5B",  74153)
+CHIP("5C",  74153)
+CHIP("5D",  7421)    
+CHIP("5E",  7400)    
+CHIP("5F",  7427)    
+CHIP("5G",  74174)
+CHIP("5H",  74S112)  //unused out 9 (lamp)
+CHIP("5J",  74S112)
+//CHIP("5K",  75453)
 
-CHIP("6A",  7404),    
-CHIP("6B",  7400),    
-CHIP("6C",  7404),    
-CHIP("6D",  74161),   //unused out 14
-CHIP("6E",  74161),   //unused out 14
-CHIP("6F",  74161),   //unused out 14
-CHIP("6G",  74161),   //unused out 14
-CHIP("6H",  7402),    
-CHIP("6J",  74S112),
+CHIP("6A",  7404)    
+CHIP("6B",  7400)    
+CHIP("6C",  7404)    
+CHIP("6D",  74161)   //unused out 14
+CHIP("6E",  74161)   //unused out 14
+CHIP("6F",  74161)   //unused out 14
+CHIP("6G",  74161)   //unused out 14
+CHIP("6H",  7402)    
+CHIP("6J",  74S112)
 
-CHIP("7A",  7420),    
-CHIP("7B",  74S112),
-CHIP("7C",  74161),   //unused out 14 13 11
-CHIP("7D",  74161),   //unused out 14 13 12 11
-CHIP("7E",  74161),   //unused out 14 13 12 11
-CHIP("7F",  74157),   //unused out 12
-CHIP("7G",  82S123, &g7_desc), //I5610 ball movement ROM
-CHIP("7H",  74157),
-CHIP("7J",  74161),   //unused out 11 14 15
-CHIP("7K",  74S112),
+CHIP("7A",  7420)    
+CHIP("7B",  74S112)
+CHIP("7C",  74161)   //unused out 14 13 11
+CHIP("7D",  74161)   //unused out 14 13 12 11
+CHIP("7E",  74161)   //unused out 14 13 12 11
+CHIP("7F",  74157)   //unused out 12
+CHIP("7G",  82S123, &g7_desc) //I5610 ball movement ROM
+CHIP("7H",  74157)
+CHIP("7J",  74161)   //unused out 11 14 15
+CHIP("7K",  74S112)
 
-CHIP("8A",  7404),    //unused out 2 (B999)  
-CHIP("8B",  74174),
-CHIP("8C",  74174),
-CHIP("8D",  74161),   //unused out 14 13 12 11
-CHIP("8E",  74161),   //unused out 14 13 12 11
-CHIP("8F",  74S112),
-CHIP("8G",  7400),    
-CHIP("8H",  74157),
-CHIP("8J",  74174),   //unused out 15 (VDSC sync)
-//CHIP("8K",  7405),
+CHIP("8A",  7404)    //unused out 2 (B999)  
+CHIP("8B",  74174)
+CHIP("8C",  74174)
+CHIP("8D",  74161)   //unused out 14 13 12 11
+CHIP("8E",  74161)   //unused out 14 13 12 11
+CHIP("8F",  74S112)
+CHIP("8G",  7400)    
+CHIP("8H",  74157)
+CHIP("8J",  74174)   //unused out 15 (VDSC sync)
+//CHIP("8K",  7405)
 
-CHIP("9A",  7400),    
-CHIP("9B",  7420),    
-CHIP("9C",  7420),    
-CHIP("9D",  7402),    
-CHIP("9E",  7402),    
-CHIP("9F",  7400),    
-CHIP("9G",  7400),    
-CHIP("9H",  7400),    
-CHIP("9J",  7400),    
+CHIP("9A",  7400)    
+CHIP("9B",  7420)    
+CHIP("9C",  7420)    
+CHIP("9D",  7402)    
+CHIP("9E",  7402)    
+CHIP("9F",  7400)    
+CHIP("9G",  7400)    
+CHIP("9H",  7400)    
+CHIP("9J",  7400)    
 
-CHIP("CAP32", CAPACITOR, &cap32_desc),
+CHIP("CAP32", CAPACITOR, &cap32_desc)
 
 
 //inputs
-CHIP("COIN_IN",   COIN_INPUT),
-CHIP("START_IN",  START_INPUT),
+CHIP("COIN_IN",   COIN_INPUT)
+CHIP("START_IN",  START_INPUT)
 
-CHIP("PADDLE1", WIPEOUT_PADDLE, &wipeout_pad1_desc),
-CHIP("PADDLE2", WIPEOUT_PADDLE, &wipeout_pad2_desc),
-CHIP("PADDLE3", WIPEOUT_PADDLE, &wipeout_pad3_desc),
-CHIP("PADDLE4", WIPEOUT_PADDLE, &wipeout_pad4_desc),
+CHIP("PADDLE1", WIPEOUT_PADDLE, &wipeout_pad1_desc)
+CHIP("PADDLE2", WIPEOUT_PADDLE, &wipeout_pad2_desc)
+CHIP("PADDLE3", WIPEOUT_PADDLE, &wipeout_pad3_desc)
+CHIP("PADDLE4", WIPEOUT_PADDLE, &wipeout_pad4_desc)
 
-CHIP("PAD1", PADDLE1_VERTICAL_INPUT, &pad1_desc),
-PADDLE_CONNECTION("PAD1", "PADDLE1"),
+CHIP("PAD1", PADDLE1_VERTICAL_INPUT, &pad1_desc)
+PADDLE_CONNECTION("PAD1", "PADDLE1")
 
-CHIP("PAD3", PADDLE3_VERTICAL_INPUT, &pad3_desc),
-PADDLE_CONNECTION("PAD3", "PADDLE3"),
+CHIP("PAD3", PADDLE3_VERTICAL_INPUT, &pad3_desc)
+PADDLE_CONNECTION("PAD3", "PADDLE3")
     
-CHIP("PAD2", PADDLE2_HORIZONTAL_INPUT, &pad2_desc),
-PADDLE_CONNECTION("PAD2", "PADDLE2"),
+CHIP("PAD2", PADDLE2_HORIZONTAL_INPUT, &pad2_desc)
+PADDLE_CONNECTION("PAD2", "PADDLE2")
     
-CHIP("PAD4", PADDLE4_HORIZONTAL_INPUT, &pad4_desc),
-PADDLE_CONNECTION("PAD4", "PADDLE4"),
+CHIP("PAD4", PADDLE4_HORIZONTAL_INPUT, &pad4_desc)
+PADDLE_CONNECTION("PAD4", "PADDLE4")
 
-CHIP("MIXER", MIXER, &mixer_desc),
+CHIP("MIXER", MIXER, &mixer_desc)
 
 // dip switches
-CHIP("SWMISS57",         DIPSWITCH, &swmiss57_desc),
+CHIP("SWMISS57",         DIPSWITCH, &swmiss57_desc)
 
 //outputs
 #ifdef DEBUG
-	CHIP("LOG1", VCD_LOG, &vcd_log_desc),
+	CHIP("LOG1", VCD_LOG, &vcd_log_desc)
 #endif
 	
-VIDEO(wipeout),
-AUDIO(wipeout),
-INPUT(wipeout),
+VIDEO(wipeout)
+AUDIO(wipeout)
+INPUT(wipeout)
 
 /* * * signals * * */
 
@@ -732,524 +731,524 @@ INPUT(wipeout),
 
 //Clock (top, left)
 
-CONNECTION(_T999,          "0C", 4),
-CONNECTION(_T999,          "0C", 3),
-CONNECTION("CRYSTAL", 1,   "0C", 1),
-CONNECTION(_T999,          "0C", 2),
-CONNECTION(_T999,          "0C", 15),
+CONNECTION(_T999,          "0C", 4)
+CONNECTION(_T999,          "0C", 3)
+CONNECTION("CRYSTAL", 1,   "0C", 1)
+CONNECTION(_T999,          "0C", 2)
+CONNECTION(_T999,          "0C", 15)
 
-CONNECTION(_1TQ05,         "0D", 2),
-CONNECTION(_1TQ05,         "0D", 1),
+CONNECTION(_1TQ05,         "0D", 2)
+CONNECTION(_1TQ05,         "0D", 1)
 
-CONNECTION(_6TQ05,         "0D", 5),
-CONNECTION(_6TQ05,         "0D", 4),
+CONNECTION(_6TQ05,         "0D", 5)
+CONNECTION(_6TQ05,         "0D", 4)
 
-CONNECTION(_T999,          "0C", 10),
-CONNECTION(_5TEC5,         "0C", 11),
-CONNECTION(_2TQ05,         "0C", 13),
-CONNECTION(_TEC5,          "0C", 12),
-CONNECTION(_TEC8,          "0C", 14),
+CONNECTION(_T999,          "0C", 10)
+CONNECTION(_5TEC5,         "0C", 11)
+CONNECTION(_2TQ05,         "0C", 13)
+CONNECTION(_TEC5,          "0C", 12)
+CONNECTION(_TEC8,          "0C", 14)
 
-CONNECTION(_THSC,          "0D", 9),
-CONNECTION(_THSC,          "0D", 10),
+CONNECTION(_THSC,          "0D", 9)
+CONNECTION(_THSC,          "0D", 10)
 
-CONNECTION(_6THSC,         "0D", 12),
-CONNECTION(_6THSC,         "0D", 13),
+CONNECTION(_6THSC,         "0D", 12)
+CONNECTION(_6THSC,         "0D", 13)
 
-CONNECTION(_5THSC,         "1F", 9),
-CONNECTION(_5TVSC,         "1F", 10),
+CONNECTION(_5THSC,         "1F", 9)
+CONNECTION(_5TVSC,         "1F", 10)
 
 //Basic timing & sync & blanking
 
   //horiz count
-CONNECTION(_T999,          "1A", 1),
-CONNECTION(_5TECC,         "1A", 9),
-CONNECTION(GND,            "1A", 3),
-CONNECTION(GND,            "1A", 4),
-CONNECTION(GND,            "1A", 5),
-CONNECTION(_T999,          "1A", 6),
-CONNECTION(_T999,          "1A", 7),
-CONNECTION(_T999,          "1A", 10),
-CONNECTION(_6TQ05,         "1A", 2),
+CONNECTION(_T999,          "1A", 1)
+CONNECTION(_5TECC,         "1A", 9)
+CONNECTION(GND,            "1A", 3)
+CONNECTION(GND,            "1A", 4)
+CONNECTION(GND,            "1A", 5)
+CONNECTION(_T999,          "1A", 6)
+CONNECTION(_T999,          "1A", 7)
+CONNECTION(_T999,          "1A", 10)
+CONNECTION(_6TQ05,         "1A", 2)
 
-CONNECTION(_T999,          "1B", 1),
-CONNECTION(_5TECC,         "1B", 9),
-CONNECTION(_5TEC8,         "1B", 3),
-CONNECTION(_5TEC8,         "1B", 4),
-CONNECTION(GND,            "1B", 5),
-CONNECTION(_5TEC8,         "1B", 6),
-CONNECTION(_TECA,          "1B", 7),
-CONNECTION(_TEC3,          "1B", 10),
-CONNECTION(_6TQ05,         "1B", 2),
+CONNECTION(_T999,          "1B", 1)
+CONNECTION(_5TECC,         "1B", 9)
+CONNECTION(_5TEC8,         "1B", 3)
+CONNECTION(_5TEC8,         "1B", 4)
+CONNECTION(GND,            "1B", 5)
+CONNECTION(_5TEC8,         "1B", 6)
+CONNECTION(_TECA,          "1B", 7)
+CONNECTION(_TEC3,          "1B", 10)
+CONNECTION(_6TQ05,         "1B", 2)
 
-CONNECTION(_TEC0,          "2C", 1),
+CONNECTION(_TEC0,          "2C", 1)
 
-CONNECTION(_TEC5,          "2C", 3),
+CONNECTION(_TEC5,          "2C", 3)
 
-CONNECTION(_TECB,          "1D", 2),
-CONNECTION(_TECA,          "1D", 1),
+CONNECTION(_TECB,          "1D", 2)
+CONNECTION(_TECA,          "1D", 1)
 
-CONNECTION(_5TECC,         "0B", 11),
+CONNECTION(_5TECC,         "0B", 11)
 
-CONNECTION(_T999,          "1C", 4),
-CONNECTION(_1TECC,         "1C", 3),
-CONNECTION(_2TQ05,         "1C", 1),
-CONNECTION(_1TECC,         "1C", 2),
-CONNECTION(_T999,          "1C", 15),
+CONNECTION(_T999,          "1C", 4)
+CONNECTION(_1TECC,         "1C", 3)
+CONNECTION(_2TQ05,         "1C", 1)
+CONNECTION(_1TECC,         "1C", 2)
+CONNECTION(_T999,          "1C", 15)
 
-CONNECTION(_TECB,          "1D", 5),
-CONNECTION(_TEC8,          "1D", 4),
+CONNECTION(_TECB,          "1D", 5)
+CONNECTION(_TEC8,          "1D", 4)
 
-CONNECTION(_TEC7,          "1D", 9),
-CONNECTION(_5TECD,         "1D", 10),
+CONNECTION(_TEC7,          "1D", 9)
+CONNECTION(_5TECD,         "1D", 10)
 
-CONNECTION(_5TEG7,         "2C", 9),
+CONNECTION(_5TEG7,         "2C", 9)
 
-CONNECTION(_5TECD,         "1D", 12),
-CONNECTION(_TEC8,          "1D", 13),
+CONNECTION(_5TECD,         "1D", 12)
+CONNECTION(_TEC8,          "1D", 13)
 
   //vert count
-CONNECTION(_T999,          "2A", 1),
-CONNECTION(_5TLCC,         "2A", 9),
-CONNECTION(GND,            "2A", 3),
-CONNECTION(GND,            "2A", 4),
-CONNECTION(GND,            "2A", 5),
-CONNECTION(_TLC8,          "2A", 6),
-CONNECTION(_T999,          "2A", 7),
-CONNECTION(_T999,          "2A", 10),
-CONNECTION(_6THSC,         "2A", 2),
+CONNECTION(_T999,          "2A", 1)
+CONNECTION(_5TLCC,         "2A", 9)
+CONNECTION(GND,            "2A", 3)
+CONNECTION(GND,            "2A", 4)
+CONNECTION(GND,            "2A", 5)
+CONNECTION(_TLC8,          "2A", 6)
+CONNECTION(_T999,          "2A", 7)
+CONNECTION(_T999,          "2A", 10)
+CONNECTION(_6THSC,         "2A", 2)
 
-CONNECTION(_T999,          "2B", 1),
-CONNECTION(_5TLCC,         "2B", 9),
-CONNECTION(GND,            "2B", 3),
-CONNECTION(_5TLC8,         "2B", 4),
-CONNECTION(_5TLC8,         "2B", 5),
-CONNECTION(_5TLC8,         "2B", 6),
-CONNECTION(_TLCA,          "2B", 7),
-CONNECTION(_TLC3,          "2B", 10),
-CONNECTION(_6THSC,         "2B", 2),
+CONNECTION(_T999,          "2B", 1)
+CONNECTION(_5TLCC,         "2B", 9)
+CONNECTION(GND,            "2B", 3)
+CONNECTION(_5TLC8,         "2B", 4)
+CONNECTION(_5TLC8,         "2B", 5)
+CONNECTION(_5TLC8,         "2B", 6)
+CONNECTION(_TLCA,          "2B", 7)
+CONNECTION(_TLC3,          "2B", 10)
+CONNECTION(_6THSC,         "2B", 2)
 
-CONNECTION(_TLC0,          "2C", 5),
+CONNECTION(_TLC0,          "2C", 5)
 
-CONNECTION(_TLCB,          "2D", 2),
-CONNECTION(_TLCA,          "2D", 1),
+CONNECTION(_TLCB,          "2D", 2)
+CONNECTION(_TLCA,          "2D", 1)
 
-CONNECTION(_5TLCC,         "0B", 13),
+CONNECTION(_5TLCC,         "0B", 13)
 
-CONNECTION(_T999,          "1C", 10),
-CONNECTION(_1TLCC,         "1C", 11),
-CONNECTION(_2THSC,         "1C", 13),
-CONNECTION(_1TLCC,         "1C", 12),
-CONNECTION(_T999,          "1C", 14),
+CONNECTION(_T999,          "1C", 10)
+CONNECTION(_1TLCC,         "1C", 11)
+CONNECTION(_2THSC,         "1C", 13)
+CONNECTION(_1TLCC,         "1C", 12)
+CONNECTION(_T999,          "1C", 14)
 
-CONNECTION(_5TLC8,         "3G", 5),
-CONNECTION(_5TLC8,         "3G", 4),
-CONNECTION(_TLCB,          "3G", 2),
-CONNECTION(_TLC2,          "3G", 1),  //vert sync
+CONNECTION(_5TLC8,         "3G", 5)
+CONNECTION(_5TLC8,         "3G", 4)
+CONNECTION(_TLCB,          "3G", 2)
+CONNECTION(_TLC2,          "3G", 1)  //vert sync
 
-CONNECTION(_TLC8,          "2D", 5),
-CONNECTION(_TLCB,          "2D", 4),
+CONNECTION(_TLC8,          "2D", 5)
+CONNECTION(_TLCB,          "2D", 4)
 
-CONNECTION(_5TLCD,         "2D", 12),
-CONNECTION(_TLC8,          "2D", 13),
+CONNECTION(_5TLCD,         "2D", 12)
+CONNECTION(_TLC8,          "2D", 13)
 
-CONNECTION(_TLC7,          "2D", 9),
-CONNECTION(_5TLCD,         "2D", 10),  
+CONNECTION(_TLC7,          "2D", 9)
+CONNECTION(_5TLCD,         "2D", 10)  
 
-CONNECTION(_5TLG7,         "2C", 11),
+CONNECTION(_5TLG7,         "2C", 11)
 
 
   //comp blanking
-CONNECTION(_THBL,          "0H", 12),
-CONNECTION(_TVBL,          "0H", 11), 
+CONNECTION(_THBL,          "0H", 12)
+CONNECTION(_TVBL,          "0H", 11) 
 
 
 // T/B GOAL GATE (bottom, left)
 
-CONNECTION(_TEC7,          "0E", 2),
-CONNECTION(_TEC6,          "0E", 1), 
+CONNECTION(_TEC7,          "0E", 2)
+CONNECTION(_TEC6,          "0E", 1) 
 
-CONNECTION(_TEC7,          "0E", 5),
-CONNECTION(_TEC5,          "0E", 4), 
+CONNECTION(_TEC7,          "0E", 5)
+CONNECTION(_TEC5,          "0E", 4) 
 
-CONNECTION(_TE76,          "1E", 5),
-CONNECTION(_TEC8,          "1E", 4), 
-CONNECTION(_TE75,          "1E", 3), 
+CONNECTION(_TE76,          "1E", 5)
+CONNECTION(_TEC8,          "1E", 4) 
+CONNECTION(_TE75,          "1E", 3) 
 
-CONNECTION(_TECA,          "1F", 2),
-CONNECTION(_TELG,          "1F", 1), 
+CONNECTION(_TECA,          "1F", 2)
+CONNECTION(_TELG,          "1F", 1) 
 
-CONNECTION(_TEC4,          "0F", 2),
-CONNECTION(_5TELA,         "0F", 3), 
+CONNECTION(_TEC4,          "0F", 2)
+CONNECTION(_5TELA,         "0F", 3) 
 
-CONNECTION(_T999,          "0G", 4),
-CONNECTION(_TEVL,          "0G", 3),
-CONNECTION(_2TQ05,         "0G", 1),
-CONNECTION(_TEVL,          "0G", 2), 
-CONNECTION(_5TEC8,         "0G", 15),
+CONNECTION(_T999,          "0G", 4)
+CONNECTION(_TEVL,          "0G", 3)
+CONNECTION(_2TQ05,         "0G", 1)
+CONNECTION(_TEVL,          "0G", 2) 
+CONNECTION(_5TEC8,         "0G", 15)
 
-CONNECTION(_TEVL,          "0F", 9),
-CONNECTION(_THBG,          "0F", 8), 
+CONNECTION(_TEVL,          "0F", 9)
+CONNECTION(_THBG,          "0F", 8) 
 
-CONNECTION(_5THBG,         "2M", 2), 
-CONNECTION(_PGSC,          "2M", 3), 
+CONNECTION(_5THBG,         "2M", 2) 
+CONNECTION(_PGSC,          "2M", 3) 
 
 
 // L/R GOAL GATE (bottom, left)
 
-CONNECTION(_TLC7,          "0E", 9),
-CONNECTION(_TLC6,          "0E", 10), 
+CONNECTION(_TLC7,          "0E", 9)
+CONNECTION(_TLC6,          "0E", 10) 
 
-CONNECTION(_TLC7,          "0E", 12),
-CONNECTION(_TLC5,          "0E", 13),
+CONNECTION(_TLC7,          "0E", 12)
+CONNECTION(_TLC5,          "0E", 13)
 
-CONNECTION(_TL76,          "1E", 9),
-CONNECTION(_TLC8,          "1E", 10), 
-CONNECTION(_TL75,          "1E", 11),
+CONNECTION(_TL76,          "1E", 9)
+CONNECTION(_TLC8,          "1E", 10) 
+CONNECTION(_TL75,          "1E", 11)
 
-CONNECTION(_TLLG,          "2H", 1),
+CONNECTION(_TLLG,          "2H", 1)
 
-CONNECTION(_TLCA,          "1F", 5),
-CONNECTION(_TLLG,          "1F", 4), 
+CONNECTION(_TLCA,          "1F", 5)
+CONNECTION(_TLLG,          "1F", 4) 
 
-CONNECTION(_TLC4,          "0F", 5), 
-CONNECTION(_5TLLA,         "0F", 6), 
+CONNECTION(_TLC4,          "0F", 5) 
+CONNECTION(_5TLLA,         "0F", 6) 
 
-CONNECTION(_T999,          "0G", 10),
-CONNECTION(_TLHL,          "0G", 11),
-CONNECTION(_2THSC,         "0G", 13),
-CONNECTION(_TLHL,          "0G", 12), 
-CONNECTION(_5TLC8,         "0G", 14),
+CONNECTION(_T999,          "0G", 10)
+CONNECTION(_TLHL,          "0G", 11)
+CONNECTION(_2THSC,         "0G", 13)
+CONNECTION(_TLHL,          "0G", 12) 
+CONNECTION(_5TLC8,         "0G", 14)
 
-CONNECTION(_TLHL,          "0F", 12),
-CONNECTION(_TVBG,          "0F", 11), 
+CONNECTION(_TLHL,          "0F", 12)
+CONNECTION(_TVBG,          "0F", 11) 
 
-CONNECTION(_5TVBG,         "2M", 5), 
-CONNECTION(_PGSC,          "2M", 6),
+CONNECTION(_5TVBG,         "2M", 5) 
+CONNECTION(_PGSC,          "2M", 6)
 
 
 // HORIZ CROSS GEN (bottom, left)
 
-CONNECTION(_TE76,          "1G", 2), 
-CONNECTION(_TE75,          "1G", 1),
+CONNECTION(_TE76,          "1G", 2) 
+CONNECTION(_TE75,          "1G", 1)
 
-CONNECTION(_TLKG,          "9J", 12), 
-CONNECTION(_TEKG,          "9J", 13),
+CONNECTION(_TLKG,          "9J", 12) 
+CONNECTION(_TEKG,          "9J", 13)
 
-CONNECTION("9J", 11,       "CAP32", 1), 
+CONNECTION("9J", 11,       "CAP32", 1) 
 
-CONNECTION(_5TCKG,         "6A", 1),
+CONNECTION(_5TCKG,         "6A", 1)
 
-CONNECTION(_TLC6,          "2E", 5), 
-CONNECTION(_TLC5,          "2E", 4),
-CONNECTION(_TLC4,          "2E", 2), 
-CONNECTION(_TLCA,          "2E", 1),
+CONNECTION(_TLC6,          "2E", 5) 
+CONNECTION(_TLC5,          "2E", 4)
+CONNECTION(_TLC4,          "2E", 2) 
+CONNECTION(_TLCA,          "2E", 1)
 
-CONNECTION(_TEKG,          "2G", 2), 
-CONNECTION(_THCL,          "2G", 1),
+CONNECTION(_TEKG,          "2G", 2) 
+CONNECTION(_THCL,          "2G", 1)
 
-CONNECTION(_THCL,          "2G", 5), 
-CONNECTION(_TVYZ,          "2G", 4),
+CONNECTION(_THCL,          "2G", 5) 
+CONNECTION(_TVYZ,          "2G", 4)
 
 
 // VERT CROSS GEN (bottom, left)
 
-CONNECTION(_TL76,          "1G", 5), 
-CONNECTION(_TL75,          "1G", 4),
+CONNECTION(_TL76,          "1G", 5) 
+CONNECTION(_TL75,          "1G", 4)
 
-CONNECTION(_TEC6,          "2E", 9), 
-CONNECTION(_TEC5,          "2E", 10),
-CONNECTION(_TEC4,          "2E", 13), 
-CONNECTION(_TECA,          "2E", 12),
+CONNECTION(_TEC6,          "2E", 9) 
+CONNECTION(_TEC5,          "2E", 10)
+CONNECTION(_TEC4,          "2E", 13) 
+CONNECTION(_TECA,          "2E", 12)
 
-CONNECTION(_TLKG,          "2G", 9), 
-CONNECTION(_TVCL,          "2G", 10),
+CONNECTION(_TLKG,          "2G", 9) 
+CONNECTION(_TVCL,          "2G", 10)
 
-CONNECTION(_TVCL,          "2G", 12), 
-CONNECTION(_THYZ,          "2G", 13),
+CONNECTION(_TVCL,          "2G", 12) 
+CONNECTION(_THYZ,          "2G", 13)
 
 
 // DETERMINE 2 OR 4 PLAYERS PAD (bottom, left)
 
-CONNECTION(_TELG,          "1G", 9), 
-CONNECTION(_5TEG7,         "1G", 10),
+CONNECTION(_TELG,          "1G", 9) 
+CONNECTION(_5TEG7,         "1G", 10)
 
-CONNECTION(_TLLG,          "1G", 12), 
-CONNECTION(_5TLG7,         "1G", 13),
+CONNECTION(_TLLG,          "1G", 12) 
+CONNECTION(_5TLG7,         "1G", 13)
 
-CONNECTION(_TPSA,          "1E", 13), 
-CONNECTION(_5PGCG,         "1E", 2),
-CONNECTION(_TPSB,          "1E", 1), 
+CONNECTION(_TPSA,          "1E", 13) 
+CONNECTION(_5PGCG,         "1E", 2)
+CONNECTION(_TPSB,          "1E", 1) 
 
-CONNECTION(_5TPSC,         "2H", 3), 
+CONNECTION(_5TPSC,         "2H", 3) 
 
 
 // SCORE ENABLE (bottom, left)
 
-CONNECTION(_TEKG,          "0H", 5), 
-CONNECTION(_1TEG7,         "0H", 6),
+CONNECTION(_TEKG,          "0H", 5) 
+CONNECTION(_1TEG7,         "0H", 6)
 
-CONNECTION(_TLKG,          "0H", 9), 
-CONNECTION(_1TLG7,         "0H", 8),
+CONNECTION(_TLKG,          "0H", 9) 
+CONNECTION(_1TLG7,         "0H", 8)
 
-CONNECTION(_TNSA,          "3J", 2), 
-CONNECTION(_TNSB,          "3J", 3), 
+CONNECTION(_TNSA,          "3J", 2) 
+CONNECTION(_TNSB,          "3J", 3) 
 
-CONNECTION(_5TNSC,         "2H", 5), 
+CONNECTION(_5TNSC,         "2H", 5) 
 
 
 // H/V PADDLE (bottom, left)
 
-CONNECTION(_1TEG7,         "2F", 5), 
-CONNECTION(_TEC6,          "2F", 4),
-CONNECTION(_TEC4,          "2F", 2), 
-CONNECTION(_THBG,          "2F", 1),
+CONNECTION(_1TEG7,         "2F", 5) 
+CONNECTION(_TEC6,          "2F", 4)
+CONNECTION(_TEC4,          "2F", 2) 
+CONNECTION(_THBG,          "2F", 1)
 
-CONNECTION(_1TLG7,         "2F", 9), 
-CONNECTION(_TLC6,          "2F", 10),
-CONNECTION(_TLC4,          "2F", 13), 
-CONNECTION(_TVBG,          "2F", 12),
+CONNECTION(_1TLG7,         "2F", 9) 
+CONNECTION(_TLC6,          "2F", 10)
+CONNECTION(_TLC4,          "2F", 13) 
+CONNECTION(_TVBG,          "2F", 12)
 
 
 // L/R PADDLE (bottom, left)
 
-CONNECTION(_TEC4,          "3H", 2), 
-CONNECTION(_TEC3,          "3H", 1),
+CONNECTION(_TEC4,          "3H", 2) 
+CONNECTION(_TEC3,          "3H", 1)
 
-CONNECTION(_1TEG7,         "1J", 5), 
-CONNECTION(_NCLC,          "1J", 4),
-CONNECTION(_TLLG,          "1J", 3), 
+CONNECTION(_1TEG7,         "1J", 5) 
+CONNECTION(_NCLC,          "1J", 4)
+CONNECTION(_TLLG,          "1J", 3) 
 
-CONNECTION(_5TEG7,         "1J", 9), 
-CONNECTION(_NCRC,          "1J", 10),
-CONNECTION(_TLLG,          "1J", 11), 
+CONNECTION(_5TEG7,         "1J", 9) 
+CONNECTION(_NCRC,          "1J", 10)
+CONNECTION(_TLLG,          "1J", 11) 
 
-CONNECTION(_TE43,          "0J", 5), 
-CONNECTION(_TELG,          "0J", 4),
-CONNECTION(_THBG,          "0J", 2), 
-CONNECTION(_PCSE,          "0J", 1), 
+CONNECTION(_TE43,          "0J", 5) 
+CONNECTION(_TELG,          "0J", 4)
+CONNECTION(_THBG,          "0J", 2) 
+CONNECTION(_PCSE,          "0J", 1) 
 
-CONNECTION(_5TGLG,         "1H", 2),
-CONNECTION(_5TGRG,         "1H", 3),
+CONNECTION(_5TGLG,         "1H", 2)
+CONNECTION(_5TGRG,         "1H", 3)
 
-CONNECTION(_5TVPG,         "1H", 9),
-CONNECTION(_TVLG,          "1H", 8),
+CONNECTION(_5TVPG,         "1H", 9)
+CONNECTION(_TVLG,          "1H", 8)
 
-CONNECTION(_TVLG,          "2J", 2),
-CONNECTION(_TEVL,          "2J", 1),
+CONNECTION(_TVLG,          "2J", 2)
+CONNECTION(_TEVL,          "2J", 1)
 
 
 // T/B PADDLE (bottom, left)
 
-CONNECTION(_TLC4,          "3H", 5), 
-CONNECTION(_TLC3,          "3H", 4),
+CONNECTION(_TLC4,          "3H", 5) 
+CONNECTION(_TLC3,          "3H", 4)
 
-CONNECTION(_1TLG7,         "1J", 13), 
-CONNECTION(_NCTC,          "1J", 2),
-CONNECTION(_TELG,          "1J", 1), 
+CONNECTION(_1TLG7,         "1J", 13) 
+CONNECTION(_NCTC,          "1J", 2)
+CONNECTION(_TELG,          "1J", 1) 
 
-CONNECTION(_5TLG7,         "4J", 5), 
-CONNECTION(_NCBC,          "4J", 4),
-CONNECTION(_TELG,          "4J", 3), 
+CONNECTION(_5TLG7,         "4J", 5) 
+CONNECTION(_NCBC,          "4J", 4)
+CONNECTION(_TELG,          "4J", 3) 
 
-CONNECTION(_TL43,          "0J", 9), 
-CONNECTION(_TLLG,          "0J", 10),
-CONNECTION(_TVBG,          "0J", 12), 
-CONNECTION(_PCSE,          "0J", 13), 
+CONNECTION(_TL43,          "0J", 9) 
+CONNECTION(_TLLG,          "0J", 10)
+CONNECTION(_TVBG,          "0J", 12) 
+CONNECTION(_PCSE,          "0J", 13) 
 
-CONNECTION(_5TGTG,         "1H", 5),
-CONNECTION(_5TGBG,         "1H", 6),
+CONNECTION(_5TGTG,         "1H", 5)
+CONNECTION(_5TGBG,         "1H", 6)
 
-CONNECTION(_5THPG,         "1H", 12),
-CONNECTION(_THLG,          "1H", 11),
+CONNECTION(_5THPG,         "1H", 12)
+CONNECTION(_THLG,          "1H", 11)
 
-CONNECTION(_THLG,          "2J", 5),
-CONNECTION(_TLHL,          "2J", 4),
+CONNECTION(_THLG,          "2J", 5)
+CONNECTION(_TLHL,          "2J", 4)
 
 
 // COUNTERS (top, right)
 
   //left score counter
-CONNECTION(_NCLC,          "3F", 5), 
-CONNECTION(_1TEG7,         "3F", 4),
-CONNECTION(_5KACH,         "3F", 3), 
+CONNECTION(_NCLC,          "3F", 5) 
+CONNECTION(_1TEG7,         "3F", 4)
+CONNECTION(_5KACH,         "3F", 3) 
 
-CONNECTION(_N999,          "3A", 1), 
-CONNECTION(_5PGSR,         "3A", 9),
-CONNECTION(GND,            "3A", 3), 
-CONNECTION(_9X7PT,         "3A", 4), 
-CONNECTION(GND,            "3A", 5),
-CONNECTION(_N999,          "3A", 6), 
-CONNECTION(_NCLA,          "3A", 7), 
-CONNECTION(_N999,          "3A", 10),
-CONNECTION(_6TQ05,         "3A", 2), 
+CONNECTION(_N999,          "3A", 1) 
+CONNECTION(_5PGSR,         "3A", 9)
+CONNECTION(GND,            "3A", 3) 
+CONNECTION(_9X7PT,         "3A", 4) 
+CONNECTION(GND,            "3A", 5)
+CONNECTION(_N999,          "3A", 6) 
+CONNECTION(_NCLA,          "3A", 7) 
+CONNECTION(_N999,          "3A", 10)
+CONNECTION(_6TQ05,         "3A", 2) 
 
   //right score counter
-CONNECTION(_NCRC,          "3F", 9), 
-CONNECTION(_5TEG7,         "3F", 10),
-CONNECTION(_5KACH,         "3F", 11), 
+CONNECTION(_NCRC,          "3F", 9) 
+CONNECTION(_5TEG7,         "3F", 10)
+CONNECTION(_5KACH,         "3F", 11) 
 
-CONNECTION(_N999,          "3C", 1), 
-CONNECTION(_5PGSR,         "3C", 9),
-CONNECTION(GND,            "3C", 3), 
-CONNECTION(_9X7PT,         "3C", 4), 
-CONNECTION(GND,            "3C", 5),
-CONNECTION(_N999,          "3C", 6), 
-CONNECTION(_NCRA,          "3C", 7), 
-CONNECTION(_N999,          "3C", 10),
-CONNECTION(_6TQ05,         "3C", 2), 
+CONNECTION(_N999,          "3C", 1) 
+CONNECTION(_5PGSR,         "3C", 9)
+CONNECTION(GND,            "3C", 3) 
+CONNECTION(_9X7PT,         "3C", 4) 
+CONNECTION(GND,            "3C", 5)
+CONNECTION(_N999,          "3C", 6) 
+CONNECTION(_NCRA,          "3C", 7) 
+CONNECTION(_N999,          "3C", 10)
+CONNECTION(_6TQ05,         "3C", 2) 
 
   //top score counter
-CONNECTION(_NCTC,          "3F", 13), 
-CONNECTION(_1TLG7,         "3F", 2),
-CONNECTION(_5KACG,         "3F", 1), 
+CONNECTION(_NCTC,          "3F", 13) 
+CONNECTION(_1TLG7,         "3F", 2)
+CONNECTION(_5KACG,         "3F", 1) 
 
-CONNECTION(_N999,          "3B", 1), 
-CONNECTION(_5PGSR,         "3B", 9),
-CONNECTION(GND,            "3B", 3), 
-CONNECTION(_9X7PT,         "3B", 4), 
-CONNECTION(GND,            "3B", 5),
-CONNECTION(_N999,          "3B", 6), 
-CONNECTION(_NCTA,          "3B", 7), 
-CONNECTION(_N999,          "3B", 10),
-CONNECTION(_6TQ05,         "3B", 2), 
+CONNECTION(_N999,          "3B", 1) 
+CONNECTION(_5PGSR,         "3B", 9)
+CONNECTION(GND,            "3B", 3) 
+CONNECTION(_9X7PT,         "3B", 4) 
+CONNECTION(GND,            "3B", 5)
+CONNECTION(_N999,          "3B", 6) 
+CONNECTION(_NCTA,          "3B", 7) 
+CONNECTION(_N999,          "3B", 10)
+CONNECTION(_6TQ05,         "3B", 2) 
 
   //bottom score counter
-CONNECTION(_NCBC,          "4F", 5), 
-CONNECTION(_5TLG7,         "4F", 4),
-CONNECTION(_5KACG,         "4F", 3), 
+CONNECTION(_NCBC,          "4F", 5) 
+CONNECTION(_5TLG7,         "4F", 4)
+CONNECTION(_5KACG,         "4F", 3) 
 
-CONNECTION(_N999,          "3D", 1), 
-CONNECTION(_5PGSR,         "3D", 9),
-CONNECTION(GND,            "3D", 3), 
-CONNECTION(_9X7PT,         "3D", 4), 
-CONNECTION(GND,            "3D", 5),
-CONNECTION(_N999,          "3D", 6), 
-CONNECTION(_NCBA,          "3D", 7), 
-CONNECTION(_N999,          "3D", 10),
-CONNECTION(_6TQ05,         "3D", 2), 
+CONNECTION(_N999,          "3D", 1) 
+CONNECTION(_5PGSR,         "3D", 9)
+CONNECTION(GND,            "3D", 3) 
+CONNECTION(_9X7PT,         "3D", 4) 
+CONNECTION(GND,            "3D", 5)
+CONNECTION(_N999,          "3D", 6) 
+CONNECTION(_NCBA,          "3D", 7) 
+CONNECTION(_N999,          "3D", 10)
+CONNECTION(_6TQ05,         "3D", 2) 
 
 
 // END OF GAME (top, right)
 
-CONNECTION(_NCTC,          "4J", 9), 
-CONNECTION(_NCBC,          "4J", 10),
-CONNECTION(_5PGCG,         "4J", 11),
+CONNECTION(_NCTC,          "4J", 9) 
+CONNECTION(_NCBC,          "4J", 10)
+CONNECTION(_5PGCG,         "4J", 11)
 
-CONNECTION(_NCLC,          "4H", 5),
-CONNECTION(_NCRC,          "4H", 4),
+CONNECTION(_NCLC,          "4H", 5)
+CONNECTION(_NCRC,          "4H", 4)
 
-CONNECTION(_5NCFA,         "3J", 9),
-CONNECTION(_5NCFB,         "3J", 8),
+CONNECTION(_5NCFA,         "3J", 9)
+CONNECTION(_5NCFB,         "3J", 8)
 
 
 // PLAYER 1 (top, right)
 
-CONNECTION(_NCFC,          "3J", 5),
-CONNECTION(_NCFF,          "3J", 6),
+CONNECTION(_NCFC,          "3J", 5)
+CONNECTION(_NCFF,          "3J", 6)
 
-CONNECTION(_5NCFG,         "2H", 9),
+CONNECTION(_5NCFG,         "2H", 9)
 
 
 // PLAYER 2 (top, right)
 
-CONNECTION(_NCLC,          "4J", 13),
-CONNECTION(_NCRC,          "4J", 2),
-CONNECTION(_5PGCG,         "4J", 1),
+CONNECTION(_NCLC,          "4J", 13)
+CONNECTION(_NCRC,          "4J", 2)
+CONNECTION(_5PGCG,         "4J", 1)
 
-CONNECTION(_NCTC,          "4H", 9),
-CONNECTION(_NCBC,          "4H", 10),
+CONNECTION(_NCTC,          "4H", 9)
+CONNECTION(_NCBC,          "4H", 10)
 
-CONNECTION(_5NCAD,         "3J", 12),
-CONNECTION(_5NCFE,         "3J", 11),
+CONNECTION(_5NCAD,         "3J", 12)
+CONNECTION(_5NCFE,         "3J", 11)
 
 
 // NUMBER GENERATION (bottom, right)
 
-CONNECTION(_NCL2,          "4A", 3),
-CONNECTION(_NCR2,          "4A", 4),
-CONNECTION(_NCT2,          "4A", 5),
-CONNECTION(_NCB2,          "4A", 6),
-CONNECTION(GND,            "4A", 1),
-CONNECTION(_NCL1,          "4A", 13),
-CONNECTION(_NCR1,          "4A", 12),
-CONNECTION(_NCT1,          "4A", 11),
-CONNECTION(_NCB1,          "4A", 10),
-CONNECTION(GND,            "4A", 15),
-CONNECTION(_TLKG,          "4A", 2),
-CONNECTION(_1TNSC,         "4A", 14),
+CONNECTION(_NCL2,          "4A", 3)
+CONNECTION(_NCR2,          "4A", 4)
+CONNECTION(_NCT2,          "4A", 5)
+CONNECTION(_NCB2,          "4A", 6)
+CONNECTION(GND,            "4A", 1)
+CONNECTION(_NCL1,          "4A", 13)
+CONNECTION(_NCR1,          "4A", 12)
+CONNECTION(_NCT1,          "4A", 11)
+CONNECTION(_NCB1,          "4A", 10)
+CONNECTION(GND,            "4A", 15)
+CONNECTION(_TLKG,          "4A", 2)
+CONNECTION(_1TNSC,         "4A", 14)
 
-CONNECTION(_NCL0,          "4B", 3),
-CONNECTION(_NCR0,          "4B", 4),
-CONNECTION(_NCT0,          "4B", 5),
-CONNECTION(_NCB0,          "4B", 6),
-CONNECTION(GND,            "4B", 1),
-CONNECTION(_TEC6,          "4B", 13),
-CONNECTION(_TEC6,          "4B", 12),
-CONNECTION(_TEC7,          "4B", 11),
-CONNECTION(_TEC7,          "4B", 10),
-CONNECTION(_TEC8,          "4B", 15),
-CONNECTION(_TLKG,          "4B", 2),
-CONNECTION(_1TNSC,         "4B", 14),
+CONNECTION(_NCL0,          "4B", 3)
+CONNECTION(_NCR0,          "4B", 4)
+CONNECTION(_NCT0,          "4B", 5)
+CONNECTION(_NCB0,          "4B", 6)
+CONNECTION(GND,            "4B", 1)
+CONNECTION(_TEC6,          "4B", 13)
+CONNECTION(_TEC6,          "4B", 12)
+CONNECTION(_TEC7,          "4B", 11)
+CONNECTION(_TEC7,          "4B", 10)
+CONNECTION(_TEC8,          "4B", 15)
+CONNECTION(_TLKG,          "4B", 2)
+CONNECTION(_1TNSC,         "4B", 14)
 
-CONNECTION(_NCS2,          "4C", 1),
-CONNECTION(_NCS1,          "4C", 3),
-CONNECTION(_NCS0,          "4C", 5),
-CONNECTION(_NCG3,          "4C", 9),
-CONNECTION(_NCG2,          "4C", 11),
-CONNECTION(GND,            "4C", 13),
+CONNECTION(_NCS2,          "4C", 1)
+CONNECTION(_NCS1,          "4C", 3)
+CONNECTION(_NCS0,          "4C", 5)
+CONNECTION(_NCG3,          "4C", 9)
+CONNECTION(_NCG2,          "4C", 11)
+CONNECTION(GND,            "4C", 13)
 
-CONNECTION(_5NCS2,         "4D", 14),
-CONNECTION(_5NCS1,         "4D", 13),
-CONNECTION(_5NCS0,         "4D", 12),
-CONNECTION(_NCC2,          "4D", 11),
-CONNECTION(_NCC1,          "4D", 10),
-CONNECTION(GND,            "4D", 15),
+CONNECTION(_5NCS2,         "4D", 14)
+CONNECTION(_5NCS1,         "4D", 13)
+CONNECTION(_5NCS0,         "4D", 12)
+CONNECTION(_NCC2,          "4D", 11)
+CONNECTION(_NCC1,          "4D", 10)
+CONNECTION(GND,            "4D", 15)
 
-CONNECTION(_NCG4,          "4H", 2),
-CONNECTION(_NCC3,          "4H", 1),
+CONNECTION(_NCG4,          "4H", 2)
+CONNECTION(_NCC3,          "4H", 1)
 
-CONNECTION(_NCG7,          "5D", 5),
-CONNECTION(_5NCG3,         "5D", 4),
-CONNECTION(_5NCGA,         "5D", 2),
-CONNECTION(_5NCGA,         "5D", 1),
+CONNECTION(_NCG7,          "5D", 5)
+CONNECTION(_5NCG3,         "5D", 4)
+CONNECTION(_5NCGA,         "5D", 2)
+CONNECTION(_5NCGA,         "5D", 1)
 
-CONNECTION(_NCG6,          "5D", 9),
-CONNECTION(_5NCG2,         "5D", 10),
-CONNECTION(_5NCGA,         "5D", 12),
-CONNECTION(_5NCGA,         "5D", 13),
+CONNECTION(_NCG6,          "5D", 9)
+CONNECTION(_5NCG2,         "5D", 10)
+CONNECTION(_5NCGA,         "5D", 12)
+CONNECTION(_5NCGA,         "5D", 13)
 
-CONNECTION(_TLC5,          "4G", 2),
-CONNECTION(_TLLG,          "4G", 3),
+CONNECTION(_TLC5,          "4G", 2)
+CONNECTION(_TLLG,          "4G", 3)
 
-CONNECTION(_NCCE,          "2C", 13),
+CONNECTION(_NCCE,          "2C", 13)
 
-CONNECTION(_N999,          "3E", 1),
-CONNECTION(_NCCE,          "3E", 9),
-CONNECTION(GND,            "3E", 3),
-CONNECTION(GND,            "3E", 4),
-CONNECTION(GND,            "3E", 5),
-CONNECTION(GND,            "3E", 6),
-CONNECTION(_5NCCC,         "3E", 7),
-CONNECTION(_5NCCC,         "3E", 10),
-CONNECTION(_6THSC,         "3E", 2),
+CONNECTION(_N999,          "3E", 1)
+CONNECTION(_NCCE,          "3E", 9)
+CONNECTION(GND,            "3E", 3)
+CONNECTION(GND,            "3E", 4)
+CONNECTION(GND,            "3E", 5)
+CONNECTION(GND,            "3E", 6)
+CONNECTION(_5NCCC,         "3E", 7)
+CONNECTION(_5NCCC,         "3E", 10)
+CONNECTION(_6THSC,         "3E", 2)
 
-CONNECTION(_NCC1,          "1F", 13),
-CONNECTION(_NCC3,          "1F", 12),
+CONNECTION(_NCC1,          "1F", 13)
+CONNECTION(_NCC3,          "1F", 12)
 
-CONNECTION(GND,            "4E", 14),
-CONNECTION(_NCH7,          "4E", 12),
-CONNECTION(_NCH6,          "4E", 11),
-CONNECTION(_NCG5,          "4E", 10),
-CONNECTION(GND,            "4E", 5),
-CONNECTION(GND,            "4E", 4),
-CONNECTION(GND,            "4E", 3),
-CONNECTION(GND,            "4E", 2),
-CONNECTION(GND,            "4E", 1),
-CONNECTION(_NCSC,          "4E", 15),
-CONNECTION(_5NCCC,         "4E", 9),
-CONNECTION(_5NCCE,         "4E", 6),
-CONNECTION(_TEC0,          "4E", 7),
+CONNECTION(GND,            "4E", 14)
+CONNECTION(_NCH7,          "4E", 12)
+CONNECTION(_NCH6,          "4E", 11)
+CONNECTION(_NCG5,          "4E", 10)
+CONNECTION(GND,            "4E", 5)
+CONNECTION(GND,            "4E", 4)
+CONNECTION(GND,            "4E", 3)
+CONNECTION(GND,            "4E", 2)
+CONNECTION(GND,            "4E", 1)
+CONNECTION(_NCSC,          "4E", 15)
+CONNECTION(_5NCCC,         "4E", 9)
+CONNECTION(_5NCCE,         "4E", 6)
+CONNECTION(_TEC0,          "4E", 7)
 
 
 /* Page 2 */
@@ -1258,259 +1257,259 @@ CONNECTION(_TEC0,          "4E", 7),
 //PADDLE IN (left)
   //DIFFERENT THAN SCHEMATIC
 //1K, 8K CONNECTIONS
-CONNECTION(_PKL5, "PADDLE1", 1),
-CONNECTION(_PKL5, "PADDLE3", 1),
+CONNECTION(_PKL5, "PADDLE1", 1)
+CONNECTION(_PKL5, "PADDLE3", 1)
 
-CONNECTION(_PKE5, "PADDLE2", 1),
-CONNECTION(_PKE5, "PADDLE4", 1),
+CONNECTION(_PKE5, "PADDLE2", 1)
+CONNECTION(_PKE5, "PADDLE4", 1)
 
 //RECLOCK PADDLE POS & INTERSECT (P2 top, left)
 
-CONNECTION(_TEC8,    "5G", 3),
-CONNECTION(_TLC8,    "5G", 4),
-CONNECTION(_TPHS,    "5G", 6),
-CONNECTION(_TPVS,    "5G", 11),
-CONNECTION(_KAAC,    "5G", 13),
-CONNECTION(_KAAD,    "5G", 14),
-CONNECTION(_PGSC,    "5G", 1),
-CONNECTION(_6TQ05,   "5G", 9),
+CONNECTION(_TEC8,    "5G", 3)
+CONNECTION(_TLC8,    "5G", 4)
+CONNECTION(_TPHS,    "5G", 6)
+CONNECTION(_TPVS,    "5G", 11)
+CONNECTION(_KAAC,    "5G", 13)
+CONNECTION(_KAAD,    "5G", 14)
+CONNECTION(_PGSC,    "5G", 1)
+CONNECTION(_6TQ05,   "5G", 9)
 
-CONNECTION(_PKE8,    "6C", 1),
+CONNECTION(_PKE8,    "6C", 1)
 
-CONNECTION(_PKL8,    "6C", 3),
+CONNECTION(_PKL8,    "6C", 3)
 
-CONNECTION(_PKE5,    "6C", 5),
+CONNECTION(_PKE5,    "6C", 5)
 
-CONNECTION(_PKL5,    "6C", 9),  //diagram is off
+CONNECTION(_PKL5,    "6C", 9)  //diagram is off
 
 
 //LEFT PADDLE POSITION (top, left)
 
-CONNECTION(_5PKL5,   "2K", 4),
-CONNECTION(_5PCLA,   "2K", 3),
-CONNECTION(_2THSC,   "2K", 1),
-CONNECTION(_TPVR,    "2K", 2),
-CONNECTION(_5PKL8,   "2K", 15),
+CONNECTION(_5PKL5,   "2K", 4)
+CONNECTION(_5PCLA,   "2K", 3)
+CONNECTION(_2THSC,   "2K", 1)
+CONNECTION(_TPVR,    "2K", 2)
+CONNECTION(_5PKL8,   "2K", 15)
 
-CONNECTION(_5PCLB,   "4F", 9),
-CONNECTION(_PCLC,    "4F", 10),
-CONNECTION(_TLLG,    "4F", 11),
+CONNECTION(_5PCLB,   "4F", 9)
+CONNECTION(_PCLC,    "4F", 10)
+CONNECTION(_TLLG,    "4F", 11)
 
-CONNECTION(_N999,    "6E", 1),
-CONNECTION(_PCLB,    "6E", 9),
-CONNECTION(GND,      "6E", 3),
-CONNECTION(GND,      "6E", 4),
-CONNECTION(GND,      "6E", 5),
-CONNECTION(GND,      "6E", 6),
-CONNECTION(_PCLE,    "6E", 7),
-CONNECTION(_N999,    "6E", 10),
-CONNECTION(_6THSC,   "6E", 2),
+CONNECTION(_N999,    "6E", 1)
+CONNECTION(_PCLB,    "6E", 9)
+CONNECTION(GND,      "6E", 3)
+CONNECTION(GND,      "6E", 4)
+CONNECTION(GND,      "6E", 5)
+CONNECTION(GND,      "6E", 6)
+CONNECTION(_PCLE,    "6E", 7)
+CONNECTION(_N999,    "6E", 10)
+CONNECTION(_6THSC,   "6E", 2)
 
 
 //RIGHT PADDLE POSITION (top, left)
 
-CONNECTION(_5PKL5,   "2K", 10),
-CONNECTION(_5PCRA,   "2K", 11),
-CONNECTION(_2THSC,   "2K", 13),
-CONNECTION(_TPVR,    "2K", 12),
-CONNECTION(_5PKL8,   "2K", 14),
+CONNECTION(_5PKL5,   "2K", 10)
+CONNECTION(_5PCRA,   "2K", 11)
+CONNECTION(_2THSC,   "2K", 13)
+CONNECTION(_TPVR,    "2K", 12)
+CONNECTION(_5PKL8,   "2K", 14)
 
-CONNECTION(_5PCRB,   "5F", 5),
-CONNECTION(_PCRC,    "5F", 4),
-CONNECTION(_TLLG,    "5F", 3),
+CONNECTION(_5PCRB,   "5F", 5)
+CONNECTION(_PCRC,    "5F", 4)
+CONNECTION(_TLLG,    "5F", 3)
 
-CONNECTION(_N999,    "6F", 1),
-CONNECTION(_PCRB,    "6F", 9),
-CONNECTION(GND,      "6F", 3),
-CONNECTION(GND,      "6F", 4),
-CONNECTION(GND,      "6F", 5),
-CONNECTION(GND,      "6F", 6),
-CONNECTION(_PCRE,    "6F", 7),
-CONNECTION(_N999,    "6F", 10),
-CONNECTION(_6THSC,   "6F", 2),
+CONNECTION(_N999,    "6F", 1)
+CONNECTION(_PCRB,    "6F", 9)
+CONNECTION(GND,      "6F", 3)
+CONNECTION(GND,      "6F", 4)
+CONNECTION(GND,      "6F", 5)
+CONNECTION(GND,      "6F", 6)
+CONNECTION(_PCRE,    "6F", 7)
+CONNECTION(_N999,    "6F", 10)
+CONNECTION(_6THSC,   "6F", 2)
 
 
 //TOP PADDLE POSITION (bottom, left)
 
-CONNECTION(_5PKE5,   "7K", 4),
-CONNECTION(_5PCTA,   "7K", 3),
-CONNECTION(_2TQ05,   "7K", 1),
-CONNECTION(_TPHR,    "7K", 2),
-CONNECTION(_5PKE8,   "7K", 15),
+CONNECTION(_5PKE5,   "7K", 4)
+CONNECTION(_5PCTA,   "7K", 3)
+CONNECTION(_2TQ05,   "7K", 1)
+CONNECTION(_TPHR,    "7K", 2)
+CONNECTION(_5PKE8,   "7K", 15)
 
-CONNECTION(_5PCTB,   "5F", 9),
-CONNECTION(_PCTC,    "5F", 10),
-CONNECTION(_TELG,    "5F", 11),
+CONNECTION(_5PCTB,   "5F", 9)
+CONNECTION(_PCTC,    "5F", 10)
+CONNECTION(_TELG,    "5F", 11)
 
-CONNECTION(_N999,    "6G", 1),
-CONNECTION(_PCTB,    "6G", 9),
-CONNECTION(GND,      "6G", 3),
-CONNECTION(GND,      "6G", 4),
-CONNECTION(GND,      "6G", 5),
-CONNECTION(GND,      "6G", 6),
-CONNECTION(_PCTE,    "6G", 7),
-CONNECTION(_N999,    "6G", 10),
-CONNECTION(_6TQ05,   "6G", 2),
+CONNECTION(_N999,    "6G", 1)
+CONNECTION(_PCTB,    "6G", 9)
+CONNECTION(GND,      "6G", 3)
+CONNECTION(GND,      "6G", 4)
+CONNECTION(GND,      "6G", 5)
+CONNECTION(GND,      "6G", 6)
+CONNECTION(_PCTE,    "6G", 7)
+CONNECTION(_N999,    "6G", 10)
+CONNECTION(_6TQ05,   "6G", 2)
 
 
 //BOTTOM PADDLE POSITION (top, left)
 
-CONNECTION(_5PKE5,   "7K", 10),
-CONNECTION(_5PCBA,   "7K", 11),
-CONNECTION(_2TQ05,   "7K", 13),
-CONNECTION(_TPHR,    "7K", 12),
-CONNECTION(_5PKE8,   "7K", 14),
+CONNECTION(_5PKE5,   "7K", 10)
+CONNECTION(_5PCBA,   "7K", 11)
+CONNECTION(_2TQ05,   "7K", 13)
+CONNECTION(_TPHR,    "7K", 12)
+CONNECTION(_5PKE8,   "7K", 14)
 
-CONNECTION(_5PCBB,   "5F", 13),
-CONNECTION(_PCBC,    "5F", 2),
-CONNECTION(_TELG,    "5F", 1),
+CONNECTION(_5PCBB,   "5F", 13)
+CONNECTION(_PCBC,    "5F", 2)
+CONNECTION(_TELG,    "5F", 1)
 
-CONNECTION(_N999,    "6D", 1),
-CONNECTION(_PCBB,    "6D", 9),
-CONNECTION(GND,      "6D", 3),
-CONNECTION(GND,      "6D", 4),
-CONNECTION(GND,      "6D", 5),
-CONNECTION(GND,      "6D", 6),
-CONNECTION(_PCBE,    "6D", 7),
-CONNECTION(_N999,    "6D", 10),
-CONNECTION(_6TQ05,   "6D", 2),
+CONNECTION(_N999,    "6D", 1)
+CONNECTION(_PCBB,    "6D", 9)
+CONNECTION(GND,      "6D", 3)
+CONNECTION(GND,      "6D", 4)
+CONNECTION(GND,      "6D", 5)
+CONNECTION(GND,      "6D", 6)
+CONNECTION(_PCBE,    "6D", 7)
+CONNECTION(_N999,    "6D", 10)
+CONNECTION(_6TQ05,   "6D", 2)
 
 
 //2 PLAYER PADDLE MULTIPLEXER (top, right)
 
-CONNECTION(_PCLE,    "5C", 3),
-CONNECTION(_PCRE,    "5C", 4),
-CONNECTION(_PCTE,    "5C", 5),
-CONNECTION(_PCBE,    "5C", 6),
-CONNECTION(GND,      "5C", 1),
-CONNECTION(_PCL3,    "5C", 13),
-CONNECTION(_PCR3,    "5C", 12),
-CONNECTION(_PCT3,    "5C", 11),
-CONNECTION(_PCB3,    "5C", 10),
-CONNECTION(GND,      "5C", 15),
-CONNECTION(_5TLLG,   "5C", 2),
-CONNECTION(_1TPSC,   "5C", 14),
+CONNECTION(_PCLE,    "5C", 3)
+CONNECTION(_PCRE,    "5C", 4)
+CONNECTION(_PCTE,    "5C", 5)
+CONNECTION(_PCBE,    "5C", 6)
+CONNECTION(GND,      "5C", 1)
+CONNECTION(_PCL3,    "5C", 13)
+CONNECTION(_PCR3,    "5C", 12)
+CONNECTION(_PCT3,    "5C", 11)
+CONNECTION(_PCB3,    "5C", 10)
+CONNECTION(GND,      "5C", 15)
+CONNECTION(_5TLLG,   "5C", 2)
+CONNECTION(_1TPSC,   "5C", 14)
 
-CONNECTION(_5PDGS,   "2M", 9),
-CONNECTION(_PCS3,    "2M", 8),
+CONNECTION(_5PDGS,   "2M", 9)
+CONNECTION(_PCS3,    "2M", 8)
 
-CONNECTION(_5PCX3,   "6B", 12),
-CONNECTION(_5PCX3,   "6B", 13),
+CONNECTION(_5PCX3,   "6B", 12)
+CONNECTION(_5PCX3,   "6B", 13)
 
-CONNECTION(_PJC1,    "6A", 3),
+CONNECTION(_PJC1,    "6A", 3)
 
-CONNECTION(_PCL2,    "5B", 3),
-CONNECTION(_PCR2,    "5B", 4),
-CONNECTION(_PCT2,    "5B", 5),
-CONNECTION(_PCB2,    "5B", 6),
-CONNECTION(_5PDGS,   "5B", 1),
-CONNECTION(_PCL1,    "5B", 13),
-CONNECTION(_PCR1,    "5B", 12),
-CONNECTION(_PCT1,    "5B", 11),
-CONNECTION(_PCB1,    "5B", 10),
-CONNECTION(_5PDGS,   "5B", 15),
-CONNECTION(_5TLLG,   "5B", 2),
-CONNECTION(_1TPSC,   "5B", 14),
+CONNECTION(_PCL2,    "5B", 3)
+CONNECTION(_PCR2,    "5B", 4)
+CONNECTION(_PCT2,    "5B", 5)
+CONNECTION(_PCB2,    "5B", 6)
+CONNECTION(_5PDGS,   "5B", 1)
+CONNECTION(_PCL1,    "5B", 13)
+CONNECTION(_PCR1,    "5B", 12)
+CONNECTION(_PCT1,    "5B", 11)
+CONNECTION(_PCB1,    "5B", 10)
+CONNECTION(_5PDGS,   "5B", 15)
+CONNECTION(_5TLLG,   "5B", 2)
+CONNECTION(_1TPSC,   "5B", 14)
 
 
 //REBOUND CONTROL (top, right)
 
-CONNECTION(_KABD,    "5A", 3),
-CONNECTION(_1PCX3,   "5A", 4),
-CONNECTION(_PCS2,    "5A", 6),
-CONNECTION(_PCS1,    "5A", 11),
-CONNECTION(_5PJC1,   "5A", 13),
-CONNECTION(_PJC0,    "5A", 14),
-CONNECTION(_N999,    "5A", 1),
-CONNECTION(_7KQPD,   "5A", 9),
+CONNECTION(_KABD,    "5A", 3)
+CONNECTION(_1PCX3,   "5A", 4)
+CONNECTION(_PCS2,    "5A", 6)
+CONNECTION(_PCS1,    "5A", 11)
+CONNECTION(_5PJC1,   "5A", 13)
+CONNECTION(_PJC0,    "5A", 14)
+CONNECTION(_N999,    "5A", 1)
+CONNECTION(_7KQPD,   "5A", 9)
 
-CONNECTION(_PDPS,    "6C", 11),
+CONNECTION(_PDPS,    "6C", 11)
 
-CONNECTION(_PCS3,    "6C", 13),
+CONNECTION(_PCS3,    "6C", 13)
 
 
 //DIRECTION CHANGE F.F. (top, right)
 
-CONNECTION(_PGSC,    "6J", 4),
-CONNECTION(_N999,    "6J", 3),
-CONNECTION(_2KQEA,   "6J", 1),
-CONNECTION(GND,      "6J", 2),
-CONNECTION(_5EBUZ,   "6J", 15),
+CONNECTION(_PGSC,    "6J", 4)
+CONNECTION(_N999,    "6J", 3)
+CONNECTION(_2KQEA,   "6J", 1)
+CONNECTION(GND,      "6J", 2)
+CONNECTION(_5EBUZ,   "6J", 15)
 
   //vert direction change ind
-CONNECTION(_5PDGS,   "5E", 5),
-CONNECTION(_PDPS,    "5E", 4),
+CONNECTION(_5PDGS,   "5E", 5)
+CONNECTION(_PDPS,    "5E", 4)
 
   //horiz direction change ind
-CONNECTION(_5PDGS,   "5E", 9),
-CONNECTION(_5PDPS,   "5E", 10),
+CONNECTION(_5PDGS,   "5E", 9)
+CONNECTION(_5PDPS,   "5E", 10)
 
 
 //GAME FLAG (top, right)
 
-CONNECTION(_N999,    "5H", 4),
-CONNECTION(_1PGSB,   "5H", 3),
-CONNECTION(_2TQ05,   "5H", 1),
-CONNECTION(_1NCFG,   "5H", 2),
-CONNECTION(_9XPRS,   "5H", 15),
+CONNECTION(_N999,    "5H", 4)
+CONNECTION(_1PGSB,   "5H", 3)
+CONNECTION(_2TQ05,   "5H", 1)
+CONNECTION(_1NCFG,   "5H", 2)
+CONNECTION(_9XPRS,   "5H", 15)
 
-CONNECTION(_1PGCC,   "5E", 12),
-CONNECTION(_PGSC,    "5E", 13),
+CONNECTION(_1PGCC,   "5E", 12)
+CONNECTION(_PGSC,    "5E", 13)
 
 
 // 2/4 PLAYER INDICATOR (bottom, right)
 
-CONNECTION(_PGCE,    "5E", 2),
-CONNECTION(_PGSA,    "5E", 1),
+CONNECTION(_PGCE,    "5E", 2)
+CONNECTION(_PGSA,    "5E", 1)
 
-CONNECTION(_5PGSB,   "6A", 5),
+CONNECTION(_5PGSB,   "6A", 5)
 
 
 //COIN COUNT (bottom, right)
 
-CONNECTION(_N999,    "5J", 4),
-CONNECTION(_PGCB,    "5J", 3),
-CONNECTION(_TLC8,    "5J", 1),  
-CONNECTION(_PGSC,    "5J", 2),
-CONNECTION(_9XPRS,   "5J", 15),
+CONNECTION(_N999,    "5J", 4)
+CONNECTION(_PGCB,    "5J", 3)
+CONNECTION(_TLC8,    "5J", 1)  
+CONNECTION(_PGSC,    "5J", 2)
+CONNECTION(_9XPRS,   "5J", 15)
 
 
 // 2 PLAYERS DETECT (bottom, right)
 
-CONNECTION(_PGCB,    "4G", 5),
-CONNECTION(_5PGCC,   "4G", 6),
+CONNECTION(_PGCB,    "4G", 5)
+CONNECTION(_5PGCC,   "4G", 6)
 
-CONNECTION(_N999,    "5J", 10),
-CONNECTION(_PGCD,    "5J", 11),
-CONNECTION(_TLC8,    "5J", 13),
-CONNECTION(_PGSC,    "5J", 12),
-CONNECTION(_9XPRS,   "5J", 14),
+CONNECTION(_N999,    "5J", 10)
+CONNECTION(_PGCD,    "5J", 11)
+CONNECTION(_TLC8,    "5J", 13)
+CONNECTION(_PGSC,    "5J", 12)
+CONNECTION(_9XPRS,   "5J", 14)
 
 // 4 PLAYERS DETECT (bottom, right)
 
-CONNECTION(_5PGCE,   "6H", 2),
-CONNECTION(_PGCD,    "6H", 3),
+CONNECTION(_5PGCE,   "6H", 2)
+CONNECTION(_PGCD,    "6H", 3)
 
-CONNECTION(_PGSC,    "6H", 5),
-CONNECTION(_PGCE,    "6H", 6),
+CONNECTION(_PGSC,    "6H", 5)
+CONNECTION(_PGCE,    "6H", 6)
 
-CONNECTION(_N999,    "5H", 10),
-CONNECTION(_PGCF,    "5H", 11),
-CONNECTION(_TLC8,    "5H", 13),  
-CONNECTION(_PGCH,    "5H", 12),
-CONNECTION(_9XPRS,   "5H", 14),
+CONNECTION(_N999,    "5H", 10)
+CONNECTION(_PGCF,    "5H", 11)
+CONNECTION(_TLC8,    "5H", 13)  
+CONNECTION(_PGCH,    "5H", 12)
+CONNECTION(_9XPRS,   "5H", 14)
 
 // 5-7 game select dipswitch (9X7PT)
-CONNECTION(VCC,      "SWMISS57", 1),
-CONNECTION(GND,      "SWMISS57", 2),
+CONNECTION(VCC,      "SWMISS57", 1)
+CONNECTION(GND,      "SWMISS57", 2)
 
 //LAMP DRIVERS (bottom, right)
-//CONNECTION(_5PGC0,   "5K", 10),
-//CONNECTION(_5PGC0,   "5K", 11),
-//CONNECTION(_5PGCC,   "5K", 6),
-//CONNECTION(_PGCG,    "5K", 5),
-//CONNECTION(_2PGCC,   "5K", 2),
-//CONNECTION(_PCSC,    "5K", 1),
+//CONNECTION(_5PGC0,   "5K", 10)
+//CONNECTION(_5PGC0,   "5K", 11)
+//CONNECTION(_5PGCC,   "5K", 6)
+//CONNECTION(_PGCG,    "5K", 5)
+//CONNECTION(_2PGCC,   "5K", 2)
+//CONNECTION(_PCSC,    "5K", 1)
 //OUT 9 - 4 PLAYER PIN #A
 //OUT 7 - 2 PLAYER PIN #2
 //OUT 3 - GAME OVER #3
@@ -1521,448 +1520,447 @@ CONNECTION(GND,      "SWMISS57", 2),
 
 //REBOUND DIRECTION CONTROL (P3 top, left)
 
-CONNECTION(_BDEC,     "8G", 2),
-CONNECTION(_KACA,     "8G", 1),
+CONNECTION(_BDEC,     "8G", 2)
+CONNECTION(_KACA,     "8G", 1)
 
-CONNECTION(_5BDEC,    "8G", 5),
-CONNECTION(_KACA,     "8G", 4),
+CONNECTION(_5BDEC,    "8G", 5)
+CONNECTION(_KACA,     "8G", 4)
 
   //left/right
-CONNECTION(_5BDSR,    "8F", 4),
-CONNECTION(_PCS3,     "8F", 3),
-CONNECTION(_2KQEL,    "8F", 1),
-CONNECTION(_5PCS3,    "8F", 2),
-CONNECTION(_5BDSL,    "8F", 15),
+CONNECTION(_5BDSR,    "8F", 4)
+CONNECTION(_PCS3,     "8F", 3)
+CONNECTION(_2KQEL,    "8F", 1)
+CONNECTION(_5PCS3,    "8F", 2)
+CONNECTION(_5BDSL,    "8F", 15)
 
-CONNECTION(_1BLGE,    "9J", 2),
-CONNECTION(_BDRR,     "9J", 1),
+CONNECTION(_1BLGE,    "9J", 2)
+CONNECTION(_BDRR,     "9J", 1)
 
-CONNECTION(_BDLC,     "8G", 9),
-CONNECTION(_KACB,     "8G", 10),
+CONNECTION(_BDLC,     "8G", 9)
+CONNECTION(_KACB,     "8G", 10)
 
   //up/down
-CONNECTION(_5BDLC,    "8G", 12),
-CONNECTION(_KACB,     "8G", 13),
+CONNECTION(_5BDLC,    "8G", 12)
+CONNECTION(_KACB,     "8G", 13)
 
-CONNECTION(_5BDSD,    "8F", 10),
-CONNECTION(_PCS3,     "8F", 11),
-CONNECTION(_2KQLN,    "8F", 13),
-CONNECTION(_5PCS3,    "8F", 12),
-CONNECTION(_5BDSU,    "8F", 14),
+CONNECTION(_5BDSD,    "8F", 10)
+CONNECTION(_PCS3,     "8F", 11)
+CONNECTION(_2KQLN,    "8F", 13)
+CONNECTION(_5PCS3,    "8F", 12)
+CONNECTION(_5BDSU,    "8F", 14)
 
-CONNECTION(_1BLGD,    "9J", 9),
-CONNECTION(_BDRD,     "9J", 10),
+CONNECTION(_1BLGD,    "9J", 9)
+CONNECTION(_BDRD,     "9J", 10)
 
-CONNECTION(_5BDGR,    "9J", 5),
-CONNECTION(_5BDGD,    "9J", 4),
+CONNECTION(_5BDGR,    "9J", 5)
+CONNECTION(_5BDGD,    "9J", 4)
 
 
 //BALL SPEED (P3 top, left)
 
-CONNECTION(_B999,     "7J", 1),
-CONNECTION(_5EBUZ,    "7J", 9),
-CONNECTION(GND,       "7J", 3),
-CONNECTION(GND,       "7J", 4),
-CONNECTION(GND,       "7J", 5),
-CONNECTION(GND,       "7J", 6),
-CONNECTION(_KACF,     "7J", 7),
-CONNECTION(_5EBIP,    "7J", 10),
-CONNECTION(_6TQ05,    "7J", 2),
+CONNECTION(_B999,     "7J", 1)
+CONNECTION(_5EBUZ,    "7J", 9)
+CONNECTION(GND,       "7J", 3)
+CONNECTION(GND,       "7J", 4)
+CONNECTION(GND,       "7J", 5)
+CONNECTION(GND,       "7J", 6)
+CONNECTION(_KACF,     "7J", 7)
+CONNECTION(_5EBIP,    "7J", 10)
+CONNECTION(_6TQ05,    "7J", 2)
 
-CONNECTION(_BSC4,     "9H", 2),
-CONNECTION(_BSC4,     "9H", 1),
+CONNECTION(_BSC4,     "9H", 2)
+CONNECTION(_BSC4,     "9H", 1)
 
-CONNECTION(_5TCKG,    "9E", 2),
-CONNECTION(_5BSCG,    "9E", 3),
+CONNECTION(_5TCKG,    "9E", 2)
+CONNECTION(_5BSCG,    "9E", 3)
 
 
 //VELOCITY GEN FROM REBOUND ADDRESS (P3 top, left)
 
-CONNECTION(_5NCFB,    "9H", 12),
-CONNECTION(_5NCFE,    "9H", 13),
+CONNECTION(_5NCFB,    "9H", 12)
+CONNECTION(_5NCFE,    "9H", 13)
 
-CONNECTION(_PDGS,     "7F", 3),
-CONNECTION(_BSC3,     "7F", 6),
-CONNECTION(_BXYZ,     "7F", 10),
-CONNECTION(GND,       "7F", 13),
-CONNECTION(_PDS3,     "7F", 2),
-CONNECTION(_PDS2,     "7F", 5),
-CONNECTION(_PDS1,     "7F", 11),
-CONNECTION(GND,       "7F", 14),
-CONNECTION(GND,       "7F", 15),
-CONNECTION(_BPSC,     "7F", 1),
+CONNECTION(_PDGS,     "7F", 3)
+CONNECTION(_BSC3,     "7F", 6)
+CONNECTION(_BXYZ,     "7F", 10)
+CONNECTION(GND,       "7F", 13)
+CONNECTION(_PDS3,     "7F", 2)
+CONNECTION(_PDS2,     "7F", 5)
+CONNECTION(_PDS1,     "7F", 11)
+CONNECTION(GND,       "7F", 14)
+CONNECTION(GND,       "7F", 15)
+CONNECTION(_BPSC,     "7F", 1)
 
 
 //BALL MOVEMENT (P3 top, left)
 
-CONNECTION(_PGSC,     "7G", 14),
-CONNECTION(_BGS3,     "7G", 13),
-CONNECTION(_BGS2,     "7G", 12),
-CONNECTION(_BGS1,     "7G", 11),
-CONNECTION(_BGS0,     "7G", 10),
-CONNECTION(GND,       "7G", 15),
+CONNECTION(_PGSC,     "7G", 14)
+CONNECTION(_BGS3,     "7G", 13)
+CONNECTION(_BGS2,     "7G", 12)
+CONNECTION(_BGS1,     "7G", 11)
+CONNECTION(_BGS0,     "7G", 10)
+CONNECTION(GND,       "7G", 15)
 
-CONNECTION(_PDPS,     "3H", 9),
-CONNECTION(_5PDGS,    "3H", 10),
+CONNECTION(_PDPS,     "3H", 9)
+CONNECTION(_5PDGS,    "3H", 10)
 
-CONNECTION(_1BLGE,    "3H", 12),
-CONNECTION(_BPSV,     "3H", 13),
+CONNECTION(_1BLGE,    "3H", 12)
+CONNECTION(_BPSV,     "3H", 13)
 
-CONNECTION(_BPE3,     "7H", 3),
-CONNECTION(_BPE2,     "7H", 6),
-CONNECTION(_BPE1,     "7H", 10),
-CONNECTION(_BPE0,     "7H", 13),
-CONNECTION(_BPL3,     "7H", 2),
-CONNECTION(_BPL2,     "7H", 5),
-CONNECTION(_BPL1,     "7H", 11),
-CONNECTION(_BPL0,     "7H", 14),
-CONNECTION(GND,       "7H", 15),
-CONNECTION(_BPSC,     "7H", 1),
+CONNECTION(_BPE3,     "7H", 3)
+CONNECTION(_BPE2,     "7H", 6)
+CONNECTION(_BPE1,     "7H", 10)
+CONNECTION(_BPE0,     "7H", 13)
+CONNECTION(_BPL3,     "7H", 2)
+CONNECTION(_BPL2,     "7H", 5)
+CONNECTION(_BPL1,     "7H", 11)
+CONNECTION(_BPL0,     "7H", 14)
+CONNECTION(GND,       "7H", 15)
+CONNECTION(_BPSC,     "7H", 1)
 
 
 // L/R T/B SELECTOR (P3 bottom, left)
 
-CONNECTION(_5TEG7,    "8H", 3),
-CONNECTION(_1TEG7,    "8H", 6),
-CONNECTION(_5TLG7,    "8H", 10),
-CONNECTION(_1TLG7,    "8H", 13),
-CONNECTION(_TEC0,     "8H", 2),
-CONNECTION(_5TEC0,    "8H", 5),
-CONNECTION(_TLC0,     "8H", 11),
-CONNECTION(_5TLC0,    "8H", 14),
-CONNECTION(_BSCD,     "8H", 15),
-CONNECTION(_5TCKG,    "8H", 1),
+CONNECTION(_5TEG7,    "8H", 3)
+CONNECTION(_1TEG7,    "8H", 6)
+CONNECTION(_5TLG7,    "8H", 10)
+CONNECTION(_1TLG7,    "8H", 13)
+CONNECTION(_TEC0,     "8H", 2)
+CONNECTION(_5TEC0,    "8H", 5)
+CONNECTION(_TLC0,     "8H", 11)
+CONNECTION(_5TLC0,    "8H", 14)
+CONNECTION(_BSCD,     "8H", 15)
+CONNECTION(_5TCKG,    "8H", 1)
 
 
 //INTERCEPT DIRECTION DEFINITION (P3 bottom, left)
 
-CONNECTION(_KABC,     "6H", 9),
-CONNECTION(_KABH,     "6H", 8),
+CONNECTION(_KABC,     "6H", 9)
+CONNECTION(_KABH,     "6H", 8)
 
-CONNECTION(_5KBCH,    "9H", 5),
-CONNECTION(_5KABE,    "9H", 4),
+CONNECTION(_5KBCH,    "9H", 5)
+CONNECTION(_5KABE,    "9H", 4)
 
-CONNECTION(_KABD,     "6H", 12),
-CONNECTION(_KABG,     "6H", 11),
+CONNECTION(_KABD,     "6H", 12)
+CONNECTION(_KABG,     "6H", 11)
 
-CONNECTION(_5KBDG,    "9H", 9),
-CONNECTION(_5KABF,    "9H", 10),
+CONNECTION(_5KBDG,    "9H", 9)
+CONNECTION(_5KABF,    "9H", 10)
 
 
 //INTERSECT (P3 left, bottom)
 
   //intersect clock
-CONNECTION(_6TQ05,    "9D", 2),
-CONNECTION(_5EBCA,    "9D", 3),
+CONNECTION(_6TQ05,    "9D", 2)
+CONNECTION(_5EBCA,    "9D", 3)
 
   //boundry intersect
-CONNECTION(_5KABE,    "9F", 5),
-CONNECTION(_5KABF,    "9F", 4),
+CONNECTION(_5KABE,    "9F", 5)
+CONNECTION(_5KABF,    "9F", 4)
 
   //paddle or cross intersect
-CONNECTION(_5KABC,    "9F", 12),
-CONNECTION(_5KABD,    "9F", 13),
+CONNECTION(_5KABC,    "9F", 12)
+CONNECTION(_5KABD,    "9F", 13)
 
 
 //INTERCEPTS (P3 bottom, left)
 
   //ball intercepts vert pad & horiz cross
-CONNECTION(_TVPD,     "4G", 9),
-CONNECTION(_THCH,     "4G", 8),
+CONNECTION(_TVPD,     "4G", 9)
+CONNECTION(_THCH,     "4G", 8)
 
-CONNECTION(_5BVAF,    "9E", 5),
-CONNECTION(_5KAAA,    "9E", 6),
+CONNECTION(_5BVAF,    "9E", 5)
+CONNECTION(_5KAAA,    "9E", 6)
 
   //ball intercepts vert cross & horiz pad
-CONNECTION(_THPD,     "4G", 12),
-CONNECTION(_TVCH,     "4G", 11),
+CONNECTION(_THPD,     "4G", 12)
+CONNECTION(_TVCH,     "4G", 11)
 
-CONNECTION(_5BVAF,    "9E", 9),
-CONNECTION(_5KAAB,    "9E", 8),
+CONNECTION(_5BVAF,    "9E", 9)
+CONNECTION(_5KAAB,    "9E", 8)
 
   //ball intercept vert line
-CONNECTION(_TVLN,     "9G", 2),
-CONNECTION(_1BVAF,    "9G", 1),
+CONNECTION(_TVLN,     "9G", 2)
+CONNECTION(_1BVAF,    "9G", 1)
 
   //ball intercept horiz line
-CONNECTION(_THLN,     "9G", 4),
-CONNECTION(_1BVAF,    "9G", 5),
+CONNECTION(_THLN,     "9G", 4)
+CONNECTION(_1BVAF,    "9G", 5)
 
   //ball intercept top & bottom scoring regions
-CONNECTION(_TLCB,     "2J", 9),
-CONNECTION(_1BVAF,    "2J", 10),
+CONNECTION(_TLCB,     "2J", 9)
+CONNECTION(_1BVAF,    "2J", 10)
 
   //ball intercept left & right scoring regions
-CONNECTION(_TECB,     "2J", 12),
-CONNECTION(_1BVAF,    "2J", 13),
+CONNECTION(_TECB,     "2J", 12)
+CONNECTION(_1BVAF,    "2J", 13)
 
 
 //SCORE (P3 bottom, left)
 
-CONNECTION(_EBUZ,     "9E", 12),
-CONNECTION(_5PGSC,    "9E", 11),
+CONNECTION(_EBUZ,     "9E", 12)
+CONNECTION(_5PGSC,    "9E", 11)
 
-CONNECTION(_KABG,     "9G", 9),
-CONNECTION(_KXYA,     "9G", 10),
+CONNECTION(_KABG,     "9G", 9)
+CONNECTION(_KXYA,     "9G", 10)
 
-CONNECTION(_KABH,     "9G", 12),
-CONNECTION(_KXYA,     "9G", 13),
+CONNECTION(_KABH,     "9G", 12)
+CONNECTION(_KXYA,     "9G", 13)
 
-CONNECTION(_5KACG,    "9F", 2),
-CONNECTION(_5KACH,    "9F", 1),
+CONNECTION(_5KACG,    "9F", 2)
+CONNECTION(_5KACH,    "9F", 1)
 
 
 //RECLOCK (bottom, left)
 
-CONNECTION(_5KAAE,    "8J", 3),
-CONNECTION(_5KAAF,    "8J", 4),
-CONNECTION(_KAAG,     "8J", 6),
-CONNECTION(_KAAH,     "8J", 11),
-CONNECTION(_5VDAE,    "8J", 13),
-CONNECTION(_TCSC,     "8J", 14),
-CONNECTION(_B999,     "8J", 1),
-CONNECTION(_6TQ05,    "8J", 9),
+CONNECTION(_5KAAE,    "8J", 3)
+CONNECTION(_5KAAF,    "8J", 4)
+CONNECTION(_KAAG,     "8J", 6)
+CONNECTION(_KAAH,     "8J", 11)
+CONNECTION(_5VDAE,    "8J", 13)
+CONNECTION(_TCSC,     "8J", 14)
+CONNECTION(_B999,     "8J", 1)
+CONNECTION(_6TQ05,    "8J", 9)
 
-CONNECTION(_KABC,     "6A", 9),
+CONNECTION(_KABC,     "6A", 9)
 
-CONNECTION(_KABD,     "6A", 11),
+CONNECTION(_KABD,     "6A", 11)
 
 
 //
 
-CONNECTION(_1TQ05,    "9F", 9),
-CONNECTION(_KAYA,     "9F", 10),
+CONNECTION(_1TQ05,    "9F", 9)
+CONNECTION(_KAYA,     "9F", 10)
 
-CONNECTION(_5KABC,    "9D", 5),
-CONNECTION(_6KQCA,    "9D", 6),
+CONNECTION(_5KABC,    "9D", 5)
+CONNECTION(_6KQCA,    "9D", 6)
 
-CONNECTION(_5KABD,    "9D", 9),
-CONNECTION(_6KQCA,    "9D", 8),
+CONNECTION(_5KABD,    "9D", 9)
+CONNECTION(_6KQCA,    "9D", 8)
 
-CONNECTION(_2KQLN,    "9D", 12),
-CONNECTION(_2KQEL,    "9D", 11),
+CONNECTION(_2KQLN,    "9D", 12)
+CONNECTION(_2KQEL,    "9D", 11)
 
-CONNECTION(_EBCA,     "2M", 12),
-CONNECTION(_1TCKG,    "2M", 11),
+CONNECTION(_EBCA,     "2M", 12)
+CONNECTION(_1TCKG,    "2M", 11)
 
 
 //COMPOSITE VIDEO (bottom, left)
 
-CONNECTION(_NCVD,     "4F", 13),  //numbers
-CONNECTION(_TVLN,     "4F", 2),   //vert lines
-CONNECTION(_THLN,     "4F", 1),   //horiz lines
+CONNECTION(_NCVD,     "4F", 13)  //numbers
+CONNECTION(_TVLN,     "4F", 2)   //vert lines
+CONNECTION(_THLN,     "4F", 1)   //horiz lines
 
-CONNECTION(_5VDAC,    "3G", 9),   
-CONNECTION(_5BVAF,    "3G", 10),  //ball
-CONNECTION(_5KAAA,    "3G", 12),  //vert paddle & horiz cross
-CONNECTION(_5KAAB,    "3G", 13),  //horiz paddle & vert cross
+CONNECTION(_5VDAC,    "3G", 9)   
+CONNECTION(_5BVAF,    "3G", 10)  //ball
+CONNECTION(_5KAAA,    "3G", 12)  //vert paddle & horiz cross
+CONNECTION(_5KAAB,    "3G", 13)  //horiz paddle & vert cross
 
-CONNECTION(_5TCBL,    "4H", 12),
-CONNECTION(_VDAD,     "4H", 13),
+CONNECTION(_5TCBL,    "4H", 12)
+CONNECTION(_VDAD,     "4H", 13)
 
 
 //BALL GENERATION AND CONTROL (p3, top, right)
 
   //horiz
-CONNECTION(_5PDEC,    "9C", 5),
-CONNECTION(_1BLGE,    "9C", 4),
-CONNECTION(_1BEGD,    "9C", 2),
-CONNECTION(_1BEGD,    "9C", 1),
+CONNECTION(_5PDEC,    "9C", 5)
+CONNECTION(_1BLGE,    "9C", 4)
+CONNECTION(_1BEGD,    "9C", 2)
+CONNECTION(_1BEGD,    "9C", 1)
   
-CONNECTION(_B999,     "7E", 1),
-CONNECTION(_5BECL,    "7E", 9),
-CONNECTION(_BPS0,     "7E", 3),
-CONNECTION(_BPS1,     "7E", 4),
-CONNECTION(_BPS2,     "7E", 5),
-CONNECTION(_BPS3,     "7E", 6),
-CONNECTION(_5TEG8,    "7E", 7),
-CONNECTION(_5TEG8,    "7E", 10),
-CONNECTION(_6TQ05,    "7E", 2),
+CONNECTION(_B999,     "7E", 1)
+CONNECTION(_5BECL,    "7E", 9)
+CONNECTION(_BPS0,     "7E", 3)
+CONNECTION(_BPS1,     "7E", 4)
+CONNECTION(_BPS2,     "7E", 5)
+CONNECTION(_BPS3,     "7E", 6)
+CONNECTION(_5TEG8,    "7E", 7)
+CONNECTION(_5TEG8,    "7E", 10)
+CONNECTION(_6TQ05,    "7E", 2)
   
-CONNECTION(_B999,     "7D", 1),
-CONNECTION(_5EBUZ,    "7D", 9),
-CONNECTION(_BDRR,     "7D", 3),
-CONNECTION(_BDRR,     "7D", 4),
-CONNECTION(_5BDRR,    "7D", 5),
-CONNECTION(_BDRR,     "7D", 6),
-CONNECTION(_BECA,     "7D", 7),
-CONNECTION(_BECA,     "7D", 10),
-CONNECTION(_6TQ05,    "7D", 2),
+CONNECTION(_B999,     "7D", 1)
+CONNECTION(_5EBUZ,    "7D", 9)
+CONNECTION(_BDRR,     "7D", 3)
+CONNECTION(_BDRR,     "7D", 4)
+CONNECTION(_5BDRR,    "7D", 5)
+CONNECTION(_BDRR,     "7D", 6)
+CONNECTION(_BECA,     "7D", 7)
+CONNECTION(_BECA,     "7D", 10)
+CONNECTION(_6TQ05,    "7D", 2)
 
-CONNECTION(_BECB,     "8A", 3),
+CONNECTION(_BECB,     "8A", 3)
 
-CONNECTION(_5BECB,    "8C", 3),
-CONNECTION(_5BEGA,    "8C", 4),
-CONNECTION(_5BEGB,    "8C", 6),
-CONNECTION(_5BEGC,    "8C", 11),
-CONNECTION(_PGCA,     "8C", 13),
-CONNECTION(_PGCC,     "8C", 14),
-CONNECTION(_B999,     "8C", 1),
-CONNECTION(_6TQ05,    "8C", 9),
+CONNECTION(_5BECB,    "8C", 3)
+CONNECTION(_5BEGA,    "8C", 4)
+CONNECTION(_5BEGB,    "8C", 6)
+CONNECTION(_5BEGC,    "8C", 11)
+CONNECTION(_PGCA,     "8C", 13)
+CONNECTION(_PGCC,     "8C", 14)
+CONNECTION(_B999,     "8C", 1)
+CONNECTION(_6TQ05,    "8C", 9)
 
-CONNECTION(_5BEGD,    "8A", 9),
+CONNECTION(_5BEGD,    "8A", 9)
 
   //vert
-CONNECTION(_5PDLC,    "9A", 2),
-CONNECTION(_1BLGD,    "9A", 1),
+CONNECTION(_5PDLC,    "9A", 2)
+CONNECTION(_1BLGD,    "9A", 1)
   
-CONNECTION(_B999,     "8E", 1),
-CONNECTION(_5BLCL,    "8E", 9),
-CONNECTION(_BPS0,     "8E", 3),
-CONNECTION(_BPS1,     "8E", 4),
-CONNECTION(_BPS2,     "8E", 5),
-CONNECTION(_BPS3,     "8E", 6),
-CONNECTION(_5TLG8,    "8E", 7),
-CONNECTION(_5TLG8,    "8E", 10),
-CONNECTION(_6THSC,    "8E", 2),
+CONNECTION(_B999,     "8E", 1)
+CONNECTION(_5BLCL,    "8E", 9)
+CONNECTION(_BPS0,     "8E", 3)
+CONNECTION(_BPS1,     "8E", 4)
+CONNECTION(_BPS2,     "8E", 5)
+CONNECTION(_BPS3,     "8E", 6)
+CONNECTION(_5TLG8,    "8E", 7)
+CONNECTION(_5TLG8,    "8E", 10)
+CONNECTION(_6THSC,    "8E", 2)
   
-CONNECTION(_B999,     "8D", 1),
-CONNECTION(_5EBUZ,    "8D", 9),
-CONNECTION(_BDRD,     "8D", 3),
-CONNECTION(_BDRD,     "8D", 4),
-CONNECTION(_5BDRD,    "8D", 5),
-CONNECTION(_BDRD,     "8D", 6),
-CONNECTION(_BLCA,     "8D", 7),
-CONNECTION(_BLCA,     "8D", 10),
-CONNECTION(_6THSC,    "8D", 2),
+CONNECTION(_B999,     "8D", 1)
+CONNECTION(_5EBUZ,    "8D", 9)
+CONNECTION(_BDRD,     "8D", 3)
+CONNECTION(_BDRD,     "8D", 4)
+CONNECTION(_5BDRD,    "8D", 5)
+CONNECTION(_BDRD,     "8D", 6)
+CONNECTION(_BLCA,     "8D", 7)
+CONNECTION(_BLCA,     "8D", 10)
+CONNECTION(_6THSC,    "8D", 2)
 
-CONNECTION(_BLCB,     "8A", 5),
+CONNECTION(_BLCB,     "8A", 5)
 
-CONNECTION(_5BLCB,    "8B", 3),
-CONNECTION(_5BLGA,    "8B", 4),
-CONNECTION(_5BLGB,    "8B", 6),
-CONNECTION(_5BLGC,    "8B", 11),
-CONNECTION(_1BLGD,    "8B", 13),
-CONNECTION(_EBCA,     "8B", 14),
-CONNECTION(_B999,     "8B", 1),
-CONNECTION(_6THSC,    "8B", 9),
+CONNECTION(_5BLCB,    "8B", 3)
+CONNECTION(_5BLGA,    "8B", 4)
+CONNECTION(_5BLGB,    "8B", 6)
+CONNECTION(_5BLGC,    "8B", 11)
+CONNECTION(_1BLGD,    "8B", 13)
+CONNECTION(_EBCA,     "8B", 14)
+CONNECTION(_B999,     "8B", 1)
+CONNECTION(_6THSC,    "8B", 9)
 
-CONNECTION(_5BLGD,    "8A", 11),
+CONNECTION(_5BLGD,    "8A", 11)
 
 //ball gen and shaping
 
   //corner round decode
-CONNECTION(_5BEGA,    "9A", 5),
-CONNECTION(_5BEGD,    "9A", 4),
+CONNECTION(_5BEGA,    "9A", 5)
+CONNECTION(_5BEGD,    "9A", 4)
 
-CONNECTION(_5BLGA,    "9A", 9),
-CONNECTION(_5BLGD,    "9A", 10),
+CONNECTION(_5BLGA,    "9A", 9)
+CONNECTION(_5BLGD,    "9A", 10)
   
-CONNECTION(_BVAA,     "9A", 12),
-CONNECTION(_BVAB,     "9A", 13),
+CONNECTION(_BVAA,     "9A", 12)
+CONNECTION(_BVAB,     "9A", 13)
 
   //
-CONNECTION(_5BEGA,    "9B", 5),
-CONNECTION(_5BEGB,    "9B", 4),
-CONNECTION(_5BEGC,    "9B", 2),
-CONNECTION(_5BEGD,    "9B", 1),
+CONNECTION(_5BEGA,    "9B", 5)
+CONNECTION(_5BEGB,    "9B", 4)
+CONNECTION(_5BEGC,    "9B", 2)
+CONNECTION(_5BEGD,    "9B", 1)
 
-CONNECTION(_5BLGA,    "9B", 9),
-CONNECTION(_5BLGB,    "9B", 10),
-CONNECTION(_5BLGC,    "9B", 12),
-CONNECTION(_5BLGD,    "9B", 13),
+CONNECTION(_5BLGA,    "9B", 9)
+CONNECTION(_5BLGB,    "9B", 10)
+CONNECTION(_5BLGC,    "9B", 12)
+CONNECTION(_5BLGD,    "9B", 13)
 
-CONNECTION(_BVAC,     "9C", 9),
-CONNECTION(_5BVAD,    "9C", 10),
-CONNECTION(_5EBUZ,    "9C", 12),
-CONNECTION(_BVAE,     "9C", 13),
+CONNECTION(_BVAC,     "9C", 9)
+CONNECTION(_5BVAD,    "9C", 10)
+CONNECTION(_5EBUZ,    "9C", 12)
+CONNECTION(_BVAE,     "9C", 13)
 
-CONNECTION(_5BVAF,    "8A", 13),
+CONNECTION(_5BVAF,    "8A", 13)
 
 
 //AUDIO GENERATION (P3 bottom, right)
 
   //ball hits paddle & cross
-CONNECTION(_B999,     "7B", 4),
-CONNECTION(_KACF,     "7B", 3),
-CONNECTION(_2TQ05,    "7B", 1),
-CONNECTION(_EBC2,     "7B", 2),
-CONNECTION(_PGSC,     "7B", 15),
+CONNECTION(_B999,     "7B", 4)
+CONNECTION(_KACF,     "7B", 3)
+CONNECTION(_2TQ05,    "7B", 1)
+CONNECTION(_EBC2,     "7B", 2)
+CONNECTION(_PGSC,     "7B", 15)
 
   //ball hits boundary
-CONNECTION(_B999,     "6J", 10),
-CONNECTION(_KACE,     "6J", 11),
-CONNECTION(_2TQ05,    "6J", 13),
-CONNECTION(_EBC2,     "6J", 12),
-CONNECTION(_PGSC,     "6J", 14),
+CONNECTION(_B999,     "6J", 10)
+CONNECTION(_KACE,     "6J", 11)
+CONNECTION(_2TQ05,    "6J", 13)
+CONNECTION(_EBC2,     "6J", 12)
+CONNECTION(_PGSC,     "6J", 14)
 
   //ball hits score
-CONNECTION(_5PGSR,    "7B", 10),
-CONNECTION(_KADG,     "7B", 11),
-CONNECTION(_2TQ05,    "7B", 13),
-CONNECTION(_EBCC,     "7B", 12),
-CONNECTION(_B999,     "7B", 14),
+CONNECTION(_5PGSR,    "7B", 10)
+CONNECTION(_KADG,     "7B", 11)
+CONNECTION(_2TQ05,    "7B", 13)
+CONNECTION(_EBCC,     "7B", 12)
+CONNECTION(_B999,     "7B", 14)
 
-CONNECTION(_EBIP,     "6B", 2),
-CONNECTION(_TLC3,     "6B", 1),
+CONNECTION(_EBIP,     "6B", 2)
+CONNECTION(_TLC3,     "6B", 1)
 
-CONNECTION(_EBOP,     "6B", 5),
-CONNECTION(_TLC4,     "6B", 4),
+CONNECTION(_EBOP,     "6B", 5)
+CONNECTION(_TLC4,     "6B", 4)
 
-CONNECTION(_EBUZ,     "6B", 9),
-CONNECTION(_TLC6,     "6B", 10),
+CONNECTION(_EBUZ,     "6B", 9)
+CONNECTION(_TLC6,     "6B", 10)
 
-CONNECTION(_5EBEA,    "7A", 5),  //audio
-CONNECTION(_5EBEB,    "7A", 4),
-CONNECTION(_5EBEC,    "7A", 2),
-CONNECTION(_5EBEC,    "7A", 1),
+CONNECTION(_5EBEA,    "7A", 5)  //audio
+CONNECTION(_5EBEB,    "7A", 4)
+CONNECTION(_5EBEC,    "7A", 2)
+CONNECTION(_5EBEC,    "7A", 1)
 
 
 //INTERSECT (bottom, right)
 
-CONNECTION(_5EBIP,    "7A", 9),
-CONNECTION(_5EBOP,    "7A", 10),
-CONNECTION(_5EBUZ,    "7A", 12),
-CONNECTION(_5EBUZ,    "7A", 13),
+CONNECTION(_5EBIP,    "7A", 9)
+CONNECTION(_5EBOP,    "7A", 10)
+CONNECTION(_5EBUZ,    "7A", 12)
+CONNECTION(_5EBUZ,    "7A", 13)
 
-CONNECTION(_EBCA,     "6A", 13),
+CONNECTION(_EBCA,     "6A", 13)
 
 //AUDIO DURATION COUNTER (bottom, right)
 
-CONNECTION(_B999,     "7C", 1),
-CONNECTION(_1EBCA,    "7C", 9),
-CONNECTION(GND,       "7C", 3),
-CONNECTION(GND,       "7C", 4),
-CONNECTION(GND,       "7C", 5),
-CONNECTION(GND,       "7C", 6),
-CONNECTION(_1TLCC,    "7C", 7),
-CONNECTION(_5TLC8,    "7C", 10),
-CONNECTION(_6THSC,    "7C", 2),
+CONNECTION(_B999,     "7C", 1)
+CONNECTION(_1EBCA,    "7C", 9)
+CONNECTION(GND,       "7C", 3)
+CONNECTION(GND,       "7C", 4)
+CONNECTION(GND,       "7C", 5)
+CONNECTION(GND,       "7C", 6)
+CONNECTION(_1TLCC,    "7C", 7)
+CONNECTION(_5TLC8,    "7C", 10)
+CONNECTION(_6THSC,    "7C", 2)
 
 
 /*  OUTPUT  */
 
-//nn sync CONNECTION(_VDSC,     "2H", 11),
+//nn sync CONNECTION(_VDSC,     "2H", 11)
 
-CONNECTION(_5VDAF,    "2H", 13),
+CONNECTION(_5VDAF,    "2H", 13)
 
 //video
 
-CONNECTION("VIDEO", 1, _1VDAF),
-//nn sync CONNECTION(_5VDSO     "VIDEO", 2),
+CONNECTION("VIDEO", 1, _1VDAF)
+//nn sync CONNECTION(_5VDSO     "VIDEO", 2)
     
-CONNECTION("VIDEO", Video::HBLANK_PIN, _THSC),
-CONNECTION("VIDEO", Video::VBLANK_PIN, _TVBL),
+CONNECTION("VIDEO", Video::HBLANK_PIN, _THSC)
+CONNECTION("VIDEO", Video::VBLANK_PIN, _TVBL)
 
 //audio
 
-CONNECTION(_EBEL,       "AUDIO", 1),
-CONNECTION("AUDIO", i1, "MIXER", 1),
+CONNECTION(_EBEL,       "AUDIO", 1)
+CONNECTION("AUDIO", i1, "MIXER", 1)
 
-CONNECTION("AUDIO", Audio::OUTPUT_MONO, "MIXER", i1),
+CONNECTION("AUDIO", Audio::OUTPUT_MONO, "MIXER", i1)
 
 
 /* * * * * * * * */
 #ifdef DEBUG
 
-CONNECTION(_THCH, "LOG1", 1),
-CONNECTION(_THPD, "LOG1", 2),
-CONNECTION(_5KAAB, "LOG1", 3),
-CONNECTION(_5BVAF, "LOG1", 4),
-CONNECTION(_KAAD, "LOG1", 5),
+CONNECTION(_THCH, "LOG1", 1)
+CONNECTION(_THPD, "LOG1", 2)
+CONNECTION(_5KAAB, "LOG1", 3)
+CONNECTION(_5BVAF, "LOG1", 4)
+CONNECTION(_KAAD, "LOG1", 5)
 
 #endif
 
-    CIRCUIT_LAYOUT_END
-};
+CIRCUIT_LAYOUT_END
 

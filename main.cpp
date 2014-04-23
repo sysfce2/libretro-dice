@@ -16,6 +16,7 @@ using namespace phoenix;
 
 #include "chips/input.h"
 #include "ui/audio_window.h"
+#include "ui/video_window.h"
 #include "ui/input_window.h"
 #include "ui/dipswitch_window.h"
 #include "ui/game_window.h"
@@ -24,12 +25,12 @@ using namespace phoenix;
 #define DEBUG
 #undef DEBUG
 
-static const char VERSION_STRING[] = "DICE 0.8";
+static const char VERSION_STRING[] = "DICE 0.9";
 
 struct MainWindow : Window 
 {
     Settings settings;
-    Input input;
+    Input* input;
     Video* video;
     Circuit* circuit;
     RealTimeClock real_time;
@@ -48,14 +49,16 @@ struct MainWindow : Window
     CheckItem mute_item;
     AudioWindow audio_window;
     Separator settings_sep[3];
-    CheckItem fullscreen_item, keep_aspect_item;
+    Item video_item;
+    VideoWindow video_window;
+    CheckItem fullscreen_item, status_visible_item;
     Item input_item;
     InputWindow input_window;
     Item dipswitch_item;
     DipswitchWindow dipswitch_window;
     
     VerticalLayout layout;
-    Viewport viewport;
+    Viewport* viewport;
 
     struct UserInterfaceState
     {
@@ -63,15 +66,16 @@ struct MainWindow : Window
 
         static UserInterfaceState getCurrent(MainWindow& main_window)
         {
-            return { main_window.input.getKeyPressed(main_window.settings.input.ui.pause),
-                     main_window.input.getKeyPressed(main_window.settings.input.ui.throttle),
-                     main_window.input.getKeyPressed(main_window.settings.input.ui.fullscreen),
-                     main_window.input.getKeyPressed(main_window.settings.input.ui.quit) };
+            return { main_window.input->getKeyPressed(main_window.settings.input.ui.pause),
+                     main_window.input->getKeyPressed(main_window.settings.input.ui.throttle),
+                     main_window.input->getKeyPressed(main_window.settings.input.ui.fullscreen),
+                     main_window.input->getKeyPressed(main_window.settings.input.ui.quit) };
         }
     };
     UserInterfaceState prev_ui_state;
 
-    MainWindow() : audio_window(settings, mute_item), input_window(settings, input, [&]{ run(); }), circuit(nullptr), prev_ui_state{false, false, false, false}
+    MainWindow() : audio_window(settings, mute_item), video_window(settings, *this), input_window(settings, input, [&]{ run(); }),
+                   circuit(nullptr), prev_ui_state{false, false, false, false}
     {
         // Load config file
         nall::string config_path = configpath();
@@ -94,7 +98,7 @@ struct MainWindow : Window
         {
             GameDesc& g = game_list[game_window.game_view.selection()];
             if(circuit) delete circuit; 
-            circuit = new Circuit(settings, input, *video, g.desc, g.command_line);
+            circuit = new Circuit(settings, *input, *video, g.desc, g.command_line);
             game_window.setModal(false);
             game_window.setVisible(false);
             onSize();
@@ -146,7 +150,6 @@ struct MainWindow : Window
         audio_window.onClose = audio_window.exit_button.onActivate = [&] 
         {
             mute_item.setChecked(settings.audio.mute);
-            settings.save();
             audio_window.setModal(false);
             audio_window.setVisible(false);
             if(circuit) circuit->audio.toggle_mute();
@@ -156,23 +159,24 @@ struct MainWindow : Window
         mute_item.onToggle = [&] 
         { 
             settings.audio.mute = mute_item.checked(); 
-            settings.save();
             if(circuit) circuit->audio.toggle_mute(); 
         };
 
         settings_menu.append(mute_item);
         settings_menu.append(settings_sep[0]);
 
+        video_item.setText("Video Settings...");
+        video_item.onActivate = [&] { video_window.create(geometry().position()); };
+        status_visible_item.setText("Status Bar Visible");
+        status_visible_item.setChecked(settings.video.status_visible);
+        status_visible_item.onToggle = [&] 
+        { 
+            settings.video.status_visible = status_visible_item.checked();
+            setStatusVisible(settings.video.status_visible);
+        };
         fullscreen_item.setText("Fullscreen");
         fullscreen_item.onToggle = [&] { toggleFullscreen(fullscreen_item.checked()); };
-        keep_aspect_item.setText("Keep Aspect Ratio");
-        keep_aspect_item.setChecked(settings.video.keep_aspect);
-        keep_aspect_item.onToggle = [&] 
-        { 
-            settings.video.keep_aspect = keep_aspect_item.checked();
-            onSize(); 
-        };
-        settings_menu.append(fullscreen_item, keep_aspect_item);
+        settings_menu.append(video_item, status_visible_item, fullscreen_item);
 
         settings_menu.append(settings_sep[1]);
         input_item.setText("Configure Inputs...");
@@ -180,7 +184,6 @@ struct MainWindow : Window
         input_window.onClose = [&] 
         {
             if(input_window.active_selector) input_window.active_selector->assign(KeyAssignment::None);
-            settings.save(); 
             input_window.setModal(false);
             input_window.setVisible(false);
         };
@@ -190,7 +193,6 @@ struct MainWindow : Window
                 input_window.active_selector->assign(KeyAssignment::None);
             else
             {
-                settings.save(); 
                 input_window.setModal(false);
                 input_window.setVisible(false);
             }
@@ -223,11 +225,12 @@ struct MainWindow : Window
 
         append(settings_menu);
 
-        setStatusVisible();
+        setStatusVisible(settings.video.status_visible);
 
         setBackgroundColor({0, 0, 0});
         layout.setMargin(0);
-        layout.append(viewport, {~0, ~0});
+        viewport = new Viewport();
+        layout.append(*viewport, {~0, ~0});
         append(layout);
 
         // Initialize SDL, input, etc.
@@ -239,22 +242,22 @@ struct MainWindow : Window
 		    exit(1);
 	    }
 
-        input.init();
-        video = Video::createDefault(viewport.handle());
+        input = new Input();
+        video = Video::createDefault(layout, viewport);
 
         onSize = [&] {
 
             if((signed)geometry().height < 0 || (signed)geometry().width < 0)
                 return;
             
-            video->video_init(geometry().width, geometry().height, circuit);
+            video->video_init(geometry().width, geometry().height, settings.video);
 
             if(circuit == nullptr)
             {
                 drawLogo();
             }
 
-            viewport.setFocused();
+            viewport->setFocused();
         };
 
         setTitle(VERSION_STRING);
@@ -267,6 +270,11 @@ struct MainWindow : Window
 
     ~MainWindow()
     {
+        settings.save();
+        if(circuit) delete circuit; 
+        delete video;
+        delete viewport;
+        delete input;
         SDL_Quit();
     }
 
@@ -274,7 +282,7 @@ struct MainWindow : Window
     {
         settings.fullscreen = fullscreen;
         fullscreen_item.setChecked(fullscreen);
-        setStatusVisible(!fullscreen);
+        setStatusVisible(!fullscreen && settings.video.status_visible);
         setMenuVisible(!fullscreen);
         setFullScreen(fullscreen);
         video->show_cursor(!fullscreen);
@@ -283,6 +291,8 @@ struct MainWindow : Window
 
     void drawLogo()
     {
+        glViewport(0, 0, geometry().width, geometry().height);
+
         glMatrixMode(GL_PROJECTION);
 	    glLoadIdentity();
 	    glOrtho(0.0, geometry().width, geometry().height, 0.0, -1.0, 1.0);
@@ -328,7 +338,7 @@ struct MainWindow : Window
 
     void run()
     {
-        input.poll_input();
+        input->poll_input();
 
         if(circuit && !settings.pause)
         {
@@ -352,14 +362,14 @@ struct MainWindow : Window
                 real_time += 1000000;
             }
 
-            //if(emu_time > 10.0e6) onClose();
+            //if(emu_time > 1.56e6) onClose();
         }
         else
         {
             SDL_Delay(10);
             if(settings.pause && statusText() != "Paused") setStatusText("Paused");
             else if(!settings.pause && statusText() != VERSION_STRING) setStatusText(VERSION_STRING);
-            if(circuit == nullptr && focused()) drawLogo();
+            if(circuit == nullptr && (focused() || video_window.focused())) drawLogo();
         }
 
         if(input_window.active_selector)
@@ -468,8 +478,9 @@ int main(int argc, char** argv)
         {
             if(strcmp(argv[1], g.command_line) == 0)
             {
-                main_window.circuit = new Circuit(main_window.settings, main_window.input, *main_window.video, g.desc, g.command_line);
                 main_window.toggleFullscreen(start_fullscreen);
+                main_window.circuit = new Circuit(main_window.settings, *main_window.input, *main_window.video, g.desc, g.command_line);
+                main_window.onSize();
             }
         }
     }
@@ -478,10 +489,10 @@ int main(int argc, char** argv)
 
 #ifdef DEBUG
     printf("chip size:%d\n", sizeof(Chip));    
-    printf("chips: %d\n", main_window.circuit->chips.size());
+    if(main_window.circuit) printf("chips: %d\n", main_window.circuit->chips.size());
     uint64_t total_event_count = 0;
     uint64_t total_loop_count[8] = { 0 };
-	for(int i = 0; i < main_window.circuit->chips.size(); i++)
+	for(int i = 0; main_window.circuit && i < main_window.circuit->chips.size(); i++)
 	{
 		total_event_count += main_window.circuit->chips[i]->total_event_count;
         printf("%p LUT=%llx, event_count=%lld, act_count=%lld, state=%d act_out:%d cyc_time:%lld act_time:%lld, max_cyc:%lld max_sub:%lld\n",

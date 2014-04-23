@@ -25,6 +25,8 @@ crashnscore
 crossfire
 gotcha
 jetfighter
+hiway
+indy4
 pinpong
 pong
 pongdoubles
@@ -32,6 +34,7 @@ quadrapong
 rebound
 sharkjaws
 spacerace
+steeplechase
 stuntcycle
 tvbasketball
 wipeout

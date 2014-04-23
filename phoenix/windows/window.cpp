@@ -136,10 +136,14 @@ void pWindow::setFocused() {
 void pWindow::setFullScreen(bool fullScreen) {
   locked = true;
   if(fullScreen == false) {
-    SetWindowLongPtr(hwnd, GWL_STYLE, WS_VISIBLE | (window.state.resizable ? ResizableStyle : FixedStyle));
+    LONG_PTR style = GetWindowLongPtr(hwnd, GWL_STYLE);
+    style |= window.state.resizable ? ResizableStyle : FixedStyle;
+    SetWindowLongPtr(hwnd, GWL_STYLE, WS_VISIBLE | style);
     setGeometry(window.state.geometry);
   } else {
-    SetWindowLongPtr(hwnd, GWL_STYLE, WS_VISIBLE | WS_POPUP);
+    LONG_PTR style = GetWindowLongPtr(hwnd, GWL_STYLE);
+    style &= ~(WS_SYSMENU | WS_CAPTION | WS_BORDER | WS_THICKFRAME);
+    SetWindowLongPtr(hwnd, GWL_STYLE, WS_VISIBLE | WS_POPUP | style);
     Geometry margin = frameMargin();
     setGeometry({margin.x, margin.y, GetSystemMetrics(SM_CXSCREEN) - margin.width, GetSystemMetrics(SM_CYSCREEN) - margin.height});
   }

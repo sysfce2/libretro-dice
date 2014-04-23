@@ -18,6 +18,13 @@ struct Wheel
     enum OUTPUT { A = 1, B = 2 };
 };
 
+struct Coin
+{
+    enum COINS { COIN1_LO =  1, COIN2_LO =  2, COIN3_LO =  3, COIN4_LO =  4, 
+                 COIN1_HI = i1, COIN2_HI = i2, COIN3_HI = i3, COIN4_HI = i4 };
+    enum DOLLARS { DOLLAR_LO = 5, DOLLAR_HI = i5 };
+};
+
 template <unsigned PADDLE, bool HORIZONTAL>
 class AnalogInputDesc
 {
@@ -65,6 +72,8 @@ typedef AnalogInputDesc<3, false> Paddle4VerticalDesc;
 
 typedef WheelDesc<0> Wheel1Desc;
 typedef WheelDesc<1> Wheel2Desc;
+typedef WheelDesc<2> Wheel3Desc;
+typedef WheelDesc<3> Wheel4Desc;
 
 typedef ThrottleDesc<0> Throttle1Desc;
 
@@ -88,13 +97,19 @@ extern CHIP_DESC( JOYSTICK2_INPUT );
 
 extern CHIP_DESC( WHEEL1_INPUT );
 extern CHIP_DESC( WHEEL2_INPUT );
+extern CHIP_DESC( WHEEL3_INPUT );
+extern CHIP_DESC( WHEEL4_INPUT );
 
 extern CHIP_DESC( BUTTONS1_INPUT );
 extern CHIP_DESC( BUTTONS2_INPUT );
+extern CHIP_DESC( BUTTONS3_INPUT );
+extern CHIP_DESC( BUTTONS4_INPUT );
+extern CHIP_DESC( BUTTONS5_INPUT );
+extern CHIP_DESC( BUTTONS6_INPUT );
 
 // Creates a connection from the paddle to the 555 timer being adjusted
-#define PADDLE_CONNECTION( c1, c2 ) CircuitDesc(c1, i3, c2, i3)
-#define THROTTLE_CONNECTION( c1, c2 ) CircuitDesc(c1, i3, c2, i3)
+#define PADDLE_CONNECTION( c1, c2 ) CONNECTION(c1, i3, c2, i3)
+#define THROTTLE_CONNECTION( c1, c2 ) CONNECTION(c1, i3, c2, i3)
 
 // Suffix operators! For Buttons -- NO = Normally Open, NC = Normally Closed
 inline constexpr uint8_t operator"" _NO ( unsigned long long pin ) { return pin; }
@@ -108,7 +123,6 @@ private:
 public:
     Input();
     ~Input();
-    void init();
     void poll_input();
     
     int getRelativeMouseX(unsigned mouse);

@@ -13,9 +13,12 @@
        +--------+
 */
 
-enum { SEL_MASK = 1, IN1_MASK = 2, CLK_MASK = 4, IN2_MASK = 8 }; 
+static CHIP_LOGIC( 2533_DATA )
+{
+    pin[i1] = pin[3] ? pin[7] : pin[5];
+}
 
-// TODO: Add buffers to handle setup / hold times?
+enum { DATA_MASK = 1, CLK_MASK = 2 }; 
 
 static CUSTOM_LOGIC( RAM_2533 )
 {
@@ -30,20 +33,13 @@ static CUSTOM_LOGIC( RAM_2533 )
     chip->state = PASSIVE;
     chip->inputs ^= mask;
 
-    int in_data = (chip->inputs & SEL_MASK) ? ((chip->inputs >> 3) & 1) : ((chip->inputs >> 1) & 1);
-    int out_addr = (desc->addr + 1) & 1023;
-
-    if(chip->inputs & CLK_MASK) // CLK high, enter data
+    if(!(chip->inputs & CLK_MASK) && (mask & CLK_MASK)) // CLK falling edge, shift and store data
     {
-        desc->data[desc->addr] = in_data;
-    }
-    else if(mask & CLK_MASK) // CLK falling edge, shift data
-    {
-        desc->addr = out_addr;
-        out_addr = (out_addr + 1) & 1023;
+        desc->data[desc->addr] = chip->inputs & DATA_MASK;
+        desc->addr = (desc->addr + 1) & 1023;
     }
 
-    int new_out = desc->data[out_addr];
+    int new_out = desc->data[desc->addr];
 
     if(new_out != chip->output && chip->pending_event == 0)
     {
@@ -59,10 +55,15 @@ static CUSTOM_LOGIC( RAM_2533 )
 
 CHIP_DESC( 2533 ) = 
 {
-	CUSTOM_CHIP_START( &RAM_2533 )
-	   INPUT_PINS( 3, 5, 6, 7 )
+	CHIP_START( 2533_DATA )
+        INPUT_PINS( 3, 5, 7 )
+        OUTPUT_PIN ( i1 )
+        OUTPUT_DELAY_NS( 25.0, 25.0 ),
+
+    CUSTOM_CHIP_START( &RAM_2533 )
+	   INPUT_PINS( i1, 6 )
 	   OUTPUT_PIN( 1 )
-	   OUTPUT_DELAY_NS( 200.0, 200.0 ),
+       OUTPUT_DELAY_NS( 200.0, 200.0 ),
 
    	CHIP_DESC_END
 };

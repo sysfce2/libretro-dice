@@ -3,14 +3,14 @@
 
 struct InputDesc
 {
-    ChipDesc* chip;
+    const ChipDesc* chip;
     std::array<uint8_t, 4> pins;
     const char* info;
 
-    constexpr InputDesc(ChipDesc* c, std::array<uint8_t, 4> p, const char* i) :
+    constexpr InputDesc(const ChipDesc* c, std::array<uint8_t, 4> p, const char* i) :
         chip(c), pins(p), info(i) { }
 
-    constexpr InputDesc(ChipDesc* c, const char* i) :
+    constexpr InputDesc(const ChipDesc* c, const char* i) :
         chip(c), pins({{0}}), info(i) { }
 };
 

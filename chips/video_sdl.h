@@ -15,13 +15,13 @@ private:
 public:
     VideoSdl(uintptr_t h) : Video(), handle(h) { }
 
-    void video_init(int width, int height, Circuit* circuit)
+    void video_init(int width, int height, const Settings::Video& settings)
     {
-        char env[256];
+        static char env[256];
         sprintf(env, "SDL_WINDOWID=%lld", (uint64_t)handle);
         putenv(env);
 
-        if(SDL_Init(SDL_INIT_VIDEO) < 0)
+        if(SDL_InitSubSystem(SDL_INIT_VIDEO) < 0)
 	    {
 	        printf("Unable to init SDL Video:\n%s\n", SDL_GetError());
 		    exit(1);
@@ -33,10 +33,13 @@ public:
 		SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
 		SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
 		SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
-    
-		SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
-		SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);
-		//SDL_GL_SetAttribute(SDL_GL_SWAP_CONTROL, 1);
+
+		if(settings.multisampling)
+        {
+            SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
+		    SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 1 << settings.multisampling);
+        }
+		SDL_GL_SetAttribute(SDL_GL_SWAP_CONTROL, settings.vsync);
     
         if(SDL_SetVideoMode(width, height, 32, SDL_OPENGL) == NULL)
 		{
@@ -44,7 +47,7 @@ public:
 			exit(1);
 		}
 
-        Video::video_init(width, height, circuit);
+        Video::video_init(width, height, settings);
     }
     
     void swap_buffers()

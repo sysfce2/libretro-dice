@@ -57,7 +57,7 @@ void Chip::initialize()
 	}
 }
 
-Chip::Chip(int QUEUE_SIZE, int SUBCYCLE_SIZE, Circuit* cir, ChipDesc* desc, void* custom) : Cycle(QUEUE_SIZE, SUBCYCLE_SIZE),
+Chip::Chip(int QUEUE_SIZE, int SUBCYCLE_SIZE, Circuit* cir, const ChipDesc* desc, void* custom) : Cycle(QUEUE_SIZE, SUBCYCLE_SIZE),
 	circuit(cir), custom_data(custom), inputs(0), output(0), event_mask(~0), prev_output_mask(0), /*deactive_inputs(0),*/ optimization_disabled(false),
     pending_event(0), state(PASSIVE), /*input_event_type(0),*/ sleep_time(0), current_cycle(this), last_output_event(0), visited(false), 
     total_event_count(0), activation_count(0), loop_count{{0}}, analog_output(0.0),
@@ -92,7 +92,7 @@ Chip::Chip(int QUEUE_SIZE, int SUBCYCLE_SIZE, Circuit* cir, ChipDesc* desc, void
     int lut_size = num_input_pins;
 
     // Setup event mask
-    for(uint8_t* p = &desc->event_pins[0]; *p != 0; p++) 
+    for(const uint8_t* p = &desc->event_pins[0]; *p != 0; p++) 
         event_mask &= ~(1 << lut_size++);
 
 	if(desc->prev_output_pin)
@@ -216,7 +216,7 @@ Chip::Chip(int QUEUE_SIZE, int SUBCYCLE_SIZE, Circuit* cir, ChipDesc* desc, void
 
 extern CUSTOM_LOGIC( deoptimize );
 
-void Chip::connect(Chip* chip, ChipDesc* desc, uint8_t pin)
+void Chip::connect(Chip* chip, const ChipDesc* desc, uint8_t pin)
 {
     //this is output, chip is input
 

@@ -6,6 +6,20 @@
 
 using namespace nall;
 
+bool GameConfig::isDipswitch(const ChipDesc* chip)
+{
+    return chip == chip_DIPSWITCH ||
+           chip == chip_DIPSWITCH_SP4T ||
+           chip == chip_53137 || 
+           chip == chip_DIPSWITCH_4SPST;
+}
+
+bool GameConfig::isPotentiometer(const ChipDesc* chip)
+{
+    return chip == chip_POT_555_ASTABLE ||
+           chip == chip_POT_555_MONO;
+}
+
 GameConfig::GameConfig(const CircuitDesc* desc, const char* name)
 {
     // Load config file
@@ -18,49 +32,20 @@ GameConfig::GameConfig(const CircuitDesc* desc, const char* name)
     bool has_config = false;
 
     // Find all DIP switches in circuit desc, append to game configuration
-    while(desc->type != CIRCUIT_END)
+    for(const ChipInstance& instance : desc->get_chips())
     {
-        if(desc->type == CHIP_INST)
+        if(isDipswitch(instance.chip))
         {
-            if(desc->u.instance.chip == chip_DIPSWITCH)
-            {
-                DipswitchDesc* d = (DipswitchDesc*)desc->u.instance.custom_data;
-                append(d->state, d->name);
-                has_config = true;
-            }
-            else if(desc->u.instance.chip == chip_DIPSWITCH_SP4T)
-            {
-                DipswitchSP4TDesc* d = (DipswitchSP4TDesc*)desc->u.instance.custom_data;
-                append(d->state, d->name);
-                has_config = true;
-            }
-            else if(desc->u.instance.chip == chip_53137)
-            {
-                Dipswitch53137Desc* d = (Dipswitch53137Desc*)desc->u.instance.custom_data;
-                append(d->state, d->name);
-                has_config = true;
-            }
-            else if(desc->u.instance.chip == chip_DIPSWITCH_4SPST)
-            {
-                Dipswitch4SP4TDesc* d = (Dipswitch4SP4TDesc*)desc->u.instance.custom_data;
-                append(d->state, d->name);
-                has_config = true;
-            }
-            else if(desc->u.instance.chip == chip_POT_555_ASTABLE)
-            {
-                PotentimeterAstable555Desc* d = (PotentimeterAstable555Desc*)desc->u.instance.custom_data;
-                append(d->current_val, d->name);
-                has_config = true;
-            }
-            else if(desc->u.instance.chip == chip_POT_555_MONO)
-            {
-                PotentimeterMono555Desc* d = (PotentimeterMono555Desc*)desc->u.instance.custom_data;
-                append(d->current_val, d->name);
-                has_config = true;
-            }
+            DipswitchBase* d = (DipswitchBase*)instance.custom_data;
+            append(d->state, d->name);
+            has_config = true;
         }
-
-        desc++;
+        else if(isPotentiometer(instance.chip))
+        {
+            PotentiometerBase* d = (PotentiometerBase*)instance.custom_data;
+            append(d->current_val, d->name);
+            has_config = true;
+        }
     }
 
     if(has_config) load();

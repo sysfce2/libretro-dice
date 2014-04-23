@@ -127,7 +127,7 @@ template <unsigned PADDLE, bool HORIZONTAL>
 void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
 {
     Circuit* circuit = chip->circuit;
-    Settings::Input::Paddle& settings = circuit->settings.input.paddle[PADDLE];
+    const Settings::Input::Paddle& settings = circuit->settings.input.paddle[PADDLE];
 
     AnalogInputDesc<PADDLE, HORIZONTAL>* desc = (AnalogInputDesc<PADDLE, HORIZONTAL>*)chip->custom_data;
     
@@ -237,12 +237,12 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
         }
     }
 
-    if(settings.use_joystick && settings.joystick_mode == Settings::Input::Paddle::JOYSTICK_RELATIVE)
+    if(settings.use_joystick && settings.joystick_mode == Settings::Input::JOYSTICK_RELATIVE)
     {
         double dt = (INPUT_POLL_RATE / Circuit::timescale) / 1000000000.0;
         double sensitivity = double(settings.joystick_sensitivity) * fabs(desc->max_val - desc->min_val) / 100000.0;
 
-        Settings::Input::Paddle::JoystickAxis joystick = HORIZONTAL ? settings.joy_x_axis : settings.joy_y_axis;
+        Settings::Input::JoystickAxis joystick = HORIZONTAL ? settings.joy_x_axis : settings.joy_y_axis;
 
         double val = circuit->input.getJoystickAxis(joystick.joystick, joystick.axis) / 32768.0;
         if(val > ANALOG_THRESHOLD)
@@ -267,10 +267,10 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
     }
 
     // Absolute Joystick - Overrides deltas
-    if(settings.use_joystick && settings.joystick_mode == Settings::Input::Paddle::JOYSTICK_ABSOLUTE)
+    if(settings.use_joystick && settings.joystick_mode == Settings::Input::JOYSTICK_ABSOLUTE)
     {
         double sensitivity = 0.25 + 0.00075 * (1000.0 - double(settings.joystick_sensitivity)); // Inverse scale from 0.25..1.0
-        Settings::Input::Paddle::JoystickAxis joystick = HORIZONTAL ? settings.joy_x_axis : settings.joy_y_axis;
+        Settings::Input::JoystickAxis joystick = HORIZONTAL ? settings.joy_x_axis : settings.joy_y_axis;
         double val = circuit->input.getJoystickAxis(joystick.joystick, joystick.axis) / (65536.0 * sensitivity) + 0.5; // 0..1
         if(val < 0.0) val = 0.0;
         else if(val > 1.0) val = 1.0;
@@ -295,21 +295,17 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
 
 
 // My sincerest apologies
-template <typename C, C (Settings::Input::*c), KeyAssignment (C::*k)>
+template <typename C, const C& (Settings::*c)() const, KeyAssignment C::*k>
 CUSTOM_LOGIC( digital_input )
 {
     Circuit* circuit = chip->circuit;
-    KeyAssignment& key_assignment = circuit->settings.input.*c.*k;
+    const KeyAssignment& key_assignment = (circuit->settings.*c)().*k;
 
     int new_out = circuit->input.getKeyPressed(key_assignment);
     new_out ^= 1; // Joysticks, buttons are active LOW
 
     if(new_out != chip->output)
     {
-        //chip->deactivate_outputs();
-        //chip->state = PASSIVE;
-        //chip->active_outputs = (1 << chip->output_links.size()) - 1;   
-
         // Generate output event
         chip->pending_event = chip->circuit->queue_push(chip, 0);
     }
@@ -327,12 +323,32 @@ CHIP_DESC( COIN_INPUT ) =
         OUTPUT_PIN( i7 ),
 
     // Normally Open (Active Low) Output
-    ChipDesc(&digital_input<Settings::Input::CoinStart, &Settings::Input::coin_start, &Settings::Input::CoinStart::coin>)
+    ChipDesc(&digital_input<Settings::Input::CoinStart, &Settings::coinStart, &Settings::Input::CoinStart::coin1>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 1 ),
 
+    ChipDesc(&digital_input<Settings::Input::CoinStart, &Settings::coinStart, &Settings::Input::CoinStart::coin2>)
+        INPUT_PINS( i7 )
+        OUTPUT_PIN( 2 ),
+
+    ChipDesc(&digital_input<Settings::Input::CoinStart, &Settings::coinStart, &Settings::Input::CoinStart::coin3>)
+        INPUT_PINS( i7 )
+        OUTPUT_PIN( 3 ),
+
+    ChipDesc(&digital_input<Settings::Input::CoinStart, &Settings::coinStart, &Settings::Input::CoinStart::coin4>)
+        INPUT_PINS( i7 )
+        OUTPUT_PIN( 4 ),
+
+    ChipDesc(&digital_input<Settings::Input::CoinStart, &Settings::coinStart, &Settings::Input::CoinStart::dollar>)
+        INPUT_PINS( i7 )
+        OUTPUT_PIN( 5 ),
+
     // Normally Closed (Active High) Outputs
     CHIP_START(button_inv<1>) INPUT_PINS( 1 ) OUTPUT_PIN( i1 ),
+    CHIP_START(button_inv<2>) INPUT_PINS( 2 ) OUTPUT_PIN( i2 ),
+    CHIP_START(button_inv<3>) INPUT_PINS( 3 ) OUTPUT_PIN( i3 ),
+    CHIP_START(button_inv<4>) INPUT_PINS( 4 ) OUTPUT_PIN( i4 ),
+    CHIP_START(button_inv<5>) INPUT_PINS( 5 ) OUTPUT_PIN( i5 ),
 
 	CHIP_DESC_END
 };
@@ -344,11 +360,11 @@ CHIP_DESC( START_INPUT ) =
         OUTPUT_PIN( i7 ),
 
     // Normally Open (Active Low) Outputs
-    ChipDesc(&digital_input<Settings::Input::CoinStart, &Settings::Input::coin_start, &Settings::Input::CoinStart::start1>)
+    ChipDesc(&digital_input<Settings::Input::CoinStart, &Settings::coinStart, &Settings::Input::CoinStart::start1>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 1 ),
 
-    ChipDesc(&digital_input<Settings::Input::CoinStart, &Settings::Input::coin_start, &Settings::Input::CoinStart::start2>)
+    ChipDesc(&digital_input<Settings::Input::CoinStart, &Settings::coinStart, &Settings::Input::CoinStart::start2>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 2 ),
 
@@ -366,19 +382,19 @@ CHIP_DESC( JOYSTICK1_INPUT ) =
         OUTPUT_PIN( i7 ),
 
     // Normally Open (Active Low) Outputs
-    ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::Input::joystick1, &Settings::Input::Joystick::up>)
+    ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::joystick<0>, &Settings::Input::Joystick::up>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( Joystick::UP ),
 
-	ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::Input::joystick1, &Settings::Input::Joystick::down>)
+	ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::joystick<0>, &Settings::Input::Joystick::down>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( Joystick::DOWN ),
 
-	ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::Input::joystick1, &Settings::Input::Joystick::left>)
+	ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::joystick<0>, &Settings::Input::Joystick::left>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( Joystick::LEFT ),
 
-	ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::Input::joystick1, &Settings::Input::Joystick::right>)
+	ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::joystick<0>, &Settings::Input::Joystick::right>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( Joystick::RIGHT ),
 
@@ -392,19 +408,19 @@ CHIP_DESC( JOYSTICK2_INPUT ) =
         OUTPUT_PIN( i7 ),
 
     // Normally Open (Active Low) Outputs
-    ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::Input::joystick2, &Settings::Input::Joystick::up>)
+    ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::joystick<1>, &Settings::Input::Joystick::up>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( Joystick::UP ),
 
-	ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::Input::joystick2, &Settings::Input::Joystick::down>)
+	ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::joystick<1>, &Settings::Input::Joystick::down>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( Joystick::DOWN ),
 
-	ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::Input::joystick2, &Settings::Input::Joystick::left>)
+	ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::joystick<1>, &Settings::Input::Joystick::left>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( Joystick::LEFT ),
 
-	ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::Input::joystick2, &Settings::Input::Joystick::right>)
+	ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::joystick<1>, &Settings::Input::Joystick::right>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( Joystick::RIGHT ),
 
@@ -418,15 +434,15 @@ CHIP_DESC( BUTTONS1_INPUT ) =
         OUTPUT_PIN( i7 ),
 
     // Normally Open (Active Low) Outputs
-    ChipDesc(&digital_input<Settings::Input::Button, &Settings::Input::buttons1, &Settings::Input::Button::button1>)
+    ChipDesc(&digital_input<Settings::Input::Button, &Settings::buttons<0>, &Settings::Input::Button::button1>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 1 ),
 
-	ChipDesc(&digital_input<Settings::Input::Button, &Settings::Input::buttons1, &Settings::Input::Button::button2>)
+	ChipDesc(&digital_input<Settings::Input::Button, &Settings::buttons<0>, &Settings::Input::Button::button2>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 2 ),
 
-	ChipDesc(&digital_input<Settings::Input::Button, &Settings::Input::buttons1, &Settings::Input::Button::button3>)
+	ChipDesc(&digital_input<Settings::Input::Button, &Settings::buttons<0>, &Settings::Input::Button::button3>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 3 ),
 
@@ -446,15 +462,15 @@ CHIP_DESC( BUTTONS2_INPUT ) =
         OUTPUT_PIN( i7 ),
 
     // Normally Open (Active Low) Outputs
-    ChipDesc(&digital_input<Settings::Input::Button, &Settings::Input::buttons2, &Settings::Input::Button::button1>)
+    ChipDesc(&digital_input<Settings::Input::Button, &Settings::buttons<1>, &Settings::Input::Button::button1>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 1 ),
 
-	ChipDesc(&digital_input<Settings::Input::Button, &Settings::Input::buttons2, &Settings::Input::Button::button2>)
+	ChipDesc(&digital_input<Settings::Input::Button, &Settings::buttons<1>, &Settings::Input::Button::button2>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 2 ),
 
-	ChipDesc(&digital_input<Settings::Input::Button, &Settings::Input::buttons2, &Settings::Input::Button::button3>)
+	ChipDesc(&digital_input<Settings::Input::Button, &Settings::buttons<1>, &Settings::Input::Button::button3>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 3 ),
 
@@ -466,6 +482,86 @@ CHIP_DESC( BUTTONS2_INPUT ) =
 	CHIP_DESC_END
 };
 
+CHIP_DESC( BUTTONS3_INPUT ) = 
+{
+	CUSTOM_CHIP_START(&clock)
+        OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
+        OUTPUT_PIN( i7 ),
+
+    // Normally Open (Active Low) Outputs
+    ChipDesc(&digital_input<Settings::Input::Button, &Settings::buttons<2>, &Settings::Input::Button::button1>)
+        INPUT_PINS( i7 )
+        OUTPUT_PIN( 1 ),
+
+	ChipDesc(&digital_input<Settings::Input::Button, &Settings::buttons<2>, &Settings::Input::Button::button2>)
+        INPUT_PINS( i7 )
+        OUTPUT_PIN( 2 ),
+
+    // Normally Closed (Active High) Outputs
+    CHIP_START(button_inv<1>) INPUT_PINS( 1 ) OUTPUT_PIN( i1 ),
+    CHIP_START(button_inv<2>) INPUT_PINS( 2 ) OUTPUT_PIN( i2 ),
+
+	CHIP_DESC_END
+};
+
+CHIP_DESC( BUTTONS4_INPUT ) = 
+{
+	CUSTOM_CHIP_START(&clock)
+        OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
+        OUTPUT_PIN( i7 ),
+
+    // Normally Open (Active Low) Outputs
+    ChipDesc(&digital_input<Settings::Input::Button, &Settings::buttons<3>, &Settings::Input::Button::button1>)
+        INPUT_PINS( i7 )
+        OUTPUT_PIN( 1 ),
+
+	ChipDesc(&digital_input<Settings::Input::Button, &Settings::buttons<3>, &Settings::Input::Button::button2>)
+        INPUT_PINS( i7 )
+        OUTPUT_PIN( 2 ),
+
+    // Normally Closed (Active High) Outputs
+    CHIP_START(button_inv<1>) INPUT_PINS( 1 ) OUTPUT_PIN( i1 ),
+    CHIP_START(button_inv<2>) INPUT_PINS( 2 ) OUTPUT_PIN( i2 ),
+
+	CHIP_DESC_END
+};
+
+
+CHIP_DESC( BUTTONS5_INPUT ) = 
+{
+	CUSTOM_CHIP_START(&clock)
+        OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
+        OUTPUT_PIN( i7 ),
+
+    // Normally Open (Active Low) Outputs
+    ChipDesc(&digital_input<Settings::Input::Button, &Settings::buttons<4>, &Settings::Input::Button::button1>)
+        INPUT_PINS( i7 )
+        OUTPUT_PIN( 1 ),
+
+    // Normally Closed (Active High) Outputs
+    CHIP_START(button_inv<1>) INPUT_PINS( 1 ) OUTPUT_PIN( i1 ),
+
+	CHIP_DESC_END
+};
+
+
+
+CHIP_DESC( BUTTONS6_INPUT ) = 
+{
+	CUSTOM_CHIP_START(&clock)
+        OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
+        OUTPUT_PIN( i7 ),
+
+    // Normally Open (Active Low) Outputs
+    ChipDesc(&digital_input<Settings::Input::Button, &Settings::buttons<5>, &Settings::Input::Button::button1>)
+        INPUT_PINS( i7 )
+        OUTPUT_PIN( 1 ),
+
+    // Normally Closed (Active High) Outputs
+    CHIP_START(button_inv<1>) INPUT_PINS( 1 ) OUTPUT_PIN( i1 ),
+
+	CHIP_DESC_END
+};
 
 
 
@@ -474,7 +570,7 @@ template <unsigned WHEEL>
 void wheel_input(Chip* chip, int mask)
 {
     Circuit* circuit = chip->circuit;
-    Settings::Input::Wheel& settings = circuit->settings.input.wheel[WHEEL];
+    const Settings::Input::Wheel& settings = circuit->settings.input.wheel[WHEEL];
 
     WheelDesc<WHEEL>* wheel = (WheelDesc<WHEEL>*)chip->custom_data;
     
@@ -625,6 +721,50 @@ CHIP_DESC( WHEEL2_INPUT ) =
 	CHIP_DESC_END
 };
 
+CHIP_DESC( WHEEL3_INPUT ) = 
+{
+	CUSTOM_CHIP_START(&clock)
+        OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
+        OUTPUT_PIN( i1 ),
+    
+	CUSTOM_CHIP_START(&clock)
+        OUTPUT_DELAY_S( INPUT_POLL_RATE / 10.0, INPUT_POLL_RATE / 10.0 )
+        OUTPUT_PIN( i2 ),
+
+    ChipDesc(&wheel_input<2>)
+        INPUT_PINS( i1 ),
+
+    ChipDesc(&wheel_event_gen<2, Wheel::A>)
+        INPUT_PINS( i2 ) OUTPUT_PIN( Wheel::A ),
+
+    ChipDesc(&wheel_event_gen<2, Wheel::B>)
+        INPUT_PINS( i2 ) OUTPUT_PIN( Wheel::B ),
+
+	CHIP_DESC_END
+};
+
+CHIP_DESC( WHEEL4_INPUT ) = 
+{
+	CUSTOM_CHIP_START(&clock)
+        OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
+        OUTPUT_PIN( i1 ),
+    
+	CUSTOM_CHIP_START(&clock)
+        OUTPUT_DELAY_S( INPUT_POLL_RATE / 10.0, INPUT_POLL_RATE / 10.0 )
+        OUTPUT_PIN( i2 ),
+
+    ChipDesc(&wheel_input<3>)
+        INPUT_PINS( i1 ),
+
+    ChipDesc(&wheel_event_gen<3, Wheel::A>)
+        INPUT_PINS( i2 ) OUTPUT_PIN( Wheel::A ),
+
+    ChipDesc(&wheel_event_gen<3, Wheel::B>)
+        INPUT_PINS( i2 ) OUTPUT_PIN( Wheel::B ),
+
+	CHIP_DESC_END
+};
+
 
 
 
@@ -632,7 +772,7 @@ template <unsigned THROTTLE>
 void ThrottleDesc<THROTTLE>::throttle_input(Chip* chip, int mask)
 {
     Circuit* circuit = chip->circuit;
-    Settings::Input::Throttle& settings = circuit->settings.input.throttle[THROTTLE];
+    const Settings::Input::Throttle& settings = circuit->settings.input.throttle[THROTTLE];
 
     ThrottleDesc<THROTTLE>* desc = (ThrottleDesc<THROTTLE>*)chip->custom_data;
     
@@ -690,21 +830,18 @@ CHIP_DESC( THROTTLE1_INPUT ) =
 
 
 Input::Input()
-{ }
-
-Input::~Input()
-{
-    for(int i = 0; i < joysticks.size(); i++)
-        if(joysticks[i]) SDL_JoystickClose(joysticks[i]);
-}
-
-void Input::init()
-{
+{ 
     joysticks.resize(SDL_NumJoysticks());
 
     for(int i = 0; i < joysticks.size(); i++)
         joysticks[i] = SDL_JoystickOpen(i);
         // TODO: check if joystick failed to open
+}
+
+Input::~Input()
+{
+    for(int i = 0; i < joysticks.size(); i++)
+        if(joysticks[i]) SDL_JoystickClose(joysticks[i]);
 }
 
 void Input::poll_input()

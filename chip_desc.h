@@ -8,7 +8,7 @@
 #define MAX_PINS			48
 #define MAX_EXTERNAL_PINS 	24
 #define MAX_INTERNAL_PINS 	24
-#define MAX_INPUT_PINS      23
+#define MAX_INPUT_PINS      31
 #define MAX_EVENT_PINS      7
 
 enum InternalPin
@@ -60,7 +60,7 @@ struct ChipDesc
     constexpr ChipDesc set_output_delay(double tp_lh, double tp_hl)
     { return ChipDesc(logic_func, custom_logic, {{tp_lh, tp_hl}}, input_pins, event_pins, output_pin, prev_output_pin); }
 
-    bool endOfDesc()
+    bool endOfDesc() const
     {
         return logic_func == NULL && custom_logic == NULL;
     }

@@ -37,7 +37,7 @@ struct GameWindow : Window
         setResizable(false);
         
         layout.setMargin(10);
-        game_view.setHeaderText("Game", "Manufacturer", "Year");
+        game_view.setHeaderText("Title", "Manufacturer", "Year");
         game_view.setHeaderVisible();
 
         for(const GameDesc& g : game_list)
@@ -47,21 +47,16 @@ struct GameWindow : Window
             std::vector<std::vector<TextLayout*>> player_layouts(1);
             player_layouts.back().push_back(new TextLayout(9, 20, "Coin / Start"));
 
-            for(CircuitDesc* desc = g.desc; desc->type != CIRCUIT_END; desc++)
+            for(const InputDesc* input = g.desc->input; input != NULL && input->chip != NULL; input++)
             {
-                if(desc->type != INPUT_INST) continue;
+                int player = get_player(input->chip);
+                while(player >= player_layouts.size())
+                    player_layouts.push_back(std::vector<TextLayout*>(1, new TextLayout(9, 20, {"Player ", player_layouts.size()})));
 
-                for(InputDesc* input = desc->u.input; input->chip != NULL; input++)
-                {
-                    int player = get_player(input->chip);
-                    while(player >= player_layouts.size())
-                        player_layouts.push_back(std::vector<TextLayout*>(1, new TextLayout(9, 20, {"Player ", player_layouts.size()})));
-
-                    std::vector<TextLayout*>& current_player = player_layouts[player];
-                    current_player.push_back(new TextLayout(8, 40, {get_name(input->chip), 
-                                                                    get_pin_name(input->chip, input->pins), 
-                                                                    ": ", input->info}));
-                }
+                std::vector<TextLayout*>& current_player = player_layouts[player];
+                current_player.push_back(new TextLayout(8, 40, {get_name(input->chip), 
+                                                                get_pin_name(input->chip, input->pins), 
+                                                                ": ", input->info}));
             }
 
             game_layouts.push_back(new VerticalLayout());
@@ -110,14 +105,14 @@ struct GameWindow : Window
 
         game_view.setSelection(0);
         game_view.setSelected(true);
-        //game_view.onChange();
+        game_view.onChange();
         
         setVisible(true);
         game_view.setFocused();
         setModal(true);
     }
 
-    static int get_player(ChipDesc* chip)
+    static int get_player(const ChipDesc* chip)
     {
         if(chip == chip_PADDLE1_HORIZONTAL_INPUT ||
            chip == chip_PADDLE1_VERTICAL_INPUT ||
@@ -133,16 +128,23 @@ struct GameWindow : Window
            chip == chip_BUTTONS2_INPUT)
                 return 2;
         if(chip == chip_PADDLE3_HORIZONTAL_INPUT ||
-           chip == chip_PADDLE3_VERTICAL_INPUT)
+           chip == chip_PADDLE3_VERTICAL_INPUT ||
+           chip == chip_WHEEL3_INPUT ||
+           chip == chip_BUTTONS3_INPUT)
                 return 3;
         if(chip == chip_PADDLE4_HORIZONTAL_INPUT ||
-           chip == chip_PADDLE4_VERTICAL_INPUT)
+           chip == chip_PADDLE4_VERTICAL_INPUT ||
+           chip == chip_WHEEL4_INPUT ||
+           chip == chip_BUTTONS4_INPUT)
                 return 4;
-
+        if(chip == chip_BUTTONS5_INPUT)
+                return 5;
+        if(chip == chip_BUTTONS6_INPUT)
+                return 6;
         return 0;
     }
 
-    static nall::string get_name(ChipDesc* chip)
+    static nall::string get_name(const ChipDesc* chip)
     {
         if(chip == chip_PADDLE1_HORIZONTAL_INPUT ||
            chip == chip_PADDLE1_VERTICAL_INPUT ||
@@ -159,10 +161,16 @@ struct GameWindow : Window
            chip == chip_JOYSTICK2_INPUT)
                 return "Joystick";
         if(chip == chip_WHEEL1_INPUT ||
-           chip == chip_WHEEL2_INPUT)
+           chip == chip_WHEEL2_INPUT ||
+           chip == chip_WHEEL3_INPUT ||
+           chip == chip_WHEEL4_INPUT)
                 return "Wheel";
         if(chip == chip_BUTTONS1_INPUT ||
-           chip == chip_BUTTONS2_INPUT)
+           chip == chip_BUTTONS2_INPUT ||
+           chip == chip_BUTTONS3_INPUT ||
+           chip == chip_BUTTONS4_INPUT ||
+           chip == chip_BUTTONS5_INPUT ||
+           chip == chip_BUTTONS6_INPUT)
                 return "Button";
         if(chip == chip_COIN_INPUT)
                 return "Coin";
@@ -172,7 +180,7 @@ struct GameWindow : Window
         return "";
     }
 
-    static nall::string get_pin_name(ChipDesc* chip, std::array<uint8_t, 4>& pins)
+    static nall::string get_pin_name(const ChipDesc* chip, const std::array<uint8_t, 4>& pins)
     {
         int count = 0;
         while(count < pins.size() && pins[count] != 0) count++;
@@ -195,7 +203,9 @@ struct GameWindow : Window
                 if(i != count-1) s.append(", ");
             }
         }
-        else if(chip == chip_BUTTONS1_INPUT || chip == chip_BUTTONS2_INPUT)
+        else if(chip == chip_BUTTONS1_INPUT || chip == chip_BUTTONS2_INPUT ||
+                chip == chip_BUTTONS3_INPUT || chip == chip_BUTTONS4_INPUT ||
+                chip == chip_BUTTONS5_INPUT || chip == chip_BUTTONS6_INPUT)
         {
             if(count == 0) return "s";
             s = (count == 1) ? "" : "s";

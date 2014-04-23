@@ -103,4 +103,33 @@ CHIP_DESC( 74H04 ) =
 	CHIP_DESC_END
 };
 
+// TODO: Adjust tp_lh based up pull up resistor value?
+CHIP_DESC( 7405 ) =
+{
+	CHIP_START( 7404A )
+        INPUT_PINS( 1 ) OUTPUT_PIN( 2 )
+        OUTPUT_DELAY_NS( 30.0, 8.0 ),
+
+	CHIP_START( 7404B )
+        INPUT_PINS( 3 ) OUTPUT_PIN( 4 )
+        OUTPUT_DELAY_NS( 30.0, 8.0 ),
+	
+    CHIP_START( 7404C )
+        INPUT_PINS( 5 ) OUTPUT_PIN( 6 )
+        OUTPUT_DELAY_NS( 30.0, 8.0 ),
+
+	CHIP_START( 7404D )
+        INPUT_PINS( 9 ) OUTPUT_PIN( 8 )
+        OUTPUT_DELAY_NS( 30.0, 8.0 ),
+
+ 	CHIP_START( 7404E )
+        INPUT_PINS( 11 ) OUTPUT_PIN( 10 )
+        OUTPUT_DELAY_NS( 30.0, 8.0 ),
+
+ 	CHIP_START( 7404F )
+        INPUT_PINS( 13 ) OUTPUT_PIN( 12 )
+        OUTPUT_DELAY_NS( 30.0, 8.0 ),
+
+	CHIP_DESC_END
+};
 

@@ -31,7 +31,7 @@ public:
 	std::vector<Chip*> chips;
     uint64_t global_time;
 
-    Settings& settings; // TODO: make const?
+    const Settings& settings;
     GameConfig game_config;
     Input& input;
     Video& video;
@@ -41,7 +41,7 @@ public:
     int queue_size;
     QueueEntry queue[MAX_QUEUE_SIZE]; // TODO: Replace with vector?
 
-	Circuit(Settings& s, Input& i, Video& v, const CircuitDesc* desc, const char* name);
+	Circuit(const Settings& s, Input& i, Video& v, const CircuitDesc* desc, const char* name);
     ~Circuit();
 
 	uint64_t queue_push(Chip* chip, uint64_t delay);

@@ -25,6 +25,9 @@ struct GameConfig : configuration
     }
 
     bool operator==(const GameConfig& g) { return filename == g.filename; }
+
+    static bool isDipswitch(const ChipDesc* chip);
+    static bool isPotentiometer(const ChipDesc* chip);
 };
 
 #endif
