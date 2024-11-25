@@ -3,8 +3,12 @@
 
 #include <vector>
 
+#include "circuit.h"
+#include "circuit_desc.h"
 
 using std::vector;
+using phoenix::VerticalLayout;
+using phoenix::Viewport;
 
 namespace dice_libretro {
 
@@ -26,6 +30,16 @@ inline bool input_mask(int32_t input_bitmask, unsigned mask_id)
 // Encapsulate the DICE emulator, for use in the libretro core.
 class DICE
 {
+   private:
+    Settings settings;
+    Input* input;
+    Video* video;
+    Circuit* circuit;
+    RealTimeClock real_time;
+
+    VerticalLayout layout;
+    Viewport* viewport;
+
    public:
       void init_mem(void);
       void update_input(int32_t *input_state);
