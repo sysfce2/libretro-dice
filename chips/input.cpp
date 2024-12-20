@@ -5,7 +5,7 @@
 //#include "../manymouse/manymouse.h"
 //#include <SDL.h>
 
-using namespace phoenix;
+//using namespace phoenix;
 
 static const double INPUT_POLL_RATE = 10.0e-3; // 10 ms poll rate
 
@@ -126,7 +126,7 @@ static const double ANALOG_SCALE = 1.0 / (1.0 - ANALOG_THRESHOLD);
 template <unsigned PADDLE, bool HORIZONTAL>
 void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
 {
-    Circuit* circuit = chip->circuit;
+    /* Circuit* circuit = chip->circuit;
     const Settings::Input::Paddle& settings = circuit->settings.input.paddle[PADDLE];
 
     AnalogInputDesc<PADDLE, HORIZONTAL>* desc = (AnalogInputDesc<PADDLE, HORIZONTAL>*)chip->custom_data;
@@ -161,7 +161,7 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
             case KeyAssignment::JOYSTICK_BUTTON:
                 delta -= circuit->input.getJoystickButton(settings.left.joystick, settings.left.button) * dt * sensitivity;
                 break;
-            /*case KeyAssignment::JOYSTICK_AXIS:
+            case KeyAssignment::JOYSTICK_AXIS:
             {
                 double val = circuit->input.getJoystickAxis(settings.left.joystick, settings.left.button >> 1) / 32768.0;
                 if(val > ANALOG_THRESHOLD && (settings.left.button & 1))
@@ -169,7 +169,7 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
                 else if(val < -ANALOG_THRESHOLD && !(settings.left.button & 1))
                     delta += (val + ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
                 break;
-            }*/
+            }
             default: break;
         }
         switch(settings.right.type)
@@ -180,7 +180,7 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
             case KeyAssignment::JOYSTICK_BUTTON:
                 delta += circuit->input.getJoystickButton(settings.right.joystick, settings.right.button) * dt * sensitivity;
                 break;
-            /*case KeyAssignment::JOYSTICK_AXIS:
+            case KeyAssignment::JOYSTICK_AXIS:
             {
                 double val = circuit->input.getJoystickAxis(settings.right.joystick, settings.right.button >> 1) / 32768.0;
                 if(val > ANALOG_THRESHOLD && (settings.right.button & 1))
@@ -188,7 +188,7 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
                 else if(val < -ANALOG_THRESHOLD && !(settings.right.button & 1))
                     delta -= (val + ANALOG_THRESHOLD) * dt * sensitivity;
                 break;
-            }*/
+            }
             default: break;
         }
     }
@@ -205,7 +205,7 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
             case KeyAssignment::JOYSTICK_BUTTON:
                 delta += circuit->input.getJoystickButton(settings.down.joystick, settings.down.button) * dt *sensitivity;
                 break;
-            /*case KeyAssignment::JOYSTICK_AXIS:
+            case KeyAssignment::JOYSTICK_AXIS:
             {
                 double val = circuit->input.getJoystickAxis(settings.down.joystick, settings.down.button >> 1) / 32768.0;
                 if(val > ANALOG_THRESHOLD && (settings.down.button & 1))
@@ -213,7 +213,7 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
                 else if(val < -ANALOG_THRESHOLD && !(settings.down.button & 1))
                     delta -= (val + ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
                 break;
-            }*/
+            }
             default: break;
         }
         switch(settings.up.type)
@@ -224,7 +224,7 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
             case KeyAssignment::JOYSTICK_BUTTON:
                 delta -= circuit->input.getJoystickButton(settings.up.joystick, settings.up.button) * dt * sensitivity;
                 break;
-            /*case KeyAssignment::JOYSTICK_AXIS:
+            case KeyAssignment::JOYSTICK_AXIS:
             {
                 double val = circuit->input.getJoystickAxis(settings.up.joystick, settings.up.button >> 1) / 32768.0;
                 if(val > ANALOG_THRESHOLD && (settings.up.button & 1))
@@ -232,7 +232,7 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
                 else if(val < -ANALOG_THRESHOLD && !(settings.up.button & 1))
                     delta += (val + ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
                 break;
-            }*/
+            }
             default: break;
         }
     }
@@ -291,6 +291,7 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
         
         chip->pending_event = chip->circuit->queue_push(chip, 0);
     }
+     */
 }
 
 
@@ -298,7 +299,7 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
 template <typename C, const C& (Settings::*c)() const, KeyAssignment C::*k>
 CUSTOM_LOGIC( digital_input )
 {
-    Circuit* circuit = chip->circuit;
+    /* Circuit* circuit = chip->circuit;
     const KeyAssignment& key_assignment = (circuit->settings.*c)().*k;
 
     int new_out = circuit->input.getKeyPressed(key_assignment);
@@ -308,7 +309,7 @@ CUSTOM_LOGIC( digital_input )
     {
         // Generate output event
         chip->pending_event = chip->circuit->queue_push(chip, 0);
-    }
+    } */
 }
 
 template <int N> CHIP_LOGIC( button_inv )
@@ -318,7 +319,7 @@ template <int N> CHIP_LOGIC( button_inv )
 
 CHIP_DESC( COIN_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&clock)
+	/* CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i7 ),
 
@@ -350,12 +351,12 @@ CHIP_DESC( COIN_INPUT ) =
     CHIP_START(button_inv<4>) INPUT_PINS( 4 ) OUTPUT_PIN( i4 ),
     CHIP_START(button_inv<5>) INPUT_PINS( 5 ) OUTPUT_PIN( i5 ),
 
-	CHIP_DESC_END
+	CHIP_DESC_END */
 };
 
 CHIP_DESC( START_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&clock)
+	/* CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i7 ),
 
@@ -372,12 +373,12 @@ CHIP_DESC( START_INPUT ) =
     CHIP_START(button_inv<1>) INPUT_PINS( 1 ) OUTPUT_PIN( i1 ),
     CHIP_START(button_inv<2>) INPUT_PINS( 2 ) OUTPUT_PIN( i2 ),
 
-	CHIP_DESC_END
+	CHIP_DESC_END */
 };
 
 CHIP_DESC( JOYSTICK1_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&clock)
+	/*CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i7 ),
 
@@ -398,12 +399,12 @@ CHIP_DESC( JOYSTICK1_INPUT ) =
         INPUT_PINS( i7 )
         OUTPUT_PIN( Joystick::RIGHT ),
 
-	CHIP_DESC_END
+	CHIP_DESC_END */
 };
 
 CHIP_DESC( JOYSTICK2_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&clock)
+	/* CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i7 ),
 
@@ -424,12 +425,12 @@ CHIP_DESC( JOYSTICK2_INPUT ) =
         INPUT_PINS( i7 )
         OUTPUT_PIN( Joystick::RIGHT ),
 
-	CHIP_DESC_END
+	CHIP_DESC_END */
 };
 
 CHIP_DESC( BUTTONS1_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&clock)
+	/* CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i7 ),
 
@@ -451,13 +452,13 @@ CHIP_DESC( BUTTONS1_INPUT ) =
     CHIP_START(button_inv<2>) INPUT_PINS( 2 ) OUTPUT_PIN( i2 ),
     CHIP_START(button_inv<3>) INPUT_PINS( 3 ) OUTPUT_PIN( i3 ),
 
-	CHIP_DESC_END
+	CHIP_DESC_END */
 };
 
 
 CHIP_DESC( BUTTONS2_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&clock)
+	/* CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i7 ),
 
@@ -479,12 +480,12 @@ CHIP_DESC( BUTTONS2_INPUT ) =
     CHIP_START(button_inv<2>) INPUT_PINS( 2 ) OUTPUT_PIN( i2 ),
     CHIP_START(button_inv<3>) INPUT_PINS( 3 ) OUTPUT_PIN( i3 ),
 
-	CHIP_DESC_END
+	CHIP_DESC_END */
 };
 
 CHIP_DESC( BUTTONS3_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&clock)
+	/* CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i7 ),
 
@@ -501,12 +502,12 @@ CHIP_DESC( BUTTONS3_INPUT ) =
     CHIP_START(button_inv<1>) INPUT_PINS( 1 ) OUTPUT_PIN( i1 ),
     CHIP_START(button_inv<2>) INPUT_PINS( 2 ) OUTPUT_PIN( i2 ),
 
-	CHIP_DESC_END
+	CHIP_DESC_END */
 };
 
 CHIP_DESC( BUTTONS4_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&clock)
+	/* CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i7 ),
 
@@ -523,13 +524,13 @@ CHIP_DESC( BUTTONS4_INPUT ) =
     CHIP_START(button_inv<1>) INPUT_PINS( 1 ) OUTPUT_PIN( i1 ),
     CHIP_START(button_inv<2>) INPUT_PINS( 2 ) OUTPUT_PIN( i2 ),
 
-	CHIP_DESC_END
+	CHIP_DESC_END */
 };
 
 
 CHIP_DESC( BUTTONS5_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&clock)
+	/* CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i7 ),
 
@@ -541,14 +542,14 @@ CHIP_DESC( BUTTONS5_INPUT ) =
     // Normally Closed (Active High) Outputs
     CHIP_START(button_inv<1>) INPUT_PINS( 1 ) OUTPUT_PIN( i1 ),
 
-	CHIP_DESC_END
+	CHIP_DESC_END */
 };
 
 
 
 CHIP_DESC( BUTTONS6_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&clock)
+	/* CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i7 ),
 
@@ -560,7 +561,7 @@ CHIP_DESC( BUTTONS6_INPUT ) =
     // Normally Closed (Active High) Outputs
     CHIP_START(button_inv<1>) INPUT_PINS( 1 ) OUTPUT_PIN( i1 ),
 
-	CHIP_DESC_END
+	CHIP_DESC_END */
 };
 
 
@@ -569,7 +570,7 @@ CHIP_DESC( BUTTONS6_INPUT ) =
 template <unsigned WHEEL>
 void wheel_input(Chip* chip, int mask)
 {
-    Circuit* circuit = chip->circuit;
+    /* Circuit* circuit = chip->circuit;
     const Settings::Input::Wheel& settings = circuit->settings.input.wheel[WHEEL];
 
     WheelDesc<WHEEL>* wheel = (WheelDesc<WHEEL>*)chip->custom_data;
@@ -645,13 +646,13 @@ void wheel_input(Chip* chip, int mask)
 
         wheel->wheel_events[0].push_back(wheel->angle);
         wheel->wheel_events[1].push_back(wheel->angle);
-    }
+    } */
 }
 
 template <unsigned WHEEL, Wheel::OUTPUT output>
 void wheel_event_gen(Chip* chip, int mask)
 {
-    WheelDesc<WHEEL>* wheel = (WheelDesc<WHEEL>*)chip->custom_data;
+    /* WheelDesc<WHEEL>* wheel = (WheelDesc<WHEEL>*)chip->custom_data;
     cirque<double>& wheel_events = wheel->wheel_events[output-1];
     
     static const double ENCODER_ANGLE = 5.0;
@@ -675,11 +676,12 @@ void wheel_event_gen(Chip* chip, int mask)
     
     if(new_out != chip->output)
         chip->pending_event = chip->circuit->queue_push(chip, 0);
+     */
 }
 
 CHIP_DESC( WHEEL1_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&clock)
+	/* CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i1 ),
 
@@ -696,12 +698,12 @@ CHIP_DESC( WHEEL1_INPUT ) =
     ChipDesc(&wheel_event_gen<0, Wheel::B>)
         INPUT_PINS( i2 ) OUTPUT_PIN( Wheel::B ),
 
-	CHIP_DESC_END
+	CHIP_DESC_END */
 };
 
 CHIP_DESC( WHEEL2_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&clock)
+	/* CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i1 ),
     
@@ -718,12 +720,12 @@ CHIP_DESC( WHEEL2_INPUT ) =
     ChipDesc(&wheel_event_gen<1, Wheel::B>)
         INPUT_PINS( i2 ) OUTPUT_PIN( Wheel::B ),
 
-	CHIP_DESC_END
+	CHIP_DESC_END */
 };
 
 CHIP_DESC( WHEEL3_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&clock)
+	/* CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i1 ),
     
@@ -740,12 +742,12 @@ CHIP_DESC( WHEEL3_INPUT ) =
     ChipDesc(&wheel_event_gen<2, Wheel::B>)
         INPUT_PINS( i2 ) OUTPUT_PIN( Wheel::B ),
 
-	CHIP_DESC_END
+	CHIP_DESC_END */
 };
 
 CHIP_DESC( WHEEL4_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&clock)
+	/* CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i1 ),
     
@@ -762,7 +764,7 @@ CHIP_DESC( WHEEL4_INPUT ) =
     ChipDesc(&wheel_event_gen<3, Wheel::B>)
         INPUT_PINS( i2 ) OUTPUT_PIN( Wheel::B ),
 
-	CHIP_DESC_END
+	CHIP_DESC_END */
 };
 
 
@@ -771,7 +773,7 @@ CHIP_DESC( WHEEL4_INPUT ) =
 template <unsigned THROTTLE>
 void ThrottleDesc<THROTTLE>::throttle_input(Chip* chip, int mask)
 {
-    Circuit* circuit = chip->circuit;
+    /* Circuit* circuit = chip->circuit;
     const Settings::Input::Throttle& settings = circuit->settings.input.throttle[THROTTLE];
 
     ThrottleDesc<THROTTLE>* desc = (ThrottleDesc<THROTTLE>*)chip->custom_data;
@@ -809,11 +811,12 @@ void ThrottleDesc<THROTTLE>::throttle_input(Chip* chip, int mask)
     //chip->active_outputs = (1 << chip->output_links.size()) - 1;
         
     chip->pending_event = chip->circuit->queue_push(chip, 0);
+     */
 }
 
 CHIP_DESC( THROTTLE1_INPUT ) = 
 {
-	CUSTOM_CHIP_START(&clock)
+	/* CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i1 ),
     
@@ -821,7 +824,7 @@ CHIP_DESC( THROTTLE1_INPUT ) =
         INPUT_PINS( i1 )
         OUTPUT_PIN( i3 ),
 
-	CHIP_DESC_END
+	CHIP_DESC_END */
 };
 
 
@@ -831,24 +834,26 @@ CHIP_DESC( THROTTLE1_INPUT ) =
 
 Input::Input()
 { 
-    joysticks.resize(SDL_NumJoysticks());
+    /* joysticks.resize(SDL_NumJoysticks());
 
     for(int i = 0; i < joysticks.size(); i++)
         joysticks[i] = SDL_JoystickOpen(i);
         // TODO: check if joystick failed to open
+     */
 }
 
 Input::~Input()
 {
-    for(int i = 0; i < joysticks.size(); i++)
+    /* for(int i = 0; i < joysticks.size(); i++)
         if(joysticks[i]) SDL_JoystickClose(joysticks[i]);
+     */
 }
 
 void Input::poll_input()
 {
     //SDL_JoystickUpdate();
 
-    Application::processEvents();
+    //Application::processEvents();
 
     /* ManyMouseEvent mouse_event;
     while (ManyMouse_PollEvent(&mouse_event))
@@ -910,7 +915,7 @@ int Input::getRelativeMouseY(unsigned mouse)
 
 bool Input::getKeyboardState(unsigned scancode)
 {
-    return Keyboard::pressed((Keyboard::Scancode)scancode);
+    //return Keyboard::pressed((Keyboard::Scancode)scancode);
 }
 
 bool Input::getJoystickButton(unsigned joystick, unsigned button)

@@ -1,10 +1,11 @@
 # TODO (mittonk): Remove these?
-LIBS := -s
-CFLAGS := -Iphoenix -O3 \
+DEBUG := 1
+LIBS :=
+CFLAGS :=  \
  -I/usr/local/share/retroarch-apple-deps/sdl/include \
   -I/usr/local/share/retroarch-apple-deps/sdl/macOS/include
   
-CPPFLAGS = $(CFLAGS) -std=c++11 -Wno-mismatched-tags -Wno-reorder-ctor -Wno-constexpr-not-const -Wno-unsupported-friend
+CPPFLAGS = $(CFLAGS) -std=c++11 -Wno-mismatched-tags -Wno-reorder-ctor -Wno-constexpr-not-const -Wno-unsupported-friend -Wno-return-type -Wno-unused-variable
 
 STATIC_LINKING := 0
 AR             := ar
@@ -202,8 +203,8 @@ GAME_OBJ := games/pong.o games/rebound.o games/gotcha.o games/spacerace.o games/
 MANYMOUSE_OBJ := manymouse/manymouse.o manymouse/windows_wminput.o manymouse/linux_evdev.o \
 				 manymouse/macosx_hidmanager.o manymouse/macosx_hidutilities.o manymouse/x11_xinput2.o
 
-OBJ := main.o chip.o circuit.o settings.o game_config.o phoenix/phoenix.o $(CHIP_OBJ) $(GAME_OBJ) $(MANYMOUSE_OBJ)
-
+# OBJ := main.o chip.o circuit.o settings.o game_config.o phoenix/phoenix.o $(CHIP_OBJ) $(GAME_OBJ) $(MANYMOUSE_OBJ)
+OBJ := main.o chip.o circuit.o settings.o game_config.o $(CHIP_OBJ) $(GAME_OBJ)
 
 BIN := dice
 

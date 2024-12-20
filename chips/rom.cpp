@@ -1,28 +1,31 @@
-#include <nall/platform.hpp>
+/*#include <nall/platform.hpp>
 #include <nall/unzip.hpp>
 #include <phoenix.hpp>
-
+*/
 #include "rom.h"
-
+/*
 using namespace nall;
 using namespace phoenix;
-
+*/
+#include <string>
+using std::string;
 // in main.cpp
-extern const nall::string& application_path();
-extern Window& application_window();
+//extern const string& application_path();
+//extern Window& application_window();
 
-static nall::string filename;
-static nall::string romname;
+static string filename;
+static string romname;
 
-static unzip zip_file;
-static nall::vector<uint8_t> rom_data;
-static bool error_shown = false;
+//static unzip zip_file;
+//static vector<uint8_t> rom_data;
+//static bool error_shown = false;
 
 // TODO: Prevent multiple error popups when file is not found.
 // By extracting entire file at once?
 
 uint8_t RomDesc::get_data(const RomDesc* rom, unsigned offset)
 {
+/*
     if(filename != rom->file_name.c_str())
     {
         filename = rom->file_name.c_str();
@@ -89,5 +92,6 @@ uint8_t RomDesc::get_data(const RomDesc* rom, unsigned offset)
     if(offset < rom_data.size()) return rom_data[offset];
 
     return 0xff;
+*/
 }
 
