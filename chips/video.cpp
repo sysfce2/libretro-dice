@@ -187,22 +187,22 @@ void Video::init_color_lut(const double (*r)[3])
 
 void Video::draw(Chip* chip)
 {
-    /* uint64_t start_time = current_time - initial_time;
+    uint64_t start_time = current_time - initial_time;
     uint64_t end_time = chip->circuit->global_time - initial_time;
 
     if((chip->inputs & VIDEO_MASK) || desc->scan_mode == INTERLACED) // Falling edge
     {
         float* c = &color[(chip->inputs & VIDEO_MASK) * 3];
 
-        glBegin(GL_QUADS);
+        /*glBegin(GL_QUADS);
             glColor3fv(c);
 
 	        glVertex3f(start_time, v_pos,     0.0);
 	        glVertex3f(end_time,   v_pos,     0.0);
 	        glVertex3f(end_time,   v_pos+1.0, 0.0);
 	        glVertex3f(start_time, v_pos+1.0, 0.0);
-	    glEnd(); 
-    } */
+	    glEnd(); */
+    }
 }
 
 void Video::draw_overlays()
@@ -235,7 +235,7 @@ void Video::draw_overlays()
 
 CUSTOM_LOGIC( Video::video )
 {
-    /* Video* video = (Video*)chip->custom_data;
+    Video* video = (Video*)chip->custom_data;
     uint64_t global_time = chip->circuit->global_time;
 
     // VBLANK rising edge, draw frame
@@ -251,8 +251,9 @@ CUSTOM_LOGIC( Video::video )
         }
         video->draw_overlays();
         video->swap_buffers();
-        if(video->desc->scan_mode == PROGRESSIVE)
+        /*if(video->desc->scan_mode == PROGRESSIVE)
             glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+         */
         video->frame_count++;
         
         // Make sure real time is caught up
@@ -300,9 +301,12 @@ CUSTOM_LOGIC( Video::video )
 
     chip->inputs ^= mask;
     video->current_time = global_time;
-     */
+     
 }
 
+void Video::swap_buffers() {
+   // TODO (mittonk)
+}
 
 #ifdef _WIN32
 
