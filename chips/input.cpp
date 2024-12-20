@@ -3,7 +3,7 @@
 #include "../settings.h"
 
 #include "../manymouse/manymouse.h"
-#include <SDL/SDL.h>
+#include <SDL.h>
 
 using namespace phoenix;
 

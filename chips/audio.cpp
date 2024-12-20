@@ -1,7 +1,7 @@
 #include "audio.h"
 #include "../circuit.h"
 
-#include <SDL/SDL.h>
+//include <SDL.h>
 #include <algorithm>
 #include <set>
 
@@ -49,9 +49,9 @@ CUSTOM_LOGIC( Audio::audio_output )
     double v = chip->input_links[0].chip->analog_output * volume;
     int16_t sample = (v > INT16_MAX) ? INT16_MAX : (v < INT16_MIN) ? INT16_MIN : v;
 
-    SDL_LockAudio();
+    //SDL_LockAudio();
     audio->audio_buffer.push_back(sample);
-    SDL_UnlockAudio();
+    //SDL_UnlockAudio();
 }
 
 CHIP_DESC( AUDIO ) = 
@@ -135,19 +135,21 @@ Audio::Audio() : gain(10.0), desc(NULL), settings(NULL), audio_buffer(8192)
 
 void Audio::audio_init(Circuit* circuit)
 {
-    settings = &circuit->settings.audio;
+    /*
+     settings = &circuit->settings.audio;
     
     //int buffer_size = FREQUENCY[circuit->settings.audio.frequency] / 50; // 20 ms, TODO: Make configurable?
     // Hardcoded 2048 buffer size now TODO: Make configurable?
     int buffer_size = 2048;
 
-    SDL_AudioSpec as;
+   SDL_AudioSpec as;
 	as.freq = Settings::Audio::FREQUENCIES[settings->frequency];
 	as.format = AUDIO_S16SYS;
 	as.channels = 1;
 	as.samples = buffer_size;
 	as.callback = &Audio::callback;
 	as.userdata = (void*)this;
+    
 
     SDL_CloseAudio();
 
@@ -156,22 +158,24 @@ void Audio::audio_init(Circuit* circuit)
 		printf("Unable to open audio:\n%s\n", SDL_GetError());
 		exit(1);
 	}
+   
 
     if(desc) gain = desc->gain;
     sample_period = 1.0 / double(as.freq);
 
     SDL_PauseAudio(settings->mute);
+     */
 }
 
 void Audio::toggle_mute()
 {
-    SDL_PauseAudio(settings->mute);
+    //SDL_PauseAudio(settings->mute);
 }
 
 Audio::~Audio()
 {
-	SDL_PauseAudio(1); // TODO: move?
-	SDL_CloseAudio();
+	//SDL_PauseAudio(1); // TODO: move?
+	//SDL_CloseAudio();
 }
 
 void Audio::callback(void* userdata, uint8_t* str, int len)

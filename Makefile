@@ -1,6 +1,6 @@
 # TODO (mittonk): Remove these?
 LIBS := -s
-CFLAGS := -Iphoenix -O3
+CFLAGS := -Iphoenix -O3 -I/usr/local/share/retroarch-apple-deps/sdl/include -I/usr/local/share/retroarch-apple-deps/sdl/macOS/include
 CPPFLAGS = $(CFLAGS) -std=c++11
 
 STATIC_LINKING := 0
