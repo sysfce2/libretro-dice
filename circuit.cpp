@@ -7,7 +7,7 @@
 #include <cstdio>
 
 #define DEBUG
-#undef DEBUG
+//KAM #undef DEBUG
 
 #define EVENT_QUEUE_SIZE 128
 #define SUBCYCLE_SIZE 64

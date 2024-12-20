@@ -6,7 +6,7 @@
 #include "circuit.h"
 
 #define DEBUG
-#undef DEBUG
+//KAM #undef DEBUG
 
 #ifdef DEBUG
 //#define debug_printf(args...) printf(args)

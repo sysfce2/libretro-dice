@@ -312,6 +312,24 @@ CUSTOM_LOGIC( digital_input )
     } */
 }
 
+
+CUSTOM_LOGIC( kam_dummy_digital_input )
+{
+    Circuit* circuit = chip->circuit;
+    //const KeyAssignment& key_assignment = (circuit->settings.*c)().*k;
+
+    //int new_out = circuit->input.getKeyPressed(key_assignment);
+   int new_out = 0;
+    new_out ^= 1; // Joysticks, buttons are active LOW
+
+    if(new_out != chip->output)
+    {
+        // Generate output event
+        chip->pending_event = chip->circuit->queue_push(chip, 0);
+    }
+}
+
+
 template <int N> CHIP_LOGIC( button_inv )
 {
     pin[i1 + N - 1] = pin[N] ^ 1;
@@ -319,15 +337,19 @@ template <int N> CHIP_LOGIC( button_inv )
 
 CHIP_DESC( COIN_INPUT ) = 
 {
-	/* CUSTOM_CHIP_START(&clock)
+	CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i7 ),
 
     // Normally Open (Active Low) Output
-    ChipDesc(&digital_input<Settings::Input::CoinStart, &Settings::coinStart, &Settings::Input::CoinStart::coin1>)
+  /* ChipDesc(&digital_input<Settings::Input::CoinStart, &Settings::coinStart, &Settings::Input::CoinStart::coin1>)
         INPUT_PINS( i7 )
-        OUTPUT_PIN( 1 ),
-
+        OUTPUT_PIN( 1 ), */
+   
+   ChipDesc(&kam_dummy_digital_input)
+   INPUT_PINS( i7 )
+   OUTPUT_PIN( 1 ),
+/*
     ChipDesc(&digital_input<Settings::Input::CoinStart, &Settings::coinStart, &Settings::Input::CoinStart::coin2>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 2 ),
@@ -343,6 +365,7 @@ CHIP_DESC( COIN_INPUT ) =
     ChipDesc(&digital_input<Settings::Input::CoinStart, &Settings::coinStart, &Settings::Input::CoinStart::dollar>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 5 ),
+ */
 
     // Normally Closed (Active High) Outputs
     CHIP_START(button_inv<1>) INPUT_PINS( 1 ) OUTPUT_PIN( i1 ),
@@ -351,7 +374,7 @@ CHIP_DESC( COIN_INPUT ) =
     CHIP_START(button_inv<4>) INPUT_PINS( 4 ) OUTPUT_PIN( i4 ),
     CHIP_START(button_inv<5>) INPUT_PINS( 5 ) OUTPUT_PIN( i5 ),
 
-	CHIP_DESC_END */
+	CHIP_DESC_END
 };
 
 CHIP_DESC( START_INPUT ) = 
