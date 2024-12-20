@@ -36,7 +36,7 @@ public:
     virtual void show_cursor(bool show) = 0;
     static CUSTOM_LOGIC( video );
 
-    static Video* createDefault(phoenix::VerticalLayout& layout, phoenix::Viewport*& viewport);
+//    static Video* createDefault(phoenix::VerticalLayout& layout, phoenix::Viewport*& viewport);
 };
 
 extern CHIP_DESC( VIDEO );

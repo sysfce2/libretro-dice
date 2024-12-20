@@ -1,6 +1,6 @@
 #include "settings.h"
 
-using namespace phoenix;
+/*using namespace phoenix;
 
 const char KeyAssignment::ScancodeName[][16] = {
     "None",
@@ -119,9 +119,10 @@ void Settings::appendKey(KeyAssignment& k, string name)
     append(k.button, string{name, ".button"});
     append(k.joystick, string{name, ".joystick"});
 }
-
+*/
 Settings::Settings() : num_mice(0), pause(false), throttle(true), fullscreen(false)
 {
+   /*
     append(audio.frequency = Audio::Frequency::FREQ_48000, "audio.frequency");
     append(audio.volume = 500, "audio.volume");
     append(audio.mute = false, "audio.mute");
@@ -224,5 +225,6 @@ Settings::Settings() : num_mice(0), pause(false), throttle(true), fullscreen(fal
     appendKey(input.ui.throttle = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::Insert), "input.ui.throttle");
     appendKey(input.ui.fullscreen = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::F11), "input.ui.fullscreen");
     appendKey(input.ui.quit = KeyAssignment(KeyAssignment::KEYBOARD, Keyboard::Scancode::Escape), "input.ui.quit");
-} 
+    */
+}
 

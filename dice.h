@@ -7,8 +7,9 @@
 #include "circuit_desc.h"
 
 using std::vector;
-using phoenix::VerticalLayout;
-using phoenix::Viewport;
+/*
+ using phoenix::VerticalLayout;
+using phoenix::Viewport; */
 
 namespace dice_libretro {
 
@@ -37,8 +38,8 @@ class DICE
     Circuit* circuit;
     RealTimeClock real_time;
 
-    VerticalLayout layout;
-    Viewport* viewport;
+    //VerticalLayout layout;
+    //Viewport* viewport;
 
    public:
       void init_mem(void);

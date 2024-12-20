@@ -1,15 +1,17 @@
 #include "video.h"
 #include "../circuit.h"
-#include <phoenix.hpp>
+//#include <phoenix.hpp>
 
 #ifdef __APPLE__
-#include <OpenGL/gl.h> // Think different
+//#include <OpenGL/gl.h> // Think different
 #else
-#include <GL/gl.h>
+//#include <GL/gl.h>
 #endif
 
+/*
 using phoenix::VerticalLayout;
 using phoenix::Viewport;
+ */
 
 /* 
 	Inputs:
@@ -98,14 +100,15 @@ void Video::video_init(int width, int height, const Settings::Video& settings)
         }
     }
 
-   	glViewport(x, y, width, height);
+   	//glViewport(x, y, width, height);
 
     adjust_screen_params();
 }
 
 void Video::adjust_screen_params()
 {
-    glMatrixMode(GL_PROJECTION);
+    /*
+     glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
     switch(desc->orientation)
@@ -137,7 +140,7 @@ void Video::adjust_screen_params()
             temp[i][0] = temp[i][1] = temp[i][2] = desc->r[i];
 
         init_color_lut(temp);
-    }
+    } */
 }
 
 void Video::init_color_lut(const double (*r)[3])
@@ -184,7 +187,7 @@ void Video::init_color_lut(const double (*r)[3])
 
 void Video::draw(Chip* chip)
 {
-    uint64_t start_time = current_time - initial_time;
+    /* uint64_t start_time = current_time - initial_time;
     uint64_t end_time = chip->circuit->global_time - initial_time;
 
     if((chip->inputs & VIDEO_MASK) || desc->scan_mode == INTERLACED) // Falling edge
@@ -199,11 +202,12 @@ void Video::draw(Chip* chip)
 	        glVertex3f(end_time,   v_pos+1.0, 0.0);
 	        glVertex3f(start_time, v_pos+1.0, 0.0);
 	    glEnd(); 
-    }
+    } */
 }
 
 void Video::draw_overlays()
 {
+   /*
     if(desc->overlays.empty()) return;
 
     glEnable(GL_BLEND);
@@ -226,12 +230,12 @@ void Video::draw_overlays()
 	    glEnd();
     }
 
-    glDisable(GL_BLEND);
+    glDisable(GL_BLEND); */
 }
 
 CUSTOM_LOGIC( Video::video )
 {
-    Video* video = (Video*)chip->custom_data;
+    /* Video* video = (Video*)chip->custom_data;
     uint64_t global_time = chip->circuit->global_time;
 
     // VBLANK rising edge, draw frame
@@ -296,25 +300,26 @@ CUSTOM_LOGIC( Video::video )
 
     chip->inputs ^= mask;
     video->current_time = global_time;
+     */
 }
 
 
 #ifdef _WIN32
 
 #include "video_wgl.h"
-Video* Video::createDefault(VerticalLayout& layout, Viewport*& viewport) { return new VideoWgl(layout, viewport); }
+//Video* Video::createDefault(VerticalLayout& layout, Viewport*& viewport) { return new VideoWgl(layout, viewport); }
 //#include "video_sdl.h"
 //Video* Video::createDefault(uintptr_t handle) { return new VideoSdl(handle); }
 
 #elif defined(__APPLE__)
 
 #include "video_cgl.h"
-Video* Video::createDefault(VerticalLayout& layout, Viewport*& viewport) { return new VideoCgl(viewport->handle()); }
+//Video* Video::createDefault(VerticalLayout& layout, Viewport*& viewport) { return new VideoCgl(viewport->handle()); }
 
 #else
 
 #include "video_sdl.h"
-Video* Video::createDefault(VerticalLayout& layout, Viewport*& viewport) { return new VideoSdl(viewport->handle()); }
+//Video* Video::createDefault(VerticalLayout& layout, Viewport*& viewport) { return new VideoSdl(viewport->handle()); }
 
 #endif
 

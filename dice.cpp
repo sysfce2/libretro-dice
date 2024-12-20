@@ -12,24 +12,28 @@
 
 #include "game_list.h"
 
-using phoenix::VerticalLayout;
+/*
+ using phoenix::VerticalLayout;
 using phoenix::Viewport;
+ */
 
 namespace dice_libretro {
 
 void DICE::init_mem(void)
 {
-        viewport = new Viewport();
+        /* viewport = new Viewport();
         layout.append(*viewport, {~0, ~0});
         //TODO (mittonk): append(layout);
 
         input = new Input();
         video = Video::createDefault(layout, viewport);
-
+         */
         int game_idx = 0;  // Pong
         GameDesc& g = game_list[game_idx];
         
-        circuit = new Circuit(settings, *input, *video, g.desc, g.command_line);
+        circuit = new Circuit(settings,
+                              //*input, *video,
+                              g.desc, g.command_line);
 }
 
 void DICE::run(void)

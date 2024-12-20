@@ -1,9 +1,11 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
-#include <phoenix.hpp>
+//#include <phoenix.hpp>
+#include <string>
 
-using namespace nall;
+//using namespace nall;
+using std::string;
 
 struct KeyAssignment
 {
@@ -13,21 +15,22 @@ struct KeyAssignment
     unsigned button;
     unsigned joystick;
 
-    KeyAssignment(unsigned t = NONE, unsigned b = 0, unsigned j = 0) :
+    /* KeyAssignment(unsigned t = NONE, unsigned b = 0, unsigned j = 0) :
         type(t), button(b), joystick(j) { }
 
     KeyAssignment(unsigned t, phoenix::Keyboard::Scancode s) :
         type(t), button((unsigned)s), joystick(0) { }
+     */
 
-    nall::string name();
+    string name();
 
     static const char ScancodeName[][16];
     static const KeyAssignment None;
 };
 
-struct Settings : configuration
+struct Settings //: configuration
 {
-    nall::string filename;
+    string filename;
     unsigned num_mice;
 
     bool pause, throttle;
@@ -129,11 +132,13 @@ struct Settings : configuration
 
     struct DefaultKeys
     {
-        static phoenix::Keyboard::Scancode Up(int player);
+        /*
+         static phoenix::Keyboard::Scancode Up(int player);
         static phoenix::Keyboard::Scancode Down(int player);
         static phoenix::Keyboard::Scancode Left(int player);
         static phoenix::Keyboard::Scancode Right(int player);
         template <int> static phoenix::Keyboard::Scancode Button(int player);
+         */
     };
 
     Settings();
@@ -142,19 +147,23 @@ struct Settings : configuration
 
     bool load()
     {
-        configuration::load(filename);
+        /*
+         configuration::load(filename);
         return save();  // Create file if it doesn't exist
+         */
     }
 
     bool save()
     {
-        return configuration::save(filename);
+        //return configuration::save(filename);
     }
 
-    template<size_t N> const Input::Joystick& joystick() const { return input.joystick[N]; }
+    /*
+     template<size_t N> const Input::Joystick& joystick() const { return input.joystick[N]; }
     template<size_t N> const Input::Button& buttons() const { return input.buttons[N]; }
     const Input::CoinStart& coinStart() const { return input.coin_start; }
     const Input::UserInterface& ui() const { return input.ui; }
+     */
 };
 
 #endif

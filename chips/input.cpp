@@ -2,8 +2,8 @@
 #include "../circuit.h"
 #include "../settings.h"
 
-#include "../manymouse/manymouse.h"
-#include <SDL.h>
+//#include "../manymouse/manymouse.h"
+//#include <SDL.h>
 
 using namespace phoenix;
 
@@ -846,11 +846,11 @@ Input::~Input()
 
 void Input::poll_input()
 {
-    SDL_JoystickUpdate();
+    //SDL_JoystickUpdate();
 
     Application::processEvents();
 
-    ManyMouseEvent mouse_event;
+    /* ManyMouseEvent mouse_event;
     while (ManyMouse_PollEvent(&mouse_event))
     {
         int mouse = mouse_event.device;
@@ -871,14 +871,15 @@ void Input::poll_input()
         else if (mouse_event.type == MANYMOUSE_EVENT_ABSMOTION)
         {
             // TODO: Handle absolute motion?
-            /*double val = (double) (mouse_event.value - mouse_event.minval);
+            double val = (double) (mouse_event.value - mouse_event.minval);
             double maxval = (double) (mouse_event.maxval - mouse_event.minval);
             if (mouse_event.item == 0)
                 mouse->x = (val / maxval);
             else if (mouse_event.item == 1)
-                mouse->y = (val / maxval);*/
+                mouse->y = (val / maxval);
         }
     }
+   */
 }
 
 int Input::getRelativeMouseX(unsigned mouse)
@@ -915,13 +916,13 @@ bool Input::getKeyboardState(unsigned scancode)
 bool Input::getJoystickButton(unsigned joystick, unsigned button)
 {
     if(joystick >= joysticks.size()) return 0;
-    return SDL_JoystickGetButton(joysticks[joystick], button);
+    //return SDL_JoystickGetButton(joysticks[joystick], button);
 }
 
 int16_t Input::getJoystickAxis(unsigned joystick, unsigned axis)
 {
     if(joystick >= joysticks.size()) return 0;
-    return SDL_JoystickGetAxis(joysticks[joystick], axis);
+    //return SDL_JoystickGetAxis(joysticks[joystick], axis);
 }
 
 int Input::getNumJoysticks()
@@ -931,7 +932,7 @@ int Input::getNumJoysticks()
 
 int Input::getNumJoystickAxes(int joystick)
 {
-    return SDL_JoystickNumAxes(joysticks[joystick]);
+    //return SDL_JoystickNumAxes(joysticks[joystick]);
 }
 
 bool Input::getKeyPressed(const KeyAssignment& key_assignment)
