@@ -101,10 +101,12 @@ public:
 
 
 Circuit::Circuit(const Settings& s,
-                 //Input& i, Video& v,
+                 //Input& i,
+                 Video& v,
                  const CircuitDesc* desc, const char* name)
     : settings(s), game_config(desc, name),
-//input(i), video(v),
+//input(i),
+video(v),
 global_time(0), queue_size(0)
 {
     CircuitBuilder converter(this, chips);
@@ -214,7 +216,7 @@ void CircuitBuilder::createSpecialChips()
     chip_map.insert( std::pair<std::string, ChipDescPair>("_DEOPTIMIZER", ChipDescPair(chips.back(), chip__DEOPTIMIZER)) );
 
     // Create Video & Audio chips
-    //createChip(chip_VIDEO, "VIDEO", &circuit->video, 8, 64);
+    createChip(chip_VIDEO, "VIDEO", &circuit->video, 8, 64);
     createChip(chip_AUDIO, "AUDIO", &circuit->audio, 8, 64);
 }
 

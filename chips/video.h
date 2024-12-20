@@ -29,11 +29,11 @@ public:
     uint32_t frame_count;
     enum VideoPins { HBLANK_PIN = 9, VBLANK_PIN = 10 };
     
-    Video();
-    virtual ~Video() { }
-    virtual void video_init(int width, int height, const Settings::Video& settings);
-    virtual void swap_buffers() = 0;
-    virtual void show_cursor(bool show) = 0;
+   Video();
+     ~Video() { }
+     void video_init(int width, int height, const Settings::Video& settings);
+     void swap_buffers();
+     void show_cursor(bool show);
     static CUSTOM_LOGIC( video );
 
 //    static Video* createDefault(phoenix::VerticalLayout& layout, phoenix::Viewport*& viewport);

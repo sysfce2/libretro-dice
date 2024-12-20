@@ -28,11 +28,13 @@ void DICE::init_mem(void)
         input = new Input();
         video = Video::createDefault(layout, viewport);
          */
+   video = new Video();
         int game_idx = 0;  // Pong
         GameDesc& g = game_list[game_idx];
         
         circuit = new Circuit(settings,
-                              //*input, *video,
+                              //*input,
+                              *video,
                               g.desc, g.command_line);
 }
 

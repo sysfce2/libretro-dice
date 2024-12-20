@@ -1,14 +1,14 @@
 #ifndef VIDEO_CGL_H
 #define VIDEO_CGL_H
 
-#undef noinline
-#define decimal CocoaDecimal
+//#undef noinline
+//#define decimal CocoaDecimal
 /*
  #import <Cocoa/Cocoa.h>
 #include <OpenGL/gl.h>
 #include <OpenGL/gl3.h>
  */
-
+/*
 #include "video.h"
 
 class VideoCgl : public Video
@@ -22,17 +22,17 @@ public:
 
     ~VideoCgl()
     {
-/*        @autoreleasepool
+        @autoreleasepool
         {
             [view removeFromSuperview];
             [view release];
         }
- */
+
     }
 
     void video_init(int width, int height, const Settings::Video& settings)
     {
-       /* @autoreleasepool
+        @autoreleasepool
         {
             [view removeFromSuperview];
             [view release];
@@ -63,27 +63,27 @@ public:
             Video::video_init(width, height, settings);
 
             [view unlockFocus];
-        } */
+        }
     }
     
     void swap_buffers()
     {
-        /* @autoreleasepool
+         @autoreleasepool
          {
             if([view lockFocusIfCanDraw]) 
             {
                 [[view openGLContext] flushBuffer];
                 [view unlockFocus];
             }
-        } */
+        }
     }
 
     void show_cursor(bool show)
     {
-       /* if(show) [NSCursor unhide];
+       if(show) [NSCursor unhide];
         else     [NSCursor hide];
-        */
+        
     }
 };
-
+*/
 #endif
