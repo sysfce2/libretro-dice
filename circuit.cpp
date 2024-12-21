@@ -102,11 +102,11 @@ public:
 
 
 Circuit::Circuit(const Settings& s,
-                 //Input& i,
+                 Input& i,
                  Video& v,
                  const CircuitDesc* desc, const char* name)
     : settings(s), game_config(desc, name),
-//input(i),
+input(i),
 video(v),
 global_time(0), queue_size(0)
 {

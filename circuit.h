@@ -33,7 +33,7 @@ public:
 
     const Settings& settings;
     GameConfig game_config;
-    //Input& input;
+    Input& input;
     Video& video;
     Audio audio;
     RealTimeClock rtc;
@@ -42,7 +42,7 @@ public:
     QueueEntry queue[MAX_QUEUE_SIZE]; // TODO: Replace with vector?
 
 	Circuit(const Settings& s,
-           //Input& i,
+           Input& i,
            Video& v,
            const CircuitDesc* desc, const char* name);
     ~Circuit();

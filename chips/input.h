@@ -133,6 +133,8 @@ public:
     int getNumJoysticks();
     int getNumJoystickAxes(int joystick);
     bool getKeyPressed(const KeyAssignment& key_assignment);
+   
+   int32_t input_state[4];
 };
 
 #endif

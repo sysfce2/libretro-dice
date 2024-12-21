@@ -1,5 +1,5 @@
 # TODO (mittonk): Remove these?
-#DEBUG := 1
+DEBUG := 1
 LIBS :=
 CFLAGS :=
 # \

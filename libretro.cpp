@@ -52,15 +52,7 @@ void retro_init(void)
    }
    color = 0;
    
-#ifdef DEBUG
-   printf("KAM21 init_mem start\n");
-#endif
-
    dice.init_mem(pixel_buffer);
-#ifdef DEBUG
-   printf("KAM1 init_mem done\n");
-#endif
-
 }
 
 void retro_deinit(void)
@@ -126,7 +118,7 @@ void retro_set_environment(retro_environment_t cb)
       log_cb = fallback_log;
 
    static const struct retro_controller_description controllers[] = {
-      { "Nintendo DS", RETRO_DEVICE_SUBCLASS(RETRO_DEVICE_JOYPAD, 0) },
+      { "Arcade stick", RETRO_DEVICE_SUBCLASS(RETRO_DEVICE_ANALOG, 0) },
    };
 
    static const struct retro_controller_info ports[] = {
@@ -184,9 +176,7 @@ static void update_input(void)
       input_bitmask[(pad)] = 0;
       for (int i = 0; i <= RETRO_DEVICE_ID_JOYPAD_R3; i++) \
          input_bitmask[(pad)] |= input_state_cb((pad), RETRO_DEVICE_JOYPAD, 0, i) ? (1 << i) : 0 ;
-#ifdef DEBUG2
          printf("KAM2 input_bitmask %u %08X\n", pad, input_bitmask[(pad)]);
-#endif
    }
    dice.update_input(input_bitmask);
 }
@@ -243,7 +233,9 @@ bool retro_load_game(const struct retro_game_info *info)
       { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_UP,    "Up" },
       { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_DOWN,  "Down" },
       { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_RIGHT, "Right" },
-      // TODO (kmitton): a, b, select, start?
+      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_SELECT, "Coin" },
+      { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_START, "Start" },
+      // TODO (kmitton): a, b, ...
       { 0 },
    };
 
@@ -265,9 +257,6 @@ bool retro_load_game(const struct retro_game_info *info)
    // TODO (mittonk): Load ROMs.
 
    (void)info;
-#ifdef DEBUG
-   printf("KAM51 retro_load_game end\n");
-#endif
 
    return true;
 }

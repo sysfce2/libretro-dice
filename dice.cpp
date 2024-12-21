@@ -21,13 +21,11 @@ namespace dice_libretro {
 
 void DICE::init_mem(uint16_t *pixel_buffer)
 {
-        /* viewport = new Viewport();
-        layout.append(*viewport, {~0, ~0});
-        //TODO (mittonk): append(layout);
-
+        /*
         input = new Input();
         video = Video::createDefault(layout, viewport);
          */
+        input = new Input();
         video = new Video();
         video->pixel_buf = pixel_buffer;
    
@@ -37,7 +35,7 @@ void DICE::init_mem(uint16_t *pixel_buffer)
         GameDesc& g = game_list[game_idx];
         
         circuit = new Circuit(settings,
-                              //*input,
+                              *input,
                               *video,
                               g.desc, g.command_line);
 }
@@ -61,8 +59,15 @@ void DICE::render_frame(void)
 {
 }
 
-void DICE::update_input(int32_t *input_state)
+void DICE::update_input(int32_t input_state[])
 {
+   if (circuit)
+   {
+      for (unsigned i=0; i<4; i++)
+      {
+         circuit->input.input_state[i] = input_state[i];
+      }
+   }
 }
 
 void DICE::reset(void)
