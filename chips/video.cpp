@@ -315,7 +315,7 @@ CUSTOM_LOGIC( Video::video )
 }
 
 void Video::swap_buffers() {
-   unsigned VIDEO_PIXELS = 640*240;
+   unsigned VIDEO_PIXELS = 640*246;
    for (unsigned i = 0; i<VIDEO_PIXELS; i++) {
       pixel_buf[i] = 0x2222;
    }

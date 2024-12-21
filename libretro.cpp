@@ -97,8 +97,9 @@ static retro_input_state_t input_state_cb;
 
 void retro_get_system_av_info(struct retro_system_av_info *info)
 {
-   // TV would have been 4:3, stretching the 16x16 game board.
-   float aspect                = 4.0f / 3.0f;
+   //float aspect                = 4.0f / 3.0f;
+   // Magic 2.0f just looks about right.
+   float aspect = 640.0f / 246.0f / 2.0f;
    float sampling_rate         = 30000.0f;
 
    info->timing = (struct retro_system_timing) {
