@@ -19,7 +19,7 @@ using phoenix::Viewport;
 
 namespace dice_libretro {
 
-void DICE::init_mem(void)
+void DICE::init_mem(uint16_t *pixel_buffer)
 {
         /* viewport = new Viewport();
         layout.append(*viewport, {~0, ~0});
@@ -29,6 +29,7 @@ void DICE::init_mem(void)
         video = Video::createDefault(layout, viewport);
          */
    video = new Video();
+   video->pixel_buf = pixel_buffer;
         int game_idx = 0;  // Pong
         GameDesc& g = game_list[game_idx];
         

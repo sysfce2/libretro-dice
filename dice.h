@@ -42,7 +42,7 @@ class DICE
     //Viewport* viewport;
 
    public:
-      void init_mem(void);
+      void init_mem(uint16_t *pixel_buffer);
       void update_input(int32_t *input_state);
       void run(void);
       void render_frame(void);

@@ -194,6 +194,13 @@ void Video::draw(Chip* chip)
     {
         float* c = &color[(chip->inputs & VIDEO_MASK) * 3];
 
+       unsigned VIDEO_WIDTH = 640;
+       uint64_t MAX_SCANLINE_TIME = 52214160;
+       uint64_t left = float(start_time) / float(MAX_SCANLINE_TIME) * float(VIDEO_WIDTH);
+       uint64_t right = float(end_time) / float(MAX_SCANLINE_TIME) * float(VIDEO_WIDTH);
+       for (uint64_t i = left; i <= right; i++) {
+          pixel_buf[i+v_pos*VIDEO_WIDTH] = chip->inputs * 1000;
+       }
         /*glBegin(GL_QUADS);
             glColor3fv(c);
 

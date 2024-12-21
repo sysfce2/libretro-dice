@@ -28,6 +28,9 @@ public:
     const VideoDesc* desc;
     uint32_t frame_count;
     enum VideoPins { HBLANK_PIN = 9, VBLANK_PIN = 10 };
+   
+   uint16_t *pixel_buf;
+
     
    Video();
      ~Video() { }

@@ -41,6 +41,7 @@ static unsigned color;  // TODO (kmitton)
 void retro_init(void)
 {
    frame_buf = (uint8_t*)malloc(VIDEO_PIXELS * VIDEO_BYTES_PER_PIXEL);
+   uint16_t *pixel_buffer = reinterpret_cast<uint16_t *>(frame_buf);
    const char *dir = NULL;
    if (environ_cb(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY, &dir) && dir)
    {
@@ -52,7 +53,7 @@ void retro_init(void)
    printf("KAM21 init_mem start\n");
 #endif
 
-   dice.init_mem();
+   dice.init_mem(pixel_buffer);
 #ifdef DEBUG
    printf("KAM1 init_mem done\n");
 #endif
@@ -199,6 +200,8 @@ static void audio_set_state(bool enable)
 {
    (void)enable;
 }
+
+typedef uint16_t pixel_t;
 
 void retro_run(void)
 {
