@@ -6,7 +6,7 @@
 #include "circuit.h"
 
 #define DEBUG
-//KAM #undef DEBUG
+#undef DEBUG
 
 #ifdef DEBUG
 //#define debug_printf(args...) printf(args)
@@ -617,7 +617,6 @@ void Chip::update_output()
     debug_printf("update output: %p t:%lld o:%d\n", this, circuit->global_time, output ^ 1);
     
     uint64_t global_time = circuit->global_time;
-   debug_printf("KAM3: %llu", global_time);
     if(state == ASLEEP)
     {
         state = ACTIVE;

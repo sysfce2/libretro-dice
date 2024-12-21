@@ -30,6 +30,7 @@ public:
     enum VideoPins { HBLANK_PIN = 9, VBLANK_PIN = 10 };
    
    uint16_t *pixel_buf;
+   bool request_video_callback = false;
 
     
    Video();

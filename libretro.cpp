@@ -214,13 +214,18 @@ void retro_run(void)
 #ifdef DEBUG2
    printf("KAM0 retro_run\n");
 #endif
-   video_cb(frame_buf, VIDEO_WIDTH, VIDEO_HEIGHT, VIDEO_PITCH);
 
-   // We wait for a rising gameclk, so start low.
    dice.run();
-   dice.render_frame();
+   //dice.render_frame();
 
+   // Show screen.
    video_cb(frame_buf, VIDEO_WIDTH, VIDEO_HEIGHT, VIDEO_PITCH);
+   
+   // Wipe screen.
+   uint16_t *pixel_buffer = reinterpret_cast<uint16_t *>(frame_buf);
+   for (unsigned i = 0; i<VIDEO_PIXELS; i++) {
+      pixel_buffer[i] = 0x2222;
+   }
 
    bool updated = false;
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE_UPDATE, &updated) && updated)

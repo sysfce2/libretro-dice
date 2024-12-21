@@ -28,8 +28,9 @@ void DICE::init_mem(uint16_t *pixel_buffer)
         input = new Input();
         video = Video::createDefault(layout, viewport);
          */
-   video = new Video();
-   video->pixel_buf = pixel_buffer;
+        video = new Video();
+        video->pixel_buf = pixel_buffer;
+   
         int game_idx = 0;  // Pong
         GameDesc& g = game_list[game_idx];
         
@@ -41,9 +42,13 @@ void DICE::init_mem(uint16_t *pixel_buffer)
 
 void DICE::run(void)
 {
+    // Run until the video frame is finished.
     if(circuit)
     {
-       circuit->run(2.5e-3 / Circuit::timescale); // Run 2.5 ms
+       while (!circuit->video.request_video_callback) {
+          circuit->run(2.5e-3 / Circuit::timescale); // Run 2.5 ms
+       }
+       circuit->video.request_video_callback = false;
     }
 }
 

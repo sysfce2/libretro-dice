@@ -315,10 +315,7 @@ CUSTOM_LOGIC( Video::video )
 }
 
 void Video::swap_buffers() {
-   unsigned VIDEO_PIXELS = 640*246;
-   for (unsigned i = 0; i<VIDEO_PIXELS; i++) {
-      pixel_buf[i] = 0x2222;
-   }
+   request_video_callback = true;
 }
 
 #ifdef _WIN32
