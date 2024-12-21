@@ -319,7 +319,10 @@ CUSTOM_LOGIC( Video::video )
 }
 
 void Video::swap_buffers() {
-   // TODO (mittonk)
+   unsigned VIDEO_PIXELS = 640*240;
+   for (unsigned i = 0; i<VIDEO_PIXELS; i++) {
+      pixel_buf[i] = 0x2222;
+   }
 }
 
 #ifdef _WIN32
