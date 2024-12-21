@@ -3,7 +3,7 @@
 
 #include "../chip_desc.h"
 #include "555mono.h"
-#include <SDL_joystick.h>
+//#include <SDL_joystick.h>
 
 struct KeyAssignment; // in settings.h
 
@@ -119,7 +119,7 @@ class Input
 {
 private:
     std::vector<int> mouse_rel_x, mouse_rel_y;
-    std::vector<SDL_Joystick*> joysticks;
+    //std::vector<SDL_Joystick*> joysticks;
 public:
     Input();
     ~Input();

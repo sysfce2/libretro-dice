@@ -943,19 +943,19 @@ bool Input::getKeyboardState(unsigned scancode)
 
 bool Input::getJoystickButton(unsigned joystick, unsigned button)
 {
-    if(joystick >= joysticks.size()) return 0;
+    //if(joystick >= joysticks.size()) return 0;
     //return SDL_JoystickGetButton(joysticks[joystick], button);
 }
 
 int16_t Input::getJoystickAxis(unsigned joystick, unsigned axis)
 {
-    if(joystick >= joysticks.size()) return 0;
+    //if(joystick >= joysticks.size()) return 0;
     //return SDL_JoystickGetAxis(joysticks[joystick], axis);
 }
 
 int Input::getNumJoysticks()
 {
-    return joysticks.size();
+    //return joysticks.size();
 }
 
 int Input::getNumJoystickAxes(int joystick)

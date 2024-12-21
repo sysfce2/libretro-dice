@@ -1,9 +1,10 @@
 # TODO (mittonk): Remove these?
 DEBUG := 1
 LIBS :=
-CFLAGS :=  \
- -I/usr/local/share/retroarch-apple-deps/sdl/include \
-  -I/usr/local/share/retroarch-apple-deps/sdl/macOS/include
+CFLAGS :=
+# \
+# -I/usr/local/share/retroarch-apple-deps/sdl/include \
+#  -I/usr/local/share/retroarch-apple-deps/sdl/macOS/include
   
 CPPFLAGS = $(CFLAGS) -std=c++11 -Wno-mismatched-tags -Wno-reorder-ctor -Wno-constexpr-not-const -Wno-unsupported-friend -Wno-return-type -Wno-unused-variable
 
