@@ -33,7 +33,7 @@ static CUSTOM_LOGIC( audio_timer )
     chip->current_output_event = chip->output_events.begin();
     chip->end_time = ~0ull;
 
-    chip->pending_event = chip->circuit->queue_push(chip, chip->delay[0]);
+    //KAM chip->pending_event = chip->circuit->queue_push(chip, chip->delay[0]);
 }
 
 CUSTOM_LOGIC( Audio::audio_input )

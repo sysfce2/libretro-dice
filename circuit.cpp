@@ -465,7 +465,11 @@ void Circuit::run(int64_t run_time)
 		}
 
 		if(global_time == queue[1].chip->pending_event)
-		{	
+		{
+#ifdef DEBUG
+   printf("KAM62 Updating chip %u\n", queue[1].chip->type);
+#endif
+
 			queue[1].chip->update_output();
 		}
         queue_pop();
