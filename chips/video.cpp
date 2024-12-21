@@ -190,16 +190,19 @@ void Video::draw(Chip* chip)
     uint64_t start_time = current_time - initial_time;
     uint64_t end_time = chip->circuit->global_time - initial_time;
 
-    if((chip->inputs & VIDEO_MASK) || desc->scan_mode == INTERLACED) // Falling edge
+   unsigned VIDEO_WIDTH = 640;
+   uint64_t MAX_SCANLINE_TIME = 52214160;
+   float ratio = float(VIDEO_WIDTH) / float(MAX_SCANLINE_TIME);
+   uint16_t c = (chip->inputs & VIDEO_MASK) * 1000;
+   
+   if((chip->inputs & VIDEO_MASK) || desc->scan_mode == INTERLACED) // Falling edge
     {
-        float* c = &color[(chip->inputs & VIDEO_MASK) * 3];
+        //float* c = &color[(chip->inputs & VIDEO_MASK) * 3];
 
-       unsigned VIDEO_WIDTH = 640;
-       uint64_t MAX_SCANLINE_TIME = 52214160;
-       uint64_t left = float(start_time) / float(MAX_SCANLINE_TIME) * float(VIDEO_WIDTH);
-       uint64_t right = float(end_time) / float(MAX_SCANLINE_TIME) * float(VIDEO_WIDTH);
+       uint64_t left = float(start_time) * ratio;
+       uint64_t right = float(end_time) * ratio;
        for (uint64_t i = left; i <= right; i++) {
-          pixel_buf[i+v_pos*VIDEO_WIDTH] = chip->inputs * 1000;
+          pixel_buf[i+v_pos*VIDEO_WIDTH] = c;
        }
         /*glBegin(GL_QUADS);
             glColor3fv(c);

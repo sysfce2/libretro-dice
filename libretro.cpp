@@ -42,6 +42,9 @@ void retro_init(void)
 {
    frame_buf = (uint8_t*)malloc(VIDEO_PIXELS * VIDEO_BYTES_PER_PIXEL);
    uint16_t *pixel_buffer = reinterpret_cast<uint16_t *>(frame_buf);
+   for (unsigned i = 0; i<VIDEO_PIXELS; i++) {
+      pixel_buffer[i] = 0;
+   }
    const char *dir = NULL;
    if (environ_cb(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY, &dir) && dir)
    {
