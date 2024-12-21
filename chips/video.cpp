@@ -190,10 +190,6 @@ void Video::draw(Chip* chip)
     uint64_t start_time = current_time - initial_time;
     uint64_t end_time = chip->circuit->global_time - initial_time;
 
-#ifdef DEBUG
-   printf("KAM61 draw\n");
-#endif
-
    unsigned VIDEO_WIDTH = 640;
    uint64_t MAX_SCANLINE_TIME = 52214160;
    float ratio = float(VIDEO_WIDTH) / float(MAX_SCANLINE_TIME);
