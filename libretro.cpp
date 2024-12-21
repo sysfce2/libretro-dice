@@ -89,9 +89,7 @@ static retro_input_state_t input_state_cb;
 
 void retro_get_system_av_info(struct retro_system_av_info *info)
 {
-   //float aspect                = 4.0f / 3.0f;
-   // Magic 2.0f just looks about right.
-   float aspect = 640.0f / 246.0f / 2.0f;
+   float aspect                = 4.0f / 3.0f;
    float sampling_rate         = 30000.0f;
 
    info->timing = (struct retro_system_timing) {
@@ -171,14 +169,25 @@ void retro_reset(void)
 static void update_input(void)
 {
    int32_t input_bitmask[4];
+   int32_t input_analog_left_x[4];
+   int32_t input_analog_left_y[4];
+
    for (unsigned pad = 0; pad < NUM_CONTROLLERS; pad++)
    {
       input_bitmask[(pad)] = 0;
       for (int i = 0; i <= RETRO_DEVICE_ID_JOYPAD_R3; i++) \
          input_bitmask[(pad)] |= input_state_cb((pad), RETRO_DEVICE_JOYPAD, 0, i) ? (1 << i) : 0 ;
-         printf("KAM2 input_bitmask %u %08X\n", pad, input_bitmask[(pad)]);
+      
+      input_analog_left_x[pad] = input_state_cb( (pad), RETRO_DEVICE_ANALOG, RETRO_DEVICE_INDEX_ANALOG_LEFT,
+                                         RETRO_DEVICE_ID_ANALOG_X);
+      
+      input_analog_left_y[pad] = input_state_cb( (pad), RETRO_DEVICE_ANALOG, RETRO_DEVICE_INDEX_ANALOG_LEFT,
+                                         RETRO_DEVICE_ID_ANALOG_Y);
+      
+      printf("KAM2 input_bitmask %u %08X %08X %08X\n", pad, input_bitmask[(pad)], input_analog_left_x[(pad)], input_analog_left_y[(pad)]);
+
    }
-   dice.update_input(input_bitmask);
+   dice.update_input(input_bitmask, input_analog_left_x, input_analog_left_y);
 }
 
 static void check_variables(void)
@@ -235,6 +244,9 @@ bool retro_load_game(const struct retro_game_info *info)
       { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_RIGHT, "Right" },
       { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_SELECT, "Coin" },
       { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_START, "Start" },
+      
+      { 0, RETRO_DEVICE_ANALOG, RETRO_DEVICE_INDEX_ANALOG_LEFT, RETRO_DEVICE_ID_ANALOG_X, "Left Analog X" },
+      { 0, RETRO_DEVICE_ANALOG, RETRO_DEVICE_INDEX_ANALOG_LEFT, RETRO_DEVICE_ID_ANALOG_Y, "Left Analog Y" },
       // TODO (kmitton): a, b, ...
       { 0 },
    };

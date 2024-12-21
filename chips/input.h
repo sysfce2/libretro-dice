@@ -135,6 +135,9 @@ public:
     bool getKeyPressed(const KeyAssignment& key_assignment);
    
    int32_t input_state[4];
+   int32_t input_analog_left_x[4];
+   int32_t input_analog_left_y[4];
+
 };
 
 #endif

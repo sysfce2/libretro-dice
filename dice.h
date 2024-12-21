@@ -44,7 +44,7 @@ class DICE
 
    public:
       void init_mem(uint16_t *pixel_buffer);
-      void update_input(int32_t *input_state);
+      void update_input(int32_t *input_state, int32_t *input_analog_left_x, int32_t *input_analog_left_y);
       void run(void);
       void render_frame(void);
       void reset(void);

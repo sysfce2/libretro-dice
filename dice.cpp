@@ -59,13 +59,15 @@ void DICE::render_frame(void)
 {
 }
 
-void DICE::update_input(int32_t input_state[])
+void DICE::update_input(int32_t input_state[], int32_t input_analog_left_x[], int32_t input_analog_left_y[])
 {
    if (circuit)
    {
       for (unsigned i=0; i<4; i++)
       {
          circuit->input.input_state[i] = input_state[i];
+         circuit->input.input_analog_left_x[i] = input_analog_left_x[i];
+         circuit->input.input_analog_left_y[i] = input_analog_left_y[i];
       }
    }
 }
