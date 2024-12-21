@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include <cstdio>
+#include <algorithm>
 
 #define DEBUG
 //KAM #undef DEBUG

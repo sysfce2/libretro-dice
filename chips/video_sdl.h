@@ -17,7 +17,7 @@ public:
 
     void video_init(int width, int height, const Settings::Video& settings)
     {
-        static char env[256];
+        /*static char env[256];
         sprintf(env, "SDL_WINDOWID=%lld", (uint64_t)handle);
         putenv(env);
 
@@ -26,6 +26,7 @@ public:
 	        printf("Unable to init SDL Video:\n%s\n", SDL_GetError());
 		    exit(1);
 	    }
+       */
 
         //Set OpenGL Parameters
 		/* SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
@@ -47,7 +48,7 @@ public:
 			exit(1);
 		} */
 
-        Video::video_init(width, height, settings);
+        //Video::video_init(width, height, settings);
     }
     
     void swap_buffers()

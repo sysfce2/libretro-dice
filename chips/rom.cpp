@@ -3,6 +3,7 @@
 #include <phoenix.hpp>
 */
 #include "rom.h"
+#include <cstdint>
 /*
 using namespace nall;
 using namespace phoenix;
