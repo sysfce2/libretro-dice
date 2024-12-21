@@ -313,13 +313,14 @@ CUSTOM_LOGIC( digital_input )
 }
 
 
-CUSTOM_LOGIC( kam_dummy_digital_input )
+CUSTOM_LOGIC( digital_input_coin1 )
 {
     Circuit* circuit = chip->circuit;
     //const KeyAssignment& key_assignment = (circuit->settings.*c)().*k;
-
+   int CONTROLLER1 = 0;
+   int SELECT = 0x0004;
     //int new_out = circuit->input.getKeyPressed(key_assignment);
-   int new_out = circuit->input.input_state[0] & 0x0004;
+   int new_out = circuit->input.input_state[CONTROLLER1] & SELECT;
    //int new_out = 0;
     new_out ^= 1; // Joysticks, buttons are active LOW
 
@@ -347,7 +348,7 @@ CHIP_DESC( COIN_INPUT ) =
         INPUT_PINS( i7 )
         OUTPUT_PIN( 1 ), */
    
-   ChipDesc(&kam_dummy_digital_input)
+   ChipDesc(&digital_input_coin1)
    INPUT_PINS( i7 )
    OUTPUT_PIN( 1 ),
 /*
