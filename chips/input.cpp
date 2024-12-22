@@ -486,20 +486,20 @@ CHIP_DESC( JOYSTICK2_INPUT ) =
 
 CHIP_DESC( BUTTONS1_INPUT ) = 
 {
-	/* CUSTOM_CHIP_START(&clock)
+	CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i7 ),
 
     // Normally Open (Active Low) Outputs
-    ChipDesc(&digital_input<Settings::Input::Button, &Settings::buttons<0>, &Settings::Input::Button::button1>)
+    ChipDesc(&digital_input<0, RETRO_DEVICE_ID_JOYPAD_A>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 1 ),
 
-	ChipDesc(&digital_input<Settings::Input::Button, &Settings::buttons<0>, &Settings::Input::Button::button2>)
+	ChipDesc(&digital_input<0, RETRO_DEVICE_ID_JOYPAD_B>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 2 ),
 
-	ChipDesc(&digital_input<Settings::Input::Button, &Settings::buttons<0>, &Settings::Input::Button::button3>)
+	ChipDesc(&digital_input<0, RETRO_DEVICE_ID_JOYPAD_X>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 3 ),
 
@@ -508,26 +508,26 @@ CHIP_DESC( BUTTONS1_INPUT ) =
     CHIP_START(button_inv<2>) INPUT_PINS( 2 ) OUTPUT_PIN( i2 ),
     CHIP_START(button_inv<3>) INPUT_PINS( 3 ) OUTPUT_PIN( i3 ),
 
-	CHIP_DESC_END */
+	CHIP_DESC_END
 };
 
 
 CHIP_DESC( BUTTONS2_INPUT ) = 
 {
-	/* CUSTOM_CHIP_START(&clock)
+	CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i7 ),
 
     // Normally Open (Active Low) Outputs
-    ChipDesc(&digital_input<Settings::Input::Button, &Settings::buttons<1>, &Settings::Input::Button::button1>)
+    ChipDesc(&digital_input<1, RETRO_DEVICE_ID_JOYPAD_A>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 1 ),
 
-	ChipDesc(&digital_input<Settings::Input::Button, &Settings::buttons<1>, &Settings::Input::Button::button2>)
+	ChipDesc(&digital_input<1, RETRO_DEVICE_ID_JOYPAD_B>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 2 ),
 
-	ChipDesc(&digital_input<Settings::Input::Button, &Settings::buttons<1>, &Settings::Input::Button::button3>)
+	ChipDesc(&digital_input<1, RETRO_DEVICE_ID_JOYPAD_X>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 3 ),
 
@@ -536,7 +536,7 @@ CHIP_DESC( BUTTONS2_INPUT ) =
     CHIP_START(button_inv<2>) INPUT_PINS( 2 ) OUTPUT_PIN( i2 ),
     CHIP_START(button_inv<3>) INPUT_PINS( 3 ) OUTPUT_PIN( i3 ),
 
-	CHIP_DESC_END */
+	CHIP_DESC_END 
 };
 
 CHIP_DESC( BUTTONS3_INPUT ) = 
