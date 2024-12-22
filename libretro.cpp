@@ -40,7 +40,8 @@ static unsigned color;  // TODO (kmitton)
 
 void retro_init(void)
 {
-   frame_buf = (uint8_t*)malloc(VIDEO_PIXELS * VIDEO_BYTES_PER_PIXEL);
+   int safety_factor = 2;
+   frame_buf = (uint8_t*)malloc(VIDEO_PIXELS * VIDEO_BYTES_PER_PIXEL * safety_factor);
    uint16_t *pixel_buffer = reinterpret_cast<uint16_t *>(frame_buf);
    for (unsigned i = 0; i<VIDEO_PIXELS; i++) {
       pixel_buffer[i] = 0x2222;
@@ -168,9 +169,9 @@ void retro_reset(void)
 
 static void update_input(void)
 {
-   int32_t input_bitmask[4];
-   int32_t input_analog_left_x[4];
-   int32_t input_analog_left_y[4];
+   int32_t input_bitmask[NUM_CONTROLLERS];
+   int32_t input_analog_left_x[NUM_CONTROLLERS];
+   int32_t input_analog_left_y[NUM_CONTROLLERS];
 
    for (unsigned pad = 0; pad < NUM_CONTROLLERS; pad++)
    {

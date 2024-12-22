@@ -267,8 +267,12 @@ CUSTOM_LOGIC( Video::video )
         video->frame_count++;
         
         // Make sure real time is caught up
-        if(chip->circuit->settings.throttle)
+       
+       // if(chip->circuit->settings.throttle)
+       if (true)
             while(chip->circuit->rtc.get_usecs() < uint64_t(global_time * 1000000.0 * Circuit::timescale));
+        
+       
     }
     // HBLANK rising edge, go to next line
     else if(mask == HBLANK_MASK && !(chip->inputs & HBLANK_MASK)) 
