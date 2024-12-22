@@ -236,7 +236,7 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
             default: break;
         }
     } */
-
+    /*
     if(settings.use_joystick && settings.joystick_mode == Settings::Input::JOYSTICK_RELATIVE)
     {
         double dt = (INPUT_POLL_RATE / Circuit::timescale) / 1000000000.0;
@@ -250,6 +250,7 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
         else if(val < -ANALOG_THRESHOLD)
             delta += (val + ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
     }
+     
 
     double prev_val = desc->current_val;
     
@@ -265,7 +266,7 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
         if(desc->current_val < desc->max_val)      desc->current_val = desc->max_val;
         else if(desc->current_val > desc->min_val) desc->current_val = desc->min_val;
     }
-     
+     */
    
     // Absolute Joystick - Overrides deltas
     //if(settings.use_joystick && settings.joystick_mode == Settings::Input::JOYSTICK_ABSOLUTE)
