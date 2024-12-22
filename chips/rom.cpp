@@ -20,7 +20,7 @@ using std::vector;
 
 static string filename;
 static string romname;
-static string libretro_zip_filename = "/Users/mittonk/play/lr/libretro-super/libretro-dice/antiaircraft.zip"; // KAM
+static string libretro_zip_filename = "/Users/mittonk/emu/ttl_arcade/attack.zip"; // KAM
 
 //static unzip zip_file;
 static vector<uint8_t> rom_data;
@@ -110,8 +110,8 @@ uint8_t RomDesc::get_data(const RomDesc* rom, unsigned offset)
       //if (!rom_data)
       // return 0;
       rom_data = std::vector<uint8_t>(&rom_data_raw[0], &rom_data_raw[rom_data_raw_size]);
-      filename = rom->file_name.c_str();
-      romname = rom->rom_name.c_str();
+      filename = rom->file_name;
+      romname = rom->rom_name;
    }
    
     if(offset < rom_data.size()) return rom_data[offset];
