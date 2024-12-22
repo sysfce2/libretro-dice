@@ -376,19 +376,20 @@ CHIP_DESC( COIN_INPUT ) =
    ChipDesc(&digital_input<0, RETRO_DEVICE_ID_JOYPAD_SELECT>)
    INPUT_PINS( i7 )
    OUTPUT_PIN( 1 ),
-/*
-    ChipDesc(&digital_input<Settings::Input::CoinStart, &Settings::coinStart, &Settings::Input::CoinStart::coin2>)
+
+    ChipDesc(&digital_input<1, RETRO_DEVICE_ID_JOYPAD_SELECT>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 2 ),
 
-    ChipDesc(&digital_input<Settings::Input::CoinStart, &Settings::coinStart, &Settings::Input::CoinStart::coin3>)
+    ChipDesc(&digital_input<2, RETRO_DEVICE_ID_JOYPAD_SELECT>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 3 ),
 
-    ChipDesc(&digital_input<Settings::Input::CoinStart, &Settings::coinStart, &Settings::Input::CoinStart::coin4>)
+    ChipDesc(&digital_input<3, RETRO_DEVICE_ID_JOYPAD_SELECT>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 4 ),
 
+   /*
     ChipDesc(&digital_input<Settings::Input::CoinStart, &Settings::coinStart, &Settings::Input::CoinStart::dollar>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 5 ),
@@ -420,11 +421,11 @@ CHIP_DESC( START_INPUT ) =
     ChipDesc(&digital_input<0, RETRO_DEVICE_ID_JOYPAD_START>)
     INPUT_PINS( i7 )
     OUTPUT_PIN( 1 ),
-/*
-    ChipDesc(&digital_input<Settings::Input::CoinStart, &Settings::coinStart, &Settings::Input::CoinStart::start2>)
+
+    ChipDesc(&digital_input<1, RETRO_DEVICE_ID_JOYPAD_START>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 2 ),
-*/
+
     // Normally Closed (Active High) Outputs
     CHIP_START(button_inv<1>) INPUT_PINS( 1 ) OUTPUT_PIN( i1 ),
     CHIP_START(button_inv<2>) INPUT_PINS( 2 ) OUTPUT_PIN( i2 ),
@@ -434,54 +435,54 @@ CHIP_DESC( START_INPUT ) =
 
 CHIP_DESC( JOYSTICK1_INPUT ) = 
 {
-	/*CUSTOM_CHIP_START(&clock)
-        OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
-        OUTPUT_PIN( i7 ),
-
-    // Normally Open (Active Low) Outputs
-    ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::joystick<0>, &Settings::Input::Joystick::up>)
-        INPUT_PINS( i7 )
-        OUTPUT_PIN( Joystick::UP ),
-
-	ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::joystick<0>, &Settings::Input::Joystick::down>)
-        INPUT_PINS( i7 )
-        OUTPUT_PIN( Joystick::DOWN ),
-
-	ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::joystick<0>, &Settings::Input::Joystick::left>)
-        INPUT_PINS( i7 )
-        OUTPUT_PIN( Joystick::LEFT ),
-
-	ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::joystick<0>, &Settings::Input::Joystick::right>)
-        INPUT_PINS( i7 )
-        OUTPUT_PIN( Joystick::RIGHT ),
-
-	CHIP_DESC_END */
+   CUSTOM_CHIP_START(&clock)
+   OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
+   OUTPUT_PIN( i7 ),
+   
+   // Normally Open (Active Low) Outputs
+   ChipDesc(&digital_input<0, RETRO_DEVICE_ID_JOYPAD_UP>)
+   INPUT_PINS( i7 )
+   OUTPUT_PIN( Joystick::UP ),
+   
+   ChipDesc(&digital_input<0, RETRO_DEVICE_ID_JOYPAD_DOWN>)
+   INPUT_PINS( i7 )
+   OUTPUT_PIN( Joystick::DOWN ),
+   
+   ChipDesc(&digital_input<0, RETRO_DEVICE_ID_JOYPAD_LEFT>)
+   INPUT_PINS( i7 )
+   OUTPUT_PIN( Joystick::LEFT ),
+   
+   ChipDesc(&digital_input<0, RETRO_DEVICE_ID_JOYPAD_RIGHT>)
+   INPUT_PINS( i7 )
+   OUTPUT_PIN( Joystick::RIGHT ),
+   
+   CHIP_DESC_END
 };
 
 CHIP_DESC( JOYSTICK2_INPUT ) = 
 {
-	/* CUSTOM_CHIP_START(&clock)
+	CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i7 ),
 
     // Normally Open (Active Low) Outputs
-    ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::joystick<1>, &Settings::Input::Joystick::up>)
+    ChipDesc(&digital_input<1, RETRO_DEVICE_ID_JOYPAD_UP>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( Joystick::UP ),
 
-	ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::joystick<1>, &Settings::Input::Joystick::down>)
+	ChipDesc(&digital_input<1, RETRO_DEVICE_ID_JOYPAD_DOWN>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( Joystick::DOWN ),
 
-	ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::joystick<1>, &Settings::Input::Joystick::left>)
+	ChipDesc(&digital_input<1, RETRO_DEVICE_ID_JOYPAD_LEFT>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( Joystick::LEFT ),
 
-	ChipDesc(&digital_input<Settings::Input::Joystick, &Settings::joystick<1>, &Settings::Input::Joystick::right>)
+	ChipDesc(&digital_input<1, RETRO_DEVICE_ID_JOYPAD_RIGHT>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( Joystick::RIGHT ),
 
-	CHIP_DESC_END */
+	CHIP_DESC_END
 };
 
 CHIP_DESC( BUTTONS1_INPUT ) = 
