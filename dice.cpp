@@ -29,7 +29,7 @@ void DICE::init_mem(uint16_t *pixel_buffer)
         video = new Video();
         video->pixel_buf = pixel_buffer;
    
-        //int game_idx = 0;  // Pong
+        //int game_idx = 0;  // Pong
         int game_idx = 3;
    
         GameDesc& g = game_list[game_idx];
@@ -63,7 +63,7 @@ void DICE::update_input(int32_t input_state[], int32_t input_analog_left_x[], in
 {
    if (circuit)
    {
-      for (unsigned i=0; i<4; i++)
+      for (unsigned i=0; i<NUM_CONTROLLERS; i++)
       {
          circuit->input.input_state[i] = input_state[i];
          circuit->input.input_analog_left_x[i] = input_analog_left_x[i];

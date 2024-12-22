@@ -3,7 +3,11 @@
 
 #include "../chip_desc.h"
 #include "555mono.h"
+
+//#include "../dice.h"
+#define NUM_CONTROLLERS 6
 //#include <SDL_joystick.h>
+
 
 struct KeyAssignment; // in settings.h
 
@@ -134,9 +138,9 @@ public:
     int getNumJoystickAxes(int joystick);
     bool getKeyPressed(const KeyAssignment& key_assignment);
    
-   int32_t input_state[4];
-   int32_t input_analog_left_x[4];
-   int32_t input_analog_left_y[4];
+   int32_t input_state[NUM_CONTROLLERS];
+   int32_t input_analog_left_x[NUM_CONTROLLERS];
+   int32_t input_analog_left_y[NUM_CONTROLLERS];
 
 };
 

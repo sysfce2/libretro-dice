@@ -20,7 +20,7 @@ namespace dice_libretro {
 #define VIDEO_PIXELS VIDEO_WIDTH * VIDEO_HEIGHT
 #define VIDEO_PITCH VIDEO_WIDTH * VIDEO_BYTES_PER_PIXEL
 
-#define NUM_CONTROLLERS 4  // TODO (mittonk)
+#define NUM_CONTROLLERS 6
 
 // RetroArch mask_id is a bit position, so do some shifting.
 inline bool input_mask(int32_t input_bitmask, unsigned mask_id)
