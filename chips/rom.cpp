@@ -20,10 +20,12 @@ using std::vector;
 
 static string filename;
 static string romname;
-static string libretro_zip_filename = "/Users/mittonk/emu/ttl_arcade/attack.zip"; // KAM
+static string libretro_zip_filename = "/Users/mittonk/emu/ttl_arcade/cleansweep.zip"; // KAM
 
 //static unzip zip_file;
 static vector<uint8_t> rom_data;
+static char temp_rom_name[1000];
+
 //static bool error_shown = false;
 
 
@@ -105,13 +107,14 @@ uint8_t RomDesc::get_data(const RomDesc* rom, unsigned offset)
       uint8_t *rom_data_raw;
       uint32_t rom_data_raw_size = 0;
       
-      rom_data_raw = loadFromZipByName((char*)libretro_zip_filename.c_str(), (char*)rom->rom_name.c_str(), &rom_data_raw_size);
-      // TODO: Copy rom_data_raw into rom_data
+      size_t bytes_copied = rom->rom_name.copy(temp_rom_name, rom->rom_name.length(), 0);
+      
+      rom_data_raw = loadFromZipByName((char*)libretro_zip_filename.c_str(), temp_rom_name, &rom_data_raw_size);
       //if (!rom_data)
       // return 0;
       rom_data = std::vector<uint8_t>(&rom_data_raw[0], &rom_data_raw[rom_data_raw_size]);
-      filename = rom->file_name;
-      romname = rom->rom_name;
+      filename = rom->file_name.c_str();
+      romname = rom->rom_name.c_str();
    }
    
     if(offset < rom_data.size()) return rom_data[offset];

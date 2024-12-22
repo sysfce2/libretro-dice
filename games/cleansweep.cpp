@@ -45,9 +45,15 @@ static VcdLogDesc vcd_log_desc
 static CleanSweepPaddleDesc cleansweep_pad_desc(K_OHM(2.5), U_FARAD(0.033));
 static Paddle1HorizontalDesc pad1_desc(K_OHM(1.0), K_OHM(4.0), &cleansweep_pad_desc);
 
-static RomDesc c6_desc("cleansweep", "clean.6c", 0xBE02B5F5);  //paddle shape  
+/*
+ static RomDesc c6_desc("cleansweep", "clean.6c", 0xBE02B5F5);  //paddle shape
 static RomDesc d7_desc("cleansweep", "clean.d7", 0xBE40B153);  //ball control
 static RomDesc k3_desc("cleansweep", "clean.k3", 0x515A34BA);  //number images
+*/
+
+const static RomDesc cleansweep_c6_desc("cleansweep", "501075.6c", 0xBE02B5F5);  //paddle shape
+const static RomDesc cleansweep_d7_desc("cleansweep", "501076.d7", 0xBE40B153);  //ball control
+const static RomDesc cleansweep_k3_desc("cleansweep", "501074.k3", 0x515A34BA);  //number images
 
 static Ram82S16Desc b5_desc;  //P1 dot memory
 static Ram82S16Desc c5_desc;  //P2 dot memory
@@ -144,7 +150,9 @@ CHIP("3F", 7402)
 CHIP("3G", 7421)
 CHIP("3H", 7421)
 CHIP("3J", 7402)
-CHIP("3K", 82S123, &k3_desc) //I5610
+//CHIP("3K", 82S123, &k3_desc) //I5610
+CHIP("3K", 82S123, &cleansweep_k3_desc) //I5610
+
 CHIP("3L", 7400)
 CHIP("3M", 74S112)
 
@@ -175,7 +183,8 @@ CHIP("5L", 74151)
 
 CHIP("6A", 74161)
 CHIP("6B", 7421)
-CHIP("6C", 82S123, &c6_desc) //I5610
+//CHIP("6C", 82S123, &c6_desc) //I5610
+CHIP("6C", 82S123, &cleansweep_c6_desc) //I5610
 CHIP("6D", 74S151)
 CHIP("6E", 7420)
 CHIP("6F", 7402)
@@ -189,7 +198,8 @@ CHIP("6M", 7420)  //labeled 6C on page 3, guess as there is a chip at 6M but it 
 CHIP("7A", 7400)
 CHIP("7B", 74174)
 CHIP("7C", 7486)
-CHIP("7D", 82S123, &d7_desc) //I5610
+//CHIP("7D", 82S123, &d7_desc) //I5610
+CHIP("7D", 82S123, &cleansweep_d7_desc) //I5610
 CHIP("7E", 74161)
 CHIP("7F", 74S112)
 CHIP("7G", 7408)
