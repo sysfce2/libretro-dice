@@ -29,9 +29,9 @@ void DICE::init_mem(uint16_t *pixel_buffer)
         video = new Video();
         video->pixel_buf = pixel_buffer;
    
-        int game_idx = 0;  // Pong
-        // int game_idx = 7;  // Breakout
-
+        //int game_idx = 0;  // Pong
+        int game_idx = 1;
+   
         GameDesc& g = game_list[game_idx];
         
         circuit = new Circuit(settings,

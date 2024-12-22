@@ -336,6 +336,24 @@ CUSTOM_LOGIC( digital_input_coin1 )
     }
 }
 
+CUSTOM_LOGIC( digital_input_start1 )
+{
+    Circuit* circuit = chip->circuit;
+    //const KeyAssignment& key_assignment = (circuit->settings.*c)().*k;
+   int CONTROLLER1 = 0;
+   int START = 0x0008;
+    //int new_out = circuit->input.getKeyPressed(key_assignment);
+   int new_out = circuit->input.input_state[CONTROLLER1] & START;
+   //int new_out = 0;
+    new_out ^= 1; // Joysticks, buttons are active LOW
+
+    if(new_out != chip->output)
+    {
+        // Generate output event
+        chip->pending_event = chip->circuit->queue_push(chip, 0);
+    }
+}
+
 
 template <int N> CHIP_LOGIC( button_inv )
 {
@@ -386,24 +404,30 @@ CHIP_DESC( COIN_INPUT ) =
 
 CHIP_DESC( START_INPUT ) = 
 {
-	/* CUSTOM_CHIP_START(&clock)
+	CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i7 ),
 
+   /*
     // Normally Open (Active Low) Outputs
     ChipDesc(&digital_input<Settings::Input::CoinStart, &Settings::coinStart, &Settings::Input::CoinStart::start1>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 1 ),
-
+*/
+   
+    ChipDesc(&digital_input_start1)
+    INPUT_PINS( i7 )
+    OUTPUT_PIN( 1 ),
+/*
     ChipDesc(&digital_input<Settings::Input::CoinStart, &Settings::coinStart, &Settings::Input::CoinStart::start2>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 2 ),
-
+*/
     // Normally Closed (Active High) Outputs
     CHIP_START(button_inv<1>) INPUT_PINS( 1 ) OUTPUT_PIN( i1 ),
     CHIP_START(button_inv<2>) INPUT_PINS( 2 ) OUTPUT_PIN( i2 ),
-
-	CHIP_DESC_END */
+ 
+	CHIP_DESC_END
 };
 
 CHIP_DESC( JOYSTICK1_INPUT ) = 
