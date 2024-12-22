@@ -3,23 +3,29 @@
 #include <phoenix.hpp>
 */
 #include "rom.h"
+#include "../unzip/unzip.h"
+#include "../unzip/fileio.h"
 #include <cstdint>
+#include <vector>
 /*
 using namespace nall;
 using namespace phoenix;
 */
 #include <string>
 using std::string;
+using std::vector;
 // in main.cpp
 //extern const string& application_path();
 //extern Window& application_window();
 
 static string filename;
 static string romname;
+static string libretro_zip_filename = "/Users/mittonk/play/lr/libretro-super/libretro-dice/antiaircraft.zip"; // KAM
 
 //static unzip zip_file;
-//static vector<uint8_t> rom_data;
+static vector<uint8_t> rom_data;
 //static bool error_shown = false;
+
 
 // TODO: Prevent multiple error popups when file is not found.
 // By extracting entire file at once?
@@ -88,11 +94,28 @@ uint8_t RomDesc::get_data(const RomDesc* rom, unsigned offset)
 
             error_shown = true;
         }
-    }
+    } */
+   
+   if((filename != rom->file_name.c_str()) ||(romname != rom->rom_name.c_str()))
+   {
+      printf("KAM6 Loading %s\n", rom->file_name.c_str());
 
+      rom_data.clear();
+      
+      uint8_t *rom_data_raw;
+      uint32_t rom_data_raw_size = 0;
+      
+      rom_data_raw = loadFromZipByName((char*)libretro_zip_filename.c_str(), (char*)rom->rom_name.c_str(), &rom_data_raw_size);
+      // TODO: Copy rom_data_raw into rom_data
+      //if (!rom_data)
+      // return 0;
+      rom_data = std::vector<uint8_t>(&rom_data_raw[0], &rom_data_raw[rom_data_raw_size]);
+      filename = rom->file_name.c_str();
+      romname = rom->rom_name.c_str();
+   }
+   
     if(offset < rom_data.size()) return rom_data[offset];
 
     return 0xff;
-*/
 }
 

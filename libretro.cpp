@@ -80,6 +80,7 @@ void retro_get_system_info(struct retro_system_info *info)
    info->need_fullpath    = true;
    // TODO (kmitton): block_extract=true and unzip ourselves... but get one rom loaded first.
    info->valid_extensions = "txt";
+   info->block_extract = true;
 }
 
 static retro_video_refresh_t video_cb;

@@ -1,4 +1,4 @@
-SOURCES_C   :=
+SOURCES_C   := $(CORE_DIR)/unzip/fileio.c  $(CORE_DIR)/unzip/ioapi.c   $(CORE_DIR)/unzip/miniz.c   $(CORE_DIR)/unzip/unzip.c
 SOURCES_CXX := $(CORE_DIR)/libretro.cxx
 
 CHIP_CPP := $(CORE_DIR)/chips/7400.cpp $(CORE_DIR)/chips/7402.cpp $(CORE_DIR)/chips/7404.cpp $(CORE_DIR)/chips/7407.cpp $(CORE_DIR)/chips/7408.cpp $(CORE_DIR)/chips/7410.cpp $(CORE_DIR)/chips/7411.cpp $(CORE_DIR)/chips/7420.cpp $(CORE_DIR)/chips/7421.cpp $(CORE_DIR)/chips/7425.cpp \
