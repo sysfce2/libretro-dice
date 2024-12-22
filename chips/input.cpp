@@ -126,14 +126,14 @@ static const double ANALOG_SCALE = 1.0 / (1.0 - ANALOG_THRESHOLD);
 template <unsigned PADDLE, bool HORIZONTAL>
 void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
 {
-    /* Circuit* circuit = chip->circuit;
+    Circuit* circuit = chip->circuit;
     const Settings::Input::Paddle& settings = circuit->settings.input.paddle[PADDLE];
 
     AnalogInputDesc<PADDLE, HORIZONTAL>* desc = (AnalogInputDesc<PADDLE, HORIZONTAL>*)chip->custom_data;
     
     double delta = 0.0;
 
-    if(settings.use_mouse)
+    /*if(settings.use_mouse)
     {
         // Scale sensitivity by total paddle range
         double sensitivity = double(settings.mouse_sensitivity) * fabs(desc->max_val - desc->min_val) / 100000.0; 
@@ -235,7 +235,7 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
             }
             default: break;
         }
-    }
+    } */
 
     if(settings.use_joystick && settings.joystick_mode == Settings::Input::JOYSTICK_RELATIVE)
     {
@@ -265,13 +265,18 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
         if(desc->current_val < desc->max_val)      desc->current_val = desc->max_val;
         else if(desc->current_val > desc->min_val) desc->current_val = desc->min_val;
     }
-
+     
+   
     // Absolute Joystick - Overrides deltas
-    if(settings.use_joystick && settings.joystick_mode == Settings::Input::JOYSTICK_ABSOLUTE)
+    //if(settings.use_joystick && settings.joystick_mode == Settings::Input::JOYSTICK_ABSOLUTE)
     {
         double sensitivity = 0.25 + 0.00075 * (1000.0 - double(settings.joystick_sensitivity)); // Inverse scale from 0.25..1.0
-        Settings::Input::JoystickAxis joystick = HORIZONTAL ? settings.joy_x_axis : settings.joy_y_axis;
-        double val = circuit->input.getJoystickAxis(joystick.joystick, joystick.axis) / (65536.0 * sensitivity) + 0.5; // 0..1
+       /*Settings::Input::JoystickAxis joystick = HORIZONTAL ? settings.joy_x_axis : settings.joy_y_axis;
+       double val = circuit->input.getJoystickAxis(joystick.joystick, joystick.axis) / (65536.0 * sensitivity) + 0.5; // 0..1 */
+       unsigned joystick_idx = PADDLE;
+       unsigned axis_idx = HORIZONTAL ? 0 : 1;
+       double val = circuit->input.getJoystickAxis(joystick_idx, axis_idx) / (65536.0 * sensitivity) + 0.5; // 0..1 */
+
         if(val < 0.0) val = 0.0;
         else if(val > 1.0) val = 1.0;
         
@@ -291,7 +296,7 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
         
         chip->pending_event = chip->circuit->queue_push(chip, 0);
     }
-     */
+     
 }
 
 
@@ -953,6 +958,11 @@ int16_t Input::getJoystickAxis(unsigned joystick, unsigned axis)
 {
     //if(joystick >= joysticks.size()) return 0;
     //return SDL_JoystickGetAxis(joysticks[joystick], axis);
+   if (axis == 0) {
+      return int16_t(float(input_analog_left_x[joystick]));
+   } else {
+      return int16_t(float(input_analog_left_y[joystick]));
+   }
 }
 
 int Input::getNumJoysticks()
