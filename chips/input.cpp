@@ -1,6 +1,7 @@
 #include "input.h"
 #include "../circuit.h"
 #include "../settings.h"
+#include "../libretro.h"
 
 //#include "../manymouse/manymouse.h"
 //#include <SDL.h>
@@ -302,10 +303,10 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
 
 
 // My sincerest apologies
-template <typename C, const C& (Settings::*c)() const, KeyAssignment C::*k>
+/* template <typename C, const C& (Settings::*c)() const, KeyAssignment C::*k>
 CUSTOM_LOGIC( digital_input )
 {
-    /* Circuit* circuit = chip->circuit;
+    Circuit* circuit = chip->circuit;
     const KeyAssignment& key_assignment = (circuit->settings.*c)().*k;
 
     int new_out = circuit->input.getKeyPressed(key_assignment);
@@ -315,18 +316,18 @@ CUSTOM_LOGIC( digital_input )
     {
         // Generate output event
         chip->pending_event = chip->circuit->queue_push(chip, 0);
-    } */
-}
+    }
+} */
 
 
-CUSTOM_LOGIC( digital_input_coin1 )
+template <int controller, unsigned keysym>
+CUSTOM_LOGIC( digital_input )
 {
     Circuit* circuit = chip->circuit;
     //const KeyAssignment& key_assignment = (circuit->settings.*c)().*k;
-   int CONTROLLER1 = 0;
-   int SELECT = 0x0004;
+   int bitmask = 1<<keysym;
     //int new_out = circuit->input.getKeyPressed(key_assignment);
-   int new_out = circuit->input.input_state[CONTROLLER1] & SELECT;
+   int new_out = circuit->input.input_state[controller] & bitmask;
    //int new_out = 0;
     new_out ^= 1; // Joysticks, buttons are active LOW
 
@@ -337,7 +338,7 @@ CUSTOM_LOGIC( digital_input_coin1 )
     }
 }
 
-CUSTOM_LOGIC( digital_input_start1 )
+/*CUSTOM_LOGIC( digital_input_start1 )
 {
     Circuit* circuit = chip->circuit;
     //const KeyAssignment& key_assignment = (circuit->settings.*c)().*k;
@@ -353,7 +354,7 @@ CUSTOM_LOGIC( digital_input_start1 )
         // Generate output event
         chip->pending_event = chip->circuit->queue_push(chip, 0);
     }
-}
+} */
 
 
 template <int N> CHIP_LOGIC( button_inv )
@@ -372,7 +373,7 @@ CHIP_DESC( COIN_INPUT ) =
         INPUT_PINS( i7 )
         OUTPUT_PIN( 1 ), */
    
-   ChipDesc(&digital_input_coin1)
+   ChipDesc(&digital_input<0, RETRO_DEVICE_ID_JOYPAD_SELECT>)
    INPUT_PINS( i7 )
    OUTPUT_PIN( 1 ),
 /*
@@ -416,7 +417,7 @@ CHIP_DESC( START_INPUT ) =
         OUTPUT_PIN( 1 ),
 */
    
-    ChipDesc(&digital_input_start1)
+    ChipDesc(&digital_input<0, RETRO_DEVICE_ID_JOYPAD_START>)
     INPUT_PINS( i7 )
     OUTPUT_PIN( 1 ),
 /*
