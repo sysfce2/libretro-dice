@@ -193,8 +193,9 @@ void Video::draw(Chip* chip)
    unsigned VIDEO_WIDTH = 640;
    uint64_t MAX_SCANLINE_TIME = 52214160;
    float ratio = float(VIDEO_WIDTH) / float(MAX_SCANLINE_TIME);
-   uint16_t c = 0xffff; // (chip->inputs & VIDEO_MASK) * 1000;
-   
+   //uint16_t c = 0xffff; // (chip->inputs & VIDEO_MASK) * 1000;
+   uint16_t c = (chip->inputs & VIDEO_MASK) * 0x3333;
+
    if((chip->inputs & VIDEO_MASK) || desc->scan_mode == INTERLACED) // Falling edge
     {
         //float* c = &color[(chip->inputs & VIDEO_MASK) * 3];

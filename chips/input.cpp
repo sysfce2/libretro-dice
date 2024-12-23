@@ -481,7 +481,7 @@ CHIP_DESC( BUTTONS1_INPUT ) =
         INPUT_PINS( i7 )
         OUTPUT_PIN( 2 ),
 
-	ChipDesc(&digital_input<0, RETRO_DEVICE_ID_JOYPAD_X>)
+	ChipDesc(&digital_input<0, RETRO_DEVICE_ID_JOYPAD_Y>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 3 ),
 
@@ -509,7 +509,7 @@ CHIP_DESC( BUTTONS2_INPUT ) =
         INPUT_PINS( i7 )
         OUTPUT_PIN( 2 ),
 
-	ChipDesc(&digital_input<1, RETRO_DEVICE_ID_JOYPAD_X>)
+	ChipDesc(&digital_input<1, RETRO_DEVICE_ID_JOYPAD_Y>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 3 ),
 
