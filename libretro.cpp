@@ -44,7 +44,7 @@ void retro_init(void)
    frame_buf = (uint8_t*)malloc(VIDEO_PIXELS * VIDEO_BYTES_PER_PIXEL * safety_factor);
    uint16_t *pixel_buffer = reinterpret_cast<uint16_t *>(frame_buf);
    for (unsigned i = 0; i<VIDEO_PIXELS; i++) {
-      pixel_buffer[i] = 0x2222;
+      pixel_buffer[i] = 0; // 0x2222;
    }
    const char *dir = NULL;
    if (environ_cb(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY, &dir) && dir)
@@ -224,7 +224,7 @@ void retro_run(void)
    // Wipe screen.
    uint16_t *pixel_buffer = reinterpret_cast<uint16_t *>(frame_buf);
    for (unsigned i = 0; i<VIDEO_PIXELS; i++) {
-      pixel_buffer[i] = 0x2222;
+      pixel_buffer[i] = 0; // 0x2222;
    }
 
    bool updated = false;
