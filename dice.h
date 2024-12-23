@@ -14,8 +14,8 @@ using phoenix::Viewport; */
 namespace dice_libretro {
 
 #define VIDEO_WIDTH 640 // TODO (mittonk): Draw from dice.
-//#define VIDEO_HEIGHT 480
-#define VIDEO_HEIGHT 246
+#define VIDEO_HEIGHT 480
+//#define VIDEO_HEIGHT 246
 #define VIDEO_BYTES_PER_PIXEL 2
 #define VIDEO_PIXELS VIDEO_WIDTH * VIDEO_HEIGHT
 #define VIDEO_PITCH VIDEO_WIDTH * VIDEO_BYTES_PER_PIXEL
