@@ -608,7 +608,7 @@ CHIP_DESC( BUTTONS6_INPUT ) =
 template <unsigned WHEEL>
 void wheel_input(Chip* chip, int mask)
 {
-    /* Circuit* circuit = chip->circuit;
+    Circuit* circuit = chip->circuit;
     const Settings::Input::Wheel& settings = circuit->settings.input.wheel[WHEEL];
 
     WheelDesc<WHEEL>* wheel = (WheelDesc<WHEEL>*)chip->custom_data;
@@ -617,6 +617,7 @@ void wheel_input(Chip* chip, int mask)
 
     double delta = 0.0;
     
+   /*
     if(settings.use_mouse)
     {
         double sensitivity = double(settings.mouse_sensitivity) / 1000.0;
@@ -626,13 +627,14 @@ void wheel_input(Chip* chip, int mask)
         else // Using mouse y-axis
             delta += circuit->input.getRelativeMouseY(settings.axis.mouse) * sensitivity;
     }
-
-    if(settings.use_keyboard)
+    */
+    if (true) // if(settings.use_keyboard)
     {
         double dt = (INPUT_POLL_RATE / Circuit::timescale) / 1000000000.0;
-        double sensitivity = double(settings.keyboard_sensitivity) / 1000.0; 
+        //double sensitivity = double(settings.keyboard_sensitivity) / 1000.0;
+       double sensitivity = 10.0 / 1000.0;
 
-        switch(settings.left.type)
+        /* switch(settings.left.type)
         {
             case KeyAssignment::KEYBOARD:
                 delta -= circuit->input.getKeyboardState(settings.left.button) * dt * sensitivity;
@@ -641,13 +643,18 @@ void wheel_input(Chip* chip, int mask)
                 delta -= circuit->input.getJoystickButton(settings.left.joystick, settings.left.button) * dt * sensitivity;
                 break;
             case KeyAssignment::JOYSTICK_AXIS:
-            {
-                double val = circuit->input.getJoystickAxis(settings.left.joystick, settings.left.button >> 1) / 32768.0;
+            { */
+       unsigned joystick_idx = WHEEL;
+       unsigned axis_idx = 0; // X-axis
+
+                //double val = circuit->input.getJoystickAxis(settings.left.joystick, settings.left.button >> 1) / 32768.0;
+       double val = circuit->input.getJoystickAxis(joystick_idx, axis_idx) / 32768.0;
+
                 if(val > ANALOG_THRESHOLD && (settings.left.button & 1))
                     delta -= (val - ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
                 else if(val < -ANALOG_THRESHOLD && !(settings.left.button & 1))
                     delta += (val + ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
-                break;
+                /* break;
             }
             default: break;
         }
@@ -668,8 +675,8 @@ void wheel_input(Chip* chip, int mask)
                     delta -= (val + ANALOG_THRESHOLD) * dt * sensitivity;
                 break;
             }
-            default: break;
-        }
+            default: break; */
+       // }
     }
         
     if(delta > MAX_ANGLE)       delta = MAX_ANGLE;
@@ -684,13 +691,13 @@ void wheel_input(Chip* chip, int mask)
 
         wheel->wheel_events[0].push_back(wheel->angle);
         wheel->wheel_events[1].push_back(wheel->angle);
-    } */
+    }
 }
 
 template <unsigned WHEEL, Wheel::OUTPUT output>
 void wheel_event_gen(Chip* chip, int mask)
 {
-    /* WheelDesc<WHEEL>* wheel = (WheelDesc<WHEEL>*)chip->custom_data;
+    WheelDesc<WHEEL>* wheel = (WheelDesc<WHEEL>*)chip->custom_data;
     cirque<double>& wheel_events = wheel->wheel_events[output-1];
     
     static const double ENCODER_ANGLE = 5.0;
@@ -714,12 +721,12 @@ void wheel_event_gen(Chip* chip, int mask)
     
     if(new_out != chip->output)
         chip->pending_event = chip->circuit->queue_push(chip, 0);
-     */
+     
 }
 
 CHIP_DESC( WHEEL1_INPUT ) = 
 {
-	/* CUSTOM_CHIP_START(&clock)
+	CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i1 ),
 
@@ -736,12 +743,12 @@ CHIP_DESC( WHEEL1_INPUT ) =
     ChipDesc(&wheel_event_gen<0, Wheel::B>)
         INPUT_PINS( i2 ) OUTPUT_PIN( Wheel::B ),
 
-	CHIP_DESC_END */
+	CHIP_DESC_END
 };
 
 CHIP_DESC( WHEEL2_INPUT ) = 
 {
-	/* CUSTOM_CHIP_START(&clock)
+	CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i1 ),
     
@@ -758,12 +765,12 @@ CHIP_DESC( WHEEL2_INPUT ) =
     ChipDesc(&wheel_event_gen<1, Wheel::B>)
         INPUT_PINS( i2 ) OUTPUT_PIN( Wheel::B ),
 
-	CHIP_DESC_END */
+	CHIP_DESC_END
 };
 
 CHIP_DESC( WHEEL3_INPUT ) = 
 {
-	/* CUSTOM_CHIP_START(&clock)
+	CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i1 ),
     
@@ -780,12 +787,12 @@ CHIP_DESC( WHEEL3_INPUT ) =
     ChipDesc(&wheel_event_gen<2, Wheel::B>)
         INPUT_PINS( i2 ) OUTPUT_PIN( Wheel::B ),
 
-	CHIP_DESC_END */
+	CHIP_DESC_END
 };
 
 CHIP_DESC( WHEEL4_INPUT ) = 
 {
-	/* CUSTOM_CHIP_START(&clock)
+	CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i1 ),
     
@@ -802,7 +809,7 @@ CHIP_DESC( WHEEL4_INPUT ) =
     ChipDesc(&wheel_event_gen<3, Wheel::B>)
         INPUT_PINS( i2 ) OUTPUT_PIN( Wheel::B ),
 
-	CHIP_DESC_END */
+	CHIP_DESC_END
 };
 
 
