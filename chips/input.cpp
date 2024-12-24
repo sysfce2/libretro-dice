@@ -809,15 +809,15 @@ CHIP_DESC( WHEEL4_INPUT ) =
 template <unsigned THROTTLE>
 void ThrottleDesc<THROTTLE>::throttle_input(Chip* chip, int mask)
 {
-    /* Circuit* circuit = chip->circuit;
-    const Settings::Input::Throttle& settings = circuit->settings.input.throttle[THROTTLE];
+    Circuit* circuit = chip->circuit;
+    //const Settings::Input::Throttle& settings = circuit->settings.input.throttle[THROTTLE];
 
     ThrottleDesc<THROTTLE>* desc = (ThrottleDesc<THROTTLE>*)chip->custom_data;
     
     double dt = (INPUT_POLL_RATE / Circuit::timescale) / 1.0e12;
     double* pos = desc->pos;
 
-    switch(settings.key.type)
+    /*switch(settings.key.type)
     {
         case KeyAssignment::KEYBOARD:
             if(circuit->input.getKeyboardState(settings.key.button))
@@ -832,12 +832,14 @@ void ThrottleDesc<THROTTLE>::throttle_input(Chip* chip, int mask)
                 *pos -= dt * double(settings.keyboard_sensitivity);
             break;
         case KeyAssignment::JOYSTICK_AXIS:
-            if(settings.key.button & 1)
-                *pos = circuit->input.getJoystickAxis(settings.key.joystick, settings.key.button >> 1) / 327.68;
-            else 
+            if(settings.key.button & 1) */
+                //*pos = circuit->input.getJoystickAxis(settings.key.joystick, settings.key.button >> 1) / 327.68;
+   *pos = circuit->input.getJoystickAxis(THROTTLE, 1) / 327.68;
+
+/*            else
                 *pos = circuit->input.getJoystickAxis(settings.key.joystick, settings.key.button >> 1) / -327.68;
             break;
-    }
+    } */
 
     if(*pos < 0.0) *pos = 0.0;
     else if(*pos > 100.0) *pos = 100.0;
@@ -847,12 +849,12 @@ void ThrottleDesc<THROTTLE>::throttle_input(Chip* chip, int mask)
     //chip->active_outputs = (1 << chip->output_links.size()) - 1;
         
     chip->pending_event = chip->circuit->queue_push(chip, 0);
-     */
+     
 }
 
 CHIP_DESC( THROTTLE1_INPUT ) = 
 {
-	/* CUSTOM_CHIP_START(&clock)
+	CUSTOM_CHIP_START(&clock)
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i1 ),
     
@@ -860,7 +862,7 @@ CHIP_DESC( THROTTLE1_INPUT ) =
         INPUT_PINS( i1 )
         OUTPUT_PIN( i3 ),
 
-	CHIP_DESC_END */
+	CHIP_DESC_END
 };
 
 
