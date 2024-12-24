@@ -350,13 +350,9 @@ CHIP_DESC( COIN_INPUT ) =
         OUTPUT_PIN( i7 ),
 
     // Normally Open (Active Low) Output
-  /* ChipDesc(&digital_input<Settings::Input::CoinStart, &Settings::coinStart, &Settings::Input::CoinStart::coin1>)
+    ChipDesc(&digital_input<0, RETRO_DEVICE_ID_JOYPAD_SELECT>)
         INPUT_PINS( i7 )
-        OUTPUT_PIN( 1 ), */
-   
-   ChipDesc(&digital_input<0, RETRO_DEVICE_ID_JOYPAD_SELECT>)
-   INPUT_PINS( i7 )
-   OUTPUT_PIN( 1 ),
+        OUTPUT_PIN( 1 ),
 
     ChipDesc(&digital_input<1, RETRO_DEVICE_ID_JOYPAD_SELECT>)
         INPUT_PINS( i7 )
@@ -370,11 +366,9 @@ CHIP_DESC( COIN_INPUT ) =
         INPUT_PINS( i7 )
         OUTPUT_PIN( 4 ),
 
-   /*
-    ChipDesc(&digital_input<Settings::Input::CoinStart, &Settings::coinStart, &Settings::Input::CoinStart::dollar>)
+    ChipDesc(&digital_input<0, RETRO_DEVICE_ID_JOYPAD_L>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 5 ),
- */
 
     // Normally Closed (Active High) Outputs
     CHIP_START(button_inv<1>) INPUT_PINS( 1 ) OUTPUT_PIN( i1 ),
@@ -392,16 +386,10 @@ CHIP_DESC( START_INPUT ) =
         OUTPUT_DELAY_S( INPUT_POLL_RATE, INPUT_POLL_RATE )
         OUTPUT_PIN( i7 ),
 
-   /*
     // Normally Open (Active Low) Outputs
-    ChipDesc(&digital_input<Settings::Input::CoinStart, &Settings::coinStart, &Settings::Input::CoinStart::start1>)
+    ChipDesc(&digital_input<0, RETRO_DEVICE_ID_JOYPAD_START>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 1 ),
-*/
-   
-    ChipDesc(&digital_input<0, RETRO_DEVICE_ID_JOYPAD_START>)
-    INPUT_PINS( i7 )
-    OUTPUT_PIN( 1 ),
 
     ChipDesc(&digital_input<1, RETRO_DEVICE_ID_JOYPAD_START>)
         INPUT_PINS( i7 )
@@ -628,11 +616,13 @@ void wheel_input(Chip* chip, int mask)
             delta += circuit->input.getRelativeMouseY(settings.axis.mouse) * sensitivity;
     }
     */
+   unsigned joystick_idx = WHEEL;
+   unsigned axis_idx = 0; // X-axis
     if (true) // if(settings.use_keyboard)
     {
         double dt = (INPUT_POLL_RATE / Circuit::timescale) / 1000000000.0;
         //double sensitivity = double(settings.keyboard_sensitivity) / 1000.0;
-       double sensitivity = 10.0 / 1000.0;
+       double sensitivity = 500.0 / 1000.0;
 
         /* switch(settings.left.type)
         {
@@ -644,15 +634,14 @@ void wheel_input(Chip* chip, int mask)
                 break;
             case KeyAssignment::JOYSTICK_AXIS:
             { */
-       unsigned joystick_idx = WHEEL;
-       unsigned axis_idx = 0; // X-axis
 
                 //double val = circuit->input.getJoystickAxis(settings.left.joystick, settings.left.button >> 1) / 32768.0;
        double val = circuit->input.getJoystickAxis(joystick_idx, axis_idx) / 32768.0;
-
-                if(val > ANALOG_THRESHOLD && (settings.left.button & 1))
-                    delta -= (val - ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
-                else if(val < -ANALOG_THRESHOLD && !(settings.left.button & 1))
+      // printf("KAM20 Wheel num %d axis %d val %f\n", joystick_idx, axis_idx, val);
+                //if(val > ANALOG_THRESHOLD ) //&& (settings.left.button & 1))
+                 //   delta -= (val - ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
+                //else
+               if(val < -ANALOG_THRESHOLD) // && !(settings.left.button & 1))
                     delta += (val + ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
                 /* break;
             }
@@ -669,8 +658,10 @@ void wheel_input(Chip* chip, int mask)
             case KeyAssignment::JOYSTICK_AXIS:
             {
                 double val = circuit->input.getJoystickAxis(settings.right.joystick, settings.right.button >> 1) / 32768.0;
-                if(val > ANALOG_THRESHOLD && (settings.right.button & 1))
+                 */
+                if(val > ANALOG_THRESHOLD )//&& (settings.right.button & 1))
                     delta += (val - ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
+       /*
                 else if(val < -ANALOG_THRESHOLD && !(settings.right.button & 1))
                     delta -= (val + ANALOG_THRESHOLD) * dt * sensitivity;
                 break;
