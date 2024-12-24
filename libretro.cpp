@@ -185,7 +185,7 @@ static void update_input(void)
       input_analog_left_y[pad] = input_state_cb( (pad), RETRO_DEVICE_ANALOG, RETRO_DEVICE_INDEX_ANALOG_LEFT,
                                          RETRO_DEVICE_ID_ANALOG_Y);
       
-      //printf("KAM2 input_bitmask %u %08X %08X %08X\n", pad, input_bitmask[(pad)], input_analog_left_x[(pad)], input_analog_left_y[(pad)]);
+      printf("KAM2 input_bitmask %u %08X %08X %08X\n", pad, input_bitmask[(pad)], input_analog_left_x[(pad)], input_analog_left_y[(pad)]);
 
    }
    dice.update_input(input_bitmask, input_analog_left_x, input_analog_left_y);

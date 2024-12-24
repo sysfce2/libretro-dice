@@ -327,7 +327,7 @@ CUSTOM_LOGIC( digital_input )
     //const KeyAssignment& key_assignment = (circuit->settings.*c)().*k;
    int bitmask = 1<<keysym;
     //int new_out = circuit->input.getKeyPressed(key_assignment);
-   int new_out = circuit->input.input_state[controller] & bitmask;
+   int new_out = bool(circuit->input.input_state[controller] & bitmask);
    //int new_out = 0;
     new_out ^= 1; // Joysticks, buttons are active LOW
 
