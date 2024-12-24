@@ -192,7 +192,8 @@ void Video::draw(Chip* chip)
 
    unsigned VIDEO_WIDTH = 640;
    uint64_t MAX_SCANLINE_TIME = 52214160;
-   float ratio = float(VIDEO_WIDTH) / float(MAX_SCANLINE_TIME);
+   //float ratio = float(VIDEO_WIDTH) / float(MAX_SCANLINE_TIME);
+   float ratio = float(VIDEO_WIDTH) / float(scanline_time);
    //uint16_t c = 0xffff; // (chip->inputs & VIDEO_MASK) * 1000;
    uint16_t c = (chip->inputs & VIDEO_MASK) * 0x3333;
 
@@ -201,7 +202,7 @@ void Video::draw(Chip* chip)
         //float* c = &color[(chip->inputs & VIDEO_MASK) * 3];
 
        uint64_t left = float(start_time) * ratio;
-       uint64_t right = float(end_time) * ratio;
+       uint64_t right = fmin(float(end_time) * ratio, VIDEO_WIDTH);
        for (uint64_t i = left; i <= right; i++) {
           pixel_buf[i+v_pos*VIDEO_WIDTH] = c;
        }
@@ -282,7 +283,7 @@ CUSTOM_LOGIC( Video::video )
         // use a different horizontal count on the first or last scanline
         if(video->v_pos > 0 && video->v_pos < video->v_size && (global_time - video->initial_time) != video->scanline_time)
         {
-            //printf("Adjust screen params old:%lld new:%lld pos:%d\n", video->scanline_time, global_time - video->initial_time, video->v_pos);
+            printf("Adjust screen params old:%lld new:%lld pos:%d\n", video->scanline_time, global_time - video->initial_time, video->v_pos);
             video->scanline_time = global_time - video->initial_time;
             video->adjust_screen_params();
         }
