@@ -20,7 +20,7 @@ using std::vector;
 
 static string filename;
 static string romname;
-static string libretro_zip_filename = "/Users/mittonk/emu/ttl_arcade/stuntcycle.zip"; // KAM
+static string libretro_zip_filename = "/Users/mittonk/emu/ttl_arcade/sharkjaws.zip"; // KAM
 //static string libretro_zip_filename = "/home/mittonk/emu/ttl_arcade/roms/indy4.zip"; // KAM
 
 //static unzip zip_file;
