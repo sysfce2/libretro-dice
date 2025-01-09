@@ -76,7 +76,7 @@ void retro_get_system_info(struct retro_system_info *info)
    info->library_name     = "dice";
    info->library_version  = "0.1.0";
    info->need_fullpath    = true;
-   info->valid_extensions = "txt";  // TODO (mittonk): zip|dmy
+   info->valid_extensions = "zip|dmy";
    info->block_extract = true;
 }
 
@@ -270,8 +270,6 @@ bool retro_load_game(const struct retro_game_info *info)
 
    uint16_t *pixel_buffer = reinterpret_cast<uint16_t *>(frame_buf);
    dice.load_game(info->path, pixel_buffer);
-
-   // TODO (mittonk): Load ROMs.
 
    (void)info;
 
