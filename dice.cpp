@@ -21,7 +21,7 @@ using phoenix::Viewport;
 
 namespace dice_libretro {
 
-void DICE::load_game(const char *path, uint16_t *pixel_buffer)
+void DICE::load_game(const char *path, uint16_t *pixel_buf1, uint16_t *pixel_buf2, bool *write_to_frame_buf1)
 {
         /*
         input = new Input();
@@ -29,8 +29,10 @@ void DICE::load_game(const char *path, uint16_t *pixel_buffer)
          */
         input = new Input();
         video = new Video();
-        video->pixel_buf = pixel_buffer;
-   
+        video->pixel_buf1 = pixel_buf1;
+        video->pixel_buf2 = pixel_buf2;
+        video->write_to_frame_buf1 = write_to_frame_buf1;
+
         const string extension = nall::extension(path);
         const string basename = nall::basename(nall::notdir(path));
         RomDesc::set_zip_filename(path);
