@@ -34,11 +34,16 @@ void DICE::load_game(const char *path, uint16_t *pixel_buffer)
         const string extension = nall::extension(path);
         const string basename = nall::basename(nall::notdir(path));
         RomDesc::set_zip_filename(path);
+        int i = 0;
+        for (i = 0; i < game_list_size; i++) {
+           if (game_list[i].command_line == basename)
+           {
+              break;
+           }
+        }
+        // TODO (mittonk): Error out if game not found.
    
-        //int game_idx = 0;  // Pong
-        int game_idx = 10;
-   
-        GameDesc& g = game_list[game_idx];
+        GameDesc& g = game_list[i];
         
         circuit = new Circuit(settings,
                               *input,
