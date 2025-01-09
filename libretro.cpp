@@ -233,10 +233,10 @@ void retro_run(void)
    video_cb(frame_buf, VIDEO_WIDTH, VIDEO_HEIGHT, VIDEO_PITCH);
    
    // Wipe the frame buffer we just displayed.
-   /*uint16_t *pixel_buffer = reinterpret_cast<uint16_t *>(frame_buf);
+   uint16_t *pixel_buffer = reinterpret_cast<uint16_t *>(frame_buf);
    for (unsigned i = 0; i<VIDEO_PIXELS; i++) {
       pixel_buffer[i] = 0; // 0x2222;
-   }*/
+   }
 
    bool updated = false;
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE_UPDATE, &updated) && updated)
