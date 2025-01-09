@@ -128,7 +128,7 @@ void Video::adjust_screen_params()
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 	swap_buffers();
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-
+    */
     if(desc->monitor_type == COLOR)
     {
         init_color_lut(desc->r_color);
@@ -140,7 +140,7 @@ void Video::adjust_screen_params()
             temp[i][0] = temp[i][1] = temp[i][2] = desc->r[i];
 
         init_color_lut(temp);
-    } */
+    } 
 }
 
 void Video::init_color_lut(const double (*r)[3])
@@ -203,7 +203,7 @@ void Video::draw(Chip* chip)
    //float ratio = float(VIDEO_WIDTH) / float(MAX_SCANLINE_TIME);
    float ratio = float(VIDEO_WIDTH) / float(scanline_time);
    //uint16_t c = 0xffff; // (chip->inputs & VIDEO_MASK) * 1000;
-   uint16_t c = (chip->inputs & VIDEO_MASK) * 0x3333;
+   uint16_t c = (chip->inputs & VIDEO_MASK) * 0x3333; // TODO (mittonk): Index by 3, don't multiply.
 
    if((chip->inputs & VIDEO_MASK) || desc->scan_mode == INTERLACED) // Falling edge
     {
