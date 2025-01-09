@@ -1,15 +1,17 @@
 #include "video.h"
 #include "../circuit.h"
-#include <phoenix.hpp>
+//#include <phoenix.hpp>
 
 #ifdef __APPLE__
-#include <OpenGL/gl.h> // Think different
+//#include <OpenGL/gl.h> // Think different
 #else
-#include <GL/gl.h>
+//#include <GL/gl.h>
 #endif
 
+/*
 using phoenix::VerticalLayout;
 using phoenix::Viewport;
+ */
 
 /* 
 	Inputs:
@@ -98,14 +100,15 @@ void Video::video_init(int width, int height, const Settings::Video& settings)
         }
     }
 
-   	glViewport(x, y, width, height);
+   	//glViewport(x, y, width, height);
 
     adjust_screen_params();
 }
 
 void Video::adjust_screen_params()
 {
-    glMatrixMode(GL_PROJECTION);
+    /*
+     glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
     switch(desc->orientation)
@@ -137,7 +140,7 @@ void Video::adjust_screen_params()
             temp[i][0] = temp[i][1] = temp[i][2] = desc->r[i];
 
         init_color_lut(temp);
-    }
+    } */
 }
 
 void Video::init_color_lut(const double (*r)[3])
@@ -187,23 +190,36 @@ void Video::draw(Chip* chip)
     uint64_t start_time = current_time - initial_time;
     uint64_t end_time = chip->circuit->global_time - initial_time;
 
-    if((chip->inputs & VIDEO_MASK) || desc->scan_mode == INTERLACED) // Falling edge
-    {
-        float* c = &color[(chip->inputs & VIDEO_MASK) * 3];
+   unsigned VIDEO_WIDTH = 640;
+   uint64_t MAX_SCANLINE_TIME = 52214160;
+   //float ratio = float(VIDEO_WIDTH) / float(MAX_SCANLINE_TIME);
+   float ratio = float(VIDEO_WIDTH) / float(scanline_time);
+   //uint16_t c = 0xffff; // (chip->inputs & VIDEO_MASK) * 1000;
+   uint16_t c = (chip->inputs & VIDEO_MASK) * 0x3333;
 
-        glBegin(GL_QUADS);
+   if((chip->inputs & VIDEO_MASK) || desc->scan_mode == INTERLACED) // Falling edge
+    {
+        //float* c = &color[(chip->inputs & VIDEO_MASK) * 3];
+
+       uint64_t left = float(start_time) * ratio;
+       uint64_t right = fmin(float(end_time) * ratio, VIDEO_WIDTH);
+       for (uint64_t i = left; i <= right; i++) {
+          pixel_buf[i+v_pos*VIDEO_WIDTH] = c;
+       }
+        /*glBegin(GL_QUADS);
             glColor3fv(c);
 
 	        glVertex3f(start_time, v_pos,     0.0);
 	        glVertex3f(end_time,   v_pos,     0.0);
 	        glVertex3f(end_time,   v_pos+1.0, 0.0);
 	        glVertex3f(start_time, v_pos+1.0, 0.0);
-	    glEnd(); 
+	    glEnd(); */
     }
 }
 
 void Video::draw_overlays()
 {
+   /*
     if(desc->overlays.empty()) return;
 
     glEnable(GL_BLEND);
@@ -226,7 +242,7 @@ void Video::draw_overlays()
 	    glEnd();
     }
 
-    glDisable(GL_BLEND);
+    glDisable(GL_BLEND); */
 }
 
 CUSTOM_LOGIC( Video::video )
@@ -247,13 +263,18 @@ CUSTOM_LOGIC( Video::video )
         }
         video->draw_overlays();
         video->swap_buffers();
-        if(video->desc->scan_mode == PROGRESSIVE)
+        /*if(video->desc->scan_mode == PROGRESSIVE)
             glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+         */
         video->frame_count++;
         
         // Make sure real time is caught up
-        if(chip->circuit->settings.throttle)
+       
+       // if(chip->circuit->settings.throttle)
+       if (true)
             while(chip->circuit->rtc.get_usecs() < uint64_t(global_time * 1000000.0 * Circuit::timescale));
+        
+       
     }
     // HBLANK rising edge, go to next line
     else if(mask == HBLANK_MASK && !(chip->inputs & HBLANK_MASK)) 
@@ -262,7 +283,7 @@ CUSTOM_LOGIC( Video::video )
         // use a different horizontal count on the first or last scanline
         if(video->v_pos > 0 && video->v_pos < video->v_size && (global_time - video->initial_time) != video->scanline_time)
         {
-            //printf("Adjust screen params old:%lld new:%lld pos:%d\n", video->scanline_time, global_time - video->initial_time, video->v_pos);
+            printf("Adjust screen params old:%lld new:%lld pos:%d\n", video->scanline_time, global_time - video->initial_time, video->v_pos);
             video->scanline_time = global_time - video->initial_time;
             video->adjust_screen_params();
         }
@@ -296,25 +317,29 @@ CUSTOM_LOGIC( Video::video )
 
     chip->inputs ^= mask;
     video->current_time = global_time;
+     
 }
 
+void Video::swap_buffers() {
+   request_video_callback = true;
+}
 
 #ifdef _WIN32
 
 #include "video_wgl.h"
-Video* Video::createDefault(VerticalLayout& layout, Viewport*& viewport) { return new VideoWgl(layout, viewport); }
+//Video* Video::createDefault(VerticalLayout& layout, Viewport*& viewport) { return new VideoWgl(layout, viewport); }
 //#include "video_sdl.h"
 //Video* Video::createDefault(uintptr_t handle) { return new VideoSdl(handle); }
 
 #elif defined(__APPLE__)
 
 #include "video_cgl.h"
-Video* Video::createDefault(VerticalLayout& layout, Viewport*& viewport) { return new VideoCgl(viewport->handle()); }
+//Video* Video::createDefault(VerticalLayout& layout, Viewport*& viewport) { return new VideoCgl(viewport->handle()); }
 
 #else
 
 #include "video_sdl.h"
-Video* Video::createDefault(VerticalLayout& layout, Viewport*& viewport) { return new VideoSdl(viewport->handle()); }
+//Video* Video::createDefault(VerticalLayout& layout, Viewport*& viewport) { return new VideoSdl(viewport->handle()); }
 
 #endif
 

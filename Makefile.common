@@ -1,0 +1,28 @@
+SOURCES_C   := $(CORE_DIR)/unzip/fileio.c  $(CORE_DIR)/unzip/ioapi.c   $(CORE_DIR)/unzip/miniz.c   $(CORE_DIR)/unzip/unzip.c
+SOURCES_CXX := $(CORE_DIR)/libretro.cxx
+
+CHIP_CPP := $(CORE_DIR)/chips/7400.cpp $(CORE_DIR)/chips/7402.cpp $(CORE_DIR)/chips/7404.cpp $(CORE_DIR)/chips/7407.cpp $(CORE_DIR)/chips/7408.cpp $(CORE_DIR)/chips/7410.cpp $(CORE_DIR)/chips/7411.cpp $(CORE_DIR)/chips/7420.cpp $(CORE_DIR)/chips/7421.cpp $(CORE_DIR)/chips/7425.cpp \
+   			$(CORE_DIR)/chips/7427.cpp $(CORE_DIR)/chips/7430.cpp $(CORE_DIR)/chips/7432.cpp $(CORE_DIR)/chips/7437.cpp $(CORE_DIR)/chips/7442.cpp $(CORE_DIR)/chips/7448.cpp $(CORE_DIR)/chips/7450.cpp $(CORE_DIR)/chips/7454.cpp $(CORE_DIR)/chips/7474.cpp $(CORE_DIR)/chips/7475.cpp \
+			$(CORE_DIR)/chips/7476.cpp $(CORE_DIR)/chips/7483.cpp $(CORE_DIR)/chips/7485.cpp $(CORE_DIR)/chips/7486.cpp $(CORE_DIR)/chips/7490.cpp $(CORE_DIR)/chips/7492.cpp $(CORE_DIR)/chips/7493.cpp $(CORE_DIR)/chips/7495.cpp $(CORE_DIR)/chips/7496.cpp $(CORE_DIR)/chips/74107.cpp \
+		   	$(CORE_DIR)/chips/74109.cpp $(CORE_DIR)/chips/74S112.cpp $(CORE_DIR)/chips/74116.cpp $(CORE_DIR)/chips/74121.cpp $(CORE_DIR)/chips/74150.cpp $(CORE_DIR)/chips/74151.cpp $(CORE_DIR)/chips/74153.cpp $(CORE_DIR)/chips/74155.cpp $(CORE_DIR)/chips/74164.cpp \
+		   	$(CORE_DIR)/chips/74165.cpp $(CORE_DIR)/chips/74166.cpp $(CORE_DIR)/chips/74174.cpp $(CORE_DIR)/chips/74175.cpp $(CORE_DIR)/chips/74191.cpp $(CORE_DIR)/chips/74192.cpp $(CORE_DIR)/chips/74193.cpp $(CORE_DIR)/chips/74194.cpp $(CORE_DIR)/chips/74279.cpp \
+		   	$(CORE_DIR)/chips/9301.cpp $(CORE_DIR)/chips/9310.cpp $(CORE_DIR)/chips/9311.cpp $(CORE_DIR)/chips/9312.cpp $(CORE_DIR)/chips/9314.cpp $(CORE_DIR)/chips/9316.cpp $(CORE_DIR)/chips/9321.cpp $(CORE_DIR)/chips/9322.cpp \
+		   	$(CORE_DIR)/chips/9602.cpp $(CORE_DIR)/chips/555astable.cpp $(CORE_DIR)/chips/555mono.cpp $(CORE_DIR)/chips/555pwm.cpp $(CORE_DIR)/chips/74S287.cpp $(CORE_DIR)/chips/8225.cpp $(CORE_DIR)/chips/8277.cpp $(CORE_DIR)/chips/2533.cpp \
+			$(CORE_DIR)/chips/82S16.cpp $(CORE_DIR)/chips/82S115.cpp $(CORE_DIR)/chips/82S123.cpp $(CORE_DIR)/chips/82S131.cpp $(CORE_DIR)/chips/TMS4800.cpp \
+			$(CORE_DIR)/chips/clock.cpp $(CORE_DIR)/chips/capacitor.cpp $(CORE_DIR)/chips/diode_matrix.cpp $(CORE_DIR)/chips/latch.cpp $(CORE_DIR)/chips/clk_gate.cpp $(CORE_DIR)/chips/wired_logic.cpp \
+			$(CORE_DIR)/chips/mixer.cpp $(CORE_DIR)/chips/566.cpp \
+			$(CORE_DIR)/chips/input.cpp $(CORE_DIR)/chips/audio.cpp $(CORE_DIR)/chips/video.cpp $(CORE_DIR)/chips/dipswitch.cpp $(CORE_DIR)/chips/rom.cpp $(CORE_DIR)/chips/vcd_log.cpp $(CORE_DIR)/chips/wav_log.cpp 
+
+GAME_CPP := $(CORE_DIR)/games/pong.cpp $(CORE_DIR)/games/rebound.cpp $(CORE_DIR)/games/gotcha.cpp $(CORE_DIR)/games/spacerace.cpp $(CORE_DIR)/games/stuntcycle.cpp $(CORE_DIR)/games/pongdoubles.cpp \
+   			$(CORE_DIR)/games/tvbasketball.cpp $(CORE_DIR)/games/breakout.cpp $(CORE_DIR)/games/antiaircraft.cpp $(CORE_DIR)/games/attack.cpp \
+		   	$(CORE_DIR)/games/sharkjaws.cpp $(CORE_DIR)/games/quadrapong.cpp $(CORE_DIR)/games/jetfighter.cpp $(CORE_DIR)/games/crashnscore.cpp \
+			$(CORE_DIR)/games/crossfire.cpp $(CORE_DIR)/games/pinpong.cpp $(CORE_DIR)/games/cleansweep.cpp $(CORE_DIR)/games/wipeout.cpp \
+			$(CORE_DIR)/games/highway.cpp $(CORE_DIR)/games/steeplechase.cpp $(CORE_DIR)/games/indy4.cpp
+
+MANYMOUSE_CPP := $(CORE_DIR)/manymouse/manymouse.cpp $(CORE_DIR)/manymouse/windows_wminput.cpp $(CORE_DIR)/manymouse/linux_evdev.cpp \
+				 $(CORE_DIR)/manymouse/macosx_hidmanager.cpp $(CORE_DIR)/manymouse/macosx_hidutilities.cpp $(CORE_DIR)/manymouse/x11_xinput2.cpp
+
+# SOURCES_CPP := $(CORE_DIR)/dice.cpp $(CORE_DIR)/chip.cpp $(CORE_DIR)/circuit.cpp $(CORE_DIR)/settings.cpp $(CORE_DIR)/game_config.cpp $(CORE_DIR)/phoenix/phoenix.cpp $(CHIP_CPP) $(GAME_CPP) $(MANYMOUSE_CPP)
+
+SOURCES_CPP := $(CORE_DIR)/dice.cpp $(CORE_DIR)/chip.cpp $(CORE_DIR)/circuit.cpp $(CORE_DIR)/settings.cpp $(CORE_DIR)/game_config.cpp  $(CHIP_CPP) $(GAME_CPP) 
+

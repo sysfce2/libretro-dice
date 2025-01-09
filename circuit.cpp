@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include <cstdio>
+#include <algorithm>
 
 #define DEBUG
 #undef DEBUG
@@ -100,8 +101,14 @@ public:
 };
 
 
-Circuit::Circuit(const Settings& s, Input& i, Video& v, const CircuitDesc* desc, const char* name) 
-    : settings(s), game_config(desc, name), input(i), video(v), global_time(0), queue_size(0)
+Circuit::Circuit(const Settings& s,
+                 Input& i,
+                 Video& v,
+                 const CircuitDesc* desc, const char* name)
+    : settings(s), game_config(desc, name),
+input(i),
+video(v),
+global_time(0), queue_size(0)
 {
     CircuitBuilder converter(this, chips);
 
@@ -144,8 +151,10 @@ Circuit::Circuit(const Settings& s, Input& i, Video& v, const CircuitDesc* desc,
 
 
     // Grab video descriptor
-    if(desc->video != nullptr) video.desc = desc->video;
+    /*
+     if(desc->video != nullptr) video.desc = desc->video;
     else video.desc = &VideoDesc::DEFAULT;
+     */
 
     // Set up VCC & GND for analog
     chips[0]->analog_output = 5.0;
@@ -456,7 +465,7 @@ void Circuit::run(int64_t run_time)
 		}
 
 		if(global_time == queue[1].chip->pending_event)
-		{	
+		{
 			queue[1].chip->update_output();
 		}
         queue_pop();

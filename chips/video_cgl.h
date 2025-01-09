@@ -1,22 +1,24 @@
 #ifndef VIDEO_CGL_H
 #define VIDEO_CGL_H
 
-#undef noinline
-#define decimal CocoaDecimal
-#import <Cocoa/Cocoa.h>
+//#undef noinline
+//#define decimal CocoaDecimal
+/*
+ #import <Cocoa/Cocoa.h>
 #include <OpenGL/gl.h>
 #include <OpenGL/gl3.h>
-
+ */
+/*
 #include "video.h"
 
 class VideoCgl : public Video
 {
 private:
-    NSOpenGLView* view;
-    NSView* handle;
+    //NSOpenGLView* view;
+    //NSView* handle;
 
 public:
-    VideoCgl(uintptr_t h) : Video(), handle((NSView*)h), view(nil) { }
+   VideoCgl(uintptr_t h) : Video() {} // , handle((NSView*)h), view(nil) { }
 
     ~VideoCgl()
     {
@@ -25,6 +27,7 @@ public:
             [view removeFromSuperview];
             [view release];
         }
+
     }
 
     void video_init(int width, int height, const Settings::Video& settings)
@@ -77,9 +80,10 @@ public:
 
     void show_cursor(bool show)
     {
-        if(show) [NSCursor unhide];
+       if(show) [NSCursor unhide];
         else     [NSCursor hide];
+        
     }
 };
-
+*/
 #endif

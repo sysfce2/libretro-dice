@@ -1,14 +1,15 @@
 #ifndef VIDEO_WGL_H
 #define VIDEO_WGL_H
 
-#include <GL/gl.h>
+/*
+ #include <GL/gl.h>
 #include <GL/glext.h>
 #include <GL/wglext.h>
 #include <phoenix.hpp>
 #include "video.h"
 
 using namespace phoenix;
-
+*/
 #define glGetProcAddress(name) wglGetProcAddress(name)
 
 static bool wglExtensionSupportedEXT(const char *extension_name)

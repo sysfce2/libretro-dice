@@ -1,10 +1,15 @@
-#include <nall/platform.hpp>
+/*
+ #include <nall/platform.hpp>
 #include <nall/directory.hpp>
+ */
+#include <string>
+
 
 #include "game_config.h"
 #include "chips/dipswitch.h"
 
-using namespace nall;
+using std::string;
+//using namespace nall;
 
 bool GameConfig::isDipswitch(const ChipDesc* chip)
 {
@@ -23,12 +28,13 @@ bool GameConfig::isPotentiometer(const ChipDesc* chip)
 GameConfig::GameConfig(const CircuitDesc* desc, const char* name)
 {
     // Load config file
-    nall::string config_path = configpath();
+    /*
+     string config_path = configpath();
     config_path.append("dice/");
     directory::create(config_path);
 
     filename = {config_path, name, ".cfg"};
-
+     
     bool has_config = false;
 
     // Find all DIP switches in circuit desc, append to game configuration
@@ -49,4 +55,5 @@ GameConfig::GameConfig(const CircuitDesc* desc, const char* name)
     }
 
     if(has_config) load();
+   */
 }

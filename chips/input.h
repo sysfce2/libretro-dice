@@ -3,7 +3,11 @@
 
 #include "../chip_desc.h"
 #include "555mono.h"
-#include <SDL/SDL_joystick.h>
+
+//#include "../dice.h"
+#define NUM_CONTROLLERS 6
+//#include <SDL_joystick.h>
+
 
 struct KeyAssignment; // in settings.h
 
@@ -119,7 +123,7 @@ class Input
 {
 private:
     std::vector<int> mouse_rel_x, mouse_rel_y;
-    std::vector<SDL_Joystick*> joysticks;
+    //std::vector<SDL_Joystick*> joysticks;
 public:
     Input();
     ~Input();
@@ -133,6 +137,11 @@ public:
     int getNumJoysticks();
     int getNumJoystickAxes(int joystick);
     bool getKeyPressed(const KeyAssignment& key_assignment);
+   
+   int32_t input_state[NUM_CONTROLLERS];
+   int32_t input_analog_left_x[NUM_CONTROLLERS];
+   int32_t input_analog_left_y[NUM_CONTROLLERS];
+
 };
 
 #endif

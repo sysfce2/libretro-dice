@@ -1,0 +1,6 @@
+*.o
+*.swp
+phoenix/qt/platform.moc
+dice
+dice_libretro.dylib
+dice_libretro.so

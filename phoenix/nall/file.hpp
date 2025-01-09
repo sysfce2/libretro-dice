@@ -1,6 +1,8 @@
 #ifndef NALL_FILE_HPP
 #define NALL_FILE_HPP
 
+#include <sys/stat.h>  //KAM
+#include <sys/types.h>
 #include <nall/platform.hpp>
 #include <nall/stdint.hpp>
 #include <nall/string.hpp>
@@ -227,8 +229,8 @@ struct file {
 
   static bool exists(const string& filename) {
     #if !defined(_WIN32)
-    struct stat64 data;
-    if(stat64(filename, &data) != 0) return false;
+    struct stat data;
+    if(stat(filename, &data) != 0) return false;
     #else
     struct __stat64 data;
     if(_wstat64(utf16_t(filename), &data) != 0) return false;
@@ -239,8 +241,8 @@ struct file {
 
   static uintmax_t size(const string& filename) {
     #if !defined(_WIN32)
-    struct stat64 data;
-    stat64(filename, &data);
+    struct stat data;
+    stat(filename, &data);
     #else
     struct __stat64 data;
     _wstat64(utf16_t(filename), &data);
@@ -250,8 +252,8 @@ struct file {
 
   static time_t timestamp(const string& filename, file::time mode = file::time::create) {
     #if !defined(_WIN32)
-    struct stat64 data;
-    stat64(filename, &data);
+    struct stat data;
+    stat(filename, &data);
     #else
     struct __stat64 data;
     _wstat64(utf16_t(filename), &data);

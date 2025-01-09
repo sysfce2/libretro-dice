@@ -36,12 +36,20 @@ static VcdLogDesc vcd_log_desc
 );
 #endif
 
-static RomDesc a4_desc("jetfighter", "jet1.a4", 0x08A0B011);    
+/*
+ static RomDesc a4_desc("jetfighter", "jet1.a4", 0x08A0B011);
 static RomDesc j1_desc("jetfighter", "jet1.j1", 0xBEE62D20);
-static RomDesc j5_desc("jetfighter", "jet1.j5", 0xC58EE65D);  
-static RomDesc k5_desc("jetfighter", "jet1.k5", 0x0D5648A9);   
+static RomDesc j5_desc("jetfighter", "jet1.j5", 0xC58EE65D);
+static RomDesc k5_desc("jetfighter", "jet1.k5", 0x0D5648A9);
 static RomDesc m1_desc("jetfighter", "jet1.m1", 0xBEE62D20);
-static RomDesc r5_desc("jetfighter", "jet1.r5", 0xBD95F87E);  
+static RomDesc r5_desc("jetfighter", "jet1.r5", 0xBD95F87E);
+*/
+static RomDesc a4_desc("jetfighter", "004252.a4", 0x08A0B011);
+static RomDesc j1_desc("jetfighter", "004250.j1", 0xBEE62D20);
+static RomDesc j5_desc("jetfighter", "004253-02.j5", 0xC58EE65D);
+static RomDesc k5_desc("jetfighter", "004253-01.k5", 0x0D5648A9);
+static RomDesc m1_desc("jetfighter", "004250.m1", 0xBEE62D20);
+static RomDesc r5_desc("jetfighter", "004251.r5", 0xBD95F87E);
 
 static N8225Desc m8_desc;
 static N8225Desc n8_desc;

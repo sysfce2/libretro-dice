@@ -55,9 +55,13 @@ static CHIP_DESC( RANDOM_CLOCK_GEN ) =
     CHIP_DESC_END
 };
 
-static RomDesc c4_desc("steeplechase", "003773-A.C4", 0x5DDC49B6); // Horse Video A
+
+ static RomDesc c4_desc("steeplechase", "003773-A.C4", 0x5DDC49B6); // Horse Video A
 static RomDesc d4_desc("steeplechase", "003773-B.D4", 0xE6994CDE); // Horse Video B
+
 //static RomDesc c8_desc("steeplechase", "003774.C8", 0xXXXXXXXX); // Bugle ROM - ROM DUMP MISSING
+//static RomDesc c4_desc("steeplechase", "003773-a.4c", 0x5DDC49B6); // Horse Video A
+//static RomDesc d4_desc("steeplechase", "003773-b.4d", 0xE6994CDE); // Horse Video B
 
 static CapacitorDesc c3_desc(P_FARAD(100.0));
 static CapacitorDesc c20_desc(U_FARAD(0.01));

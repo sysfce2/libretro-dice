@@ -37,8 +37,13 @@ static VcdLogDesc vcd_log_desc
 
 static CapacitorDesc cap35_desc(P_FARAD(470));
 
-static RomDesc d1a_desc("sharkjaws", "004182.1da", 0x05242912);  //shark-fish
+/*
+ static RomDesc d1a_desc("sharkjaws", "004182.1da", 0x05242912);  //shark-fish
 static RomDesc d1b_desc("sharkjaws", "004183.1db", 0xB161B889);  //diver
+ */
+
+static RomDesc d1a_desc("sharkjaws", "004182.da1", 0x05242912);  //shark-fish
+static RomDesc d1b_desc("sharkjaws", "004183.db1", 0xB161B889);  //diver
 
 static Mono555Desc c9a_555_desc(K_OHM(470.0), U_FARAD(1.0));
 

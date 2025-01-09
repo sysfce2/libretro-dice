@@ -41,7 +41,10 @@ public:
     int queue_size;
     QueueEntry queue[MAX_QUEUE_SIZE]; // TODO: Replace with vector?
 
-	Circuit(const Settings& s, Input& i, Video& v, const CircuitDesc* desc, const char* name);
+	Circuit(const Settings& s,
+           Input& i,
+           Video& v,
+           const CircuitDesc* desc, const char* name);
     ~Circuit();
 
 	uint64_t queue_push(Chip* chip, uint64_t delay);
