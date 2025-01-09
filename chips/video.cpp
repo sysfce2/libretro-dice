@@ -187,6 +187,14 @@ void Video::init_color_lut(const double (*r)[3])
 
 void Video::draw(Chip* chip)
 {
+   uint16_t *pixel_buf;
+   if (*write_to_frame_buf1)
+   {
+      pixel_buf = pixel_buf1;
+   } else {
+      pixel_buf = pixel_buf2;
+   }
+   
     uint64_t start_time = current_time - initial_time;
     uint64_t end_time = chip->circuit->global_time - initial_time;
 
@@ -321,25 +329,6 @@ CUSTOM_LOGIC( Video::video )
 }
 
 void Video::swap_buffers() {
+   *write_to_frame_buf1 = not(*write_to_frame_buf1);
    request_video_callback = true;
 }
-
-#ifdef _WIN32
-
-#include "video_wgl.h"
-//Video* Video::createDefault(VerticalLayout& layout, Viewport*& viewport) { return new VideoWgl(layout, viewport); }
-//#include "video_sdl.h"
-//Video* Video::createDefault(uintptr_t handle) { return new VideoSdl(handle); }
-
-#elif defined(__APPLE__)
-
-#include "video_cgl.h"
-//Video* Video::createDefault(VerticalLayout& layout, Viewport*& viewport) { return new VideoCgl(viewport->handle()); }
-
-#else
-
-#include "video_sdl.h"
-//Video* Video::createDefault(VerticalLayout& layout, Viewport*& viewport) { return new VideoSdl(viewport->handle()); }
-
-#endif
-
