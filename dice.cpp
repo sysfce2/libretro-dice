@@ -11,6 +11,8 @@
 #include "circuit_desc.h"
 
 #include "game_list.h"
+#include "chips/rom.h"
+#include "filename.h"
 
 /*
  using phoenix::VerticalLayout;
@@ -19,7 +21,7 @@ using phoenix::Viewport;
 
 namespace dice_libretro {
 
-void DICE::init_mem(uint16_t *pixel_buffer)
+void DICE::load_game(const char *path, uint16_t *pixel_buffer)
 {
         /*
         input = new Input();
@@ -28,6 +30,10 @@ void DICE::init_mem(uint16_t *pixel_buffer)
         input = new Input();
         video = new Video();
         video->pixel_buf = pixel_buffer;
+   
+        const string extension = nall::extension(path);
+        const string basename = nall::basename(nall::notdir(path));
+        RomDesc::set_zip_filename(path);
    
         //int game_idx = 0;  // Pong
         int game_idx = 10;

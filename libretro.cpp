@@ -52,8 +52,6 @@ void retro_init(void)
       snprintf(retro_base_directory, sizeof(retro_base_directory), "%s", dir);
    }
    color = 0;
-   
-   dice.init_mem(pixel_buffer);
 }
 
 void retro_deinit(void)
@@ -78,7 +76,7 @@ void retro_get_system_info(struct retro_system_info *info)
    info->library_name     = "dice";
    info->library_version  = "0.1.0";
    info->need_fullpath    = true;
-   info->valid_extensions = "txt";
+   info->valid_extensions = "txt";  // TODO (mittonk): zip|dmy
    info->block_extract = true;
 }
 
@@ -269,6 +267,9 @@ bool retro_load_game(const struct retro_game_info *info)
    use_audio_cb = environ_cb(RETRO_ENVIRONMENT_SET_AUDIO_CALLBACK, &audio_cb);
 
    check_variables();
+
+   uint16_t *pixel_buffer = reinterpret_cast<uint16_t *>(frame_buf);
+   dice.load_game(info->path, pixel_buffer);
 
    // TODO (mittonk): Load ROMs.
 

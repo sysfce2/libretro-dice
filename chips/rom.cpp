@@ -20,8 +20,7 @@ using std::vector;
 
 static string filename;
 static string romname;
-static string libretro_zip_filename = "/Users/mittonk/emu/ttl_arcade/sharkjaws.zip"; // KAM
-//static string libretro_zip_filename = "/home/mittonk/emu/ttl_arcade/roms/indy4.zip"; // KAM
+static string libretro_zip_filename;
 
 //static unzip zip_file;
 static vector<uint8_t> rom_data;
@@ -55,6 +54,7 @@ uint8_t RomDesc::get_data(const RomDesc* rom, unsigned offset)
    if((filename != rom->file_name.c_str()) || (romname != rom->rom_name.c_str()))
 
     {
+       printf("KAM14 libretro zip file %s\n", libretro_zip_filename.c_str());
        printf("KAM13 Loading zipfile %s %s %08X\n", rom->file_name.c_str(), rom->rom_name.c_str(), rom->crc);
 
         filename = rom->file_name.c_str();
@@ -219,3 +219,7 @@ uint8_t RomDesc::get_data(const RomDesc* rom, unsigned offset)
     return 0xff;
 }
 
+void RomDesc::set_zip_filename(const char *filename)
+{
+   libretro_zip_filename = filename;
+}

@@ -1,3 +1,6 @@
+#ifndef ROM_H__
+#define ROM_H__
+
 #include <string>
 #include <cstdint>
 
@@ -14,5 +17,8 @@ struct RomDesc
     // Caches last used ROM file for faster LUT initialization
     //
     static uint8_t get_data(const RomDesc* rom, unsigned offset);
+   
+   static void set_zip_filename(const char *filename);
 };
 
+#endif

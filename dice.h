@@ -43,7 +43,7 @@ class DICE
     //Viewport* viewport;
 
    public:
-      void init_mem(uint16_t *pixel_buffer);
+      void load_game(const char *path, uint16_t *pixel_buffer);
       void update_input(int32_t *input_state, int32_t *input_analog_left_x, int32_t *input_analog_left_y);
       void run(void);
       void render_frame(void);
