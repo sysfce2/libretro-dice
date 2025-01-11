@@ -18,6 +18,7 @@ protected:
     uint32_t v_pos;
 
     std::vector<float> color;
+   std::vector<uint16_t> retro_color;
 
     void adjust_screen_params();
     void draw(Chip* chip);

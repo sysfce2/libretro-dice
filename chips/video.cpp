@@ -60,7 +60,9 @@ CHIP_DESC( VIDEO ) =
 const VideoDesc VideoDesc::DEFAULT = VideoDesc();
 
 Video::Video() : scanline_time(0), current_time(0), initial_time(0), 
-    v_size(0), v_pos(0), frame_count(0), desc(&VideoDesc::DEFAULT), color(3 << 8)
+    v_size(0), v_pos(0), frame_count(0), desc(&VideoDesc::DEFAULT),
+    color(3 << 8),  // Reserve 768 colors for standalone OpenGL LUT
+    retro_color(1 << 8) // Reserve 256 for libretro colormap
 { }
 
 void Video::video_init(int width, int height /*, const Settings::Video& settings */)
@@ -182,9 +184,16 @@ void Video::init_color_lut(const double (*r)[3])
         }
 
         color[i] = (val + desc->brightness) * desc->contrast; // TODO: user configurable brightness/contrast?
-        
         printf("Color %d: %g %g %g %g\n", i, r_lo, r_hi, val, color[i]);
     }
+   
+   // Boil the old OpenGL Look Up Table down to a libretro-ish RGB565 colormap.
+   for (int i = 0; i < color.size() / 3; i++) {
+      uint16_t red5 = color[i*3] * 31;
+      uint16_t green6 = color[i*3+1] * 63;
+      uint16_t blue5 = color[i*3+2] * 31;
+      retro_color[i] = red5 << 11 | green6 << 5 | blue5;
+   }
 }
 
 void Video::draw(Chip* chip)
@@ -201,11 +210,13 @@ void Video::draw(Chip* chip)
    float ratio = float(VIDEO_WIDTH) / float(scanline_time);
    //uint16_t c = 0xffff; // (chip->inputs & VIDEO_MASK) * 1000;
    //uint16_t c = (chip->inputs & VIDEO_MASK) * 0x3333; // TODO (mittonk): Index by 3, don't multiply.
-   uint16_t c = bool(chip->inputs & VIDEO_MASK) ? 0xffff : 0x0;
+   //uint16_t c = bool(chip->inputs & VIDEO_MASK) ? 0xffff : 0x0;
+   uint16_t c = retro_color[(chip->inputs & VIDEO_MASK)];
+
 
    if((chip->inputs & VIDEO_MASK) || desc->scan_mode == INTERLACED) // Falling edge
     {
-        float* c_opengl = &color[(chip->inputs & VIDEO_MASK) * 3];
+        //float* c_opengl = &color[(chip->inputs & VIDEO_MASK) * 3];
 
        uint64_t left = float(start_time) * ratio;
        uint64_t right = fmin(float(end_time) * ratio, VIDEO_WIDTH);
