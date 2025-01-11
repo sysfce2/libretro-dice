@@ -38,7 +38,7 @@ public:
     
    Video();
      ~Video() { }
-     void video_init(int width, int height, const Settings::Video& settings);
+     void video_init(int width, int height /*, const Settings::Video& settings */);
      void swap_buffers();
      void show_cursor(bool show);
     static CUSTOM_LOGIC( video );
