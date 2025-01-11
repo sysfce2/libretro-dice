@@ -173,6 +173,11 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
         bitmask = 1<<keysym;
         new_out = bool(circuit->input.input_state[controller] & bitmask);
        delta -= new_out * dt * sensitivity;
+       // Right
+       keysym = RETRO_DEVICE_ID_JOYPAD_RIGHT;
+       bitmask = 1<<keysym;
+       new_out = bool(circuit->input.input_state[controller] & bitmask);
+      delta += new_out * dt * sensitivity;
 
          /*       break;
             case KeyAssignment::JOYSTICK_AXIS:
@@ -194,10 +199,6 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
             case KeyAssignment::JOYSTICK_BUTTON:
                 delta += circuit->input.getJoystickButton(settings.right.joystick, settings.right.button) * dt * sensitivity;
                 break; */
-        keysym = RETRO_DEVICE_ID_JOYPAD_RIGHT;
-        bitmask = 1<<keysym;
-        new_out = bool(circuit->input.input_state[controller] & bitmask);
-       delta += new_out * dt * sensitivity;
  
  /*           case KeyAssignment::JOYSTICK_AXIS:
             {
@@ -649,10 +650,38 @@ void wheel_input(Chip* chip, int mask)
    unsigned axis_idx = 0; // X-axis
     if (true) // if(settings.use_keyboard)
     {
-        double dt = (INPUT_POLL_RATE / Circuit::timescale) / 1000000000.0;
-        //double sensitivity = double(settings.keyboard_sensitivity) / 1000.0;
-       double sensitivity = 500.0 / 1000.0;
+       double sensitivity;
+       int keysym, bitmask, new_out;
+       
+       double dt = (INPUT_POLL_RATE / Circuit::timescale) / 1000000000.0;
+       sensitivity = 500.0 / 1000.0;
 
+      /* switch(settings.left.type)
+       {
+           case KeyAssignment::KEYBOARD:
+               delta -= circuit->input.getKeyboardState(settings.left.button) * dt * sensitivity;
+               break;
+           case KeyAssignment::JOYSTICK_BUTTON: */
+       keysym = RETRO_DEVICE_ID_JOYPAD_LEFT;
+       bitmask = 1<<keysym;
+       new_out = bool(circuit->input.input_state[joystick_idx] & bitmask);
+      delta -= new_out * dt * sensitivity;
+      // Right
+      keysym = RETRO_DEVICE_ID_JOYPAD_RIGHT;
+      bitmask = 1<<keysym;
+      new_out = bool(circuit->input.input_state[joystick_idx] & bitmask);
+     delta += new_out * dt * sensitivity;
+
+
+       
+       
+       
+       //double dt = (INPUT_POLL_RATE / Circuit::timescale) / 1000000000.0;
+        //double sensitivity = double(settings.keyboard_sensitivity) / 1000.0;
+        sensitivity = 500.0 / 1000.0;
+
+       
+       
         /* switch(settings.left.type)
         {
             case KeyAssignment::KEYBOARD:
@@ -855,6 +884,7 @@ void ThrottleDesc<THROTTLE>::throttle_input(Chip* chip, int mask)
                 *pos -= dt * double(settings.keyboard_sensitivity);
             break;
         case KeyAssignment::JOYSTICK_BUTTON:
+      // TODO (mittonk): Digital throttle control.
             if(circuit->input.getJoystickButton(settings.key.joystick, settings.key.button))
                 *pos += dt * double(settings.keyboard_sensitivity);
             else
