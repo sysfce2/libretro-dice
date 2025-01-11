@@ -189,9 +189,10 @@ void Video::init_color_lut(const double (*r)[3])
    
    // Boil the old OpenGL Look Up Table down to a libretro-ish RGB565 colormap.
    for (int i = 0; i < color.size() / 3; i++) {
-      uint16_t red5 = color[i*3] * 31;
-      uint16_t green6 = color[i*3+1] * 63;
-      uint16_t blue5 = color[i*3+2] * 31;
+      // LUT isn't clamped to 1.0, do that here so we don't wrap around.
+      uint16_t red5 = fmin(color[i*3],1) * 31;
+      uint16_t green6 = fmin(color[i*3+1],1) * 63;
+      uint16_t blue5 = fmin(color[i*3+2],1) * 31;
       retro_color[i] = red5 << 11 | green6 << 5 | blue5;
    }
 }
