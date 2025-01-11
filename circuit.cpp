@@ -151,10 +151,9 @@ global_time(0), queue_size(0)
 
 
     // Grab video descriptor
-    /*
-     if(desc->video != nullptr) video.desc = desc->video;
+    if(desc->video != nullptr) video.desc = desc->video;
     else video.desc = &VideoDesc::DEFAULT;
-     */
+    
 
     // Set up VCC & GND for analog
     chips[0]->analog_output = 5.0;
