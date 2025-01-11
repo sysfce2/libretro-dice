@@ -18,6 +18,7 @@ protected:
     uint32_t v_pos;
 
     std::vector<float> color;
+   std::vector<uint16_t> retro_color;
 
     void adjust_screen_params();
     void draw(Chip* chip);
@@ -38,7 +39,7 @@ public:
     
    Video();
      ~Video() { }
-     void video_init(int width, int height, const Settings::Video& settings);
+     void video_init(int width, int height /*, const Settings::Video& settings */);
      void swap_buffers();
      void show_cursor(bool show);
     static CUSTOM_LOGIC( video );

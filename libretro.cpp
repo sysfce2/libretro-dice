@@ -224,12 +224,7 @@ void retro_run(void)
 
    // Show the frame buffer that we're done writing to.
    uint8_t *frame_buf;
-   if (write_to_frame_buf1)
-   {
-      frame_buf = frame_buf2;
-   } else {
-      frame_buf = frame_buf1;
-   }
+   frame_buf = write_to_frame_buf1 ? frame_buf2 : frame_buf1;
    video_cb(frame_buf, VIDEO_WIDTH, VIDEO_HEIGHT, VIDEO_PITCH);
    
    // Wipe the frame buffer we just displayed.
