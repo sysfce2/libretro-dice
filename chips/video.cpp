@@ -121,7 +121,8 @@ void Video::adjust_screen_params()
         case ROTATE_180: glRotatef(180.0, 0.0, 0.0, -1.0); break;
         case ROTATE_270: glRotatef(270.0, 0.0, 0.0, -1.0); break;
         default: break;
-    }    
+    }
+     
     glOrtho(0.0, scanline_time, v_size, 0.0, -1.0, 1.0);
 
 	glMatrixMode(GL_MODELVIEW);

@@ -36,7 +36,6 @@ class DICE
     Settings settings;
     Input* input;
     Video* video;
-    Circuit* circuit;
     RealTimeClock real_time;
 
     //VerticalLayout layout;
@@ -48,6 +47,9 @@ class DICE
       void run(void);
       void render_frame(void);
       void reset(void);
+   
+   Circuit* circuit; // TODO (mittonk): Private after video callbacks figured out.
+
 };
 
 
