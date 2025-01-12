@@ -149,19 +149,16 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
             delta += circuit->input.getRelativeMouseY(settings.y_axis.mouse) * sensitivity;
     } */
    // TODO (mittonk): User-accessable core setting.
-   bool settings_use_analog_for_paddles = false;
+   bool settings_absolute_paddles = false;
    
    unsigned joystick_idx = PADDLE;
    unsigned controller = PADDLE;
-   int keysym;
-   int bitmask;
-   int new_out;
-
+ 
     //if(settings.use_keyboard && HORIZONTAL)
-   if ((!settings_use_analog_for_paddles) && HORIZONTAL)
+   if ((!settings_absolute_paddles) && HORIZONTAL)
     {
         double dt = (INPUT_POLL_RATE / Circuit::timescale) / 1000000000.0;
-        double sensitivity = double(0.5 * 128.0 /*settings.keyboard_sensitivity*/) * fabs(desc->max_val - desc->min_val) / 100000.0;
+        double sensitivity = double(0.75 * 128.0 /*settings.keyboard_sensitivity*/) * fabs(desc->max_val - desc->min_val) / 100000.0;
 
        /* switch(settings.left.type)
         {
@@ -169,24 +166,23 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
                 delta -= circuit->input.getKeyboardState(settings.left.button) * dt * sensitivity;
                 break;
             case KeyAssignment::JOYSTICK_BUTTON: */
-        keysym = RETRO_DEVICE_ID_JOYPAD_LEFT;
-        bitmask = 1<<keysym;
-        new_out = bool(circuit->input.input_state[controller] & bitmask);
-       delta -= new_out * dt * sensitivity;
+       delta -= circuit->input.getJoystickButton(controller, RETRO_DEVICE_ID_JOYPAD_LEFT) * dt * sensitivity;
        // Right
-       keysym = RETRO_DEVICE_ID_JOYPAD_RIGHT;
-       bitmask = 1<<keysym;
-       new_out = bool(circuit->input.input_state[controller] & bitmask);
-      delta += new_out * dt * sensitivity;
+      delta += circuit->input.getJoystickButton(controller, RETRO_DEVICE_ID_JOYPAD_RIGHT) * dt * sensitivity;
 
          /*       break;
             case KeyAssignment::JOYSTICK_AXIS:
             {
                 double val = circuit->input.getJoystickAxis(settings.left.joystick, settings.left.button >> 1) / 32768.0;
-                if(val > ANALOG_THRESHOLD && (settings.left.button & 1))
-                    delta -= (val - ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
-                else if(val < -ANALOG_THRESHOLD && !(settings.left.button & 1))
+          */
+       unsigned axis_idx = HORIZONTAL ? 0 : 1;
+
+       double val = circuit->input.getJoystickAxis(joystick_idx, axis_idx) / 32768.0;
+                if(val > ANALOG_THRESHOLD) // && (settings.left.button & 1))
+                    delta += (val - ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
+                else if(val < -ANALOG_THRESHOLD)  //&& !(settings.left.button & 1))
                     delta += (val + ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
+          /*
                 break;
             }
             default: break;
@@ -212,20 +208,14 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
             default: break;
         } */
     }
-    else if(!settings_use_analog_for_paddles /*settings.use_keyboard */) // vertical
+    else if(!settings_absolute_paddles /*settings.use_keyboard */) // vertical
     {
         double dt = (INPUT_POLL_RATE / Circuit::timescale) / 1000000000.0;
-        double sensitivity = double(0.5 * 128.0 /*settings.keyboard_sensitivity */) * fabs(desc->max_val - desc->min_val) / 100000.0;
+        double sensitivity = double(0.75 * 128.0 /*settings.keyboard_sensitivity */) * fabs(desc->max_val - desc->min_val) / 100000.0;
 
-        keysym = RETRO_DEVICE_ID_JOYPAD_DOWN;
-        bitmask = 1<<keysym;
-        new_out = bool(circuit->input.input_state[controller] & bitmask);
-       delta += new_out * dt * sensitivity;
-        keysym = RETRO_DEVICE_ID_JOYPAD_UP;
-        bitmask = 1<<keysym;
-        new_out = bool(circuit->input.input_state[controller] & bitmask);
-       delta -= new_out * dt * sensitivity;
-
+       delta += circuit->input.getJoystickButton(controller, RETRO_DEVICE_ID_JOYPAD_DOWN) * dt * sensitivity;
+       delta -= circuit->input.getJoystickButton(controller, RETRO_DEVICE_ID_JOYPAD_UP) * dt * sensitivity;
+       
         /*switch(settings.down.type)
         {
             case KeyAssignment::KEYBOARD:
@@ -242,6 +232,21 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
                 else if(val < -ANALOG_THRESHOLD && !(settings.down.button & 1))
                     delta -= (val + ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
                 break;
+         */
+       unsigned axis_idx = HORIZONTAL ? 0 : 1;
+
+       double val = circuit->input.getJoystickAxis(joystick_idx, axis_idx) / 32768.0;
+
+       if(val < -ANALOG_THRESHOLD) // && !(settings.left.button & 1))
+            delta += (val + ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
+        if(val > ANALOG_THRESHOLD )//&& (settings.right.button & 1))
+            delta += (val - ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
+
+       
+       //else if(val < -ANALOG_THRESHOLD)  //&& !(settings.left.button & 1))
+                  //  delta += (val + ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
+
+       /*
             }
             default: break;
         }
@@ -299,7 +304,7 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
    
     // Absolute Joystick - Overrides deltas
     //if(settings.use_joystick && settings.joystick_mode == Settings::Input::JOYSTICK_ABSOLUTE)
-    if (settings_use_analog_for_paddles)
+    if (settings_absolute_paddles)
     {
         //double sensitivity = 0.25 + 0.00075 * (1000.0 - double(settings.joystick_sensitivity)); // Inverse scale from 0.25..1.0
        double sensitivity = 0.25 + 0.00075 * (1000.0 - 500.0); // Inverse scale from 0.25..1.0
@@ -350,14 +355,13 @@ CUSTOM_LOGIC( digital_input )
 } */
 
 
-template <int controller, unsigned keysym>
+template <int controller, unsigned button>
 CUSTOM_LOGIC( digital_input )
 {
     Circuit* circuit = chip->circuit;
     //const KeyAssignment& key_assignment = (circuit->settings.*c)().*k;
-   int bitmask = 1<<keysym;
     //int new_out = circuit->input.getKeyPressed(key_assignment);
-   int new_out = bool(circuit->input.input_state[controller] & bitmask);
+   int new_out = circuit->input.getJoystickButton(controller, button);
    //int new_out = 0;
     new_out ^= 1; // Joysticks, buttons are active LOW
 
@@ -651,7 +655,6 @@ void wheel_input(Chip* chip, int mask)
     if (true) // if(settings.use_keyboard)
     {
        double sensitivity;
-       int keysym, bitmask, new_out;
        
        double dt = (INPUT_POLL_RATE / Circuit::timescale) / 1000000000.0;
        sensitivity = 500.0 / 1000.0;
@@ -662,15 +665,9 @@ void wheel_input(Chip* chip, int mask)
                delta -= circuit->input.getKeyboardState(settings.left.button) * dt * sensitivity;
                break;
            case KeyAssignment::JOYSTICK_BUTTON: */
-       keysym = RETRO_DEVICE_ID_JOYPAD_LEFT;
-       bitmask = 1<<keysym;
-       new_out = bool(circuit->input.input_state[joystick_idx] & bitmask);
-      delta -= new_out * dt * sensitivity;
+      delta -= circuit->input.getJoystickButton(joystick_idx, RETRO_DEVICE_ID_JOYPAD_LEFT) * dt * sensitivity;
       // Right
-      keysym = RETRO_DEVICE_ID_JOYPAD_RIGHT;
-      bitmask = 1<<keysym;
-      new_out = bool(circuit->input.input_state[joystick_idx] & bitmask);
-     delta += new_out * dt * sensitivity;
+     delta += circuit->input.getJoystickButton(joystick_idx, RETRO_DEVICE_ID_JOYPAD_RIGHT) * dt * sensitivity;
 
 
        
@@ -1017,7 +1014,12 @@ bool Input::getKeyboardState(unsigned scancode)
 
 bool Input::getJoystickButton(unsigned joystick, unsigned button)
 {
-    //if(joystick >= joysticks.size()) return 0;
+   // Button is RETRO_DEVICE_ID_JOYPAD_A or similar.
+   // RetroPad d-pad is implemented as 4 buttons.
+   unsigned bitmask = 1<<button;
+   return bool(input_state[joystick] & bitmask);
+
+   //if(joystick >= joysticks.size()) return 0;
     //return SDL_JoystickGetButton(joysticks[joystick], button);
 }
 
