@@ -5,6 +5,7 @@
 #include "rom.h"
 #include "../unzip/unzip.h"
 #include "../unzip/fileio.h"
+#include "../libretro.h"
 #include <cstdint>
 #include <vector>
 /*
@@ -17,6 +18,10 @@ using std::vector;
 // in main.cpp
 //extern const string& application_path();
 //extern Window& application_window();
+// In libretro.cpp
+extern retro_log_printf_t log_cb;
+extern retro_environment_t environ_cb;
+
 
 static string filename;
 static string romname;
@@ -72,6 +77,12 @@ uint8_t RomDesc::get_data(const RomDesc* rom, unsigned offset)
                 .setTitle("Error")
                 .error();
 */
+           struct retro_message message;
+           message.msg = "ROM file not found or damaged.  Game will not function correctly!";
+           message.frames = 60;
+           environ_cb(RETRO_ENVIRONMENT_SET_MESSAGE, &message);
+
+           //log_cb(RETRO_LOG_ERROR, "ROM file %s not found.  Game will not function correctly!", libretro_zip_filename.c_str());
            printf("KAM8 zip not found\n");
             romname = rom->rom_name.c_str();
             error_shown = true;

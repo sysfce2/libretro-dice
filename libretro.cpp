@@ -17,7 +17,7 @@ static uint8_t *frame_buf1;
 static uint8_t *frame_buf2;
 static bool write_to_frame_buf1 = true;
 static struct retro_log_callback logging;
-static retro_log_printf_t log_cb;
+retro_log_printf_t log_cb;
 static bool use_audio_cb;
 static float last_aspect;
 static float last_sample_rate;
@@ -37,7 +37,8 @@ static void fallback_log(enum retro_log_level level, const char *fmt, ...)
 }
 
 
-static retro_environment_t environ_cb;
+//static
+retro_environment_t environ_cb;
 
 static unsigned color;  // TODO (kmitton)
 
