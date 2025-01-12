@@ -290,7 +290,7 @@ bool retro_load_game(const struct retro_game_info *info)
    // TODO (mittonk): Push down to video module, which will need access to
    // some RetroArch callbacks.
    VideoOrientation game_video_rotation = ROTATE_0;
-   //VideoOrientation game_video_rotation = dice.circuit->video.desc->orientation;
+   if (dice.circuit) game_video_rotation = dice.circuit->video.desc->orientation;
    screen_horizontal = game_video_rotation == ROTATE_0 || game_video_rotation == ROTATE_180;
    environ_cb(RETRO_ENVIRONMENT_SET_ROTATION, &game_video_rotation);
 
