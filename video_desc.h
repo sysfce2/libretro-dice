@@ -3,7 +3,8 @@
 
 #include <vector>
 
-enum VideoOrientation { ROTATE_0 = 0, ROTATE_90, ROTATE_180, ROTATE_270 }; // Degrees clock-wise to rotate monitor
+enum VideoOrientation { ROTATE_0 = 0, ROTATE_90 = 3, ROTATE_180 = 2, ROTATE_270 = 1}; // Degrees clock-wise to rotate monitor
+// Odd enumeration values to match libretro RETRO_ENVIRONMENT_SET_ROTATION, cheat.
 enum VideoScanMode { PROGRESSIVE = 0, INTERLACED };
 enum VideoMonitorType { MONOCHRONE = 0, COLOR };
 

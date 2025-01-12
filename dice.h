@@ -43,11 +43,15 @@ class DICE
     //Viewport* viewport;
 
    public:
+      VideoOrientation game_video_rotation = ROTATE_0;
+   
       void load_game(const char *path, uint16_t *pixel_buf1, uint16_t *pixel_buf2, bool *write_to_frame_buf1);
       void update_input(int32_t *input_state, int32_t *input_analog_left_x, int32_t *input_analog_left_y);
       void run(void);
       void render_frame(void);
       void reset(void);
+   
+
 };
 
 
