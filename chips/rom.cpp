@@ -78,7 +78,7 @@ uint8_t RomDesc::get_data(const RomDesc* rom, unsigned offset)
                 .error();
 */
            struct retro_message message;
-           message.msg = "ROM file not found.  Game will not function correctly!";
+           message.msg = "ROM file not found or damaged.  Game will not function correctly!";
            message.frames = 60;
            environ_cb(RETRO_ENVIRONMENT_SET_MESSAGE, &message);
 
