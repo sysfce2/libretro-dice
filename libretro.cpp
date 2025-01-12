@@ -95,13 +95,8 @@ static retro_input_state_t input_state_cb;
 
 void retro_get_system_av_info(struct retro_system_av_info *info)
 {
-   float aspect;
-   if (screen_horizontal)
-   {
-      aspect = 4.0f / 3.0f;
-   } else {
-      aspect = 3.0f / 4.0f;
-   }
+   // Some games use vertical monitors, won't know till we load it.
+   float aspect = screen_horizontal ? 4.0f / 3.0f : 3.0f / 4.0f;
    float sampling_rate         = 30000.0f;
 
    info->timing = (struct retro_system_timing) {
@@ -287,12 +282,9 @@ bool retro_load_game(const struct retro_game_info *info)
    uint16_t *pixel_buf2 = reinterpret_cast<uint16_t *>(frame_buf2);
    dice.load_game(info->path, pixel_buf1, pixel_buf2, &write_to_frame_buf1);
 
-   // TODO (mittonk): Push down to video module, which will need access to
-   // some RetroArch callbacks.
-   VideoOrientation game_video_rotation = ROTATE_0;
-   if (dice.circuit) game_video_rotation = dice.circuit->video.desc->orientation;
-   screen_horizontal = game_video_rotation == ROTATE_0 || game_video_rotation == ROTATE_180;
-   environ_cb(RETRO_ENVIRONMENT_SET_ROTATION, &game_video_rotation);
+   // If game uses a vertical monitor, tell libretro and adjust aspect ratio.
+   screen_horizontal = dice.game_video_rotation == ROTATE_0 || dice.game_video_rotation == ROTATE_180;
+   environ_cb(RETRO_ENVIRONMENT_SET_ROTATION, &dice.game_video_rotation);
 
    (void)info;
 

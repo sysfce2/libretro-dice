@@ -53,6 +53,10 @@ void DICE::load_game(const char *path, uint16_t *pixel_buf1, uint16_t *pixel_buf
                               *input,
                               *video,
                               g.desc, g.command_line);
+
+   // Export monitor orientation towards libretro.
+   if (circuit) game_video_rotation = circuit->video.desc->orientation;
+   
 }
 
 void DICE::run(void)
