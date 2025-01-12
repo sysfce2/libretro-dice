@@ -13,11 +13,16 @@
 #include "game_list.h"
 #include "chips/rom.h"
 #include "filename.h"
+#include "libretro.h"
 
 /*
  using phoenix::VerticalLayout;
 using phoenix::Viewport;
  */
+
+extern retro_environment_t environ_cb;
+extern retro_log_printf_t log_cb;
+
 
 namespace dice_libretro {
 
@@ -45,7 +50,12 @@ void DICE::load_game(const char *path, uint16_t *pixel_buf1, uint16_t *pixel_buf
               break;
            }
         }
-        // TODO (mittonk): Error out if game not found.
+        if (i == game_list_size)
+        {
+           log_cb(RETRO_LOG_ERROR, "Fatal: No matching game for that filename.  Filenames matter.");
+           printf("Fatal: No matching game for that filename.");
+           exit(1);  // TODO (mittonk): Seems rude, what's cleaner?
+        }
    
         GameDesc& g = game_list[i];
         
