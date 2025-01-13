@@ -1,67 +1,60 @@
 DICE is a Discrete Integrated Circuit Emulator. It emulates computer systems
 that lack any type of CPU, consisting only of discrete logic components.
 
+dice-libretro is a Libretro port of DICE, to run in RetroArch.
 
 1) Usage
 
-By default, the DICE executable will launch in GUI mode, which allows
-the user to configure the emulator and load a circuit. Additionally, DICE
-can be run from the command line, which by default will launch the emulator
-in fullscreen mode without the GUI and start a game immediately. When launching
-from the command line, press the Exit key to exit the emulator. 
+Some games use ROMs and launch similarly to MAME or FBNeo ---
+filename is important.
+Please do not attempt to contact the DICE team
+to request ROM files.
 
-Launching DICE from the command line can be accomplished by navigating to the
-directory where DICE is installed and typing:
+Some games (pong, breakout, pinpong, etc) do not have any
+ROM on the board at all.  For these, copy the dummy launcher
+file from dummy_files to your ROM folder; these have a
+correct name (ie, pong.dmy) that will get RetroArch to set up
+lr-dice for the correct game.
 
-dice gamename [parameters]
-
-Where "gamename" is the name of the game to be run:
-
-antiaircraft
-attack
+Games:
+antiaircraft  (rom needed)
+attack  (rom needed)
 breakout
-cleansweep
-crashnscore
+cleansweep  (rom needed)
+crashnscore  (rom needed)
 crossfire
 gotcha
-jetfighter
+jetfighter  (rom needed)
 hiway
-indy4
+indy4  (rom needed)
 pinpong
 pong
 pongdoubles
 quadrapong
 rebound
-sharkjaws
+sharkjaws  (rom needed)
 spacerace
-steeplechase
-stuntcycle
+steeplechase  (rom needed)
+stuntcycle  (rom needed)
 tvbasketball
-wipeout
-
-And parameters is any optional combination of the following:
-
--window : Start the emulator in a window instead of fullscreen mode.
-
-
-
-ROM files should be placed in a subfolder named "roms" in the directory where 
-the DICE executable is located. Please do not attempt to contact the DICE team 
-to request ROM files.
-
+wipeout  (rom needed)
 
 
 2) Compiling
+Working on getting this integrated with libretro's CI/CD infrastructure.
+
+Until then, use:
+https://docs.libretro.com/development/retroarch/compilation/linux-and-bsd/#building-libretro-cores
+
+or similar for your platform.
 
 DICE makes use of some C++11 features, so GCC 4.7 or newer is needed to compile.
-The SDL headers are also required, available at http://www.libsdl.org.
-
-Currently DICE supports Windows (using MinGW to compile), Linux, and OS X (preliminarily).
-
 
 
 3) Contact Information
+Github: https://github.com/mittonk/dice-libretro
 
+For upstream standalone DICE (inactive):
 Project Page: http://sourceforge.net/projects/dice/
 Email: dice.emulator@gmail.com
 
@@ -69,7 +62,7 @@ Email: dice.emulator@gmail.com
 
 4) License
 
-Copyright (C) 2008-2014 DICE Team
+Copyright (C) 2008-2025 DICE Team
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
