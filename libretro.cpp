@@ -127,10 +127,10 @@ void retro_set_environment(retro_environment_t cb)
    
    static const struct retro_variable vars[] = {
       { "dice_paddle_joystick_absolute", "Paddle joystick absolute; false|true" },
-      { "dice_paddle_keyboard_sensitivity", "Paddle D-pad sensitivity; 250|375|500" },
-      { "dice_paddle_joystick_sensitivity", "Paddle analog stick sensitivity; 500|250|375" },
-      { "dice_wheel_keyjoy_sensitivity", "Wheel sensitivity; 500|250|375" },
-      { "dice_throttle_keyjoy_sensitivity", "Throttle sensitivity; 250|375|500" },
+      { "dice_paddle_keyboard_sensitivity", "Paddle D-pad sensitivity; 250|125|375|500" },
+      { "dice_paddle_joystick_sensitivity", "Paddle analog stick sensitivity; 500|125|250|375" },
+      { "dice_wheel_keyjoy_sensitivity", "Wheel sensitivity; 500|125|250|375" },
+      { "dice_throttle_keyjoy_sensitivity", "Throttle sensitivity; 250|125|375|500" },
       { NULL, NULL },
    };
 

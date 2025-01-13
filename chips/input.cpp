@@ -10,11 +10,6 @@
 
 static const double INPUT_POLL_RATE = 10.0e-3; // 10 ms poll rate
 
-int Input::paddle_keyboard_sensitivity;
-int Input::paddle_joystick_sensitivity;
-int Input::wheel_keyjoy_sensitivity;
-int Input::throttle_keyjoy_sensitivity;
-
 extern CUSTOM_LOGIC( clock );
 
 CHIP_DESC( PADDLE1_HORIZONTAL_INPUT ) = 
