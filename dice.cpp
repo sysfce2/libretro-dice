@@ -73,12 +73,11 @@ void DICE::run(void)
     if(circuit)
     {
        // Run until we've got a full video frame, but not much more.
-       while (!circuit->video.request_video_callback) {  // TODO (mittonk): Rename frame_done.
+       while (!circuit->video.frame_done) {
             // circuit->run(2.5e-3 / Circuit::timescale); // Run 2.5 ms
           circuit->run(1.0e-3 / Circuit::timescale); // Run 1 ms
        }
-       // Headed out to video callback, clear request.
-       circuit->video.request_video_callback = false;
+       circuit->video.frame_done = false;
     }
 }
 

@@ -32,7 +32,7 @@ public:
    
    uint16_t *pixel_buf;
 
-   bool request_video_callback = false;
+   bool frame_done = false;
 
     
    Video();

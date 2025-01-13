@@ -340,11 +340,11 @@ CUSTOM_LOGIC( Video::video )
 
 void Video::swap_buffers() {
    video_cb(reinterpret_cast<uint8_t*>(pixel_buf), VIDEO_WIDTH, VIDEO_HEIGHT, VIDEO_PITCH);
-
+   
    // Wipe the frame buffer we just displayed.
    for (unsigned i = 0; i<VIDEO_PIXELS; i++) {
       pixel_buf[i] = 0; // 0x2222;
    }
-
-   request_video_callback = true; // TODO (mittonk): Rename ase "frame_done" or similar.
+   
+   frame_done = true;
 }
