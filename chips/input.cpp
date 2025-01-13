@@ -150,14 +150,11 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
         else // Vertical, using mouse y-axis
             delta += circuit->input.getRelativeMouseY(settings.y_axis.mouse) * sensitivity;
     } */
-   // TODO (mittonk): User-accessable core setting.
-   bool settings_absolute_paddles = false;
-   
    unsigned joystick_idx = PADDLE;
    unsigned controller = PADDLE;
  
     //if(settings.use_keyboard && HORIZONTAL)
-   if ((!settings_absolute_paddles) && HORIZONTAL)
+   if ((!circuit->input.paddle_joystick_absolute) && HORIZONTAL)
     {
         double dt = (INPUT_POLL_RATE / Circuit::timescale) / 1000000000.0;
         double sensitivity = double(PADDLE_KEYBOARD_SENSITIVITY) * fabs(desc->max_val - desc->min_val) / 100000.0;
@@ -210,7 +207,7 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
             default: break;
         } */
     }
-    else if(!settings_absolute_paddles /*settings.use_keyboard */) // vertical
+    else if(!circuit->input.paddle_joystick_absolute /*settings.use_keyboard */) // vertical
     {
         double dt = (INPUT_POLL_RATE / Circuit::timescale) / 1000000000.0;
         double sensitivity = double(PADDLE_KEYBOARD_SENSITIVITY/*settings.keyboard_sensitivity */) * fabs(desc->max_val - desc->min_val) / 100000.0;
@@ -307,7 +304,7 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
    
     // Absolute Joystick - Overrides deltas
     //if(settings.use_joystick && settings.joystick_mode == Settings::Input::JOYSTICK_ABSOLUTE)
-    if (settings_absolute_paddles)
+    if (circuit->input.paddle_joystick_absolute)
     {
         //double sensitivity = 0.25 + 0.00075 * (1000.0 - double(settings.joystick_sensitivity)); // Inverse scale from 0.25..1.0
        double sensitivity = 0.25 + 0.00075 * (1000.0 - 500.0); // Inverse scale from 0.25..1.0

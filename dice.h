@@ -50,6 +50,7 @@ class DICE
       void run(void);
       void render_frame(void);
       void reset(void);
+      void set_paddle_joystick_absolute(bool paddle_joystick_absolute);
    
 
 };
