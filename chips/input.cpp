@@ -884,18 +884,17 @@ void ThrottleDesc<THROTTLE>::throttle_input(Chip* chip, int mask)
                 *pos -= dt * double(settings.keyboard_sensitivity);
             break;
         case KeyAssignment::JOYSTICK_BUTTON:
-      // TODO (mittonk): Digital throttle control.
             if(circuit->input.getJoystickButton(settings.key.joystick, settings.key.button))
-                *pos += dt * double(settings.keyboard_sensitivity);
+     */
+            if(circuit->input.getJoystickButton(THROTTLE, RETRO_DEVICE_ID_JOYPAD_UP))
+                *pos += dt * double(THROTTLE_KEYJOY_SENSITIVITY);
             else
-                *pos -= dt * double(settings.keyboard_sensitivity);
-            break;
+                *pos -= dt * double(THROTTLE_KEYJOY_SENSITIVITY);
+       /*     break;
         case KeyAssignment::JOYSTICK_AXIS:
-            if(settings.key.button & 1) */
-                //*pos = circuit->input.getJoystickAxis(settings.key.joystick, settings.key.button >> 1) / 327.68;
-   *pos = circuit->input.getJoystickAxis(THROTTLE, 1) / 327.68;
-
-/*            else
+            if(settings.key.button & 1)
+                *pos = circuit->input.getJoystickAxis(settings.key.joystick, settings.key.button >> 1) / 327.68;
+            else
                 *pos = circuit->input.getJoystickAxis(settings.key.joystick, settings.key.button >> 1) / -327.68;
             break;
     } */
