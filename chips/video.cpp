@@ -247,7 +247,6 @@ void Video::draw_overlays()
 
     /*glEnable(GL_BLEND);
     glBlendFunc(GL_ZERO, GL_SRC_COLOR); */
-   float ratio = float(VIDEO_WIDTH) / float(scanline_time);
 
     for(const VideoOverlay& o : desc->overlays)
     {
@@ -264,17 +263,34 @@ void Video::draw_overlays()
 	        glVertex3f(end_x,   end_y,   0.0);
 	        glVertex3f(start_x, end_y,   0.0);
 	    glEnd(); */
+
+       bool horizontal = true;
+       if(desc->orientation == ROTATE_90 || desc->orientation == ROTATE_270)
+           horizontal = false;
+
        // Negative values mean "full screen".
-       int left = o.x;
-       int top = o.y;
-       int right = (o.width < 0.0) ? VIDEO_WIDTH : o.x + o.width;
-       int bottom = (o.height < 0.0) ? VIDEO_HEIGHT : o.y + o.height;
+       int left, top, right, bottom;
+       if (horizontal)
+       {
+          left = o.x;
+          top = o.y;
+          right = (o.width < 0.0) ? VIDEO_WIDTH : o.x + o.width;
+          bottom = (o.height < 0.0) ? VIDEO_HEIGHT : o.y + o.height;
+       } else {
+          // Good enough for Breakout.
+          // TODO (mittonk): Fix to handle another hypothetical vertical overlay.
+          left = fmin(o.x / Circuit::timescale / scanline_time * VIDEO_WIDTH, VIDEO_WIDTH);
+          top = o.x;
+          right = fmin((o.x + o.width) / Circuit::timescale / scanline_time * VIDEO_WIDTH, VIDEO_WIDTH);
+          bottom = (o.height < 0.0) ? VIDEO_HEIGHT : o.y + o.height;
+       }
        uint16_t c = doublergb_to_retrocolor(o.r, o.g, o.b);
        for (int i = left; i <= right; i++)
        {
           for (int j = top; j <= bottom; j++)
           {
              uint16_t existing = pixel_buf[i + j*VIDEO_WIDTH];
+             //pixel_buf[i + j*VIDEO_WIDTH] = c;
              pixel_buf[i + j*VIDEO_WIDTH] = retro_blend(existing, c);
           }
        }
