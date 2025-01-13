@@ -102,4 +102,9 @@ void DICE::reset(void)
 {
 }
 
+void DICE::set_paddle_joystick_absolute(bool paddle_joystick_absolute)
+{
+   if (circuit) circuit->input.paddle_joystick_absolute = paddle_joystick_absolute;
+}
+
 } // namespace

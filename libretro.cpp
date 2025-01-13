@@ -126,6 +126,7 @@ void retro_set_environment(retro_environment_t cb)
    cb(RETRO_ENVIRONMENT_SET_CONTROLLER_INFO, (void*)ports);
    
    static const struct retro_variable vars[] = {
+      { "dice_paddle_joystick_absolute", "Paddle joystick absolute; false|true" },
       { NULL, NULL },
    };
 
@@ -159,9 +160,6 @@ void retro_set_video_refresh(retro_video_refresh_t cb)
 
 void retro_reset(void)
 {
-   // TODO (kmitton): Read level and 4-player inputs before restarting initialization.
-   // check_variables();
-
    dice.reset();
 }
 
@@ -191,11 +189,20 @@ static void update_input(void)
 
 static void check_variables(void)
 {
+   struct retro_variable var = {0};
+   var.key = "dice_paddle_joystick_absolute";
+   var.value = NULL;
+   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+   {
+      if (!strcmp(var.value, "false"))
+         dice.set_paddle_joystick_absolute(false);
+      else
+         dice.set_paddle_joystick_absolute(true);
+   }
 }
 
 static void audio_callback(void)
 {
-   // TODO (kmitton): TAUNT?
 }
 
 static void audio_set_state(bool enable)
