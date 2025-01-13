@@ -13,9 +13,7 @@
 #include "libretro.h"
 #include "dice.h"
 
-static uint8_t *frame_buf1;
-static uint8_t *frame_buf2;
-static bool write_to_frame_buf1 = true;
+static uint8_t *frame_buf;
 static struct retro_log_callback logging;
 retro_log_printf_t log_cb;
 static bool use_audio_cb;
@@ -45,12 +43,7 @@ static unsigned color;  // TODO (kmitton)
 void retro_init(void)
 {
    int safety_factor = 2;
-   frame_buf1 = (uint8_t*)malloc(VIDEO_PIXELS * VIDEO_BYTES_PER_PIXEL * safety_factor);
-   frame_buf2 = (uint8_t*)malloc(VIDEO_PIXELS * VIDEO_BYTES_PER_PIXEL * safety_factor);
-   /*uint16_t *pixel_buffer = reinterpret_cast<uint16_t *>(frame_buf);
-   for (unsigned i = 0; i<VIDEO_PIXELS; i++) {
-      pixel_buffer[i] = 0; // 0x2222;
-   }*/
+   frame_buf = (uint8_t*)malloc(VIDEO_PIXELS * VIDEO_BYTES_PER_PIXEL * safety_factor);
    
    const char *dir = NULL;
    if (environ_cb(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY, &dir) && dir)
@@ -62,10 +55,8 @@ void retro_init(void)
 
 void retro_deinit(void)
 {
-   free(frame_buf1);
-   frame_buf1 = NULL;
-   free(frame_buf2);
-   frame_buf2 = NULL;
+   free(frame_buf);
+   frame_buf = NULL;
 }
 
 unsigned retro_api_version(void)
@@ -88,7 +79,7 @@ void retro_get_system_info(struct retro_system_info *info)
    info->block_extract = true;
 }
 
-static retro_video_refresh_t video_cb;
+retro_video_refresh_t video_cb;
 static retro_audio_sample_t audio_cb;
 static retro_audio_sample_batch_t audio_batch_cb;
 static retro_input_poll_t input_poll_cb;
@@ -224,18 +215,7 @@ void retro_run(void)
 
    dice.run();
    //dice.render_frame();
-
-   // Show the frame buffer that we're done writing to.
-   uint8_t *frame_buf;
-   frame_buf = write_to_frame_buf1 ? frame_buf2 : frame_buf1;
-   video_cb(frame_buf, VIDEO_WIDTH, VIDEO_HEIGHT, VIDEO_PITCH);
    
-   // Wipe the frame buffer we just displayed.
-   uint16_t *pixel_buffer = reinterpret_cast<uint16_t *>(frame_buf);
-   for (unsigned i = 0; i<VIDEO_PIXELS; i++) {
-      pixel_buffer[i] = 0; // 0x2222;
-   }
-
    bool updated = false;
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE_UPDATE, &updated) && updated)
       check_variables();
@@ -279,9 +259,8 @@ bool retro_load_game(const struct retro_game_info *info)
 
    check_variables();
 
-   uint16_t *pixel_buf1 = reinterpret_cast<uint16_t *>(frame_buf1);
-   uint16_t *pixel_buf2 = reinterpret_cast<uint16_t *>(frame_buf2);
-   dice.load_game(info->path, pixel_buf1, pixel_buf2, &write_to_frame_buf1);
+   uint16_t *pixel_buf = reinterpret_cast<uint16_t *>(frame_buf);
+   dice.load_game(info->path, pixel_buf);
 
    // If game uses a vertical monitor, tell libretro and adjust aspect ratio.
    screen_horizontal = dice.game_video_rotation == ROTATE_0 || dice.game_video_rotation == ROTATE_180;

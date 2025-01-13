@@ -1,5 +1,7 @@
 #include "video.h"
 #include "../circuit.h"
+#include "../libretro.h"
+#include "../dice.h"
 //#include <phoenix.hpp>
 
 #ifdef __APPLE__
@@ -25,6 +27,8 @@ using phoenix::Viewport;
 #define HBLANK_MASK (1 << 8)
 #define VBLANK_MASK (1 << 9)
 #define VIDEO_MASK ((1 << 8) - 1)
+
+extern retro_video_refresh_t video_cb;
 
 // Use buffer to add capacitance to the video output, to smooth out high frequency noise.
 // TODO: Is this accurate?
@@ -71,11 +75,10 @@ void Video::video_init(int width, int height /*, const Settings::Video& settings
     unsigned x = 0;
     unsigned y = 0;
 
-    bool horizontal = true;
+    /* bool horizontal = true;
     if(desc->orientation == ROTATE_90 || desc->orientation == ROTATE_270)
         horizontal = false;        
 
-    /*
     if(settings.keep_aspect && horizontal)
     {
         if(width > 4*height/3)
@@ -200,13 +203,9 @@ void Video::init_color_lut(const double (*r)[3])
 
 void Video::draw(Chip* chip)
 {
-   uint16_t *pixel_buf;
-   pixel_buf = (*write_to_frame_buf1) ? pixel_buf1 : pixel_buf2;
-   
     uint64_t start_time = current_time - initial_time;
     uint64_t end_time = chip->circuit->global_time - initial_time;
 
-   unsigned VIDEO_WIDTH = 640;
    uint64_t MAX_SCANLINE_TIME = 52214160;
    //float ratio = float(VIDEO_WIDTH) / float(MAX_SCANLINE_TIME);
    float ratio = float(VIDEO_WIDTH) / float(scanline_time);
@@ -340,6 +339,12 @@ CUSTOM_LOGIC( Video::video )
 }
 
 void Video::swap_buffers() {
-   *write_to_frame_buf1 = not(*write_to_frame_buf1);
-   request_video_callback = true;
+   video_cb(reinterpret_cast<uint8_t*>(pixel_buf), VIDEO_WIDTH, VIDEO_HEIGHT, VIDEO_PITCH);
+
+   // Wipe the frame buffer we just displayed.
+   for (unsigned i = 0; i<VIDEO_PIXELS; i++) {
+      pixel_buf[i] = 0; // 0x2222;
+   }
+
+   request_video_callback = true; // TODO (mittonk): Rename ase "frame_done" or similar.
 }

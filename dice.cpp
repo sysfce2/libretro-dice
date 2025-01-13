@@ -26,7 +26,7 @@ extern retro_log_printf_t log_cb;
 
 namespace dice_libretro {
 
-void DICE::load_game(const char *path, uint16_t *pixel_buf1, uint16_t *pixel_buf2, bool *write_to_frame_buf1)
+void DICE::load_game(const char *path, uint16_t *pixel_buf)
 {
         /*
         input = new Input();
@@ -34,9 +34,7 @@ void DICE::load_game(const char *path, uint16_t *pixel_buf1, uint16_t *pixel_buf
          */
         input = new Input();
         video = new Video();
-        video->pixel_buf1 = pixel_buf1;
-        video->pixel_buf2 = pixel_buf2;
-        video->write_to_frame_buf1 = write_to_frame_buf1;
+        video->pixel_buf = pixel_buf;
    
         video->video_init(VIDEO_WIDTH, VIDEO_HEIGHT);
 
@@ -75,7 +73,7 @@ void DICE::run(void)
     if(circuit)
     {
        // Run until we've got a full video frame, but not much more.
-       while (!circuit->video.request_video_callback) {
+       while (!circuit->video.request_video_callback) {  // TODO (mittonk): Rename frame_done.
             // circuit->run(2.5e-3 / Circuit::timescale); // Run 2.5 ms
           circuit->run(1.0e-3 / Circuit::timescale); // Run 1 ms
        }

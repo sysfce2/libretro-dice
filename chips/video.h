@@ -30,9 +30,7 @@ public:
     uint32_t frame_count;
     enum VideoPins { HBLANK_PIN = 9, VBLANK_PIN = 10 };
    
-   uint16_t *pixel_buf1;
-   uint16_t *pixel_buf2;
-   bool *write_to_frame_buf1;
+   uint16_t *pixel_buf;
 
    bool request_video_callback = false;
 
