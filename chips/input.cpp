@@ -120,9 +120,11 @@ CHIP_DESC( PADDLE4_VERTICAL_INPUT ) =
 };
 
 
-
 static const double ANALOG_THRESHOLD = 0.20; // Joystick dead zone, TODO: make configurable?
 static const double ANALOG_SCALE = 1.0 / (1.0 - ANALOG_THRESHOLD);
+
+#define PADDLE_KEYBOARD_SENSITIVITY 250
+#define PADDLE_JOYSTICK_SENSITIVITY 500
 
 template <unsigned PADDLE, bool HORIZONTAL>
 void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
@@ -158,7 +160,7 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
    if ((!settings_absolute_paddles) && HORIZONTAL)
     {
         double dt = (INPUT_POLL_RATE / Circuit::timescale) / 1000000000.0;
-        double sensitivity = double(0.75 * 128.0 /*settings.keyboard_sensitivity*/) * fabs(desc->max_val - desc->min_val) / 100000.0;
+        double sensitivity = double(PADDLE_KEYBOARD_SENSITIVITY) * fabs(desc->max_val - desc->min_val) / 100000.0;
 
        /* switch(settings.left.type)
         {
@@ -211,7 +213,7 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
     else if(!settings_absolute_paddles /*settings.use_keyboard */) // vertical
     {
         double dt = (INPUT_POLL_RATE / Circuit::timescale) / 1000000000.0;
-        double sensitivity = double(0.75 * 128.0 /*settings.keyboard_sensitivity */) * fabs(desc->max_val - desc->min_val) / 100000.0;
+        double sensitivity = double(PADDLE_KEYBOARD_SENSITIVITY/*settings.keyboard_sensitivity */) * fabs(desc->max_val - desc->min_val) / 100000.0;
 
        delta += circuit->input.getJoystickButton(controller, RETRO_DEVICE_ID_JOYPAD_DOWN) * dt * sensitivity;
        delta -= circuit->input.getJoystickButton(controller, RETRO_DEVICE_ID_JOYPAD_UP) * dt * sensitivity;
@@ -234,6 +236,7 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
                 break;
          */
        unsigned axis_idx = HORIZONTAL ? 0 : 1;
+        sensitivity = double(PADDLE_JOYSTICK_SENSITIVITY/*settings.keyboard_sensitivity */) * fabs(desc->max_val - desc->min_val) / 100000.0;
 
        double val = circuit->input.getJoystickAxis(joystick_idx, axis_idx) / 32768.0;
 
@@ -625,7 +628,7 @@ CHIP_DESC( BUTTONS6_INPUT ) =
 };
 
 
-
+#define WHEEL_KEYJOY_SENSITIVITY 500
 
 template <unsigned WHEEL>
 void wheel_input(Chip* chip, int mask)
@@ -657,7 +660,7 @@ void wheel_input(Chip* chip, int mask)
        double sensitivity;
        
        double dt = (INPUT_POLL_RATE / Circuit::timescale) / 1000000000.0;
-       sensitivity = 500.0 / 1000.0;
+       sensitivity = double(WHEEL_KEYJOY_SENSITIVITY) / 1000.0;
 
       /* switch(settings.left.type)
        {
@@ -675,7 +678,7 @@ void wheel_input(Chip* chip, int mask)
        
        //double dt = (INPUT_POLL_RATE / Circuit::timescale) / 1000000000.0;
         //double sensitivity = double(settings.keyboard_sensitivity) / 1000.0;
-        sensitivity = 500.0 / 1000.0;
+        sensitivity = double(WHEEL_KEYJOY_SENSITIVITY) / 1000.0;
 
        
        
@@ -859,7 +862,7 @@ CHIP_DESC( WHEEL4_INPUT ) =
 };
 
 
-
+#define THROTTLE_KEYJOY_SENSITIVITY 250
 
 template <unsigned THROTTLE>
 void ThrottleDesc<THROTTLE>::throttle_input(Chip* chip, int mask)
