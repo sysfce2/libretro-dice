@@ -142,7 +142,11 @@ public:
    int32_t input_analog_left_x[NUM_CONTROLLERS];
    int32_t input_analog_left_y[NUM_CONTROLLERS];
    bool paddle_joystick_absolute;
-
+   static int paddle_keyboard_sensitivity;
+   static int paddle_joystick_sensitivity;
+   static int wheel_keyjoy_sensitivity;
+   static int throttle_keyjoy_sensitivity;
+   
 };
 
 #endif

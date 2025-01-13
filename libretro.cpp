@@ -127,6 +127,10 @@ void retro_set_environment(retro_environment_t cb)
    
    static const struct retro_variable vars[] = {
       { "dice_paddle_joystick_absolute", "Paddle joystick absolute; false|true" },
+      { "dice_paddle_keyboard_sensitivity", "Paddle D-pad sensitivity; 250|375|500" },
+      { "dice_paddle_joystick_sensitivity", "Paddle analog stick sensitivity; 500|250|375" },
+      { "dice_wheel_keyjoy_sensitivity", "Wheel sensitivity; 500|250|375" },
+      { "dice_throttle_keyjoy_sensitivity", "Throttle sensitivity; 250|375|500" },
       { NULL, NULL },
    };
 
@@ -198,6 +202,38 @@ static void check_variables(void)
          dice.set_paddle_joystick_absolute(false);
       else
          dice.set_paddle_joystick_absolute(true);
+   }
+   
+   //struct retro_variable var = {0};
+   var.key = "dice_paddle_keyboard_sensitivity";
+   var.value = NULL;
+   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+   {
+      dice.set_paddle_keyboard_sensitivity(atoi(var.value));
+   }
+   
+   //struct retro_variable var = {0};
+   var.key = "dice_paddle_joystick_sensitivity";
+   var.value = NULL;
+   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+   {
+      dice.set_paddle_joystick_sensitivity(atoi(var.value));
+   }
+   
+   //struct retro_variable var = {0};
+   var.key = "dice_wheel_keyjoy_sensitivity";
+   var.value = NULL;
+   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+   {
+      dice.set_wheel_keyjoy_sensitivity(atoi(var.value));
+   }
+   
+   //struct retro_variable var = {0};
+   var.key = "dice_throttle_keyjoy_sensitivity";
+   var.value = NULL;
+   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+   {
+      dice.set_throttle_keyjoy_sensitivity(atoi(var.value));
    }
 }
 
@@ -272,6 +308,9 @@ bool retro_load_game(const struct retro_game_info *info)
    // If game uses a vertical monitor, tell libretro and adjust aspect ratio.
    screen_horizontal = dice.game_video_rotation == ROTATE_0 || dice.game_video_rotation == ROTATE_180;
    environ_cb(RETRO_ENVIRONMENT_SET_ROTATION, &dice.game_video_rotation);
+
+   // Now that we've got a circuit up, configure input sensitivity.
+   check_variables();
 
    (void)info;
 

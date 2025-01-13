@@ -107,4 +107,24 @@ void DICE::set_paddle_joystick_absolute(bool paddle_joystick_absolute)
    if (circuit) circuit->input.paddle_joystick_absolute = paddle_joystick_absolute;
 }
 
+void DICE::set_paddle_keyboard_sensitivity(int val)
+{
+   if (circuit) circuit->input.paddle_keyboard_sensitivity = val;
+}
+
+void DICE::set_paddle_joystick_sensitivity(int val)
+{
+   if (circuit) circuit->input.paddle_joystick_sensitivity = val;
+}
+
+void DICE::set_wheel_keyjoy_sensitivity(int val)
+{
+   if (circuit) circuit->input.wheel_keyjoy_sensitivity = val;
+}
+
+void DICE::set_throttle_keyjoy_sensitivity(int val)
+{
+   if (circuit) circuit->input.throttle_keyjoy_sensitivity = val;
+}
+
 } // namespace
