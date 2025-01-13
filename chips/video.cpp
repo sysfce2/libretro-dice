@@ -193,12 +193,17 @@ void Video::init_color_lut(const double (*r)[3])
    
    // Boil the old OpenGL Look Up Table down to a libretro-ish RGB565 colormap.
    for (int i = 0; i < color.size() / 3; i++) {
-      // LUT isn't clamped to 1.0, do that here so we don't wrap around.
-      uint16_t red5 = fmin(color[i*3],1) * 31;
-      uint16_t green6 = fmin(color[i*3+1],1) * 63;
-      uint16_t blue5 = fmin(color[i*3+2],1) * 31;
-      retro_color[i] = red5 << 11 | green6 << 5 | blue5;
+      retro_color[i] = doublergb_to_retrocolor(color[i*3], color[i*3+1], color[i*3+2]);
    }
+}
+
+uint16_t Video::doublergb_to_retrocolor(double r, double g, double b)
+{
+   // LUT isn't clamped to 1.0, do that here so we don't wrap around.
+   uint16_t red5 = fmin(r,1) * 31;
+   uint16_t green6 = fmin(g,1) * 63;
+   uint16_t blue5 = fmin(b,1) * 31;
+   return red5 << 11 | green6 << 5 | blue5;
 }
 
 void Video::draw(Chip* chip)
@@ -237,15 +242,16 @@ void Video::draw(Chip* chip)
 
 void Video::draw_overlays()
 {
-   /*
+   
     if(desc->overlays.empty()) return;
 
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_ZERO, GL_SRC_COLOR);
+    /*glEnable(GL_BLEND);
+    glBlendFunc(GL_ZERO, GL_SRC_COLOR); */
+   float ratio = float(VIDEO_WIDTH) / float(scanline_time);
 
     for(const VideoOverlay& o : desc->overlays)
     {
-        double end_x = (o.width < 0.0) ? scanline_time : (o.x + o.width) / Circuit::timescale;
+     /*   double end_x = (o.width < 0.0) ? scanline_time : (o.x + o.width) / Circuit::timescale;
         double end_y = (o.height < 0.0) ? v_size : o.y + o.height;
         double start_x = o.x / Circuit::timescale;
         double start_y = o.y;
@@ -257,10 +263,32 @@ void Video::draw_overlays()
 	        glVertex3f(end_x,   start_y, 0.0);
 	        glVertex3f(end_x,   end_y,   0.0);
 	        glVertex3f(start_x, end_y,   0.0);
-	    glEnd();
+	    glEnd(); */
+       // Negative values mean "full screen".
+       int left = o.x;
+       int top = o.y;
+       int right = (o.width < 0.0) ? VIDEO_WIDTH : o.x + o.width;
+       int bottom = (o.height < 0.0) ? VIDEO_HEIGHT : o.y + o.height;
+       uint16_t c = doublergb_to_retrocolor(o.r, o.g, o.b);
+       for (int i = left; i <= right; i++)
+       {
+          for (int j = top; j <= bottom; j++)
+          {
+             uint16_t existing = pixel_buf[i + j*VIDEO_WIDTH];
+             pixel_buf[i + j*VIDEO_WIDTH] = retro_blend(existing, c);
+          }
+       }
+
     }
 
-    glDisable(GL_BLEND); */
+    /*glDisable(GL_BLEND); */
+}
+
+uint16_t Video::retro_blend(uint16_t bg, uint16_t fg)
+{
+   // TODO (mittonk): Something closer to glBlendFunc(GL_ZERO, GL_SRC_COLOR).
+   // This is recognizable for a monochrome background and overlay foreground, though.
+   return bg & fg;
 }
 
 CUSTOM_LOGIC( Video::video )

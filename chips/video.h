@@ -24,6 +24,8 @@ protected:
     void draw(Chip* chip);
     void draw_overlays();
     void init_color_lut(const double (*r)[3]);
+   uint16_t doublergb_to_retrocolor(double r, double g, double b);
+   uint16_t retro_blend(uint16_t bg, uint16_t fg);
 
 public:
     const VideoDesc* desc;
