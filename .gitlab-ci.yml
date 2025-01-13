@@ -7,7 +7,7 @@
 # Core definitions
 .core-defs:
   variables:
-    JNI_PATH: libretro-build
+    JNI_PATH: .
     MAKEFILE: Makefile
     CORENAME: dice
 
