@@ -1,5 +1,4 @@
 SOURCES_C   := $(CORE_DIR)/unzip/fileio.c  $(CORE_DIR)/unzip/ioapi.c   $(CORE_DIR)/unzip/miniz.c   $(CORE_DIR)/unzip/unzip.c
-SOURCES_CXX := $(CORE_DIR)/libretro.cxx
 
 CHIP_CPP := $(CORE_DIR)/chips/7400.cpp $(CORE_DIR)/chips/7402.cpp $(CORE_DIR)/chips/7404.cpp $(CORE_DIR)/chips/7407.cpp $(CORE_DIR)/chips/7408.cpp $(CORE_DIR)/chips/7410.cpp $(CORE_DIR)/chips/7411.cpp $(CORE_DIR)/chips/7420.cpp $(CORE_DIR)/chips/7421.cpp $(CORE_DIR)/chips/7425.cpp \
    			$(CORE_DIR)/chips/7427.cpp $(CORE_DIR)/chips/7430.cpp $(CORE_DIR)/chips/7432.cpp $(CORE_DIR)/chips/7437.cpp $(CORE_DIR)/chips/7442.cpp $(CORE_DIR)/chips/7448.cpp $(CORE_DIR)/chips/7450.cpp $(CORE_DIR)/chips/7454.cpp $(CORE_DIR)/chips/7474.cpp $(CORE_DIR)/chips/7475.cpp \
@@ -24,5 +23,5 @@ MANYMOUSE_CPP := $(CORE_DIR)/manymouse/manymouse.cpp $(CORE_DIR)/manymouse/windo
 
 # SOURCES_CPP := $(CORE_DIR)/dice.cpp $(CORE_DIR)/chip.cpp $(CORE_DIR)/circuit.cpp $(CORE_DIR)/settings.cpp $(CORE_DIR)/game_config.cpp $(CORE_DIR)/phoenix/phoenix.cpp $(CHIP_CPP) $(GAME_CPP) $(MANYMOUSE_CPP)
 
-SOURCES_CPP := $(CORE_DIR)/dice.cpp $(CORE_DIR)/chip.cpp $(CORE_DIR)/circuit.cpp $(CORE_DIR)/settings.cpp $(CORE_DIR)/game_config.cpp  $(CHIP_CPP) $(GAME_CPP) 
+SOURCES_CXX := $(CORE_DIR)/libretro.cpp $(CORE_DIR)/dice.cpp $(CORE_DIR)/chip.cpp $(CORE_DIR)/circuit.cpp $(CORE_DIR)/settings.cpp $(CORE_DIR)/game_config.cpp  $(CHIP_CPP) $(GAME_CPP) 
 
