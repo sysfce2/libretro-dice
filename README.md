@@ -1,3 +1,8 @@
+dice-libretro
+=============
+
+![dice logo](ui/icon_largepng)
+
 DICE is a Discrete Integrated Circuit Emulator. It emulates computer systems
 that lack any type of CPU, consisting only of discrete logic components.
 
@@ -47,8 +52,6 @@ Until then, use:
 https://docs.libretro.com/development/retroarch/compilation/linux-and-bsd/#building-libretro-cores
 
 or similar for your platform.
-
-DICE makes use of some C++11 features, so GCC 4.7 or newer is needed to compile.
 
 
 3) Contact Information
