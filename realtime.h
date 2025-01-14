@@ -30,36 +30,6 @@ public:
     }
 };
 
-#elif defined(__linux__)
-
-#include <time.h>
-
-class RealTimeClock
-{
-private:
-    struct timespec start;
-
-public:
-    RealTimeClock()
-    {
-	    clock_gettime(CLOCK_REALTIME, &start);
-    }
-    void operator +=(int64_t usecs)
-    {
-        uint64_t time = start.tv_sec * 1000000000 + start.tv_nsec + usecs * 1000;
-        start.tv_sec = time / 1000000000;
-        start.tv_nsec = time % 1000000000;
-    }
-    uint64_t get_usecs()
-    {
-	    struct timespec time;
-	    clock_gettime(CLOCK_REALTIME, &time);
-
-        return (uint64_t(time.tv_sec - start.tv_sec) * 1000000 + 
-               (time.tv_nsec - start.tv_nsec) / 1000);
-    }
-};
-
 #elif defined(__APPLE__)
 
 #include <mach/mach.h>
@@ -90,7 +60,36 @@ public:
 };
 
 #else
-	#error "realtime.h not implemented for this platform"
+// Linux and similar... including consoles, handhelds, etc.
+
+#include <time.h>
+
+class RealTimeClock
+{
+private:
+    struct timespec start;
+
+public:
+    RealTimeClock()
+    {
+	    clock_gettime(CLOCK_REALTIME, &start);
+    }
+    void operator +=(int64_t usecs)
+    {
+        uint64_t time = start.tv_sec * 1000000000 + start.tv_nsec + usecs * 1000;
+        start.tv_sec = time / 1000000000;
+        start.tv_nsec = time % 1000000000;
+    }
+    uint64_t get_usecs()
+    {
+	    struct timespec time;
+	    clock_gettime(CLOCK_REALTIME, &time);
+
+        return (uint64_t(time.tv_sec - start.tv_sec) * 1000000 + 
+               (time.tv_nsec - start.tv_nsec) / 1000);
+    }
+};
+
 #endif
 
 #endif
