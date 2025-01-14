@@ -213,12 +213,6 @@ libretro-build-libnx-aarch64:
     - .libretro-libnx-static-retroarch-master
     - .core-defs
 
-# OpenDingux
-libretro-build-dingux-mips32:
-  extends:
-    - .libretro-dingux-mips32-make-default
-    - .core-defs
-
 # OpenDingux Beta
 libretro-build-dingux-odbeta-mips32:
   extends:
