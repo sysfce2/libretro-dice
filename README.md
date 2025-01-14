@@ -1,17 +1,17 @@
-dice-libretro
-=============
+# dice-libretro
 
-![dice logo](ui/icon_largepng)
+![dice logo](ui/icon.png)
 
 DICE is a Discrete Integrated Circuit Emulator. It emulates computer systems
 that lack any type of CPU, consisting only of discrete logic components.
 
 dice-libretro is a Libretro port of DICE, to run in RetroArch.
 
-1) Usage
+## Usage
 
 Some games use ROMs and launch similarly to MAME or FBNeo ---
 filename is important.
+
 Please do not attempt to contact the DICE team
 to request ROM files.
 
@@ -21,40 +21,40 @@ file from dummy_files to your ROM folder; these have a
 correct name (ie, pong.dmy) that will get RetroArch to set up
 lr-dice for the correct game.
 
-Games:
-antiaircraft  (rom needed)
-attack  (rom needed)
-breakout
-cleansweep  (rom needed)
-crashnscore  (rom needed)
-crossfire
-gotcha
-jetfighter  (rom needed)
-hiway
-indy4  (rom needed)
-pinpong
-pong
-pongdoubles
-quadrapong
-rebound
-sharkjaws  (rom needed)
-spacerace
-steeplechase  (rom needed)
-stuntcycle  (rom needed)
-tvbasketball
-wipeout  (rom needed)
+### Games
+* antiaircraft  (rom needed)
+* attack  (rom needed)
+* breakout
+* cleansweep  (rom needed)
+* crashnscore  (rom needed)
+* crossfire
+* gotcha
+* jetfighter  (rom needed)
+* hiway
+* indy4  (rom needed)
+* pinpong
+* pong
+* pongdoubles
+* quadrapong
+* rebound
+* sharkjaws  (rom needed)
+* spacerace
+* steeplechase  (rom needed)
+* stuntcycle  (rom needed)
+* tvbasketball
+* wipeout  (rom needed)
 
+## Compiling
+Working on getting this integrated with libretro's CI/CD infrastructure.  Core is tagged "experimental" so won't show up in most by default.
 
-2) Compiling
-Working on getting this integrated with libretro's CI/CD infrastructure.
+Pre-built binaries for a few platforms are available at:
+* [Build artifacts](https://git.libretro.com/libretro/dice-libretro/-/artifacts)
 
-Until then, use:
-https://docs.libretro.com/development/retroarch/compilation/linux-and-bsd/#building-libretro-cores
+For other platforms, use:
+* https://docs.libretro.com/development/retroarch/compilation/linux-and-bsd/#building-libretro-cores
+or similar.
 
-or similar for your platform.
-
-
-3) Contact Information
+# Contact Information
 Github: https://github.com/mittonk/dice-libretro
 
 For upstream standalone DICE (inactive):
@@ -62,8 +62,7 @@ Project Page: http://sourceforge.net/projects/dice/
 Email: dice.emulator@gmail.com
 
 
-
-4) License
+# License
 
 Copyright (C) 2008-2025 DICE Team
 
