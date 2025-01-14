@@ -7,6 +7,9 @@ that lack any type of CPU, consisting only of discrete logic components.
 
 dice-libretro is a Libretro port of DICE, to run in RetroArch.
 
+Upstream, standalone DICE has some nice screenshots:
+* https://adamulation.blogspot.com/
+
 ## Usage
 
 Some games use ROMs and launch similarly to MAME or FBNeo ---
@@ -55,11 +58,11 @@ For other platforms, use:
 or similar.
 
 # Contact Information
-Github: https://github.com/mittonk/dice-libretro
+* Github: https://github.com/mittonk/dice-libretro
 
 For upstream standalone DICE (inactive):
-Project Page: http://sourceforge.net/projects/dice/
-Email: dice.emulator@gmail.com
+* Project Page: http://sourceforge.net/projects/dice/
+* Email: dice.emulator@gmail.com
 
 
 # License
