@@ -47,15 +47,11 @@ include:
   - project: 'libretro-infrastructure/ci-templates'
     file: '/ios9.yml'
 
-  ################################## CONSOLES ################################
-
-  # OpenDingux
-  - project: 'libretro-infrastructure/ci-templates'
-    file: '/dingux-mips32.yml'
-
   # tvOS (AppleTV)
   - project: 'libretro-infrastructure/ci-templates'
     file: '/tvos-arm64.yml'
+  ################################## CONSOLES ################################
+
   #################################### MISC ##################################
 
 # Stages for building
@@ -125,16 +121,5 @@ libretro-build-tvos-arm64:
     - .core-defs
 
 ################################### CONSOLES #################################
-# OpenDingux Beta
-libretro-build-dingux-odbeta-mips32:
-  extends:
-    - .libretro-dingux-odbeta-mips32-make-default
-    - .core-defs
-
-# Miyoo
-libretro-build-miyoo-arm32:
-  extends:
-    - .libretro-miyoo-arm32-make-default
-    - .core-defs
 
 #################################### MISC ##################################
