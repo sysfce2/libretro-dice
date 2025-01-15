@@ -200,7 +200,7 @@ static void update_input(void)
    if (pointer_pressed)
       log_cb(RETRO_LOG_INFO, "Pointer Pressed #: %d    : (%6d, %6d).\n", pad, pointer_x, pointer_y);
 
-   log_cb(RETRO_LOG_INFO, "Pointer #: %d    : (%6d, %6d).\n", pad, pointer_x, pointer_y);
+   //log_cb(RETRO_LOG_INFO, "Pointer #: %d    : (%6d, %6d).\n", pad, pointer_x, pointer_y);
    input_pointer_x[pad] = pointer_x;
    input_pointer_y[pad] = pointer_y;
 
