@@ -322,6 +322,24 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
             desc->current_val = (1.0 - val) * (desc->min_val - desc->max_val) + desc->max_val;
     }
 
+   if (circuit->input.use_mouse_pointer_for_paddle_1 && controller == 0)
+   {
+      double sensitivity = 0.25 + 0.00075 * (1000.0 - 500.0); // Inverse scale from 0.25..1.0
+
+      /*Settings::Input::JoystickAxis joystick = HORIZONTAL ? settings.joy_x_axis : settings.joy_y_axis;
+      double val = circuit->input.getJoystickAxis(joystick.joystick, joystick.axis) / (65536.0 * sensitivity) + 0.5; // 0..1 */
+      unsigned axis_idx = HORIZONTAL ? 0 : 1;
+      double val = circuit->input.getJoystickAxis(joystick_idx, axis_idx) / (65536.0 * sensitivity) + 0.5; // 0..1 */
+
+       if(val < 0.0) val = 0.0;
+       else if(val > 1.0) val = 1.0;
+       
+       if(desc->max_val > desc->min_val)
+           desc->current_val = val * (desc->max_val - desc->min_val) + desc->min_val;
+       else
+           desc->current_val = (1.0 - val) * (desc->min_val - desc->max_val) + desc->max_val;
+   }
+
     //if(desc->current_val != prev_val && desc->mono_555) // Update resistance value in 555
     {
         desc->mono_555->r = desc->current_val;
