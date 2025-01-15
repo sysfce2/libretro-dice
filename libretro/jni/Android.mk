@@ -1,8 +1,8 @@
 LOCAL_PATH := $(call my-dir)
 
-ROOT_DIR     := $(LOCAL_PATH)
+ROOT_DIR     := $(LOCAL_PATH)/../..
 CORE_DIR     := $(ROOT_DIR)
-LIBRETRO_DIR := $(ROOT_DIR)
+LIBRETRO_DIR := $(ROOT_DIR)/libretro
 
 HAVE_NETWORK := 1
 
