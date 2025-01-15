@@ -259,7 +259,13 @@ static void update_input(void)
       else if (mouse_rel_y < 10)
          mouse_rel_y = 10;
 
-      log_cb(RETRO_LOG_INFO, "Mouse #: %d X: %d   Y: %d\n", pad, mouse_x, mouse_y);
+      bool pointer_pressed = input_state_cb(pad, RETRO_DEVICE_POINTER, 0, RETRO_DEVICE_ID_POINTER_PRESSED);
+      int16_t pointer_x = input_state_cb(pad, RETRO_DEVICE_POINTER, 0, RETRO_DEVICE_ID_POINTER_X);
+      int16_t pointer_y = input_state_cb(pad, RETRO_DEVICE_POINTER, 0, RETRO_DEVICE_ID_POINTER_Y);
+      if (pointer_pressed)
+         log_cb(RETRO_LOG_INFO, "Pointer Pressed #: %d    : (%6d, %6d).\n", pad, pointer_x, pointer_y);
+
+      log_cb(RETRO_LOG_INFO, "Pointer #: %d    : (%6d, %6d).\n", pad, pointer_x, pointer_y);
    }
    dice.update_input(input_bitmask, input_analog_left_x, input_analog_left_y);
 }
