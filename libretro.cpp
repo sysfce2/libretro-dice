@@ -133,8 +133,13 @@ void retro_set_environment(retro_environment_t cb)
       { "dice_paddle_joystick_sensitivity", "Paddle analog stick sensitivity; 500|125|250|375" },
       { "dice_wheel_keyjoy_sensitivity", "Wheel sensitivity; 500|125|250|375" },
       { "dice_throttle_keyjoy_sensitivity", "Throttle sensitivity; 250|125|375|500" },
-      { "test_analog_mouse", "Left Analog as mouse; true|false" },
-      { "test_analog_mouse_relative", "Analog mouse is relative; false|true" },
+
+      /* TODO (mittonk): Drop these after we get as much mouse support as we can. */
+      { "dice_analog_mouse", "Left Analog as mouse; true|false" },
+      { "dice_analog_mouse_relative", "Analog mouse is relative; false|true" },
+      
+      { "dice_use_mouse_pointer_for_paddle_1", "Use mouse pointer for paddle 1; false|true" },
+
       { NULL, NULL },
    };
 
@@ -317,17 +322,25 @@ static void check_variables(void)
       dice.set_throttle_keyjoy_sensitivity(atoi(var.value));
    }
 
-   var.key = "test_analog_mouse";
+   var.key = "dice_analog_mouse";
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
    {
       analog_mouse = !strcmp(var.value, "true") ? true : false;
       log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
    }
 
-   var.key = "test_analog_mouse_relative";
+   var.key = "dice_analog_mouse_relative";
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
    {
       analog_mouse_relative = !strcmp(var.value, "true") ? true : false;
+      log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
+   }
+
+   var.key = "dice_use_mouse_pointer_for_paddle_1";
+   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+   {
+      bool use_mouse_pointer_for_paddle_1 = !strcmp(var.value, "true") ? true : false;
+      dice.set_use_mouse_pointer_for_paddle_1(use_mouse_pointer_for_paddle_1);
       log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
    }
 

@@ -129,4 +129,9 @@ void DICE::set_throttle_keyjoy_sensitivity(int val)
    if (circuit) circuit->input.throttle_keyjoy_sensitivity = val;
 }
 
+void DICE::set_use_mouse_pointer_for_paddle_1(bool val)
+{
+   if (circuit) circuit->input.use_mouse_pointer_for_paddle_1 = val;
+}
+
 } // namespace

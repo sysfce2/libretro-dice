@@ -933,6 +933,7 @@ Input::Input()
    paddle_joystick_sensitivity = 500;
    wheel_keyjoy_sensitivity = 500;
    throttle_keyjoy_sensitivity = 250;
+   use_mouse_pointer_for_paddle_1 = false;
 }
 
 Input::~Input()
@@ -1027,8 +1028,7 @@ int16_t Input::getJoystickAxis(unsigned joystick, unsigned axis)
     //if(joystick >= joysticks.size()) return 0;
     //return SDL_JoystickGetAxis(joysticks[joystick], axis);
 
-   bool use_mouse_for_paddle_1 = true;
-   if (use_mouse_for_paddle_1 /*&& joystick == 0*/)
+   if (use_mouse_pointer_for_paddle_1 && joystick == 0)
    {
       if (axis == 0) {
          return int16_t(float(input_pointer_x[joystick]));

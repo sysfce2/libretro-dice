@@ -148,6 +148,7 @@ public:
    int paddle_joystick_sensitivity;
    int wheel_keyjoy_sensitivity;
    int throttle_keyjoy_sensitivity;
+   bool use_mouse_pointer_for_paddle_1;
    
 };
 

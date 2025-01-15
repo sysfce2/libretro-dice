@@ -56,6 +56,7 @@ class DICE
    void set_paddle_joystick_sensitivity(int val);
    void set_wheel_keyjoy_sensitivity(int val);
    void set_throttle_keyjoy_sensitivity(int val);
+   void set_use_mouse_pointer_for_paddle_1(bool val);
 
 
 };
