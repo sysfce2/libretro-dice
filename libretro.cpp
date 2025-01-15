@@ -22,8 +22,6 @@ static float last_sample_rate;
 char retro_base_directory[4096];
 char retro_game_path[4096];
 static bool screen_horizontal = true;
-static bool analog_mouse = true;
-static bool analog_mouse_relative = false;
 
 static dice_libretro::DICE dice;
 
@@ -134,10 +132,6 @@ void retro_set_environment(retro_environment_t cb)
       { "dice_wheel_keyjoy_sensitivity", "Wheel sensitivity; 500|125|250|375" },
       { "dice_throttle_keyjoy_sensitivity", "Throttle sensitivity; 250|125|375|500" },
 
-      /* TODO (mittonk): Drop these after we get as much mouse support as we can. */
-      { "dice_analog_mouse", "Left Analog as mouse; true|false" },
-      { "dice_analog_mouse_relative", "Analog mouse is relative; false|true" },
-      
       { "dice_use_mouse_pointer_for_paddle_1", "Use mouse pointer for paddle 1; false|true" },
 
       { NULL, NULL },
@@ -176,9 +170,6 @@ void retro_reset(void)
    dice.reset();
 }
 
-static int mouse_rel_x;
-static int mouse_rel_y;
-
 static void update_input(void)
 {
    int32_t input_bitmask[NUM_CONTROLLERS];
@@ -194,89 +185,26 @@ static void update_input(void)
          input_bitmask[(pad)] |= input_state_cb((pad), RETRO_DEVICE_JOYPAD, 0, i) ? (1 << i) : 0 ;
       
       input_analog_left_x[pad] = input_state_cb( (pad), RETRO_DEVICE_ANALOG, RETRO_DEVICE_INDEX_ANALOG_LEFT,
-                                         RETRO_DEVICE_ID_ANALOG_X);
+                                                RETRO_DEVICE_ID_ANALOG_X);
       
       input_analog_left_y[pad] = input_state_cb( (pad), RETRO_DEVICE_ANALOG, RETRO_DEVICE_INDEX_ANALOG_LEFT,
-                                         RETRO_DEVICE_ID_ANALOG_Y);
+                                                RETRO_DEVICE_ID_ANALOG_Y);
       
       //printf("KAM2 input_bitmask %u %08X %08X %08X\n", pad, input_bitmask[(pad)], input_analog_left_x[(pad)], input_analog_left_y[(pad)]);
-
-      int16_t mouse_x;
-      int16_t mouse_y;
-
-      bool mouse_l      = input_state_cb(pad, RETRO_DEVICE_MOUSE, 0, RETRO_DEVICE_ID_MOUSE_LEFT);
-      bool mouse_r      = input_state_cb(pad, RETRO_DEVICE_MOUSE, 0, RETRO_DEVICE_ID_MOUSE_RIGHT);
-      bool mouse_down   = input_state_cb(pad, RETRO_DEVICE_MOUSE, 0, RETRO_DEVICE_ID_MOUSE_WHEELDOWN);
-      bool mouse_up     = input_state_cb(pad, RETRO_DEVICE_MOUSE, 0, RETRO_DEVICE_ID_MOUSE_WHEELUP);
-      bool mouse_middle = input_state_cb(pad, RETRO_DEVICE_MOUSE, 0, RETRO_DEVICE_ID_MOUSE_MIDDLE);
-
-      if (analog_mouse)
-      {
-         mouse_x = (320.0f / 32767.0f) * input_state_cb(pad, RETRO_DEVICE_ANALOG, RETRO_DEVICE_INDEX_ANALOG_LEFT, RETRO_DEVICE_ID_ANALOG_X);
-         mouse_y = (240.0f / 32767.0f) * input_state_cb(pad, RETRO_DEVICE_ANALOG, RETRO_DEVICE_INDEX_ANALOG_LEFT, RETRO_DEVICE_ID_ANALOG_Y);
-
-         if (analog_mouse_relative)
-         {
-            mouse_x /= 32;
-            mouse_y /= 32;
-         }
-         else
-         {
-            mouse_x /= 2;
-            mouse_y /= 2;
-
-            mouse_x += 320 / 2;
-            mouse_y += 240 / 2;
-         }
-      }
-      else
-      {
-         mouse_x = input_state_cb(pad, RETRO_DEVICE_MOUSE, 0, RETRO_DEVICE_ID_MOUSE_X);
-         mouse_y = input_state_cb(pad, RETRO_DEVICE_MOUSE, 0, RETRO_DEVICE_ID_MOUSE_Y);
-      }
-
-      if (mouse_l)
-         log_cb(RETRO_LOG_INFO, "Mouse #: %d     L pressed.   X: %d   Y: %d\n", pad, mouse_x, mouse_y);
-      if (mouse_r)
-         log_cb(RETRO_LOG_INFO, "Mouse #: %d     R pressed.   X: %d   Y: %d\n", pad, mouse_x, mouse_y);
-      if (mouse_down)
-         log_cb(RETRO_LOG_INFO, "Mouse #: %d     wheeldown pressed.   X: %d   Y: %d\n", pad, mouse_x, mouse_y);
-      if (mouse_up)
-         log_cb(RETRO_LOG_INFO, "Mouse #: %d     wheelup pressed.     X: %d   Y: %d\n", pad, mouse_x, mouse_y);
-      if (mouse_middle)
-         log_cb(RETRO_LOG_INFO, "Mouse #: %d     middle pressed.      X: %d   Y: %d\n", pad, mouse_x, mouse_y);
-
-      if ((analog_mouse && analog_mouse_relative) || !analog_mouse)
-      {
-         mouse_rel_x += mouse_x;
-         mouse_rel_y += mouse_y;
-      }
-      else
-      {
-         mouse_rel_x = mouse_x;
-         mouse_rel_y = mouse_y;
-      }
-
-      if (mouse_rel_x >= 310)
-         mouse_rel_x = 309;
-      else if (mouse_rel_x < 10)
-         mouse_rel_x = 10;
-      if (mouse_rel_y >= 230)
-         mouse_rel_y = 229;
-      else if (mouse_rel_y < 10)
-         mouse_rel_y = 10;
-
-      bool pointer_pressed = input_state_cb(pad, RETRO_DEVICE_POINTER, 0, RETRO_DEVICE_ID_POINTER_PRESSED);
-      int16_t pointer_x = input_state_cb(pad, RETRO_DEVICE_POINTER, 0, RETRO_DEVICE_ID_POINTER_X);
-      int16_t pointer_y = input_state_cb(pad, RETRO_DEVICE_POINTER, 0, RETRO_DEVICE_ID_POINTER_Y);
-      if (pointer_pressed)
-         log_cb(RETRO_LOG_INFO, "Pointer Pressed #: %d    : (%6d, %6d).\n", pad, pointer_x, pointer_y);
-
-      log_cb(RETRO_LOG_INFO, "Pointer #: %d    : (%6d, %6d).\n", pad, pointer_x, pointer_y);
-      input_pointer_x[pad] = pointer_x;
-      input_pointer_y[pad] = pointer_y;
-
    }
+
+   unsigned pad = 0;
+   bool pointer_pressed = input_state_cb(pad, RETRO_DEVICE_POINTER, 0, RETRO_DEVICE_ID_POINTER_PRESSED);
+   int16_t pointer_x = input_state_cb(pad, RETRO_DEVICE_POINTER, 0, RETRO_DEVICE_ID_POINTER_X);
+   int16_t pointer_y = input_state_cb(pad, RETRO_DEVICE_POINTER, 0, RETRO_DEVICE_ID_POINTER_Y);
+   if (pointer_pressed)
+      log_cb(RETRO_LOG_INFO, "Pointer Pressed #: %d    : (%6d, %6d).\n", pad, pointer_x, pointer_y);
+
+   log_cb(RETRO_LOG_INFO, "Pointer #: %d    : (%6d, %6d).\n", pad, pointer_x, pointer_y);
+   input_pointer_x[pad] = pointer_x;
+   input_pointer_y[pad] = pointer_y;
+
+   
    dice.update_input(input_bitmask, input_analog_left_x, input_analog_left_y, input_pointer_x, input_pointer_y);
 }
 
@@ -320,20 +248,6 @@ static void check_variables(void)
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
    {
       dice.set_throttle_keyjoy_sensitivity(atoi(var.value));
-   }
-
-   var.key = "dice_analog_mouse";
-   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
-   {
-      analog_mouse = !strcmp(var.value, "true") ? true : false;
-      log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
-   }
-
-   var.key = "dice_analog_mouse_relative";
-   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
-   {
-      analog_mouse_relative = !strcmp(var.value, "true") ? true : false;
-      log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
    }
 
    var.key = "dice_use_mouse_pointer_for_paddle_1";
