@@ -12,8 +12,8 @@ Upstream, standalone DICE has some nice screenshots:
 
 ## Usage
 
-Some games use ROMs and launch similarly to MAME or FBNeo ---
-filename is important.
+Some games use zipped ROMs and launch similarly to MAME or FBNeo ---
+filename is important, see table below.
 
 Please do not attempt to contact the DICE team
 to request ROM files.
@@ -21,37 +21,42 @@ to request ROM files.
 Some games (pong, breakout, pinpong, etc) do not have any
 ROM on the board at all.  For these, copy the dummy launcher
 file from dummy_files to your ROM folder; these have a
-correct name (ie, pong.dmy) that will get RetroArch to set up
+correct name (for example, pong.dmy) that will get RetroArch to set up
 lr-dice for the correct game.
 
 ### Games
-* antiaircraft  (rom needed)
-* attack  (rom needed)
-* breakout
-* cleansweep  (rom needed)
-* crashnscore  (rom needed)
-* crossfire
-* gotcha
-* jetfighter  (rom needed)
-* hiway
-* indy4  (rom needed)
-* pinpong
-* pong
-* pongdoubles
-* quadrapong
-* rebound
-* sharkjaws  (rom needed)
-* spacerace
-* steeplechase  (rom needed)
-* stuntcycle  (rom needed)
-* tvbasketball
-* wipeout  (rom needed)
+
+|	Name	|	Base filename	|	Publisher	|	Year |	Needs ROM?	|
+| ----  | ------------- | --------- | ---- | -------- |
+|	Anti-Aircraft	|	antiaircraft	|	Atari	|	1975	|	x	|
+|	Attack	|	attack	|	Exidy	|	1977	|	x	|
+|	Breakout	|	breakout	|	Atari	|	1976	|		|
+|	Clean Sweep	|	cleansweep	|	Ramtek	|	1974	|	x	|
+|	Crash 'N Score	|	crashnscore	|	Atari	|	1975	|	x	|
+|	Crossfire	|	crossfire	|	Atari	|	1975	|		|
+|	Gotcha	|	gotcha	|	Atari	|	1973	|		|
+|	Hi-Way	|	hiway	|	Atari	|	1975	|		|
+|	Indy 4	|	indy4	|	Atari	|	1976	|	x	|
+|	Jet Fighter	|	jetfighter	|	Atari	|	1975	|	x	|
+|	Pin Pong	|	pinpong	|	Atari	|	1974	|		|
+|	Pong	|	pong	|	Atari	|	1972	|		|
+|	Pong Doubles	|	pongdoubles	|	Atari	|	1973	|		|
+|	Quadrapong	|	quadrapong	|	Atari	|	1974	|		|
+|	Rebound	|	rebound	|	Atari	|	1974	|		|
+|	Shark Jaws	|	sharkjaws	|	Atari	|	1975	|	x	|
+|	Space Race	|	spacerace	|	Atari	|	1973	|		|
+|	Steeplechase	|	steeplechase	|	Atari	|	1975	|	x	|
+|	Stunt Cycle	|	stuntcycle	|	Atari	|	1976	|	x	|
+|	TV Basketball	|	tvbasketball	|	Midway	|	1974	|		|
+|	Wipe Out	|	wipeout	|	Ramtek	|	1974	|	x	|
+
+## Mouse support
+One mouse can be used for Paddle 1.  Use "Core Options -> Use mouse pointer for paddle 1".  You'll still want a keyboard or gamepad handy to have enough buttons.
+
+(Multiple mice are not yet supported, see [#8](https://github.com/mittonk/dice-libretro/issues/8).)
 
 ## Compiling
-Working on getting this integrated with libretro's CI/CD infrastructure.  Core is tagged "experimental" so won't show up in most by default.
-
-Pre-built binaries for a few platforms are available at:
-* [Build artifacts](https://git.libretro.com/libretro/dice-libretro/-/artifacts)
+Prebuilt binaries for several platforms are available through RetroArch's "Online Updater -> Core Downloader".  DICE is marked "experimental," you'll need to set "Online Updater -> Updater Settings -> Show Experimental Cores" first.
 
 For other platforms, use:
 * https://docs.libretro.com/development/retroarch/compilation/linux-and-bsd/#building-libretro-cores
