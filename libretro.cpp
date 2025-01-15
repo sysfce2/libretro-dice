@@ -131,6 +131,9 @@ void retro_set_environment(retro_environment_t cb)
       { "dice_paddle_joystick_sensitivity", "Paddle analog stick sensitivity; 500|125|250|375" },
       { "dice_wheel_keyjoy_sensitivity", "Wheel sensitivity; 500|125|250|375" },
       { "dice_throttle_keyjoy_sensitivity", "Throttle sensitivity; 250|125|375|500" },
+
+      { "dice_use_mouse_pointer_for_paddle_1", "Use mouse pointer for paddle 1; false|true" },
+
       { NULL, NULL },
    };
 
@@ -172,6 +175,8 @@ static void update_input(void)
    int32_t input_bitmask[NUM_CONTROLLERS];
    int32_t input_analog_left_x[NUM_CONTROLLERS];
    int32_t input_analog_left_y[NUM_CONTROLLERS];
+   int32_t input_pointer_x[NUM_CONTROLLERS];
+   int32_t input_pointer_y[NUM_CONTROLLERS];
 
    for (unsigned pad = 0; pad < NUM_CONTROLLERS; pad++)
    {
@@ -180,20 +185,33 @@ static void update_input(void)
          input_bitmask[(pad)] |= input_state_cb((pad), RETRO_DEVICE_JOYPAD, 0, i) ? (1 << i) : 0 ;
       
       input_analog_left_x[pad] = input_state_cb( (pad), RETRO_DEVICE_ANALOG, RETRO_DEVICE_INDEX_ANALOG_LEFT,
-                                         RETRO_DEVICE_ID_ANALOG_X);
+                                                RETRO_DEVICE_ID_ANALOG_X);
       
       input_analog_left_y[pad] = input_state_cb( (pad), RETRO_DEVICE_ANALOG, RETRO_DEVICE_INDEX_ANALOG_LEFT,
-                                         RETRO_DEVICE_ID_ANALOG_Y);
+                                                RETRO_DEVICE_ID_ANALOG_Y);
       
       //printf("KAM2 input_bitmask %u %08X %08X %08X\n", pad, input_bitmask[(pad)], input_analog_left_x[(pad)], input_analog_left_y[(pad)]);
-
    }
-   dice.update_input(input_bitmask, input_analog_left_x, input_analog_left_y);
+
+   unsigned pad = 0;
+   bool pointer_pressed = input_state_cb(pad, RETRO_DEVICE_POINTER, 0, RETRO_DEVICE_ID_POINTER_PRESSED);
+   int16_t pointer_x = input_state_cb(pad, RETRO_DEVICE_POINTER, 0, RETRO_DEVICE_ID_POINTER_X);
+   int16_t pointer_y = input_state_cb(pad, RETRO_DEVICE_POINTER, 0, RETRO_DEVICE_ID_POINTER_Y);
+   if (pointer_pressed)
+      log_cb(RETRO_LOG_INFO, "Pointer Pressed #: %d    : (%6d, %6d).\n", pad, pointer_x, pointer_y);
+
+   //log_cb(RETRO_LOG_INFO, "Pointer #: %d    : (%6d, %6d).\n", pad, pointer_x, pointer_y);
+   input_pointer_x[pad] = pointer_x;
+   input_pointer_y[pad] = pointer_y;
+
+   
+   dice.update_input(input_bitmask, input_analog_left_x, input_analog_left_y, input_pointer_x, input_pointer_y);
 }
 
 static void check_variables(void)
 {
    struct retro_variable var = {0};
+
    var.key = "dice_paddle_joystick_absolute";
    var.value = NULL;
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
@@ -204,7 +222,6 @@ static void check_variables(void)
          dice.set_paddle_joystick_absolute(true);
    }
    
-   //struct retro_variable var = {0};
    var.key = "dice_paddle_keyboard_sensitivity";
    var.value = NULL;
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
@@ -212,7 +229,6 @@ static void check_variables(void)
       dice.set_paddle_keyboard_sensitivity(atoi(var.value));
    }
    
-   //struct retro_variable var = {0};
    var.key = "dice_paddle_joystick_sensitivity";
    var.value = NULL;
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
@@ -220,7 +236,6 @@ static void check_variables(void)
       dice.set_paddle_joystick_sensitivity(atoi(var.value));
    }
    
-   //struct retro_variable var = {0};
    var.key = "dice_wheel_keyjoy_sensitivity";
    var.value = NULL;
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
@@ -228,13 +243,21 @@ static void check_variables(void)
       dice.set_wheel_keyjoy_sensitivity(atoi(var.value));
    }
    
-   //struct retro_variable var = {0};
    var.key = "dice_throttle_keyjoy_sensitivity";
    var.value = NULL;
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
    {
       dice.set_throttle_keyjoy_sensitivity(atoi(var.value));
    }
+
+   var.key = "dice_use_mouse_pointer_for_paddle_1";
+   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+   {
+      bool use_mouse_pointer_for_paddle_1 = !strcmp(var.value, "true") ? true : false;
+      dice.set_use_mouse_pointer_for_paddle_1(use_mouse_pointer_for_paddle_1);
+      log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
+   }
+
 }
 
 static void audio_callback(void)

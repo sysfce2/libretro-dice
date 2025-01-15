@@ -141,11 +141,14 @@ public:
    int32_t input_state[NUM_CONTROLLERS];
    int32_t input_analog_left_x[NUM_CONTROLLERS];
    int32_t input_analog_left_y[NUM_CONTROLLERS];
+   int32_t input_pointer_x[NUM_CONTROLLERS];
+   int32_t input_pointer_y[NUM_CONTROLLERS];
    bool paddle_joystick_absolute;
    int paddle_keyboard_sensitivity;
    int paddle_joystick_sensitivity;
    int wheel_keyjoy_sensitivity;
    int throttle_keyjoy_sensitivity;
+   bool use_mouse_pointer_for_paddle_1;
    
 };
 

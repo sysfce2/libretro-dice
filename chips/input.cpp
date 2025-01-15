@@ -322,6 +322,24 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
             desc->current_val = (1.0 - val) * (desc->min_val - desc->max_val) + desc->max_val;
     }
 
+   if (circuit->input.use_mouse_pointer_for_paddle_1 && controller == 0)
+   {
+      double sensitivity = 0.25 + 0.00075 * (1000.0 - 500.0); // Inverse scale from 0.25..1.0
+
+      /*Settings::Input::JoystickAxis joystick = HORIZONTAL ? settings.joy_x_axis : settings.joy_y_axis;
+      double val = circuit->input.getJoystickAxis(joystick.joystick, joystick.axis) / (65536.0 * sensitivity) + 0.5; // 0..1 */
+      unsigned axis_idx = HORIZONTAL ? 0 : 1;
+      double val = circuit->input.getJoystickAxis(joystick_idx, axis_idx) / (65536.0 * sensitivity) + 0.5; // 0..1 */
+
+       if(val < 0.0) val = 0.0;
+       else if(val > 1.0) val = 1.0;
+       
+       if(desc->max_val > desc->min_val)
+           desc->current_val = val * (desc->max_val - desc->min_val) + desc->min_val;
+       else
+           desc->current_val = (1.0 - val) * (desc->min_val - desc->max_val) + desc->max_val;
+   }
+
     //if(desc->current_val != prev_val && desc->mono_555) // Update resistance value in 555
     {
         desc->mono_555->r = desc->current_val;
@@ -933,6 +951,7 @@ Input::Input()
    paddle_joystick_sensitivity = 500;
    wheel_keyjoy_sensitivity = 500;
    throttle_keyjoy_sensitivity = 250;
+   use_mouse_pointer_for_paddle_1 = false;
 }
 
 Input::~Input()
@@ -1026,10 +1045,20 @@ int16_t Input::getJoystickAxis(unsigned joystick, unsigned axis)
 {
     //if(joystick >= joysticks.size()) return 0;
     //return SDL_JoystickGetAxis(joysticks[joystick], axis);
-   if (axis == 0) {
-      return int16_t(float(input_analog_left_x[joystick]));
+
+   if (use_mouse_pointer_for_paddle_1 && joystick == 0)
+   {
+      if (axis == 0) {
+         return int16_t(float(input_pointer_x[joystick]));
+      } else {
+         return int16_t(float(input_pointer_y[joystick]));
+      }
    } else {
-      return int16_t(float(input_analog_left_y[joystick]));
+      if (axis == 0) {
+         return int16_t(float(input_analog_left_x[joystick]));
+      } else {
+         return int16_t(float(input_analog_left_y[joystick]));
+      }
    }
 }
 
