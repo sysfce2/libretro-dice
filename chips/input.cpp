@@ -1026,10 +1026,21 @@ int16_t Input::getJoystickAxis(unsigned joystick, unsigned axis)
 {
     //if(joystick >= joysticks.size()) return 0;
     //return SDL_JoystickGetAxis(joysticks[joystick], axis);
-   if (axis == 0) {
-      return int16_t(float(input_analog_left_x[joystick]));
+
+   bool use_mouse_for_paddle_1 = true;
+   if (use_mouse_for_paddle_1 /*&& joystick == 0*/)
+   {
+      if (axis == 0) {
+         return int16_t(float(input_pointer_x[joystick]));
+      } else {
+         return int16_t(float(input_pointer_y[joystick]));
+      }
    } else {
-      return int16_t(float(input_analog_left_y[joystick]));
+      if (axis == 0) {
+         return int16_t(float(input_analog_left_x[joystick]));
+      } else {
+         return int16_t(float(input_analog_left_y[joystick]));
+      }
    }
 }
 

@@ -179,6 +179,8 @@ static void update_input(void)
    int32_t input_bitmask[NUM_CONTROLLERS];
    int32_t input_analog_left_x[NUM_CONTROLLERS];
    int32_t input_analog_left_y[NUM_CONTROLLERS];
+   int32_t input_pointer_x[NUM_CONTROLLERS];
+   int32_t input_pointer_y[NUM_CONTROLLERS];
 
    for (unsigned pad = 0; pad < NUM_CONTROLLERS; pad++)
    {
@@ -266,8 +268,11 @@ static void update_input(void)
          log_cb(RETRO_LOG_INFO, "Pointer Pressed #: %d    : (%6d, %6d).\n", pad, pointer_x, pointer_y);
 
       log_cb(RETRO_LOG_INFO, "Pointer #: %d    : (%6d, %6d).\n", pad, pointer_x, pointer_y);
+      input_pointer_x[pad] = pointer_x;
+      input_pointer_y[pad] = pointer_y;
+
    }
-   dice.update_input(input_bitmask, input_analog_left_x, input_analog_left_y);
+   dice.update_input(input_bitmask, input_analog_left_x, input_analog_left_y, input_pointer_x, input_pointer_y);
 }
 
 static void check_variables(void)
