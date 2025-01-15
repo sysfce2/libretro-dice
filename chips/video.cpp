@@ -188,7 +188,7 @@ void Video::init_color_lut(const double (*r)[3])
         }
 
         color[i] = (val + desc->brightness) * desc->contrast; // TODO: user configurable brightness/contrast?
-        printf("Color %d: %g %g %g %g\n", i, r_lo, r_hi, val, color[i]);
+        //printf("Color %d: %g %g %g %g\n", i, r_lo, r_hi, val, color[i]);
     }
    
    // Boil the old OpenGL Look Up Table down to a libretro-ish RGB565 colormap.

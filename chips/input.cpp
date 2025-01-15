@@ -303,7 +303,8 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
    
     // Absolute Joystick - Overrides deltas
     //if(settings.use_joystick && settings.joystick_mode == Settings::Input::JOYSTICK_ABSOLUTE)
-    if (circuit->input.paddle_joystick_absolute)
+    if (circuit->input.paddle_joystick_absolute || 
+          (circuit->input.use_mouse_pointer_for_paddle_1 && joystick_idx == 0))
     {
         //double sensitivity = 0.25 + 0.00075 * (1000.0 - double(settings.joystick_sensitivity)); // Inverse scale from 0.25..1.0
        double sensitivity = 0.25 + 0.00075 * (1000.0 - 500.0); // Inverse scale from 0.25..1.0
@@ -311,7 +312,14 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
        /*Settings::Input::JoystickAxis joystick = HORIZONTAL ? settings.joy_x_axis : settings.joy_y_axis;
        double val = circuit->input.getJoystickAxis(joystick.joystick, joystick.axis) / (65536.0 * sensitivity) + 0.5; // 0..1 */
        unsigned axis_idx = HORIZONTAL ? 0 : 1;
-       double val = circuit->input.getJoystickAxis(joystick_idx, axis_idx) / (65536.0 * sensitivity) + 0.5; // 0..1 */
+       double controller_input;
+       if (circuit->input.use_mouse_pointer_for_paddle_1 && joystick_idx == 0)
+       {
+         controller_input = circuit->input.getPointerAxis(axis_idx);
+       } else {                                                                                     
+         controller_input = circuit->input.getJoystickAxis(joystick_idx, axis_idx);
+       }
+       double val = controller_input / (65536.0 * sensitivity) + 0.5; // 0..1 */
 
         if(val < 0.0) val = 0.0;
         else if(val > 1.0) val = 1.0;
@@ -321,24 +329,6 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
         else
             desc->current_val = (1.0 - val) * (desc->min_val - desc->max_val) + desc->max_val;
     }
-
-   if (circuit->input.use_mouse_pointer_for_paddle_1 && controller == 0)
-   {
-      double sensitivity = 0.25 + 0.00075 * (1000.0 - 500.0); // Inverse scale from 0.25..1.0
-
-      /*Settings::Input::JoystickAxis joystick = HORIZONTAL ? settings.joy_x_axis : settings.joy_y_axis;
-      double val = circuit->input.getJoystickAxis(joystick.joystick, joystick.axis) / (65536.0 * sensitivity) + 0.5; // 0..1 */
-      unsigned axis_idx = HORIZONTAL ? 0 : 1;
-      double val = circuit->input.getJoystickAxis(joystick_idx, axis_idx) / (65536.0 * sensitivity) + 0.5; // 0..1 */
-
-       if(val < 0.0) val = 0.0;
-       else if(val > 1.0) val = 1.0;
-       
-       if(desc->max_val > desc->min_val)
-           desc->current_val = val * (desc->max_val - desc->min_val) + desc->min_val;
-       else
-           desc->current_val = (1.0 - val) * (desc->min_val - desc->max_val) + desc->max_val;
-   }
 
     //if(desc->current_val != prev_val && desc->mono_555) // Update resistance value in 555
     {
@@ -707,7 +697,9 @@ void wheel_input(Chip* chip, int mask)
             { */
 
                 //double val = circuit->input.getJoystickAxis(settings.left.joystick, settings.left.button >> 1) / 32768.0;
+
        double val = circuit->input.getJoystickAxis(joystick_idx, axis_idx) / 32768.0;
+
       // printf("KAM20 Wheel num %d axis %d val %f\n", joystick_idx, axis_idx, val);
                 //if(val > ANALOG_THRESHOLD ) //&& (settings.left.button & 1))
                  //   delta -= (val - ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
@@ -1043,22 +1035,19 @@ bool Input::getJoystickButton(unsigned joystick, unsigned button)
 
 int16_t Input::getJoystickAxis(unsigned joystick, unsigned axis)
 {
-    //if(joystick >= joysticks.size()) return 0;
-    //return SDL_JoystickGetAxis(joysticks[joystick], axis);
-
-   if (use_mouse_pointer_for_paddle_1 && joystick == 0)
-   {
-      if (axis == 0) {
-         return int16_t(float(input_pointer_x[joystick]));
-      } else {
-         return int16_t(float(input_pointer_y[joystick]));
-      }
+   if (axis == 0) {
+      return int16_t(float(input_analog_left_x[joystick]));
    } else {
-      if (axis == 0) {
-         return int16_t(float(input_analog_left_x[joystick]));
-      } else {
-         return int16_t(float(input_analog_left_y[joystick]));
-      }
+      return int16_t(float(input_analog_left_y[joystick]));
+   }
+}
+
+int16_t Input::getPointerAxis(unsigned axis)
+{
+   if (axis == 0) {
+      return int16_t(float(input_pointer_x[0]));
+   } else {
+      return int16_t(float(input_pointer_y[0]));
    }
 }
 
