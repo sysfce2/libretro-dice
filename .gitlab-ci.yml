@@ -52,6 +52,11 @@ include:
     file: '/ios9.yml'
 
   ################################## CONSOLES ################################
+
+  # PlayStation Portable
+  - project: 'libretro-infrastructure/ci-templates'
+    file: '/psp-static.yml'
+
   # PlayStation Vita
   - project: 'libretro-infrastructure/ci-templates'
     file: '/vita-static.yml'
@@ -71,6 +76,10 @@ include:
   # Nintendo Wii
   - project: 'libretro-infrastructure/ci-templates'
     file: '/wii-static.yml'
+
+  # Nintendo WiiU
+  - project: 'libretro-infrastructure/ci-templates'
+    file: '/wiiu-static.yml'
 
   # Nintendo Switch
   - project: 'libretro-infrastructure/ci-templates'
@@ -184,6 +193,12 @@ libretro-build-tvos-arm64:
     - .core-defs
 
 ################################### CONSOLES #################################
+# PlayStation Portable
+libretro-build-psp:
+  extends:
+    - .libretro-psp-static-retroarch-master
+    - .core-defs
+
 # PlayStation Vita
 libretro-build-vita:
   extends:
@@ -212,6 +227,12 @@ libretro-build-ngc:
 libretro-build-wii:
   extends:
     - .libretro-wii-static-retroarch-master
+    - .core-defs
+
+# Nintendo WiiU
+libretro-build-wiiu:
+  extends:
+    - .libretro-wiiu-static-retroarch-master
     - .core-defs
 
 # Nintendo Switch
