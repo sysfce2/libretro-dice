@@ -12,6 +12,7 @@
 #endif
 #include "libretro.h"
 #include "dice.h"
+#include "manymouse/manymouse.h"
 
 static uint8_t *frame_buf;
 static struct retro_log_callback logging;
@@ -39,6 +40,7 @@ static void fallback_log(enum retro_log_level level, const char *fmt, ...)
 retro_environment_t environ_cb;
 
 static unsigned color;  // TODO (kmitton)
+static int num_mice;
 
 void retro_init(void)
 {
@@ -50,7 +52,10 @@ void retro_init(void)
    {
       snprintf(retro_base_directory, sizeof(retro_base_directory), "%s", dir);
    }
+   num_mice = ManyMouse_Init();
+
    color = 0;
+   
 }
 
 void retro_deinit(void)

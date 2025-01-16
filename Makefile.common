@@ -21,7 +21,5 @@ GAME_CPP := $(CORE_DIR)/games/pong.cpp $(CORE_DIR)/games/rebound.cpp $(CORE_DIR)
 MANYMOUSE_CPP := $(CORE_DIR)/manymouse/manymouse.cpp $(CORE_DIR)/manymouse/windows_wminput.cpp $(CORE_DIR)/manymouse/linux_evdev.cpp \
 				 $(CORE_DIR)/manymouse/macosx_hidmanager.cpp $(CORE_DIR)/manymouse/macosx_hidutilities.cpp $(CORE_DIR)/manymouse/x11_xinput2.cpp
 
-# SOURCES_CPP := $(CORE_DIR)/dice.cpp $(CORE_DIR)/chip.cpp $(CORE_DIR)/circuit.cpp $(CORE_DIR)/settings.cpp $(CORE_DIR)/game_config.cpp $(CORE_DIR)/phoenix/phoenix.cpp $(CHIP_CPP) $(GAME_CPP) $(MANYMOUSE_CPP)
-
-SOURCES_CXX := $(CORE_DIR)/libretro.cpp $(CORE_DIR)/dice.cpp $(CORE_DIR)/chip.cpp $(CORE_DIR)/circuit.cpp $(CORE_DIR)/settings.cpp $(CORE_DIR)/game_config.cpp  $(CHIP_CPP) $(GAME_CPP) 
+SOURCES_CXX := $(CORE_DIR)/libretro.cpp $(CORE_DIR)/dice.cpp $(CORE_DIR)/chip.cpp $(CORE_DIR)/circuit.cpp $(CORE_DIR)/settings.cpp $(CORE_DIR)/game_config.cpp  $(CHIP_CPP) $(GAME_CPP) $(MANYMOUSE_CPP)
 

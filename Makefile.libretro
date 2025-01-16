@@ -1,6 +1,8 @@
 DEBUG = 0
 HAVE_NETWORK = 0
 VIDEO_RGB565 = 1
+# TODO (mittonk): Only some platforms.
+MANYMOUSE = 1
 
 SPACE :=
 SPACE := $(SPACE) $(SPACE)
@@ -162,6 +164,11 @@ else ifeq ($(platform), osx)
       CXXFLAGS += $(ARCHFLAGS)
       LDFLAGS += $(ARCHFLAGS)
    endif
+   
+   ifeq ($(MANYMOUSE), 1)
+      LDFLAGS += -framework Carbon -framework IOKit
+   endif
+
    HAVE_NETWORK=1
 ifeq ($(arch),ppc)
 	CFLAGS += -DHAVE_NO_LANGEXTRA
