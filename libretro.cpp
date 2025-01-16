@@ -42,6 +42,7 @@ static unsigned color;  // TODO (kmitton)
 
 void retro_init(void)
 {
+   // Screen height jitters a little in some games, leave some extra buffer space.
    int safety_factor = 2;
    frame_buf = (uint8_t*)malloc(VIDEO_PIXELS * VIDEO_BYTES_PER_PIXEL * safety_factor);
    
@@ -88,11 +89,12 @@ static retro_input_state_t input_state_cb;
 void retro_get_system_av_info(struct retro_system_av_info *info)
 {
    // Some games use vertical monitors, won't know till we load it.
-   float aspect = screen_horizontal ? 4.0f / 3.0f : 3.0f / 4.0f;
+   //float aspect = screen_horizontal ? 4.0f / 3.0f : 3.0f / 4.0f;
+   float aspect = 4.0f / 3.0f;
    float sampling_rate         = 30000.0f;
 
    info->timing = (struct retro_system_timing) {
-      .fps = 8.0,
+      .fps = 60.0,
       .sample_rate = 0.0,
    };
    info->geometry.base_width   = VIDEO_WIDTH;
