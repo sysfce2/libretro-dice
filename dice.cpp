@@ -87,7 +87,9 @@ void DICE::render_frame(void)
 
 void DICE::update_input(int32_t input_state[], int32_t input_analog_left_x[], int32_t input_analog_left_y[], int32_t input_pointer_x[], int32_t input_pointer_y[])
 {
+#ifdef MANYMOUSE
    input->poll_input(); // Mice handled by manymouse
+#endif
    
    if (circuit)
    {

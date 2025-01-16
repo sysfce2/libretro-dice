@@ -1,8 +1,7 @@
 DEBUG = 0
 HAVE_NETWORK = 0
 VIDEO_RGB565 = 1
-# TODO (mittonk): Only some platforms.
-MANYMOUSE = 1
+MANYMOUSE = 0
 
 SPACE :=
 SPACE := $(SPACE) $(SPACE)
@@ -166,6 +165,8 @@ else ifeq ($(platform), osx)
    endif
    
    ifeq ($(MANYMOUSE), 1)
+      CFLAGS += -DMANYMOUSE
+      CXXFLAGS += -DMANYMOUSE
       LDFLAGS += -framework Carbon -framework IOKit
    endif
 

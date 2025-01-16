@@ -12,7 +12,9 @@
 #endif
 #include "libretro.h"
 #include "dice.h"
+#ifdef MANYMOUSE
 #include "manymouse/manymouse.h"
+#endif
 
 static uint8_t *frame_buf;
 static struct retro_log_callback logging;
@@ -52,7 +54,9 @@ void retro_init(void)
    {
       snprintf(retro_base_directory, sizeof(retro_base_directory), "%s", dir);
    }
+#ifdef MANYMOUSE
    num_mice = ManyMouse_Init();
+#endif
 
    color = 0;
    
@@ -131,13 +135,13 @@ void retro_set_environment(retro_environment_t cb)
    cb(RETRO_ENVIRONMENT_SET_CONTROLLER_INFO, (void*)ports);
    
    static const struct retro_variable vars[] = {
+      { "dice_use_mouse_pointer_for_paddle_1", "Use mouse pointer for paddle 1; false|true" },
+
       { "dice_paddle_joystick_absolute", "Paddle joystick absolute; false|true" },
       { "dice_paddle_keyboard_sensitivity", "Paddle D-pad sensitivity; 250|125|375|500" },
       { "dice_paddle_joystick_sensitivity", "Paddle analog stick sensitivity; 500|125|250|375" },
       { "dice_wheel_keyjoy_sensitivity", "Wheel sensitivity; 500|125|250|375" },
       { "dice_throttle_keyjoy_sensitivity", "Throttle sensitivity; 250|125|375|500" },
-
-      { "dice_use_mouse_pointer_for_paddle_1", "Use mouse pointer for paddle 1; false|true" },
 
       { NULL, NULL },
    };
