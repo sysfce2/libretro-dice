@@ -75,6 +75,7 @@ ifneq (,$(findstring unix,$(platform)))
    endif
 
    ifeq ($(MANYMOUSE), 1)
+      BUILD_MANYMOUSE := 1
       CFLAGS += -DMANYMOUSE
       CXXFLAGS += -DMANYMOUSE
       CFLAGS += -fPIC -I/usr/src/linux/include
@@ -172,6 +173,7 @@ else ifeq ($(platform), osx)
    endif
    
    ifeq ($(MANYMOUSE), 1)
+      BUILD_MANYMOUSE := 1
       CFLAGS += -DMANYMOUSE
       CXXFLAGS += -DMANYMOUSE
       LDFLAGS += -framework Carbon -framework IOKit
@@ -649,6 +651,7 @@ else
    LDFLAGS += -lws2_32
 
    ifeq ($(MANYMOUSE), 1)
+      BUILD_MANYMOUSE := 1
       CFLAGS += -DMANYMOUSE
       CXXFLAGS += -DMANYMOUSE
    endif

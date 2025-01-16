@@ -24,7 +24,7 @@ MANYMOUSE_CPP := $(CORE_DIR)/manymouse/manymouse.cpp $(CORE_DIR)/manymouse/windo
 
 SOURCES_CXX := $(CORE_DIR)/libretro.cpp $(CORE_DIR)/dice.cpp $(CORE_DIR)/chip.cpp $(CORE_DIR)/circuit.cpp $(CORE_DIR)/settings.cpp $(CORE_DIR)/game_config.cpp  $(CHIP_CPP) $(GAME_CPP)
 
-ifeq ($(MANYMOUSE), 1)
+ifeq ($(BUILD_MANYMOUSE), 1)
     SOURCES_CXX += $(MANYMOUSE_CPP)
 endif
 
