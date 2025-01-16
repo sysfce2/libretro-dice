@@ -134,6 +134,7 @@ public:
     bool getKeyboardState(unsigned scancode);
     bool getJoystickButton(unsigned joystick, unsigned button);
     int16_t getJoystickAxis(unsigned joystick, unsigned axis);
+    int16_t getPointerAxis(unsigned axis);
     int getNumJoysticks();
     int getNumJoystickAxes(int joystick);
     bool getKeyPressed(const KeyAssignment& key_assignment);
