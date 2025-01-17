@@ -147,8 +147,7 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
 
    struct retro_variable var = {0};
    char buffer[50];
-   bool settings_use_mouse = PADDLE <= 1;  // 2 paddles to start.
-    if(settings_use_mouse)
+    if(circuit->input.mouse_enabled[PADDLE])
     {
         // Scale sensitivity by total paddle range
         double sensitivity = double(settings_mouse_sensitivity) * fabs(desc->max_val - desc->min_val) / 100000.0;

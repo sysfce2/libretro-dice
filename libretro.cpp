@@ -66,6 +66,11 @@ void retro_deinit(void)
 {
    free(frame_buf);
    frame_buf = NULL;
+   
+#ifdef MANYMOUSE
+   // TODO (mittonk): Is this too early?
+   ManyMouse_Quit();
+#endif
 }
 
 unsigned retro_api_version(void)
@@ -146,15 +151,14 @@ void retro_set_environment(retro_environment_t cb)
       { "dice_manymouse_paddle1_x", "Manymouse axis for paddle 2 x; 1x|0x|0y|1x|1y|2x|2y|3x|3y" },
       { "dice_manymouse_paddle1_y", "Manymouse axis for paddle 2 y; 1y|0x|0y|1x|1y|2x|2y|3x|3y" },
 
-/*
-      { "dice_manymouse_paddle0", "Enable manymouse paddle 3; false|true" },
-      { "dice_manymouse_paddle0_x", "Manymouse axis for paddle 3 x; 0x|0y|1x|1y|2x|2y|3x|3y" },
-      { "dice_manymouse_paddle0_y", "Manymouse axis for paddle 3 y; 0x|0y|1x|1y|2x|2y|3x|3y" },
+      { "dice_manymouse_paddle2", "Enable manymouse paddle 3; false|true" },
+      { "dice_manymouse_paddle2_x", "Manymouse axis for paddle 3 x; 2x|0x|0y|1x|1y|2x|2y|3x|3y" },
+      { "dice_manymouse_paddle2_y", "Manymouse axis for paddle 3 y; 2y|0x|0y|1x|1y|2x|2y|3x|3y" },
 
-      { "dice_manymouse_paddle0", "Enable manymouse paddle 4; false|true" },
-      { "dice_manymouse_paddle0_x", "Manymouse axis for paddle 4 x; 0x|0y|1x|1y|2x|2y|3x|3y" },
-      { "dice_manymouse_paddle0_y", "Manymouse axis for paddle 4 y; 0x|0y|1x|1y|2x|2y|3x|3y" },
- */
+      { "dice_manymouse_paddle3", "Enable manymouse paddle 4; false|true" },
+      { "dice_manymouse_paddle3_x", "Manymouse axis for paddle 4 x; 3x|0x|0y|1x|1y|2x|2y|3x|3y" },
+      { "dice_manymouse_paddle3_y", "Manymouse axis for paddle 4 y; 3y|0x|0y|1x|1y|2x|2y|3x|3y" },
+
 #endif
       
       { "dice_paddle_joystick_absolute", "Paddle joystick absolute; false|true" },
@@ -253,7 +257,7 @@ static void check_variables(void)
 #ifdef MANYMOUSE
    char buffer[50];
    
-   for (unsigned paddle=0; paddle < 2; paddle++)
+   for (unsigned paddle=0; paddle < 4; paddle++)
    {
       snprintf(buffer, sizeof(buffer), "dice_manymouse_paddle%d", paddle);
       var.key = buffer;
@@ -407,7 +411,6 @@ bool retro_load_game(const struct retro_game_info *info)
 
 void retro_unload_game(void)
 {
-
 }
 
 unsigned retro_get_region(void)
