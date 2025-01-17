@@ -87,6 +87,10 @@ void DICE::render_frame(void)
 
 void DICE::update_input(int32_t input_state[], int32_t input_analog_left_x[], int32_t input_analog_left_y[], int32_t input_pointer_x[], int32_t input_pointer_y[])
 {
+#ifdef MANYMOUSE
+   input->poll_input(); // Mice handled by manymouse
+#endif
+   
    if (circuit)
    {
       for (unsigned i=0; i<NUM_CONTROLLERS; i++)
@@ -102,6 +106,44 @@ void DICE::update_input(int32_t input_state[], int32_t input_analog_left_x[], in
 
 void DICE::reset(void)
 {
+}
+
+void DICE::set_use_mouse_pointer_for_paddle_1(bool val)
+{
+   if (circuit) circuit->input.use_mouse_pointer_for_paddle_1 = val;
+}
+
+void DICE::set_manymouse_enabled(unsigned paddle, bool val)
+{
+   if (circuit) circuit->input.mouse_enabled[paddle] = val;
+}
+
+void DICE::set_manymouse_axis(unsigned paddle, unsigned axis, const char* axis_name)
+{
+   unsigned mouse_idx = 0;
+   unsigned mouse_axis = 0;
+   switch (axis_name[0]) {
+      case '0': mouse_idx = 0; break;
+      case '1': mouse_idx = 1; break;
+      case '2': mouse_idx = 2; break;
+      case '3': mouse_idx = 3; break;
+   }
+   switch (axis_name[1]) {
+      case 'x': mouse_axis = 0; break;
+      case 'y': mouse_axis = 1; break;
+   }
+
+   if (circuit)
+   {
+      if (axis == 0)
+      {
+         circuit->input.mouse_settings[paddle].settings_x_axis_mouse = mouse_idx;
+         circuit->input.mouse_settings[paddle].settings_x_axis_axis = mouse_axis;
+      } else {
+         circuit->input.mouse_settings[paddle].settings_y_axis_mouse = mouse_idx;
+         circuit->input.mouse_settings[paddle].settings_y_axis_axis = mouse_axis;
+      }
+   }
 }
 
 void DICE::set_paddle_joystick_absolute(bool paddle_joystick_absolute)
@@ -127,11 +169,6 @@ void DICE::set_wheel_keyjoy_sensitivity(int val)
 void DICE::set_throttle_keyjoy_sensitivity(int val)
 {
    if (circuit) circuit->input.throttle_keyjoy_sensitivity = val;
-}
-
-void DICE::set_use_mouse_pointer_for_paddle_1(bool val)
-{
-   if (circuit) circuit->input.use_mouse_pointer_for_paddle_1 = val;
 }
 
 } // namespace

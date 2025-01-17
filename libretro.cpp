@@ -12,6 +12,9 @@
 #endif
 #include "libretro.h"
 #include "dice.h"
+#ifdef MANYMOUSE
+#include "manymouse/manymouse.h"
+#endif
 
 static uint8_t *frame_buf;
 static struct retro_log_callback logging;
@@ -50,13 +53,51 @@ void retro_init(void)
    {
       snprintf(retro_base_directory, sizeof(retro_base_directory), "%s", dir);
    }
+#ifdef MANYMOUSE
+   int available_mice = ManyMouse_Init();
+   
+   if (available_mice < 0)
+       printf("ManyMouse failed to initialize!\n");
+   else if (available_mice == 0)
+       printf("No mice detected!\n");
+   else if (available_mice > 1)
+   {
+       // Extra mice, list them.
+       // (Or maybe just Wayland on Linux):
+       // https://github.com/icculus/manymouse/issues/10
+       char buffer[255];
+       struct retro_message message;
+       message.msg = buffer;
+       message.frames = 120;
+
+       snprintf(buffer, sizeof(buffer), "ManyMouse driver: %s\n", ManyMouse_DriverName());
+       environ_cb(RETRO_ENVIRONMENT_SET_MESSAGE, &message);
+       //log_cb(RETRO_LOG_INFO, buffer);
+       printf(buffer);
+      
+       for (int i = 0; i < available_mice; i++)
+       {
+          snprintf(buffer, sizeof(buffer), "Mouse #%d: %s\n", i, ManyMouse_DeviceName(i));
+          environ_cb(RETRO_ENVIRONMENT_SET_MESSAGE, &message);
+          //log_cb(RETRO_LOG_INFO, buffer);
+          printf(buffer);
+       }
+   }
+#endif
+
    color = 0;
+   
 }
 
 void retro_deinit(void)
 {
    free(frame_buf);
    frame_buf = NULL;
+   
+#ifdef MANYMOUSE
+   // TODO (mittonk): Is this too early?  Or too late?
+   ManyMouse_Quit();
+#endif
 }
 
 unsigned retro_api_version(void)
@@ -126,13 +167,31 @@ void retro_set_environment(retro_environment_t cb)
    cb(RETRO_ENVIRONMENT_SET_CONTROLLER_INFO, (void*)ports);
    
    static const struct retro_variable vars[] = {
+      { "dice_use_mouse_pointer_for_paddle_1", "Use mouse pointer for paddle 1; false|true" },
+
+#ifdef MANYMOUSE
+      { "dice_manymouse_paddle0", "Mouse-Paddle 1; false|true" },
+      { "dice_manymouse_paddle0_x", "Mouse-Paddle 1 x; 0x|0x|0y|1x|1y|2x|2y|3x|3y" },
+      { "dice_manymouse_paddle0_y", "Mouse-Paddle 1 y; 0y|0x|0y|1x|1y|2x|2y|3x|3y" },
+
+      { "dice_manymouse_paddle1", "Mouse-Paddle 2; false|true" },
+      { "dice_manymouse_paddle1_x", "Mouse-Paddle 2 x; 1x|0x|0y|1x|1y|2x|2y|3x|3y" },
+      { "dice_manymouse_paddle1_y", "Mouse-Paddle 2 y; 1y|0x|0y|1x|1y|2x|2y|3x|3y" },
+
+      { "dice_manymouse_paddle2", "Mouse-Paddle 3; false|true" },
+      { "dice_manymouse_paddle2_x", "Mouse-Paddle 3 x; 2x|0x|0y|1x|1y|2x|2y|3x|3y" },
+      { "dice_manymouse_paddle2_y", "Mouse-Paddle 3 y; 2y|0x|0y|1x|1y|2x|2y|3x|3y" },
+
+      { "dice_manymouse_paddle3", "Mouse-Paddle 4; false|true" },
+      { "dice_manymouse_paddle3_x", "Mouse-Paddle 4 x; 3x|0x|0y|1x|1y|2x|2y|3x|3y" },
+      { "dice_manymouse_paddle3_y", "Mouse-Paddle 4 y; 3y|0x|0y|1x|1y|2x|2y|3x|3y" },
+#endif
+      
       { "dice_paddle_joystick_absolute", "Paddle joystick absolute; false|true" },
       { "dice_paddle_keyboard_sensitivity", "Paddle D-pad sensitivity; 250|125|375|500" },
       { "dice_paddle_joystick_sensitivity", "Paddle analog stick sensitivity; 500|125|250|375" },
       { "dice_wheel_keyjoy_sensitivity", "Wheel sensitivity; 500|125|250|375" },
       { "dice_throttle_keyjoy_sensitivity", "Throttle sensitivity; 250|125|375|500" },
-
-      { "dice_use_mouse_pointer_for_paddle_1", "Use mouse pointer for paddle 1; false|true" },
 
       { NULL, NULL },
    };
@@ -212,6 +271,50 @@ static void check_variables(void)
 {
    struct retro_variable var = {0};
 
+   var.key = "dice_use_mouse_pointer_for_paddle_1";
+   var.value = NULL;
+   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+   {
+      bool use_mouse_pointer_for_paddle_1 = !strcmp(var.value, "true") ? true : false;
+      dice.set_use_mouse_pointer_for_paddle_1(use_mouse_pointer_for_paddle_1);
+      log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
+   }
+
+#ifdef MANYMOUSE
+   char buffer[50];
+   
+   for (unsigned paddle=0; paddle < 4; paddle++)
+   {
+      snprintf(buffer, sizeof(buffer), "dice_manymouse_paddle%d", paddle);
+      var.key = buffer;
+      var.value = NULL;
+      if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+      {
+         bool val = !strcmp(var.value, "true") ? true : false;
+         dice.set_manymouse_enabled(paddle, val);
+         log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
+      }
+      
+      snprintf(buffer, sizeof(buffer), "dice_manymouse_paddle%d_x", paddle);
+      var.key = buffer;
+      var.value = NULL;
+      if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+      {
+         dice.set_manymouse_axis(paddle, 0, var.value);
+         log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
+      }
+      
+      snprintf(buffer, sizeof(buffer), "dice_manymouse_paddle%d_y", paddle);
+      var.key = buffer;
+      var.value = NULL;
+      if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+      {
+         dice.set_manymouse_axis(paddle, 1, var.value);
+         log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
+      }
+   }
+#endif
+
    var.key = "dice_paddle_joystick_absolute";
    var.value = NULL;
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
@@ -248,14 +351,6 @@ static void check_variables(void)
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
    {
       dice.set_throttle_keyjoy_sensitivity(atoi(var.value));
-   }
-
-   var.key = "dice_use_mouse_pointer_for_paddle_1";
-   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
-   {
-      bool use_mouse_pointer_for_paddle_1 = !strcmp(var.value, "true") ? true : false;
-      dice.set_use_mouse_pointer_for_paddle_1(use_mouse_pointer_for_paddle_1);
-      log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
    }
 
 }
@@ -342,7 +437,6 @@ bool retro_load_game(const struct retro_game_info *info)
 
 void retro_unload_game(void)
 {
-
 }
 
 unsigned retro_get_region(void)
