@@ -137,6 +137,26 @@ void retro_set_environment(retro_environment_t cb)
    static const struct retro_variable vars[] = {
       { "dice_use_mouse_pointer_for_paddle_1", "Use mouse pointer for paddle 1; false|true" },
 
+#ifdef MANYMOUSE
+      { "dice_manymouse_paddle0", "Enable manymouse paddle 1; false|true" },
+      { "dice_manymouse_paddle0_x", "Manymouse axis for paddle 1 x; 0x|0x|0y|1x|1y|2x|2y|3x|3y" },
+      { "dice_manymouse_paddle0_y", "Manymouse axis for paddle 1 y; 0y|0x|0y|1x|1y|2x|2y|3x|3y" },
+
+      { "dice_manymouse_paddle1", "Enable manymouse paddle 2; false|true" },
+      { "dice_manymouse_paddle1_x", "Manymouse axis for paddle 2 x; 1x|0x|0y|1x|1y|2x|2y|3x|3y" },
+      { "dice_manymouse_paddle1_y", "Manymouse axis for paddle 2 y; 1y|0x|0y|1x|1y|2x|2y|3x|3y" },
+
+/*
+      { "dice_manymouse_paddle0", "Enable manymouse paddle 3; false|true" },
+      { "dice_manymouse_paddle0_x", "Manymouse axis for paddle 3 x; 0x|0y|1x|1y|2x|2y|3x|3y" },
+      { "dice_manymouse_paddle0_y", "Manymouse axis for paddle 3 y; 0x|0y|1x|1y|2x|2y|3x|3y" },
+
+      { "dice_manymouse_paddle0", "Enable manymouse paddle 4; false|true" },
+      { "dice_manymouse_paddle0_x", "Manymouse axis for paddle 4 x; 0x|0y|1x|1y|2x|2y|3x|3y" },
+      { "dice_manymouse_paddle0_y", "Manymouse axis for paddle 4 y; 0x|0y|1x|1y|2x|2y|3x|3y" },
+ */
+#endif
+      
       { "dice_paddle_joystick_absolute", "Paddle joystick absolute; false|true" },
       { "dice_paddle_keyboard_sensitivity", "Paddle D-pad sensitivity; 250|125|375|500" },
       { "dice_paddle_joystick_sensitivity", "Paddle analog stick sensitivity; 500|125|250|375" },
@@ -221,6 +241,91 @@ static void check_variables(void)
 {
    struct retro_variable var = {0};
 
+   var.key = "dice_use_mouse_pointer_for_paddle_1";
+   var.value = NULL;
+   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+   {
+      bool use_mouse_pointer_for_paddle_1 = !strcmp(var.value, "true") ? true : false;
+      dice.set_use_mouse_pointer_for_paddle_1(use_mouse_pointer_for_paddle_1);
+      log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
+   }
+
+#ifdef MANYMOUSE
+   var.key = "dice_manymouse_paddle0";
+   var.value = NULL;
+   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+   {
+      bool use_manymouse_paddle0 = !strcmp(var.value, "true") ? true : false;
+      //dice.set_use_mouse_pointer_for_paddle_1(use_mouse_pointer_for_paddle_1);
+      // TODO (mittonk): Hook up
+      log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
+   }
+
+   var.key = "dice_manymouse_paddle0x";
+   var.value = NULL;
+   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+   {
+      // TODO (mittonk): Hook up
+      // dice.set_paddle_keyboard_sensitivity(atoi(var.value));
+   }
+   
+   var.key = "dice_manymouse_paddle0y";
+   var.value = NULL;
+   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+   {
+      // TODO (mittonk): Hook up
+      // dice.set_paddle_keyboard_sensitivity(atoi(var.value));
+   }
+   
+   var.key = "dice_manymouse_paddle1x";
+   var.value = NULL;
+   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+   {
+      // TODO (mittonk): Hook up
+      // dice.set_paddle_keyboard_sensitivity(atoi(var.value));
+   }
+   
+   var.key = "dice_manymouse_paddle1y";
+   var.value = NULL;
+   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+   {
+      // TODO (mittonk): Hook up
+      // dice.set_paddle_keyboard_sensitivity(atoi(var.value));
+   }
+   
+   var.key = "dice_manymouse_paddle2x";
+   var.value = NULL;
+   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+   {
+      // TODO (mittonk): Hook up
+      // dice.set_paddle_keyboard_sensitivity(atoi(var.value));
+   }
+   
+   var.key = "dice_manymouse_paddle2y";
+   var.value = NULL;
+   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+   {
+      // TODO (mittonk): Hook up
+      // dice.set_paddle_keyboard_sensitivity(atoi(var.value));
+   }
+   
+   var.key = "dice_manymouse_paddle3x";
+   var.value = NULL;
+   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+   {
+      // TODO (mittonk): Hook up
+      // dice.set_paddle_keyboard_sensitivity(atoi(var.value));
+   }
+
+   var.key = "dice_manymouse_paddle3y";
+   var.value = NULL;
+   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+   {
+      // TODO (mittonk): Hook up
+      // dice.set_paddle_keyboard_sensitivity(atoi(var.value));
+   }
+#endif
+
    var.key = "dice_paddle_joystick_absolute";
    var.value = NULL;
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
@@ -257,14 +362,6 @@ static void check_variables(void)
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
    {
       dice.set_throttle_keyjoy_sensitivity(atoi(var.value));
-   }
-
-   var.key = "dice_use_mouse_pointer_for_paddle_1";
-   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
-   {
-      bool use_mouse_pointer_for_paddle_1 = !strcmp(var.value, "true") ? true : false;
-      dice.set_use_mouse_pointer_for_paddle_1(use_mouse_pointer_for_paddle_1);
-      log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
    }
 
 }
