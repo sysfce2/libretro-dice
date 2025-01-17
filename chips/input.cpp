@@ -133,7 +133,8 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
 {
     Circuit* circuit = chip->circuit;
     //const Settings::Input::Paddle& settings = circuit->settings.input.paddle[PADDLE];
-
+   const ManymouseSettings& settings = circuit->input.mouse_settings[PADDLE];
+   
     AnalogInputDesc<PADDLE, HORIZONTAL>* desc = (AnalogInputDesc<PADDLE, HORIZONTAL>*)chip->custom_data;
     
     double delta = 0.0;
@@ -146,72 +147,20 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
 
    struct retro_variable var = {0};
    char buffer[50];
-/*
-   snprintf(buffer, sizeof(buffer), "dice_manymouse_paddle%d", PADDLE);
-   var.key = buffer;
-   var.value = NULL;
-   bool settings_use_mouse = false;
-   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value) // TODO (mittonk): Axis 0?
-      settings_use_mouse = !strcmp(var.value, "true") ? true : false;
-*/
    bool settings_use_mouse = PADDLE <= 1;  // 2 paddles to start.
     if(settings_use_mouse)
     {
-       // TODO (mittonk): Cache value on input object?
-       struct retro_variable var = {0};
-       char buffer[50];
-       
-       snprintf(buffer, sizeof(buffer), "dice_manymouse_paddle%d_x", PADDLE);
-       var.key = buffer;
-       var.value = NULL;
-       unsigned settings_x_axis_mouse = 0;
-       unsigned settings_x_axis_axis = 0;
-
-       if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
-       {
-          switch (var.value[0]) {
-             case '0': settings_x_axis_mouse = 0; break;
-             case '1': settings_x_axis_mouse = 1; break;
-             case '2': settings_x_axis_mouse = 2; break;
-             case '3': settings_x_axis_mouse = 3; break;
-          }
-          switch (var.value[1]) {
-             case 'x': settings_x_axis_axis = 0; break;
-             case 'y': settings_x_axis_axis = 1; break;
-          }
-       }
-       
-       snprintf(buffer, sizeof(buffer), "dice_manymouse_paddle%d_y", PADDLE);
-       var.key = buffer;
-       var.value = NULL;
-       unsigned settings_y_axis_mouse = 0;
-       unsigned settings_y_axis_axis = 0;
-
-       if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
-       {
-          switch (var.value[0]) {
-             case '0': settings_y_axis_mouse = 0; break;
-             case '1': settings_y_axis_mouse = 1; break;
-             case '2': settings_y_axis_mouse = 2; break;
-             case '3': settings_y_axis_mouse = 3; break;
-          }
-          switch (var.value[1]) {
-             case 'x': settings_y_axis_axis = 0; break;
-             case 'y': settings_y_axis_axis = 1; break;
-          }
-       }
-       
         // Scale sensitivity by total paddle range
         double sensitivity = double(settings_mouse_sensitivity) * fabs(desc->max_val - desc->min_val) / 100000.0;
         
-        if(HORIZONTAL && settings_x_axis_axis == 0) // Horizontal, using mouse x-axis
-            delta += circuit->input.getRelativeMouseX(settings_x_axis_mouse) * sensitivity;
+        if(HORIZONTAL && settings.settings_x_axis_axis == 0) // Horizontal, using mouse x-axis
+            delta += circuit->input.getRelativeMouseX(settings.settings_x_axis_mouse) * sensitivity;
         else if(HORIZONTAL) // Horizontal, using mouse y-axis
-            delta += circuit->input.getRelativeMouseY(settings_x_axis_mouse) * sensitivity;
-        else if(settings_y_axis_axis == 0) // Vertical, using mouse x-axis
-            delta += circuit->input.getRelativeMouseX(settings_y_axis_mouse) * sensitivity;
+            delta += circuit->input.getRelativeMouseY(settings.settings_x_axis_mouse) * sensitivity;
+        else if(settings.settings_y_axis_axis == 0) // Vertical, using mouse x-axis
+            delta += circuit->input.getRelativeMouseX(settings.settings_y_axis_mouse) * sensitivity;
         else // Vertical, using mouse y-axis
-            delta += circuit->input.getRelativeMouseY(settings_y_axis_mouse) * sensitivity;
+            delta += circuit->input.getRelativeMouseY(settings.settings_y_axis_mouse) * sensitivity;
     }
 #endif
  

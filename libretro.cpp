@@ -251,78 +251,37 @@ static void check_variables(void)
    }
 
 #ifdef MANYMOUSE
-   var.key = "dice_manymouse_paddle0";
-   var.value = NULL;
-   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
-   {
-      bool use_manymouse_paddle0 = !strcmp(var.value, "true") ? true : false;
-      //dice.set_use_mouse_pointer_for_paddle_1(use_mouse_pointer_for_paddle_1);
-      // TODO (mittonk): Hook up
-      log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
-   }
-
-   var.key = "dice_manymouse_paddle0x";
-   var.value = NULL;
-   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
-   {
-      // TODO (mittonk): Hook up
-      // dice.set_paddle_keyboard_sensitivity(atoi(var.value));
-   }
+   char buffer[50];
    
-   var.key = "dice_manymouse_paddle0y";
-   var.value = NULL;
-   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+   for (unsigned paddle=0; paddle < 2; paddle++)
    {
-      // TODO (mittonk): Hook up
-      // dice.set_paddle_keyboard_sensitivity(atoi(var.value));
-   }
-   
-   var.key = "dice_manymouse_paddle1x";
-   var.value = NULL;
-   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
-   {
-      // TODO (mittonk): Hook up
-      // dice.set_paddle_keyboard_sensitivity(atoi(var.value));
-   }
-   
-   var.key = "dice_manymouse_paddle1y";
-   var.value = NULL;
-   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
-   {
-      // TODO (mittonk): Hook up
-      // dice.set_paddle_keyboard_sensitivity(atoi(var.value));
-   }
-   
-   var.key = "dice_manymouse_paddle2x";
-   var.value = NULL;
-   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
-   {
-      // TODO (mittonk): Hook up
-      // dice.set_paddle_keyboard_sensitivity(atoi(var.value));
-   }
-   
-   var.key = "dice_manymouse_paddle2y";
-   var.value = NULL;
-   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
-   {
-      // TODO (mittonk): Hook up
-      // dice.set_paddle_keyboard_sensitivity(atoi(var.value));
-   }
-   
-   var.key = "dice_manymouse_paddle3x";
-   var.value = NULL;
-   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
-   {
-      // TODO (mittonk): Hook up
-      // dice.set_paddle_keyboard_sensitivity(atoi(var.value));
-   }
-
-   var.key = "dice_manymouse_paddle3y";
-   var.value = NULL;
-   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
-   {
-      // TODO (mittonk): Hook up
-      // dice.set_paddle_keyboard_sensitivity(atoi(var.value));
+      snprintf(buffer, sizeof(buffer), "dice_manymouse_paddle%d", paddle);
+      var.key = buffer;
+      var.value = NULL;
+      if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+      {
+         bool val = !strcmp(var.value, "true") ? true : false;
+         dice.set_manymouse_enabled(paddle, val);
+         log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
+      }
+      
+      snprintf(buffer, sizeof(buffer), "dice_manymouse_paddle%d_x", paddle);
+      var.key = buffer;
+      var.value = NULL;
+      if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+      {
+         dice.set_manymouse_axis(paddle, 0, var.value);
+         log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
+      }
+      
+      snprintf(buffer, sizeof(buffer), "dice_manymouse_paddle%d_y", paddle);
+      var.key = buffer;
+      var.value = NULL;
+      if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+      {
+         dice.set_manymouse_axis(paddle, 1, var.value);
+         log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
+      }
    }
 #endif
 
