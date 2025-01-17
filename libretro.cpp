@@ -42,7 +42,6 @@ static void fallback_log(enum retro_log_level level, const char *fmt, ...)
 retro_environment_t environ_cb;
 
 static unsigned color;  // TODO (kmitton)
-static int num_mice;
 
 void retro_init(void)
 {
@@ -55,7 +54,35 @@ void retro_init(void)
       snprintf(retro_base_directory, sizeof(retro_base_directory), "%s", dir);
    }
 #ifdef MANYMOUSE
-   num_mice = ManyMouse_Init();
+   int available_mice = ManyMouse_Init();
+   
+   if (available_mice < 0)
+       printf("ManyMouse failed to initialize!\n");
+   else if (available_mice == 0)
+       printf("No mice detected!\n");
+   else if (available_mice > 1)
+   {
+       // Extra mice, list them.
+       // (Or maybe just Wayland on Linux):
+       // https://github.com/icculus/manymouse/issues/10
+       char buffer[255];
+       struct retro_message message;
+       message.msg = buffer;
+       message.frames = 120;
+
+       snprintf(buffer, sizeof(buffer), "ManyMouse driver: %s\n", ManyMouse_DriverName());
+       environ_cb(RETRO_ENVIRONMENT_SET_MESSAGE, &message);
+       //log_cb(RETRO_LOG_INFO, buffer);
+       printf(buffer);
+      
+       for (int i = 0; i < available_mice; i++)
+       {
+          snprintf(buffer, sizeof(buffer), "Mouse #%d: %s\n", i, ManyMouse_DeviceName(i));
+          environ_cb(RETRO_ENVIRONMENT_SET_MESSAGE, &message);
+          //log_cb(RETRO_LOG_INFO, buffer);
+          printf(buffer);
+       }
+   }
 #endif
 
    color = 0;
@@ -68,7 +95,7 @@ void retro_deinit(void)
    frame_buf = NULL;
    
 #ifdef MANYMOUSE
-   // TODO (mittonk): Is this too early?
+   // TODO (mittonk): Is this too early?  Or too late?
    ManyMouse_Quit();
 #endif
 }
@@ -143,22 +170,21 @@ void retro_set_environment(retro_environment_t cb)
       { "dice_use_mouse_pointer_for_paddle_1", "Use mouse pointer for paddle 1; false|true" },
 
 #ifdef MANYMOUSE
-      { "dice_manymouse_paddle0", "Enable manymouse paddle 1; false|true" },
-      { "dice_manymouse_paddle0_x", "Manymouse axis for paddle 1 x; 0x|0x|0y|1x|1y|2x|2y|3x|3y" },
-      { "dice_manymouse_paddle0_y", "Manymouse axis for paddle 1 y; 0y|0x|0y|1x|1y|2x|2y|3x|3y" },
+      { "dice_manymouse_paddle0", "Mouse-Paddle 1; false|true" },
+      { "dice_manymouse_paddle0_x", "Mouse-Paddle 1 x; 0x|0x|0y|1x|1y|2x|2y|3x|3y" },
+      { "dice_manymouse_paddle0_y", "Mouse-Paddle 1 y; 0y|0x|0y|1x|1y|2x|2y|3x|3y" },
 
-      { "dice_manymouse_paddle1", "Enable manymouse paddle 2; false|true" },
-      { "dice_manymouse_paddle1_x", "Manymouse axis for paddle 2 x; 1x|0x|0y|1x|1y|2x|2y|3x|3y" },
-      { "dice_manymouse_paddle1_y", "Manymouse axis for paddle 2 y; 1y|0x|0y|1x|1y|2x|2y|3x|3y" },
+      { "dice_manymouse_paddle1", "Mouse-Paddle 2; false|true" },
+      { "dice_manymouse_paddle1_x", "Mouse-Paddle 2 x; 1x|0x|0y|1x|1y|2x|2y|3x|3y" },
+      { "dice_manymouse_paddle1_y", "Mouse-Paddle 2 y; 1y|0x|0y|1x|1y|2x|2y|3x|3y" },
 
-      { "dice_manymouse_paddle2", "Enable manymouse paddle 3; false|true" },
-      { "dice_manymouse_paddle2_x", "Manymouse axis for paddle 3 x; 2x|0x|0y|1x|1y|2x|2y|3x|3y" },
-      { "dice_manymouse_paddle2_y", "Manymouse axis for paddle 3 y; 2y|0x|0y|1x|1y|2x|2y|3x|3y" },
+      { "dice_manymouse_paddle2", "Mouse-Paddle 3; false|true" },
+      { "dice_manymouse_paddle2_x", "Mouse-Paddle 3 x; 2x|0x|0y|1x|1y|2x|2y|3x|3y" },
+      { "dice_manymouse_paddle2_y", "Mouse-Paddle 3 y; 2y|0x|0y|1x|1y|2x|2y|3x|3y" },
 
-      { "dice_manymouse_paddle3", "Enable manymouse paddle 4; false|true" },
-      { "dice_manymouse_paddle3_x", "Manymouse axis for paddle 4 x; 3x|0x|0y|1x|1y|2x|2y|3x|3y" },
-      { "dice_manymouse_paddle3_y", "Manymouse axis for paddle 4 y; 3y|0x|0y|1x|1y|2x|2y|3x|3y" },
-
+      { "dice_manymouse_paddle3", "Mouse-Paddle 4; false|true" },
+      { "dice_manymouse_paddle3_x", "Mouse-Paddle 4 x; 3x|0x|0y|1x|1y|2x|2y|3x|3y" },
+      { "dice_manymouse_paddle3_y", "Mouse-Paddle 4 y; 3y|0x|0y|1x|1y|2x|2y|3x|3y" },
 #endif
       
       { "dice_paddle_joystick_absolute", "Paddle joystick absolute; false|true" },
