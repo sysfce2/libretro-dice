@@ -56,6 +56,10 @@ static INPUT_DESC( crossfire )
     INPUT_INFO(COIN_INPUT, {{ 1 }}, "Insert Coin and Start Game")
 INPUT_DESC_END
 
+static VIDEO_DESC ( crossfire )
+    VIDEO_RETRO_V_SIZE(254)
+VIDEO_DESC_END
+
 
 CIRCUIT_LAYOUT( crossfire )
 

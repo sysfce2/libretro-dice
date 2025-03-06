@@ -45,6 +45,7 @@ class DICE
 
    public:
       VideoOrientation game_video_rotation = ROTATE_0;
+      uint32_t max_height;
    
       void load_game(const char *path, uint16_t *pixel_buf);
       void update_input(int32_t *input_state, int32_t *input_analog_left_x, int32_t *input_analog_left_y, int32_t *input_pointer_x, int32_t *input_pointer_y);

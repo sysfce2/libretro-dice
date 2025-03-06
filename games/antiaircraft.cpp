@@ -80,6 +80,10 @@ static INPUT_DESC( antiaircraft )
     INPUT_INFO(START_INPUT, {{ 1 }}, "Start Game")
 INPUT_DESC_END
 
+static VIDEO_DESC ( antiaircraft )
+    VIDEO_RETRO_V_SIZE(252)
+VIDEO_DESC_END
+
 CIRCUIT_LAYOUT( antiaircraft )
 	/**************************************************************************
 	* Chips                                                                   *

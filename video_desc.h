@@ -25,6 +25,10 @@ struct VideoDesc
     };
     double brightness;
     double contrast;
+   
+    // Changing resolution in RetroArch seems harder than standalone --- start with a height hint.
+    uint32_t retro_v_size;
+   
     VideoOrientation orientation;
     VideoScanMode scan_mode;
     VideoMonitorType monitor_type;
@@ -54,6 +58,11 @@ struct VideoDesc
         orientation = o;
         return *this;
     }
+   VideoDesc& set_retro_v_size(uint32_t v)
+   {
+       retro_v_size = v;
+       return *this;
+   }
     VideoDesc& set_scan_mode(VideoScanMode s)
     {
         scan_mode = s;
@@ -87,6 +96,7 @@ struct VideoDesc
 #define VIDEO_MONITOR_TYPE( m ) .set_monitor_type(m)
 #define VIDEO_OVERLAY( o... ) .add_overlay({o})
 #define VIDEO_RESISTANCES_RGB( r... ) .set_r_color(r)
+#define VIDEO_RETRO_V_SIZE( v ) .set_retro_v_size(v)
 #define VIDEO_DESC_END ;
 
 #endif

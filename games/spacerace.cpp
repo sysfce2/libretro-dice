@@ -86,6 +86,10 @@ static INPUT_DESC( spacerace )
     INPUT_INFO(START_INPUT, {{ 1 }}, "Start Game")
 INPUT_DESC_END
 
+static VIDEO_DESC ( spacerace )
+    VIDEO_RETRO_V_SIZE(246)
+VIDEO_DESC_END
+
 // Transistor used to enable/disable 566 outputs
 // TODO: Figure out how to simulate more accurately
 static CHIP_DESC( SPACERACE_PNP )

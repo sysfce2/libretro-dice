@@ -77,6 +77,7 @@ static VIDEO_DESC( highway )
     VIDEO_RESISTANCE(1, OHM(470))  
     VIDEO_RESISTANCE(2, OHM(800)) 
     VIDEO_CONTRAST(1.0)
+    VIDEO_RETRO_V_SIZE(252)
 VIDEO_DESC_END
 
 static MixerDesc mixer_desc({OHM(220.0)}, 0, 0, U_FARAD(0.1)); 

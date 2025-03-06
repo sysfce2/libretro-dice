@@ -137,18 +137,25 @@ void Video::adjust_screen_params()
    VideoOrientation orientation = desc->orientation;
    environ_cb(RETRO_ENVIRONMENT_SET_ROTATION, &orientation);
 
-
    if (v_size > 0)
    {
       struct retro_system_av_info avinfo;
       retro_get_system_av_info(&avinfo);
+      printf("KAM3 avinfo_max_height %d\n", avinfo.geometry.max_height);
       avinfo.geometry.base_height = v_size;
       avinfo.geometry.aspect_ratio = horizontal ? 4.0f / 3.0f : 3.0f / 4.0f;
       
-      // SET_GEOMETRY is much lighter weight... light enough it doesn't
-      // seem to redo the scaling.
-      environ_cb(RETRO_ENVIRONMENT_SET_GEOMETRY, &avinfo);
-      //environ_cb(RETRO_ENVIRONMENT_SET_SYSTEM_AV_INFO, &avinfo);
+      /*if (avinfo.geometry.max_height != desc->retro_v_size)
+      {
+         // Set maximum height based on circuit description.  Heavy.
+         avinfo.geometry.max_height = desc->retro_v_size;
+         environ_cb(RETRO_ENVIRONMENT_SET_SYSTEM_AV_INFO, &avinfo);
+         printf("KAM1 set_system_av_info %d\n", desc->retro_v_size);
+      } else { */
+         // Just set current height based on emulation.  Light.
+         environ_cb(RETRO_ENVIRONMENT_SET_GEOMETRY, &avinfo);
+         printf("KAM2 set_geometry %d\n", v_size);
+      /* } */
    }
 
    /*
