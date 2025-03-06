@@ -45,8 +45,6 @@ The "usual mouse" is often (but not always) index 0; use `detect_mice` to find y
 Other controllers map motion to different mouse axes.
 
 #### Thunderstick GRS spinners
-_(Untested)_
-
 Each spinner appears as a separate mouse, and can switch between axes with a button-hold or similar.
 
 Two players each using single-axis spinners like the Thunderstick GRS (and neither using the usual Mouse 0):
