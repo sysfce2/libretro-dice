@@ -229,6 +229,7 @@ CIRCUIT_LAYOUT( spacerace )
     CHIP("MIXER", MIXER, &mixer_desc)
 
     AUDIO(spacerace)
+    VIDEO(spacerace)
     INPUT(spacerace)
 
 #ifdef DEBUG

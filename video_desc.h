@@ -34,7 +34,7 @@ struct VideoDesc
     VideoMonitorType monitor_type;
     std::vector<VideoOverlay> overlays;
 
-    VideoDesc() : brightness(0.0), contrast(1.0), orientation(ROTATE_0), scan_mode(PROGRESSIVE), monitor_type(MONOCHRONE)
+    VideoDesc() : brightness(0.0), contrast(1.0), retro_v_size(0), orientation(ROTATE_0), scan_mode(PROGRESSIVE), monitor_type(MONOCHRONE)
     {
         for(int i = 0; i < 9; i++) r[i] = 0.0;
     }

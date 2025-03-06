@@ -212,6 +212,7 @@ CIRCUIT_LAYOUT( antiaircraft )
     CHIP("POT1", POT_555_MONO, &pot1_desc)
     POTENTIOMETER_CONNECTION("POT1", "D9")
 
+    VIDEO(antiaircraft)
     INPUT(antiaircraft)
 
     OPTIMIZATION_HINT("M3", 64, 64)

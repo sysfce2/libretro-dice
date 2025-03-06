@@ -235,6 +235,7 @@ CIRCUIT_LAYOUT( gotcha )
     OPTIMIZATION_HINT("J4", 64, 64)
 
     AUDIO(gotcha)
+    VIDEO(gotcha)
     INPUT(gotcha)
 
 #ifdef DEBUG

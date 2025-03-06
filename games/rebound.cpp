@@ -147,6 +147,7 @@ CIRCUIT_LAYOUT( rebound )
     CHIP("DSW1", DIPSWITCH, &dipswitch1_desc)
     CHIP("DSW2", DIPSWITCH, &dipswitch2_desc)
 
+    VIDEO(rebound)
     INPUT(rebound)
 
 #ifdef DEBUG
