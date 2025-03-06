@@ -3,10 +3,14 @@
 #include "../settings.h"
 #include "../libretro.h"
 
-//#include "../manymouse/manymouse.h"
+#ifdef MANYMOUSE
+#include "../manymouse/manymouse.h"
+#endif
 //#include <SDL.h>
 
 //using namespace phoenix;
+
+extern retro_environment_t environ_cb;
 
 static const double INPUT_POLL_RATE = 10.0e-3; // 10 ms poll rate
 
@@ -129,27 +133,35 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
 {
     Circuit* circuit = chip->circuit;
     //const Settings::Input::Paddle& settings = circuit->settings.input.paddle[PADDLE];
-
+   const ManymouseSettings& settings = circuit->input.mouse_settings[PADDLE];
+   
     AnalogInputDesc<PADDLE, HORIZONTAL>* desc = (AnalogInputDesc<PADDLE, HORIZONTAL>*)chip->custom_data;
     
     double delta = 0.0;
-
-    /*if(settings.use_mouse)
-    {
-        // Scale sensitivity by total paddle range
-        double sensitivity = double(settings.mouse_sensitivity) * fabs(desc->max_val - desc->min_val) / 100000.0; 
-        
-        if(HORIZONTAL && settings.x_axis.axis == 0) // Horizontal, using mouse x-axis
-            delta += circuit->input.getRelativeMouseX(settings.x_axis.mouse) * sensitivity;
-        else if(HORIZONTAL) // Horizontal, using mouse y-axis
-            delta += circuit->input.getRelativeMouseY(settings.x_axis.mouse) * sensitivity;
-        else if(settings.y_axis.axis == 0) // Vertical, using mouse x-axis
-            delta += circuit->input.getRelativeMouseX(settings.y_axis.mouse) * sensitivity;
-        else // Vertical, using mouse y-axis
-            delta += circuit->input.getRelativeMouseY(settings.y_axis.mouse) * sensitivity;
-    } */
    unsigned joystick_idx = PADDLE;
    unsigned controller = PADDLE;
+ 
+
+#ifdef MANYMOUSE
+   int settings_mouse_sensitivity = 500;  // TODO (mittonk): Core setting
+
+   struct retro_variable var = {0};
+   char buffer[50];
+    if(circuit->input.mouse_enabled[PADDLE])
+    {
+        // Scale sensitivity by total paddle range
+        double sensitivity = double(settings_mouse_sensitivity) * fabs(desc->max_val - desc->min_val) / 100000.0;
+        
+        if(HORIZONTAL && settings.settings_x_axis_axis == 0) // Horizontal, using mouse x-axis
+            delta += circuit->input.getRelativeMouseX(settings.settings_x_axis_mouse) * sensitivity;
+        else if(HORIZONTAL) // Horizontal, using mouse y-axis
+            delta += circuit->input.getRelativeMouseY(settings.settings_x_axis_mouse) * sensitivity;
+        else if(settings.settings_y_axis_axis == 0) // Vertical, using mouse x-axis
+            delta += circuit->input.getRelativeMouseX(settings.settings_y_axis_mouse) * sensitivity;
+        else // Vertical, using mouse y-axis
+            delta += circuit->input.getRelativeMouseY(settings.settings_y_axis_mouse) * sensitivity;
+    }
+#endif
  
     //if(settings.use_keyboard && HORIZONTAL)
    if ((!circuit->input.paddle_joystick_absolute) && HORIZONTAL)
@@ -644,20 +656,24 @@ void wheel_input(Chip* chip, int mask)
     static const double MAX_ANGLE = 15.0;
 
     double delta = 0.0;
-    
-   /*
-    if(settings.use_mouse)
+   unsigned joystick_idx = WHEEL;
+   unsigned axis_idx = 0; // X-axis
+
+#ifdef MANYMOUSE
+   bool settings_use_mouse = true;  // TODO (mittonk): Core setting
+   int settings_mouse_sensitivity = 500;  // TODO (mittonk): Core setting
+   int settings_wheel_axis_mouse = WHEEL;  // TODO (mittonk): Pick controller.
+    if(settings_use_mouse)
     {
-        double sensitivity = double(settings.mouse_sensitivity) / 1000.0;
+        double sensitivity = double(settings_mouse_sensitivity) / 1000.0;
 
         if(settings.axis.axis == 0) // Using mouse x-axis
             delta += circuit->input.getRelativeMouseX(settings.axis.mouse) * sensitivity;
         else // Using mouse y-axis
             delta += circuit->input.getRelativeMouseY(settings.axis.mouse) * sensitivity;
     }
-    */
-   unsigned joystick_idx = WHEEL;
-   unsigned axis_idx = 0; // X-axis
+#endif
+    
     if (true) // if(settings.use_keyboard)
     {
        double sensitivity;
@@ -958,8 +974,8 @@ void Input::poll_input()
     //SDL_JoystickUpdate();
 
     //Application::processEvents();
-
-    /* ManyMouseEvent mouse_event;
+#ifdef MANYMOUSE
+    ManyMouseEvent mouse_event;
     while (ManyMouse_PollEvent(&mouse_event))
     {
         int mouse = mouse_event.device;
@@ -980,20 +996,21 @@ void Input::poll_input()
         else if (mouse_event.type == MANYMOUSE_EVENT_ABSMOTION)
         {
             // TODO: Handle absolute motion?
-            double val = (double) (mouse_event.value - mouse_event.minval);
+            /*double val = (double) (mouse_event.value - mouse_event.minval);
             double maxval = (double) (mouse_event.maxval - mouse_event.minval);
             if (mouse_event.item == 0)
                 mouse->x = (val / maxval);
             else if (mouse_event.item == 1)
-                mouse->y = (val / maxval);
+                mouse->y = (val / maxval);*/
         }
     }
-   */
+#endif
 }
 
 int Input::getRelativeMouseX(unsigned mouse)
 {
-    if(mouse >= mouse_rel_x.size())
+#ifdef MANYMOUSE
+   if(mouse >= mouse_rel_x.size())
     {
         mouse_rel_x.resize(mouse+1);
         mouse_rel_y.resize(mouse+1);
@@ -1002,19 +1019,22 @@ int Input::getRelativeMouseX(unsigned mouse)
     int x = mouse_rel_x[mouse];
     mouse_rel_x[mouse] = 0;
     return x;
+#endif
 }
 
 int Input::getRelativeMouseY(unsigned mouse)
 {
-    if(mouse >= mouse_rel_y.size())
-    {
-        mouse_rel_x.resize(mouse+1);
-        mouse_rel_y.resize(mouse+1);
-    }
-
-    int y = mouse_rel_y[mouse];
-    mouse_rel_y[mouse] = 0;
-    return y;
+#ifdef MANYMOUSE
+   if(mouse >= mouse_rel_y.size())
+   {
+      mouse_rel_x.resize(mouse+1);
+      mouse_rel_y.resize(mouse+1);
+   }
+   
+   int y = mouse_rel_y[mouse];
+   mouse_rel_y[mouse] = 0;
+   return y;
+#endif
 }
 
 bool Input::getKeyboardState(unsigned scancode)

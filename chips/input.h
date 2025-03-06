@@ -119,6 +119,14 @@ extern CHIP_DESC( BUTTONS6_INPUT );
 inline constexpr uint8_t operator"" _NO ( unsigned long long pin ) { return pin; }
 inline constexpr uint8_t operator"" _NC ( unsigned long long pin ) { return pin + i1 - 1; }
 
+struct ManymouseSettings
+{
+   unsigned settings_x_axis_mouse;
+   unsigned settings_x_axis_axis;
+   unsigned settings_y_axis_mouse;
+   unsigned settings_y_axis_axis;
+};
+
 class Input
 {
 private:
@@ -150,7 +158,8 @@ public:
    int wheel_keyjoy_sensitivity;
    int throttle_keyjoy_sensitivity;
    bool use_mouse_pointer_for_paddle_1;
-   
+   bool mouse_enabled[4];
+   ManymouseSettings mouse_settings[4];
 };
 
 #endif

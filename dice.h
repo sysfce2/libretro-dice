@@ -52,12 +52,15 @@ class DICE
       void render_frame(void);
       void reset(void);
 
+   void set_use_mouse_pointer_for_paddle_1(bool val);
+   void set_manymouse_enabled(unsigned paddle, bool val);
+   void set_manymouse_axis(unsigned paddle, unsigned axis, const char* axis_name);
+
    void set_paddle_joystick_absolute(bool paddle_joystick_absolute);
    void set_paddle_keyboard_sensitivity(int val);
    void set_paddle_joystick_sensitivity(int val);
    void set_wheel_keyjoy_sensitivity(int val);
    void set_throttle_keyjoy_sensitivity(int val);
-   void set_use_mouse_pointer_for_paddle_1(bool val);
 
 
 };

@@ -53,7 +53,10 @@ lr-dice for the correct game.
 ## Mouse support
 One mouse can be used for Paddle 1.  Use "Core Options -> Use mouse pointer for paddle 1".  You'll still want a keyboard or gamepad handy to have enough buttons.
 
-(Multiple mice are not yet supported, see [#8](https://github.com/mittonk/dice-libretro/issues/8).)
+(Mouse buttons can be configured using the usual RetroArch binding and remapping, https://docs.libretro.com/guides/input-and-controls/ ).
+
+Advanced: Multiple mice are a compile-time option on Linux, Windows, and Mac, see 
+[manymouse.md](manymouse.md).
 
 ## Compiling
 Prebuilt binaries for several platforms are available through RetroArch's "Online Updater -> Core Downloader".  DICE is marked "experimental," you'll need to set "Online Updater -> Updater Settings -> Show Experimental Cores" first.
