@@ -22,6 +22,10 @@ static INPUT_DESC( rebound )
     INPUT_INFO(START_INPUT, {{ 1 }}, "Start Game")
 INPUT_DESC_END
 
+static VIDEO_DESC ( rebound )
+    VIDEO_RETRO_V_SIZE(246)
+VIDEO_DESC_END
+
 
 #ifdef DEBUG
 static VcdLogDesc vcd_log_desc
@@ -143,6 +147,7 @@ CIRCUIT_LAYOUT( rebound )
     CHIP("DSW1", DIPSWITCH, &dipswitch1_desc)
     CHIP("DSW2", DIPSWITCH, &dipswitch2_desc)
 
+    VIDEO(rebound)
     INPUT(rebound)
 
 #ifdef DEBUG

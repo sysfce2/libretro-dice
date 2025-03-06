@@ -100,6 +100,11 @@ static INPUT_DESC( gotcha )
     INPUT_INFO(START_INPUT, {{ 1 }}, "Start Game")
 INPUT_DESC_END
 
+static VIDEO_DESC ( gotcha )
+    VIDEO_RETRO_V_SIZE(246)
+VIDEO_DESC_END
+
+
 CIRCUIT_LAYOUT( gotcha )
     /**************************************************************************
 		Chips
@@ -230,6 +235,7 @@ CIRCUIT_LAYOUT( gotcha )
     OPTIMIZATION_HINT("J4", 64, 64)
 
     AUDIO(gotcha)
+    VIDEO(gotcha)
     INPUT(gotcha)
 
 #ifdef DEBUG

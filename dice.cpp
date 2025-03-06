@@ -64,7 +64,9 @@ void DICE::load_game(const char *path, uint16_t *pixel_buf)
 
    // Export monitor orientation towards libretro.
    if (circuit) game_video_rotation = circuit->video.desc->orientation;
-   
+   // Export monitor height towards libretro.
+   if (circuit) max_height = circuit->video.desc->retro_v_size;
+
 }
 
 void DICE::run(void)

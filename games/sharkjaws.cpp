@@ -74,6 +74,8 @@ static VIDEO_DESC( sharkjaws )
     // Values guessed based on screenshots. TODO: Make more accurate
     //             X,   Y,   W,    H,    R,    G,    B
     VIDEO_OVERLAY( 0.0, 0.0, -1.0, -1.0, 0.20, 0.75, 0.95 ) // Blue Overlay
+
+    VIDEO_RETRO_V_SIZE(258)
 VIDEO_DESC_END
 
 static INPUT_DESC( sharkjaws )

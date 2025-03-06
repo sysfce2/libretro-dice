@@ -80,6 +80,10 @@ static INPUT_DESC( antiaircraft )
     INPUT_INFO(START_INPUT, {{ 1 }}, "Start Game")
 INPUT_DESC_END
 
+static VIDEO_DESC ( antiaircraft )
+    VIDEO_RETRO_V_SIZE(252)
+VIDEO_DESC_END
+
 CIRCUIT_LAYOUT( antiaircraft )
 	/**************************************************************************
 	* Chips                                                                   *
@@ -208,6 +212,7 @@ CIRCUIT_LAYOUT( antiaircraft )
     CHIP("POT1", POT_555_MONO, &pot1_desc)
     POTENTIOMETER_CONNECTION("POT1", "D9")
 
+    VIDEO(antiaircraft)
     INPUT(antiaircraft)
 
     OPTIMIZATION_HINT("M3", 64, 64)

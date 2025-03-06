@@ -82,6 +82,7 @@ static VIDEO_DESC( cleansweep )
     // Values guessed based on screenshots. TODO: Make more accurate
     //             X,   Y,   W,    H,    R,    G,    B
     VIDEO_OVERLAY( 0.0, 0.0, -1.0, -1.0, 0.20, 0.90, 0.80 ) // Blue Overlay
+    VIDEO_RETRO_V_SIZE(256)  // Also sometimes 253
 VIDEO_DESC_END
 
 static AUDIO_DESC( cleansweep )

@@ -15,7 +15,8 @@ namespace dice_libretro {
 
 #define VIDEO_WIDTH 640 // TODO (mittonk): Draw from dice.
 //#define VIDEO_HEIGHT 480
-#define VIDEO_HEIGHT 246
+//#define VIDEO_HEIGHT 246
+#define VIDEO_HEIGHT 268
 #define VIDEO_BYTES_PER_PIXEL 2
 #define VIDEO_PIXELS VIDEO_WIDTH * VIDEO_HEIGHT
 #define VIDEO_PITCH VIDEO_WIDTH * VIDEO_BYTES_PER_PIXEL
@@ -44,6 +45,7 @@ class DICE
 
    public:
       VideoOrientation game_video_rotation = ROTATE_0;
+      uint32_t max_height;
    
       void load_game(const char *path, uint16_t *pixel_buf);
       void update_input(int32_t *input_state, int32_t *input_analog_left_x, int32_t *input_analog_left_y, int32_t *input_pointer_x, int32_t *input_pointer_y);

@@ -51,6 +51,7 @@ static VIDEO_DESC( quadrapong )
     VIDEO_RESISTANCE(3, K_OHM(1.0))
     VIDEO_RESISTANCE(Video::HBLANK_PIN, K_OHM(1.0))
     VIDEO_CONTRAST(3.0)
+    VIDEO_RETRO_V_SIZE(246)
 VIDEO_DESC_END
 
 static INPUT_DESC( quadrapong )

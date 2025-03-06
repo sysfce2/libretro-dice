@@ -82,6 +82,7 @@ static VIDEO_DESC( steeplechase )
     VIDEO_OVERLAY( 0.0, 130.0, -1.0, 32.0, 0.60, 0.25, 0.60 ) // Purple Horse (Mac's Nag)
     VIDEO_OVERLAY( 0.0, 162.0, -1.0, 32.0, 0.90, 0.75, 0.25 ) // Amber Horse (Golden Boys)
     VIDEO_OVERLAY( 0.0, 194.0, -1.0, 32.0, 0.35, 0.60, 0.25 ) // Green Horse (Crazy Arnold)
+    VIDEO_RETRO_V_SIZE(268)  // Also 256
 VIDEO_DESC_END
 
 

@@ -29,6 +29,7 @@ using phoenix::Viewport;
 #define VIDEO_MASK ((1 << 8) - 1)
 
 extern retro_video_refresh_t video_cb;
+extern retro_environment_t environ_cb;
 
 // Use buffer to add capacitance to the video output, to smooth out high frequency noise.
 // TODO: Is this accurate?
@@ -127,7 +128,37 @@ void Video::adjust_screen_params()
     }
      
     glOrtho(0.0, scanline_time, v_size, 0.0, -1.0, 1.0);
+*/
+   bool horizontal = true;
+   if(desc->orientation == ROTATE_90 || desc->orientation == ROTATE_270)
+       horizontal = false;
 
+   // If game uses a vertical monitor, tell libretro and adjust aspect ratio.
+   VideoOrientation orientation = desc->orientation;
+   environ_cb(RETRO_ENVIRONMENT_SET_ROTATION, &orientation);
+
+   if (v_size > 0)
+   {
+      struct retro_system_av_info avinfo;
+      retro_get_system_av_info(&avinfo);
+      printf("KAM3 avinfo_max_height %d\n", avinfo.geometry.max_height);
+      avinfo.geometry.base_height = v_size;
+      avinfo.geometry.aspect_ratio = horizontal ? 4.0f / 3.0f : 3.0f / 4.0f;
+      
+      /*if (avinfo.geometry.max_height != desc->retro_v_size)
+      {
+         // Set maximum height based on circuit description.  Heavy.
+         avinfo.geometry.max_height = desc->retro_v_size;
+         environ_cb(RETRO_ENVIRONMENT_SET_SYSTEM_AV_INFO, &avinfo);
+         printf("KAM1 set_system_av_info %d\n", desc->retro_v_size);
+      } else { */
+         // Just set current height based on emulation.  Light.
+         environ_cb(RETRO_ENVIRONMENT_SET_GEOMETRY, &avinfo);
+         printf("KAM2 set_geometry %d\n", v_size);
+      /* } */
+   }
+
+   /*
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 

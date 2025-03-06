@@ -25,6 +25,7 @@ static float last_sample_rate;
 char retro_base_directory[4096];
 char retro_game_path[4096];
 static bool screen_horizontal = true;
+static uint32_t max_height;
 
 static dice_libretro::DICE dice;
 
@@ -45,6 +46,9 @@ static unsigned color;  // TODO (kmitton)
 
 void retro_init(void)
 {
+   max_height = VIDEO_HEIGHT;  // Until we load the video description.
+   
+   // Screen height jitters a little in some games, leave some extra buffer space.
    int safety_factor = 2;
    frame_buf = (uint8_t*)malloc(VIDEO_PIXELS * VIDEO_BYTES_PER_PIXEL * safety_factor);
    
@@ -129,17 +133,19 @@ static retro_input_state_t input_state_cb;
 void retro_get_system_av_info(struct retro_system_av_info *info)
 {
    // Some games use vertical monitors, won't know till we load it.
-   float aspect = screen_horizontal ? 4.0f / 3.0f : 3.0f / 4.0f;
+   //float aspect = screen_horizontal ? 4.0f / 3.0f : 3.0f / 4.0f;
+   float aspect = 4.0f / 3.0f;
    float sampling_rate         = 30000.0f;
 
    info->timing = (struct retro_system_timing) {
-      .fps = 8.0,
+      .fps = 60.0,
       .sample_rate = 0.0,
    };
    info->geometry.base_width   = VIDEO_WIDTH;
-   info->geometry.base_height  = VIDEO_HEIGHT;
+   info->geometry.base_height  = max_height;
    info->geometry.max_width    = VIDEO_WIDTH;
-   info->geometry.max_height   = VIDEO_HEIGHT;
+   printf("KAM7 max_height in av_info %d\n", max_height);
+   info->geometry.max_height   = max_height;
    info->geometry.aspect_ratio = aspect;
 
    last_aspect                 = aspect;
@@ -427,6 +433,16 @@ bool retro_load_game(const struct retro_game_info *info)
    screen_horizontal = dice.game_video_rotation == ROTATE_0 || dice.game_video_rotation == ROTATE_180;
    environ_cb(RETRO_ENVIRONMENT_SET_ROTATION, &dice.game_video_rotation);
 
+   // Set max screen size based on circuit description
+   max_height = dice.max_height;
+   struct retro_system_av_info avinfo;
+   retro_get_system_av_info(&avinfo);
+   printf("KAM5 older max_height %d\n", avinfo.geometry.max_height);
+   if (avinfo.geometry.max_height != max_height) {
+      printf("KAM6 newer max_height %d\n", max_height);
+      avinfo.geometry.max_height = max_height;
+      environ_cb(RETRO_ENVIRONMENT_SET_SYSTEM_AV_INFO, &avinfo);
+   }
    // Now that we've got a circuit up, configure input sensitivity.
    check_variables();
 

@@ -62,6 +62,8 @@ static VIDEO_DESC( breakout )
     VIDEO_OVERLAY( 51.345e-6, 0.0, 1.956e-6, -1.0, 0.05, 0.65, 0.95 ) // Blue Paddle
 
     // TODO: Different overlays for cocktail cabinet
+
+    VIDEO_RETRO_V_SIZE(248) // Also 224
 VIDEO_DESC_END
 
 

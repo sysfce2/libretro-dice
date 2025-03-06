@@ -59,8 +59,8 @@ uint8_t RomDesc::get_data(const RomDesc* rom, unsigned offset)
    if((filename != rom->file_name.c_str()) || (romname != rom->rom_name.c_str()))
 
     {
-       printf("KAM14 libretro zip file %s\n", libretro_zip_filename.c_str());
-       printf("KAM13 Loading zipfile %s %s %08X\n", rom->file_name.c_str(), rom->rom_name.c_str(), rom->crc);
+       /* printf("KAM14 libretro zip file %s\n", libretro_zip_filename.c_str());
+       printf("KAM13 Loading zipfile %s %s %08X\n", rom->file_name.c_str(), rom->rom_name.c_str(), rom->crc); */
 
         filename = rom->file_name.c_str();
         error_shown = false;
@@ -92,7 +92,7 @@ uint8_t RomDesc::get_data(const RomDesc* rom, unsigned offset)
 
     if(romname != rom->rom_name.c_str())
     {
-       printf("KAM14 Loading rom     %s %s\n", rom->file_name.c_str(), rom->rom_name.c_str());
+       /* printf("KAM14 Loading rom     %s %s\n", rom->file_name.c_str(), rom->rom_name.c_str()); */
 
         romname = rom->rom_name.c_str();
 
@@ -124,7 +124,7 @@ uint8_t RomDesc::get_data(const RomDesc* rom, unsigned offset)
           unzGetCurrentFileInfo(zhandle, &zinfo, &name[0], 0xff, NULL, 0, NULL, 0);
           // TODO : No files match?
        }
-       printf("KAM15 Found %s %08lX\n", name, zinfo.crc);
+       /* printf("KAM15 Found %s %08lX\n", name, zinfo.crc); */
        //rom_data = zip_file.extract(f);
        filesize = zinfo.uncompressed_size;
 
@@ -221,9 +221,10 @@ uint8_t RomDesc::get_data(const RomDesc* rom, unsigned offset)
    */
    
    if(offset < rom_data.size()) {
+      /*
       if (offset == 0x07) {
          printf("KAM16 Rom %s offset %02X val %02X\n", rom->rom_name.c_str(), offset, rom_data[offset]);
-      }
+      } */
       return rom_data[offset];
    }
 
