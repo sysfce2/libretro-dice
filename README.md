@@ -72,6 +72,12 @@ For upstream standalone DICE (inactive):
 * Project Page: http://sourceforge.net/projects/dice/
 * Email: dice.emulator@gmail.com
 
+For a fork of standalone DICE running on modern Linux systems:
+* https://github.com/DirtBagXon/DICE
+
+# Credits
+
+Many thanks to _Adam B_ for his work on `DICE`: https://adamulation.blogspot.com/
 
 # License
 
