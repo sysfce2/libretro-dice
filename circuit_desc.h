@@ -57,7 +57,7 @@ struct SubcircuitDesc
 
 struct CircuitEntry
 {
-    union U
+    union alignas(64) U
     {
 		ChipInstance instance;
     	ConnectionDesc connection;
