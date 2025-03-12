@@ -1019,6 +1019,8 @@ int Input::getRelativeMouseX(unsigned mouse)
     int x = mouse_rel_x[mouse];
     mouse_rel_x[mouse] = 0;
     return x;
+#else
+    return 0;
 #endif
 }
 
@@ -1034,12 +1036,15 @@ int Input::getRelativeMouseY(unsigned mouse)
    int y = mouse_rel_y[mouse];
    mouse_rel_y[mouse] = 0;
    return y;
+#else
+   return 0;
 #endif
 }
 
 bool Input::getKeyboardState(unsigned scancode)
 {
     //return Keyboard::pressed((Keyboard::Scancode)scancode);
+    return false;
 }
 
 bool Input::getJoystickButton(unsigned joystick, unsigned button)
