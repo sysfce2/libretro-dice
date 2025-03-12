@@ -18,11 +18,13 @@ struct GameConfig //: configuration
         /*configuration::load(filename);
         return save();  // Create file if it doesn't exist
          */
+       return true;
     }
 
     bool save()
     {
         //return configuration::save(filename);
+       return true;
     }
 
     bool operator==(const GameConfig& g) { return filename == g.filename; }
