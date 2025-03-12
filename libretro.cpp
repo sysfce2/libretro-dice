@@ -120,7 +120,11 @@ void retro_get_system_info(struct retro_system_info *info)
    info->library_name     = "dice";
    info->library_version  = "0.1.0";
    info->need_fullpath    = true;
-   info->valid_extensions = "zip|dmy";
+   // dmy are launcher files for rom-less games like pong.
+   // zip means we support zipped files (maybe not needed here?)
+   // The others are extensions on various rom dumps, which aren't standardized
+   // at all.
+   info->valid_extensions = "zip|dmy|k1|a1|6c|c6|d2|s1|f4|a4|1da|da1|C4|4c|4d|d7|d4";
    info->block_extract = true;
 }
 
