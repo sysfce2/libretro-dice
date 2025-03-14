@@ -1,5 +1,6 @@
 #include "../circuit.h"
 #include "82S16.h"
+#include "../libretro.h"
 
 /*
 82S16
@@ -17,13 +18,15 @@
        +------+
 */
 
+extern retro_log_printf_t log_cb;
+
 enum { ADDR_MASK = 0xff, CE_MASK = 0x700, WE_MASK = 0x800, D_SHIFT = 12 }; 
 
 static CUSTOM_LOGIC( RAM_82S16 )
 {
     if(chip->custom_data == NULL)
     {
-        printf("ERROR: Missing Ram82S16Desc for chip %p\n", chip);\
+        log_cb(RETRO_LOG_ERROR, "ERROR: Missing Ram82S16Desc for chip %p\n", chip);\
         return;
     }
 

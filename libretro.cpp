@@ -61,9 +61,9 @@ void retro_init(void)
    int available_mice = ManyMouse_Init();
    
    if (available_mice < 0)
-       printf("ManyMouse failed to initialize!\n");
+       log_cb(RETRO_LOG_ERROR, "ManyMouse failed to initialize!\n");
    else if (available_mice == 0)
-       printf("No mice detected!\n");
+       log_cb(RETRO_LOG_INFO, "No mice detected!\n");
    else if (available_mice > 1)
    {
        // Extra mice, list them.
@@ -76,15 +76,13 @@ void retro_init(void)
 
        snprintf(buffer, sizeof(buffer), "ManyMouse driver: %s\n", ManyMouse_DriverName());
        environ_cb(RETRO_ENVIRONMENT_SET_MESSAGE, &message);
-       //log_cb(RETRO_LOG_INFO, buffer);
-       printf(buffer);
+       log_cb(RETRO_LOG_INFO, buffer);
       
        for (int i = 0; i < available_mice; i++)
        {
           snprintf(buffer, sizeof(buffer), "Mouse #%d: %s\n", i, ManyMouse_DeviceName(i));
           environ_cb(RETRO_ENVIRONMENT_SET_MESSAGE, &message);
-          //log_cb(RETRO_LOG_INFO, buffer);
-          printf(buffer);
+          log_cb(RETRO_LOG_INFO, buffer);
        }
    }
 #endif
@@ -148,7 +146,7 @@ void retro_get_system_av_info(struct retro_system_av_info *info)
    info->geometry.base_width   = VIDEO_WIDTH;
    info->geometry.base_height  = max_height;
    info->geometry.max_width    = VIDEO_WIDTH;
-   printf("KAM7 max_height in av_info %d\n", max_height);
+   log_cb(RETRO_LOG_DEBUG, "max_height in av_info %d\n", max_height);
    info->geometry.max_height   = max_height;
    info->geometry.aspect_ratio = aspect;
 
@@ -258,8 +256,6 @@ static void update_input(void)
       
       input_analog_left_y[pad] = input_state_cb( (pad), RETRO_DEVICE_ANALOG, RETRO_DEVICE_INDEX_ANALOG_LEFT,
                                                 RETRO_DEVICE_ID_ANALOG_Y);
-      
-      //printf("KAM2 input_bitmask %u %08X %08X %08X\n", pad, input_bitmask[(pad)], input_analog_left_x[(pad)], input_analog_left_y[(pad)]);
    }
 
    unsigned pad = 0;
@@ -380,10 +376,6 @@ void retro_run(void)
 {
    update_input();
 
-#ifdef DEBUG2
-   printf("KAM0 retro_run\n");
-#endif
-
    dice.run();
    //dice.render_frame();
    
@@ -394,10 +386,6 @@ void retro_run(void)
 
 bool retro_load_game(const struct retro_game_info *info)
 {
-#ifdef DEBUG
-   printf("KAM50 retro_load_game\n");
-#endif
-
    struct retro_input_descriptor desc[] = {
       { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_LEFT,  "Left" },
       { 0, RETRO_DEVICE_JOYPAD, 0, RETRO_DEVICE_ID_JOYPAD_UP,    "Up" },
@@ -441,9 +429,9 @@ bool retro_load_game(const struct retro_game_info *info)
    max_height = dice.max_height;
    struct retro_system_av_info avinfo;
    retro_get_system_av_info(&avinfo);
-   printf("KAM5 older max_height %d\n", avinfo.geometry.max_height);
+   log_cb(RETRO_LOG_DEBUG, "older max_height %d\n", avinfo.geometry.max_height);
    if (avinfo.geometry.max_height != max_height) {
-      printf("KAM6 newer max_height %d\n", max_height);
+      log_cb(RETRO_LOG_INFO, "Setting max_height %d\n", max_height);
       avinfo.geometry.max_height = max_height;
       environ_cb(RETRO_ENVIRONMENT_SET_SYSTEM_AV_INFO, &avinfo);
    }
