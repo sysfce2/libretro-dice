@@ -1,5 +1,6 @@
 #include "../circuit.h"
 #include "2533.h"
+#include "../libretro.h"
 
 /*
 2533
@@ -13,6 +14,8 @@
        +--------+
 */
 
+extern retro_log_printf_t log_cb;
+
 static CHIP_LOGIC( 2533_DATA )
 {
     pin[i1] = pin[3] ? pin[7] : pin[5];
@@ -24,7 +27,7 @@ static CUSTOM_LOGIC( RAM_2533 )
 {
     if(chip->custom_data == NULL)
     {
-        printf("ERROR: Missing Ram2533Desc for chip %p\n", chip);
+        log_cb(RETRO_LOG_ERROR, "ERROR: Missing Ram2533Desc for chip %p\n", chip);
         return;
     }
 

@@ -59,9 +59,6 @@ uint8_t RomDesc::get_data(const RomDesc* rom, unsigned offset)
    if((filename != rom->file_name.c_str()) || (romname != rom->rom_name.c_str()))
 
     {
-       /* printf("KAM14 libretro zip file %s\n", libretro_zip_filename.c_str());
-       printf("KAM13 Loading zipfile %s %s %08X\n", rom->file_name.c_str(), rom->rom_name.c_str(), rom->crc); */
-
         filename = rom->file_name.c_str();
         error_shown = false;
         
@@ -82,8 +79,7 @@ uint8_t RomDesc::get_data(const RomDesc* rom, unsigned offset)
            message.frames = 60;
            environ_cb(RETRO_ENVIRONMENT_SET_MESSAGE, &message);
 
-           //log_cb(RETRO_LOG_ERROR, "ROM file %s not found.  Game will not function correctly!", libretro_zip_filename.c_str());
-           printf("KAM8 zip not found\n");
+           log_cb(RETRO_LOG_ERROR, "ROM file %s not found.  Game will not function correctly!", libretro_zip_filename.c_str());
             romname = rom->rom_name.c_str();
             error_shown = true;
             return 0xff;
@@ -92,8 +88,6 @@ uint8_t RomDesc::get_data(const RomDesc* rom, unsigned offset)
 
     if(romname != rom->rom_name.c_str())
     {
-       /* printf("KAM14 Loading rom     %s %s\n", rom->file_name.c_str(), rom->rom_name.c_str()); */
-
         romname = rom->rom_name.c_str();
 
         //rom_data.reset();
@@ -104,7 +98,7 @@ uint8_t RomDesc::get_data(const RomDesc* rom, unsigned offset)
        if(zerror != UNZ_OK)
        {
            unzClose(zhandle);
-          printf("KAM11 Cannot go to first file\n");
+          log_cb(RETRO_LOG_ERROR, "Cannot go to first file\n");
           return 0xff;
        }
        /* Get information about the file */
@@ -124,7 +118,6 @@ uint8_t RomDesc::get_data(const RomDesc* rom, unsigned offset)
           unzGetCurrentFileInfo(zhandle, &zinfo, &name[0], 0xff, NULL, 0, NULL, 0);
           // TODO : No files match?
        }
-       /* printf("KAM15 Found %s %08lX\n", name, zinfo.crc); */
        //rom_data = zip_file.extract(f);
        filesize = zinfo.uncompressed_size;
 
@@ -179,7 +172,7 @@ uint8_t RomDesc::get_data(const RomDesc* rom, unsigned offset)
                         .setParent(application_window())
                         .setTitle("Warning")
                         .warning(); */
-                  /* printf("KAM9 incorrect CRC\n");
+                  /* 
 
                     break;
                 }
@@ -193,7 +186,7 @@ uint8_t RomDesc::get_data(const RomDesc* rom, unsigned offset)
                 .setTitle("Error")
                 .error();
              */
-        /*   printf("KAM10 Rom with CRC not found\n");
+        /*  
 
             error_shown = true;
         } */
@@ -201,8 +194,6 @@ uint8_t RomDesc::get_data(const RomDesc* rom, unsigned offset)
    /*
    if((filename != rom->file_name.c_str()) ||(romname != rom->rom_name.c_str()))
    {
-      printf("KAM6 Loading %s\n", rom->file_name.c_str());
-
       rom_data.clear();
       
       uint8_t *rom_data_raw;
@@ -221,10 +212,6 @@ uint8_t RomDesc::get_data(const RomDesc* rom, unsigned offset)
    */
    
    if(offset < rom_data.size()) {
-      /*
-      if (offset == 0x07) {
-         printf("KAM16 Rom %s offset %02X val %02X\n", rom->rom_name.c_str(), offset, rom_data[offset]);
-      } */
       return rom_data[offset];
    }
 

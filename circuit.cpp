@@ -1,5 +1,6 @@
 #include "circuit.h"
 #include "circuit_desc.h"
+#include "libretro.h"
 
 #include <map>
 #include <string>
@@ -12,6 +13,8 @@
 
 #define EVENT_QUEUE_SIZE 128
 #define SUBCYCLE_SIZE 64
+
+extern retro_log_printf_t log_cb;
 
 CHIP_DESC( _VCC ) = 
 {
@@ -31,7 +34,7 @@ CUSTOM_LOGIC( deoptimize )
 {
     for(ChipLink& cl : chip->output_links)
     {
-        printf("Deoptimizing %p\n", cl.chip);
+        log_cb(RETRO_LOG_DEBUG, "Deoptimizing %p\n", cl.chip);
         cl.chip->optimization_disabled = true;
     }
 }
@@ -143,7 +146,8 @@ global_time(0), queue_size(0)
                 std::string name = converter.getInputInfo(chips[i], j);
 
                 if(chips[i]->type != CUSTOM_CHIP)
-                    printf("WARNING: Unconnected input pin: %s, connecting to GND\n", name.c_str());
+                    // Common in working circuits.  Mostly a concern when implementing new circuits.
+                    log_cb(RETRO_LOG_INFO, "INFO: Unconnected input pin: %s, connecting to GND\n", name.c_str());
                 
                 chips[1]->output_links.push_back(ChipLink(chips[i], 1 << j));
                 chips[i]->input_links[j] = ChipLink(chips[1], 0);
@@ -189,7 +193,7 @@ void CircuitBuilder::createChip(const ChipDesc* chip_desc, std::string name, voi
         if(d->output_pin) output_pin_map[d->output_pin] = cd;
 
         #ifdef DEBUG
-        printf("chip name:%s p:%p\n", name.c_str(), chips.back());
+        log_cb(RETRO_LOG_DEBUG, "chip name:%s p:%p\n", name.c_str(), chips.back());
         #endif
     }
 
@@ -226,7 +230,7 @@ void CircuitBuilder::createChips(std::string prefix, const CircuitDesc* desc)
     std::map<std::string, OptimizationHintDesc> hint_list;
     for(const OptimizationHintDesc& hint : desc->get_hints())
     {
-        printf("Hinting %s\n", hint.chip);
+        log_cb(RETRO_LOG_DEBUG, "Hinting %s\n", hint.chip);
         hint_list[hint.chip] = hint;
     }
 
@@ -270,7 +274,8 @@ void CircuitBuilder::findConnections(std::string prefix, const CircuitDesc* desc
         }
         
         // No connection found
-        printf("WARNING: Invalid connection: %s(%s.%d -> %s.%d)\n",
+        // Common in working circuits.  Mostly a concern when implementing new circuits.
+        log_cb(RETRO_LOG_INFO, "INFO: Invalid connection: %s(%s.%d -> %s.%d)\n",
                prefix.c_str(), c.name1, c.pin1, c.name2, c.pin2);
     }
 
@@ -295,7 +300,7 @@ bool CircuitBuilder::findConnection(const std::string& name1, const std::string&
                     {
                         if(std::find(connection_list_in.begin(), connection_list_in.end(), Connection(connection.pin2, it2->second)) != connection_list_in.end())
                         {
-                            printf("WARNING: Attempted multiple connections to input: %s.%d\n", name2.c_str(), connection.pin2);
+                            log_cb(RETRO_LOG_INFO, "INFO: Attempted multiple connections to input: %s.%d\n", name2.c_str(), connection.pin2);
                         }
                         //else
                         {
@@ -316,7 +321,7 @@ bool CircuitBuilder::findConnection(const std::string& name1, const std::string&
                     {
                         if(std::find(connection_list_in.begin(), connection_list_in.end(), Connection(connection.pin1, it1->second)) != connection_list_in.end())
                         {
-                            printf("WARNING: Attempted multiple connections to input: %s.%d\n", name1.c_str(), connection.pin1);
+                            log_cb(RETRO_LOG_INFO, "INFO: Attempted multiple connections to input: %s.%d\n", name1.c_str(), connection.pin1);
                         }
                         //else
                         {
@@ -355,7 +360,7 @@ void CircuitBuilder::makeAllConnections()
     
             if(!found)
             {
-                printf("Removing unused chip %s\n", getOutputInfo(*it).c_str());
+                log_cb(RETRO_LOG_DEBUG, "Removing unused chip %s\n", getOutputInfo(*it).c_str());
                 removed = true;
                 
                 // Remove all connections to this chip
@@ -391,7 +396,7 @@ void CircuitBuilder::makeAllConnections()
             std::string name = getOutputInfo(c_out);
 
             if(name != "_VCC.1" && name != "_GND.1")
-                printf("ERROR: Maximum output connection limit reached, chip:%s, cout:%d\n", name.c_str(), c_out->output_links.size());
+                log_cb(RETRO_LOG_ERROR, "ERROR: Maximum output connection limit reached, chip:%s, cout:%d\n", name.c_str(), c_out->output_links.size());
         }
     }
 

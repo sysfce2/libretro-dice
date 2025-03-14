@@ -716,7 +716,6 @@ void wheel_input(Chip* chip, int mask)
 
        double val = circuit->input.getJoystickAxis(joystick_idx, axis_idx) / 32768.0;
 
-      // printf("KAM20 Wheel num %d axis %d val %f\n", joystick_idx, axis_idx, val);
                 //if(val > ANALOG_THRESHOLD ) //&& (settings.left.button & 1))
                  //   delta -= (val - ANALOG_THRESHOLD) * ANALOG_SCALE * dt * sensitivity;
                 //else

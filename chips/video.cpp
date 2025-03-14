@@ -30,6 +30,7 @@ using phoenix::Viewport;
 
 extern retro_video_refresh_t video_cb;
 extern retro_environment_t environ_cb;
+extern retro_log_printf_t log_cb;
 
 // Use buffer to add capacitance to the video output, to smooth out high frequency noise.
 // TODO: Is this accurate?
@@ -141,7 +142,7 @@ void Video::adjust_screen_params()
    {
       struct retro_system_av_info avinfo;
       retro_get_system_av_info(&avinfo);
-      printf("KAM3 avinfo_max_height %d\n", avinfo.geometry.max_height);
+      log_cb(RETRO_LOG_DEBUG, "avinfo_max_height %d\n", avinfo.geometry.max_height);
       avinfo.geometry.base_height = v_size;
       avinfo.geometry.aspect_ratio = horizontal ? 4.0f / 3.0f : 3.0f / 4.0f;
       
@@ -150,11 +151,10 @@ void Video::adjust_screen_params()
          // Set maximum height based on circuit description.  Heavy.
          avinfo.geometry.max_height = desc->retro_v_size;
          environ_cb(RETRO_ENVIRONMENT_SET_SYSTEM_AV_INFO, &avinfo);
-         printf("KAM1 set_system_av_info %d\n", desc->retro_v_size);
       } else { */
          // Just set current height based on emulation.  Light.
          environ_cb(RETRO_ENVIRONMENT_SET_GEOMETRY, &avinfo);
-         printf("KAM2 set_geometry %d\n", v_size);
+         log_cb(RETRO_LOG_INFO, "set_geometry v_size %d\n", v_size);
       /* } */
    }
 
@@ -376,7 +376,7 @@ CUSTOM_LOGIC( Video::video )
         // use a different horizontal count on the first or last scanline
         if(video->v_pos > 0 && video->v_pos < video->v_size && (global_time - video->initial_time) != video->scanline_time)
         {
-            printf("Adjust screen params old:%lld new:%lld pos:%d\n", video->scanline_time, global_time - video->initial_time, video->v_pos);
+            log_cb(RETRO_LOG_INFO, "Adjust screen params old:%lld new:%lld pos:%d\n", video->scanline_time, global_time - video->initial_time, video->v_pos);
             video->scanline_time = global_time - video->initial_time;
             video->adjust_screen_params();
         }
