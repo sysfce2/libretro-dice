@@ -250,14 +250,13 @@ void Video::draw(Chip* chip)
    //uint16_t c = bool(chip->inputs & VIDEO_MASK) ? 0xffff : 0x0;
    uint16_t c = retro_color[(chip->inputs & VIDEO_MASK)];
 
-
    if((chip->inputs & VIDEO_MASK) || desc->scan_mode == INTERLACED) // Falling edge
     {
         //float* c_opengl = &color[(chip->inputs & VIDEO_MASK) * 3];
 
        uint64_t left = float(start_time) * ratio;
        uint64_t right = fmin(float(end_time) * ratio, VIDEO_WIDTH);
-       for (uint64_t i = left; i <= right; i++) {
+       for (uint64_t i = left; i < right; i++) {
           pixel_buf[i+v_pos*VIDEO_WIDTH] = c;
        }
         /*glBegin(GL_QUADS);
@@ -316,9 +315,9 @@ void Video::draw_overlays()
           bottom = (o.height < 0.0) ? VIDEO_HEIGHT : o.y + o.height;
        }
        uint16_t c = doublergb_to_retrocolor(o.r, o.g, o.b);
-       for (int i = left; i <= right; i++)
+       for (int i = left; i < right; i++)
        {
-          for (int j = top; j <= bottom; j++)
+          for (int j = top; j < bottom; j++)
           {
              uint16_t existing = pixel_buf[i + j*VIDEO_WIDTH];
              //pixel_buf[i + j*VIDEO_WIDTH] = c;
