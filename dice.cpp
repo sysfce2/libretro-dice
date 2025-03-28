@@ -76,12 +76,12 @@ void DICE::load_game(const char *path, uint16_t *pixel_buf)
            exit(1);  // TODO (mittonk): Seems rude, what's cleaner?
         }
    
-        GameDesc& g = game_list[i];
+        g = &game_list[i];
         
         circuit = new Circuit(settings,
                               *input,
                               *video,
-                              g.desc, g.command_line);
+                              g->desc, g->command_line);
 
    // Export monitor orientation towards libretro.
    if (circuit) game_video_rotation = circuit->video.desc->orientation;
@@ -133,6 +133,8 @@ void DICE::update_input(int32_t input_state[], int32_t input_analog_left_x[], in
 
 void DICE::reset(void)
 {
+   if(circuit) delete circuit;
+   circuit = new Circuit(settings, *input, *video, g->desc, g->command_line);
 }
 
 void DICE::set_use_mouse_pointer_for_paddle_1(bool val)

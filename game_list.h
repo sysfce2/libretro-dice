@@ -1,3 +1,5 @@
+#ifndef GAME_LIST_H__
+#define GAME_LIST_H__
 #include "circuit_desc.h"
 
 EXTERN_CIRCUIT_LAYOUT( pong );
@@ -64,3 +66,4 @@ static GameDesc game_list[] =
 
 static const int game_list_size = sizeof(game_list) / sizeof(GameDesc);
 
+#endif
