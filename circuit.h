@@ -14,6 +14,7 @@
 #include "chips/input.h"
 
 #define MAX_QUEUE_SIZE 4096
+#define RETRO_WATCHDOG_USECS 2000000
 
 class CircuitDesc;
 
@@ -37,6 +38,7 @@ public:
     Video& video;
     Audio audio;
     RealTimeClock rtc;
+    uint64_t last_input_update_timestamp;
    
     int queue_size;
     QueueEntry queue[MAX_QUEUE_SIZE]; // TODO: Replace with vector?

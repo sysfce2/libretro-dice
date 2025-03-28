@@ -457,6 +457,13 @@ void Circuit::run(int64_t run_time)
 {
     while(run_time > 0)
 	{        
+      // Infinite-loop watchdog, since our libretro setup doesn't check inputs
+      // as continuously as the standalone version.
+      if (rtc.get_usecs() > last_input_update_timestamp + RETRO_WATCHDOG_USECS)
+      {
+         log_cb(RETRO_LOG_WARN, "Watchdog skipping simulation, too long since input check.\n");
+         return;
+      }
         if(queue_size)
         {
             run_time -= queue[1].time - global_time;
