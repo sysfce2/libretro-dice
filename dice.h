@@ -5,6 +5,7 @@
 
 #include "circuit.h"
 #include "circuit_desc.h"
+#include "game_list.h"
 
 using std::vector;
 /*
@@ -39,6 +40,7 @@ class DICE
     Video* video;
     Circuit* circuit;
     RealTimeClock real_time;
+    GameDesc* g;
 
     //VerticalLayout layout;
     //Viewport* viewport;
