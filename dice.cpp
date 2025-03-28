@@ -38,9 +38,31 @@ void DICE::load_game(const char *path, uint16_t *pixel_buf)
    
         video->video_init(VIDEO_WIDTH, VIDEO_HEIGHT);
 
-        const string extension = nall::extension(path);
-        const string basename = nall::basename(nall::notdir(path));
-        RomDesc::set_zip_filename(path);
+        log_cb(RETRO_LOG_DEBUG, "Filename from libretro: %s\n", path);
+
+        // Some RetroArch playlists supply entries like
+        // "game.zip#inner.rom".  We want just "game.zip".
+        std::string ziphash (".zip#");
+        std::string path_no_inner (path);
+        std::size_t found = path_no_inner.rfind(ziphash);
+        log_cb(RETRO_LOG_DEBUG, "Any '.zip#', found at position: %d\n", found);
+        if (found != std::string::npos)
+           path_no_inner.replace(found, std::string::npos, ".zip");
+        else if (found == std::string::npos)
+        {
+           found = path_no_inner.rfind(".ZIP#");  // Cover simple uppercase.
+           log_cb(RETRO_LOG_DEBUG, "Any '.ZIP#', found at position: %d\n", found);
+           if (found != std::string::npos)
+              path_no_inner.replace(found, std::string::npos, ".ZIP");
+        }
+        log_cb(RETRO_LOG_DEBUG, "Filename with any '.zip#...' removed: %s\n", path_no_inner.c_str());
+        //const string extension = nall::extension(path_no_inner);
+        //log_cb(RETRO_LOG_DEBUG, "File extension: %s\n", extension.c_str());
+
+        const string basename = nall::basename(nall::notdir(path_no_inner));
+        log_cb(RETRO_LOG_INFO, "File basename, for game matching: %s\n", basename.c_str());
+
+        RomDesc::set_zip_filename(path_no_inner.c_str());
         int i = 0;
         for (i = 0; i < game_list_size; i++) {
            if (game_list[i].command_line == basename)
@@ -51,7 +73,6 @@ void DICE::load_game(const char *path, uint16_t *pixel_buf)
         if (i == game_list_size)
         {
            log_cb(RETRO_LOG_ERROR, "Fatal: No matching game for that filename.  Filenames matter.");
-           printf("Fatal: No matching game for that filename.");
            exit(1);  // TODO (mittonk): Seems rude, what's cleaner?
         }
    
