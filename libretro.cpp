@@ -17,6 +17,7 @@
 #endif
 
 static uint8_t *frame_buf;
+static uint8_t *retro_frame_buf;
 static struct retro_log_callback logging;
 retro_log_printf_t log_cb;
 static bool use_audio_cb;
@@ -51,6 +52,7 @@ void retro_init(void)
    // Screen height jitters a little in some games, leave some extra buffer space.
    int safety_factor = 2;
    frame_buf = (uint8_t*)malloc(VIDEO_PIXELS * VIDEO_BYTES_PER_PIXEL * safety_factor);
+   retro_frame_buf = (uint8_t*)malloc(VIDEO_PIXELS * VIDEO_BYTES_PER_PIXEL * safety_factor);
    
    const char *dir = NULL;
    if (environ_cb(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY, &dir) && dir)
@@ -96,6 +98,9 @@ void retro_deinit(void)
    free(frame_buf);
    frame_buf = NULL;
    
+   free(retro_frame_buf);
+   retro_frame_buf = NULL;
+
 #ifdef MANYMOUSE
    // TODO (mittonk): Is this too early?  Or too late?
    ManyMouse_Quit();
@@ -419,7 +424,8 @@ bool retro_load_game(const struct retro_game_info *info)
    check_variables();
 
    uint16_t *pixel_buf = reinterpret_cast<uint16_t *>(frame_buf);
-   dice.load_game(info->path, pixel_buf);
+   uint16_t *retro_pixel_buf = reinterpret_cast<uint16_t *>(retro_frame_buf);
+   dice.load_game(info->path, pixel_buf, retro_pixel_buf);
 
    // If game uses a vertical monitor, tell libretro and adjust aspect ratio.
    screen_horizontal = dice.game_video_rotation == ROTATE_0 || dice.game_video_rotation == ROTATE_180;

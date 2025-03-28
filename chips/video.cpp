@@ -413,12 +413,18 @@ CUSTOM_LOGIC( Video::video )
 }
 
 void Video::swap_buffers() {
-   video_cb(reinterpret_cast<uint8_t*>(pixel_buf), VIDEO_WIDTH, VIDEO_HEIGHT, VIDEO_PITCH);
+   // Copy to external-facing frame buffer.
+   for (unsigned i = 0; i<VIDEO_PIXELS; i++) {
+      retro_pixel_buf[i] = pixel_buf[i];
+   }
+
+   // Display.
+   video_cb(reinterpret_cast<uint8_t*>(retro_pixel_buf), VIDEO_WIDTH, VIDEO_HEIGHT, VIDEO_PITCH);
    
    // Wipe the frame buffer we just displayed.
    for (unsigned i = 0; i<VIDEO_PIXELS; i++) {
-      pixel_buf[i] = 0; // 0x2222;
+      pixel_buf[i] = 0;
    }
-   
+
    frame_done = true;
 }

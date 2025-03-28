@@ -26,7 +26,7 @@ extern retro_log_printf_t log_cb;
 
 namespace dice_libretro {
 
-void DICE::load_game(const char *path, uint16_t *pixel_buf)
+void DICE::load_game(const char *path, uint16_t *pixel_buf, uint16_t *retro_pixel_buf)
 {
         /*
         input = new Input();
@@ -35,6 +35,7 @@ void DICE::load_game(const char *path, uint16_t *pixel_buf)
         input = new Input();
         video = new Video();
         video->pixel_buf = pixel_buf;
+        video->retro_pixel_buf = retro_pixel_buf;
    
         video->video_init(VIDEO_WIDTH, VIDEO_HEIGHT);
 

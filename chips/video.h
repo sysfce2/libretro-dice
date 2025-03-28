@@ -33,6 +33,7 @@ public:
     enum VideoPins { HBLANK_PIN = 9, VBLANK_PIN = 10 };
    
    uint16_t *pixel_buf;
+   uint16_t *retro_pixel_buf;
 
    bool frame_done = false;
 
