@@ -96,8 +96,10 @@ void DICE::run(void)
     if(circuit)
     {
        // Run until we've got a full video frame, but not much more.
-       while (!circuit->video.frame_done) {
-            // circuit->run(2.5e-3 / Circuit::timescale); // Run 2.5 ms
+       while (!circuit->video.frame_done && 
+             // Bail if it's taken 2+ wall clock seconds since the last input check / video
+             // frame.
+             circuit->rtc.get_usecs() < circuit->last_input_update_timestamp + RETRO_WATCHDOG_USECS) {
           circuit->run(1.0e-3 / Circuit::timescale); // Run 1 ms
        }
        circuit->video.frame_done = false;
@@ -124,6 +126,8 @@ void DICE::update_input(int32_t input_state[], int32_t input_analog_left_x[], in
          circuit->input.input_pointer_x[i] = input_pointer_x[i];
          circuit->input.input_pointer_y[i] = input_pointer_y[i];
       }
+
+      circuit->last_input_update_timestamp = circuit->rtc.get_usecs();
    }
 }
 
