@@ -201,4 +201,22 @@ void DICE::set_throttle_keyjoy_sensitivity(int val)
    if (circuit) circuit->input.throttle_keyjoy_sensitivity = val;
 }
 
+void DICE::set_dipswitch(const char* retro_dipswitch_key, int val)
+{
+   // Brute force, but only done on game load and manual config
+   // changes, so maybe good enough.
+   if (circuit)
+   {
+      log_cb(RETRO_LOG_DEBUG, "Setting dipswitch");
+
+    /* for(const ChipInstance& instance : circuit->desc->get_chips())
+      {
+         if(GameConfig::isDipswitch(instance.chip))
+         {
+         }
+      }
+     */
+   }
+}
+
 } // namespace

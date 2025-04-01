@@ -298,9 +298,9 @@ static void check_variables(void)
       log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
    }
 
-#ifdef MANYMOUSE
    char buffer[50];
-   
+
+#ifdef MANYMOUSE
    for (unsigned paddle=0; paddle < 4; paddle++)
    {
       snprintf(buffer, sizeof(buffer), "dice_manymouse_paddle%d", paddle);
@@ -371,14 +371,16 @@ static void check_variables(void)
       dice.set_throttle_keyjoy_sensitivity(atoi(var.value));
    }
 
-   var.key = "dice_dipswitch_1";
-   var.value = NULL;
-   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+   for (unsigned dipswitch=1; dipswitch<=3; dipswitch++)
    {
-      //dice.set_paddle_keyboard_sensitivity(atoi(var.value));
-      log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
+      snprintf(buffer, sizeof(buffer), "dice_dipswitch_%d", dipswitch);
+      var.key = buffer;
+      var.value = NULL;
+      if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+      {
+         dice.set_dipswitch(var.key, atoi(var.value));
+      }
    }
-
 
 }
 

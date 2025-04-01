@@ -12,6 +12,8 @@ struct GameConfig //: configuration
     std::string filename;
     
     GameConfig(const CircuitDesc* desc, const char* name);
+   
+   std::map<std::string, DipswitchBase*> dipswitch_map;
 
     bool load()
     {
