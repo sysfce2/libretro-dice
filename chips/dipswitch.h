@@ -12,9 +12,10 @@ struct DipswitchBase
     const char* name;
     const char* desc;
     const char* retro_setting_key;
+   unsigned retro_default_state;
 
     constexpr DipswitchBase(const char* n, const char* k, const char* d, int default_state)
-        : name(n), retro_setting_key(k), desc(d), state(default_state) { }
+        : name(n), retro_setting_key(k), desc(d), state(default_state), retro_default_state(default_state) { }
 
     virtual const char* const* getSettings() const = 0;
     virtual const size_t settingsSize() const = 0;

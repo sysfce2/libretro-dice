@@ -47,6 +47,8 @@ CUSTOM_LOGIC( DipswitchDesc::logic )
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
    {
       desc_state = atoi(var.value);
+      if (desc_state == -1)
+         desc_state = desc->retro_default_state;
    }
 
     if(desc_state != chip->output)
