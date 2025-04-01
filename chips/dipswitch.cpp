@@ -1,5 +1,8 @@
 #include "dipswitch.h"
 #include "../circuit.h"
+#include "../libretro.h"
+
+extern retro_environment_t environ_cb;
 
 /*
 Standard 1-bit DIP Switch. Can be SPDT or DPDT.

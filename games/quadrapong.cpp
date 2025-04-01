@@ -43,7 +43,7 @@ static SeriesRCDesc c34_desc(K_OHM(1.0), U_FARAD(0.1)); // Capacitor C34, Resist
 static BufferDesc miss_buf_desc(DELAY_NS(15.0), DELAY_NS(15.0)); // Prevents 12 ns glitches on MISS signal from clocking score counters multiple times.
                                                                  // 74107 probably wouldn't clock on an 8 ns pulse? TODO: investigate
 
-static DipswitchDesc dipswitch1_desc("coinage", "Coinage", 0, "1 Coin / 1 Credit", "1 Coin / 2 Credits");
+static DipswitchDesc dipswitch1_desc("coinage", "dice_dipswitch_1", "Coinage", 0, "1 Coin / 1 Credit", "1 Coin / 2 Credits");
 
 static VIDEO_DESC( quadrapong )
     VIDEO_RESISTANCE(1, K_OHM(1.0))

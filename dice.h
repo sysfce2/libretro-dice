@@ -40,7 +40,7 @@ class DICE
     Video* video;
     Circuit* circuit;
     RealTimeClock real_time;
-    GameDesc* g;
+    GameDesc* game_desc;
 
     //VerticalLayout layout;
     //Viewport* viewport;
@@ -64,7 +64,7 @@ class DICE
    void set_paddle_joystick_sensitivity(int val);
    void set_wheel_keyjoy_sensitivity(int val);
    void set_throttle_keyjoy_sensitivity(int val);
-
+   void set_dipswitch(const char* retro_dipswitch_key, int val);
 
 };
 

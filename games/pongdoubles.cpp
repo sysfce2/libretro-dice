@@ -36,7 +36,7 @@ static Paddle2VerticalDesc pad2_desc(17000.0, 145000.0, &a10_555_desc);
 static Paddle3VerticalDesc pad3_desc(17000.0, 145000.0, &b9a_555_desc);
 static Paddle4VerticalDesc pad4_desc(17000.0, 145000.0, &b9b_555_desc);
 
-static DipswitchDesc dipswitch1_desc("winning_score", "Winning Score", 0, "11", "15");
+static DipswitchDesc dipswitch1_desc("winning_score", "dice_dipswitch_1", "Winning Score", 0, "11", "15");
 
 static VIDEO_DESC( pongdoubles )
     VIDEO_RESISTANCE(1, OHM(220))

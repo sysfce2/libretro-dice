@@ -35,9 +35,9 @@ static CapacitorDesc cap3_desc(P_FARAD(220.0));
 static CapacitorDesc cap4_desc(P_FARAD(110.0)); // 220 too much? messes up ball horizontal count. TODO: adjust all capacitor delay times?
 static CapacitorDesc cap5_desc(P_FARAD(220.0));
 
-static DipswitchDesc dipswitch1_desc("coinage", "Coinage", 0, "1 Coin / 1 Credit", "1 Coin / 2 Credits");
-static DipswitchDesc dipswitch2_desc("free_ball", "Free Ball", 0, "Enabled", "Disabled");
-static DipswitchDesc dipswitch3_desc("ball_count", "Ball Count", 0, "3", "5");
+static DipswitchDesc dipswitch1_desc("coinage", "dice_dipswitch_1", "Coinage", 0, "1 Coin / 1 Credit", "1 Coin / 2 Credits");
+static DipswitchDesc dipswitch2_desc("free_ball", "dice_dipswitch_2", "Free Ball", 0, "Enabled", "Disabled");
+static DipswitchDesc dipswitch3_desc("ball_count", "dice_dipswitch_3", "Ball Count", 0, "3", "5");
 
 static VIDEO_DESC( pinpong )
     VIDEO_RESISTANCE(1, OHM(330))

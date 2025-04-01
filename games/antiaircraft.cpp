@@ -31,8 +31,8 @@ static Mono9602Desc c1_desc(K_OHM(15.0), U_FARAD(5.0), K_OHM(15.0), U_FARAD(5.0)
 static Mono9602Desc e1_desc(K_OHM(33.0), U_FARAD(47.0), K_OHM(27.0), P_FARAD(100.0));
 static Mono555Desc d9_555_desc(K_OHM(610.0), U_FARAD(100.0));
 
-static DipswitchDesc dipswitch1_desc("coinage", "Coinage", 0, "1 Coin / 1 Credit", "1 Coin / 2 Credits");
-static DipswitchDesc dipswitch2_desc("plane_type", "Plane Type", 0, "Airplane", "UFO");
+static DipswitchDesc dipswitch1_desc("coinage", "dice_dipswitch_1", "Coinage", 0, "1 Coin / 1 Credit", "1 Coin / 2 Credits");
+static DipswitchDesc dipswitch2_desc("plane_type", "dice_dipswitch_2", "Plane Type", 0, "Airplane", "UFO");
 static PotentimeterMono555Desc pot1_desc("playtime", "Play Time", K_OHM(830.0), K_OHM(220.0), K_OHM(1220.0), d9_555_desc);
 
 static RomDesc k1_desc("antiaircraft", "aa.k1", 0x9DE772D5);

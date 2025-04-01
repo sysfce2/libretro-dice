@@ -51,7 +51,7 @@ static Paddle2HorizontalDesc pad2_desc(K_OHM(0.0), K_OHM(400.0), &wipeout_pad2_d
 static Paddle4HorizontalDesc pad4_desc(K_OHM(0.0), K_OHM(400.0), &wipeout_pad4_desc);
 
 
-static DipswitchDesc swmiss57_desc("misses", "Starting Score", 0, "5", "7");
+static DipswitchDesc swmiss57_desc("misses", "dice_dipswitch_1", "Starting Score", 0, "5", "7");
 
 static MixerDesc mixer_desc({OHM(220.0)}, 0, 0, U_FARAD(0.1)); 
 

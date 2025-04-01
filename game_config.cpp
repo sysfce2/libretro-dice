@@ -36,24 +36,27 @@ GameConfig::GameConfig(const CircuitDesc* desc, const char* name)
     filename = {config_path, name, ".cfg"};
      
     bool has_config = false;
-
+     */
+   
     // Find all DIP switches in circuit desc, append to game configuration
     for(const ChipInstance& instance : desc->get_chips())
     {
         if(isDipswitch(instance.chip))
         {
             DipswitchBase* d = (DipswitchBase*)instance.custom_data;
-            append(d->state, d->name);
-            has_config = true;
+           dipswitch_map.insert({d->retro_setting_key, d});
+            //append(d->state, d->name);
+            //has_config = true;
         }
-        else if(isPotentiometer(instance.chip))
+        /*else if(isPotentiometer(instance.chip))
         {
             PotentiometerBase* d = (PotentiometerBase*)instance.custom_data;
             append(d->current_val, d->name);
             has_config = true;
-        }
+        } */
     }
 
+   /*
     if(has_config) load();
    */
 }

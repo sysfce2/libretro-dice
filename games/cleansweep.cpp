@@ -58,9 +58,9 @@ const static RomDesc cleansweep_k3_desc("cleansweep", "501074.k3", 0x515A34BA); 
 static Ram82S16Desc b5_desc;  //P1 dot memory
 static Ram82S16Desc c5_desc;  //P2 dot memory
 
-static DipswitchDesc swreplayyn_desc("replay", "Replay", 1, "Disabled", "Enabled");
-static DipswitchDesc swballs35_desc("ball_count", "Ball Count", 1, "3", "5");
-static DipswitchDesc swplayspercoin12_desc("coinage", "Coinage", 0, "1 Coin / 1 Credit", "1 Coin / 2 Credits");
+static DipswitchDesc swreplayyn_desc("replay", "dice_dipswitch_1", "Replay", 1, "Disabled", "Enabled");
+static DipswitchDesc swballs35_desc("ball_count", "dice_dipswitch_2", "Ball Count", 1, "3", "5");
+static DipswitchDesc swplayspercoin12_desc("coinage", "dice_dipswitch_3", "Coinage", 0, "1 Coin / 1 Credit", "1 Coin / 2 Credits");
 
 static BufferDesc buf1_desc(DELAY_NS(10.0), DELAY_NS(10.0)); // Prevents 5F from counting down instead of up on credit insertion. TODO: investigate
 
