@@ -33,7 +33,7 @@ static Mono555Desc g4_555_desc(K_OHM(220.0), U_FARAD(1.0));
 static Paddle1VerticalDesc pad1_desc(17000.0, 145000.0, &b9_555_desc);
 static Paddle2VerticalDesc pad2_desc(17000.0, 145000.0, &a9_555_desc);
 
-static DipswitchDesc dipswitch1_desc("winning_score", "Winning Score", 0, "11", "15");
+static DipswitchDesc dipswitch1_desc("winning_score", "dice_dipswitch_1", "Winning Score", 0, "11", "15");
 
 static INPUT_DESC( pong )
     INPUT_INFO(PADDLE1_VERTICAL_INPUT, "Move Left Paddle")

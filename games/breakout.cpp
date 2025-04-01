@@ -89,10 +89,10 @@ static Mono9602Desc f3_desc(K_OHM(47.0), U_FARAD(1.0), K_OHM(47.0), U_FARAD(1.0)
 static Mono9602Desc a7_desc(K_OHM(68.0), U_FARAD(1.0), K_OHM(22.0), U_FARAD(10.0));
 static Mono9602Desc a8_desc(K_OHM(27.0), U_FARAD(1.0), K_OHM(27.0), U_FARAD(1.0));
 
-static Dipswitch53137Desc dipswitch1_desc("bonus_credit", "Bonus Credit", 3, "None", "100", "200", "300", "400", "500", "600", "700", "800");
-static DipswitchDesc dipswitch2_desc("cabinet_type", "Cabinet Type", 0, "Normal", "Cocktail");
-static DipswitchDesc dipswitch3_desc("coinage", "Coinage", 0, "1 Coin / 1 Credit", "1 Coin / 2 Credits");
-static DipswitchDesc dipswitch4_desc("ball_count", "Ball Count", 0, "3", "5");
+static Dipswitch53137Desc dipswitch1_desc("bonus_credit", "dice_dipswitch53137_1", "Bonus Credit", 3, "None", "100", "200", "300", "400", "500", "600", "700", "800");
+static DipswitchDesc dipswitch2_desc("cabinet_type", "dice_dipswitch_1", "Cabinet Type", 0, "Normal", "Cocktail");
+static DipswitchDesc dipswitch3_desc("coinage", "dice_dipswitch_2", "Coinage", 0, "1 Coin / 1 Credit", "1 Coin / 2 Credits");
+static DipswitchDesc dipswitch4_desc("ball_count", "dice_dipswitch_3", "Ball Count", 0, "3", "5");
 
 CIRCUIT_LAYOUT( breakout )
 

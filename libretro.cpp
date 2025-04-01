@@ -206,6 +206,13 @@ void retro_set_environment(retro_environment_t cb)
       { "dice_wheel_keyjoy_sensitivity", "Wheel sensitivity; 500|125|250|375" },
       { "dice_throttle_keyjoy_sensitivity", "Throttle sensitivity; 250|125|375|500" },
 
+      { "dice_dipswitch_1", "Dipswitch 1; 0|1" },
+      { "dice_dipswitch_2", "Dipswitch 2; 0|1" },
+      { "dice_dipswitch_3", "Dipswitch 3; 0|1" },
+
+      // TODO (mittonk): More complicated dipswitches.
+      // TODO (mittonk): Potentiometers.
+
       { NULL, NULL },
    };
 

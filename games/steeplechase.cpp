@@ -70,8 +70,8 @@ static CapacitorDesc c68_desc(P_FARAD(100.0));
 static BufferDesc buf1_desc(DELAY_NS(20.0), DELAY_NS(5.0)); // Prevent glitch on VRESET
 static BufferDesc buf2_desc(DELAY_NS(5.0), DELAY_NS(25.0)); // Prevent glitch on picket clock
 
-static DipswitchDesc dsw1_desc("game_time", "Game Time", 0, "90 Seconds", "2 Minutes");
-static DipswitchDesc dsw2_desc("coinage", "Coinage", 0, "1 Coin / 2 Credit", "1 Coin / 6 Credits");
+static DipswitchDesc dsw1_desc("game_time", "dice_dipswitch_1", "Game Time", 0, "90 Seconds", "2 Minutes");
+static DipswitchDesc dsw2_desc("coinage", "dice_dipswitch_2", "Coinage", 0, "1 Coin / 2 Credit", "1 Coin / 6 Credits");
 
 static VIDEO_DESC( steeplechase )
     // Values guessed based on screenshots. TODO: Make more accurate

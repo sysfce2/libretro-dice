@@ -11,9 +11,10 @@ struct DipswitchBase
     unsigned state;
     const char* name;
     const char* desc;
+    const char* retro_setting_key;
 
-    constexpr DipswitchBase(const char* n, const char* d, int default_state)
-        : name(n), desc(d), state(default_state) { }
+    constexpr DipswitchBase(const char* n, const char* k, const char* d, int default_state)
+        : name(n), retro_setting_key(k), desc(d), state(default_state) { }
 
     virtual const char* const* getSettings() const = 0;
     virtual const size_t settingsSize() const = 0;
@@ -23,8 +24,8 @@ template <size_t N> struct DipswitchTemplate : DipswitchBase
 {
     std::array<const char*, N> settings;
 
-    constexpr DipswitchTemplate(const char* n, const char* d, int default_state, std::array<const char*, N> s)
-        : DipswitchBase(n, d, default_state), settings(s) { }
+    constexpr DipswitchTemplate(const char* n, const char* k, const char* d, int default_state, std::array<const char*, N> s)
+        : DipswitchBase(n, k, d, default_state), settings(s) { }
 
     const char* const* getSettings() const { return settings.data(); }
     const size_t settingsSize() const { return N; }
@@ -35,9 +36,9 @@ template <size_t N> struct DipswitchTemplate : DipswitchBase
 class DipswitchDesc : DipswitchTemplate<2>
 {
 public:
-    constexpr DipswitchDesc(const char* n, const char* d, int default_state,
+    constexpr DipswitchDesc(const char* n, const char* k, const char* d, int default_state,
                             const char* setting1, const char* setting2) 
-        : DipswitchTemplate(n, d, default_state, std::array<const char*, 2>{{setting1, setting2}}) { }
+        : DipswitchTemplate(n, k, d, default_state, std::array<const char*, 2>{{setting1, setting2}}) { }
     
     static CUSTOM_LOGIC( logic );
 };
@@ -50,10 +51,10 @@ extern CHIP_DESC( DIPSWITCH );
 class DipswitchSP4TDesc : DipswitchTemplate<4>
 {
 public:
-    DipswitchSP4TDesc(const char* n, const char* d, int default_state,
+    DipswitchSP4TDesc(const char* n, const char* k, const char* d, int default_state,
                       const char* setting1, const char* setting2,
                       const char* setting3, const char* setting4) 
-        : DipswitchTemplate(n, d, default_state,
+        : DipswitchTemplate(n, k, d, default_state,
           std::array<const char*, 4>{{setting1, setting2, setting3, setting4}}) { }
 
     template<int T> static CUSTOM_LOGIC( logic );
@@ -68,7 +69,7 @@ extern CHIP_DESC( DIPSWITCH_SP4T );
 class Dipswitch53137Desc : DipswitchTemplate<16>
 {
 public:
-    Dipswitch53137Desc(const char* n, const char* d, int default_state,
+    Dipswitch53137Desc(const char* n, const char* k, const char* d, int default_state,
                        const char* setting1, const char* setting2,
 			           const char* setting3 = NULL, const char* setting4 = NULL,
 			           const char* setting5 = NULL, const char* setting6 = NULL,
@@ -77,7 +78,7 @@ public:
 			           const char* setting11 = NULL, const char* setting12 = NULL,
 			           const char* setting13 = NULL, const char* setting14 = NULL,
 			           const char* setting15 = NULL, const char* setting16 = NULL)
-        : DipswitchTemplate(n, d, default_state,
+        : DipswitchTemplate(n, k, d, default_state,
           std::array<const char*, 16>
 	  {{setting1, setting2, setting3, setting4,
            setting5, setting6, setting7, setting8,

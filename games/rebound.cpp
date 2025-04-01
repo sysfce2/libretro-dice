@@ -12,8 +12,8 @@ static Mono9602Desc k1_desc(K_OHM(33.0), U_FARAD(47.0), K_OHM(47.0), U_FARAD(10.
 static Paddle2HorizontalDesc pad2_desc(150000.0, 250000.0, &b9_555_desc);
 static Paddle1HorizontalDesc pad1_desc(42000.0, 132000.0, &c9_555_desc);
 
-static DipswitchDesc dipswitch1_desc("winning_score", "Winning Score", 0, "11", "15");
-static DipswitchDesc dipswitch2_desc("coinage", "Coinage", 0, "1 Coin / 1 Credit", "1 Coin / 2 Credits");
+static DipswitchDesc dipswitch1_desc("winning_score", "dice_dipswitch_1", "Winning Score", 0, "11", "15");
+static DipswitchDesc dipswitch2_desc("coinage", "dice_dipswitch_2", "Coinage", 0, "1 Coin / 1 Credit", "1 Coin / 2 Credits");
 
 static INPUT_DESC( rebound )
     INPUT_INFO(PADDLE1_HORIZONTAL_INPUT, "Move Left Paddle")

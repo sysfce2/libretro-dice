@@ -40,7 +40,7 @@ class DICE
     Video* video;
     Circuit* circuit;
     RealTimeClock real_time;
-    GameDesc* g;
+    GameDesc* game_desc;
 
     //VerticalLayout layout;
     //Viewport* viewport;

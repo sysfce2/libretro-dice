@@ -58,7 +58,7 @@ static Astable555Desc k9_555_desc(K_OHM(510.0), K_OHM(470.0), U_FARAD(10.0));
 
 static PotentimeterAstable555Desc pot1_desc("playtime", "Play Time", K_OHM(510.0), K_OHM(10.0), K_OHM(1010.0), k9_555_desc);
 
-static DipswitchDesc dipswitch1_desc("coinage", "Coinage", 0, "25 Cents/2 players", "50 Cents/2 players");
+static DipswitchDesc dipswitch1_desc("coinage", "dice_dipswitch_1", "Coinage", 0, "25 Cents/2 players", "50 Cents/2 players");
 
 static VIDEO_DESC( jetfighter )
     VIDEO_RESISTANCE(1, OHM(470))

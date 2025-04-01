@@ -59,7 +59,7 @@ static Astable555Desc n9b_555_desc(K_OHM(4.7), K_OHM(680.0), U_FARAD(0.22));
 
 static Mono555Desc n8_555_desc(K_OHM(220.0), U_FARAD(100.0));
 
-static DipswitchDesc dipswitch1_desc("coinage", "Coinage", 0, "1 Coin / 1 Credit", "1 Coin / 2 Credits");
+static DipswitchDesc dipswitch1_desc("coinage", "dice_dipswitch_1", "Coinage", 0, "1 Coin / 1 Credit", "1 Coin / 2 Credits");
 
 static PotentimeterMono555Desc pot1_desc("playtime", "Play Time", K_OHM(970.0), K_OHM(470.0), K_OHM(1470.0), n9a_555_desc);
 

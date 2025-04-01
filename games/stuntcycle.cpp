@@ -64,17 +64,17 @@ static SeriesRCDesc c13_desc(K_OHM(2.2), P_FARAD(470.0));
 static RomDesc d7_desc("stuntcycle", "82s123.4d", 0x31A09EFB);
 static RomDesc hf1_desc("stuntcycle", "82s115.1fh", 0x4ED5A99D);
 
-static Dipswitch53137Desc f5_desc("misses", "Number of Misses Allowed", 4,
+static Dipswitch53137Desc f5_desc("misses", "dice_dipswitch53137_1", "Number of Misses Allowed", 4,
                                   "0", "1", "2", "3",
                                   "4", "5", "6", "7");
 
-static Dipswitch53137Desc f7_desc("free_game_control", "Free Game Control", 9,
+static Dipswitch53137Desc f7_desc("free_game_control", "dice_dipswitch53137_2", "Free Game Control", 9,
                                   "12", "13", "14", "15", "16", "17", "18", "19",
                                   "20", "21", "22", "23", "24", "25", "26", "27");
 
-static DipswitchDesc dipswitch1_desc("coinage", "Coinage", 0,
+static DipswitchDesc dipswitch1_desc("coinage", "dice_dipswitch_1", "Coinage", 0,
                                      "1 Coin / 1 Credit", "1 Coin / 2 Credits");
-static DipswitchDesc dipswitch2_desc("free_game_en", "Free Game", 0, "Enabled", "Disabled");
+static DipswitchDesc dipswitch2_desc("free_game_en", "dice_dipswitch_2", "Free Game", 0, "Enabled", "Disabled");
 
 static VIDEO_DESC( stuntcycle )
     VIDEO_RESISTANCE(1, K_OHM(1.0))
