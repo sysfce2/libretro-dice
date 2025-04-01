@@ -146,7 +146,7 @@ rather than per-core to avoid cross-contamination.
 ### Steeplechase (steeplechase)
 | Switch | Name               | Default | Setting | Value                |
 | ------ | ------------------ | ------- | ------- | -------------------- |
-| 1      | Game Time          | 0       | 0       | 90 Seconds Credit    |
+| 1      | Game Time          | 0       | 0       | 90 Seconds           |
 |        |                    |         | 1       | 2 Minutes            |
 | 2      | Coinage            | 0       | 0       | 1 Coin / 2 Credits   |
 |        |                    |         | 1       | 1 Coin / 6 Credits   |
