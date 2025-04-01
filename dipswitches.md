@@ -5,7 +5,7 @@ Some games use DIP switches or potentiometers to allow the owner/operator to set
 game parameters like balls-per-coin.
 
 These can be configured through the "Core Options" menu. Setting "default" or "-1"
-means the factory default for the game, naming changes based on your RetroArch-or-similar version.
+means the factory default for the game.  (Naming changes based on your RetroArch version.)
 
 If you save configurations with non-default values, you may want to save them per-game
 rather than per-core to avoid cross-contamination.
