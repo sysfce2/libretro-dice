@@ -21,11 +21,13 @@ struct retro_core_option_v2_category option_cats_us[] = {
       "Input",
       "Configure core-specific input settings"
    },
+#ifdef MANYMOUSE
    {
       "manymouse",
       "Manymouse",
       "Configure many-mouse settings"
    },
+#endif
    {
       "dipswitch",
       "Dipswitch",
@@ -130,6 +132,7 @@ struct retro_core_option_v2_definition option_defs_us[] = {
       "250"
    },
 
+#ifdef MANYMOUSE
    {
       "dice_manymouse_paddle0",
       "Manymouse > Mouse-Paddle 1",
@@ -346,8 +349,111 @@ struct retro_core_option_v2_definition option_defs_us[] = {
       },
       "3y"
    },
+#endif
 
-
+   {
+      "dice_dipswitch_1",
+      "Dipswitch > Dipswitch 1",
+      "Dipswitch 1",
+      "Setting for Dipswitch 1.",
+      NULL,
+      "dipswitch",
+      {
+         {"-1", "default"},
+         {"0", NULL},
+         {"1", NULL},
+         {NULL, NULL},
+      },
+      "-1"
+   },
+   {
+      "dice_dipswitch_2",
+      "Dipswitch > Dipswitch 2",
+      "Dipswitch 2",
+      "Setting for Dipswitch 2.",
+      NULL,
+      "dipswitch",
+      {
+         {"-1", "default"},
+         {"0", NULL},
+         {"1", NULL},
+         {NULL, NULL},
+      },
+      "-1"
+   },
+   {
+      "dice_dipswitch_3",
+      "Dipswitch > Dipswitch 3",
+      "Dipswitch 3",
+      "Setting for Dipswitch 3.",
+      NULL,
+      "dipswitch",
+      {
+         {"-1", "default"},
+         {"0", NULL},
+         {"1", NULL},
+         {NULL, NULL},
+      },
+      "-1"
+   },
+   {
+      "dice_dipswitch16_1",
+      "Dipswitch > Dipswitch16 1",
+      "Dipswitch16 1",
+      "Setting for 16-position Dipswitch number 1.",
+      NULL,
+      "dipswitch",
+      {
+         {"-1", "default"},
+         {"0", NULL},
+         {"1", NULL},
+         {"2", NULL},
+         {"3", NULL},
+         {"4", NULL},
+         {"5", NULL},
+         {"6", NULL},
+         {"7", NULL},
+         {"8", NULL},
+         {"9", NULL},
+         {"10", NULL},
+         {"11", NULL},
+         {"12", NULL},
+         {"13", NULL},
+         {"14", NULL},
+         {"15", NULL},
+         {NULL, NULL},
+      },
+      "-1"
+   },
+   {
+      "dice_dipswitch16_2",
+      "Dipswitch > Dipswitch16 2",
+      "Dipswitch16 2",
+      "Setting for 16-position Dipswitch number 2.",
+      NULL,
+      "dipswitch",
+      {
+         {"-1", "default"},
+         {"0", NULL},
+         {"1", NULL},
+         {"2", NULL},
+         {"3", NULL},
+         {"4", NULL},
+         {"5", NULL},
+         {"6", NULL},
+         {"7", NULL},
+         {"8", NULL},
+         {"9", NULL},
+         {"10", NULL},
+         {"11", NULL},
+         {"12", NULL},
+         {"13", NULL},
+         {"14", NULL},
+         {"15", NULL},
+         {NULL, NULL},
+      },
+      "-1"
+   },
 
    { NULL, NULL, NULL, NULL, NULL, NULL, {{0}}, NULL },
 };
