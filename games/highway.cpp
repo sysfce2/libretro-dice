@@ -59,7 +59,7 @@ static CapacitorDesc cap11_desc(N_FARAD(1));
 static CapacitorDesc cap12_desc(P_FARAD(100));
 static CapacitorDesc cap14_desc(N_FARAD(1), OHM(180));  //RC
 
-static Dipswitch4SP4TDesc sw_ext_play("ext_play", "dice_dipswitch4SP4T_1", "Extended Play Score", 6, "None",
+static Dipswitch4SP4TDesc sw_ext_play("ext_play", "dice_dipswitch16_1", "Extended Play Score", 6, "None",
                                       "10", "20", "30", "40", "50", "60", "70", "80",
                                       "90", "100", "110", "120", "130", "140", "150");
 static DipswitchDesc sw_k4l4("concurrent_traffic", "dice_dipswitch_1", "Concurrent Traffic", 0, "Regular", "Double");

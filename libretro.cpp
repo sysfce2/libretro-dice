@@ -210,8 +210,8 @@ void retro_set_environment(retro_environment_t cb)
       { "dice_dipswitch_2", "Dipswitch 2; -1|0|1" },
       { "dice_dipswitch_3", "Dipswitch 3; -1|0|1" },
 
-      // TODO (mittonk): More complicated dipswitches.
-      // TODO (mittonk): Potentiometers.
+      { "dice_dipswitch16_1", "Dipswitch16 1; -1|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15" },
+      { "dice_dipswitch16_2", "Dipswitch16 2; -1|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15" },
 
       { NULL, NULL },
    };
@@ -374,6 +374,17 @@ static void check_variables(void)
    for (unsigned dipswitch=1; dipswitch<=3; dipswitch++)
    {
       snprintf(buffer, sizeof(buffer), "dice_dipswitch_%d", dipswitch);
+      var.key = buffer;
+      var.value = NULL;
+      if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+      {
+         dice.set_dipswitch(var.key, atoi(var.value));
+      }
+   }
+
+   for (unsigned dipswitch=1; dipswitch<=2; dipswitch++)
+   {
+      snprintf(buffer, sizeof(buffer), "dice_dipswitch16_%d", dipswitch);
       var.key = buffer;
       var.value = NULL;
       if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)

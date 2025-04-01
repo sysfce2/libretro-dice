@@ -55,7 +55,7 @@ static PotentimeterAstable555Desc pot1_desc("playtime", "Play Time", K_OHM(510.0
 
 //static DipswitchDesc sw1_desc("barrier", "dice_dipswitch_1", "Barrier Select", 1, "Barriers Disabled", "Barriers Enabled");
 static DipswitchDesc sw2play_desc("coinage", "dice_dipswitch_2", "Coinage", 0, "1 Coin / 1 Credit", "1 Coin / 2 Credits");
-static Dipswitch4SP4TDesc sw2_desc("bonus_credit", "dice_dipswitch4SP4T_1", "Bonus Credit", 6, "None", 
+static Dipswitch4SP4TDesc sw2_desc("bonus_credit", "dice_dipswitch16_1", "Bonus Credit", 6, "None", 
                                    "10", "20", "30", "40", "50", "60", "70", "80", "90");
 
 static Wheel1Desc wheel1_desc;
