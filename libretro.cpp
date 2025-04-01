@@ -371,6 +371,15 @@ static void check_variables(void)
       dice.set_throttle_keyjoy_sensitivity(atoi(var.value));
    }
 
+   var.key = "dice_dipswitch_1";
+   var.value = NULL;
+   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+   {
+      //dice.set_paddle_keyboard_sensitivity(atoi(var.value));
+      log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
+   }
+
+
 }
 
 static void audio_callback(void)

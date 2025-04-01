@@ -1,5 +1,8 @@
 #include "dipswitch.h"
 #include "../circuit.h"
+#include "../libretro.h"
+
+extern retro_environment_t environ_cb;
 
 /*
 Standard 1-bit DIP Switch. Can be SPDT or DPDT.
@@ -36,7 +39,17 @@ CUSTOM_LOGIC( DipswitchDesc::logic )
 
     chip->state = PASSIVE;
 
-    if(desc->state != chip->output)
+    /*if(desc->state != chip->output)*/
+   int desc_state = desc->state;
+   struct retro_variable var = {0};
+   var.key = desc->retro_setting_key;
+   var.value = NULL;
+   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+   {
+      desc_state = atoi(var.value);
+   }
+
+    if(desc_state != chip->output)
         chip->pending_event = chip->circuit->queue_push(chip, 0);
 }
 
