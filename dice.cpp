@@ -207,15 +207,21 @@ void DICE::set_dipswitch(const char* retro_dipswitch_key, int val)
    // changes, so maybe good enough.
    if (circuit)
    {
-      log_cb(RETRO_LOG_DEBUG, "Setting dipswitch");
-
-    /* for(const ChipInstance& instance : circuit->desc->get_chips())
+      
+      const std::string key(retro_dipswitch_key);
+      DipswitchBase *desc = circuit->game_config.dipswitch_map[key];
+      
+      if (desc)
       {
-         if(GameConfig::isDipswitch(instance.chip))
+         if (val == -1)
          {
+            log_cb(RETRO_LOG_DEBUG, "Setting dipswitch %s to %d meaning default value %d\n", retro_dipswitch_key, val, desc->retro_default_state);
+            desc->state = desc->retro_default_state;
+         } else {
+            log_cb(RETRO_LOG_DEBUG, "Setting dipswitch %s to %d\n", retro_dipswitch_key, val);
+            desc->state = val;
          }
       }
-     */
    }
 }
 
