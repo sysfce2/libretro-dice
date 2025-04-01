@@ -6,6 +6,7 @@
 - Fixed screenshots and pause screen.
 - Fixed filename parsing in RetroArch playlists.
 - Fixed video artifacts on the left margin.
+- Fixed memory alignment bug. (DirtBagXon)
 
 ## 0.1.0
 - Initial libretro port of DICE v0.9.
