@@ -322,7 +322,7 @@ static void check_variables(void)
    var.value = NULL;
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
    {
-      bool use_mouse_pointer_for_paddle_1 = !strcmp(var.value, "true") ? true : false;
+      bool use_mouse_pointer_for_paddle_1 = !strcmp(var.value, "enabled") ? true : false;
       dice.set_use_mouse_pointer_for_paddle_1(use_mouse_pointer_for_paddle_1);
       log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
    }
@@ -337,7 +337,7 @@ static void check_variables(void)
       var.value = NULL;
       if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
       {
-         bool val = !strcmp(var.value, "true") ? true : false;
+         bool val = !strcmp(var.value, "enabled") ? true : false;
          dice.set_manymouse_enabled(paddle, val);
          log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
       }
@@ -366,7 +366,7 @@ static void check_variables(void)
    var.value = NULL;
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
    {
-      if (!strcmp(var.value, "false"))
+      if (!strcmp(var.value, "disabled"))
          dice.set_paddle_joystick_absolute(false);
       else
          dice.set_paddle_joystick_absolute(true);
