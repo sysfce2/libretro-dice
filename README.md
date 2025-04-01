@@ -58,6 +58,10 @@ One mouse can be used for Paddle 1.  Use "Core Options -> Use mouse pointer for 
 Advanced: Multiple mice are a compile-time option on Linux, Windows, and Mac, see 
 [manymouse.md](manymouse.md).
 
+## DIP Switches
+
+Settable in "Core Options," see [dipswitches.md](dipswitches.md).
+
 ## Compiling
 Prebuilt binaries for several platforms are available through RetroArch's "Online Updater -> Core Downloader".  DICE is marked "experimental," you'll need to set "Online Updater -> Updater Settings -> Show Experimental Cores" first.
 
