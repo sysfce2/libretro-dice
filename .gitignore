@@ -1,6 +1,7 @@
 *.o
 *.swp
-phoenix/qt/platform.moc
+.DS_Store
+.idea
 dice
 dice_libretro.dylib
 dice_libretro.so
