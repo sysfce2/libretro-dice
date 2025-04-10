@@ -285,6 +285,8 @@ static void update_input(void)
    int32_t input_analog_left_y[NUM_CONTROLLERS];
    int32_t input_pointer_x[NUM_CONTROLLERS];
    int32_t input_pointer_y[NUM_CONTROLLERS];
+   int32_t input_mouse_x[NUM_CONTROLLERS];
+   int32_t input_mouse_y[NUM_CONTROLLERS];
 
    for (unsigned pad = 0; pad < NUM_CONTROLLERS; pad++)
    {
@@ -297,6 +299,12 @@ static void update_input(void)
       
       input_analog_left_y[pad] = input_state_cb( (pad), RETRO_DEVICE_ANALOG, RETRO_DEVICE_INDEX_ANALOG_LEFT,
                                                 RETRO_DEVICE_ID_ANALOG_Y);
+
+      input_mouse_x[pad] = input_state_cb( (pad), RETRO_DEVICE_MOUSE, pad, RETRO_DEVICE_ID_MOUSE_X);
+      input_mouse_y[pad] = input_state_cb( (pad), RETRO_DEVICE_MOUSE, pad, RETRO_DEVICE_ID_MOUSE_Y);
+      bool mouse_pressed = input_state_cb((pad), RETRO_DEVICE_MOUSE, pad, RETRO_DEVICE_ID_MOUSE_LEFT);
+      if (mouse_pressed)
+         log_cb(RETRO_LOG_INFO, "Mouse #: %d    : (%6d, %6d).\n", pad, input_mouse_x[pad], input_mouse_y[pad]);
    }
 
    unsigned pad = 0;
@@ -310,8 +318,7 @@ static void update_input(void)
    input_pointer_x[pad] = pointer_x;
    input_pointer_y[pad] = pointer_y;
 
-   
-   dice.update_input(input_bitmask, input_analog_left_x, input_analog_left_y, input_pointer_x, input_pointer_y);
+   dice.update_input(input_bitmask, input_analog_left_x, input_analog_left_y, input_pointer_x, input_pointer_y, input_mouse_x, input_mouse_y);
 }
 
 static void check_variables(void)
@@ -328,6 +335,37 @@ static void check_variables(void)
    }
 
    char buffer[50];
+
+   for (unsigned paddle=0; paddle < 4; paddle++)
+   {
+      snprintf(buffer, sizeof(buffer), "dice_retromouse_paddle%d", paddle);
+      var.key = buffer;
+      var.value = NULL;
+      if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+      {
+         bool val = !strcmp(var.value, "enabled") ? true : false;
+         dice.set_retromouse_enabled(paddle, val);
+         log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
+      }
+      
+      snprintf(buffer, sizeof(buffer), "dice_retromouse_paddle%d_x", paddle);
+      var.key = buffer;
+      var.value = NULL;
+      if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+      {
+         dice.set_retromouse_axis(paddle, 0, var.value);
+         log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
+      }
+      
+      snprintf(buffer, sizeof(buffer), "dice_retromouse_paddle%d_y", paddle);
+      var.key = buffer;
+      var.value = NULL;
+      if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+      {
+         dice.set_retromouse_axis(paddle, 1, var.value);
+         log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
+      }
+   }
 
 #ifdef MANYMOUSE
    for (unsigned paddle=0; paddle < 4; paddle++)

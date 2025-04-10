@@ -50,12 +50,16 @@ class DICE
       uint32_t max_height;
    
       void load_game(const char *path, uint16_t *pixel_buf, uint16_t *retro_pixel_buf);
-      void update_input(int32_t *input_state, int32_t *input_analog_left_x, int32_t *input_analog_left_y, int32_t *input_pointer_x, int32_t *input_pointer_y);
+      void update_input(int32_t *input_state, int32_t *input_analog_left_x, int32_t *input_analog_left_y,
+            int32_t *input_pointer_x, int32_t *input_pointer_y,
+            int32_t *input_mouse_x, int32_t *input_mouse_y);
       void run(void);
       void render_frame(void);
       void reset(void);
 
    void set_use_mouse_pointer_for_paddle_1(bool val);
+   void set_retromouse_enabled(unsigned paddle, bool val);
+   void set_retromouse_axis(unsigned paddle, unsigned axis, const char* axis_name);
    void set_manymouse_enabled(unsigned paddle, bool val);
    void set_manymouse_axis(unsigned paddle, unsigned axis, const char* axis_name);
 

@@ -119,6 +119,12 @@ extern CHIP_DESC( BUTTONS6_INPUT );
 inline constexpr uint8_t operator"" _NO ( unsigned long long pin ) { return pin; }
 inline constexpr uint8_t operator"" _NC ( unsigned long long pin ) { return pin + i1 - 1; }
 
+struct RetromouseSettings
+{
+   unsigned settings_x_axis_axis;
+   unsigned settings_y_axis_axis;
+};
+
 struct ManymouseSettings
 {
    unsigned settings_x_axis_mouse;
@@ -152,14 +158,18 @@ public:
    int32_t input_analog_left_y[NUM_CONTROLLERS];
    int32_t input_pointer_x[NUM_CONTROLLERS];
    int32_t input_pointer_y[NUM_CONTROLLERS];
+   int32_t input_mouse_x[NUM_CONTROLLERS];
+   int32_t input_mouse_y[NUM_CONTROLLERS];
    bool paddle_joystick_absolute;
    int paddle_keyboard_sensitivity;
    int paddle_joystick_sensitivity;
    int wheel_keyjoy_sensitivity;
    int throttle_keyjoy_sensitivity;
    bool use_mouse_pointer_for_paddle_1;
-   bool mouse_enabled[4];
-   ManymouseSettings mouse_settings[4];
+   bool retromouse_enabled[4];
+   RetromouseSettings retromouse_settings[4];
+   bool manymouse_enabled[4];
+   ManymouseSettings manymouse_settings[4];
 };
 
 #endif

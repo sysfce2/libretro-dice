@@ -111,7 +111,9 @@ void DICE::render_frame(void)
 {
 }
 
-void DICE::update_input(int32_t input_state[], int32_t input_analog_left_x[], int32_t input_analog_left_y[], int32_t input_pointer_x[], int32_t input_pointer_y[])
+void DICE::update_input(int32_t input_state[], int32_t input_analog_left_x[], int32_t input_analog_left_y[],
+      int32_t input_pointer_x[], int32_t input_pointer_y[],
+      int32_t input_mouse_x[], int32_t input_mouse_y[])
 {
 #ifdef MANYMOUSE
    input->poll_input(); // Mice handled by manymouse
@@ -126,6 +128,8 @@ void DICE::update_input(int32_t input_state[], int32_t input_analog_left_x[], in
          circuit->input.input_analog_left_y[i] = input_analog_left_y[i];
          circuit->input.input_pointer_x[i] = input_pointer_x[i];
          circuit->input.input_pointer_y[i] = input_pointer_y[i];
+         circuit->input.input_mouse_x[i] = input_pointer_x[i];
+         circuit->input.input_mouse_y[i] = input_pointer_y[i];
       }
 
       circuit->last_input_update_timestamp = circuit->rtc.get_usecs();
@@ -143,9 +147,33 @@ void DICE::set_use_mouse_pointer_for_paddle_1(bool val)
    if (circuit) circuit->input.use_mouse_pointer_for_paddle_1 = val;
 }
 
+void DICE::set_retromouse_enabled(unsigned paddle, bool val)
+{
+   if (circuit) circuit->input.retromouse_enabled[paddle] = val;
+}
+
+void DICE::set_retromouse_axis(unsigned paddle, unsigned axis, const char* axis_name)
+{
+   unsigned mouse_axis = 0;
+   switch (axis_name[0]) {
+      case 'x': mouse_axis = 0; break;
+      case 'y': mouse_axis = 1; break;
+   }
+
+   if (circuit)
+   {
+      if (axis == 0)
+      {
+         circuit->input.retromouse_settings[paddle].settings_x_axis_axis = mouse_axis;
+      } else {
+         circuit->input.retromouse_settings[paddle].settings_y_axis_axis = mouse_axis;
+      }
+   }
+}
+
 void DICE::set_manymouse_enabled(unsigned paddle, bool val)
 {
-   if (circuit) circuit->input.mouse_enabled[paddle] = val;
+   if (circuit) circuit->input.manymouse_enabled[paddle] = val;
 }
 
 void DICE::set_manymouse_axis(unsigned paddle, unsigned axis, const char* axis_name)
@@ -167,11 +195,11 @@ void DICE::set_manymouse_axis(unsigned paddle, unsigned axis, const char* axis_n
    {
       if (axis == 0)
       {
-         circuit->input.mouse_settings[paddle].settings_x_axis_mouse = mouse_idx;
-         circuit->input.mouse_settings[paddle].settings_x_axis_axis = mouse_axis;
+         circuit->input.manymouse_settings[paddle].settings_x_axis_mouse = mouse_idx;
+         circuit->input.manymouse_settings[paddle].settings_x_axis_axis = mouse_axis;
       } else {
-         circuit->input.mouse_settings[paddle].settings_y_axis_mouse = mouse_idx;
-         circuit->input.mouse_settings[paddle].settings_y_axis_axis = mouse_axis;
+         circuit->input.manymouse_settings[paddle].settings_y_axis_mouse = mouse_idx;
+         circuit->input.manymouse_settings[paddle].settings_y_axis_axis = mouse_axis;
       }
    }
 }

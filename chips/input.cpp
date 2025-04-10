@@ -11,6 +11,7 @@
 //using namespace phoenix;
 
 extern retro_environment_t environ_cb;
+extern retro_log_printf_t log_cb;
 
 static const double INPUT_POLL_RATE = 10.0e-3; // 10 ms poll rate
 
@@ -133,7 +134,8 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
 {
     Circuit* circuit = chip->circuit;
     //const Settings::Input::Paddle& settings = circuit->settings.input.paddle[PADDLE];
-   const ManymouseSettings& settings = circuit->input.mouse_settings[PADDLE];
+   const RetromouseSettings& retromouse_settings = circuit->input.retromouse_settings[PADDLE];
+   const ManymouseSettings& manymouse_settings = circuit->input.manymouse_settings[PADDLE];
    
     AnalogInputDesc<PADDLE, HORIZONTAL>* desc = (AnalogInputDesc<PADDLE, HORIZONTAL>*)chip->custom_data;
     
@@ -142,24 +144,44 @@ void AnalogInputDesc<PADDLE, HORIZONTAL>::analog_input(Chip* chip, int mask)
    unsigned controller = PADDLE;
  
 
+   int settings_retro_mouse_sensitivity = 500;  // TODO (mittonk): Core setting
+
+   struct retro_variable var = {0};
+   char buffer[50];
+    if(circuit->input.retromouse_enabled[PADDLE])
+    {
+       log_cb(RETRO_LOG_INFO, "KAM1\n");
+        // Scale sensitivity by total paddle range
+        double sensitivity = double(settings_retro_mouse_sensitivity) * fabs(desc->max_val - desc->min_val) / 100000.0;
+        
+        if(HORIZONTAL && retromouse_settings.settings_x_axis_axis == 0) // Horizontal, using mouse x-axis
+            delta += circuit->input.getRelativeMouseX(PADDLE) * sensitivity;
+        else if(HORIZONTAL) // Horizontal, using mouse y-axis
+            delta += circuit->input.getRelativeMouseY(PADDLE) * sensitivity;
+        else if(retromouse_settings.settings_y_axis_axis == 0) // Vertical, using mouse x-axis
+            delta += circuit->input.getRelativeMouseX(PADDLE) * sensitivity;
+        else // Vertical, using mouse y-axis
+            delta += circuit->input.getRelativeMouseY(PADDLE) * sensitivity;
+    }
+
 #ifdef MANYMOUSE
    int settings_mouse_sensitivity = 500;  // TODO (mittonk): Core setting
 
    struct retro_variable var = {0};
    char buffer[50];
-    if(circuit->input.mouse_enabled[PADDLE])
+    if(circuit->input.manymouse_enabled[PADDLE])
     {
         // Scale sensitivity by total paddle range
         double sensitivity = double(settings_mouse_sensitivity) * fabs(desc->max_val - desc->min_val) / 100000.0;
         
-        if(HORIZONTAL && settings.settings_x_axis_axis == 0) // Horizontal, using mouse x-axis
-            delta += circuit->input.getRelativeMouseX(settings.settings_x_axis_mouse) * sensitivity;
+        if(HORIZONTAL && manymouse_settings.settings_x_axis_axis == 0) // Horizontal, using mouse x-axis
+            delta += circuit->input.getRelativeMouseX(manymouse_settings.settings_x_axis_mouse) * sensitivity;
         else if(HORIZONTAL) // Horizontal, using mouse y-axis
-            delta += circuit->input.getRelativeMouseY(settings.settings_x_axis_mouse) * sensitivity;
-        else if(settings.settings_y_axis_axis == 0) // Vertical, using mouse x-axis
-            delta += circuit->input.getRelativeMouseX(settings.settings_y_axis_mouse) * sensitivity;
+            delta += circuit->input.getRelativeMouseY(manymouse_settings.settings_x_axis_mouse) * sensitivity;
+        else if(manymouse_settings.settings_y_axis_axis == 0) // Vertical, using mouse x-axis
+            delta += circuit->input.getRelativeMouseX(manymouse_settings.settings_y_axis_mouse) * sensitivity;
         else // Vertical, using mouse y-axis
-            delta += circuit->input.getRelativeMouseY(settings.settings_y_axis_mouse) * sensitivity;
+            delta += circuit->input.getRelativeMouseY(manymouse_settings.settings_y_axis_mouse) * sensitivity;
     }
 #endif
  
@@ -1018,8 +1040,8 @@ int Input::getRelativeMouseX(unsigned mouse)
     int x = mouse_rel_x[mouse];
     mouse_rel_x[mouse] = 0;
     return x;
-#else
-    return 0;
+#else  // Retro mouse
+    return input_mouse_x[mouse];
 #endif
 }
 
@@ -1035,8 +1057,9 @@ int Input::getRelativeMouseY(unsigned mouse)
    int y = mouse_rel_y[mouse];
    mouse_rel_y[mouse] = 0;
    return y;
-#else
-   return 0;
+#else  // Retro mouse
+   log_cb(RETRO_LOG_INFO, "KAM3\n");
+   return input_mouse_y[mouse];
 #endif
 }
 
