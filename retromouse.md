@@ -88,5 +88,4 @@ Two players using a shared Stelladaptor 2600 with two Atari paddles (and neither
 | Bind           | Value | Notes                                                                       |
 | ---------------- | ----- | --------------------------------------------------------------------------- |
 | Retropad Binds > Port 1 Controls > Mouse Index | Stelladaptor 1 | |
-| Retropad Binds > Port 2 Controls > Mouse Index | Stelladaptor 1 | Note
-duplicate |
+| Retropad Binds > Port 2 Controls > Mouse Index | Stelladaptor 1 | Note duplicate |
