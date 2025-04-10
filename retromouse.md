@@ -1,4 +1,4 @@
-# Multiple mice using libretro (advanced)
+# Multiple mice using libretro (somewhat advanced)
 
 ## Overview
 On some platforms (Linux, Windows) and certain input drivers (Linux udev, Windows raw),
