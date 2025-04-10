@@ -417,6 +417,13 @@ static void check_variables(void)
       dice.set_paddle_keyboard_sensitivity(atoi(var.value));
    }
    
+   var.key = "dice_retromouse_paddle_sensitivity";
+   var.value = NULL;
+   if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
+   {
+      dice.set_paddle_retromouse_sensitivity(atoi(var.value));
+   }
+   
    var.key = "dice_paddle_joystick_sensitivity";
    var.value = NULL;
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)

@@ -128,8 +128,8 @@ void DICE::update_input(int32_t input_state[], int32_t input_analog_left_x[], in
          circuit->input.input_analog_left_y[i] = input_analog_left_y[i];
          circuit->input.input_pointer_x[i] = input_pointer_x[i];
          circuit->input.input_pointer_y[i] = input_pointer_y[i];
-         circuit->input.input_mouse_x[i] = input_pointer_x[i];
-         circuit->input.input_mouse_y[i] = input_pointer_y[i];
+         circuit->input.input_mouse_x[i] = input_mouse_x[i];
+         circuit->input.input_mouse_y[i] = input_mouse_y[i];
       }
 
       circuit->last_input_update_timestamp = circuit->rtc.get_usecs();
@@ -217,6 +217,11 @@ void DICE::set_paddle_keyboard_sensitivity(int val)
 void DICE::set_paddle_joystick_sensitivity(int val)
 {
    if (circuit) circuit->input.paddle_joystick_sensitivity = val;
+}
+
+void DICE::set_paddle_retromouse_sensitivity(int val)
+{
+   if (circuit) circuit->input.paddle_retromouse_sensitivity = val;
 }
 
 void DICE::set_wheel_keyjoy_sensitivity(int val)

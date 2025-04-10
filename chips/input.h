@@ -163,6 +163,7 @@ public:
    bool paddle_joystick_absolute;
    int paddle_keyboard_sensitivity;
    int paddle_joystick_sensitivity;
+   int paddle_retromouse_sensitivity;
    int wheel_keyjoy_sensitivity;
    int throttle_keyjoy_sensitivity;
    bool use_mouse_pointer_for_paddle_1;
