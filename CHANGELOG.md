@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.3.0
+- Multiple mice using libretro's drivers, [retromouse.md](retromouse.md).
+
 ## 0.2.0
 - Added DIP switch support.
 - Fixed RetroArch lockup on Space Race's Coin button.
