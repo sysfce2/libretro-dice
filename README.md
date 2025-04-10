@@ -51,11 +51,14 @@ lr-dice for the correct game.
 |	Wipe Out	|	wipeout	|	Ramtek	|	1974	|	x	|
 
 ## Mouse support
-One mouse can be used for Paddle 1.  Use "Core Options -> Use mouse pointer for paddle 1".  You'll still want a keyboard or gamepad handy to have enough buttons.
+* Easy: One mouse can be used for Paddle 1.  Use "Core Options -> Use mouse pointer for paddle 1".  You'll still want a keyboard or gamepad handy to have enough buttons.
 
-(Mouse buttons can be configured using the usual RetroArch binding and remapping, https://docs.libretro.com/guides/input-and-controls/ ).
+  (Mouse buttons can be configured using the usual RetroArch binding and remapping, https://docs.libretro.com/guides/input-and-controls/ ).
 
-Advanced: Multiple mice are a compile-time option on Linux, Windows, and Mac, see 
+* Somewhat advanced: Multiple mice are supported using certain libretro drivers on
+Linux and Windows, see [retromouse.md](retromouse.md).
+
+* More advanced: Multiple mice are a compile-time option on Linux, Windows, and Mac, see 
 [manymouse.md](manymouse.md).
 
 ## DIP Switches

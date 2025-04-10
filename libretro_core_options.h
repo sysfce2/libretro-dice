@@ -21,11 +21,16 @@ struct retro_core_option_v2_category option_cats_us[] = {
       "Input",
       "Configure core-specific input settings"
    },
+   {
+      "retromouse",
+      "Retromouse",
+      "Configure libretro multiple-mouse settings"
+   },
 #ifdef MANYMOUSE
    {
       "manymouse",
       "Manymouse",
-      "Configure many-mouse settings"
+      "Configure Manymouse multiple-mouse settings"
    },
 #endif
    {
@@ -100,6 +105,26 @@ struct retro_core_option_v2_definition option_defs_us[] = {
       "500"
    },
    {
+      "dice_retromouse_paddle_sensitivity",
+      "Input > Paddle retromouse sensitivity",
+      "Paddle retromouse sensitivity",
+      "Sensitivity when using Retromouse for a paddle.",
+      NULL,
+      "input",
+      {
+         {"25", NULL},
+         {"50", NULL},
+         {"75", NULL},
+         {"100", NULL},
+         {"125", NULL},
+         {"250", NULL},
+         {"375", NULL},
+         {"500", NULL},
+         {NULL, NULL},
+      },
+      "125"
+   },
+   {
       "dice_wheel_keyjoy_sensitivity",
       "Input > Wheel sensitivity",
       "Wheel sensitivity",
@@ -130,6 +155,175 @@ struct retro_core_option_v2_definition option_defs_us[] = {
          {NULL, NULL},
       },
       "250"
+   },
+
+   {
+      "dice_retromouse_paddle0",
+      "Retromouse > Mouse-Paddle 1",
+      "Mouse-Paddle 1",
+      "Use a mouse for Paddle 1.",
+      NULL,
+      "retromouse",
+      {
+         {"disabled", NULL},
+         {"enabled", NULL},
+         {NULL, NULL},
+      },
+      "disabled"
+   },
+   {
+      "dice_retromouse_paddle1",
+      "Retromouse > Mouse-Paddle 2",
+      "Mouse-Paddle 2",
+      "Use a mouse for Paddle 2.",
+      NULL,
+      "retromouse",
+      {
+         {"disabled", NULL},
+         {"enabled", NULL},
+         {NULL, NULL},
+      },
+      "disabled"
+   },
+   {
+      "dice_retromouse_paddle2",
+      "Retromouse > Mouse-Paddle 3",
+      "Mouse-Paddle 3",
+      "Use a mouse for Paddle 3.",
+      NULL,
+      "retromouse",
+      {
+         {"disabled", NULL},
+         {"enabled", NULL},
+         {NULL, NULL},
+      },
+      "disabled"
+   },
+   {
+      "dice_retromouse_paddle3",
+      "Retromouse > Mouse-Paddle 4",
+      "Mouse-Paddle 4",
+      "Use a mouse for Paddle 4.",
+      NULL,
+      "retromouse",
+      {
+         {"disabled", NULL},
+         {"enabled", NULL},
+         {NULL, NULL},
+      },
+      "disabled"
+   },
+   {
+      "dice_retromouse_paddle0_x",
+      "Retromouse > Mouse-Paddle 1 x",
+      "Mouse-Paddle 1 x",
+      "Mouse axis for player 1, horizontal screen motion.",
+      NULL,
+      "retromouse",
+      {
+         {"x", NULL},
+         {"y", NULL},
+         {NULL, NULL},
+      },
+      "x"
+   },
+   {
+      "dice_retromouse_paddle0_y",
+      "Retromouse > Mouse-Paddle 1 y",
+      "Mouse-Paddle 1 y",
+      "Mouse axis for player 1, vertical screen motion.",
+      NULL,
+      "retromouse",
+      {
+         {"x", NULL},
+         {"y", NULL},
+         {NULL, NULL},
+      },
+      "y"
+   },
+   {
+      "dice_retromouse_paddle1_x",
+      "Retromouse > Mouse-Paddle 2 x",
+      "Mouse-Paddle 2 x",
+      "Mouse axis for player 2, horizontal screen motion.",
+      NULL,
+      "retromouse",
+      {
+         {"x", NULL},
+         {"y", NULL},
+         {NULL, NULL},
+      },
+      "x"
+   },
+   {
+      "dice_retromouse_paddle1_y",
+      "Retromouse > Mouse-Paddle 2 y",
+      "Mouse-Paddle 2 y",
+      "Mouse axis for player 2, vertical screen motion.",
+      NULL,
+      "retromouse",
+      {
+         {"x", NULL},
+         {"y", NULL},
+         {NULL, NULL},
+      },
+      "y"
+   },
+   {
+      "dice_retromouse_paddle2_x",
+      "Retromouse > Mouse-Paddle 3 x",
+      "Mouse-Paddle 3 x",
+      "Mouse axis for player 3, horizontal screen motion.",
+      NULL,
+      "retromouse",
+      {
+         {"x", NULL},
+         {"y", NULL},
+         {NULL, NULL},
+      },
+      "x"
+   },
+   {
+      "dice_retromouse_paddle2_y",
+      "Retromouse > Mouse-Paddle 3 y",
+      "Mouse-Paddle 3 y",
+      "Mouse axis for player 3, vertical screen motion.",
+      NULL,
+      "retromouse",
+      {
+         {"x", NULL},
+         {"y", NULL},
+         {NULL, NULL},
+      },
+      "y"
+   },
+   {
+      "dice_retromouse_paddle3_x",
+      "Retromouse > Mouse-Paddle 4 x",
+      "Mouse-Paddle 4 x",
+      "Mouse axis for player 4, horizontal screen motion.",
+      NULL,
+      "retromouse",
+      {
+         {"x", NULL},
+         {"y", NULL},
+         {NULL, NULL},
+      },
+      "x"
+   },
+   {
+      "dice_retromouse_paddle3_y",
+      "Retromouse > Mouse-Paddle 4 y",
+      "Mouse-Paddle 4 y",
+      "Mouse axis for player 4, vertical screen motion.",
+      NULL,
+      "retromouse",
+      {
+         {"x", NULL},
+         {"y", NULL},
+         {NULL, NULL},
+      },
+      "y"
    },
 
 #ifdef MANYMOUSE

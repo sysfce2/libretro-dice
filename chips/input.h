@@ -119,6 +119,13 @@ extern CHIP_DESC( BUTTONS6_INPUT );
 inline constexpr uint8_t operator"" _NO ( unsigned long long pin ) { return pin; }
 inline constexpr uint8_t operator"" _NC ( unsigned long long pin ) { return pin + i1 - 1; }
 
+struct RetromouseSettings
+{
+   unsigned settings_x_axis_axis;
+   unsigned settings_y_axis_axis;
+};
+
+#ifdef MANYMOUSE
 struct ManymouseSettings
 {
    unsigned settings_x_axis_mouse;
@@ -126,6 +133,7 @@ struct ManymouseSettings
    unsigned settings_y_axis_mouse;
    unsigned settings_y_axis_axis;
 };
+#endif
 
 class Input
 {
@@ -137,8 +145,12 @@ public:
     ~Input();
     void poll_input();
     
-    int getRelativeMouseX(unsigned mouse);
-    int getRelativeMouseY(unsigned mouse);
+    int getRetroRelativeMouseX(unsigned mouse);
+    int getRetroRelativeMouseY(unsigned mouse);
+#ifdef MANYMOUSE
+    int getManymouseRelativeMouseX(unsigned mouse);
+    int getManymouseRelativeMouseY(unsigned mouse);
+#endif
     bool getKeyboardState(unsigned scancode);
     bool getJoystickButton(unsigned joystick, unsigned button);
     int16_t getJoystickAxis(unsigned joystick, unsigned axis);
@@ -152,14 +164,21 @@ public:
    int32_t input_analog_left_y[NUM_CONTROLLERS];
    int32_t input_pointer_x[NUM_CONTROLLERS];
    int32_t input_pointer_y[NUM_CONTROLLERS];
+   int32_t input_mouse_x[NUM_CONTROLLERS];
+   int32_t input_mouse_y[NUM_CONTROLLERS];
    bool paddle_joystick_absolute;
    int paddle_keyboard_sensitivity;
    int paddle_joystick_sensitivity;
+   int paddle_retromouse_sensitivity;
    int wheel_keyjoy_sensitivity;
    int throttle_keyjoy_sensitivity;
    bool use_mouse_pointer_for_paddle_1;
-   bool mouse_enabled[4];
-   ManymouseSettings mouse_settings[4];
+   bool retromouse_enabled[4];
+   RetromouseSettings retromouse_settings[4];
+#ifdef MANYMOUSE
+   bool manymouse_enabled[4];
+   ManymouseSettings manymouse_settings[4];
+#endif
 };
 
 #endif
