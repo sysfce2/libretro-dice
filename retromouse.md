@@ -1,8 +1,8 @@
 # Multiple mice using libretro (advanced)
 
 ## Overview
-On some platforms (Linux, Windows) and certain input drivers, DICE supports
-multiple mice.
+On some platforms (Linux, Windows) and certain input drivers (Linux udev, Windows raw),
+DICE supports multiple mice.
 
 This support uses 
 * https://docs.libretro.com/guides/input-controller-drivers/
@@ -15,9 +15,12 @@ like "wireless 2.4G Mouse" or "Logitech K400" are good, "Default" and "N/A (#2)"
 are bad.
 
 ## Axis setup
+Mouse choice for each player is in "Settings > Input > RetroPad Binds > Port 1/2/.. Controls > Mouse Index".
 
-Axes overrides are configured in "Core Options > Retromouse", rather than the usual input setup.
-The defaults work for most actual mice --- this setting is mostly used for
+Enabling mouse paddle for each player is in "Core Options > Retromouse".
+
+Axes overrides are also configured in "Core Options > Retromouse", rather than the usual input setup.
+The defaults work for most actual mice --- these overrides are mostly used for
 mouse-like spinners.
 You bind either the X or Y axis of your mouse to the single axis of the virtual paddle controller.
 
