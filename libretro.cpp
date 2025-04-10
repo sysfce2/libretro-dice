@@ -302,9 +302,10 @@ static void update_input(void)
 
       input_mouse_x[pad] = input_state_cb( (pad), RETRO_DEVICE_MOUSE, pad, RETRO_DEVICE_ID_MOUSE_X);
       input_mouse_y[pad] = input_state_cb( (pad), RETRO_DEVICE_MOUSE, pad, RETRO_DEVICE_ID_MOUSE_Y);
-      bool mouse_pressed = input_state_cb((pad), RETRO_DEVICE_MOUSE, pad, RETRO_DEVICE_ID_MOUSE_LEFT);
+      /* bool mouse_pressed = input_state_cb((pad), RETRO_DEVICE_MOUSE, pad, RETRO_DEVICE_ID_MOUSE_LEFT);
       if (mouse_pressed)
          log_cb(RETRO_LOG_INFO, "Mouse #: %d    : (%6d, %6d).\n", pad, input_mouse_x[pad], input_mouse_y[pad]);
+         */
    }
 
    unsigned pad = 0;

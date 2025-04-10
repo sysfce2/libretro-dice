@@ -678,6 +678,7 @@ void wheel_input(Chip* chip, int mask)
    unsigned joystick_idx = WHEEL;
    unsigned axis_idx = 0; // X-axis
 
+/*
 #ifdef MANYMOUSE
    bool settings_use_mouse = true;  // TODO (mittonk): Core setting
    int settings_mouse_sensitivity = 500;  // TODO (mittonk): Core setting
@@ -692,6 +693,7 @@ void wheel_input(Chip* chip, int mask)
             delta += circuit->input.getManymouseRelativeMouseY(settings.axis.mouse) * sensitivity;
     }
 #endif
+*/
     
     if (true) // if(settings.use_keyboard)
     {
