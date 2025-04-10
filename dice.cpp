@@ -171,6 +171,7 @@ void DICE::set_retromouse_axis(unsigned paddle, unsigned axis, const char* axis_
    }
 }
 
+#ifdef MANYMOUSE
 void DICE::set_manymouse_enabled(unsigned paddle, bool val)
 {
    if (circuit) circuit->input.manymouse_enabled[paddle] = val;
@@ -203,6 +204,7 @@ void DICE::set_manymouse_axis(unsigned paddle, unsigned axis, const char* axis_n
       }
    }
 }
+#endif
 
 void DICE::set_paddle_joystick_absolute(bool paddle_joystick_absolute)
 {

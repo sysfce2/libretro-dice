@@ -125,6 +125,7 @@ struct RetromouseSettings
    unsigned settings_y_axis_axis;
 };
 
+#ifdef MANYMOUSE
 struct ManymouseSettings
 {
    unsigned settings_x_axis_mouse;
@@ -132,6 +133,7 @@ struct ManymouseSettings
    unsigned settings_y_axis_mouse;
    unsigned settings_y_axis_axis;
 };
+#endif
 
 class Input
 {
@@ -143,8 +145,12 @@ public:
     ~Input();
     void poll_input();
     
-    int getRelativeMouseX(unsigned mouse);
-    int getRelativeMouseY(unsigned mouse);
+    int getRetroRelativeMouseX(unsigned mouse);
+    int getRetroRelativeMouseY(unsigned mouse);
+#ifdef MANYMOUSE
+    int getManymouseRelativeMouseX(unsigned mouse);
+    int getManymouseRelativeMouseY(unsigned mouse);
+#endif
     bool getKeyboardState(unsigned scancode);
     bool getJoystickButton(unsigned joystick, unsigned button);
     int16_t getJoystickAxis(unsigned joystick, unsigned axis);
@@ -169,8 +175,10 @@ public:
    bool use_mouse_pointer_for_paddle_1;
    bool retromouse_enabled[4];
    RetromouseSettings retromouse_settings[4];
+#ifdef MANYMOUSE
    bool manymouse_enabled[4];
    ManymouseSettings manymouse_settings[4];
+#endif
 };
 
 #endif

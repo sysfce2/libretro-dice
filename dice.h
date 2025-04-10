@@ -60,8 +60,10 @@ class DICE
    void set_use_mouse_pointer_for_paddle_1(bool val);
    void set_retromouse_enabled(unsigned paddle, bool val);
    void set_retromouse_axis(unsigned paddle, unsigned axis, const char* axis_name);
+#ifdef MANYMOUSE
    void set_manymouse_enabled(unsigned paddle, bool val);
    void set_manymouse_axis(unsigned paddle, unsigned axis, const char* axis_name);
+#endif
 
    void set_paddle_joystick_absolute(bool paddle_joystick_absolute);
    void set_paddle_keyboard_sensitivity(int val);
