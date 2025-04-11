@@ -12,7 +12,7 @@
 		<email>mittonk@alum.mit.edu</email>
 		<homepage>dice-libretro</homepage>
 		<url>https://github.com/mittonk/dice-libretro/</url>
-		<comment>Arcade games using logic based circuitry</comment>
+		<comment>Machines without any type of CPU</comment>
 	</header>
 	<machine name="antiaircraft">
 		<description>Anti-Aircraft [TTL]</description>
