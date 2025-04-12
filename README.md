@@ -66,7 +66,7 @@ Linux and Windows, see [retromouse.md](retromouse.md).
 Settable in "Core Options," see [dipswitches.md](dipswitches.md).
 
 ## Compiling
-Prebuilt binaries for several platforms are available through RetroArch's "Online Updater -> Core Downloader".  DICE is marked "experimental," you'll need to set "Online Updater -> Updater Settings -> Show Experimental Cores" first.
+Prebuilt binaries for several platforms are available through RetroArch's "Online Updater -> Core Downloader".  You may need to do "Online Updater -> Update Core Info Files" first.
 
 For other platforms, use:
 * https://docs.libretro.com/development/retroarch/compilation/linux-and-bsd/#building-libretro-cores
