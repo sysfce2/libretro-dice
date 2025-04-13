@@ -6,7 +6,7 @@ name: Crowdin Source Texts Upload
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - 'libretro_core_options.h'
 
