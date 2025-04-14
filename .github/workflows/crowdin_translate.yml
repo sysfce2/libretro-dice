@@ -11,6 +11,9 @@ on:
 jobs:
   create_intl_file:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Setup Java JDK
         uses: actions/setup-java@v3
