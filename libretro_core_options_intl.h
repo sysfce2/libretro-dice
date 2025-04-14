@@ -7481,13 +7481,13 @@ struct retro_core_options_v2 options_da = {
 /* RETRO_LANGUAGE_DE */
 
 #define CATEGORY_INPUT_LABEL_DE "Eingabe"
-#define CATEGORY_INPUT_INFO_0_DE NULL
+#define CATEGORY_INPUT_INFO_0_DE "Core-spezifische Eingabeeinstellungen konfigurieren"
 #define CATEGORY_RETROMOUSE_LABEL_DE NULL
 #define CATEGORY_RETROMOUSE_INFO_0_DE NULL
 #define CATEGORY_MANYMOUSE_LABEL_DE NULL
-#define CATEGORY_MANYMOUSE_INFO_0_DE NULL
-#define CATEGORY_DIPSWITCH_LABEL_DE NULL
-#define CATEGORY_DIPSWITCH_INFO_0_DE NULL
+#define CATEGORY_MANYMOUSE_INFO_0_DE "Multi-Maus-Einstellungen von ManyMouse konfigurieren"
+#define CATEGORY_DIPSWITCH_LABEL_DE "DIP-Schalter"
+#define CATEGORY_DIPSWITCH_INFO_0_DE "DIP-Schalter- und Potentiometer-Einstellungen konfigurieren"
 #define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_DE NULL
 #define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_DE NULL
 #define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_DE NULL
@@ -7555,7 +7555,7 @@ struct retro_core_options_v2 options_da = {
 #define OPTION_VAL_1Y_DE NULL
 #define OPTION_VAL_2X_DE NULL
 #define OPTION_VAL_2Y_DE NULL
-#define OPTION_VAL_3X_DE "3 x"
+#define OPTION_VAL_3X_DE NULL
 #define OPTION_VAL_3Y_DE NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_DE NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_DE NULL
@@ -7570,7 +7570,7 @@ struct retro_core_options_v2 options_da = {
 #define DICE_DIPSWITCH_1_LABEL_DE NULL
 #define DICE_DIPSWITCH_1_LABEL_CAT_DE NULL
 #define DICE_DIPSWITCH_1_INFO_0_DE NULL
-#define OPTION_VAL_1_DE NULL
+#define OPTION_VAL_1_DE "Standard"
 #define DICE_DIPSWITCH_2_LABEL_DE NULL
 #define DICE_DIPSWITCH_2_LABEL_CAT_DE NULL
 #define DICE_DIPSWITCH_2_INFO_0_DE NULL
@@ -10465,7 +10465,7 @@ struct retro_core_options_v2 options_eo = {
 /* RETRO_LANGUAGE_ES */
 
 #define CATEGORY_INPUT_LABEL_ES "Entrada"
-#define CATEGORY_INPUT_INFO_0_ES NULL
+#define CATEGORY_INPUT_INFO_0_ES "Cambia los ajustes específicos para el núcleo."
 #define CATEGORY_RETROMOUSE_LABEL_ES NULL
 #define CATEGORY_RETROMOUSE_INFO_0_ES NULL
 #define CATEGORY_MANYMOUSE_LABEL_ES NULL
@@ -21655,7 +21655,7 @@ struct retro_core_options_v2 options_or = {
 /* RETRO_LANGUAGE_PL */
 
 #define CATEGORY_INPUT_LABEL_PL "Wejście"
-#define CATEGORY_INPUT_INFO_0_PL NULL
+#define CATEGORY_INPUT_INFO_0_PL "Skonfiguruj ustawienia wejściowe specyficzne dla rdzenia"
 #define CATEGORY_RETROMOUSE_LABEL_PL NULL
 #define CATEGORY_RETROMOUSE_INFO_0_PL NULL
 #define CATEGORY_MANYMOUSE_LABEL_PL NULL
@@ -26966,7 +26966,7 @@ struct retro_core_options_v2 options_sv = {
 #define DICE_DIPSWITCH_1_LABEL_TR NULL
 #define DICE_DIPSWITCH_1_LABEL_CAT_TR NULL
 #define DICE_DIPSWITCH_1_INFO_0_TR NULL
-#define OPTION_VAL_1_TR NULL
+#define OPTION_VAL_1_TR "varsayılan"
 #define DICE_DIPSWITCH_2_LABEL_TR NULL
 #define DICE_DIPSWITCH_2_LABEL_CAT_TR NULL
 #define DICE_DIPSWITCH_2_INFO_0_TR NULL
