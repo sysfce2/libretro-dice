@@ -19,24 +19,24 @@ struct retro_core_option_v2_category option_cats_us[] = {
    {
       "input",
       "Input",
-      "Configure core-specific input settings"
+      "Configure core-specific input settings."
    },
    {
       "retromouse",
       "RetroMouse",
-      "Configure libretro multiple-mouse settings"
+      "Configure libretro multiple-mouse settings."
    },
 #ifdef MANYMOUSE
    {
       "manymouse",
       "ManyMouse",
-      "Configure ManyMouse multiple-mouse settings"
+      "Configure ManyMouse multiple-mouse settings."
    },
 #endif
    {
       "dipswitch",
-      "Dipswitch",
-      "Configure dipswitch and potentiometer settings"
+      "DIP Switch",
+      "Configure DIP switch and potentiometer settings."
    },
    { NULL, NULL, NULL },
 };
@@ -44,8 +44,8 @@ struct retro_core_option_v2_category option_cats_us[] = {
 struct retro_core_option_v2_definition option_defs_us[] = {
    {
       "dice_use_mouse_pointer_for_paddle_1",
-      "Input > Use mouse pointer for paddle 1",
-      "Use mouse pointer for paddle 1",
+      "Input > Use Mouse Pointer For Paddle 1",
+      "Use Mouse Pointer For Paddle 1",
       "Use the main mouse as paddle controller 1.",
       NULL,
       "input",
@@ -58,9 +58,9 @@ struct retro_core_option_v2_definition option_defs_us[] = {
    },
    {
       "dice_paddle_joystick_absolute",
-      "Input > Paddle joystick absolute",
-      "Paddle joystick absolute",
-      "Directly map joystick range to paddle range.",
+      "Input > Paddle Joystick Uses Absolute Motion",
+      "Paddle Joystick Uses Absolute Motion",
+      "Directly map joystick movement range to paddle range, rather than relative motions.",
       NULL,
       "input",
       {
@@ -74,8 +74,8 @@ struct retro_core_option_v2_definition option_defs_us[] = {
       // D-pad but not necessarily keyboard under libretro,
       // that name comes from the upstream code.
       "dice_paddle_keyboard_sensitivity",
-      "Input > Paddle D-pad sensitivity",
-      "Paddle D-pad sensitivity",
+      "Input > Paddle D-pad Sensitivity",
+      "Paddle D-pad Sensitivity",
       "Sensitivity when using D-pad for a paddle.",
       NULL,
       "input",
@@ -90,8 +90,8 @@ struct retro_core_option_v2_definition option_defs_us[] = {
    },
    {
       "dice_paddle_joystick_sensitivity",
-      "Input > Paddle analog stick sensitivity",
-      "Paddle analog stick sensitivity",
+      "Input > Paddle Analog Stick Sensitivity",
+      "Paddle Analog Stick Sensitivity",
       "Sensitivity when using analog stick for a paddle.",
       NULL,
       "input",
@@ -106,8 +106,8 @@ struct retro_core_option_v2_definition option_defs_us[] = {
    },
    {
       "dice_retromouse_paddle_sensitivity",
-      "Input > Paddle retromouse sensitivity",
-      "Paddle retromouse sensitivity",
+      "Input > Paddle RetroMouse Sensitivity",
+      "Paddle RetroMouse Sensitivity",
       "Sensitivity when using RetroMouse for a paddle.",
       NULL,
       "input",
@@ -126,8 +126,8 @@ struct retro_core_option_v2_definition option_defs_us[] = {
    },
    {
       "dice_wheel_keyjoy_sensitivity",
-      "Input > Wheel sensitivity",
-      "Wheel sensitivity",
+      "Input > Wheel Sensitivity",
+      "Wheel Sensitivity",
       "Sensitivity when using D-pad or analog stick for a wheel.",
       NULL,
       "input",
@@ -142,8 +142,8 @@ struct retro_core_option_v2_definition option_defs_us[] = {
    },
    {
       "dice_throttle_keyjoy_sensitivity",
-      "Input > Throttle sensitivity",
-      "Throttle sensitivity",
+      "Input > Throttle Sensitivity",
+      "Throttle Sensitivity",
       "Sensitivity when using D-pad or analog stick for a throttle.",
       NULL,
       "input",
@@ -159,8 +159,8 @@ struct retro_core_option_v2_definition option_defs_us[] = {
 
    {
       "dice_retromouse_paddle0",
-      "RetroMouse > Mouse-Paddle 1",
-      "Mouse-Paddle 1",
+      "RetroMouse > Use Mouse For Paddle 1",
+      "Use Mouse For Paddle 1",
       "Use a mouse for Paddle 1.",
       NULL,
       "retromouse",
@@ -173,8 +173,8 @@ struct retro_core_option_v2_definition option_defs_us[] = {
    },
    {
       "dice_retromouse_paddle1",
-      "RetroMouse > Mouse-Paddle 2",
-      "Mouse-Paddle 2",
+      "RetroMouse > Use Mouse For Paddle 2",
+      "Use Mouse For Paddle 2",
       "Use a mouse for Paddle 2.",
       NULL,
       "retromouse",
@@ -187,8 +187,8 @@ struct retro_core_option_v2_definition option_defs_us[] = {
    },
    {
       "dice_retromouse_paddle2",
-      "RetroMouse > Mouse-Paddle 3",
-      "Mouse-Paddle 3",
+      "RetroMouse > Use Mouse For Paddle 3",
+      "Use Mouse For Paddle 3",
       "Use a mouse for Paddle 3.",
       NULL,
       "retromouse",
@@ -201,8 +201,8 @@ struct retro_core_option_v2_definition option_defs_us[] = {
    },
    {
       "dice_retromouse_paddle3",
-      "RetroMouse > Mouse-Paddle 4",
-      "Mouse-Paddle 4",
+      "RetroMouse > Use Mouse For Paddle 4",
+      "Use Mouse For Paddle 4",
       "Use a mouse for Paddle 4.",
       NULL,
       "retromouse",
@@ -329,8 +329,8 @@ struct retro_core_option_v2_definition option_defs_us[] = {
 #ifdef MANYMOUSE
    {
       "dice_manymouse_paddle0",
-      "ManyMouse > Mouse-Paddle 1",
-      "Mouse-Paddle 1",
+      "ManyMouse > Use Mouse For Paddle 1",
+      "Use Mouse For Paddle 1",
       "Use a mouse for Paddle 1.",
       NULL,
       "manymouse",
@@ -383,8 +383,8 @@ struct retro_core_option_v2_definition option_defs_us[] = {
    },
    {
       "dice_manymouse_paddle1",
-      "ManyMouse > Mouse-Paddle 2",
-      "Mouse-Paddle 2",
+      "ManyMouse > Use Mouse For Paddle 2",
+      "Use Mouse For Paddle 2",
       "Use a mouse for Paddle 2.",
       NULL,
       "manymouse",
@@ -437,8 +437,8 @@ struct retro_core_option_v2_definition option_defs_us[] = {
    },
    {
       "dice_manymouse_paddle2",
-      "ManyMouse > Mouse-Paddle 3",
-      "Mouse-Paddle 3",
+      "ManyMouse > Use Mouse For Paddle 3",
+      "Use Mouse For Paddle 3",
       "Use a mouse for Paddle 3.",
       NULL,
       "manymouse",
@@ -491,8 +491,8 @@ struct retro_core_option_v2_definition option_defs_us[] = {
    },
    {
       "dice_manymouse_paddle3",
-      "ManyMouse > Mouse-Paddle 4",
-      "Mouse-Paddle 4",
+      "ManyMouse > Use Mouse For Paddle 4",
+      "Use Mouse For Paddle 4",
       "Use a mouse for Paddle 4.",
       NULL,
       "manymouse",
@@ -547,9 +547,9 @@ struct retro_core_option_v2_definition option_defs_us[] = {
 
    {
       "dice_dipswitch_1",
-      "Dipswitch > Dipswitch 1",
-      "Dipswitch 1",
-      "Setting for Dipswitch 1.",
+      "DIP Switch > DIP Switch 1",
+      "DIP Switch 1",
+      "Setting for DIP switch 1.",
       NULL,
       "dipswitch",
       {
@@ -562,9 +562,9 @@ struct retro_core_option_v2_definition option_defs_us[] = {
    },
    {
       "dice_dipswitch_2",
-      "Dipswitch > Dipswitch 2",
-      "Dipswitch 2",
-      "Setting for Dipswitch 2.",
+      "DIP Switch > DIP Switch 2",
+      "DIP Switch 2",
+      "Setting for DIP switch 2.",
       NULL,
       "dipswitch",
       {
@@ -577,9 +577,9 @@ struct retro_core_option_v2_definition option_defs_us[] = {
    },
    {
       "dice_dipswitch_3",
-      "Dipswitch > Dipswitch 3",
-      "Dipswitch 3",
-      "Setting for Dipswitch 3.",
+      "DIP Switch > DIP Switch 3",
+      "DIP Switch 3",
+      "Setting for DIP switch 3.",
       NULL,
       "dipswitch",
       {
@@ -592,9 +592,9 @@ struct retro_core_option_v2_definition option_defs_us[] = {
    },
    {
       "dice_dipswitch16_1",
-      "Dipswitch > Dipswitch16 1",
-      "Dipswitch16 1",
-      "Setting for 16-position Dipswitch number 1.",
+      "DIP Switch > DIP Switch Hex 1",
+      "DIP Switch Hex 1",
+      "Setting for 16-position DIP switch number 1.",
       NULL,
       "dipswitch",
       {
@@ -621,9 +621,9 @@ struct retro_core_option_v2_definition option_defs_us[] = {
    },
    {
       "dice_dipswitch16_2",
-      "Dipswitch > Dipswitch16 2",
-      "Dipswitch16 2",
-      "Setting for 16-position Dipswitch number 2.",
+      "DIP Switch > DIP Switch Hex 2",
+      "DIP Switch Hex 2",
+      "Setting for 16-position DIP switch number 2.",
       NULL,
       "dipswitch",
       {
