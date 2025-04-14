@@ -29,8 +29,8 @@ struct retro_core_option_v2_category option_cats_us[] = {
 #ifdef MANYMOUSE
    {
       "manymouse",
-      "Manymouse",
-      "Configure Manymouse multiple-mouse settings"
+      "ManyMouse",
+      "Configure ManyMouse multiple-mouse settings"
    },
 #endif
    {
@@ -329,7 +329,7 @@ struct retro_core_option_v2_definition option_defs_us[] = {
 #ifdef MANYMOUSE
    {
       "dice_manymouse_paddle0",
-      "Manymouse > Mouse-Paddle 1",
+      "ManyMouse > Mouse-Paddle 1",
       "Mouse-Paddle 1",
       "Use a mouse for Paddle 1.",
       NULL,
@@ -343,7 +343,7 @@ struct retro_core_option_v2_definition option_defs_us[] = {
    },
    {
       "dice_manymouse_paddle0_x",
-      "Manymouse > Mouse-Paddle 1 x",
+      "ManyMouse > Mouse-Paddle 1 x",
       "Mouse-Paddle 1 x",
       "Mouse axis for player 1, horizontal screen motion.",
       NULL,
@@ -363,7 +363,7 @@ struct retro_core_option_v2_definition option_defs_us[] = {
    },
    {
       "dice_manymouse_paddle0_y",
-      "Manymouse > Mouse-Paddle 1 y",
+      "ManyMouse > Mouse-Paddle 1 y",
       "Mouse-Paddle 1 y",
       "Mouse axis for player 1, vertical screen motion.",
       NULL,
@@ -383,7 +383,7 @@ struct retro_core_option_v2_definition option_defs_us[] = {
    },
    {
       "dice_manymouse_paddle1",
-      "Manymouse > Mouse-Paddle 2",
+      "ManyMouse > Mouse-Paddle 2",
       "Mouse-Paddle 2",
       "Use a mouse for Paddle 2.",
       NULL,
@@ -397,7 +397,7 @@ struct retro_core_option_v2_definition option_defs_us[] = {
    },
    {
       "dice_manymouse_paddle1_x",
-      "Manymouse > Mouse-Paddle 2 x",
+      "ManyMouse > Mouse-Paddle 2 x",
       "Mouse-Paddle 2 x",
       "Mouse axis for player 2, horizontal screen motion.",
       NULL,
@@ -417,7 +417,7 @@ struct retro_core_option_v2_definition option_defs_us[] = {
    },
    {
       "dice_manymouse_paddle1_y",
-      "Manymouse > Mouse-Paddle 2 y",
+      "ManyMouse > Mouse-Paddle 2 y",
       "Mouse-Paddle 2 y",
       "Mouse axis for player 2, vertical screen motion.",
       NULL,
@@ -437,7 +437,7 @@ struct retro_core_option_v2_definition option_defs_us[] = {
    },
    {
       "dice_manymouse_paddle2",
-      "Manymouse > Mouse-Paddle 3",
+      "ManyMouse > Mouse-Paddle 3",
       "Mouse-Paddle 3",
       "Use a mouse for Paddle 3.",
       NULL,
@@ -451,7 +451,7 @@ struct retro_core_option_v2_definition option_defs_us[] = {
    },
    {
       "dice_manymouse_paddle2_x",
-      "Manymouse > Mouse-Paddle 3 x",
+      "ManyMouse > Mouse-Paddle 3 x",
       "Mouse-Paddle 3 x",
       "Mouse axis for player 3, horizontal screen motion.",
       NULL,
@@ -471,7 +471,7 @@ struct retro_core_option_v2_definition option_defs_us[] = {
    },
    {
       "dice_manymouse_paddle2_y",
-      "Manymouse > Mouse-Paddle 3 y",
+      "ManyMouse > Mouse-Paddle 3 y",
       "Mouse-Paddle 3 y",
       "Mouse axis for player 3, vertical screen motion.",
       NULL,
@@ -491,7 +491,7 @@ struct retro_core_option_v2_definition option_defs_us[] = {
    },
    {
       "dice_manymouse_paddle3",
-      "Manymouse > Mouse-Paddle 4",
+      "ManyMouse > Mouse-Paddle 4",
       "Mouse-Paddle 4",
       "Use a mouse for Paddle 4.",
       NULL,
@@ -505,7 +505,7 @@ struct retro_core_option_v2_definition option_defs_us[] = {
    },
    {
       "dice_manymouse_paddle3_x",
-      "Manymouse > Mouse-Paddle 4 x",
+      "ManyMouse > Mouse-Paddle 4 x",
       "Mouse-Paddle 4 x",
       "Mouse axis for player 4, horizontal screen motion.",
       NULL,
@@ -525,7 +525,7 @@ struct retro_core_option_v2_definition option_defs_us[] = {
    },
    {
       "dice_manymouse_paddle3_y",
-      "Manymouse > Mouse-Paddle 4 y",
+      "ManyMouse > Mouse-Paddle 4 y",
       "Mouse-Paddle 4 y",
       "Mouse axis for player 4, vertical screen motion.",
       NULL,
