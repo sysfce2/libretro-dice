@@ -1,5 +1,8 @@
 # Changelog
 
+## Since the last release
+- Core Options translated using Crowdin.
+
 ## 0.3.0
 - Multiple mice using libretro's drivers, [retromouse.md](retromouse.md).
 
