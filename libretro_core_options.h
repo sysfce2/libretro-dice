@@ -313,7 +313,7 @@ struct retro_core_option_v2_definition option_defs_us[] = {
    },
    {
       "dice_retromouse_paddle3_y",
-      "Retromouse > Mouse-Paddle 4 y",
+      "RetroMouse > Mouse-Paddle 4 y",
       "Mouse-Paddle 4 y",
       "Mouse axis for player 4, vertical screen motion.",
       NULL,

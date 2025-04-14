@@ -17,7 +17,7 @@ are bad.
 ## Axis setup
 Mouse choice for each player is in "Settings > Input > RetroPad Binds > Port 1/2/.. Controls > Mouse Index".
 
-Enabling mouse paddle for each player is in "Core Options > Retromouse".
+Enabling mouse paddle for each player is in "Core Options > RetroMouse".
 
 Axes overrides are also configured in "Core Options > Retromouse", rather than the usual input setup.
 The defaults work for most actual mice --- these overrides are mostly used for
