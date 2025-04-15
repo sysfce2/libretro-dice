@@ -1,4 +1,4 @@
-# Dipswitches
+# DIP Switches
 
 ## Overview
 Some games use DIP switches or potentiometers to allow the owner/operator to set
