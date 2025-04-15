@@ -46,7 +46,7 @@ struct retro_core_option_v2_definition option_defs_us[] = {
       "dice_use_mouse_pointer_for_paddle_1",
       "Input > Use Mouse Pointer For Paddle 1",
       "Use Mouse Pointer For Paddle 1",
-      "Use the main mouse as paddle controller 1.",
+      "Use the system mouse pointer as paddle controller 1.  Does not let you choose a specific mouse if you have several.",
       NULL,
       "input",
       {
