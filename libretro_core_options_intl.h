@@ -7641,36 +7641,36 @@ struct retro_core_options_v2 options_da = {
 #define DICE_RETROMOUSE_PADDLE3_LABEL_DE "RetroMouse > Maus für Paddel 4 verwenden"
 #define DICE_RETROMOUSE_PADDLE3_LABEL_CAT_DE "Maus für Paddel 4 verwenden"
 #define DICE_RETROMOUSE_PADDLE3_INFO_0_DE "Eine bestimmte Maus als Paddel 4 verwenden, die durch den Mausindex von Port 4 bestimmt wird."
-#define DICE_RETROMOUSE_PADDLE0_X_LABEL_DE NULL
-#define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_DE NULL
+#define DICE_RETROMOUSE_PADDLE0_X_LABEL_DE "RetroMouse > Mausachse für Paddel 1 Horizontal"
+#define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_DE "Mausachse für Paddel 1 Horizontal"
 #define DICE_RETROMOUSE_PADDLE0_X_INFO_0_DE "Mausachse für Spieler 1, horizontale Bildschirmbewegung."
 #define OPTION_VAL_X_DE NULL
 #define OPTION_VAL_Y_DE NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_DE NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_CAT_DE NULL
+#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_DE "RetroMouse > Mausachse für Paddel 1 Vertikal"
+#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_CAT_DE "Mausachse für Paddel 1 Vertikal"
 #define DICE_RETROMOUSE_PADDLE0_Y_INFO_0_DE "Mausachse für Spieler 1, vertikale Bildschirmbewegung."
-#define DICE_RETROMOUSE_PADDLE1_X_LABEL_DE NULL
-#define DICE_RETROMOUSE_PADDLE1_X_LABEL_CAT_DE NULL
+#define DICE_RETROMOUSE_PADDLE1_X_LABEL_DE "RetroMouse > Mausachse für Paddel 2 Horizontal"
+#define DICE_RETROMOUSE_PADDLE1_X_LABEL_CAT_DE "Mausachse für Paddel 2 Horizontal"
 #define DICE_RETROMOUSE_PADDLE1_X_INFO_0_DE "Mausachse für Spieler 2, horizontale Bildschirmbewegung."
-#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_DE NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CAT_DE NULL
+#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_DE "RetroMouse > Mausachse für Paddel 2 Horizontal"
+#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CAT_DE "Mausachse für Paddel 2 Vertikal"
 #define DICE_RETROMOUSE_PADDLE1_Y_INFO_0_DE "Mausachse für Spieler 2, vertikale Bildschirmbewegung."
-#define DICE_RETROMOUSE_PADDLE2_X_LABEL_DE NULL
-#define DICE_RETROMOUSE_PADDLE2_X_LABEL_CAT_DE NULL
+#define DICE_RETROMOUSE_PADDLE2_X_LABEL_DE "RetroMouse > Mausachse für Paddel 3 Horizontal"
+#define DICE_RETROMOUSE_PADDLE2_X_LABEL_CAT_DE "Mausachse für Paddel 3 Horizontal"
 #define DICE_RETROMOUSE_PADDLE2_X_INFO_0_DE "Mausachse für Spieler 3, horizontale Bildschirmbewegung."
-#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_DE NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_CAT_DE NULL
+#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_DE "RetroMouse > Mausachse für Paddel 3 Vertikal"
+#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_CAT_DE "Mausachse für Paddel 3 Vertikal"
 #define DICE_RETROMOUSE_PADDLE2_Y_INFO_0_DE "Mausachse für Spieler 3, vertikale Bildschirmbewegung."
-#define DICE_RETROMOUSE_PADDLE3_X_LABEL_DE NULL
-#define DICE_RETROMOUSE_PADDLE3_X_LABEL_CAT_DE NULL
+#define DICE_RETROMOUSE_PADDLE3_X_LABEL_DE "RetroMouse > Mausachse für Paddel 4 Horizontal"
+#define DICE_RETROMOUSE_PADDLE3_X_LABEL_CAT_DE "Mausachse für Paddel 4 Horizontal"
 #define DICE_RETROMOUSE_PADDLE3_X_INFO_0_DE "Mausachse für Spieler 4, horizontale Bildschirmbewegung."
-#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_DE NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_DE NULL
+#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_DE "RetroMouse > Mausachse für Paddel 4 Vertikal"
+#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_DE "Mausachse für Paddel 4 Vertikal"
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_DE "Mausachse für Spieler 4, vertikale Bildschirmbewegung."
 #define DICE_MANYMOUSE_PADDLE0_LABEL_DE "ManyMouse > Maus für Paddel 1 verwenden"
 #define DICE_MANYMOUSE_PADDLE0_INFO_0_DE "Eine Maus als Paddel 1 verwenden."
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_DE "ManyMaus > Mauspaddel 1 x"
-#define DICE_MANYMOUSE_PADDLE0_X_LABEL_CAT_DE NULL
+#define DICE_MANYMOUSE_PADDLE0_X_LABEL_CAT_DE "Mauspaddel 1 x"
 #define OPTION_VAL_0X_DE NULL
 #define OPTION_VAL_0Y_DE NULL
 #define OPTION_VAL_1X_DE NULL
@@ -7680,25 +7680,25 @@ struct retro_core_options_v2 options_da = {
 #define OPTION_VAL_3X_DE NULL
 #define OPTION_VAL_3Y_DE NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_DE "ManyMaus > Mauspaddel 1 y"
-#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CAT_DE NULL
+#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CAT_DE "Mauspaddel 1 y"
 #define DICE_MANYMOUSE_PADDLE1_LABEL_DE "ManyMouse > Maus für Paddel 2 verwenden"
 #define DICE_MANYMOUSE_PADDLE1_INFO_0_DE "Eine Maus als Paddel 2 verwenden."
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_DE "ManyMaus > Mauspaddel 2 x"
-#define DICE_MANYMOUSE_PADDLE1_X_LABEL_CAT_DE NULL
+#define DICE_MANYMOUSE_PADDLE1_X_LABEL_CAT_DE "Mauspaddel 2 x"
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_DE "ManyMaus > Mauspaddel 2 y"
-#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CAT_DE NULL
+#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CAT_DE "Mauspaddel 2 y"
 #define DICE_MANYMOUSE_PADDLE2_LABEL_DE "ManyMouse > Maus für Paddel 3 verwenden"
 #define DICE_MANYMOUSE_PADDLE2_INFO_0_DE "Eine Maus als Paddel 3 verwenden."
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_DE "ManyMaus > Mauspaddel 3 x"
-#define DICE_MANYMOUSE_PADDLE2_X_LABEL_CAT_DE NULL
+#define DICE_MANYMOUSE_PADDLE2_X_LABEL_CAT_DE "Mauspaddel 3 x"
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_DE "ManyMaus > Mauspaddel 3 y"
-#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CAT_DE NULL
+#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CAT_DE "Mauspaddel 3 y"
 #define DICE_MANYMOUSE_PADDLE3_LABEL_DE "ManyMouse > Maus für Paddel 4 verwenden"
 #define DICE_MANYMOUSE_PADDLE3_INFO_0_DE "Eine Maus als Paddel 4 verwenden."
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_DE "ManyMaus > Mauspaddel 4 x"
-#define DICE_MANYMOUSE_PADDLE3_X_LABEL_CAT_DE NULL
+#define DICE_MANYMOUSE_PADDLE3_X_LABEL_CAT_DE "Mauspaddel 4 x"
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_DE "ManyMaus > Mauspaddel 4 y"
-#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CAT_DE NULL
+#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CAT_DE "Mauspaddel 4 y"
 #define DICE_DIPSWITCH_1_LABEL_DE "DIP-Schalter > DIP-Schalter 1"
 #define DICE_DIPSWITCH_1_LABEL_CAT_DE "DIP-Schalter 1"
 #define DICE_DIPSWITCH_1_INFO_0_DE "Einstellung für DIP-Schalter 1."
