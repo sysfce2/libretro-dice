@@ -88,6 +88,7 @@ extern "C" {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_AR NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_AR NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_AR NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_AR NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_AR NULL
 #define OPTION_VAL_0X_AR NULL
 #define OPTION_VAL_0Y_AR NULL
@@ -99,12 +100,15 @@ extern "C" {
 #define OPTION_VAL_3Y_AR NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_AR NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_AR NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_AR NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_AR NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_AR NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_AR NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_AR NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_AR NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_AR NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_AR NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_AR NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_AR NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_AR NULL
 #define DICE_DIPSWITCH_1_LABEL_AR NULL
@@ -439,7 +443,7 @@ struct retro_core_option_v2_definition option_defs_ar[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_AR,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_AR,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_AR,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_AR,
       NULL,
       "manymouse",
       {
@@ -493,7 +497,7 @@ struct retro_core_option_v2_definition option_defs_ar[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_AR,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_AR,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_AR,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_AR,
       NULL,
       "manymouse",
       {
@@ -547,7 +551,7 @@ struct retro_core_option_v2_definition option_defs_ar[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_AR,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_AR,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_AR,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_AR,
       NULL,
       "manymouse",
       {
@@ -601,7 +605,7 @@ struct retro_core_option_v2_definition option_defs_ar[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_AR,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_AR,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_AR,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_AR,
       NULL,
       "manymouse",
       {
@@ -834,6 +838,7 @@ struct retro_core_options_v2 options_ar = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_AST NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_AST NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_AST NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_AST NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_AST NULL
 #define OPTION_VAL_0X_AST NULL
 #define OPTION_VAL_0Y_AST NULL
@@ -845,12 +850,15 @@ struct retro_core_options_v2 options_ar = {
 #define OPTION_VAL_3Y_AST NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_AST NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_AST NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_AST NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_AST NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_AST NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_AST NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_AST NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_AST NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_AST NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_AST NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_AST NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_AST NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_AST NULL
 #define DICE_DIPSWITCH_1_LABEL_AST NULL
@@ -1185,7 +1193,7 @@ struct retro_core_option_v2_definition option_defs_ast[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_AST,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_AST,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_AST,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_AST,
       NULL,
       "manymouse",
       {
@@ -1239,7 +1247,7 @@ struct retro_core_option_v2_definition option_defs_ast[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_AST,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_AST,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_AST,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_AST,
       NULL,
       "manymouse",
       {
@@ -1293,7 +1301,7 @@ struct retro_core_option_v2_definition option_defs_ast[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_AST,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_AST,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_AST,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_AST,
       NULL,
       "manymouse",
       {
@@ -1347,7 +1355,7 @@ struct retro_core_option_v2_definition option_defs_ast[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_AST,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_AST,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_AST,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_AST,
       NULL,
       "manymouse",
       {
@@ -1580,6 +1588,7 @@ struct retro_core_options_v2 options_ast = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_BE NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_BE NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_BE NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_BE NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_BE NULL
 #define OPTION_VAL_0X_BE NULL
 #define OPTION_VAL_0Y_BE NULL
@@ -1591,12 +1600,15 @@ struct retro_core_options_v2 options_ast = {
 #define OPTION_VAL_3Y_BE NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_BE NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_BE NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_BE NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_BE NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_BE NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_BE NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_BE NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_BE NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_BE NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_BE NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_BE NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_BE NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_BE NULL
 #define DICE_DIPSWITCH_1_LABEL_BE NULL
@@ -1931,7 +1943,7 @@ struct retro_core_option_v2_definition option_defs_be[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_BE,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_BE,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_BE,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_BE,
       NULL,
       "manymouse",
       {
@@ -1985,7 +1997,7 @@ struct retro_core_option_v2_definition option_defs_be[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_BE,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_BE,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_BE,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_BE,
       NULL,
       "manymouse",
       {
@@ -2039,7 +2051,7 @@ struct retro_core_option_v2_definition option_defs_be[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_BE,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_BE,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_BE,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_BE,
       NULL,
       "manymouse",
       {
@@ -2093,7 +2105,7 @@ struct retro_core_option_v2_definition option_defs_be[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_BE,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_BE,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_BE,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_BE,
       NULL,
       "manymouse",
       {
@@ -2326,6 +2338,7 @@ struct retro_core_options_v2 options_be = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_BG NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_BG NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_BG NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_BG NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_BG NULL
 #define OPTION_VAL_0X_BG NULL
 #define OPTION_VAL_0Y_BG NULL
@@ -2337,12 +2350,15 @@ struct retro_core_options_v2 options_be = {
 #define OPTION_VAL_3Y_BG NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_BG NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_BG NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_BG NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_BG NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_BG NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_BG NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_BG NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_BG NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_BG NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_BG NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_BG NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_BG NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_BG NULL
 #define DICE_DIPSWITCH_1_LABEL_BG NULL
@@ -2677,7 +2693,7 @@ struct retro_core_option_v2_definition option_defs_bg[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_BG,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_BG,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_BG,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_BG,
       NULL,
       "manymouse",
       {
@@ -2731,7 +2747,7 @@ struct retro_core_option_v2_definition option_defs_bg[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_BG,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_BG,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_BG,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_BG,
       NULL,
       "manymouse",
       {
@@ -2785,7 +2801,7 @@ struct retro_core_option_v2_definition option_defs_bg[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_BG,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_BG,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_BG,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_BG,
       NULL,
       "manymouse",
       {
@@ -2839,7 +2855,7 @@ struct retro_core_option_v2_definition option_defs_bg[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_BG,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_BG,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_BG,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_BG,
       NULL,
       "manymouse",
       {
@@ -3035,16 +3051,16 @@ struct retro_core_options_v2 options_bg = {
 #define DICE_THROTTLE_KEYJOY_SENSITIVITY_INFO_0_CA NULL
 #define DICE_RETROMOUSE_PADDLE0_LABEL_CA NULL
 #define DICE_RETROMOUSE_PADDLE0_LABEL_CAT_CA NULL
-#define DICE_RETROMOUSE_PADDLE0_INFO_0_CA "Fes servir un ratolí pel controlador analògic 1."
+#define DICE_RETROMOUSE_PADDLE0_INFO_0_CA NULL
 #define DICE_RETROMOUSE_PADDLE1_LABEL_CA NULL
 #define DICE_RETROMOUSE_PADDLE1_LABEL_CAT_CA NULL
-#define DICE_RETROMOUSE_PADDLE1_INFO_0_CA "Fes servir un ratolí pel controlador analògic 2."
+#define DICE_RETROMOUSE_PADDLE1_INFO_0_CA NULL
 #define DICE_RETROMOUSE_PADDLE2_LABEL_CA NULL
 #define DICE_RETROMOUSE_PADDLE2_LABEL_CAT_CA NULL
-#define DICE_RETROMOUSE_PADDLE2_INFO_0_CA "Fes servir un ratolí pel controlador analògic 3."
+#define DICE_RETROMOUSE_PADDLE2_INFO_0_CA NULL
 #define DICE_RETROMOUSE_PADDLE3_LABEL_CA NULL
 #define DICE_RETROMOUSE_PADDLE3_LABEL_CAT_CA NULL
-#define DICE_RETROMOUSE_PADDLE3_INFO_0_CA "Fes servir un ratolí pel controlador analògic 4."
+#define DICE_RETROMOUSE_PADDLE3_INFO_0_CA NULL
 #define DICE_RETROMOUSE_PADDLE0_X_LABEL_CA NULL
 #define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_CA NULL
 #define DICE_RETROMOUSE_PADDLE0_X_INFO_0_CA NULL
@@ -3072,6 +3088,7 @@ struct retro_core_options_v2 options_bg = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_CA NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_CA NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_CA NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_CA NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_CA "ManyMouse> Mouse-Paddle 1 x"
 #define OPTION_VAL_0X_CA NULL
 #define OPTION_VAL_0Y_CA NULL
@@ -3083,12 +3100,15 @@ struct retro_core_options_v2 options_bg = {
 #define OPTION_VAL_3Y_CA NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CA NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_CA NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_CA NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_CA NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CA NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_CA NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_CA NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_CA NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CA NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_CA NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_CA NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_CA NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CA NULL
 #define DICE_DIPSWITCH_1_LABEL_CA NULL
@@ -3423,7 +3443,7 @@ struct retro_core_option_v2_definition option_defs_ca[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_CA,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_CA,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_CA,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_CA,
       NULL,
       "manymouse",
       {
@@ -3477,7 +3497,7 @@ struct retro_core_option_v2_definition option_defs_ca[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_CA,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_CA,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_CA,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_CA,
       NULL,
       "manymouse",
       {
@@ -3531,7 +3551,7 @@ struct retro_core_option_v2_definition option_defs_ca[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_CA,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_CA,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_CA,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_CA,
       NULL,
       "manymouse",
       {
@@ -3585,7 +3605,7 @@ struct retro_core_option_v2_definition option_defs_ca[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_CA,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_CA,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_CA,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_CA,
       NULL,
       "manymouse",
       {
@@ -3818,6 +3838,7 @@ struct retro_core_options_v2 options_ca = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_CHS NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_CHS NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_CHS NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_CHS NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_CHS NULL
 #define OPTION_VAL_0X_CHS NULL
 #define OPTION_VAL_0Y_CHS NULL
@@ -3829,12 +3850,15 @@ struct retro_core_options_v2 options_ca = {
 #define OPTION_VAL_3Y_CHS NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CHS NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_CHS NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_CHS NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_CHS NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CHS NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_CHS NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_CHS NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_CHS NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CHS NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_CHS NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_CHS NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_CHS NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CHS NULL
 #define DICE_DIPSWITCH_1_LABEL_CHS NULL
@@ -4169,7 +4193,7 @@ struct retro_core_option_v2_definition option_defs_chs[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_CHS,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_CHS,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_CHS,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_CHS,
       NULL,
       "manymouse",
       {
@@ -4223,7 +4247,7 @@ struct retro_core_option_v2_definition option_defs_chs[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_CHS,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_CHS,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_CHS,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_CHS,
       NULL,
       "manymouse",
       {
@@ -4277,7 +4301,7 @@ struct retro_core_option_v2_definition option_defs_chs[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_CHS,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_CHS,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_CHS,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_CHS,
       NULL,
       "manymouse",
       {
@@ -4331,7 +4355,7 @@ struct retro_core_option_v2_definition option_defs_chs[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_CHS,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_CHS,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_CHS,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_CHS,
       NULL,
       "manymouse",
       {
@@ -4564,6 +4588,7 @@ struct retro_core_options_v2 options_chs = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_CHT NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_CHT NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_CHT NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_CHT NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_CHT NULL
 #define OPTION_VAL_0X_CHT NULL
 #define OPTION_VAL_0Y_CHT NULL
@@ -4575,12 +4600,15 @@ struct retro_core_options_v2 options_chs = {
 #define OPTION_VAL_3Y_CHT NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CHT NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_CHT NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_CHT NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_CHT NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CHT NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_CHT NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_CHT NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_CHT NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CHT NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_CHT NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_CHT NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_CHT NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CHT NULL
 #define DICE_DIPSWITCH_1_LABEL_CHT NULL
@@ -4915,7 +4943,7 @@ struct retro_core_option_v2_definition option_defs_cht[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_CHT,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_CHT,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_CHT,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_CHT,
       NULL,
       "manymouse",
       {
@@ -4969,7 +4997,7 @@ struct retro_core_option_v2_definition option_defs_cht[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_CHT,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_CHT,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_CHT,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_CHT,
       NULL,
       "manymouse",
       {
@@ -5023,7 +5051,7 @@ struct retro_core_option_v2_definition option_defs_cht[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_CHT,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_CHT,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_CHT,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_CHT,
       NULL,
       "manymouse",
       {
@@ -5077,7 +5105,7 @@ struct retro_core_option_v2_definition option_defs_cht[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_CHT,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_CHT,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_CHT,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_CHT,
       NULL,
       "manymouse",
       {
@@ -5310,6 +5338,7 @@ struct retro_core_options_v2 options_cht = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_CS NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_CS NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_CS NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_CS NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_CS NULL
 #define OPTION_VAL_0X_CS NULL
 #define OPTION_VAL_0Y_CS NULL
@@ -5321,12 +5350,15 @@ struct retro_core_options_v2 options_cht = {
 #define OPTION_VAL_3Y_CS NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CS NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_CS NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_CS NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_CS NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CS NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_CS NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_CS NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_CS NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CS NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_CS NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_CS NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_CS NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CS NULL
 #define DICE_DIPSWITCH_1_LABEL_CS NULL
@@ -5661,7 +5693,7 @@ struct retro_core_option_v2_definition option_defs_cs[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_CS,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_CS,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_CS,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_CS,
       NULL,
       "manymouse",
       {
@@ -5715,7 +5747,7 @@ struct retro_core_option_v2_definition option_defs_cs[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_CS,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_CS,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_CS,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_CS,
       NULL,
       "manymouse",
       {
@@ -5769,7 +5801,7 @@ struct retro_core_option_v2_definition option_defs_cs[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_CS,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_CS,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_CS,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_CS,
       NULL,
       "manymouse",
       {
@@ -5823,7 +5855,7 @@ struct retro_core_option_v2_definition option_defs_cs[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_CS,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_CS,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_CS,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_CS,
       NULL,
       "manymouse",
       {
@@ -6056,6 +6088,7 @@ struct retro_core_options_v2 options_cs = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_CY NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_CY NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_CY NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_CY NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_CY NULL
 #define OPTION_VAL_0X_CY NULL
 #define OPTION_VAL_0Y_CY NULL
@@ -6067,12 +6100,15 @@ struct retro_core_options_v2 options_cs = {
 #define OPTION_VAL_3Y_CY NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CY NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_CY NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_CY NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_CY NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CY NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_CY NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_CY NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_CY NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CY NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_CY NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_CY NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_CY NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CY NULL
 #define DICE_DIPSWITCH_1_LABEL_CY NULL
@@ -6407,7 +6443,7 @@ struct retro_core_option_v2_definition option_defs_cy[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_CY,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_CY,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_CY,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_CY,
       NULL,
       "manymouse",
       {
@@ -6461,7 +6497,7 @@ struct retro_core_option_v2_definition option_defs_cy[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_CY,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_CY,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_CY,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_CY,
       NULL,
       "manymouse",
       {
@@ -6515,7 +6551,7 @@ struct retro_core_option_v2_definition option_defs_cy[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_CY,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_CY,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_CY,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_CY,
       NULL,
       "manymouse",
       {
@@ -6569,7 +6605,7 @@ struct retro_core_option_v2_definition option_defs_cy[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_CY,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_CY,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_CY,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_CY,
       NULL,
       "manymouse",
       {
@@ -6802,6 +6838,7 @@ struct retro_core_options_v2 options_cy = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_DA NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_DA NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_DA NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_DA NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_DA NULL
 #define OPTION_VAL_0X_DA NULL
 #define OPTION_VAL_0Y_DA NULL
@@ -6813,12 +6850,15 @@ struct retro_core_options_v2 options_cy = {
 #define OPTION_VAL_3Y_DA NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_DA NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_DA NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_DA NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_DA NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_DA NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_DA NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_DA NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_DA NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_DA NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_DA NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_DA NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_DA NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_DA NULL
 #define DICE_DIPSWITCH_1_LABEL_DA NULL
@@ -7153,7 +7193,7 @@ struct retro_core_option_v2_definition option_defs_da[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_DA,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_DA,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_DA,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_DA,
       NULL,
       "manymouse",
       {
@@ -7207,7 +7247,7 @@ struct retro_core_option_v2_definition option_defs_da[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_DA,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_DA,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_DA,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_DA,
       NULL,
       "manymouse",
       {
@@ -7261,7 +7301,7 @@ struct retro_core_option_v2_definition option_defs_da[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_DA,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_DA,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_DA,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_DA,
       NULL,
       "manymouse",
       {
@@ -7315,7 +7355,7 @@ struct retro_core_option_v2_definition option_defs_da[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_DA,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_DA,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_DA,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_DA,
       NULL,
       "manymouse",
       {
@@ -7490,7 +7530,7 @@ struct retro_core_options_v2 options_da = {
 #define CATEGORY_DIPSWITCH_INFO_0_DE NULL
 #define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_DE NULL
 #define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_DE NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_DE "Die Hauptmaus als Paddle-Controller 1 verwenden."
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_DE NULL
 #define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_DE NULL
 #define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_DE NULL
 #define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_DE NULL
@@ -7511,16 +7551,16 @@ struct retro_core_options_v2 options_da = {
 #define DICE_THROTTLE_KEYJOY_SENSITIVITY_INFO_0_DE "Empfindlichkeit beim Verwenden des D-Pads oder Analogsticks als Drossel."
 #define DICE_RETROMOUSE_PADDLE0_LABEL_DE NULL
 #define DICE_RETROMOUSE_PADDLE0_LABEL_CAT_DE NULL
-#define DICE_RETROMOUSE_PADDLE0_INFO_0_DE "Eine Maus als Paddel 1 verwenden."
+#define DICE_RETROMOUSE_PADDLE0_INFO_0_DE NULL
 #define DICE_RETROMOUSE_PADDLE1_LABEL_DE NULL
 #define DICE_RETROMOUSE_PADDLE1_LABEL_CAT_DE NULL
-#define DICE_RETROMOUSE_PADDLE1_INFO_0_DE "Eine Maus als Paddel 2 verwenden."
+#define DICE_RETROMOUSE_PADDLE1_INFO_0_DE NULL
 #define DICE_RETROMOUSE_PADDLE2_LABEL_DE NULL
 #define DICE_RETROMOUSE_PADDLE2_LABEL_CAT_DE NULL
-#define DICE_RETROMOUSE_PADDLE2_INFO_0_DE "Eine Maus als Paddel 3 verwenden."
+#define DICE_RETROMOUSE_PADDLE2_INFO_0_DE NULL
 #define DICE_RETROMOUSE_PADDLE3_LABEL_DE NULL
 #define DICE_RETROMOUSE_PADDLE3_LABEL_CAT_DE NULL
-#define DICE_RETROMOUSE_PADDLE3_INFO_0_DE "Eine Maus als Paddel 4 verwenden."
+#define DICE_RETROMOUSE_PADDLE3_INFO_0_DE NULL
 #define DICE_RETROMOUSE_PADDLE0_X_LABEL_DE "RetroMouse > Mauspaddel 1 x"
 #define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_DE "Mauspaddel 1 x"
 #define DICE_RETROMOUSE_PADDLE0_X_INFO_0_DE "Mausachse für Spieler 1, horizontale Bildschirmbewegung."
@@ -7548,6 +7588,7 @@ struct retro_core_options_v2 options_da = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_DE "Mauspaddel 4 y"
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_DE "Mausachse für Spieler 4, vertikale Bildschirmbewegung."
 #define DICE_MANYMOUSE_PADDLE0_LABEL_DE NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_DE NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_DE "ManyMaus > Mauspaddel 1 x"
 #define OPTION_VAL_0X_DE NULL
 #define OPTION_VAL_0Y_DE NULL
@@ -7559,12 +7600,15 @@ struct retro_core_options_v2 options_da = {
 #define OPTION_VAL_3Y_DE NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_DE "ManyMaus > Mauspaddel 1 y"
 #define DICE_MANYMOUSE_PADDLE1_LABEL_DE NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_DE NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_DE "ManyMaus > Mauspaddel 2 x"
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_DE "ManyMaus > Mauspaddel 2 y"
 #define DICE_MANYMOUSE_PADDLE2_LABEL_DE NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_DE NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_DE "ManyMaus > Mauspaddel 3 x"
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_DE "ManyMaus > Mauspaddel 3 y"
 #define DICE_MANYMOUSE_PADDLE3_LABEL_DE NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_DE NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_DE "ManyMaus > Mauspaddel 4 x"
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_DE "ManyMaus > Mauspaddel 4 y"
 #define DICE_DIPSWITCH_1_LABEL_DE NULL
@@ -7899,7 +7943,7 @@ struct retro_core_option_v2_definition option_defs_de[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_DE,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_DE,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_DE,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_DE,
       NULL,
       "manymouse",
       {
@@ -7953,7 +7997,7 @@ struct retro_core_option_v2_definition option_defs_de[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_DE,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_DE,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_DE,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_DE,
       NULL,
       "manymouse",
       {
@@ -8007,7 +8051,7 @@ struct retro_core_option_v2_definition option_defs_de[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_DE,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_DE,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_DE,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_DE,
       NULL,
       "manymouse",
       {
@@ -8061,7 +8105,7 @@ struct retro_core_option_v2_definition option_defs_de[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_DE,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_DE,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_DE,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_DE,
       NULL,
       "manymouse",
       {
@@ -8294,6 +8338,7 @@ struct retro_core_options_v2 options_de = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_EL NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_EL NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_EL NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_EL NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_EL NULL
 #define OPTION_VAL_0X_EL NULL
 #define OPTION_VAL_0Y_EL NULL
@@ -8305,12 +8350,15 @@ struct retro_core_options_v2 options_de = {
 #define OPTION_VAL_3Y_EL NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_EL NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_EL NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_EL NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_EL NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_EL NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_EL NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_EL NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_EL NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_EL NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_EL NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_EL NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_EL NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_EL NULL
 #define DICE_DIPSWITCH_1_LABEL_EL NULL
@@ -8645,7 +8693,7 @@ struct retro_core_option_v2_definition option_defs_el[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_EL,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_EL,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_EL,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_EL,
       NULL,
       "manymouse",
       {
@@ -8699,7 +8747,7 @@ struct retro_core_option_v2_definition option_defs_el[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_EL,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_EL,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_EL,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_EL,
       NULL,
       "manymouse",
       {
@@ -8753,7 +8801,7 @@ struct retro_core_option_v2_definition option_defs_el[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_EL,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_EL,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_EL,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_EL,
       NULL,
       "manymouse",
       {
@@ -8807,7 +8855,7 @@ struct retro_core_option_v2_definition option_defs_el[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_EL,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_EL,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_EL,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_EL,
       NULL,
       "manymouse",
       {
@@ -9040,6 +9088,7 @@ struct retro_core_options_v2 options_el = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_EN NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_EN NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_EN NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_EN NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_EN NULL
 #define OPTION_VAL_0X_EN NULL
 #define OPTION_VAL_0Y_EN NULL
@@ -9051,12 +9100,15 @@ struct retro_core_options_v2 options_el = {
 #define OPTION_VAL_3Y_EN NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_EN NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_EN NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_EN NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_EN NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_EN NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_EN NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_EN NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_EN NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_EN NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_EN NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_EN NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_EN NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_EN NULL
 #define DICE_DIPSWITCH_1_LABEL_EN NULL
@@ -9391,7 +9443,7 @@ struct retro_core_option_v2_definition option_defs_en[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_EN,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_EN,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_EN,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_EN,
       NULL,
       "manymouse",
       {
@@ -9445,7 +9497,7 @@ struct retro_core_option_v2_definition option_defs_en[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_EN,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_EN,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_EN,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_EN,
       NULL,
       "manymouse",
       {
@@ -9499,7 +9551,7 @@ struct retro_core_option_v2_definition option_defs_en[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_EN,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_EN,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_EN,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_EN,
       NULL,
       "manymouse",
       {
@@ -9553,7 +9605,7 @@ struct retro_core_option_v2_definition option_defs_en[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_EN,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_EN,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_EN,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_EN,
       NULL,
       "manymouse",
       {
@@ -9786,6 +9838,7 @@ struct retro_core_options_v2 options_en = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_EO NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_EO NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_EO NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_EO NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_EO NULL
 #define OPTION_VAL_0X_EO NULL
 #define OPTION_VAL_0Y_EO NULL
@@ -9797,12 +9850,15 @@ struct retro_core_options_v2 options_en = {
 #define OPTION_VAL_3Y_EO NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_EO NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_EO NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_EO NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_EO NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_EO NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_EO NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_EO NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_EO NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_EO NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_EO NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_EO NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_EO NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_EO NULL
 #define DICE_DIPSWITCH_1_LABEL_EO NULL
@@ -10137,7 +10193,7 @@ struct retro_core_option_v2_definition option_defs_eo[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_EO,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_EO,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_EO,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_EO,
       NULL,
       "manymouse",
       {
@@ -10191,7 +10247,7 @@ struct retro_core_option_v2_definition option_defs_eo[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_EO,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_EO,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_EO,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_EO,
       NULL,
       "manymouse",
       {
@@ -10245,7 +10301,7 @@ struct retro_core_option_v2_definition option_defs_eo[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_EO,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_EO,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_EO,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_EO,
       NULL,
       "manymouse",
       {
@@ -10299,7 +10355,7 @@ struct retro_core_option_v2_definition option_defs_eo[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_EO,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_EO,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_EO,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_EO,
       NULL,
       "manymouse",
       {
@@ -10474,7 +10530,7 @@ struct retro_core_options_v2 options_eo = {
 #define CATEGORY_DIPSWITCH_INFO_0_ES NULL
 #define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_ES NULL
 #define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_ES NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_ES "Utiliza el ratón principal como el mando analógico 1."
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_ES NULL
 #define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_ES NULL
 #define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_ES NULL
 #define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_ES NULL
@@ -10495,16 +10551,16 @@ struct retro_core_options_v2 options_eo = {
 #define DICE_THROTTLE_KEYJOY_SENSITIVITY_INFO_0_ES "Ajusta la sensibilidad si se va a usar una cruceta o un stick analógico como acelerador."
 #define DICE_RETROMOUSE_PADDLE0_LABEL_ES NULL
 #define DICE_RETROMOUSE_PADDLE0_LABEL_CAT_ES NULL
-#define DICE_RETROMOUSE_PADDLE0_INFO_0_ES "Utiliza un ratón para el mando analógico 1."
+#define DICE_RETROMOUSE_PADDLE0_INFO_0_ES NULL
 #define DICE_RETROMOUSE_PADDLE1_LABEL_ES NULL
 #define DICE_RETROMOUSE_PADDLE1_LABEL_CAT_ES NULL
-#define DICE_RETROMOUSE_PADDLE1_INFO_0_ES "Utiliza un ratón para el mando analógico 2."
+#define DICE_RETROMOUSE_PADDLE1_INFO_0_ES NULL
 #define DICE_RETROMOUSE_PADDLE2_LABEL_ES NULL
 #define DICE_RETROMOUSE_PADDLE2_LABEL_CAT_ES NULL
-#define DICE_RETROMOUSE_PADDLE2_INFO_0_ES "Utiliza un ratón para el mando analógico 3."
+#define DICE_RETROMOUSE_PADDLE2_INFO_0_ES NULL
 #define DICE_RETROMOUSE_PADDLE3_LABEL_ES NULL
 #define DICE_RETROMOUSE_PADDLE3_LABEL_CAT_ES NULL
-#define DICE_RETROMOUSE_PADDLE3_INFO_0_ES "Utiliza un ratón para el mando analógico 4."
+#define DICE_RETROMOUSE_PADDLE3_INFO_0_ES NULL
 #define DICE_RETROMOUSE_PADDLE0_X_LABEL_ES "RetroMouse > Eje X del ratón/mando analógico 1"
 #define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_ES "Eje X del ratón/mando analógico 1"
 #define DICE_RETROMOUSE_PADDLE0_X_INFO_0_ES "Eje del ratón para los movimientos horizontales del jugador 1."
@@ -10532,6 +10588,7 @@ struct retro_core_options_v2 options_eo = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_ES "Eje Y del ratón/mando analógico 4"
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_ES "Eje del ratón para los movimientos verticales del jugador 4."
 #define DICE_MANYMOUSE_PADDLE0_LABEL_ES NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_ES NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_ES "ManyMouse > Eje X del ratón/mando analógico 1"
 #define OPTION_VAL_0X_ES NULL
 #define OPTION_VAL_0Y_ES NULL
@@ -10543,12 +10600,15 @@ struct retro_core_options_v2 options_eo = {
 #define OPTION_VAL_3Y_ES NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_ES "ManyMouse > Eje Y del ratón/mando analógico 1"
 #define DICE_MANYMOUSE_PADDLE1_LABEL_ES NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_ES NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_ES "ManyMouse > Eje X del ratón/mando analógico 2"
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_ES "ManyMouse > Eje Y del ratón/mando analógico 2"
 #define DICE_MANYMOUSE_PADDLE2_LABEL_ES NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_ES NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_ES "ManyMouse > Eje X del ratón/mando analógico 3"
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_ES "ManyMouse > Eje Y del ratón/mando analógico 3"
 #define DICE_MANYMOUSE_PADDLE3_LABEL_ES NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_ES NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_ES "ManyMouse > Eje X del ratón/mando analógico 4"
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_ES "ManyMouse > Eje Y del ratón/mando analógico 4"
 #define DICE_DIPSWITCH_1_LABEL_ES NULL
@@ -10883,7 +10943,7 @@ struct retro_core_option_v2_definition option_defs_es[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_ES,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_ES,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_ES,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_ES,
       NULL,
       "manymouse",
       {
@@ -10937,7 +10997,7 @@ struct retro_core_option_v2_definition option_defs_es[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_ES,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_ES,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_ES,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_ES,
       NULL,
       "manymouse",
       {
@@ -10991,7 +11051,7 @@ struct retro_core_option_v2_definition option_defs_es[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_ES,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_ES,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_ES,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_ES,
       NULL,
       "manymouse",
       {
@@ -11045,7 +11105,7 @@ struct retro_core_option_v2_definition option_defs_es[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_ES,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_ES,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_ES,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_ES,
       NULL,
       "manymouse",
       {
@@ -11278,6 +11338,7 @@ struct retro_core_options_v2 options_es = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_FA NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_FA NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_FA NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_FA NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_FA NULL
 #define OPTION_VAL_0X_FA NULL
 #define OPTION_VAL_0Y_FA NULL
@@ -11289,12 +11350,15 @@ struct retro_core_options_v2 options_es = {
 #define OPTION_VAL_3Y_FA NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_FA NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_FA NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_FA NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_FA NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_FA NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_FA NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_FA NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_FA NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_FA NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_FA NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_FA NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_FA NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_FA NULL
 #define DICE_DIPSWITCH_1_LABEL_FA NULL
@@ -11629,7 +11693,7 @@ struct retro_core_option_v2_definition option_defs_fa[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_FA,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_FA,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_FA,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_FA,
       NULL,
       "manymouse",
       {
@@ -11683,7 +11747,7 @@ struct retro_core_option_v2_definition option_defs_fa[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_FA,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_FA,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_FA,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_FA,
       NULL,
       "manymouse",
       {
@@ -11737,7 +11801,7 @@ struct retro_core_option_v2_definition option_defs_fa[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_FA,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_FA,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_FA,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_FA,
       NULL,
       "manymouse",
       {
@@ -11791,7 +11855,7 @@ struct retro_core_option_v2_definition option_defs_fa[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_FA,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_FA,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_FA,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_FA,
       NULL,
       "manymouse",
       {
@@ -12024,6 +12088,7 @@ struct retro_core_options_v2 options_fa = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_FI NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_FI NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_FI NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_FI NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_FI NULL
 #define OPTION_VAL_0X_FI NULL
 #define OPTION_VAL_0Y_FI NULL
@@ -12035,12 +12100,15 @@ struct retro_core_options_v2 options_fa = {
 #define OPTION_VAL_3Y_FI NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_FI NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_FI NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_FI NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_FI NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_FI NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_FI NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_FI NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_FI NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_FI NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_FI NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_FI NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_FI NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_FI NULL
 #define DICE_DIPSWITCH_1_LABEL_FI NULL
@@ -12375,7 +12443,7 @@ struct retro_core_option_v2_definition option_defs_fi[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_FI,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_FI,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_FI,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_FI,
       NULL,
       "manymouse",
       {
@@ -12429,7 +12497,7 @@ struct retro_core_option_v2_definition option_defs_fi[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_FI,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_FI,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_FI,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_FI,
       NULL,
       "manymouse",
       {
@@ -12483,7 +12551,7 @@ struct retro_core_option_v2_definition option_defs_fi[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_FI,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_FI,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_FI,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_FI,
       NULL,
       "manymouse",
       {
@@ -12537,7 +12605,7 @@ struct retro_core_option_v2_definition option_defs_fi[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_FI,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_FI,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_FI,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_FI,
       NULL,
       "manymouse",
       {
@@ -12712,7 +12780,7 @@ struct retro_core_options_v2 options_fi = {
 #define CATEGORY_DIPSWITCH_INFO_0_FR NULL
 #define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_FR NULL
 #define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_FR NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_FR "Utilisez la souris principale comme manette de raquette 1."
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_FR NULL
 #define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_FR NULL
 #define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_FR NULL
 #define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_FR NULL
@@ -12733,16 +12801,16 @@ struct retro_core_options_v2 options_fi = {
 #define DICE_THROTTLE_KEYJOY_SENSITIVITY_INFO_0_FR "Sensibilité lorsque vous utilisez la croix directionnelle ou le stick analogique pour l'accélérateur."
 #define DICE_RETROMOUSE_PADDLE0_LABEL_FR NULL
 #define DICE_RETROMOUSE_PADDLE0_LABEL_CAT_FR NULL
-#define DICE_RETROMOUSE_PADDLE0_INFO_0_FR "Utilisez une souris pour la raquette 1."
+#define DICE_RETROMOUSE_PADDLE0_INFO_0_FR NULL
 #define DICE_RETROMOUSE_PADDLE1_LABEL_FR NULL
 #define DICE_RETROMOUSE_PADDLE1_LABEL_CAT_FR NULL
-#define DICE_RETROMOUSE_PADDLE1_INFO_0_FR "Utilisez une souris pour la raquette 2."
+#define DICE_RETROMOUSE_PADDLE1_INFO_0_FR NULL
 #define DICE_RETROMOUSE_PADDLE2_LABEL_FR NULL
 #define DICE_RETROMOUSE_PADDLE2_LABEL_CAT_FR NULL
-#define DICE_RETROMOUSE_PADDLE2_INFO_0_FR "Utilisez une souris pour la raquette 3."
+#define DICE_RETROMOUSE_PADDLE2_INFO_0_FR NULL
 #define DICE_RETROMOUSE_PADDLE3_LABEL_FR NULL
 #define DICE_RETROMOUSE_PADDLE3_LABEL_CAT_FR NULL
-#define DICE_RETROMOUSE_PADDLE3_INFO_0_FR "Utilisez une souris pour la raquette 4."
+#define DICE_RETROMOUSE_PADDLE3_INFO_0_FR NULL
 #define DICE_RETROMOUSE_PADDLE0_X_LABEL_FR "RetroSouris > Souris-raquette 1 x"
 #define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_FR "Souris-raquette 1 x"
 #define DICE_RETROMOUSE_PADDLE0_X_INFO_0_FR "Axe de la souris pour le joueur 1, mouvement horizontal à l'écran."
@@ -12770,6 +12838,7 @@ struct retro_core_options_v2 options_fi = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_FR "Souris-raquette 4 y"
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_FR "Axe de la souris pour le joueur 4, mouvement vertical à l'écran."
 #define DICE_MANYMOUSE_PADDLE0_LABEL_FR NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_FR NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_FR "ManyMouse > Souris-raquette 1 x"
 #define OPTION_VAL_0X_FR "0 x"
 #define OPTION_VAL_0Y_FR "0 y"
@@ -12781,12 +12850,15 @@ struct retro_core_options_v2 options_fi = {
 #define OPTION_VAL_3Y_FR "3 y"
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_FR "ManyMouse > Souris-raquette 1 y"
 #define DICE_MANYMOUSE_PADDLE1_LABEL_FR NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_FR NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_FR "ManyMouse > Souris-raquette 2 x"
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_FR "ManyMouse > Souris-raquette 2 y"
 #define DICE_MANYMOUSE_PADDLE2_LABEL_FR NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_FR NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_FR "ManyMouse > Souris-raquette 3 x"
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_FR "ManyMouse > Souris-raquette 3 y"
 #define DICE_MANYMOUSE_PADDLE3_LABEL_FR NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_FR NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_FR "ManyMouse > Souris-raquette 4 x"
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_FR "ManyMouse > Souris-raquette 4 y"
 #define DICE_DIPSWITCH_1_LABEL_FR NULL
@@ -13121,7 +13193,7 @@ struct retro_core_option_v2_definition option_defs_fr[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_FR,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_FR,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_FR,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_FR,
       NULL,
       "manymouse",
       {
@@ -13175,7 +13247,7 @@ struct retro_core_option_v2_definition option_defs_fr[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_FR,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_FR,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_FR,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_FR,
       NULL,
       "manymouse",
       {
@@ -13229,7 +13301,7 @@ struct retro_core_option_v2_definition option_defs_fr[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_FR,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_FR,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_FR,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_FR,
       NULL,
       "manymouse",
       {
@@ -13283,7 +13355,7 @@ struct retro_core_option_v2_definition option_defs_fr[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_FR,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_FR,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_FR,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_FR,
       NULL,
       "manymouse",
       {
@@ -13516,6 +13588,7 @@ struct retro_core_options_v2 options_fr = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_GL NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_GL NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_GL NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_GL NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_GL NULL
 #define OPTION_VAL_0X_GL NULL
 #define OPTION_VAL_0Y_GL NULL
@@ -13527,12 +13600,15 @@ struct retro_core_options_v2 options_fr = {
 #define OPTION_VAL_3Y_GL NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_GL NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_GL NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_GL NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_GL NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_GL NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_GL NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_GL NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_GL NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_GL NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_GL NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_GL NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_GL NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_GL NULL
 #define DICE_DIPSWITCH_1_LABEL_GL NULL
@@ -13867,7 +13943,7 @@ struct retro_core_option_v2_definition option_defs_gl[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_GL,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_GL,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_GL,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_GL,
       NULL,
       "manymouse",
       {
@@ -13921,7 +13997,7 @@ struct retro_core_option_v2_definition option_defs_gl[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_GL,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_GL,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_GL,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_GL,
       NULL,
       "manymouse",
       {
@@ -13975,7 +14051,7 @@ struct retro_core_option_v2_definition option_defs_gl[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_GL,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_GL,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_GL,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_GL,
       NULL,
       "manymouse",
       {
@@ -14029,7 +14105,7 @@ struct retro_core_option_v2_definition option_defs_gl[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_GL,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_GL,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_GL,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_GL,
       NULL,
       "manymouse",
       {
@@ -14262,6 +14338,7 @@ struct retro_core_options_v2 options_gl = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_HE NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_HE NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_HE NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_HE NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_HE NULL
 #define OPTION_VAL_0X_HE NULL
 #define OPTION_VAL_0Y_HE NULL
@@ -14273,12 +14350,15 @@ struct retro_core_options_v2 options_gl = {
 #define OPTION_VAL_3Y_HE NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_HE NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_HE NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_HE NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_HE NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_HE NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_HE NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_HE NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_HE NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_HE NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_HE NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_HE NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_HE NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_HE NULL
 #define DICE_DIPSWITCH_1_LABEL_HE NULL
@@ -14613,7 +14693,7 @@ struct retro_core_option_v2_definition option_defs_he[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_HE,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_HE,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_HE,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_HE,
       NULL,
       "manymouse",
       {
@@ -14667,7 +14747,7 @@ struct retro_core_option_v2_definition option_defs_he[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_HE,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_HE,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_HE,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_HE,
       NULL,
       "manymouse",
       {
@@ -14721,7 +14801,7 @@ struct retro_core_option_v2_definition option_defs_he[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_HE,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_HE,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_HE,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_HE,
       NULL,
       "manymouse",
       {
@@ -14775,7 +14855,7 @@ struct retro_core_option_v2_definition option_defs_he[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_HE,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_HE,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_HE,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_HE,
       NULL,
       "manymouse",
       {
@@ -15008,6 +15088,7 @@ struct retro_core_options_v2 options_he = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_HR NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_HR NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_HR NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_HR NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_HR NULL
 #define OPTION_VAL_0X_HR NULL
 #define OPTION_VAL_0Y_HR NULL
@@ -15019,12 +15100,15 @@ struct retro_core_options_v2 options_he = {
 #define OPTION_VAL_3Y_HR NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_HR NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_HR NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_HR NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_HR NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_HR NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_HR NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_HR NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_HR NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_HR NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_HR NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_HR NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_HR NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_HR NULL
 #define DICE_DIPSWITCH_1_LABEL_HR NULL
@@ -15359,7 +15443,7 @@ struct retro_core_option_v2_definition option_defs_hr[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_HR,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_HR,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_HR,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_HR,
       NULL,
       "manymouse",
       {
@@ -15413,7 +15497,7 @@ struct retro_core_option_v2_definition option_defs_hr[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_HR,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_HR,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_HR,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_HR,
       NULL,
       "manymouse",
       {
@@ -15467,7 +15551,7 @@ struct retro_core_option_v2_definition option_defs_hr[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_HR,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_HR,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_HR,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_HR,
       NULL,
       "manymouse",
       {
@@ -15521,7 +15605,7 @@ struct retro_core_option_v2_definition option_defs_hr[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_HR,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_HR,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_HR,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_HR,
       NULL,
       "manymouse",
       {
@@ -15754,6 +15838,7 @@ struct retro_core_options_v2 options_hr = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_HU NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_HU NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_HU NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_HU NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_HU NULL
 #define OPTION_VAL_0X_HU NULL
 #define OPTION_VAL_0Y_HU NULL
@@ -15765,12 +15850,15 @@ struct retro_core_options_v2 options_hr = {
 #define OPTION_VAL_3Y_HU NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_HU NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_HU NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_HU NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_HU NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_HU NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_HU NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_HU NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_HU NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_HU NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_HU NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_HU NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_HU NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_HU NULL
 #define DICE_DIPSWITCH_1_LABEL_HU NULL
@@ -16105,7 +16193,7 @@ struct retro_core_option_v2_definition option_defs_hu[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_HU,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_HU,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_HU,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_HU,
       NULL,
       "manymouse",
       {
@@ -16159,7 +16247,7 @@ struct retro_core_option_v2_definition option_defs_hu[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_HU,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_HU,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_HU,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_HU,
       NULL,
       "manymouse",
       {
@@ -16213,7 +16301,7 @@ struct retro_core_option_v2_definition option_defs_hu[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_HU,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_HU,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_HU,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_HU,
       NULL,
       "manymouse",
       {
@@ -16267,7 +16355,7 @@ struct retro_core_option_v2_definition option_defs_hu[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_HU,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_HU,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_HU,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_HU,
       NULL,
       "manymouse",
       {
@@ -16500,6 +16588,7 @@ struct retro_core_options_v2 options_hu = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_ID NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_ID NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_ID NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_ID NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_ID NULL
 #define OPTION_VAL_0X_ID NULL
 #define OPTION_VAL_0Y_ID NULL
@@ -16511,12 +16600,15 @@ struct retro_core_options_v2 options_hu = {
 #define OPTION_VAL_3Y_ID NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_ID NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_ID NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_ID NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_ID NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_ID NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_ID NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_ID NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_ID NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_ID NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_ID NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_ID NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_ID NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_ID NULL
 #define DICE_DIPSWITCH_1_LABEL_ID NULL
@@ -16851,7 +16943,7 @@ struct retro_core_option_v2_definition option_defs_id[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_ID,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_ID,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_ID,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_ID,
       NULL,
       "manymouse",
       {
@@ -16905,7 +16997,7 @@ struct retro_core_option_v2_definition option_defs_id[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_ID,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_ID,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_ID,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_ID,
       NULL,
       "manymouse",
       {
@@ -16959,7 +17051,7 @@ struct retro_core_option_v2_definition option_defs_id[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_ID,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_ID,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_ID,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_ID,
       NULL,
       "manymouse",
       {
@@ -17013,7 +17105,7 @@ struct retro_core_option_v2_definition option_defs_id[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_ID,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_ID,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_ID,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_ID,
       NULL,
       "manymouse",
       {
@@ -17246,6 +17338,7 @@ struct retro_core_options_v2 options_id = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_IT NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_IT NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_IT NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_IT NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_IT NULL
 #define OPTION_VAL_0X_IT NULL
 #define OPTION_VAL_0Y_IT NULL
@@ -17257,12 +17350,15 @@ struct retro_core_options_v2 options_id = {
 #define OPTION_VAL_3Y_IT NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_IT NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_IT NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_IT NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_IT NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_IT NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_IT NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_IT NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_IT NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_IT NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_IT NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_IT NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_IT NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_IT NULL
 #define DICE_DIPSWITCH_1_LABEL_IT NULL
@@ -17597,7 +17693,7 @@ struct retro_core_option_v2_definition option_defs_it[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_IT,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_IT,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_IT,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_IT,
       NULL,
       "manymouse",
       {
@@ -17651,7 +17747,7 @@ struct retro_core_option_v2_definition option_defs_it[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_IT,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_IT,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_IT,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_IT,
       NULL,
       "manymouse",
       {
@@ -17705,7 +17801,7 @@ struct retro_core_option_v2_definition option_defs_it[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_IT,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_IT,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_IT,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_IT,
       NULL,
       "manymouse",
       {
@@ -17759,7 +17855,7 @@ struct retro_core_option_v2_definition option_defs_it[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_IT,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_IT,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_IT,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_IT,
       NULL,
       "manymouse",
       {
@@ -17992,6 +18088,7 @@ struct retro_core_options_v2 options_it = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_JA NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_JA NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_JA NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_JA NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_JA NULL
 #define OPTION_VAL_0X_JA NULL
 #define OPTION_VAL_0Y_JA NULL
@@ -18003,12 +18100,15 @@ struct retro_core_options_v2 options_it = {
 #define OPTION_VAL_3Y_JA NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_JA NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_JA NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_JA NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_JA NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_JA NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_JA NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_JA NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_JA NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_JA NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_JA NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_JA NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_JA NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_JA NULL
 #define DICE_DIPSWITCH_1_LABEL_JA NULL
@@ -18343,7 +18443,7 @@ struct retro_core_option_v2_definition option_defs_ja[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_JA,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_JA,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_JA,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_JA,
       NULL,
       "manymouse",
       {
@@ -18397,7 +18497,7 @@ struct retro_core_option_v2_definition option_defs_ja[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_JA,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_JA,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_JA,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_JA,
       NULL,
       "manymouse",
       {
@@ -18451,7 +18551,7 @@ struct retro_core_option_v2_definition option_defs_ja[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_JA,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_JA,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_JA,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_JA,
       NULL,
       "manymouse",
       {
@@ -18505,7 +18605,7 @@ struct retro_core_option_v2_definition option_defs_ja[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_JA,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_JA,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_JA,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_JA,
       NULL,
       "manymouse",
       {
@@ -18738,6 +18838,7 @@ struct retro_core_options_v2 options_ja = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_KO NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_KO NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_KO NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_KO NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_KO NULL
 #define OPTION_VAL_0X_KO NULL
 #define OPTION_VAL_0Y_KO NULL
@@ -18749,12 +18850,15 @@ struct retro_core_options_v2 options_ja = {
 #define OPTION_VAL_3Y_KO NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_KO NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_KO NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_KO NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_KO NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_KO NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_KO NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_KO NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_KO NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_KO NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_KO NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_KO NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_KO NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_KO NULL
 #define DICE_DIPSWITCH_1_LABEL_KO NULL
@@ -19089,7 +19193,7 @@ struct retro_core_option_v2_definition option_defs_ko[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_KO,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_KO,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_KO,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_KO,
       NULL,
       "manymouse",
       {
@@ -19143,7 +19247,7 @@ struct retro_core_option_v2_definition option_defs_ko[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_KO,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_KO,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_KO,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_KO,
       NULL,
       "manymouse",
       {
@@ -19197,7 +19301,7 @@ struct retro_core_option_v2_definition option_defs_ko[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_KO,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_KO,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_KO,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_KO,
       NULL,
       "manymouse",
       {
@@ -19251,7 +19355,7 @@ struct retro_core_option_v2_definition option_defs_ko[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_KO,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_KO,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_KO,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_KO,
       NULL,
       "manymouse",
       {
@@ -19484,6 +19588,7 @@ struct retro_core_options_v2 options_ko = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_NL NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_NL NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_NL NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_NL NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_NL NULL
 #define OPTION_VAL_0X_NL NULL
 #define OPTION_VAL_0Y_NL NULL
@@ -19495,12 +19600,15 @@ struct retro_core_options_v2 options_ko = {
 #define OPTION_VAL_3Y_NL NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_NL NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_NL NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_NL NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_NL NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_NL NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_NL NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_NL NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_NL NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_NL NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_NL NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_NL NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_NL NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_NL NULL
 #define DICE_DIPSWITCH_1_LABEL_NL NULL
@@ -19835,7 +19943,7 @@ struct retro_core_option_v2_definition option_defs_nl[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_NL,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_NL,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_NL,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_NL,
       NULL,
       "manymouse",
       {
@@ -19889,7 +19997,7 @@ struct retro_core_option_v2_definition option_defs_nl[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_NL,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_NL,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_NL,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_NL,
       NULL,
       "manymouse",
       {
@@ -19943,7 +20051,7 @@ struct retro_core_option_v2_definition option_defs_nl[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_NL,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_NL,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_NL,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_NL,
       NULL,
       "manymouse",
       {
@@ -19997,7 +20105,7 @@ struct retro_core_option_v2_definition option_defs_nl[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_NL,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_NL,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_NL,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_NL,
       NULL,
       "manymouse",
       {
@@ -20230,6 +20338,7 @@ struct retro_core_options_v2 options_nl = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_NO NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_NO NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_NO NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_NO NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_NO NULL
 #define OPTION_VAL_0X_NO NULL
 #define OPTION_VAL_0Y_NO NULL
@@ -20241,12 +20350,15 @@ struct retro_core_options_v2 options_nl = {
 #define OPTION_VAL_3Y_NO NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_NO NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_NO NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_NO NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_NO NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_NO NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_NO NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_NO NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_NO NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_NO NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_NO NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_NO NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_NO NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_NO NULL
 #define DICE_DIPSWITCH_1_LABEL_NO NULL
@@ -20581,7 +20693,7 @@ struct retro_core_option_v2_definition option_defs_no[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_NO,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_NO,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_NO,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_NO,
       NULL,
       "manymouse",
       {
@@ -20635,7 +20747,7 @@ struct retro_core_option_v2_definition option_defs_no[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_NO,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_NO,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_NO,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_NO,
       NULL,
       "manymouse",
       {
@@ -20689,7 +20801,7 @@ struct retro_core_option_v2_definition option_defs_no[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_NO,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_NO,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_NO,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_NO,
       NULL,
       "manymouse",
       {
@@ -20743,7 +20855,7 @@ struct retro_core_option_v2_definition option_defs_no[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_NO,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_NO,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_NO,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_NO,
       NULL,
       "manymouse",
       {
@@ -20976,6 +21088,7 @@ struct retro_core_options_v2 options_no = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_OR NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_OR NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_OR NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_OR NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_OR NULL
 #define OPTION_VAL_0X_OR NULL
 #define OPTION_VAL_0Y_OR NULL
@@ -20987,12 +21100,15 @@ struct retro_core_options_v2 options_no = {
 #define OPTION_VAL_3Y_OR NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_OR NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_OR NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_OR NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_OR NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_OR NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_OR NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_OR NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_OR NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_OR NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_OR NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_OR NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_OR NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_OR NULL
 #define DICE_DIPSWITCH_1_LABEL_OR NULL
@@ -21327,7 +21443,7 @@ struct retro_core_option_v2_definition option_defs_or[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_OR,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_OR,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_OR,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_OR,
       NULL,
       "manymouse",
       {
@@ -21381,7 +21497,7 @@ struct retro_core_option_v2_definition option_defs_or[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_OR,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_OR,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_OR,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_OR,
       NULL,
       "manymouse",
       {
@@ -21435,7 +21551,7 @@ struct retro_core_option_v2_definition option_defs_or[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_OR,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_OR,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_OR,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_OR,
       NULL,
       "manymouse",
       {
@@ -21489,7 +21605,7 @@ struct retro_core_option_v2_definition option_defs_or[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_OR,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_OR,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_OR,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_OR,
       NULL,
       "manymouse",
       {
@@ -21722,6 +21838,7 @@ struct retro_core_options_v2 options_or = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_PL NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_PL NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_PL NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_PL NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_PL NULL
 #define OPTION_VAL_0X_PL NULL
 #define OPTION_VAL_0Y_PL NULL
@@ -21733,12 +21850,15 @@ struct retro_core_options_v2 options_or = {
 #define OPTION_VAL_3Y_PL NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_PL NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_PL NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_PL NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_PL NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_PL NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_PL NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_PL NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_PL NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_PL NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_PL NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_PL NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_PL NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_PL NULL
 #define DICE_DIPSWITCH_1_LABEL_PL NULL
@@ -22073,7 +22193,7 @@ struct retro_core_option_v2_definition option_defs_pl[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_PL,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_PL,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_PL,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_PL,
       NULL,
       "manymouse",
       {
@@ -22127,7 +22247,7 @@ struct retro_core_option_v2_definition option_defs_pl[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_PL,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_PL,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_PL,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_PL,
       NULL,
       "manymouse",
       {
@@ -22181,7 +22301,7 @@ struct retro_core_option_v2_definition option_defs_pl[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_PL,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_PL,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_PL,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_PL,
       NULL,
       "manymouse",
       {
@@ -22235,7 +22355,7 @@ struct retro_core_option_v2_definition option_defs_pl[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_PL,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_PL,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_PL,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_PL,
       NULL,
       "manymouse",
       {
@@ -22431,16 +22551,16 @@ struct retro_core_options_v2 options_pl = {
 #define DICE_THROTTLE_KEYJOY_SENSITIVITY_INFO_0_PT_BR NULL
 #define DICE_RETROMOUSE_PADDLE0_LABEL_PT_BR NULL
 #define DICE_RETROMOUSE_PADDLE0_LABEL_CAT_PT_BR NULL
-#define DICE_RETROMOUSE_PADDLE0_INFO_0_PT_BR "Use o mouse para o Paddle 1."
+#define DICE_RETROMOUSE_PADDLE0_INFO_0_PT_BR NULL
 #define DICE_RETROMOUSE_PADDLE1_LABEL_PT_BR NULL
 #define DICE_RETROMOUSE_PADDLE1_LABEL_CAT_PT_BR NULL
-#define DICE_RETROMOUSE_PADDLE1_INFO_0_PT_BR "Use o mouse para o Paddle 2."
+#define DICE_RETROMOUSE_PADDLE1_INFO_0_PT_BR NULL
 #define DICE_RETROMOUSE_PADDLE2_LABEL_PT_BR NULL
 #define DICE_RETROMOUSE_PADDLE2_LABEL_CAT_PT_BR NULL
-#define DICE_RETROMOUSE_PADDLE2_INFO_0_PT_BR "Use o mouse para o Paddle 3."
+#define DICE_RETROMOUSE_PADDLE2_INFO_0_PT_BR NULL
 #define DICE_RETROMOUSE_PADDLE3_LABEL_PT_BR NULL
 #define DICE_RETROMOUSE_PADDLE3_LABEL_CAT_PT_BR NULL
-#define DICE_RETROMOUSE_PADDLE3_INFO_0_PT_BR "Use o mouse para o Paddle 4."
+#define DICE_RETROMOUSE_PADDLE3_INFO_0_PT_BR NULL
 #define DICE_RETROMOUSE_PADDLE0_X_LABEL_PT_BR "RetroMouse > Paddle do Mouse 1 x"
 #define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_PT_BR "Paddle do Mouse 1 x"
 #define DICE_RETROMOUSE_PADDLE0_X_INFO_0_PT_BR NULL
@@ -22468,6 +22588,7 @@ struct retro_core_options_v2 options_pl = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_PT_BR "Paddle do Mouse 4 y"
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_PT_BR NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_PT_BR NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_PT_BR NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_PT_BR "ManyMouse > Paddle do Mouse 1 x"
 #define OPTION_VAL_0X_PT_BR NULL
 #define OPTION_VAL_0Y_PT_BR NULL
@@ -22479,12 +22600,15 @@ struct retro_core_options_v2 options_pl = {
 #define OPTION_VAL_3Y_PT_BR "1y"
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_PT_BR "ManyMouse > Paddle do Mouse 1 y"
 #define DICE_MANYMOUSE_PADDLE1_LABEL_PT_BR NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_PT_BR NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_PT_BR "ManyMouse > Paddle do Mouse 2 x"
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_PT_BR "ManyMouse > Paddle do Mouse 2 y"
 #define DICE_MANYMOUSE_PADDLE2_LABEL_PT_BR NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_PT_BR NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_PT_BR "ManyMouse > Paddle do Mouse 3 x"
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_PT_BR "ManyMouse > Paddle do Mouse 3 y"
 #define DICE_MANYMOUSE_PADDLE3_LABEL_PT_BR NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_PT_BR NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_PT_BR "ManyMouse > Paddle do Mouse 4 x"
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_PT_BR "ManyMouse > Paddle do Mouse 4 y"
 #define DICE_DIPSWITCH_1_LABEL_PT_BR NULL
@@ -22819,7 +22943,7 @@ struct retro_core_option_v2_definition option_defs_pt_br[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_PT_BR,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_PT_BR,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_PT_BR,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_PT_BR,
       NULL,
       "manymouse",
       {
@@ -22873,7 +22997,7 @@ struct retro_core_option_v2_definition option_defs_pt_br[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_PT_BR,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_PT_BR,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_PT_BR,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_PT_BR,
       NULL,
       "manymouse",
       {
@@ -22927,7 +23051,7 @@ struct retro_core_option_v2_definition option_defs_pt_br[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_PT_BR,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_PT_BR,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_PT_BR,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_PT_BR,
       NULL,
       "manymouse",
       {
@@ -22981,7 +23105,7 @@ struct retro_core_option_v2_definition option_defs_pt_br[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_PT_BR,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_PT_BR,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_PT_BR,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_PT_BR,
       NULL,
       "manymouse",
       {
@@ -23214,6 +23338,7 @@ struct retro_core_options_v2 options_pt_br = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_PT_PT NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_PT_PT NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_PT_PT NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_PT_PT NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_PT_PT NULL
 #define OPTION_VAL_0X_PT_PT NULL
 #define OPTION_VAL_0Y_PT_PT NULL
@@ -23225,12 +23350,15 @@ struct retro_core_options_v2 options_pt_br = {
 #define OPTION_VAL_3Y_PT_PT NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_PT_PT NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_PT_PT NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_PT_PT NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_PT_PT NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_PT_PT NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_PT_PT NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_PT_PT NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_PT_PT NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_PT_PT NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_PT_PT NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_PT_PT NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_PT_PT NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_PT_PT NULL
 #define DICE_DIPSWITCH_1_LABEL_PT_PT NULL
@@ -23565,7 +23693,7 @@ struct retro_core_option_v2_definition option_defs_pt_pt[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_PT_PT,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_PT_PT,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_PT_PT,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_PT_PT,
       NULL,
       "manymouse",
       {
@@ -23619,7 +23747,7 @@ struct retro_core_option_v2_definition option_defs_pt_pt[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_PT_PT,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_PT_PT,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_PT_PT,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_PT_PT,
       NULL,
       "manymouse",
       {
@@ -23673,7 +23801,7 @@ struct retro_core_option_v2_definition option_defs_pt_pt[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_PT_PT,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_PT_PT,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_PT_PT,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_PT_PT,
       NULL,
       "manymouse",
       {
@@ -23727,7 +23855,7 @@ struct retro_core_option_v2_definition option_defs_pt_pt[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_PT_PT,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_PT_PT,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_PT_PT,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_PT_PT,
       NULL,
       "manymouse",
       {
@@ -23960,6 +24088,7 @@ struct retro_core_options_v2 options_pt_pt = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_RU NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_RU NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_RU NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_RU NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_RU NULL
 #define OPTION_VAL_0X_RU NULL
 #define OPTION_VAL_0Y_RU NULL
@@ -23971,12 +24100,15 @@ struct retro_core_options_v2 options_pt_pt = {
 #define OPTION_VAL_3Y_RU NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_RU NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_RU NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_RU NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_RU NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_RU NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_RU NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_RU NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_RU NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_RU NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_RU NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_RU NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_RU NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_RU NULL
 #define DICE_DIPSWITCH_1_LABEL_RU NULL
@@ -24311,7 +24443,7 @@ struct retro_core_option_v2_definition option_defs_ru[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_RU,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_RU,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_RU,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_RU,
       NULL,
       "manymouse",
       {
@@ -24365,7 +24497,7 @@ struct retro_core_option_v2_definition option_defs_ru[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_RU,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_RU,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_RU,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_RU,
       NULL,
       "manymouse",
       {
@@ -24419,7 +24551,7 @@ struct retro_core_option_v2_definition option_defs_ru[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_RU,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_RU,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_RU,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_RU,
       NULL,
       "manymouse",
       {
@@ -24473,7 +24605,7 @@ struct retro_core_option_v2_definition option_defs_ru[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_RU,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_RU,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_RU,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_RU,
       NULL,
       "manymouse",
       {
@@ -24706,6 +24838,7 @@ struct retro_core_options_v2 options_ru = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_SK NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_SK NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_SK NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_SK NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_SK NULL
 #define OPTION_VAL_0X_SK NULL
 #define OPTION_VAL_0Y_SK NULL
@@ -24717,12 +24850,15 @@ struct retro_core_options_v2 options_ru = {
 #define OPTION_VAL_3Y_SK NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_SK NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_SK NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_SK NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_SK NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_SK NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_SK NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_SK NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_SK NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_SK NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_SK NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_SK NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_SK NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_SK NULL
 #define DICE_DIPSWITCH_1_LABEL_SK NULL
@@ -25057,7 +25193,7 @@ struct retro_core_option_v2_definition option_defs_sk[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_SK,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_SK,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_SK,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_SK,
       NULL,
       "manymouse",
       {
@@ -25111,7 +25247,7 @@ struct retro_core_option_v2_definition option_defs_sk[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_SK,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_SK,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_SK,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_SK,
       NULL,
       "manymouse",
       {
@@ -25165,7 +25301,7 @@ struct retro_core_option_v2_definition option_defs_sk[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_SK,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_SK,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_SK,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_SK,
       NULL,
       "manymouse",
       {
@@ -25219,7 +25355,7 @@ struct retro_core_option_v2_definition option_defs_sk[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_SK,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_SK,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_SK,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_SK,
       NULL,
       "manymouse",
       {
@@ -25452,6 +25588,7 @@ struct retro_core_options_v2 options_sk = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_SR NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_SR NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_SR NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_SR NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_SR NULL
 #define OPTION_VAL_0X_SR NULL
 #define OPTION_VAL_0Y_SR NULL
@@ -25463,12 +25600,15 @@ struct retro_core_options_v2 options_sk = {
 #define OPTION_VAL_3Y_SR NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_SR NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_SR NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_SR NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_SR NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_SR NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_SR NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_SR NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_SR NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_SR NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_SR NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_SR NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_SR NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_SR NULL
 #define DICE_DIPSWITCH_1_LABEL_SR NULL
@@ -25803,7 +25943,7 @@ struct retro_core_option_v2_definition option_defs_sr[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_SR,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_SR,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_SR,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_SR,
       NULL,
       "manymouse",
       {
@@ -25857,7 +25997,7 @@ struct retro_core_option_v2_definition option_defs_sr[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_SR,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_SR,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_SR,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_SR,
       NULL,
       "manymouse",
       {
@@ -25911,7 +26051,7 @@ struct retro_core_option_v2_definition option_defs_sr[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_SR,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_SR,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_SR,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_SR,
       NULL,
       "manymouse",
       {
@@ -25965,7 +26105,7 @@ struct retro_core_option_v2_definition option_defs_sr[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_SR,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_SR,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_SR,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_SR,
       NULL,
       "manymouse",
       {
@@ -26198,6 +26338,7 @@ struct retro_core_options_v2 options_sr = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_SV NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_SV NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_SV NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_SV NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_SV NULL
 #define OPTION_VAL_0X_SV NULL
 #define OPTION_VAL_0Y_SV NULL
@@ -26209,12 +26350,15 @@ struct retro_core_options_v2 options_sr = {
 #define OPTION_VAL_3Y_SV NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_SV NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_SV NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_SV NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_SV NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_SV NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_SV NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_SV NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_SV NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_SV NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_SV NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_SV NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_SV NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_SV NULL
 #define DICE_DIPSWITCH_1_LABEL_SV NULL
@@ -26549,7 +26693,7 @@ struct retro_core_option_v2_definition option_defs_sv[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_SV,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_SV,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_SV,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_SV,
       NULL,
       "manymouse",
       {
@@ -26603,7 +26747,7 @@ struct retro_core_option_v2_definition option_defs_sv[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_SV,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_SV,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_SV,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_SV,
       NULL,
       "manymouse",
       {
@@ -26657,7 +26801,7 @@ struct retro_core_option_v2_definition option_defs_sv[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_SV,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_SV,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_SV,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_SV,
       NULL,
       "manymouse",
       {
@@ -26711,7 +26855,7 @@ struct retro_core_option_v2_definition option_defs_sv[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_SV,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_SV,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_SV,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_SV,
       NULL,
       "manymouse",
       {
@@ -26944,6 +27088,7 @@ struct retro_core_options_v2 options_sv = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_TR NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_TR NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_TR NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_TR NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_TR NULL
 #define OPTION_VAL_0X_TR NULL
 #define OPTION_VAL_0Y_TR NULL
@@ -26955,12 +27100,15 @@ struct retro_core_options_v2 options_sv = {
 #define OPTION_VAL_3Y_TR NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_TR NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_TR NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_TR NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_TR NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_TR NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_TR NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_TR NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_TR NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_TR NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_TR NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_TR NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_TR NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_TR NULL
 #define DICE_DIPSWITCH_1_LABEL_TR NULL
@@ -27295,7 +27443,7 @@ struct retro_core_option_v2_definition option_defs_tr[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_TR,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_TR,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_TR,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_TR,
       NULL,
       "manymouse",
       {
@@ -27349,7 +27497,7 @@ struct retro_core_option_v2_definition option_defs_tr[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_TR,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_TR,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_TR,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_TR,
       NULL,
       "manymouse",
       {
@@ -27403,7 +27551,7 @@ struct retro_core_option_v2_definition option_defs_tr[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_TR,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_TR,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_TR,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_TR,
       NULL,
       "manymouse",
       {
@@ -27457,7 +27605,7 @@ struct retro_core_option_v2_definition option_defs_tr[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_TR,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_TR,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_TR,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_TR,
       NULL,
       "manymouse",
       {
@@ -27690,6 +27838,7 @@ struct retro_core_options_v2 options_tr = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_TT NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_TT NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_TT NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_TT NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_TT NULL
 #define OPTION_VAL_0X_TT NULL
 #define OPTION_VAL_0Y_TT NULL
@@ -27701,12 +27850,15 @@ struct retro_core_options_v2 options_tr = {
 #define OPTION_VAL_3Y_TT NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_TT NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_TT NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_TT NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_TT NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_TT NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_TT NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_TT NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_TT NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_TT NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_TT NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_TT NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_TT NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_TT NULL
 #define DICE_DIPSWITCH_1_LABEL_TT NULL
@@ -28041,7 +28193,7 @@ struct retro_core_option_v2_definition option_defs_tt[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_TT,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_TT,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_TT,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_TT,
       NULL,
       "manymouse",
       {
@@ -28095,7 +28247,7 @@ struct retro_core_option_v2_definition option_defs_tt[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_TT,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_TT,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_TT,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_TT,
       NULL,
       "manymouse",
       {
@@ -28149,7 +28301,7 @@ struct retro_core_option_v2_definition option_defs_tt[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_TT,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_TT,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_TT,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_TT,
       NULL,
       "manymouse",
       {
@@ -28203,7 +28355,7 @@ struct retro_core_option_v2_definition option_defs_tt[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_TT,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_TT,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_TT,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_TT,
       NULL,
       "manymouse",
       {
@@ -28436,6 +28588,7 @@ struct retro_core_options_v2 options_tt = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_UK NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_UK NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_UK NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_UK NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_UK NULL
 #define OPTION_VAL_0X_UK NULL
 #define OPTION_VAL_0Y_UK NULL
@@ -28447,12 +28600,15 @@ struct retro_core_options_v2 options_tt = {
 #define OPTION_VAL_3Y_UK NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_UK NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_UK NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_UK NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_UK NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_UK NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_UK NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_UK NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_UK NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_UK NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_UK NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_UK NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_UK NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_UK NULL
 #define DICE_DIPSWITCH_1_LABEL_UK NULL
@@ -28787,7 +28943,7 @@ struct retro_core_option_v2_definition option_defs_uk[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_UK,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_UK,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_UK,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_UK,
       NULL,
       "manymouse",
       {
@@ -28841,7 +28997,7 @@ struct retro_core_option_v2_definition option_defs_uk[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_UK,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_UK,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_UK,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_UK,
       NULL,
       "manymouse",
       {
@@ -28895,7 +29051,7 @@ struct retro_core_option_v2_definition option_defs_uk[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_UK,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_UK,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_UK,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_UK,
       NULL,
       "manymouse",
       {
@@ -28949,7 +29105,7 @@ struct retro_core_option_v2_definition option_defs_uk[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_UK,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_UK,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_UK,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_UK,
       NULL,
       "manymouse",
       {
@@ -29182,6 +29338,7 @@ struct retro_core_options_v2 options_uk = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_VAL NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_VAL NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_VAL NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_VAL NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_VAL NULL
 #define OPTION_VAL_0X_VAL NULL
 #define OPTION_VAL_0Y_VAL NULL
@@ -29193,12 +29350,15 @@ struct retro_core_options_v2 options_uk = {
 #define OPTION_VAL_3Y_VAL NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_VAL NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_VAL NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_VAL NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_VAL NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_VAL NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_VAL NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_VAL NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_VAL NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_VAL NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_VAL NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_VAL NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_VAL NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_VAL NULL
 #define DICE_DIPSWITCH_1_LABEL_VAL NULL
@@ -29533,7 +29693,7 @@ struct retro_core_option_v2_definition option_defs_val[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_VAL,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_VAL,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_VAL,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_VAL,
       NULL,
       "manymouse",
       {
@@ -29587,7 +29747,7 @@ struct retro_core_option_v2_definition option_defs_val[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_VAL,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_VAL,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_VAL,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_VAL,
       NULL,
       "manymouse",
       {
@@ -29641,7 +29801,7 @@ struct retro_core_option_v2_definition option_defs_val[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_VAL,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_VAL,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_VAL,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_VAL,
       NULL,
       "manymouse",
       {
@@ -29695,7 +29855,7 @@ struct retro_core_option_v2_definition option_defs_val[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_VAL,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_VAL,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_VAL,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_VAL,
       NULL,
       "manymouse",
       {
@@ -29928,6 +30088,7 @@ struct retro_core_options_v2 options_val = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_VN NULL
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_VN NULL
 #define DICE_MANYMOUSE_PADDLE0_LABEL_VN NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_VN NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_VN NULL
 #define OPTION_VAL_0X_VN NULL
 #define OPTION_VAL_0Y_VN NULL
@@ -29939,12 +30100,15 @@ struct retro_core_options_v2 options_val = {
 #define OPTION_VAL_3Y_VN NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_VN NULL
 #define DICE_MANYMOUSE_PADDLE1_LABEL_VN NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_VN NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_VN NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_VN NULL
 #define DICE_MANYMOUSE_PADDLE2_LABEL_VN NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_VN NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_VN NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_VN NULL
 #define DICE_MANYMOUSE_PADDLE3_LABEL_VN NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_VN NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_VN NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_VN NULL
 #define DICE_DIPSWITCH_1_LABEL_VN NULL
@@ -30279,7 +30443,7 @@ struct retro_core_option_v2_definition option_defs_vn[] = {
       "dice_manymouse_paddle0",
       DICE_MANYMOUSE_PADDLE0_LABEL_VN,
       DICE_RETROMOUSE_PADDLE0_LABEL_CAT_VN,
-      DICE_RETROMOUSE_PADDLE0_INFO_0_VN,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_VN,
       NULL,
       "manymouse",
       {
@@ -30333,7 +30497,7 @@ struct retro_core_option_v2_definition option_defs_vn[] = {
       "dice_manymouse_paddle1",
       DICE_MANYMOUSE_PADDLE1_LABEL_VN,
       DICE_RETROMOUSE_PADDLE1_LABEL_CAT_VN,
-      DICE_RETROMOUSE_PADDLE1_INFO_0_VN,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_VN,
       NULL,
       "manymouse",
       {
@@ -30387,7 +30551,7 @@ struct retro_core_option_v2_definition option_defs_vn[] = {
       "dice_manymouse_paddle2",
       DICE_MANYMOUSE_PADDLE2_LABEL_VN,
       DICE_RETROMOUSE_PADDLE2_LABEL_CAT_VN,
-      DICE_RETROMOUSE_PADDLE2_INFO_0_VN,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_VN,
       NULL,
       "manymouse",
       {
@@ -30441,7 +30605,7 @@ struct retro_core_option_v2_definition option_defs_vn[] = {
       "dice_manymouse_paddle3",
       DICE_MANYMOUSE_PADDLE3_LABEL_VN,
       DICE_RETROMOUSE_PADDLE3_LABEL_CAT_VN,
-      DICE_RETROMOUSE_PADDLE3_INFO_0_VN,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_VN,
       NULL,
       "manymouse",
       {
