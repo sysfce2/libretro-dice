@@ -161,7 +161,7 @@ struct retro_core_option_v2_definition option_defs_us[] = {
       "dice_retromouse_paddle0",
       "RetroMouse > Use Mouse For Paddle 1",
       "Use Mouse For Paddle 1",
-      "Use a mouse for Paddle 1.",
+      "Use a specific mouse for Paddle 1, chosen by Port 1's Mouse Index.",
       NULL,
       "retromouse",
       {
@@ -175,7 +175,7 @@ struct retro_core_option_v2_definition option_defs_us[] = {
       "dice_retromouse_paddle1",
       "RetroMouse > Use Mouse For Paddle 2",
       "Use Mouse For Paddle 2",
-      "Use a mouse for Paddle 2.",
+      "Use a specific mouse for Paddle 2, chosen by Port 2's Mouse Index.",
       NULL,
       "retromouse",
       {
@@ -189,7 +189,7 @@ struct retro_core_option_v2_definition option_defs_us[] = {
       "dice_retromouse_paddle2",
       "RetroMouse > Use Mouse For Paddle 3",
       "Use Mouse For Paddle 3",
-      "Use a mouse for Paddle 3.",
+      "Use a specific mouse for Paddle 3, chosen by Port 3's Mouse Index.",
       NULL,
       "retromouse",
       {
@@ -203,7 +203,7 @@ struct retro_core_option_v2_definition option_defs_us[] = {
       "dice_retromouse_paddle3",
       "RetroMouse > Use Mouse For Paddle 4",
       "Use Mouse For Paddle 4",
-      "Use a mouse for Paddle 4.",
+      "Use a specific mouse for Paddle 4, chosen by Port 4's Mouse Index.",
       NULL,
       "retromouse",
       {
