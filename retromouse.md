@@ -27,11 +27,11 @@ You bind either the X or Y axis of your mouse to the single axis of the virtual 
 (Mouse buttons can be configured using the usual RetroArch systems.)
 
 ### One player using a mouse
-| Option                        | Value | Notes                                                                       |
-| ----------------------------- | ----- | --------------------------------------------------------------------------- |
-| RetroMouse > Mouse-Paddle 1   | ON    | Enable mouse as paddle.                                                     |
-| RetroMouse > Mouse-Paddle 1 x | x     | Control "horizontal motion" like Breakout using horizontal mouse movements. |
-| RetroMouse > Mouse-Paddle 1 y | y     | Control "vertical motion" like Pong using vertical mouse movements.         |
+| Option                                          | Value | Notes                                                                       |
+| ----------------------------------------------- | ----- | --------------------------------------------------------------------------- |
+| RetroMouse > Use Mouse For Paddle 1             | ON    | Enable mouse as paddle.                                                     |
+| RetroMouse > Mouse Axis For Paddle 1 Horizontal | x     | Control "horizontal motion" like Breakout using horizontal mouse movements. |
+| RetroMouse > Mouse Axis For Paddle 2 Vertical   | y     | Control "vertical motion" like Pong using vertical mouse movements.         |
 
 
 | Bind                                           | Value   | Notes  |
@@ -39,14 +39,14 @@ You bind either the X or Y axis of your mouse to the single axis of the virtual 
 | Retropad Binds > Port 1 Controls > Mouse Index | mouse 1 |        |
 
 ### Two players each using mice
-| Option                        | Value |
-| ----------------------------- | ----- |
-| RetroMouse > Mouse-Paddle 1   | ON    |
-| RetroMouse > Mouse-Paddle 1 x | x     |
-| RetroMouse > Mouse-Paddle 1 y | y     |
-| RetroMouse > Mouse-Paddle 2   | ON    |
-| RetroMouse > Mouse-Paddle 2 x | x     |
-| RetroMouse > Mouse-Paddle 2 y | y     |
+| Option                                          | Value |
+| ----------------------------------------------- | ----- |
+| RetroMouse > Use Mouse For Paddle 1             | ON    |
+| RetroMouse > Mouse Axis For Paddle 1 Horizontal | x     |
+| RetroMouse > Mouse Axis For Paddle 1 Vertical   | y     |
+| RetroMouse > Use Mouse For Paddle 2             | ON    |
+| RetroMouse > Mouse Axis For Paddle 2 Horizontal | x     |
+| RetroMouse > Mouse Axis For Paddle 2 Vertical   | y     |
 
 | Bind           | Value | Notes                                                                       |
 | ---------------- | ----- | --------------------------------------------------------------------------- |
@@ -60,12 +60,14 @@ Other controllers map motion to different mouse axes.
 Each spinner appears as a separate mouse, and can switch between axes with a button-hold or similar.
 
 Two players each using single-axis spinners like the Thunderstick GRS (and neither using the usual Mouse 0):
-| Option                        | Value |
-| ----------------------------- | ----- |
-| RetroMouse > Mouse-Paddle 1 x | x     |
-| RetroMouse > Mouse-Paddle 1 y | x     |
-| RetroMouse > Mouse-Paddle 2 x | x     |
-| RetroMouse > Mouse-Paddle 2 y | x     |
+| Option                                          | Value |
+| ----------------------------------------------- | ----- |
+| RetroMouse > Use Mouse For Paddle 1             | ON    |
+| RetroMouse > Mouse Axis For Paddle 1 Horizontal | x     |
+| RetroMouse > Mouse Axis For Paddle 1 Vertical   | x     |
+| RetroMouse > Use Mouse For Paddle 2             | ON    |
+| RetroMouse > Mouse Axis For Paddle 2 Horizontal | x     |
+| RetroMouse > Mouse Axis For Paddle 2 Vertical   | x     |
 
 | Bind           | Value | Notes                                                                       |
 | ---------------- | ----- | --------------------------------------------------------------------------- |
@@ -80,12 +82,14 @@ One Stelladaptor appears as a single mouse, with each axis controlled by a diffe
 Two players using a shared Stelladaptor 2600 with two Atari paddles (and neither using the usual Mouse 0):
 | Option                        | Value |
 | ----------------------------- | ----- |
-| RetroMouse > Mouse-Paddle 1 x | x     |
-| RetroMouse > Mouse-Paddle 1 y | x     |
-| RetroMouse > Mouse-Paddle 2 x | y     |
-| RetroMouse > Mouse-Paddle 2 y | y     |
+| RetroMouse > Use Mouse For Paddle 1             | ON    |
+| RetroMouse > Mouse Axis For Paddle 1 Horizontal | x     |
+| RetroMouse > Mouse Axis For Paddle 1 Vertical   | x     |
+| RetroMouse > Use Mouse For Paddle 2             | ON    |
+| RetroMouse > Mouse Axis For Paddle 2 Horizontal | y     |
+| RetroMouse > Mouse Axis For Paddle 2 Vertical   | y     |
 
-| Bind           | Value | Notes                                                                       |
-| ---------------- | ----- | --------------------------------------------------------------------------- |
-| Retropad Binds > Port 1 Controls > Mouse Index | Stelladaptor 1 | |
+| Bind                                           | Value          | Notes          |
+| ---------------------------------------------- | -------------- | -------------- |
+| Retropad Binds > Port 1 Controls > Mouse Index | Stelladaptor 1 |                |
 | Retropad Binds > Port 2 Controls > Mouse Index | Stelladaptor 1 | Note duplicate |
