@@ -2,6 +2,7 @@
 
 ## Since the last release
 - Core Options translated using Crowdin.
+- Compile-time option to put Button 1 on South/B by default.
 
 ## 0.3.0
 - Multiple mice using libretro's drivers, [retromouse.md](retromouse.md).
