@@ -1,8 +1,10 @@
 # Changelog
 
 ## Since the last release
+
+## 0.4.0
+- Button 1 on South/B by default.
 - Core Options translated using Crowdin.
-- Compile-time option to put Button 1 on South/B by default.
 
 ## 0.3.0
 - Multiple mice using libretro's drivers, [retromouse.md](retromouse.md).

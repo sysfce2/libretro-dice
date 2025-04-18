@@ -2,8 +2,6 @@ DEBUG = 0
 HAVE_NETWORK = 0
 VIDEO_RGB565 = 1
 MANYMOUSE = 0
-# Default to Button 1 on South/B, to better match some FBNeo and MAME setups.
-SNES_BUTTONS = 0
 
 SPACE :=
 SPACE := $(SPACE) $(SPACE)
@@ -64,12 +62,6 @@ core_installdir := $(prefix)/lib
 GIT_VERSION := " $(shell git rev-parse --short HEAD || echo unknown)"
 ifneq ($(GIT_VERSION)," unknown")
    CXXFLAGS += -DGIT_VERSION=\"$(GIT_VERSION)\"
-endif
-
-# SNES-arcade button layout, with Button 1 on South/B.
-ifeq ($(SNES_BUTTONS), 1)
-	CFLAGS += -DSNES_BUTTONS
-	CXXFLAGS += -DSNES_BUTTONS
 endif
 
 # Unix
