@@ -123,7 +123,7 @@ void retro_get_system_info(struct retro_system_info *info)
 {
    memset(info, 0, sizeof(*info));
    info->library_name     = "dice";
-   info->library_version  = "0.3.0";
+   info->library_version  = "0.4.0";
    info->need_fullpath    = true;
    // dmy are launcher files for rom-less games like pong.
    // zip means we support zipped files (maybe not needed here?)
