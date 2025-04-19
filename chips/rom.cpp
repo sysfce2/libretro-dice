@@ -34,10 +34,9 @@ static char temp_rom_name[1000];
 static bool error_shown = false;
 
 
-// TODO: Prevent multiple error popups when file is not found.
-// By extracting entire file at once?
-
+#ifndef PATH_MAX
 #define PATH_MAX    1024
+#endif
 
 uint8_t RomDesc::get_data(const RomDesc* rom, unsigned offset)
 {
