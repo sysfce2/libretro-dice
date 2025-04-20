@@ -533,11 +533,11 @@ CHIP_DESC( BUTTONS1_INPUT ) =
         OUTPUT_PIN( i7 ),
 
     // Normally Open (Active Low) Outputs
-    ChipDesc(&digital_input<0, RETRO_DEVICE_ID_JOYPAD_A>)
+    ChipDesc(&digital_input<0, RETRO_DEVICE_ID_JOYPAD_B>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 1 ),
 
-	ChipDesc(&digital_input<0, RETRO_DEVICE_ID_JOYPAD_B>)
+	ChipDesc(&digital_input<0, RETRO_DEVICE_ID_JOYPAD_A>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 2 ),
 
@@ -561,11 +561,11 @@ CHIP_DESC( BUTTONS2_INPUT ) =
         OUTPUT_PIN( i7 ),
 
     // Normally Open (Active Low) Outputs
-    ChipDesc(&digital_input<1, RETRO_DEVICE_ID_JOYPAD_A>)
+    ChipDesc(&digital_input<1, RETRO_DEVICE_ID_JOYPAD_B>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 1 ),
 
-	ChipDesc(&digital_input<1, RETRO_DEVICE_ID_JOYPAD_B>)
+	ChipDesc(&digital_input<1, RETRO_DEVICE_ID_JOYPAD_A>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 2 ),
 
@@ -588,11 +588,11 @@ CHIP_DESC( BUTTONS3_INPUT ) =
         OUTPUT_PIN( i7 ),
 
     // Normally Open (Active Low) Outputs
-    ChipDesc(&digital_input<2, RETRO_DEVICE_ID_JOYPAD_A>)
+    ChipDesc(&digital_input<2, RETRO_DEVICE_ID_JOYPAD_B>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 1 ),
 
-	ChipDesc(&digital_input<2, RETRO_DEVICE_ID_JOYPAD_B>)
+	ChipDesc(&digital_input<2, RETRO_DEVICE_ID_JOYPAD_A>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 2 ),
 
@@ -610,11 +610,11 @@ CHIP_DESC( BUTTONS4_INPUT ) =
         OUTPUT_PIN( i7 ),
 
     // Normally Open (Active Low) Outputs
-    ChipDesc(&digital_input<3, RETRO_DEVICE_ID_JOYPAD_A>)
+    ChipDesc(&digital_input<3, RETRO_DEVICE_ID_JOYPAD_B>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 1 ),
 
-	ChipDesc(&digital_input<3, RETRO_DEVICE_ID_JOYPAD_B>)
+	ChipDesc(&digital_input<3, RETRO_DEVICE_ID_JOYPAD_A>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 2 ),
 
@@ -633,7 +633,7 @@ CHIP_DESC( BUTTONS5_INPUT ) =
         OUTPUT_PIN( i7 ),
 
     // Normally Open (Active Low) Outputs
-    ChipDesc(&digital_input<4, RETRO_DEVICE_ID_JOYPAD_A>)
+    ChipDesc(&digital_input<4, RETRO_DEVICE_ID_JOYPAD_B>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 1 ),
 
@@ -652,7 +652,7 @@ CHIP_DESC( BUTTONS6_INPUT ) =
         OUTPUT_PIN( i7 ),
 
     // Normally Open (Active Low) Outputs
-    ChipDesc(&digital_input<5, RETRO_DEVICE_ID_JOYPAD_A>)
+    ChipDesc(&digital_input<5, RETRO_DEVICE_ID_JOYPAD_B>)
         INPUT_PINS( i7 )
         OUTPUT_PIN( 1 ),
 
@@ -1073,7 +1073,7 @@ bool Input::getKeyboardState(unsigned scancode)
 
 bool Input::getJoystickButton(unsigned joystick, unsigned button)
 {
-   // Button is RETRO_DEVICE_ID_JOYPAD_A or similar.
+   // Button is RETRO_DEVICE_ID_JOYPAD_B or similar.
    // RetroPad d-pad is implemented as 4 buttons.
    unsigned bitmask = 1<<button;
    return bool(input_state[joystick] & bitmask);
