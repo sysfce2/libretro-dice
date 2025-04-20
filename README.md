@@ -24,6 +24,9 @@ file from dummy_files to your ROM folder; these have a
 correct name (for example, pong.dmy) that will get RetroArch to set up
 lr-dice for the correct game.
 
+(If you use a ROM manager like RomVault or clrmamepro, it may suggest wrapping
+pong.dmy in pong.zip --- that works fine as well.)
+
 ### Games
 
 |	Name	|	Base filename	|	Publisher	|	Year |	Needs ROM?	|
