@@ -2,6 +2,9 @@
 
 ## Since the last release
 
+## 0.4.1
+- Fix Button 1 on South/B.
+
 ## 0.4.0
 - Button 1 on South/B by default.
 - Core Options translated using Crowdin.
