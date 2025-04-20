@@ -45,19 +45,19 @@ struct ChipDesc
         logic_func(chip_l), custom_logic(cust_l), output_delay(delay), input_pins(in), 
         event_pins(ev), output_pin(out), prev_output_pin(prev_out) { }
 
-    constexpr ChipDesc set_input_pins(std::array<uint8_t, MAX_INPUT_PINS+1> p)
+    constexpr ChipDesc set_input_pins(std::array<uint8_t, MAX_INPUT_PINS+1> p) const
     { return ChipDesc(logic_func, custom_logic, output_delay, p, event_pins, output_pin, prev_output_pin); }
 
-    constexpr ChipDesc set_event_pins(std::array<uint8_t, MAX_EVENT_PINS+1> p)
+    constexpr ChipDesc set_event_pins(std::array<uint8_t, MAX_EVENT_PINS+1> p) const
     { return ChipDesc(logic_func, custom_logic, output_delay, input_pins, p, output_pin, prev_output_pin); }
 
-    constexpr ChipDesc set_output_pin(uint8_t p)
+    constexpr ChipDesc set_output_pin(uint8_t p) const
     { return ChipDesc(logic_func, custom_logic, output_delay, input_pins, event_pins, p, prev_output_pin); }
 
-    constexpr ChipDesc set_prev_output_pin(uint8_t p)
+    constexpr ChipDesc set_prev_output_pin(uint8_t p) const
     { return ChipDesc(logic_func, custom_logic, output_delay, input_pins, event_pins, output_pin, p); }
 
-    constexpr ChipDesc set_output_delay(double tp_lh, double tp_hl)
+    constexpr ChipDesc set_output_delay(double tp_lh, double tp_hl) const
     { return ChipDesc(logic_func, custom_logic, {{tp_lh, tp_hl}}, input_pins, event_pins, output_pin, prev_output_pin); }
 
     bool endOfDesc() const

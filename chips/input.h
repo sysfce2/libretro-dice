@@ -142,7 +142,6 @@ private:
     //std::vector<SDL_Joystick*> joysticks;
 public:
     Input();
-    ~Input();
     void poll_input();
     
     int getRetroRelativeMouseX(unsigned mouse);
@@ -155,8 +154,6 @@ public:
     bool getJoystickButton(unsigned joystick, unsigned button);
     int16_t getJoystickAxis(unsigned joystick, unsigned axis);
     int16_t getPointerAxis(unsigned axis);
-    int getNumJoysticks();
-    int getNumJoystickAxes(int joystick);
     bool getKeyPressed(const KeyAssignment& key_assignment);
    
    int32_t input_state[NUM_CONTROLLERS];

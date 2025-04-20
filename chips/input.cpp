@@ -969,12 +969,6 @@ CHIP_DESC( THROTTLE1_INPUT ) =
 
 Input::Input()
 { 
-    /* joysticks.resize(SDL_NumJoysticks());
-
-    for(int i = 0; i < joysticks.size(); i++)
-        joysticks[i] = SDL_JoystickOpen(i);
-        // TODO: check if joystick failed to open
-     */
    paddle_keyboard_sensitivity = 250;
    paddle_joystick_sensitivity = 500;
    wheel_keyjoy_sensitivity = 500;
@@ -982,18 +976,8 @@ Input::Input()
    use_mouse_pointer_for_paddle_1 = false;
 }
 
-Input::~Input()
-{
-    /* for(int i = 0; i < joysticks.size(); i++)
-        if(joysticks[i]) SDL_JoystickClose(joysticks[i]);
-     */
-}
-
 void Input::poll_input()
 {
-    //SDL_JoystickUpdate();
-
-    //Application::processEvents();
 #ifdef MANYMOUSE
     ManyMouseEvent mouse_event;
     while (ManyMouse_PollEvent(&mouse_event))
@@ -1077,9 +1061,6 @@ bool Input::getJoystickButton(unsigned joystick, unsigned button)
    // RetroPad d-pad is implemented as 4 buttons.
    unsigned bitmask = 1<<button;
    return bool(input_state[joystick] & bitmask);
-
-   //if(joystick >= joysticks.size()) return 0;
-    //return SDL_JoystickGetButton(joysticks[joystick], button);
 }
 
 int16_t Input::getJoystickAxis(unsigned joystick, unsigned axis)
@@ -1098,16 +1079,6 @@ int16_t Input::getPointerAxis(unsigned axis)
    } else {
       return int16_t(float(input_pointer_y[0]));
    }
-}
-
-int Input::getNumJoysticks()
-{
-    //return joysticks.size();
-}
-
-int Input::getNumJoystickAxes(int joystick)
-{
-    //return SDL_JoystickNumAxes(joysticks[joystick]);
 }
 
 bool Input::getKeyPressed(const KeyAssignment& key_assignment)
