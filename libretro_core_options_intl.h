@@ -26553,25 +26553,25 @@ struct retro_core_options_v2 options_sr = {
 #define CATEGORY_INPUT_LABEL_SV "Inmatning"
 #define CATEGORY_INPUT_INFO_0_SV "Konfigurera kärmspecifika inmatningsinställningar."
 #define CATEGORY_RETROMOUSE_LABEL_SV NULL
-#define CATEGORY_RETROMOUSE_INFO_0_SV NULL
+#define CATEGORY_RETROMOUSE_INFO_0_SV "Konfigurera libretro-inställningar för flera möss."
 #define CATEGORY_MANYMOUSE_LABEL_SV NULL
-#define CATEGORY_MANYMOUSE_INFO_0_SV NULL
+#define CATEGORY_MANYMOUSE_INFO_0_SV "Konfigurera ManyMouse, inställningar för flera möss."
 #define CATEGORY_DIPSWITCH_LABEL_SV "DIP-brytare"
 #define CATEGORY_DIPSWITCH_INFO_0_SV "Konfigurera inställningar för DIP-brytare och potentiometer."
 #define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_SV "Inmatning > Använd muspekare för Paddel 1"
 #define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_SV "Använd muspekare för Paddel 1"
 #define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_SV "Använd systemmuspekaren som paddelkontroll 1.  Låter dig inte välja en specifik mus om du har flera."
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_SV NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_SV NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_SV NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_SV NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CAT_SV NULL
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_SV "Inmatning > Paddelstyrspak använder absolut rörelse"
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_SV "Paddelstyrspak använder absolut rörelse"
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_SV "Direktmappning av styrspaksrörelsens omfång till paddelns omfång, istället för relativa rörelser."
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_SV "Inmatning > Paddelkänslighet för riktningsknappar"
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CAT_SV "Paddelkänslighet för riktningsknappar"
 #define DICE_PADDLE_KEYBOARD_SENSITIVITY_INFO_0_SV "Känslighet när riktningsknappar används som en paddel."
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_SV NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CAT_SV NULL
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_SV "Inmatning > Paddelkänslighet för analog spak"
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CAT_SV "Paddelkänslighet för analog spak"
 #define DICE_PADDLE_JOYSTICK_SENSITIVITY_INFO_0_SV "Känslighet när analog spak används som en paddel."
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_SV NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CAT_SV NULL
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_SV "Inmatning > Paddelkänslighet för RetroMouse"
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CAT_SV "Paddelkänslighet för RetroMouse"
 #define DICE_RETROMOUSE_PADDLE_SENSITIVITY_INFO_0_SV "Känslighet när du använder RetroMouse för en paddel."
 #define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_SV "Inmatning > Rattkänslighet"
 #define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_CAT_SV "Rattkänslighet"
@@ -26591,36 +26591,36 @@ struct retro_core_options_v2 options_sr = {
 #define DICE_RETROMOUSE_PADDLE3_LABEL_SV "RetroMouse > Använd mus för Paddel 4"
 #define DICE_RETROMOUSE_PADDLE3_LABEL_CAT_SV "Använd mus för Paddel 4"
 #define DICE_RETROMOUSE_PADDLE3_INFO_0_SV "Använd en specifik mus för Paddel 4, vald av musindex för Port 4."
-#define DICE_RETROMOUSE_PADDLE0_X_LABEL_SV NULL
-#define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_SV NULL
-#define DICE_RETROMOUSE_PADDLE0_X_INFO_0_SV NULL
+#define DICE_RETROMOUSE_PADDLE0_X_LABEL_SV "RetroMouse > Musaxel för paddel 1 horisontell"
+#define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_SV "Musaxel för paddel 1 horisontell"
+#define DICE_RETROMOUSE_PADDLE0_X_INFO_0_SV "Musaxel för spelare 1, horisontell skärmrörelse."
 #define OPTION_VAL_X_SV NULL
 #define OPTION_VAL_Y_SV NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_SV NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_CAT_SV NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_INFO_0_SV NULL
-#define DICE_RETROMOUSE_PADDLE1_X_LABEL_SV NULL
-#define DICE_RETROMOUSE_PADDLE1_X_LABEL_CAT_SV NULL
-#define DICE_RETROMOUSE_PADDLE1_X_INFO_0_SV NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_SV NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CAT_SV NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_INFO_0_SV NULL
-#define DICE_RETROMOUSE_PADDLE2_X_LABEL_SV NULL
-#define DICE_RETROMOUSE_PADDLE2_X_LABEL_CAT_SV NULL
-#define DICE_RETROMOUSE_PADDLE2_X_INFO_0_SV NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_SV NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_CAT_SV NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_INFO_0_SV NULL
-#define DICE_RETROMOUSE_PADDLE3_X_LABEL_SV NULL
-#define DICE_RETROMOUSE_PADDLE3_X_LABEL_CAT_SV NULL
-#define DICE_RETROMOUSE_PADDLE3_X_INFO_0_SV NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_SV NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_SV NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_SV NULL
-#define DICE_MANYMOUSE_PADDLE0_LABEL_SV NULL
+#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_SV "RetroMouse > Musaxel för paddel 1 vertikal"
+#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_CAT_SV "Musaxel för paddel 1 vertikal"
+#define DICE_RETROMOUSE_PADDLE0_Y_INFO_0_SV "Musaxel för spelare 1, vertikal skärmrörelse."
+#define DICE_RETROMOUSE_PADDLE1_X_LABEL_SV "RetroMouse > Musaxel för paddel 2 horisontell"
+#define DICE_RETROMOUSE_PADDLE1_X_LABEL_CAT_SV "Musaxel för paddel 2 horisontell"
+#define DICE_RETROMOUSE_PADDLE1_X_INFO_0_SV "Musaxel för spelare 2, horisontell skärmrörelse."
+#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_SV "RetroMouse > Musaxel för paddel 2 vertikal"
+#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CAT_SV "Musaxel för paddel 2 vertikal"
+#define DICE_RETROMOUSE_PADDLE1_Y_INFO_0_SV "Musaxel för spelare 2, vertikal skärmrörelse."
+#define DICE_RETROMOUSE_PADDLE2_X_LABEL_SV "RetroMouse > Musaxel för paddel 3 horisontell"
+#define DICE_RETROMOUSE_PADDLE2_X_LABEL_CAT_SV "Musaxel för paddel 3 horisontell"
+#define DICE_RETROMOUSE_PADDLE2_X_INFO_0_SV "Musaxel för spelare 3, horisontell skärmrörelse."
+#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_SV "RetroMouse > Musaxel för paddel 3 vertikal"
+#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_CAT_SV "Musaxel för paddel 3 vertikal"
+#define DICE_RETROMOUSE_PADDLE2_Y_INFO_0_SV "Musaxel för spelare 3, vertikal skärmrörelse."
+#define DICE_RETROMOUSE_PADDLE3_X_LABEL_SV "RetroMouse > Musaxel för paddel 4 horisontell"
+#define DICE_RETROMOUSE_PADDLE3_X_LABEL_CAT_SV "Musaxel för paddel 4 horisontell"
+#define DICE_RETROMOUSE_PADDLE3_X_INFO_0_SV "Musaxel för spelare 4, horisontell skärmrörelse."
+#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_SV "RetroMouse > Musaxel för paddel 4 vertikal"
+#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_SV "Musaxel för paddel 4 vertikal"
+#define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_SV "Musaxel för spelare 4, vertikal skärmrörelse."
+#define DICE_MANYMOUSE_PADDLE0_LABEL_SV "ManyMouse > Använd mus för paddel 1"
 #define DICE_MANYMOUSE_PADDLE0_INFO_0_SV "Använd en mus som Paddel 1."
-#define DICE_MANYMOUSE_PADDLE0_X_LABEL_SV NULL
-#define DICE_MANYMOUSE_PADDLE0_X_LABEL_CAT_SV NULL
+#define DICE_MANYMOUSE_PADDLE0_X_LABEL_SV "ManyMouse > Muspaddel 1 x"
+#define DICE_MANYMOUSE_PADDLE0_X_LABEL_CAT_SV "Muspaddel 1 x"
 #define OPTION_VAL_0X_SV NULL
 #define OPTION_VAL_0Y_SV NULL
 #define OPTION_VAL_1X_SV NULL
@@ -26629,26 +26629,26 @@ struct retro_core_options_v2 options_sr = {
 #define OPTION_VAL_2Y_SV NULL
 #define OPTION_VAL_3X_SV NULL
 #define OPTION_VAL_3Y_SV NULL
-#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_SV NULL
-#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CAT_SV NULL
-#define DICE_MANYMOUSE_PADDLE1_LABEL_SV NULL
+#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_SV "ManyMouse > Muspaddel 1 y"
+#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CAT_SV "Muspaddel 1 y"
+#define DICE_MANYMOUSE_PADDLE1_LABEL_SV "ManyMouse > Använd mus för paddel 2"
 #define DICE_MANYMOUSE_PADDLE1_INFO_0_SV "Använd en mus som Paddel 2."
-#define DICE_MANYMOUSE_PADDLE1_X_LABEL_SV NULL
-#define DICE_MANYMOUSE_PADDLE1_X_LABEL_CAT_SV NULL
-#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_SV NULL
-#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CAT_SV NULL
-#define DICE_MANYMOUSE_PADDLE2_LABEL_SV NULL
+#define DICE_MANYMOUSE_PADDLE1_X_LABEL_SV "ManyMouse > Muspaddel 2 x"
+#define DICE_MANYMOUSE_PADDLE1_X_LABEL_CAT_SV "Muspaddel 2 x"
+#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_SV "ManyMouse > Muspaddel 2 y"
+#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CAT_SV "Muspaddel 2 y"
+#define DICE_MANYMOUSE_PADDLE2_LABEL_SV "ManyMouse > Använd mus för paddel 3"
 #define DICE_MANYMOUSE_PADDLE2_INFO_0_SV "Använd en mus som Paddel 3."
-#define DICE_MANYMOUSE_PADDLE2_X_LABEL_SV NULL
-#define DICE_MANYMOUSE_PADDLE2_X_LABEL_CAT_SV NULL
-#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_SV NULL
-#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CAT_SV NULL
-#define DICE_MANYMOUSE_PADDLE3_LABEL_SV NULL
+#define DICE_MANYMOUSE_PADDLE2_X_LABEL_SV "ManyMouse > Muspaddel 3 x"
+#define DICE_MANYMOUSE_PADDLE2_X_LABEL_CAT_SV "Muspaddel 3 x"
+#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_SV "ManyMouse > Muspaddel 3 y"
+#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CAT_SV "Muspaddel 3 y"
+#define DICE_MANYMOUSE_PADDLE3_LABEL_SV "ManyMouse > Använd mus för paddel 4"
 #define DICE_MANYMOUSE_PADDLE3_INFO_0_SV "Använd en mus som Paddel 4."
-#define DICE_MANYMOUSE_PADDLE3_X_LABEL_SV NULL
-#define DICE_MANYMOUSE_PADDLE3_X_LABEL_CAT_SV NULL
-#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_SV NULL
-#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CAT_SV NULL
+#define DICE_MANYMOUSE_PADDLE3_X_LABEL_SV "ManyMouse > Muspaddel 4 x"
+#define DICE_MANYMOUSE_PADDLE3_X_LABEL_CAT_SV "Muspaddel 4 x"
+#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_SV "ManyMouse > Muspaddel 4 y"
+#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CAT_SV "Muspaddel 4 y"
 #define DICE_DIPSWITCH_1_LABEL_SV "DIP-brytare > DIP-brytare 1"
 #define DICE_DIPSWITCH_1_LABEL_CAT_SV "DIP-brytare 1"
 #define DICE_DIPSWITCH_1_INFO_0_SV "Inställning för DIP-brytare 1."
@@ -26659,11 +26659,11 @@ struct retro_core_options_v2 options_sr = {
 #define DICE_DIPSWITCH_3_LABEL_SV "DIP-brytare > DIP-brytare 3"
 #define DICE_DIPSWITCH_3_LABEL_CAT_SV "DIP-brytare 3"
 #define DICE_DIPSWITCH_3_INFO_0_SV "Inställning för DIP-brytare 3."
-#define DICE_DIPSWITCH16_1_LABEL_SV NULL
-#define DICE_DIPSWITCH16_1_LABEL_CAT_SV NULL
+#define DICE_DIPSWITCH16_1_LABEL_SV "DIP-brytare > DIP-brytare hex 1"
+#define DICE_DIPSWITCH16_1_LABEL_CAT_SV "DIP-brytare hex 1"
 #define DICE_DIPSWITCH16_1_INFO_0_SV "Inställning för 16-positions DIP-brytare nummer 1."
-#define DICE_DIPSWITCH16_2_LABEL_SV NULL
-#define DICE_DIPSWITCH16_2_LABEL_CAT_SV NULL
+#define DICE_DIPSWITCH16_2_LABEL_SV "DIP-brytare > DIP-brytare hex 2"
+#define DICE_DIPSWITCH16_2_LABEL_CAT_SV "DIP-brytare hex 2"
 #define DICE_DIPSWITCH16_2_INFO_0_SV "Inställning för 16-positions DIP-brytare nummer 2."
 
 struct retro_core_option_v2_category option_cats_sv[] = {
@@ -27309,76 +27309,76 @@ struct retro_core_options_v2 options_sv = {
 /* RETRO_LANGUAGE_TR */
 
 #define CATEGORY_INPUT_LABEL_TR "Giriş"
-#define CATEGORY_INPUT_INFO_0_TR NULL
-#define CATEGORY_RETROMOUSE_LABEL_TR NULL
-#define CATEGORY_RETROMOUSE_INFO_0_TR NULL
+#define CATEGORY_INPUT_INFO_0_TR "Çekirdeğe özgü giriş ayarlarını yapılandırın."
+#define CATEGORY_RETROMOUSE_LABEL_TR "RetroFare"
+#define CATEGORY_RETROMOUSE_INFO_0_TR "Libretro çoklu fare ayarlarını yapılandırın."
 #define CATEGORY_MANYMOUSE_LABEL_TR "ÇokluFare"
-#define CATEGORY_MANYMOUSE_INFO_0_TR NULL
-#define CATEGORY_DIPSWITCH_LABEL_TR NULL
-#define CATEGORY_DIPSWITCH_INFO_0_TR NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_TR NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_TR NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_TR NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_TR NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_TR NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_TR NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_TR NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CAT_TR NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_INFO_0_TR NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_TR NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CAT_TR NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_INFO_0_TR NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_TR NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CAT_TR NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_INFO_0_TR NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_TR NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_CAT_TR NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_INFO_0_TR NULL
-#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_TR NULL
-#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_CAT_TR NULL
-#define DICE_THROTTLE_KEYJOY_SENSITIVITY_INFO_0_TR NULL
-#define DICE_RETROMOUSE_PADDLE0_LABEL_TR NULL
-#define DICE_RETROMOUSE_PADDLE0_LABEL_CAT_TR NULL
-#define DICE_RETROMOUSE_PADDLE0_INFO_0_TR NULL
-#define DICE_RETROMOUSE_PADDLE1_LABEL_TR NULL
-#define DICE_RETROMOUSE_PADDLE1_LABEL_CAT_TR NULL
-#define DICE_RETROMOUSE_PADDLE1_INFO_0_TR NULL
-#define DICE_RETROMOUSE_PADDLE2_LABEL_TR NULL
-#define DICE_RETROMOUSE_PADDLE2_LABEL_CAT_TR NULL
-#define DICE_RETROMOUSE_PADDLE2_INFO_0_TR NULL
-#define DICE_RETROMOUSE_PADDLE3_LABEL_TR NULL
-#define DICE_RETROMOUSE_PADDLE3_LABEL_CAT_TR NULL
-#define DICE_RETROMOUSE_PADDLE3_INFO_0_TR NULL
-#define DICE_RETROMOUSE_PADDLE0_X_LABEL_TR NULL
-#define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_TR NULL
-#define DICE_RETROMOUSE_PADDLE0_X_INFO_0_TR NULL
+#define CATEGORY_MANYMOUSE_INFO_0_TR "ÇokluFare birden çok fare ayarlarını yapılandırın."
+#define CATEGORY_DIPSWITCH_LABEL_TR "DIP Anahtarı"
+#define CATEGORY_DIPSWITCH_INFO_0_TR "DIP anahtarı ve potansiyometre ayarlarını yapılandırın."
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_TR "Giriş > Pedal 1 İçin Fare İşaretçisini Kullan"
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_TR "Pedal 1 İçin Fare İşaretçisini Kullan"
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_TR "Sistem fare işaretçisini pedal kontrolcüsü olarak kullan 1. Birden fazla fareniz varsa belirli bir fareyi seçmenize izin vermez."
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_TR "Giriş > Pedal Joystick Mutlak Hareketi Kullanır"
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_TR "Pedal Joystick Mutlak Hareketi Kullanır"
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_TR "Joystick hareket aralığını, göreceli hareketler yerine doğrudan pedal aralığına eşleyin."
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_TR "Giriş > Pedal D-pad Hassasiyeti"
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CAT_TR "Pedal D-pad Hassasiyeti"
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_INFO_0_TR "Pedal için D-pad kullanıldığında hassasiyet."
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_TR "Giriş > Pedal Analog Çubuk Hassasiyeti"
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CAT_TR "Pedal Analog Çubuk Hassasiyeti"
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_INFO_0_TR "Pedal için analog çubuk kullanıldığında hassasiyet."
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_TR "Giriş > Pedal RetroFare Hassasiyeti"
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CAT_TR "Pedal RetroFare Hassasiyeti"
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_INFO_0_TR "Pedal için RetroFare kullanıldığında hassasiyet."
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_TR "Giriş > Direksiyon Hassasiyeti"
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_CAT_TR "Direksiyon Hassasiyeti"
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_INFO_0_TR "Direksiyon yerine D-pad veya analog çubuk kullanıldığında hassasiyet."
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_TR "Giriş > Gaz Kelebeği Hassasiyeti"
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_CAT_TR "Gaz Kelebeği Hassasiyeti"
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_INFO_0_TR "Gaz pedalı olarak D-pad veya analog çubuk kullanıldığında hassasiyet."
+#define DICE_RETROMOUSE_PADDLE0_LABEL_TR "RetroFare > Pedal 1 İçin Fareyi Kullan"
+#define DICE_RETROMOUSE_PADDLE0_LABEL_CAT_TR "Pedal 1 İçin Fareyi Kullan"
+#define DICE_RETROMOUSE_PADDLE0_INFO_0_TR "Port 1 Fare Dizini tarafından seçilen Pedal 1 için özel bir fare kullanın."
+#define DICE_RETROMOUSE_PADDLE1_LABEL_TR "RetroFare > Pedal 2 İçin Fareyi Kullan"
+#define DICE_RETROMOUSE_PADDLE1_LABEL_CAT_TR "Pedal 2 İçin Fareyi Kullan"
+#define DICE_RETROMOUSE_PADDLE1_INFO_0_TR "Port 2 Fare Dizini tarafından seçilen Pedal 2 için özel bir fare kullanın."
+#define DICE_RETROMOUSE_PADDLE2_LABEL_TR "RetroFare > Pedal 3 İçin Fareyi Kullan"
+#define DICE_RETROMOUSE_PADDLE2_LABEL_CAT_TR "Pedal 3 İçin Fareyi Kullan"
+#define DICE_RETROMOUSE_PADDLE2_INFO_0_TR "Port 3 Fare Dizini tarafından seçilen Pedal 3 için özel bir fare kullanın."
+#define DICE_RETROMOUSE_PADDLE3_LABEL_TR "RetroFare > Pedal 4 İçin Fareyi Kullan"
+#define DICE_RETROMOUSE_PADDLE3_LABEL_CAT_TR "Pedal 4 İçin Fareyi Kullan"
+#define DICE_RETROMOUSE_PADDLE3_INFO_0_TR "Port 4 Fare Dizini tarafından seçilen Pedal 4 için özel bir fare kullanın."
+#define DICE_RETROMOUSE_PADDLE0_X_LABEL_TR "RetroFare > Pedal 1 İçin Yatay Fare Ekseni"
+#define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_TR "Pedal 1 İçin Yatay Fare Ekseni"
+#define DICE_RETROMOUSE_PADDLE0_X_INFO_0_TR "1. oyuncu için fare ekseni, yatay ekran hareketi."
 #define OPTION_VAL_X_TR NULL
 #define OPTION_VAL_Y_TR NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_TR NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_CAT_TR NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_INFO_0_TR NULL
-#define DICE_RETROMOUSE_PADDLE1_X_LABEL_TR NULL
-#define DICE_RETROMOUSE_PADDLE1_X_LABEL_CAT_TR NULL
-#define DICE_RETROMOUSE_PADDLE1_X_INFO_0_TR NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_TR NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CAT_TR NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_INFO_0_TR NULL
-#define DICE_RETROMOUSE_PADDLE2_X_LABEL_TR NULL
-#define DICE_RETROMOUSE_PADDLE2_X_LABEL_CAT_TR NULL
-#define DICE_RETROMOUSE_PADDLE2_X_INFO_0_TR NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_TR NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_CAT_TR NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_INFO_0_TR NULL
-#define DICE_RETROMOUSE_PADDLE3_X_LABEL_TR NULL
-#define DICE_RETROMOUSE_PADDLE3_X_LABEL_CAT_TR NULL
-#define DICE_RETROMOUSE_PADDLE3_X_INFO_0_TR NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_TR NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_TR NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_TR NULL
-#define DICE_MANYMOUSE_PADDLE0_LABEL_TR NULL
-#define DICE_MANYMOUSE_PADDLE0_INFO_0_TR NULL
-#define DICE_MANYMOUSE_PADDLE0_X_LABEL_TR NULL
-#define DICE_MANYMOUSE_PADDLE0_X_LABEL_CAT_TR NULL
+#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_TR "RetroFare > Pedal 1 İçin Dikey Fare Ekseni"
+#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_CAT_TR "Pedal 1 İçin Dikey Fare Ekseni"
+#define DICE_RETROMOUSE_PADDLE0_Y_INFO_0_TR "1. oyuncu için fare ekseni, dikey ekran hareketi."
+#define DICE_RETROMOUSE_PADDLE1_X_LABEL_TR "RetroFare > Pedal 2 İçin Yatay Fare Ekseni"
+#define DICE_RETROMOUSE_PADDLE1_X_LABEL_CAT_TR "Pedal 2 İçin Yatay Fare Ekseni"
+#define DICE_RETROMOUSE_PADDLE1_X_INFO_0_TR "2. oyuncu için fare ekseni, yatay ekran hareketi."
+#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_TR "RetroFare > Pedal 2 İçin Dikey Fare Ekseni"
+#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CAT_TR "Pedal 2 İçin Dikey Fare Ekseni"
+#define DICE_RETROMOUSE_PADDLE1_Y_INFO_0_TR "2. oyuncu için fare ekseni, dikey ekran hareketi."
+#define DICE_RETROMOUSE_PADDLE2_X_LABEL_TR "RetroFare > Pedal 3 İçin Yatay Fare Ekseni"
+#define DICE_RETROMOUSE_PADDLE2_X_LABEL_CAT_TR "Pedal 3 İçin Yatay Fare Ekseni"
+#define DICE_RETROMOUSE_PADDLE2_X_INFO_0_TR "3. oyuncu için fare ekseni, yatay ekran hareketi."
+#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_TR "RetroFare > Pedal 3 İçin Dikey Fare Ekseni"
+#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_CAT_TR "Pedal 3 İçin Dikey Fare Ekseni"
+#define DICE_RETROMOUSE_PADDLE2_Y_INFO_0_TR "3. oyuncu için fare ekseni, dikey ekran hareketi."
+#define DICE_RETROMOUSE_PADDLE3_X_LABEL_TR "RetroFare > Pedal 4 İçin Yatay Fare Ekseni"
+#define DICE_RETROMOUSE_PADDLE3_X_LABEL_CAT_TR "Pedal 4 İçin Yatay Fare Ekseni"
+#define DICE_RETROMOUSE_PADDLE3_X_INFO_0_TR "4. oyuncu için fare ekseni, yatay ekran hareketi."
+#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_TR "RetroFare > Pedal 4 İçin Dikey Fare Ekseni"
+#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_TR "Pedal 4 İçin Dikey Fare Ekseni"
+#define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_TR "4. oyuncu için fare ekseni, dikey ekran hareketi."
+#define DICE_MANYMOUSE_PADDLE0_LABEL_TR "ÇokluFare > Pedal 1 İçin Fareyi Kullan"
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_TR "Pedal 1 için fareyi kullanın."
+#define DICE_MANYMOUSE_PADDLE0_X_LABEL_TR "ÇokluFare > Fare-Pedal 1 x"
+#define DICE_MANYMOUSE_PADDLE0_X_LABEL_CAT_TR "Fare-Pedal 1 x"
 #define OPTION_VAL_0X_TR NULL
 #define OPTION_VAL_0Y_TR NULL
 #define OPTION_VAL_1X_TR NULL
@@ -27387,42 +27387,42 @@ struct retro_core_options_v2 options_sv = {
 #define OPTION_VAL_2Y_TR NULL
 #define OPTION_VAL_3X_TR NULL
 #define OPTION_VAL_3Y_TR NULL
-#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_TR NULL
-#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CAT_TR NULL
-#define DICE_MANYMOUSE_PADDLE1_LABEL_TR NULL
-#define DICE_MANYMOUSE_PADDLE1_INFO_0_TR NULL
-#define DICE_MANYMOUSE_PADDLE1_X_LABEL_TR NULL
-#define DICE_MANYMOUSE_PADDLE1_X_LABEL_CAT_TR NULL
-#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_TR NULL
-#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CAT_TR NULL
-#define DICE_MANYMOUSE_PADDLE2_LABEL_TR NULL
-#define DICE_MANYMOUSE_PADDLE2_INFO_0_TR NULL
-#define DICE_MANYMOUSE_PADDLE2_X_LABEL_TR NULL
-#define DICE_MANYMOUSE_PADDLE2_X_LABEL_CAT_TR NULL
-#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_TR NULL
-#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CAT_TR NULL
-#define DICE_MANYMOUSE_PADDLE3_LABEL_TR NULL
-#define DICE_MANYMOUSE_PADDLE3_INFO_0_TR NULL
-#define DICE_MANYMOUSE_PADDLE3_X_LABEL_TR NULL
-#define DICE_MANYMOUSE_PADDLE3_X_LABEL_CAT_TR NULL
-#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_TR NULL
-#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CAT_TR NULL
-#define DICE_DIPSWITCH_1_LABEL_TR NULL
-#define DICE_DIPSWITCH_1_LABEL_CAT_TR NULL
-#define DICE_DIPSWITCH_1_INFO_0_TR NULL
+#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_TR "ÇokluFare > Fare-Pedal 1 y"
+#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CAT_TR "Fare-Pedal 1 y"
+#define DICE_MANYMOUSE_PADDLE1_LABEL_TR "ÇokluFare > Pedal 2 İçin Fareyi Kullan"
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_TR "Pedal 2 için fareyi kullanın."
+#define DICE_MANYMOUSE_PADDLE1_X_LABEL_TR "ÇokluFare > Fare-Pedal 2 x"
+#define DICE_MANYMOUSE_PADDLE1_X_LABEL_CAT_TR "Fare-Pedal 2 x"
+#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_TR "ÇokluFare > Fare-Pedal 2 y"
+#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CAT_TR "Fare-Pedal 2 y"
+#define DICE_MANYMOUSE_PADDLE2_LABEL_TR "ÇokluFare > Pedal 3 İçin Fareyi Kullan"
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_TR "Pedal 3 için fareyi kullanın."
+#define DICE_MANYMOUSE_PADDLE2_X_LABEL_TR "ÇokluFare > Fare-Pedal 3 x"
+#define DICE_MANYMOUSE_PADDLE2_X_LABEL_CAT_TR "Fare-Pedal 3 x"
+#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_TR "ÇokluFare > Fare-Pedal 3 y"
+#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CAT_TR "Fare-Pedal 3 y"
+#define DICE_MANYMOUSE_PADDLE3_LABEL_TR "ÇokluFare > Pedal 4 İçin Fareyi Kullan"
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_TR "Pedal 4 için fareyi kullanın."
+#define DICE_MANYMOUSE_PADDLE3_X_LABEL_TR "ÇokluFare > Fare-Pedal 4 x"
+#define DICE_MANYMOUSE_PADDLE3_X_LABEL_CAT_TR "Fare-Pedal 4 x"
+#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_TR "ÇokluFare > Fare-Pedal 4 y"
+#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CAT_TR "Fare-Pedal 4 y"
+#define DICE_DIPSWITCH_1_LABEL_TR "DIP Anahtarı > DIP Anahtarı 1"
+#define DICE_DIPSWITCH_1_LABEL_CAT_TR "DIP Anahtarı 1"
+#define DICE_DIPSWITCH_1_INFO_0_TR "DIP anahtarı 1 için ayar."
 #define OPTION_VAL_1_TR "varsayılan"
-#define DICE_DIPSWITCH_2_LABEL_TR NULL
-#define DICE_DIPSWITCH_2_LABEL_CAT_TR NULL
-#define DICE_DIPSWITCH_2_INFO_0_TR NULL
-#define DICE_DIPSWITCH_3_LABEL_TR NULL
-#define DICE_DIPSWITCH_3_LABEL_CAT_TR NULL
-#define DICE_DIPSWITCH_3_INFO_0_TR NULL
-#define DICE_DIPSWITCH16_1_LABEL_TR NULL
-#define DICE_DIPSWITCH16_1_LABEL_CAT_TR NULL
-#define DICE_DIPSWITCH16_1_INFO_0_TR NULL
-#define DICE_DIPSWITCH16_2_LABEL_TR NULL
-#define DICE_DIPSWITCH16_2_LABEL_CAT_TR NULL
-#define DICE_DIPSWITCH16_2_INFO_0_TR NULL
+#define DICE_DIPSWITCH_2_LABEL_TR "DIP Anahtarı > DIP Anahtarı 2"
+#define DICE_DIPSWITCH_2_LABEL_CAT_TR "DIP Anahtarı 2"
+#define DICE_DIPSWITCH_2_INFO_0_TR "DIP anahtarı 2 için ayar."
+#define DICE_DIPSWITCH_3_LABEL_TR "DIP Anahtarı > DIP Anahtarı 3"
+#define DICE_DIPSWITCH_3_LABEL_CAT_TR "DIP Anahtarı 3"
+#define DICE_DIPSWITCH_3_INFO_0_TR "DIP anahtarı 3 için ayar."
+#define DICE_DIPSWITCH16_1_LABEL_TR "DIP Anahtarı > DIP Anahtarı Hex 1"
+#define DICE_DIPSWITCH16_1_LABEL_CAT_TR "DIP Anahtarı Hex 1"
+#define DICE_DIPSWITCH16_1_INFO_0_TR "16 konumlu DIP anahtar numarası 1 için ayar."
+#define DICE_DIPSWITCH16_2_LABEL_TR "DIP Anahtarı > DIP Anahtarı Hex 2"
+#define DICE_DIPSWITCH16_2_LABEL_CAT_TR "DIP Anahtarı Hex 2"
+#define DICE_DIPSWITCH16_2_INFO_0_TR "16 konumlu DIP anahtar numarası 2 için ayar."
 
 struct retro_core_option_v2_category option_cats_tr[] = {
    {
@@ -28875,59 +28875,59 @@ struct retro_core_options_v2 options_tt = {
 #define DICE_RETROMOUSE_PADDLE0_Y_INFO_0_UK "Вісь миші для гравця 1, вертикальний рух."
 #define DICE_RETROMOUSE_PADDLE1_X_LABEL_UK "Ретромиша > вісь миші для платформи 2 Горизонтальна"
 #define DICE_RETROMOUSE_PADDLE1_X_LABEL_CAT_UK "Вісь миші для платформи 2 Горизонтальної"
-#define DICE_RETROMOUSE_PADDLE1_X_INFO_0_UK NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_UK NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CAT_UK NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_INFO_0_UK NULL
-#define DICE_RETROMOUSE_PADDLE2_X_LABEL_UK NULL
-#define DICE_RETROMOUSE_PADDLE2_X_LABEL_CAT_UK NULL
-#define DICE_RETROMOUSE_PADDLE2_X_INFO_0_UK NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_UK NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_CAT_UK NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_INFO_0_UK NULL
-#define DICE_RETROMOUSE_PADDLE3_X_LABEL_UK NULL
-#define DICE_RETROMOUSE_PADDLE3_X_LABEL_CAT_UK NULL
-#define DICE_RETROMOUSE_PADDLE3_X_INFO_0_UK NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_UK NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_UK NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_UK NULL
-#define DICE_MANYMOUSE_PADDLE0_LABEL_UK NULL
-#define DICE_MANYMOUSE_PADDLE0_INFO_0_UK NULL
-#define DICE_MANYMOUSE_PADDLE0_X_LABEL_UK NULL
-#define DICE_MANYMOUSE_PADDLE0_X_LABEL_CAT_UK NULL
-#define OPTION_VAL_0X_UK NULL
-#define OPTION_VAL_0Y_UK NULL
+#define DICE_RETROMOUSE_PADDLE1_X_INFO_0_UK "Вісь миші для переміщення гравця 2, горизонтальний екран."
+#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_UK "RetroMouse > вісь миші для платформи 2 вертикально"
+#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CAT_UK "Вісь миші для платформи 2 вертикально"
+#define DICE_RETROMOUSE_PADDLE1_Y_INFO_0_UK "Вісь миші для руху 2, вертикального екрану для гравця."
+#define DICE_RETROMOUSE_PADDLE2_X_LABEL_UK "Ретромиша > вісь миші для платформи 3 Горизонтального"
+#define DICE_RETROMOUSE_PADDLE2_X_LABEL_CAT_UK "Вісь миші для платформи 3 Горизонтальної"
+#define DICE_RETROMOUSE_PADDLE2_X_INFO_0_UK "Вісь миші для руху 3 гравця, горизонтальний екран."
+#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_UK "Ретромиша > вісь миші для платформи 3 вертикальних"
+#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_CAT_UK "Вісь миші для Падла 3 вертикальної"
+#define DICE_RETROMOUSE_PADDLE2_Y_INFO_0_UK "Вісь миші для руху 3 гравця, вертикальний екран."
+#define DICE_RETROMOUSE_PADDLE3_X_LABEL_UK "Ретромиша > вісь миші для платформи 4 Горизонтальної"
+#define DICE_RETROMOUSE_PADDLE3_X_LABEL_CAT_UK "Вісь миші для платформи 4 Горизонтальної"
+#define DICE_RETROMOUSE_PADDLE3_X_INFO_0_UK "Вісь миші для руху 4, горизонтальний екран."
+#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_UK "RetroMouse > вісь миші для платформи 4 вертикальних"
+#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_UK "Вісь миші для платформи 4 вертикального"
+#define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_UK "Вісь миші для руху 4 гравця, вертикальний екран."
+#define DICE_MANYMOUSE_PADDLE0_LABEL_UK "Багатомиша > Використання миші для Падла 1"
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_UK "Використовуйте мишку для Падла 1."
+#define DICE_MANYMOUSE_PADDLE0_X_LABEL_UK "Манна Миша > Миша 1 x"
+#define DICE_MANYMOUSE_PADDLE0_X_LABEL_CAT_UK "Весло для миші 1 x"
+#define OPTION_VAL_0X_UK "0х"
+#define OPTION_VAL_0Y_UK "0р"
 #define OPTION_VAL_1X_UK NULL
-#define OPTION_VAL_1Y_UK NULL
+#define OPTION_VAL_1Y_UK "1р"
 #define OPTION_VAL_2X_UK NULL
-#define OPTION_VAL_2Y_UK NULL
+#define OPTION_VAL_2Y_UK "2р"
 #define OPTION_VAL_3X_UK NULL
-#define OPTION_VAL_3Y_UK NULL
-#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_UK NULL
-#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CAT_UK NULL
-#define DICE_MANYMOUSE_PADDLE1_LABEL_UK NULL
-#define DICE_MANYMOUSE_PADDLE1_INFO_0_UK NULL
-#define DICE_MANYMOUSE_PADDLE1_X_LABEL_UK NULL
-#define DICE_MANYMOUSE_PADDLE1_X_LABEL_CAT_UK NULL
-#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_UK NULL
-#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CAT_UK NULL
-#define DICE_MANYMOUSE_PADDLE2_LABEL_UK NULL
-#define DICE_MANYMOUSE_PADDLE2_INFO_0_UK NULL
-#define DICE_MANYMOUSE_PADDLE2_X_LABEL_UK NULL
-#define DICE_MANYMOUSE_PADDLE2_X_LABEL_CAT_UK NULL
-#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_UK NULL
-#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CAT_UK NULL
-#define DICE_MANYMOUSE_PADDLE3_LABEL_UK NULL
-#define DICE_MANYMOUSE_PADDLE3_INFO_0_UK NULL
-#define DICE_MANYMOUSE_PADDLE3_X_LABEL_UK NULL
-#define DICE_MANYMOUSE_PADDLE3_X_LABEL_CAT_UK NULL
-#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_UK NULL
-#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CAT_UK NULL
-#define DICE_DIPSWITCH_1_LABEL_UK NULL
-#define DICE_DIPSWITCH_1_LABEL_CAT_UK NULL
-#define DICE_DIPSWITCH_1_INFO_0_UK NULL
-#define OPTION_VAL_1_UK NULL
-#define DICE_DIPSWITCH_2_LABEL_UK NULL
+#define OPTION_VAL_3Y_UK "3р"
+#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_UK "ManyMouse > Миша-лопатка 1 р"
+#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CAT_UK "Весло для миші 1 р"
+#define DICE_MANYMOUSE_PADDLE1_LABEL_UK "Багатомиша > Використання миші для Падла 2"
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_UK "Використовуйте мишку для Ведла 2."
+#define DICE_MANYMOUSE_PADDLE1_X_LABEL_UK "Манна Миша > Миша 2 x"
+#define DICE_MANYMOUSE_PADDLE1_X_LABEL_CAT_UK "Весло для миші 2 x"
+#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_UK "ManyMouse > Миша-лопатка 2 р"
+#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CAT_UK "Весло для миші 2 р"
+#define DICE_MANYMOUSE_PADDLE2_LABEL_UK "Багатомиша > Використовувати миші для Падла 3"
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_UK "Використовуйте мишку для Падла 3."
+#define DICE_MANYMOUSE_PADDLE2_X_LABEL_UK "Манна Миша > Миша 3 x"
+#define DICE_MANYMOUSE_PADDLE2_X_LABEL_CAT_UK "Весло для миші 3 x"
+#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_UK "ManyMouse > Миша-лопатка 3 р"
+#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CAT_UK "Весло для миші 3 р"
+#define DICE_MANYMOUSE_PADDLE3_LABEL_UK "Багатомиша > Використовувати миші для Падла 4"
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_UK "Скористайтеся мишею для платформи 4."
+#define DICE_MANYMOUSE_PADDLE3_X_LABEL_UK "Манна Миша > Миша 4 x"
+#define DICE_MANYMOUSE_PADDLE3_X_LABEL_CAT_UK "Весло для миші 4 x"
+#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_UK "ManyMouse > Миша-лопатка 4 р"
+#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CAT_UK "Весло для миші 4 р"
+#define DICE_DIPSWITCH_1_LABEL_UK "DIP перемикач > DIP перемикач 1"
+#define DICE_DIPSWITCH_1_LABEL_CAT_UK "DIP перемикач 1"
+#define DICE_DIPSWITCH_1_INFO_0_UK "Налаштування DIP перемикача 1."
+#define OPTION_VAL_1_UK "за замовчуванням"
+#define DICE_DIPSWITCH_2_LABEL_UK "DIP перемикач > DIP перемикач 2"
 #define DICE_DIPSWITCH_2_LABEL_CAT_UK "Перемикач DIP 2"
 #define DICE_DIPSWITCH_2_INFO_0_UK "Параметр для перемикача DIP 2."
 #define DICE_DIPSWITCH_3_LABEL_UK "Перемикання DIP > DIP - перемикач 3"
