@@ -24277,11 +24277,11 @@ struct retro_core_options_v2 options_pt_pt = {
 /* RETRO_LANGUAGE_RU */
 
 #define CATEGORY_INPUT_LABEL_RU "Ввод"
-#define CATEGORY_INPUT_INFO_0_RU NULL
+#define CATEGORY_INPUT_INFO_0_RU "Настройки ввода для ядра."
 #define CATEGORY_RETROMOUSE_LABEL_RU NULL
-#define CATEGORY_RETROMOUSE_INFO_0_RU NULL
+#define CATEGORY_RETROMOUSE_INFO_0_RU "Настройки libretro для нескольких мышек."
 #define CATEGORY_MANYMOUSE_LABEL_RU NULL
-#define CATEGORY_MANYMOUSE_INFO_0_RU NULL
+#define CATEGORY_MANYMOUSE_INFO_0_RU "Настройки ManyMouse для ввода с нескольких мышек."
 #define CATEGORY_DIPSWITCH_LABEL_RU NULL
 #define CATEGORY_DIPSWITCH_INFO_0_RU NULL
 #define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_RU NULL
