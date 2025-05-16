@@ -15939,56 +15939,56 @@ struct retro_core_options_v2 options_hr = {
 /* RETRO_LANGUAGE_HU */
 
 #define CATEGORY_INPUT_LABEL_HU "Bemenet"
-#define CATEGORY_INPUT_INFO_0_HU NULL
+#define CATEGORY_INPUT_INFO_0_HU "Magspecifikus bemeneti beállítások."
 #define CATEGORY_RETROMOUSE_LABEL_HU NULL
-#define CATEGORY_RETROMOUSE_INFO_0_HU NULL
+#define CATEGORY_RETROMOUSE_INFO_0_HU "Egynél több egér beállításai (libretro)."
 #define CATEGORY_MANYMOUSE_LABEL_HU NULL
-#define CATEGORY_MANYMOUSE_INFO_0_HU NULL
-#define CATEGORY_DIPSWITCH_LABEL_HU NULL
-#define CATEGORY_DIPSWITCH_INFO_0_HU NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_HU NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_HU NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_HU NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_HU NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_HU NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_HU NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_HU NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CAT_HU NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_INFO_0_HU NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_HU NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CAT_HU NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_INFO_0_HU NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_HU NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CAT_HU NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_INFO_0_HU NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_HU NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_CAT_HU NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_INFO_0_HU NULL
-#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_HU NULL
-#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_CAT_HU NULL
-#define DICE_THROTTLE_KEYJOY_SENSITIVITY_INFO_0_HU NULL
-#define DICE_RETROMOUSE_PADDLE0_LABEL_HU NULL
-#define DICE_RETROMOUSE_PADDLE0_LABEL_CAT_HU NULL
-#define DICE_RETROMOUSE_PADDLE0_INFO_0_HU NULL
-#define DICE_RETROMOUSE_PADDLE1_LABEL_HU NULL
-#define DICE_RETROMOUSE_PADDLE1_LABEL_CAT_HU NULL
-#define DICE_RETROMOUSE_PADDLE1_INFO_0_HU NULL
-#define DICE_RETROMOUSE_PADDLE2_LABEL_HU NULL
-#define DICE_RETROMOUSE_PADDLE2_LABEL_CAT_HU NULL
-#define DICE_RETROMOUSE_PADDLE2_INFO_0_HU NULL
-#define DICE_RETROMOUSE_PADDLE3_LABEL_HU NULL
-#define DICE_RETROMOUSE_PADDLE3_LABEL_CAT_HU NULL
-#define DICE_RETROMOUSE_PADDLE3_INFO_0_HU NULL
-#define DICE_RETROMOUSE_PADDLE0_X_LABEL_HU NULL
-#define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_HU NULL
-#define DICE_RETROMOUSE_PADDLE0_X_INFO_0_HU NULL
+#define CATEGORY_MANYMOUSE_INFO_0_HU "Egynél több egér beállításai (ManyMouse)."
+#define CATEGORY_DIPSWITCH_LABEL_HU "DIP kapcsolók"
+#define CATEGORY_DIPSWITCH_INFO_0_HU "A DIP kapcsolók és potenciométerek beállításai."
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_HU "Bemenet > Egérmutató használata az 1. ütőhöz"
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_HU "Egérmutató használata az 1. ütőhöz"
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_HU "A rendszeregér mutatójának használata az 1. ütő irányításához. Több egér esetén nem lehet választani közülük."
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_HU "Bemenet > A joystick abszolút értékének használata az ütőhöz"
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_HU "A joystick abszolút értékének használata az ütőhöz"
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_HU "A joystick mozgástartományának direkt leképezése az ütő tartományára, a relatív elmozdulás helyett."
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_HU "Bemenet > A D-pad érzékenysége az ütőhöz"
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CAT_HU "A D-pad érzékenysége az ütőhöz"
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_INFO_0_HU "A D-pad érzékenysége az ütő irányításához."
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_HU "Bemenet > Analóg kar érzékenysége az ütőhöz"
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CAT_HU "Analóg kar érzékenysége az ütőhöz"
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_INFO_0_HU "Az analóg kar érzékenysége az ütő irányításához."
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_HU "Bemenet > RetroMouse érzékenysége az ütőhöz"
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CAT_HU "RetroMouse érzékenysége az ütőhöz"
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_INFO_0_HU "A RetroMouse érzékenysége az ütő irányításához."
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_HU "Bemenet > Kerék érzékenysége"
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_CAT_HU "Kerék érzékenysége"
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_INFO_0_HU "A D-pad vagy analóg kar érzékenysége a kerék irányításához."
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_HU "Bemenet > Gázkar érzékenysége"
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_CAT_HU "Gázkar érzékenysége"
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_INFO_0_HU "A D-pad vagy analóg kar érzékenysége a gázkar irányításához."
+#define DICE_RETROMOUSE_PADDLE0_LABEL_HU "RetroMouse > Egér használata az 1. ütőhöz"
+#define DICE_RETROMOUSE_PADDLE0_LABEL_CAT_HU "Egér használata az 1. ütőhöz"
+#define DICE_RETROMOUSE_PADDLE0_INFO_0_HU "Kijelölt egér használata az 1. ütőhöz, az 1. csatlakozó egerének sorszáma szerint."
+#define DICE_RETROMOUSE_PADDLE1_LABEL_HU "RetroMouse > Egér használata az 2. ütőhöz"
+#define DICE_RETROMOUSE_PADDLE1_LABEL_CAT_HU "Egér használata a 2. ütőhöz"
+#define DICE_RETROMOUSE_PADDLE1_INFO_0_HU "Kijelölt egér használata a 2. ütőhöz, a 2. csatlakozó egerének sorszáma szerint."
+#define DICE_RETROMOUSE_PADDLE2_LABEL_HU "RetroMouse > Egér használata a 3. ütőhöz"
+#define DICE_RETROMOUSE_PADDLE2_LABEL_CAT_HU "Egér használata a 3. ütőhöz"
+#define DICE_RETROMOUSE_PADDLE2_INFO_0_HU "Kijelölt egér használata a 3. ütőhöz, a 3. csatlakozó egerének sorszáma szerint."
+#define DICE_RETROMOUSE_PADDLE3_LABEL_HU "RetroMouse > Egér használata a 4. ütőhöz"
+#define DICE_RETROMOUSE_PADDLE3_LABEL_CAT_HU "Egér használata a 4. ütőhöz"
+#define DICE_RETROMOUSE_PADDLE3_INFO_0_HU "Kijelölt egér használata a 4. ütőhöz, a 4. csatlakozó egerének sorszáma szerint."
+#define DICE_RETROMOUSE_PADDLE0_X_LABEL_HU "RetroMouse > Egér tengelye az 1. ütő vízszintes mozgatásához"
+#define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_HU "Egér tengelye az 1. ütő vízszintes mozgatásához"
+#define DICE_RETROMOUSE_PADDLE0_X_INFO_0_HU "Az 1. játékos egerének tengelye, vízszintes mozgáshoz a képernyőn."
 #define OPTION_VAL_X_HU NULL
 #define OPTION_VAL_Y_HU NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_HU NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_CAT_HU NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_INFO_0_HU NULL
-#define DICE_RETROMOUSE_PADDLE1_X_LABEL_HU NULL
-#define DICE_RETROMOUSE_PADDLE1_X_LABEL_CAT_HU NULL
+#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_HU "RetroMouse > Egér tengelye az 1. ütő függőleges mozgatásához"
+#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_CAT_HU "Egér tengelye az 1. ütő függőleges mozgatásához"
+#define DICE_RETROMOUSE_PADDLE0_Y_INFO_0_HU "Az 1. játékos egerének tengelye, függőleges mozgáshoz a képernyőn."
+#define DICE_RETROMOUSE_PADDLE1_X_LABEL_HU "RetroMouse > Egér tengelye a 2. ütő vízszintes mozgatásához"
+#define DICE_RETROMOUSE_PADDLE1_X_LABEL_CAT_HU "Egér tengelye a 2. ütő vízszintes mozgatásához"
 #define DICE_RETROMOUSE_PADDLE1_X_INFO_0_HU NULL
 #define DICE_RETROMOUSE_PADDLE1_Y_LABEL_HU NULL
 #define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CAT_HU NULL
@@ -16043,16 +16043,16 @@ struct retro_core_options_v2 options_hr = {
 #define OPTION_VAL_1_HU NULL
 #define DICE_DIPSWITCH_2_LABEL_HU NULL
 #define DICE_DIPSWITCH_2_LABEL_CAT_HU NULL
-#define DICE_DIPSWITCH_2_INFO_0_HU NULL
-#define DICE_DIPSWITCH_3_LABEL_HU NULL
-#define DICE_DIPSWITCH_3_LABEL_CAT_HU NULL
-#define DICE_DIPSWITCH_3_INFO_0_HU NULL
-#define DICE_DIPSWITCH16_1_LABEL_HU NULL
-#define DICE_DIPSWITCH16_1_LABEL_CAT_HU NULL
-#define DICE_DIPSWITCH16_1_INFO_0_HU NULL
-#define DICE_DIPSWITCH16_2_LABEL_HU NULL
-#define DICE_DIPSWITCH16_2_LABEL_CAT_HU NULL
-#define DICE_DIPSWITCH16_2_INFO_0_HU NULL
+#define DICE_DIPSWITCH_2_INFO_0_HU "A 2. DIP kapcsoló beállítása."
+#define DICE_DIPSWITCH_3_LABEL_HU "DIP kapcsoló > DIP kapcsoló 3"
+#define DICE_DIPSWITCH_3_LABEL_CAT_HU "DIP kapcsoló 3"
+#define DICE_DIPSWITCH_3_INFO_0_HU "A 3. DIP kapcsoló beállítása."
+#define DICE_DIPSWITCH16_1_LABEL_HU "DIP kapcsoló > Hexa DIP kapcsoló 1"
+#define DICE_DIPSWITCH16_1_LABEL_CAT_HU "Hexa DIP kapcsoló 1"
+#define DICE_DIPSWITCH16_1_INFO_0_HU "A 16 állású 1. DIP kapcsoló beállítása."
+#define DICE_DIPSWITCH16_2_LABEL_HU "DIP kapcsoló > Hexa DIP kapcsoló 2"
+#define DICE_DIPSWITCH16_2_LABEL_CAT_HU "Hexa DIP kapcsoló 2"
+#define DICE_DIPSWITCH16_2_INFO_0_HU "A 16 állású 2. DIP kapcsoló beállítása."
 
 struct retro_core_option_v2_category option_cats_hu[] = {
    {
@@ -17455,7 +17455,7 @@ struct retro_core_options_v2 options_id = {
 /* RETRO_LANGUAGE_IT */
 
 #define CATEGORY_INPUT_LABEL_IT NULL
-#define CATEGORY_INPUT_INFO_0_IT NULL
+#define CATEGORY_INPUT_INFO_0_IT "Configura le impostazioni di input per core."
 #define CATEGORY_RETROMOUSE_LABEL_IT NULL
 #define CATEGORY_RETROMOUSE_INFO_0_IT NULL
 #define CATEGORY_MANYMOUSE_LABEL_IT NULL
@@ -17556,7 +17556,7 @@ struct retro_core_options_v2 options_id = {
 #define DICE_DIPSWITCH_1_LABEL_IT NULL
 #define DICE_DIPSWITCH_1_LABEL_CAT_IT NULL
 #define DICE_DIPSWITCH_1_INFO_0_IT NULL
-#define OPTION_VAL_1_IT NULL
+#define OPTION_VAL_1_IT "predefinito"
 #define DICE_DIPSWITCH_2_LABEL_IT NULL
 #define DICE_DIPSWITCH_2_LABEL_CAT_IT NULL
 #define DICE_DIPSWITCH_2_INFO_0_IT NULL
