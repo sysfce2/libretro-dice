@@ -7,139 +7,139 @@
 
 template <typename T> class cirque
 {
-public:
-    class index // Like an iterator
-    {
-    private:
-        uint16_t idx;
-        uint16_t mask;
-        index(int i, int m) : idx(i & m), mask(m) { }
+   public:
+      class index // Like an iterator
+      {
+         private:
+            uint16_t idx;
+            uint16_t mask;
+            index(int i, int m) : idx(i & m), mask(m) { }
 
-    public:
-        index(int QUEUE_SIZE) : idx(0), mask(QUEUE_SIZE-1) { }
-        template <typename U> index(const U& u) : idx(u.idx), mask(u.mask) { }
-        
-        bool operator==(const index& i) const { return idx == i.idx; }
-        bool operator!=(const index& i) const { return idx != i.idx; }
-        
-        index operator+(unsigned int i) const { return index(idx + i, mask); }
-        index operator-(unsigned int i) const { return index(idx - i, mask); }
-        
-        index& operator++()
-        { 
-            idx = (idx+1) & mask;
-            return *this; 
-        }
-        index operator++(int)
-        { 
-            index t(idx, mask);
-            idx = (idx+1) & mask; 
-            return t;
-        }
-        index& operator--()
-        { 
-            idx = (idx-1) & mask;
-            return *this; 
-        }
-        index operator--(int)
-        { 
-            index t(idx, mask);
-            idx = (idx-1) & mask; 
-            return t;
-        }
+         public:
+            index(int QUEUE_SIZE) : idx(0), mask(QUEUE_SIZE-1) { }
+            template <typename U> index(const U& u) : idx(u.idx), mask(u.mask) { }
 
-        index& operator+=(int x)
-        { 
-            idx = (idx+x) & mask;
-            return *this; 
-        }
-        index& operator-=(int x)
-        { 
-            idx = (idx-x) & mask;
-            return *this; 
-        }
+            bool operator==(const index& i) const { return idx == i.idx; }
+            bool operator!=(const index& i) const { return idx != i.idx; }
 
-        // Really shouldn't use these...
-        uint16_t getRawIndex() const { return idx; }
-        uint32_t getQueueSize() const { return mask + 1; }
-        index makeIndex(uint16_t i) const { return index(i, mask); }
+            index operator+(unsigned int i) const { return index(idx + i, mask); }
+            index operator-(unsigned int i) const { return index(idx - i, mask); }
 
-        friend class cirque<T>;
-        template<typename U> friend class cirque<U>::index; 
-    };
+            index& operator++()
+            { 
+               idx = (idx+1) & mask;
+               return *this; 
+            }
+            index operator++(int)
+            { 
+               index t(idx, mask);
+               idx = (idx+1) & mask; 
+               return t;
+            }
+            index& operator--()
+            { 
+               idx = (idx-1) & mask;
+               return *this; 
+            }
+            index operator--(int)
+            { 
+               index t(idx, mask);
+               idx = (idx-1) & mask; 
+               return t;
+            }
 
-private:
-    T* queue;
-    index first, next;
+            index& operator+=(int x)
+            { 
+               idx = (idx+x) & mask;
+               return *this; 
+            }
+            index& operator-=(int x)
+            { 
+               idx = (idx-x) & mask;
+               return *this; 
+            }
 
-public:
-    cirque(int QUEUE_SIZE) : first(QUEUE_SIZE), next(QUEUE_SIZE) { queue = new T[QUEUE_SIZE]; }
-    cirque(const cirque& c) : first(c.first), next(c.next)
-    {
-        int QUEUE_SIZE = first.mask + 1; 
-        queue = new T[QUEUE_SIZE]; 
-        memcpy(queue, c.queue, sizeof(T) * QUEUE_SIZE);
-    }
-    ~cirque() { delete[] queue; }
+            // Really shouldn't use these...
+            uint16_t getRawIndex() const { return idx; }
+            uint32_t getQueueSize() const { return mask + 1; }
+            index makeIndex(uint16_t i) const { return index(i, mask); }
 
-    bool empty() const { return first == next; }
-    bool full() const { return (next+1) == first; }
-    uint32_t size() const { return (next.idx - first.idx) & next.mask; }
+            friend class cirque<T>;
+            template<typename U> friend class cirque<U>::index; 
+      };
 
-    void push_back(const T& x)
-    {
-        queue[next.idx] = x;
-        if(++next == first) pop_front();
-    }
+   private:
+      T* queue;
+      index first, next;
 
-    void pop_front() { ++first; }
-    void pop_back() { --next; }
-    void clear() { first = next; }
+   public:
+      cirque(int QUEUE_SIZE) : first(QUEUE_SIZE), next(QUEUE_SIZE) { queue = new T[QUEUE_SIZE]; }
+      cirque(const cirque& c) : first(c.first), next(c.next)
+   {
+      int QUEUE_SIZE = first.mask + 1; 
+      queue = new T[QUEUE_SIZE]; 
+      memcpy(queue, c.queue, sizeof(T) * QUEUE_SIZE);
+   }
+      ~cirque() { delete[] queue; }
 
-    void erase_front(const index& i) // Erase values up to, but not including, index
-    { first = i; }
+      bool empty() const { return first == next; }
+      bool full() const { return (next+1) == first; }
+      uint32_t size() const { return (next.idx - first.idx) & next.mask; }
 
-    void erase_back(const index& i) // Erase values after, but not including, index
-    { next = i + 1; }
+      void push_back(const T& x)
+      {
+         queue[next.idx] = x;
+         if(++next == first) pop_front();
+      }
 
-    T& operator[](const index& i) { return queue[i.idx]; }
-    const T& operator[](const index& i) const { return queue[i.idx]; }
+      void pop_front() { ++first; }
+      void pop_back() { --next; }
+      void clear() { first = next; }
 
-    T& front() { return queue[first.idx]; }
-    const T& front() const { return queue[first.idx]; }
+      void erase_front(const index& i) // Erase values up to, but not including, index
+      { first = i; }
 
-    T& back() { return queue[(next.idx - 1) & next.mask]; }
-    const T& back() const { return queue[(next.idx - 1) & next.mask]; }
+      void erase_back(const index& i) // Erase values after, but not including, index
+      { next = i + 1; }
 
-    const index& begin() const { return first; }
-    const index& end() const { return next; }
+      T& operator[](const index& i) { return queue[i.idx]; }
+      const T& operator[](const index& i) const { return queue[i.idx]; }
 
-    // Perform binary search for element.
-    // Returns index that is less than or equal to the value being searched for,
-    // but where index+1 is greater than the value (or non existant).
-    index binary_search(index first, index last, const T& val) const
-    {
-        while(first.idx != last.idx)
-        {
+      T& front() { return queue[first.idx]; }
+      const T& front() const { return queue[first.idx]; }
+
+      T& back() { return queue[(next.idx - 1) & next.mask]; }
+      const T& back() const { return queue[(next.idx - 1) & next.mask]; }
+
+      const index& begin() const { return first; }
+      const index& end() const { return next; }
+
+      // Perform binary search for element.
+      // Returns index that is less than or equal to the value being searched for,
+      // but where index+1 is greater than the value (or non existant).
+      index binary_search(index first, index last, const T& val) const
+      {
+         while(first.idx != last.idx)
+         {
             index mid = first + ((last - first).idx >> 1);
 
             if(val < queue[mid.idx])
             {
-                last = mid;
-                continue;
+               last = mid;
+               continue;
             }
 
             index after = mid + 1;
 
             if(after == end() || val < queue[after.idx])
-                return mid;
+               return mid;
 
             //first = mid; // which of these is correct?
             first = after;
-        }
+         }
 
-        return first;
-    }
+         return first;
+      }
 };
 
 #endif

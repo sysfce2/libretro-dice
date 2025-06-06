@@ -13,54 +13,54 @@ struct KeyAssignment; // in settings.h
 
 struct Joystick
 {
-    enum JOYSTICK { UP = 1, DOWN, LEFT, RIGHT };
-    enum LIMIT { BUTTON_THRESHOLD = 8192 }; // TODO: make configurable?
+   enum JOYSTICK { UP = 1, DOWN, LEFT, RIGHT };
+   enum LIMIT { BUTTON_THRESHOLD = 8192 }; // TODO: make configurable?
 };
 
 struct Wheel
 {
-    enum OUTPUT { A = 1, B = 2 };
+   enum OUTPUT { A = 1, B = 2 };
 };
 
 struct Coin
 {
-    enum COINS { COIN1_LO =  1, COIN2_LO =  2, COIN3_LO =  3, COIN4_LO =  4, 
-                 COIN1_HI = i1, COIN2_HI = i2, COIN3_HI = i3, COIN4_HI = i4 };
-    enum DOLLARS { DOLLAR_LO = 5, DOLLAR_HI = i5 };
+   enum COINS { COIN1_LO =  1, COIN2_LO =  2, COIN3_LO =  3, COIN4_LO =  4, 
+      COIN1_HI = i1, COIN2_HI = i2, COIN3_HI = i3, COIN4_HI = i4 };
+   enum DOLLARS { DOLLAR_LO = 5, DOLLAR_HI = i5 };
 };
 
 template <unsigned PADDLE, bool HORIZONTAL>
 class AnalogInputDesc
 {
-    double min_val, max_val, current_val;
-    Mono555Desc* mono_555;
+   double min_val, max_val, current_val;
+   Mono555Desc* mono_555;
 
-public:
-    AnalogInputDesc(double min, double max, Mono555Desc* m) : min_val(min), max_val(max),
-        current_val((max+min) / 2.0), mono_555(m) { }
+   public:
+   AnalogInputDesc(double min, double max, Mono555Desc* m) : min_val(min), max_val(max),
+   current_val((max+min) / 2.0), mono_555(m) { }
 
-    static CUSTOM_LOGIC( analog_input );
+   static CUSTOM_LOGIC( analog_input );
 };
 
 template <unsigned WHEEL>
 class WheelDesc
 {
-public:
-    double angle; // Wheel position, 0.0 to 360.0
-    cirque<double> wheel_events[2];
+   public:
+      double angle; // Wheel position, 0.0 to 360.0
+      cirque<double> wheel_events[2];
 
-    WheelDesc() : angle(0.0), wheel_events{cirque<double>(32), cirque<double>(32)} { }
+      WheelDesc() : angle(0.0), wheel_events{cirque<double>(32), cirque<double>(32)} { }
 };
 
 template <unsigned THROTTLE>
 class ThrottleDesc
 {
-    double* pos; // Throttle position, 0.0 to 100.0
+   double* pos; // Throttle position, 0.0 to 100.0
 
-public:
-    ThrottleDesc(double* p) : pos(p) { }
+   public:
+   ThrottleDesc(double* p) : pos(p) { }
 
-    static CUSTOM_LOGIC( throttle_input );
+   static CUSTOM_LOGIC( throttle_input );
 };
 
 
@@ -137,44 +137,44 @@ struct ManymouseSettings
 
 class Input
 {
-private:
-    std::vector<int> mouse_rel_x, mouse_rel_y;
-    //std::vector<SDL_Joystick*> joysticks;
-public:
-    Input();
-    void poll_input();
-    
-    int getRetroRelativeMouseX(unsigned mouse);
-    int getRetroRelativeMouseY(unsigned mouse);
+   private:
+      std::vector<int> mouse_rel_x, mouse_rel_y;
+      //std::vector<SDL_Joystick*> joysticks;
+   public:
+      Input();
+      void poll_input();
+
+      int getRetroRelativeMouseX(unsigned mouse);
+      int getRetroRelativeMouseY(unsigned mouse);
 #ifdef MANYMOUSE
-    int getManymouseRelativeMouseX(unsigned mouse);
-    int getManymouseRelativeMouseY(unsigned mouse);
+      int getManymouseRelativeMouseX(unsigned mouse);
+      int getManymouseRelativeMouseY(unsigned mouse);
 #endif
-    bool getKeyboardState(unsigned scancode);
-    bool getJoystickButton(unsigned joystick, unsigned button);
-    int16_t getJoystickAxis(unsigned joystick, unsigned axis);
-    int16_t getPointerAxis(unsigned axis);
-    bool getKeyPressed(const KeyAssignment& key_assignment);
-   
-   int32_t input_state[NUM_CONTROLLERS];
-   int32_t input_analog_left_x[NUM_CONTROLLERS];
-   int32_t input_analog_left_y[NUM_CONTROLLERS];
-   int32_t input_pointer_x[NUM_CONTROLLERS];
-   int32_t input_pointer_y[NUM_CONTROLLERS];
-   int32_t input_mouse_x[NUM_CONTROLLERS];
-   int32_t input_mouse_y[NUM_CONTROLLERS];
-   bool paddle_joystick_absolute;
-   int paddle_keyboard_sensitivity;
-   int paddle_joystick_sensitivity;
-   int paddle_retromouse_sensitivity;
-   int wheel_keyjoy_sensitivity;
-   int throttle_keyjoy_sensitivity;
-   bool use_mouse_pointer_for_paddle_1;
-   bool retromouse_enabled[4];
-   RetromouseSettings retromouse_settings[4];
+      bool getKeyboardState(unsigned scancode);
+      bool getJoystickButton(unsigned joystick, unsigned button);
+      int16_t getJoystickAxis(unsigned joystick, unsigned axis);
+      int16_t getPointerAxis(unsigned axis);
+      bool getKeyPressed(const KeyAssignment& key_assignment);
+
+      int32_t input_state[NUM_CONTROLLERS];
+      int32_t input_analog_left_x[NUM_CONTROLLERS];
+      int32_t input_analog_left_y[NUM_CONTROLLERS];
+      int32_t input_pointer_x[NUM_CONTROLLERS];
+      int32_t input_pointer_y[NUM_CONTROLLERS];
+      int32_t input_mouse_x[NUM_CONTROLLERS];
+      int32_t input_mouse_y[NUM_CONTROLLERS];
+      bool paddle_joystick_absolute;
+      int paddle_keyboard_sensitivity;
+      int paddle_joystick_sensitivity;
+      int paddle_retromouse_sensitivity;
+      int wheel_keyjoy_sensitivity;
+      int throttle_keyjoy_sensitivity;
+      bool use_mouse_pointer_for_paddle_1;
+      bool retromouse_enabled[4];
+      RetromouseSettings retromouse_settings[4];
 #ifdef MANYMOUSE
-   bool manymouse_enabled[4];
-   ManymouseSettings manymouse_settings[4];
+      bool manymouse_enabled[4];
+      ManymouseSettings manymouse_settings[4];
 #endif
 };
 
