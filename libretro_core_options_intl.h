@@ -13665,76 +13665,76 @@ struct retro_core_options_v2 options_fr = {
 /* RETRO_LANGUAGE_GL */
 
 #define CATEGORY_INPUT_LABEL_GL "Entrada"
-#define CATEGORY_INPUT_INFO_0_GL NULL
-#define CATEGORY_RETROMOUSE_LABEL_GL NULL
-#define CATEGORY_RETROMOUSE_INFO_0_GL NULL
+#define CATEGORY_INPUT_INFO_0_GL "Configurar a entrada específica do núcleo."
+#define CATEGORY_RETROMOUSE_LABEL_GL "Rato Retro"
+#define CATEGORY_RETROMOUSE_INFO_0_GL "Configurar as opcións de múltiples ratos en libretro."
 #define CATEGORY_MANYMOUSE_LABEL_GL NULL
-#define CATEGORY_MANYMOUSE_INFO_0_GL NULL
-#define CATEGORY_DIPSWITCH_LABEL_GL NULL
-#define CATEGORY_DIPSWITCH_INFO_0_GL NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_GL NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_GL NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_GL NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_GL NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_GL NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_GL NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_GL NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CAT_GL NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_INFO_0_GL NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_GL NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CAT_GL NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_INFO_0_GL NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_GL NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CAT_GL NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_INFO_0_GL NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_GL NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_CAT_GL NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_INFO_0_GL NULL
-#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_GL NULL
-#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_CAT_GL NULL
-#define DICE_THROTTLE_KEYJOY_SENSITIVITY_INFO_0_GL NULL
-#define DICE_RETROMOUSE_PADDLE0_LABEL_GL NULL
-#define DICE_RETROMOUSE_PADDLE0_LABEL_CAT_GL NULL
-#define DICE_RETROMOUSE_PADDLE0_INFO_0_GL NULL
-#define DICE_RETROMOUSE_PADDLE1_LABEL_GL NULL
-#define DICE_RETROMOUSE_PADDLE1_LABEL_CAT_GL NULL
-#define DICE_RETROMOUSE_PADDLE1_INFO_0_GL NULL
-#define DICE_RETROMOUSE_PADDLE2_LABEL_GL NULL
-#define DICE_RETROMOUSE_PADDLE2_LABEL_CAT_GL NULL
-#define DICE_RETROMOUSE_PADDLE2_INFO_0_GL NULL
-#define DICE_RETROMOUSE_PADDLE3_LABEL_GL NULL
-#define DICE_RETROMOUSE_PADDLE3_LABEL_CAT_GL NULL
-#define DICE_RETROMOUSE_PADDLE3_INFO_0_GL NULL
-#define DICE_RETROMOUSE_PADDLE0_X_LABEL_GL NULL
-#define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_GL NULL
-#define DICE_RETROMOUSE_PADDLE0_X_INFO_0_GL NULL
+#define CATEGORY_MANYMOUSE_INFO_0_GL "Configurar os axustes para varios ratos de ManyMouse."
+#define CATEGORY_DIPSWITCH_LABEL_GL "Interruptor DIP"
+#define CATEGORY_DIPSWITCH_INFO_0_GL "Configurar os axustes do interruptor DIP e do potenciómetro."
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_GL "Entrada > Usar o punteiro do rato para o mando xiratorio 1"
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_GL "Usar o punteiro do rato para o mando xiratorio 1"
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_GL "Usar o punteiro do rato do sistema como mando xiratorio 1. Non permite escoller un rato específico se tes varios conectados."
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_GL "Entrada > O mando xiratorio usa movemento absoluto"
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_GL "O mando xiratorio usa movemento absoluto"
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_GL "Asignar directamente a gama de movemento do joystick á do mando xiratorio, en lugar de movementos relativos."
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_GL "Entrada > Sensibilidade do mando xiratorio para D-pad"
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CAT_GL "Sensibilidade do mando xiratorio co D-pad"
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_INFO_0_GL "Sensibilidade ao usar o D-pad para controlar un mando xiratorio."
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_GL "Entrada > Sensibilidade do mando xiratorio co stick analóxico"
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CAT_GL "Sensibilidade do mando xiratorio co stick analóxico"
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_INFO_0_GL "Sensibilidade ao usar o stick analóxico para controlar un mando xiratorio."
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_GL "Entrada > Sensibilidade do mando xiratorio co RetroMouse"
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CAT_GL "Sensibilidade do mando xiratorio co RetroMouse"
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_INFO_0_GL "Sensibilidade ao usar RetroMouse para controlar un mando xiratorio."
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_GL "Entrada > Sensibilidade do volante"
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_CAT_GL "Sensibilidade do volante"
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_INFO_0_GL "Sensibilidade ao usar o D-pad ou o stick analóxico para controlar un volante."
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_GL "Entrada > Sensibilidade do acelerador"
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_CAT_GL "Sensibilidade do acelerador"
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_INFO_0_GL "Sensibilidade ao usar o D-pad ou o stick analóxico para controlar o acelerador."
+#define DICE_RETROMOUSE_PADDLE0_LABEL_GL "RetroMouse > Usar o rato para o mando xiratorio 1"
+#define DICE_RETROMOUSE_PADDLE0_LABEL_CAT_GL "Usar o rato para o mando xiratorio 1"
+#define DICE_RETROMOUSE_PADDLE0_INFO_0_GL "Usar un rato específico para o mando xiratorio 1, elixido polo índice de rato do porto 1."
+#define DICE_RETROMOUSE_PADDLE1_LABEL_GL "RetroMouse > Usar o rato para o mando xiratorio 2"
+#define DICE_RETROMOUSE_PADDLE1_LABEL_CAT_GL "Usar o rato para o mando xiratorio 2"
+#define DICE_RETROMOUSE_PADDLE1_INFO_0_GL "Usar un rato específico para o mando xiratorio 2, elixido polo índice de rato do porto 2."
+#define DICE_RETROMOUSE_PADDLE2_LABEL_GL "RetroMouse > Usar rato para mando xiratorio 3"
+#define DICE_RETROMOUSE_PADDLE2_LABEL_CAT_GL "Usar rato para mando xiratorio 3"
+#define DICE_RETROMOUSE_PADDLE2_INFO_0_GL "Usar un rato específico para o mando xiratorio 3, elixido polo índice de rato do porto 3."
+#define DICE_RETROMOUSE_PADDLE3_LABEL_GL "RetroMouse > Usar rato para mando xiratorio 4"
+#define DICE_RETROMOUSE_PADDLE3_LABEL_CAT_GL "Usar rato para mando xiratorio 4"
+#define DICE_RETROMOUSE_PADDLE3_INFO_0_GL "Usar un rato específico para o mando xiratorio 4, elixido polo índice de rato do porto 4."
+#define DICE_RETROMOUSE_PADDLE0_X_LABEL_GL "RetroMouse > Eixe do rato para mando xiratorio 1 horizontal"
+#define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_GL "Eixe do rato para o mando xiratorio 1 horizontal"
+#define DICE_RETROMOUSE_PADDLE0_X_INFO_0_GL "Eixe do rato para o xogador 1, movemento horizontal na pantalla."
 #define OPTION_VAL_X_GL NULL
 #define OPTION_VAL_Y_GL NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_GL NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_CAT_GL NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_INFO_0_GL NULL
-#define DICE_RETROMOUSE_PADDLE1_X_LABEL_GL NULL
-#define DICE_RETROMOUSE_PADDLE1_X_LABEL_CAT_GL NULL
-#define DICE_RETROMOUSE_PADDLE1_X_INFO_0_GL NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_GL NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CAT_GL NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_INFO_0_GL NULL
-#define DICE_RETROMOUSE_PADDLE2_X_LABEL_GL NULL
-#define DICE_RETROMOUSE_PADDLE2_X_LABEL_CAT_GL NULL
-#define DICE_RETROMOUSE_PADDLE2_X_INFO_0_GL NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_GL NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_CAT_GL NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_INFO_0_GL NULL
-#define DICE_RETROMOUSE_PADDLE3_X_LABEL_GL NULL
-#define DICE_RETROMOUSE_PADDLE3_X_LABEL_CAT_GL NULL
-#define DICE_RETROMOUSE_PADDLE3_X_INFO_0_GL NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_GL NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_GL NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_GL NULL
-#define DICE_MANYMOUSE_PADDLE0_LABEL_GL NULL
-#define DICE_MANYMOUSE_PADDLE0_INFO_0_GL NULL
-#define DICE_MANYMOUSE_PADDLE0_X_LABEL_GL NULL
-#define DICE_MANYMOUSE_PADDLE0_X_LABEL_CAT_GL NULL
+#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_GL "RetroMouse > Eixe do rato para o mando xiratorio 1 vertical"
+#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_CAT_GL "Eixe do rato para o mando xiratorio 1 vertical"
+#define DICE_RETROMOUSE_PADDLE0_Y_INFO_0_GL "Eixe do rato para o xogador 1, movemento vertical na pantalla."
+#define DICE_RETROMOUSE_PADDLE1_X_LABEL_GL "RetroMouse > Eixe do rato para o mando xiratorio 2 horizontal"
+#define DICE_RETROMOUSE_PADDLE1_X_LABEL_CAT_GL "Eixe do rato para o mando xiratorio 2 horizontal"
+#define DICE_RETROMOUSE_PADDLE1_X_INFO_0_GL "Eixe do rato para o xogador 2, movemento horizontal."
+#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_GL "RetroMouse > Eixe do rato para o mando xiratorio 2 vertical"
+#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CAT_GL "Eixe do rato para o mando xiratorio 2 vertical"
+#define DICE_RETROMOUSE_PADDLE1_Y_INFO_0_GL "Eixe do rato para o xogador 2, movemento vertical."
+#define DICE_RETROMOUSE_PADDLE2_X_LABEL_GL "RetroMouse > Eixe do rato para o mando xiratorio 3 horizontal"
+#define DICE_RETROMOUSE_PADDLE2_X_LABEL_CAT_GL "Eixe do rato para o mando xiratorio 3 horizontal"
+#define DICE_RETROMOUSE_PADDLE2_X_INFO_0_GL "Eixe do rato para o xogador 3, movemento horizontal."
+#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_GL "RetroMouse > Eixe do rato para o mando xiratorio 3 vertical"
+#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_CAT_GL "Eixe do rato para o mando xiratorio 3 vertical"
+#define DICE_RETROMOUSE_PADDLE2_Y_INFO_0_GL "Eixe do rato para o xogador 3, movemento vertical."
+#define DICE_RETROMOUSE_PADDLE3_X_LABEL_GL "RetroMouse > Eixe do rato para o mando xiratorio 4 horizontal"
+#define DICE_RETROMOUSE_PADDLE3_X_LABEL_CAT_GL "Eixe do rato para o mando xiratorio 4 horizontal"
+#define DICE_RETROMOUSE_PADDLE3_X_INFO_0_GL "Eixe do rato para o xogador 4, movemento horizontal."
+#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_GL "RetroMouse > Eixe do rato para o mando xiratorio 4 vertical"
+#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_GL "Eixe do rato para o mando xiratorio 4 vertical"
+#define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_GL "Eixe do rato para o xogador 4, movemento vertical."
+#define DICE_MANYMOUSE_PADDLE0_LABEL_GL "ManyMouse > Usar o rato para o mando xiratorio 1"
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_GL "Usar o rato para o mando xiratorio 1."
+#define DICE_MANYMOUSE_PADDLE0_X_LABEL_GL "ManyMouse > Rato–Mando xiratorio 1 x"
+#define DICE_MANYMOUSE_PADDLE0_X_LABEL_CAT_GL "Rato–Mando xiratorio 1 x"
 #define OPTION_VAL_0X_GL NULL
 #define OPTION_VAL_0Y_GL NULL
 #define OPTION_VAL_1X_GL NULL
@@ -13743,42 +13743,42 @@ struct retro_core_options_v2 options_fr = {
 #define OPTION_VAL_2Y_GL NULL
 #define OPTION_VAL_3X_GL NULL
 #define OPTION_VAL_3Y_GL NULL
-#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_GL NULL
-#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CAT_GL NULL
-#define DICE_MANYMOUSE_PADDLE1_LABEL_GL NULL
-#define DICE_MANYMOUSE_PADDLE1_INFO_0_GL NULL
-#define DICE_MANYMOUSE_PADDLE1_X_LABEL_GL NULL
-#define DICE_MANYMOUSE_PADDLE1_X_LABEL_CAT_GL NULL
-#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_GL NULL
-#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CAT_GL NULL
-#define DICE_MANYMOUSE_PADDLE2_LABEL_GL NULL
-#define DICE_MANYMOUSE_PADDLE2_INFO_0_GL NULL
-#define DICE_MANYMOUSE_PADDLE2_X_LABEL_GL NULL
-#define DICE_MANYMOUSE_PADDLE2_X_LABEL_CAT_GL NULL
-#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_GL NULL
-#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CAT_GL NULL
-#define DICE_MANYMOUSE_PADDLE3_LABEL_GL NULL
-#define DICE_MANYMOUSE_PADDLE3_INFO_0_GL NULL
-#define DICE_MANYMOUSE_PADDLE3_X_LABEL_GL NULL
-#define DICE_MANYMOUSE_PADDLE3_X_LABEL_CAT_GL NULL
-#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_GL NULL
-#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CAT_GL NULL
-#define DICE_DIPSWITCH_1_LABEL_GL NULL
-#define DICE_DIPSWITCH_1_LABEL_CAT_GL NULL
-#define DICE_DIPSWITCH_1_INFO_0_GL NULL
-#define OPTION_VAL_1_GL NULL
-#define DICE_DIPSWITCH_2_LABEL_GL NULL
-#define DICE_DIPSWITCH_2_LABEL_CAT_GL NULL
-#define DICE_DIPSWITCH_2_INFO_0_GL NULL
-#define DICE_DIPSWITCH_3_LABEL_GL NULL
-#define DICE_DIPSWITCH_3_LABEL_CAT_GL NULL
-#define DICE_DIPSWITCH_3_INFO_0_GL NULL
-#define DICE_DIPSWITCH16_1_LABEL_GL NULL
-#define DICE_DIPSWITCH16_1_LABEL_CAT_GL NULL
-#define DICE_DIPSWITCH16_1_INFO_0_GL NULL
-#define DICE_DIPSWITCH16_2_LABEL_GL NULL
-#define DICE_DIPSWITCH16_2_LABEL_CAT_GL NULL
-#define DICE_DIPSWITCH16_2_INFO_0_GL NULL
+#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_GL "ManyMouse > Rato–Mando xiratorio 1 y"
+#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CAT_GL "Rato–Mando xiratorio 1 y"
+#define DICE_MANYMOUSE_PADDLE1_LABEL_GL "ManyMouse > Usar o rato para o mando xiratorio 2"
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_GL "Usar o rato para o mando xiratorio 2."
+#define DICE_MANYMOUSE_PADDLE1_X_LABEL_GL "ManyMouse > Rato–Mando xiratorio 2 x"
+#define DICE_MANYMOUSE_PADDLE1_X_LABEL_CAT_GL "Rato–Mando xiratorio 2 x"
+#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_GL "ManyMouse > Rato–Mando xiratorio 2 y"
+#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CAT_GL "Rato–Mando xiratorio 2 y"
+#define DICE_MANYMOUSE_PADDLE2_LABEL_GL "ManyMouse > Usar o rato para o mando xiratorio 3"
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_GL "Usar o rato para o mando xiratorio 3."
+#define DICE_MANYMOUSE_PADDLE2_X_LABEL_GL "ManyMouse > Rato–Mando xiratorio 3 x"
+#define DICE_MANYMOUSE_PADDLE2_X_LABEL_CAT_GL "Rato–Mando xiratorio 3 x"
+#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_GL "ManyMouse > Rato–Mando xiratorio 3 y"
+#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CAT_GL "Rato–Mando xiratorio 3 y"
+#define DICE_MANYMOUSE_PADDLE3_LABEL_GL "ManyMouse > Usar o rato para o mando xiratorio 4"
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_GL "Usar o rato para o mando xiratorio 4."
+#define DICE_MANYMOUSE_PADDLE3_X_LABEL_GL "ManyMouse > Rato–Mando xiratorio 4 x"
+#define DICE_MANYMOUSE_PADDLE3_X_LABEL_CAT_GL "Rato–Mando xiratorio 4 x"
+#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_GL "ManyMouse > Rato–Mando xiratorio 4 y"
+#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CAT_GL "Rato–Mando xiratorio 4 y"
+#define DICE_DIPSWITCH_1_LABEL_GL "Interruptor DIP > Interruptor DIP 1"
+#define DICE_DIPSWITCH_1_LABEL_CAT_GL "Interruptor DIP 1"
+#define DICE_DIPSWITCH_1_INFO_0_GL "Configuración do interruptor DIP 1."
+#define OPTION_VAL_1_GL "predeterminado"
+#define DICE_DIPSWITCH_2_LABEL_GL "Interruptor DIP > Interruptor DIP 2"
+#define DICE_DIPSWITCH_2_LABEL_CAT_GL "Interruptor DIP 2"
+#define DICE_DIPSWITCH_2_INFO_0_GL "Configuración do interruptor DIP 2."
+#define DICE_DIPSWITCH_3_LABEL_GL "Interruptor DIP > Interruptor DIP 3"
+#define DICE_DIPSWITCH_3_LABEL_CAT_GL "Interruptor DIP 3"
+#define DICE_DIPSWITCH_3_INFO_0_GL "Configuración do interruptor DIP 3."
+#define DICE_DIPSWITCH16_1_LABEL_GL "Interruptor DIP > Interruptor Hexadecimal DIP 1"
+#define DICE_DIPSWITCH16_1_LABEL_CAT_GL "Interruptor DIP Hex 1"
+#define DICE_DIPSWITCH16_1_INFO_0_GL "Axuste para o interruptor DIP número 1 de 16 posicións."
+#define DICE_DIPSWITCH16_2_LABEL_GL "Interruptor DIP > Interruptor Hexadecimal DIP 2"
+#define DICE_DIPSWITCH16_2_LABEL_CAT_GL "Interruptor DIP Hex 2"
+#define DICE_DIPSWITCH16_2_INFO_0_GL "Axuste para o interruptor DIP número 2 de 16 posicións."
 
 struct retro_core_option_v2_category option_cats_gl[] = {
    {
