@@ -50,12 +50,12 @@ static unsigned color;  // TODO (kmitton)
 void retro_init(void)
 {
    max_height = VIDEO_HEIGHT;  // Until we load the video description.
-   
+
    // Screen height jitters a little in some games, leave some extra buffer space.
    int safety_factor = 2;
    frame_buf = (uint8_t*)malloc(VIDEO_PIXELS * VIDEO_BYTES_PER_PIXEL * safety_factor);
    retro_frame_buf = (uint8_t*)malloc(VIDEO_PIXELS * VIDEO_BYTES_PER_PIXEL * safety_factor);
-   
+
    const char *dir = NULL;
    if (environ_cb(RETRO_ENVIRONMENT_GET_SYSTEM_DIRECTORY, &dir) && dir)
    {
@@ -63,43 +63,43 @@ void retro_init(void)
    }
 #ifdef MANYMOUSE
    int available_mice = ManyMouse_Init();
-   
+
    if (available_mice < 0)
-       log_cb(RETRO_LOG_ERROR, "ManyMouse failed to initialize!\n");
+      log_cb(RETRO_LOG_ERROR, "ManyMouse failed to initialize!\n");
    else if (available_mice == 0)
-       log_cb(RETRO_LOG_INFO, "No mice detected!\n");
+      log_cb(RETRO_LOG_INFO, "No mice detected!\n");
    else if (available_mice > 1)
    {
-       // Extra mice, list them.
-       // (Or maybe just Wayland on Linux):
-       // https://github.com/icculus/manymouse/issues/10
-       char buffer[255];
-       struct retro_message message;
-       message.msg = buffer;
-       message.frames = 120;
+      // Extra mice, list them.
+      // (Or maybe just Wayland on Linux):
+      // https://github.com/icculus/manymouse/issues/10
+      char buffer[255];
+      struct retro_message message;
+      message.msg = buffer;
+      message.frames = 120;
 
-       snprintf(buffer, sizeof(buffer), "ManyMouse driver: %s\n", ManyMouse_DriverName());
-       environ_cb(RETRO_ENVIRONMENT_SET_MESSAGE, &message);
-       log_cb(RETRO_LOG_INFO, buffer);
-      
-       for (int i = 0; i < available_mice; i++)
-       {
-          snprintf(buffer, sizeof(buffer), "Mouse #%d: %s\n", i, ManyMouse_DeviceName(i));
-          environ_cb(RETRO_ENVIRONMENT_SET_MESSAGE, &message);
-          log_cb(RETRO_LOG_INFO, buffer);
-       }
+      snprintf(buffer, sizeof(buffer), "ManyMouse driver: %s\n", ManyMouse_DriverName());
+      environ_cb(RETRO_ENVIRONMENT_SET_MESSAGE, &message);
+      log_cb(RETRO_LOG_INFO, buffer);
+
+      for (int i = 0; i < available_mice; i++)
+      {
+         snprintf(buffer, sizeof(buffer), "Mouse #%d: %s\n", i, ManyMouse_DeviceName(i));
+         environ_cb(RETRO_ENVIRONMENT_SET_MESSAGE, &message);
+         log_cb(RETRO_LOG_INFO, buffer);
+      }
    }
 #endif
 
    color = 0;
-   
+
 }
 
 void retro_deinit(void)
 {
    free(frame_buf);
    frame_buf = NULL;
-   
+
    free(retro_frame_buf);
    retro_frame_buf = NULL;
 
@@ -148,7 +148,7 @@ void retro_get_system_av_info(struct retro_system_av_info *info)
 
    info->timing = (struct retro_system_timing) {
       .fps = 60.0,
-      .sample_rate = 0.0,
+         .sample_rate = 0.0,
    };
    info->geometry.base_width   = VIDEO_WIDTH;
    info->geometry.base_height  = max_height;
@@ -167,7 +167,7 @@ void retro_set_environment(retro_environment_t cb)
    bool option_cats_supported = false;
 
    environ_cb = cb;
-   
+
    if (cb(RETRO_ENVIRONMENT_GET_LOG_INTERFACE, &logging))
       log_cb = logging.log;
    else
@@ -175,78 +175,78 @@ void retro_set_environment(retro_environment_t cb)
 
 
    libretro_set_core_options(environ_cb,
-      &option_cats_supported);
+         &option_cats_supported);
 }
 
 /*
- void retro_set_environment(retro_environment_t cb)
-{
+   void retro_set_environment(retro_environment_t cb)
+   {
    environ_cb = cb;
 
    if (cb(RETRO_ENVIRONMENT_GET_LOG_INTERFACE, &logging))
-      log_cb = logging.log;
+   log_cb = logging.log;
    else
-      log_cb = fallback_log;
+   log_cb = fallback_log;
 
    static const struct retro_controller_description controllers[] = {
-      { "Arcade stick", RETRO_DEVICE_SUBCLASS(RETRO_DEVICE_ANALOG, 0) },
+   { "Arcade stick", RETRO_DEVICE_SUBCLASS(RETRO_DEVICE_ANALOG, 0) },
    };
 
    static const struct retro_controller_info ports[] = {
-      { controllers, 1 },
-      { NULL, 0 },
+   { controllers, 1 },
+   { NULL, 0 },
    };
 
    cb(RETRO_ENVIRONMENT_SET_CONTROLLER_INFO, (void*)ports);
-   
+
    unsigned core_options_version = 0;
    if (!environ_cb(RETRO_ENVIRONMENT_GET_CORE_OPTIONS_VERSION, &core_options_version))
-      core_options_version = 0;
-   
+   core_options_version = 0;
+
    if (core_options_version >= 2)
    {
    } else {
-      static const struct retro_variable vars[] = {
-         { "dice_use_mouse_pointer_for_paddle_1", "Use mouse pointer for paddle 1; false|true" },
-         
+   static const struct retro_variable vars[] = {
+   { "dice_use_mouse_pointer_for_paddle_1", "Use mouse pointer for paddle 1; false|true" },
+
 #ifdef MANYMOUSE
-         { "dice_manymouse_paddle0", "Mouse-Paddle 1; false|true" },
-         { "dice_manymouse_paddle0_x", "Mouse-Paddle 1 x; 0x|0x|0y|1x|1y|2x|2y|3x|3y" },
-         { "dice_manymouse_paddle0_y", "Mouse-Paddle 1 y; 0y|0x|0y|1x|1y|2x|2y|3x|3y" },
-         
-         { "dice_manymouse_paddle1", "Mouse-Paddle 2; false|true" },
-         { "dice_manymouse_paddle1_x", "Mouse-Paddle 2 x; 1x|0x|0y|1x|1y|2x|2y|3x|3y" },
-         { "dice_manymouse_paddle1_y", "Mouse-Paddle 2 y; 1y|0x|0y|1x|1y|2x|2y|3x|3y" },
-         
-         { "dice_manymouse_paddle2", "Mouse-Paddle 3; false|true" },
-         { "dice_manymouse_paddle2_x", "Mouse-Paddle 3 x; 2x|0x|0y|1x|1y|2x|2y|3x|3y" },
-         { "dice_manymouse_paddle2_y", "Mouse-Paddle 3 y; 2y|0x|0y|1x|1y|2x|2y|3x|3y" },
-         
-         { "dice_manymouse_paddle3", "Mouse-Paddle 4; false|true" },
-         { "dice_manymouse_paddle3_x", "Mouse-Paddle 4 x; 3x|0x|0y|1x|1y|2x|2y|3x|3y" },
-         { "dice_manymouse_paddle3_y", "Mouse-Paddle 4 y; 3y|0x|0y|1x|1y|2x|2y|3x|3y" },
+{ "dice_manymouse_paddle0", "Mouse-Paddle 1; false|true" },
+{ "dice_manymouse_paddle0_x", "Mouse-Paddle 1 x; 0x|0x|0y|1x|1y|2x|2y|3x|3y" },
+{ "dice_manymouse_paddle0_y", "Mouse-Paddle 1 y; 0y|0x|0y|1x|1y|2x|2y|3x|3y" },
+
+{ "dice_manymouse_paddle1", "Mouse-Paddle 2; false|true" },
+{ "dice_manymouse_paddle1_x", "Mouse-Paddle 2 x; 1x|0x|0y|1x|1y|2x|2y|3x|3y" },
+{ "dice_manymouse_paddle1_y", "Mouse-Paddle 2 y; 1y|0x|0y|1x|1y|2x|2y|3x|3y" },
+
+{ "dice_manymouse_paddle2", "Mouse-Paddle 3; false|true" },
+{ "dice_manymouse_paddle2_x", "Mouse-Paddle 3 x; 2x|0x|0y|1x|1y|2x|2y|3x|3y" },
+{ "dice_manymouse_paddle2_y", "Mouse-Paddle 3 y; 2y|0x|0y|1x|1y|2x|2y|3x|3y" },
+
+{ "dice_manymouse_paddle3", "Mouse-Paddle 4; false|true" },
+{ "dice_manymouse_paddle3_x", "Mouse-Paddle 4 x; 3x|0x|0y|1x|1y|2x|2y|3x|3y" },
+{ "dice_manymouse_paddle3_y", "Mouse-Paddle 4 y; 3y|0x|0y|1x|1y|2x|2y|3x|3y" },
 #endif
-         
-         { "dice_paddle_joystick_absolute", "Paddle joystick absolute; false|true" },
-         { "dice_paddle_keyboard_sensitivity", "Paddle D-pad sensitivity; 250|125|375|500" },
-         { "dice_paddle_joystick_sensitivity", "Paddle analog stick sensitivity; 500|125|250|375" },
-         { "dice_wheel_keyjoy_sensitivity", "Wheel sensitivity; 500|125|250|375" },
-         { "dice_throttle_keyjoy_sensitivity", "Throttle sensitivity; 250|125|375|500" },
-         
-         { "dice_dipswitch_1", "Dipswitch 1; -1|0|1" },
-         { "dice_dipswitch_2", "Dipswitch 2; -1|0|1" },
-         { "dice_dipswitch_3", "Dipswitch 3; -1|0|1" },
-         
-         { "dice_dipswitch16_1", "Dipswitch16 1; -1|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15" },
-         { "dice_dipswitch16_2", "Dipswitch16 2; -1|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15" },
-         
-         { NULL, NULL },
-      };
-      
-      cb(RETRO_ENVIRONMENT_SET_VARIABLES, (void*)vars);
-   }
+
+{ "dice_paddle_joystick_absolute", "Paddle joystick absolute; false|true" },
+{ "dice_paddle_keyboard_sensitivity", "Paddle D-pad sensitivity; 250|125|375|500" },
+{ "dice_paddle_joystick_sensitivity", "Paddle analog stick sensitivity; 500|125|250|375" },
+{ "dice_wheel_keyjoy_sensitivity", "Wheel sensitivity; 500|125|250|375" },
+{ "dice_throttle_keyjoy_sensitivity", "Throttle sensitivity; 250|125|375|500" },
+
+{ "dice_dipswitch_1", "Dipswitch 1; -1|0|1" },
+{ "dice_dipswitch_2", "Dipswitch 2; -1|0|1" },
+{ "dice_dipswitch_3", "Dipswitch 3; -1|0|1" },
+
+{ "dice_dipswitch16_1", "Dipswitch16 1; -1|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15" },
+{ "dice_dipswitch16_2", "Dipswitch16 2; -1|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15" },
+
+{ NULL, NULL },
+};
+
+cb(RETRO_ENVIRONMENT_SET_VARIABLES, (void*)vars);
 }
- */
+}
+*/
 
 void retro_set_audio_sample(retro_audio_sample_t cb)
 {
@@ -293,17 +293,17 @@ static void update_input(void)
       input_bitmask[(pad)] = 0;
       for (int i = 0; i <= RETRO_DEVICE_ID_JOYPAD_R3; i++) \
          input_bitmask[(pad)] |= input_state_cb((pad), RETRO_DEVICE_JOYPAD, 0, i) ? (1 << i) : 0 ;
-      
+
       input_analog_left_x[pad] = input_state_cb( (pad), RETRO_DEVICE_ANALOG, RETRO_DEVICE_INDEX_ANALOG_LEFT,
-                                                RETRO_DEVICE_ID_ANALOG_X);
-      
+            RETRO_DEVICE_ID_ANALOG_X);
+
       input_analog_left_y[pad] = input_state_cb( (pad), RETRO_DEVICE_ANALOG, RETRO_DEVICE_INDEX_ANALOG_LEFT,
-                                                RETRO_DEVICE_ID_ANALOG_Y);
+            RETRO_DEVICE_ID_ANALOG_Y);
 
       input_mouse_x[pad] = input_state_cb( (pad), RETRO_DEVICE_MOUSE, pad, RETRO_DEVICE_ID_MOUSE_X);
       input_mouse_y[pad] = input_state_cb( (pad), RETRO_DEVICE_MOUSE, pad, RETRO_DEVICE_ID_MOUSE_Y);
       /* bool mouse_pressed = input_state_cb((pad), RETRO_DEVICE_MOUSE, pad, RETRO_DEVICE_ID_MOUSE_LEFT);
-      if (mouse_pressed)
+         if (mouse_pressed)
          log_cb(RETRO_LOG_INFO, "Mouse #: %d    : (%6d, %6d).\n", pad, input_mouse_x[pad], input_mouse_y[pad]);
          */
    }
@@ -313,7 +313,7 @@ static void update_input(void)
    int16_t pointer_x = input_state_cb(pad, RETRO_DEVICE_POINTER, 0, RETRO_DEVICE_ID_POINTER_X);
    int16_t pointer_y = input_state_cb(pad, RETRO_DEVICE_POINTER, 0, RETRO_DEVICE_ID_POINTER_Y);
    //if (pointer_pressed)
-      //log_cb(RETRO_LOG_INFO, "Pointer Pressed #: %d    : (%6d, %6d).\n", pad, pointer_x, pointer_y);
+   //log_cb(RETRO_LOG_INFO, "Pointer Pressed #: %d    : (%6d, %6d).\n", pad, pointer_x, pointer_y);
 
    //log_cb(RETRO_LOG_INFO, "Pointer #: %d    : (%6d, %6d).\n", pad, pointer_x, pointer_y);
    input_pointer_x[pad] = pointer_x;
@@ -348,7 +348,7 @@ static void check_variables(void)
          dice.set_retromouse_enabled(paddle, val);
          log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
       }
-      
+
       snprintf(buffer, sizeof(buffer), "dice_retromouse_paddle%d_x", paddle);
       var.key = buffer;
       var.value = NULL;
@@ -357,7 +357,7 @@ static void check_variables(void)
          dice.set_retromouse_axis(paddle, 0, var.value);
          log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
       }
-      
+
       snprintf(buffer, sizeof(buffer), "dice_retromouse_paddle%d_y", paddle);
       var.key = buffer;
       var.value = NULL;
@@ -380,7 +380,7 @@ static void check_variables(void)
          dice.set_manymouse_enabled(paddle, val);
          log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
       }
-      
+
       snprintf(buffer, sizeof(buffer), "dice_manymouse_paddle%d_x", paddle);
       var.key = buffer;
       var.value = NULL;
@@ -389,7 +389,7 @@ static void check_variables(void)
          dice.set_manymouse_axis(paddle, 0, var.value);
          log_cb(RETRO_LOG_INFO, "Key -> Val: %s -> %s.\n", var.key, var.value);
       }
-      
+
       snprintf(buffer, sizeof(buffer), "dice_manymouse_paddle%d_y", paddle);
       var.key = buffer;
       var.value = NULL;
@@ -410,35 +410,35 @@ static void check_variables(void)
       else
          dice.set_paddle_joystick_absolute(true);
    }
-   
+
    var.key = "dice_paddle_keyboard_sensitivity";
    var.value = NULL;
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
    {
       dice.set_paddle_keyboard_sensitivity(atoi(var.value));
    }
-   
+
    var.key = "dice_retromouse_paddle_sensitivity";
    var.value = NULL;
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
    {
       dice.set_paddle_retromouse_sensitivity(atoi(var.value));
    }
-   
+
    var.key = "dice_paddle_joystick_sensitivity";
    var.value = NULL;
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
    {
       dice.set_paddle_joystick_sensitivity(atoi(var.value));
    }
-   
+
    var.key = "dice_wheel_keyjoy_sensitivity";
    var.value = NULL;
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
    {
       dice.set_wheel_keyjoy_sensitivity(atoi(var.value));
    }
-   
+
    var.key = "dice_throttle_keyjoy_sensitivity";
    var.value = NULL;
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE, &var) && var.value)
@@ -487,7 +487,7 @@ void retro_run(void)
 
    dice.run();
    //dice.render_frame();
-   
+
    bool updated = false;
    if (environ_cb(RETRO_ENVIRONMENT_GET_VARIABLE_UPDATE, &updated) && updated)
       check_variables();

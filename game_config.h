@@ -9,30 +9,30 @@
 
 struct GameConfig //: configuration
 {
-    std::string filename;
-    
-    GameConfig(const CircuitDesc* desc, const char* name);
-   
+   std::string filename;
+
+   GameConfig(const CircuitDesc* desc, const char* name);
+
    std::map<std::string, DipswitchBase*> dipswitch_map;
 
-    bool load()
-    {
-        /*configuration::load(filename);
+   bool load()
+   {
+      /*configuration::load(filename);
         return save();  // Create file if it doesn't exist
-         */
-       return true;
-    }
+        */
+      return true;
+   }
 
-    bool save()
-    {
-        //return configuration::save(filename);
-       return true;
-    }
+   bool save()
+   {
+      //return configuration::save(filename);
+      return true;
+   }
 
-    bool operator==(const GameConfig& g) { return filename == g.filename; }
+   bool operator==(const GameConfig& g) { return filename == g.filename; }
 
-    static bool isDipswitch(const ChipDesc* chip);
-    static bool isPotentiometer(const ChipDesc* chip);
+   static bool isDipswitch(const ChipDesc* chip);
+   static bool isPotentiometer(const ChipDesc* chip);
 };
 
 #endif

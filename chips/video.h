@@ -9,43 +9,43 @@ class Video;
 
 class Video
 {
-protected:
-    uint64_t scanline_time;
-    uint64_t current_time;
-    uint64_t initial_time;
+   protected:
+      uint64_t scanline_time;
+      uint64_t current_time;
+      uint64_t initial_time;
 
-    uint32_t v_size;
-    uint32_t v_pos;
+      uint32_t v_size;
+      uint32_t v_pos;
 
-    std::vector<float> color;
-   std::vector<uint16_t> retro_color;
+      std::vector<float> color;
+      std::vector<uint16_t> retro_color;
 
-    void adjust_screen_params();
-    void draw(Chip* chip);
-    void draw_overlays();
-    void init_color_lut(const double (*r)[3]);
-   uint16_t doublergb_to_retrocolor(double r, double g, double b);
-   uint16_t retro_blend(uint16_t bg, uint16_t fg);
+      void adjust_screen_params();
+      void draw(Chip* chip);
+      void draw_overlays();
+      void init_color_lut(const double (*r)[3]);
+      uint16_t doublergb_to_retrocolor(double r, double g, double b);
+      uint16_t retro_blend(uint16_t bg, uint16_t fg);
 
-public:
-    const VideoDesc* desc;
-    uint32_t frame_count;
-    enum VideoPins { HBLANK_PIN = 9, VBLANK_PIN = 10 };
-   
-   uint16_t *pixel_buf;
-   uint16_t *retro_pixel_buf;
+   public:
+      const VideoDesc* desc;
+      uint32_t frame_count;
+      enum VideoPins { HBLANK_PIN = 9, VBLANK_PIN = 10 };
 
-   bool frame_done = false;
+      uint16_t *pixel_buf;
+      uint16_t *retro_pixel_buf;
 
-    
-   Video();
-     ~Video() { }
-     void video_init(int width, int height /*, const Settings::Video& settings */);
-     void swap_buffers();
-     void show_cursor(bool show);
-    static CUSTOM_LOGIC( video );
+      bool frame_done = false;
 
-//    static Video* createDefault(phoenix::VerticalLayout& layout, phoenix::Viewport*& viewport);
+
+      Video();
+      ~Video() { }
+      void video_init(int width, int height /*, const Settings::Video& settings */);
+      void swap_buffers();
+      void show_cursor(bool show);
+      static CUSTOM_LOGIC( video );
+
+      //    static Video* createDefault(phoenix::VerticalLayout& layout, phoenix::Viewport*& viewport);
 };
 
 extern CHIP_DESC( VIDEO );
