@@ -13665,68 +13665,68 @@ struct retro_core_options_v2 options_fr = {
 /* RETRO_LANGUAGE_GA */
 
 #define CATEGORY_INPUT_LABEL_GA "Ionchur"
-#define CATEGORY_INPUT_INFO_0_GA NULL
-#define CATEGORY_RETROMOUSE_LABEL_GA NULL
-#define CATEGORY_RETROMOUSE_INFO_0_GA NULL
+#define CATEGORY_INPUT_INFO_0_GA "Cumraigh socruithe ionchuir croí-shonracha."
+#define CATEGORY_RETROMOUSE_LABEL_GA "LuchRetro"
+#define CATEGORY_RETROMOUSE_INFO_0_GA "Cumraigh socruithe il-luch libretro."
 #define CATEGORY_MANYMOUSE_LABEL_GA NULL
-#define CATEGORY_MANYMOUSE_INFO_0_GA NULL
-#define CATEGORY_DIPSWITCH_LABEL_GA NULL
-#define CATEGORY_DIPSWITCH_INFO_0_GA NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_GA NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_GA NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_GA NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_GA NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_GA NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_GA NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_GA NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CAT_GA NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_INFO_0_GA NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_GA NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CAT_GA NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_INFO_0_GA NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_GA NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CAT_GA NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_INFO_0_GA NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_GA NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_CAT_GA NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_INFO_0_GA NULL
-#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_GA NULL
-#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_CAT_GA NULL
-#define DICE_THROTTLE_KEYJOY_SENSITIVITY_INFO_0_GA NULL
-#define DICE_RETROMOUSE_PADDLE0_LABEL_GA NULL
-#define DICE_RETROMOUSE_PADDLE0_LABEL_CAT_GA NULL
-#define DICE_RETROMOUSE_PADDLE0_INFO_0_GA NULL
-#define DICE_RETROMOUSE_PADDLE1_LABEL_GA NULL
-#define DICE_RETROMOUSE_PADDLE1_LABEL_CAT_GA NULL
-#define DICE_RETROMOUSE_PADDLE1_INFO_0_GA NULL
-#define DICE_RETROMOUSE_PADDLE2_LABEL_GA NULL
-#define DICE_RETROMOUSE_PADDLE2_LABEL_CAT_GA NULL
-#define DICE_RETROMOUSE_PADDLE2_INFO_0_GA NULL
-#define DICE_RETROMOUSE_PADDLE3_LABEL_GA NULL
-#define DICE_RETROMOUSE_PADDLE3_LABEL_CAT_GA NULL
-#define DICE_RETROMOUSE_PADDLE3_INFO_0_GA NULL
-#define DICE_RETROMOUSE_PADDLE0_X_LABEL_GA NULL
-#define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_GA NULL
-#define DICE_RETROMOUSE_PADDLE0_X_INFO_0_GA NULL
+#define CATEGORY_MANYMOUSE_INFO_0_GA "Cumraigh socruithe il-luch ManyMouse."
+#define CATEGORY_DIPSWITCH_LABEL_GA "Lasc DIP"
+#define CATEGORY_DIPSWITCH_INFO_0_GA "Cumraigh socruithe an lasc DIP agus an phoitéinsiméadar."
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_GA "Ionchur > Úsáid an Pointeoir Luchóige mar Pheadal 1"
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_GA "Úsáid an Pointeoir Luchóige mar Pheadal 1"
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_GA "Úsáid pointeoir réamhshocraithe an chórais mar Pheadal Rialaitheora 1. Ní ligeann sé duit luch shonrach a roghnú má tá cinn iolracha agat."
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_GA "Ionchur > Úsáideann Luamhán stiúrtha Pheadal Gluaisne Lán"
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_GA "Úsáideann an Luamhán stiúrtha Pheadal Gluaisne Lán"
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_GA "Déan raon gluaiseachta an luamháin stiúrtha a mhapáil go díreach chuig raon an rámha, seachas gluaiseachtaí coibhneasta."
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_GA "Ionchur > Íogaireacht Pheadal D-pad"
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CAT_GA "Pheadal D-pad Íogaireacht"
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_INFO_0_GA "Íogaireacht agus D-pad á úsáid mar peadal."
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_GA "Ionchur > Íogaireacht Bata Analógach Peadal"
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CAT_GA "Íogaireacht Bata Analógach Peadal"
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_INFO_0_GA "Íogaireacht agus bata analógach in úsáid mar peadal."
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_GA "Ionchur > Íogaireacht Luch Retro Peadal"
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CAT_GA "Íogaireacht Luch Retro Peadal"
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_INFO_0_GA "Íogaireacht agus RetroMouse á úsáid mar peadal."
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_GA "Ionchur > Íogaireacht Roth"
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_CAT_GA "Íogaireacht Roth"
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_INFO_0_GA "Íogaireacht agus D-pad nó bata analógach á n-úsáid mar roth."
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_GA "Ionchur > Íogaireacht an Scóig"
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_CAT_GA "Íogaireacht an Scóig"
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_INFO_0_GA "Íogaireacht agus D-pad nó bata analógach in úsáid mar scóig."
+#define DICE_RETROMOUSE_PADDLE0_LABEL_GA "RetroMouse > Úsáid an Luch le haghaidh an Pheadal 1"
+#define DICE_RETROMOUSE_PADDLE0_LABEL_CAT_GA "Úsáid an Luch le haghaidh an Pheadal 1"
+#define DICE_RETROMOUSE_PADDLE0_INFO_0_GA "Bain úsáid as luchóg shonrach do Pheadal 1, arna roghnú ag Innéacs Luiche Port 1."
+#define DICE_RETROMOUSE_PADDLE1_LABEL_GA "RetroMouse > Úsáid an Luch le haghaidh Pheadal 2"
+#define DICE_RETROMOUSE_PADDLE1_LABEL_CAT_GA "Úsáid an Luch le haghaidh Pheadal 2"
+#define DICE_RETROMOUSE_PADDLE1_INFO_0_GA "Bain úsáid as luchóg shonrach do Pheadal 2, arna roghnú ag Innéacs Luiche Port 2."
+#define DICE_RETROMOUSE_PADDLE2_LABEL_GA "RetroMouse > Úsáid an Luch le haghaidh Pheadal 3"
+#define DICE_RETROMOUSE_PADDLE2_LABEL_CAT_GA "Úsáid an Luch le haghaidh an Pheadal 3"
+#define DICE_RETROMOUSE_PADDLE2_INFO_0_GA "Bain úsáid as luchóg shonrach do Pheadal 3, arna roghnú ag Innéacs Luiche Port 3."
+#define DICE_RETROMOUSE_PADDLE3_LABEL_GA "RetroMouse > Úsáid an Luch le haghaidh Pheadal 4"
+#define DICE_RETROMOUSE_PADDLE3_LABEL_CAT_GA "Úsáid an Luch le haghaidh an Pheadal 4"
+#define DICE_RETROMOUSE_PADDLE3_INFO_0_GA "Bain úsáid as luchóg shonrach do Pheadal 4, arna roghnú ag Innéacs Luiche Port 4."
+#define DICE_RETROMOUSE_PADDLE0_X_LABEL_GA "RetroMouse > Ais Luiche le haghaidh Pheadal 1 Cothrománach"
+#define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_GA "Ais Luiche le haghaidh Pheadal 1 Cothrománach"
+#define DICE_RETROMOUSE_PADDLE0_X_INFO_0_GA "Ais luiche do imreoir 1, gluaiseacht chothrománach scáileáin."
 #define OPTION_VAL_X_GA NULL
 #define OPTION_VAL_Y_GA NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_GA NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_CAT_GA NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_INFO_0_GA NULL
-#define DICE_RETROMOUSE_PADDLE1_X_LABEL_GA NULL
-#define DICE_RETROMOUSE_PADDLE1_X_LABEL_CAT_GA NULL
-#define DICE_RETROMOUSE_PADDLE1_X_INFO_0_GA NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_GA NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CAT_GA NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_INFO_0_GA NULL
-#define DICE_RETROMOUSE_PADDLE2_X_LABEL_GA NULL
-#define DICE_RETROMOUSE_PADDLE2_X_LABEL_CAT_GA NULL
-#define DICE_RETROMOUSE_PADDLE2_X_INFO_0_GA NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_GA NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_CAT_GA NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_INFO_0_GA NULL
-#define DICE_RETROMOUSE_PADDLE3_X_LABEL_GA NULL
-#define DICE_RETROMOUSE_PADDLE3_X_LABEL_CAT_GA NULL
+#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_GA "RetroMouse > Ais Luiche le haghaidh Pheadal 1 Ingearach"
+#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_CAT_GA "Ais Luiche le haghaidh Pheadal 1 Ingearach"
+#define DICE_RETROMOUSE_PADDLE0_Y_INFO_0_GA "Ais luiche do imreoir 1, gluaiseacht ingearach scáileáin."
+#define DICE_RETROMOUSE_PADDLE1_X_LABEL_GA "RetroMouse > Ais Luiche le haghaidh Pheadal 2 Cothrománach"
+#define DICE_RETROMOUSE_PADDLE1_X_LABEL_CAT_GA "Ais Luiche le haghaidh Pheadal 2 Cothrománach"
+#define DICE_RETROMOUSE_PADDLE1_X_INFO_0_GA "Ais luiche do imreoir 2, gluaiseacht chothrománach scáileáin."
+#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_GA "RetroMouse > Ais Luiche le haghaidh Pheadal 2 Ingearach"
+#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CAT_GA "Ais Luiche le haghaidh Pheadal 2 Ingearach"
+#define DICE_RETROMOUSE_PADDLE1_Y_INFO_0_GA "Ais luiche do imreoir 2, gluaiseacht scáileáin ingearach."
+#define DICE_RETROMOUSE_PADDLE2_X_LABEL_GA "RetroMouse > Ais Luiche le haghaidh Pheadal 3 Cothrománach"
+#define DICE_RETROMOUSE_PADDLE2_X_LABEL_CAT_GA "Ais Luiche le haghaidh Pheadal 3 Cothrománach"
+#define DICE_RETROMOUSE_PADDLE2_X_INFO_0_GA "Ais luiche do imreoir 3, gluaiseacht chothrománach scáileáin."
+#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_GA "RetroMouse > Ais Luiche le haghaidh Pheadal 3 Ingearach"
+#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_CAT_GA "Ais Luiche le haghaidh Pheadal 3 Ingearach"
+#define DICE_RETROMOUSE_PADDLE2_Y_INFO_0_GA "Ais luiche do imreoir 3, gluaiseacht scáileáin ingearach."
+#define DICE_RETROMOUSE_PADDLE3_X_LABEL_GA "RetroMouse > Ais Luiche le haghaidh Pheadal 4 Cothrománach"
+#define DICE_RETROMOUSE_PADDLE3_X_LABEL_CAT_GA "Ais Luiche le haghaidh Pheadal 4 Cothrománach"
 #define DICE_RETROMOUSE_PADDLE3_X_INFO_0_GA "Ais luiche do imreoir 4, gluaiseacht chothrománach scáileáin."
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_GA "RetroMouse > Ais Luiche le haghaidh Paddle 4 Ingearach"
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_GA "Ais Luiche le haghaidh Paddle 4 Ingearach"
