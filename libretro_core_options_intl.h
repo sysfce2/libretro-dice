@@ -16747,26 +16747,26 @@ struct retro_core_options_v2 options_hr = {
 #define DICE_RETROMOUSE_PADDLE0_Y_INFO_0_HU "Az 1. játékos egerének tengelye, függőleges mozgáshoz a képernyőn."
 #define DICE_RETROMOUSE_PADDLE1_X_LABEL_HU "RetroMouse > Egér tengelye a 2. ütő vízszintes mozgatásához"
 #define DICE_RETROMOUSE_PADDLE1_X_LABEL_CAT_HU "Egér tengelye a 2. ütő vízszintes mozgatásához"
-#define DICE_RETROMOUSE_PADDLE1_X_INFO_0_HU NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_HU NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CAT_HU NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_INFO_0_HU NULL
-#define DICE_RETROMOUSE_PADDLE2_X_LABEL_HU NULL
-#define DICE_RETROMOUSE_PADDLE2_X_LABEL_CAT_HU NULL
-#define DICE_RETROMOUSE_PADDLE2_X_INFO_0_HU NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_HU NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_CAT_HU NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_INFO_0_HU NULL
-#define DICE_RETROMOUSE_PADDLE3_X_LABEL_HU NULL
-#define DICE_RETROMOUSE_PADDLE3_X_LABEL_CAT_HU NULL
-#define DICE_RETROMOUSE_PADDLE3_X_INFO_0_HU NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_HU NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_HU NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_HU NULL
-#define DICE_MANYMOUSE_PADDLE0_LABEL_HU NULL
-#define DICE_MANYMOUSE_PADDLE0_INFO_0_HU NULL
-#define DICE_MANYMOUSE_PADDLE0_X_LABEL_HU NULL
-#define DICE_MANYMOUSE_PADDLE0_X_LABEL_CAT_HU NULL
+#define DICE_RETROMOUSE_PADDLE1_X_INFO_0_HU "A 2. játékos egerének tengelye, vízszintes mozgáshoz a képernyőn."
+#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_HU "RetroMouse > Egér tengelye az 2. ütő függőleges mozgatásához"
+#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CAT_HU "Egér tengelye a 2. ütő függőleges mozgatásához"
+#define DICE_RETROMOUSE_PADDLE1_Y_INFO_0_HU "A 2. játékos egerének tengelye, függőleges mozgáshoz a képernyőn."
+#define DICE_RETROMOUSE_PADDLE2_X_LABEL_HU "RetroMouse > Egér tengelye a 3. ütő vízszintes mozgatásához"
+#define DICE_RETROMOUSE_PADDLE2_X_LABEL_CAT_HU "Egér tengelye a 3. ütő vízszintes mozgatásához"
+#define DICE_RETROMOUSE_PADDLE2_X_INFO_0_HU "A 3. játékos egerének tengelye, vízszintes mozgáshoz a képernyőn."
+#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_HU "RetroMouse > Egér tengelye a 3. ütő függőleges mozgatásához"
+#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_CAT_HU "Egér tengelye a 3. ütő függőleges mozgatásához"
+#define DICE_RETROMOUSE_PADDLE2_Y_INFO_0_HU "A 3. játékos egerének tengelye, függőleges mozgáshoz a képernyőn."
+#define DICE_RETROMOUSE_PADDLE3_X_LABEL_HU "RetroMouse > Egér tengelye a 4. ütő vízszintes mozgatásához"
+#define DICE_RETROMOUSE_PADDLE3_X_LABEL_CAT_HU "Egér tengelye a 4. ütő vízszintes mozgatásához"
+#define DICE_RETROMOUSE_PADDLE3_X_INFO_0_HU "A 4. játékos egerének tengelye, vízszintes mozgáshoz a képernyőn."
+#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_HU "RetroMouse > Egér tengelye a 4. ütő függőleges mozgatásához"
+#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_HU "Egér tengelye a 4. ütő függőleges mozgatásához"
+#define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_HU "A 4. játékos egerének tengelye, függőleges mozgáshoz a képernyőn."
+#define DICE_MANYMOUSE_PADDLE0_LABEL_HU "ManyMouse > Egér használata az 1. ütőhöz"
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_HU "Egér használata az 1. ütőhöz."
+#define DICE_MANYMOUSE_PADDLE0_X_LABEL_HU "ManyMouse > Egér-Ütő 1 x"
+#define DICE_MANYMOUSE_PADDLE0_X_LABEL_CAT_HU "Egér-Ütő 1 x"
 #define OPTION_VAL_0X_HU NULL
 #define OPTION_VAL_0Y_HU NULL
 #define OPTION_VAL_1X_HU NULL
@@ -16775,32 +16775,32 @@ struct retro_core_options_v2 options_hr = {
 #define OPTION_VAL_2Y_HU NULL
 #define OPTION_VAL_3X_HU NULL
 #define OPTION_VAL_3Y_HU NULL
-#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_HU NULL
-#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CAT_HU NULL
-#define DICE_MANYMOUSE_PADDLE1_LABEL_HU NULL
-#define DICE_MANYMOUSE_PADDLE1_INFO_0_HU NULL
-#define DICE_MANYMOUSE_PADDLE1_X_LABEL_HU NULL
-#define DICE_MANYMOUSE_PADDLE1_X_LABEL_CAT_HU NULL
-#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_HU NULL
-#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CAT_HU NULL
-#define DICE_MANYMOUSE_PADDLE2_LABEL_HU NULL
-#define DICE_MANYMOUSE_PADDLE2_INFO_0_HU NULL
-#define DICE_MANYMOUSE_PADDLE2_X_LABEL_HU NULL
-#define DICE_MANYMOUSE_PADDLE2_X_LABEL_CAT_HU NULL
-#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_HU NULL
-#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CAT_HU NULL
-#define DICE_MANYMOUSE_PADDLE3_LABEL_HU NULL
-#define DICE_MANYMOUSE_PADDLE3_INFO_0_HU NULL
-#define DICE_MANYMOUSE_PADDLE3_X_LABEL_HU NULL
-#define DICE_MANYMOUSE_PADDLE3_X_LABEL_CAT_HU NULL
-#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_HU NULL
-#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CAT_HU NULL
-#define DICE_DIPSWITCH_1_LABEL_HU NULL
-#define DICE_DIPSWITCH_1_LABEL_CAT_HU NULL
-#define DICE_DIPSWITCH_1_INFO_0_HU NULL
-#define OPTION_VAL_1_HU NULL
-#define DICE_DIPSWITCH_2_LABEL_HU NULL
-#define DICE_DIPSWITCH_2_LABEL_CAT_HU NULL
+#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_HU "ManyMouse > Egér-Ütő 1 y"
+#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CAT_HU "Egér-Ütő 1 y"
+#define DICE_MANYMOUSE_PADDLE1_LABEL_HU "ManyMouse > Egér használata a 2. ütőhöz"
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_HU "Egér használata a 2. ütőhöz."
+#define DICE_MANYMOUSE_PADDLE1_X_LABEL_HU "ManyMouse > Egér-Ütő 2 x"
+#define DICE_MANYMOUSE_PADDLE1_X_LABEL_CAT_HU "Egér-Ütő 2 x"
+#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_HU "ManyMouse > Egér-Ütő 2 y"
+#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CAT_HU "Egér-Ütő 2 y"
+#define DICE_MANYMOUSE_PADDLE2_LABEL_HU "ManyMouse > Egér használata a 3. ütőhöz"
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_HU "Egér használata a 3. ütőhöz."
+#define DICE_MANYMOUSE_PADDLE2_X_LABEL_HU "ManyMouse > Egér-Ütő 3 x"
+#define DICE_MANYMOUSE_PADDLE2_X_LABEL_CAT_HU "Egér-Ütő 3 x"
+#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_HU "ManyMouse > Egér-Ütő 3 y"
+#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CAT_HU "Egér-Ütő 3 y"
+#define DICE_MANYMOUSE_PADDLE3_LABEL_HU "ManyMouse > Egér használata a 4. ütőhöz"
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_HU "Egér használata a 4. ütőhöz."
+#define DICE_MANYMOUSE_PADDLE3_X_LABEL_HU "ManyMouse > Egér-Ütő 4 x"
+#define DICE_MANYMOUSE_PADDLE3_X_LABEL_CAT_HU "Egér-Ütő 4 x"
+#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_HU "ManyMouse > Egér-Ütő 4 y"
+#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CAT_HU "Egér-Ütő 4 y"
+#define DICE_DIPSWITCH_1_LABEL_HU "DIP kapcsoló > DIP kapcsoló 1"
+#define DICE_DIPSWITCH_1_LABEL_CAT_HU "DIP kapcsoló 1"
+#define DICE_DIPSWITCH_1_INFO_0_HU "Az 1. DIP kapcsoló beállítása."
+#define OPTION_VAL_1_HU "alapértelmezett"
+#define DICE_DIPSWITCH_2_LABEL_HU "DIP kapcsoló > DIP kapcsoló 2"
+#define DICE_DIPSWITCH_2_LABEL_CAT_HU "DIP kapcsoló 2"
 #define DICE_DIPSWITCH_2_INFO_0_HU "A 2. DIP kapcsoló beállítása."
 #define DICE_DIPSWITCH_3_LABEL_HU "DIP kapcsoló > DIP kapcsoló 3"
 #define DICE_DIPSWITCH_3_LABEL_CAT_HU "DIP kapcsoló 3"
@@ -18229,58 +18229,58 @@ struct retro_core_options_v2 options_id = {
 #define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_IT "Input > Sensibilità D-Pad Racchetta"
 #define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CAT_IT "Sensibilità D-pad Della Racchetta"
 #define DICE_PADDLE_KEYBOARD_SENSITIVITY_INFO_0_IT "Sensibilità quando si utilizza D-pad per una racchetta."
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_IT NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CAT_IT NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_INFO_0_IT NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_IT NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CAT_IT NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_INFO_0_IT NULL
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_IT "Input > Sensibilità dello stick analogico Paddle"
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CAT_IT "Sensibilità dello stick analogico Paddle"
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_INFO_0_IT "Sensibilità nell'uso dello stick analogico per il paddle."
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_IT "Input > Sensibilità del RetroMouse per il Paddle"
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CAT_IT "Sensibilità del RetroMouse per il Paddle"
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_INFO_0_IT "Sensibilità quando si utilizza RetroMouse per il paddle."
 #define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_IT "Ingresso > Sensibilità Sterzo"
 #define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_CAT_IT "Sensibilità Sterzo"
 #define DICE_WHEEL_KEYJOY_SENSITIVITY_INFO_0_IT "Sensibilità quando si utilizza D-pad o stick analogico per una ruota."
 #define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_IT "Input > Sensibilità Dell'acceletatore"
 #define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_CAT_IT "Sensibilità Acceleratore"
-#define DICE_THROTTLE_KEYJOY_SENSITIVITY_INFO_0_IT NULL
-#define DICE_RETROMOUSE_PADDLE0_LABEL_IT NULL
-#define DICE_RETROMOUSE_PADDLE0_LABEL_CAT_IT NULL
-#define DICE_RETROMOUSE_PADDLE0_INFO_0_IT NULL
-#define DICE_RETROMOUSE_PADDLE1_LABEL_IT NULL
-#define DICE_RETROMOUSE_PADDLE1_LABEL_CAT_IT NULL
-#define DICE_RETROMOUSE_PADDLE1_INFO_0_IT NULL
-#define DICE_RETROMOUSE_PADDLE2_LABEL_IT NULL
-#define DICE_RETROMOUSE_PADDLE2_LABEL_CAT_IT NULL
-#define DICE_RETROMOUSE_PADDLE2_INFO_0_IT NULL
-#define DICE_RETROMOUSE_PADDLE3_LABEL_IT NULL
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_INFO_0_IT "Sensibilità nell’uso del D-pad o dello stick analogico per l'acceleratore."
+#define DICE_RETROMOUSE_PADDLE0_LABEL_IT "RetroMouse > usa il mouse per il paddle 1"
+#define DICE_RETROMOUSE_PADDLE0_LABEL_CAT_IT "Usa il mouse per il paddle 1"
+#define DICE_RETROMOUSE_PADDLE0_INFO_0_IT "Usa un mouse specifico per paddle 1, scelto dall'indice del mouse della porta 1."
+#define DICE_RETROMOUSE_PADDLE1_LABEL_IT "RetroMouse > usa il mouse per il paddle 2"
+#define DICE_RETROMOUSE_PADDLE1_LABEL_CAT_IT "Usa il mouse per il paddle 2"
+#define DICE_RETROMOUSE_PADDLE1_INFO_0_IT "Usa un mouse specifico per il paddle 2, scelto dall'indice del mouse della porta 2."
+#define DICE_RETROMOUSE_PADDLE2_LABEL_IT "RetroMouse > usa il mouse per il paddle 3"
+#define DICE_RETROMOUSE_PADDLE2_LABEL_CAT_IT "Usa il mouse per il paddle 3"
+#define DICE_RETROMOUSE_PADDLE2_INFO_0_IT "Usa un mouse specifico per il paddle 3, scelto dall'indice del mouse della porta 3."
+#define DICE_RETROMOUSE_PADDLE3_LABEL_IT "RetroMouse > usa il mouse per il paddle 4"
 #define DICE_RETROMOUSE_PADDLE3_LABEL_CAT_IT "Usa il Mouse Per La Racchetta 4"
-#define DICE_RETROMOUSE_PADDLE3_INFO_0_IT NULL
-#define DICE_RETROMOUSE_PADDLE0_X_LABEL_IT NULL
-#define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_IT NULL
-#define DICE_RETROMOUSE_PADDLE0_X_INFO_0_IT NULL
+#define DICE_RETROMOUSE_PADDLE3_INFO_0_IT "Usa un mouse specifico per il paddle 4, scelto dall'indice del mouse della porta 4."
+#define DICE_RETROMOUSE_PADDLE0_X_LABEL_IT "RetroMouse > Asse del mouse per il paddle 1 orizzontale"
+#define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_IT "Asse del mouse per il paddle 1 orizzontale"
+#define DICE_RETROMOUSE_PADDLE0_X_INFO_0_IT "Asse del mouse per il giocatore 1, movimento orizzontale dello schermo."
 #define OPTION_VAL_X_IT NULL
 #define OPTION_VAL_Y_IT NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_IT NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_CAT_IT NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_INFO_0_IT NULL
-#define DICE_RETROMOUSE_PADDLE1_X_LABEL_IT NULL
-#define DICE_RETROMOUSE_PADDLE1_X_LABEL_CAT_IT NULL
-#define DICE_RETROMOUSE_PADDLE1_X_INFO_0_IT NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_IT NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CAT_IT NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_INFO_0_IT NULL
-#define DICE_RETROMOUSE_PADDLE2_X_LABEL_IT NULL
-#define DICE_RETROMOUSE_PADDLE2_X_LABEL_CAT_IT NULL
-#define DICE_RETROMOUSE_PADDLE2_X_INFO_0_IT NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_IT NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_CAT_IT NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_INFO_0_IT NULL
-#define DICE_RETROMOUSE_PADDLE3_X_LABEL_IT NULL
-#define DICE_RETROMOUSE_PADDLE3_X_LABEL_CAT_IT NULL
-#define DICE_RETROMOUSE_PADDLE3_X_INFO_0_IT NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_IT NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_IT NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_IT NULL
-#define DICE_MANYMOUSE_PADDLE0_LABEL_IT NULL
-#define DICE_MANYMOUSE_PADDLE0_INFO_0_IT NULL
+#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_IT "RetroMouse > Asse del mouse per il paddle 1 verticale"
+#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_CAT_IT "Asse del mouse per il paddle 1 verticale"
+#define DICE_RETROMOUSE_PADDLE0_Y_INFO_0_IT "Asse del mouse per il giocatore 1, movimento verticale dello schermo."
+#define DICE_RETROMOUSE_PADDLE1_X_LABEL_IT "RetroMouse > Asse del mouse per il paddle 2 orizzontale"
+#define DICE_RETROMOUSE_PADDLE1_X_LABEL_CAT_IT "Asse del mouse per il paddle 2 orizzontale"
+#define DICE_RETROMOUSE_PADDLE1_X_INFO_0_IT "Asse del mouse per il giocatore 2, movimento orizzontale dello schermo."
+#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_IT "RetroMouse > Asse del mouse per il paddle 2 verticale"
+#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CAT_IT "Asse del mouse per il paddle 2 verticale"
+#define DICE_RETROMOUSE_PADDLE1_Y_INFO_0_IT "Asse del mouse per il giocatore 2, movimento verticale dello schermo."
+#define DICE_RETROMOUSE_PADDLE2_X_LABEL_IT "RetroMouse > Asse del mouse per il paddle 3 orizzontale"
+#define DICE_RETROMOUSE_PADDLE2_X_LABEL_CAT_IT "Asse del mouse per il paddle 3 orizzontale"
+#define DICE_RETROMOUSE_PADDLE2_X_INFO_0_IT "Asse del mouse per il giocatore 3, movimento orizzontale dello schermo."
+#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_IT "RetroMouse > Asse del mouse per il paddle 3 verticale"
+#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_CAT_IT "Asse del mouse per il paddle 3 verticale"
+#define DICE_RETROMOUSE_PADDLE2_Y_INFO_0_IT "Asse del mouse per il giocatore 3, movimento verticale dello schermo."
+#define DICE_RETROMOUSE_PADDLE3_X_LABEL_IT "RetroMouse > Asse del mouse per il paddle 4 orizzontale"
+#define DICE_RETROMOUSE_PADDLE3_X_LABEL_CAT_IT "Asse del mouse per il paddle 4 orizzontale"
+#define DICE_RETROMOUSE_PADDLE3_X_INFO_0_IT "Asse del mouse per il giocatore 4, movimento orizzontale dello schermo."
+#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_IT "RetroMouse > Asse del mouse per il paddle 4 verticale"
+#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_IT "Asse del mouse per il paddle 4 verticale"
+#define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_IT "Asse del mouse per il giocatore 4, movimento verticale dello schermo."
+#define DICE_MANYMOUSE_PADDLE0_LABEL_IT "RetroMouse > usa il mouse per il paddle 1"
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_IT "Usa un mouse per il paddle 1."
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_IT NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_CAT_IT NULL
 #define OPTION_VAL_0X_IT NULL
@@ -18293,40 +18293,40 @@ struct retro_core_options_v2 options_id = {
 #define OPTION_VAL_3Y_IT NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_IT NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CAT_IT NULL
-#define DICE_MANYMOUSE_PADDLE1_LABEL_IT NULL
-#define DICE_MANYMOUSE_PADDLE1_INFO_0_IT NULL
+#define DICE_MANYMOUSE_PADDLE1_LABEL_IT "ManyMouse > usa il mouse per il paddle 2"
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_IT "Usa un mouse per il paddle 2."
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_IT NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_CAT_IT NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_IT NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CAT_IT NULL
-#define DICE_MANYMOUSE_PADDLE2_LABEL_IT NULL
-#define DICE_MANYMOUSE_PADDLE2_INFO_0_IT NULL
+#define DICE_MANYMOUSE_PADDLE2_LABEL_IT "ManyMouse > usa il mouse per il paddle 3"
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_IT "Usa un mouse per il paddle 3."
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_IT NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_CAT_IT NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_IT NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CAT_IT NULL
-#define DICE_MANYMOUSE_PADDLE3_LABEL_IT NULL
-#define DICE_MANYMOUSE_PADDLE3_INFO_0_IT NULL
+#define DICE_MANYMOUSE_PADDLE3_LABEL_IT "RetroMouse > usa il mouse per il paddle 4"
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_IT "Usa un mouse per il paddle 4."
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_IT NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_CAT_IT NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_IT NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CAT_IT NULL
-#define DICE_DIPSWITCH_1_LABEL_IT NULL
-#define DICE_DIPSWITCH_1_LABEL_CAT_IT NULL
-#define DICE_DIPSWITCH_1_INFO_0_IT NULL
+#define DICE_DIPSWITCH_1_LABEL_IT "Interruttore DIP > Interruttore DIP 1"
+#define DICE_DIPSWITCH_1_LABEL_CAT_IT "Interruttore DIP 1"
+#define DICE_DIPSWITCH_1_INFO_0_IT "Impostazione dell'interruttore DIP 1."
 #define OPTION_VAL_1_IT "predefinito"
-#define DICE_DIPSWITCH_2_LABEL_IT NULL
-#define DICE_DIPSWITCH_2_LABEL_CAT_IT NULL
-#define DICE_DIPSWITCH_2_INFO_0_IT NULL
-#define DICE_DIPSWITCH_3_LABEL_IT NULL
-#define DICE_DIPSWITCH_3_LABEL_CAT_IT NULL
-#define DICE_DIPSWITCH_3_INFO_0_IT NULL
-#define DICE_DIPSWITCH16_1_LABEL_IT NULL
-#define DICE_DIPSWITCH16_1_LABEL_CAT_IT NULL
-#define DICE_DIPSWITCH16_1_INFO_0_IT NULL
-#define DICE_DIPSWITCH16_2_LABEL_IT NULL
-#define DICE_DIPSWITCH16_2_LABEL_CAT_IT NULL
-#define DICE_DIPSWITCH16_2_INFO_0_IT NULL
+#define DICE_DIPSWITCH_2_LABEL_IT "Interruttore DIP > Interruttore DIP 2"
+#define DICE_DIPSWITCH_2_LABEL_CAT_IT "Interruttore DIP 2"
+#define DICE_DIPSWITCH_2_INFO_0_IT "Impostazione dell'interruttore DIP 2."
+#define DICE_DIPSWITCH_3_LABEL_IT "Interruttore DIP > Interruttore DIP 3"
+#define DICE_DIPSWITCH_3_LABEL_CAT_IT "Interruttore DIP 3"
+#define DICE_DIPSWITCH_3_INFO_0_IT "Impostazione dell'interruttore DIP 3."
+#define DICE_DIPSWITCH16_1_LABEL_IT "Interruttore DIP > Interruttore DIP hex 1"
+#define DICE_DIPSWITCH16_1_LABEL_CAT_IT "Interruttore DIP hex 1"
+#define DICE_DIPSWITCH16_1_INFO_0_IT "Impostazione per interruttore DIP a 16 posizioni numero 1."
+#define DICE_DIPSWITCH16_2_LABEL_IT "Interruttore DIP > Interruttore DIP hex 2"
+#define DICE_DIPSWITCH16_2_LABEL_CAT_IT "Interruttore DIP hex 2"
+#define DICE_DIPSWITCH16_2_INFO_0_IT "Impostazione per interruttore DIP a 16 posizioni numero 2."
 
 struct retro_core_option_v2_category option_cats_it[] = {
    {
