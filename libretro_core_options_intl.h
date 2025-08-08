@@ -23519,51 +23519,51 @@ struct retro_core_options_v2 options_pl = {
 /* RETRO_LANGUAGE_PT_BR */
 
 #define CATEGORY_INPUT_LABEL_PT_BR "Entrada"
-#define CATEGORY_INPUT_INFO_0_PT_BR NULL
+#define CATEGORY_INPUT_INFO_0_PT_BR "Configurar ajustes de entrada específicas do núcleo."
 #define CATEGORY_RETROMOUSE_LABEL_PT_BR NULL
-#define CATEGORY_RETROMOUSE_INFO_0_PT_BR NULL
+#define CATEGORY_RETROMOUSE_INFO_0_PT_BR "Configurar ajustes de múltiplos mouses do libretro."
 #define CATEGORY_MANYMOUSE_LABEL_PT_BR NULL
-#define CATEGORY_MANYMOUSE_INFO_0_PT_BR NULL
-#define CATEGORY_DIPSWITCH_LABEL_PT_BR NULL
-#define CATEGORY_DIPSWITCH_INFO_0_PT_BR NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_PT_BR NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_PT_BR NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_PT_BR NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_PT_BR NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_PT_BR NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_PT_BR NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_PT_BR NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CAT_PT_BR NULL
+#define CATEGORY_MANYMOUSE_INFO_0_PT_BR "Configurar ajustes de múltiplos mouses do ManyMouse."
+#define CATEGORY_DIPSWITCH_LABEL_PT_BR "Chave DIP"
+#define CATEGORY_DIPSWITCH_INFO_0_PT_BR "Configurar ajustes das chaves DIP e dos potenciômetros."
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_PT_BR "Entrada > Usar Ponteiro do Mouse para o Paddle 1"
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_PT_BR "Usar Ponteiro do Mouse para o Paddle 1"
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_PT_BR "Usa o ponteiro do mouse do sistema como o controle paddle 1. Não permite escolher um mouse específico se você tiver vários."
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_PT_BR "Entrada > Joystick do Paddle Usa Movimento Absoluto"
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_PT_BR "Joystick do Paddle Usa Movimento Absoluto"
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_PT_BR "Mapeia diretamente o alcance de movimento do joystick para o alcance do paddle, em vez de usar movimentos relativos."
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_PT_BR "Entrada > Sensibilidade do D-pad do Paddle"
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CAT_PT_BR "Sensibilidade do D-pad do Paddle"
 #define DICE_PADDLE_KEYBOARD_SENSITIVITY_INFO_0_PT_BR "Sensibilidade ao usar o direcional D-pad para um paddle."
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_PT_BR NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CAT_PT_BR NULL
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_PT_BR "Entrada > Sensibilidade do Analógico do Paddle"
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CAT_PT_BR "Sensibilidade do Analógico do Paddle"
 #define DICE_PADDLE_JOYSTICK_SENSITIVITY_INFO_0_PT_BR "Sensibilidade ao usar o direcional analógico para um paddle."
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_PT_BR NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CAT_PT_BR NULL
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_PT_BR "Entrada > Sensibilidade do RetroMouse do Paddle"
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CAT_PT_BR "Sensibilidade do RetroMouse do Paddle"
 #define DICE_RETROMOUSE_PADDLE_SENSITIVITY_INFO_0_PT_BR "Sensibilidade ao usar o RetroMouse com um paddle."
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_PT_BR NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_CAT_PT_BR NULL
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_PT_BR "Entrada > Sensibilidade do Volante"
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_CAT_PT_BR "Sensibilidade do Volante"
 #define DICE_WHEEL_KEYJOY_SENSITIVITY_INFO_0_PT_BR "Sensibilidade ao usar o direcional D-pad ou analógico para um volante."
-#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_PT_BR NULL
-#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_CAT_PT_BR NULL
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_PT_BR "Entrada > Sensibilidade do Acelerador"
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_CAT_PT_BR "Sensibilidade do Acelerador"
 #define DICE_THROTTLE_KEYJOY_SENSITIVITY_INFO_0_PT_BR "Sensibilidade ao usar o direcional D-pad ou analógico para um acelerador."
-#define DICE_RETROMOUSE_PADDLE0_LABEL_PT_BR NULL
-#define DICE_RETROMOUSE_PADDLE0_LABEL_CAT_PT_BR NULL
-#define DICE_RETROMOUSE_PADDLE0_INFO_0_PT_BR NULL
-#define DICE_RETROMOUSE_PADDLE1_LABEL_PT_BR NULL
-#define DICE_RETROMOUSE_PADDLE1_LABEL_CAT_PT_BR NULL
-#define DICE_RETROMOUSE_PADDLE1_INFO_0_PT_BR NULL
-#define DICE_RETROMOUSE_PADDLE2_LABEL_PT_BR NULL
-#define DICE_RETROMOUSE_PADDLE2_LABEL_CAT_PT_BR NULL
-#define DICE_RETROMOUSE_PADDLE2_INFO_0_PT_BR NULL
-#define DICE_RETROMOUSE_PADDLE3_LABEL_PT_BR NULL
-#define DICE_RETROMOUSE_PADDLE3_LABEL_CAT_PT_BR NULL
-#define DICE_RETROMOUSE_PADDLE3_INFO_0_PT_BR NULL
+#define DICE_RETROMOUSE_PADDLE0_LABEL_PT_BR "RetroMouse > Usar Mouse para o Paddle 1"
+#define DICE_RETROMOUSE_PADDLE0_LABEL_CAT_PT_BR "Usar Mouse para o Paddle 1"
+#define DICE_RETROMOUSE_PADDLE0_INFO_0_PT_BR "Usa um mouse específico para o Paddle 1, escolhido pelo Índice de Mouse da Porta 1."
+#define DICE_RETROMOUSE_PADDLE1_LABEL_PT_BR "RetroMouse > Usar Mouse para o Paddle 2"
+#define DICE_RETROMOUSE_PADDLE1_LABEL_CAT_PT_BR "Usar Mouse para o Paddle 2"
+#define DICE_RETROMOUSE_PADDLE1_INFO_0_PT_BR "Usa um mouse específico para o Paddle 2, escolhido pelo Índice de Mouse da Porta 2."
+#define DICE_RETROMOUSE_PADDLE2_LABEL_PT_BR "RetroMouse > Usar Mouse para o Paddle 3"
+#define DICE_RETROMOUSE_PADDLE2_LABEL_CAT_PT_BR "Usar Mouse para o Paddle 3"
+#define DICE_RETROMOUSE_PADDLE2_INFO_0_PT_BR "Usa um mouse específico para o Paddle 3, escolhido pelo Índice de Mouse da Porta 3."
+#define DICE_RETROMOUSE_PADDLE3_LABEL_PT_BR "RetroMouse > Usar Mouse para o Paddle 4"
+#define DICE_RETROMOUSE_PADDLE3_LABEL_CAT_PT_BR "Usar Mouse para o Paddle 4"
+#define DICE_RETROMOUSE_PADDLE3_INFO_0_PT_BR "Usa um mouse específico para o Paddle 4, escolhido pelo Índice de Mouse da Porta 4."
 #define DICE_RETROMOUSE_PADDLE0_X_LABEL_PT_BR "RetroMouse > Eixo do Mouse para Paddle 1 Horizontal"
 #define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_PT_BR "Eixo do Mouse para Paddle 1 Horizontal"
 #define DICE_RETROMOUSE_PADDLE0_X_INFO_0_PT_BR "Eixo do mouse para o jogador 1, movimento horizontal da tela."
 #define OPTION_VAL_X_PT_BR NULL
-#define OPTION_VAL_Y_PT_BR "u"
+#define OPTION_VAL_Y_PT_BR NULL
 #define DICE_RETROMOUSE_PADDLE0_Y_LABEL_PT_BR "RetroMouse > Eixo do Mouse para Paddle 1 Vertical"
 #define DICE_RETROMOUSE_PADDLE0_Y_LABEL_CAT_PT_BR "Eixo do Mouse para Paddle 1 Vertical"
 #define DICE_RETROMOUSE_PADDLE0_Y_INFO_0_PT_BR "Eixo do mouse para o jogador 1, movimento vertical da tela."
@@ -23585,54 +23585,54 @@ struct retro_core_options_v2 options_pl = {
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_PT_BR "RetroMouse > Eixo do Mouse para Paddle 4 Vertical"
 #define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_PT_BR "Eixo do Mouse para Paddle 4 Vertical"
 #define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_PT_BR "Eixo do mouse para o jogador 4, movimento vertical da tela."
-#define DICE_MANYMOUSE_PADDLE0_LABEL_PT_BR NULL
-#define DICE_MANYMOUSE_PADDLE0_INFO_0_PT_BR NULL
+#define DICE_MANYMOUSE_PADDLE0_LABEL_PT_BR "ManyMouse > Usar Mouse para o Paddle 1"
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_PT_BR "Usa um mouse para o Paddle 1."
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_PT_BR "ManyMouse > Paddle do Mouse 1 x"
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_CAT_PT_BR "Paddle do Mouse 1 x"
 #define OPTION_VAL_0X_PT_BR NULL
 #define OPTION_VAL_0Y_PT_BR NULL
-#define OPTION_VAL_1X_PT_BR "Padrão (100%)"
+#define OPTION_VAL_1X_PT_BR NULL
 #define OPTION_VAL_1Y_PT_BR NULL
 #define OPTION_VAL_2X_PT_BR NULL
-#define OPTION_VAL_2Y_PT_BR "1y"
-#define OPTION_VAL_3X_PT_BR "300%"
-#define OPTION_VAL_3Y_PT_BR "1y"
+#define OPTION_VAL_2Y_PT_BR NULL
+#define OPTION_VAL_3X_PT_BR NULL
+#define OPTION_VAL_3Y_PT_BR NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_PT_BR "ManyMouse > Paddle do Mouse 1 y"
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CAT_PT_BR "Paddle do Mouse 1 y"
-#define DICE_MANYMOUSE_PADDLE1_LABEL_PT_BR NULL
-#define DICE_MANYMOUSE_PADDLE1_INFO_0_PT_BR NULL
+#define DICE_MANYMOUSE_PADDLE1_LABEL_PT_BR "ManyMouse > Usar Mouse para o Paddle 2"
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_PT_BR "Usa um mouse para o Paddle 2."
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_PT_BR "ManyMouse > Paddle do Mouse 2 x"
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_CAT_PT_BR "Paddle do Mouse 2 x"
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_PT_BR "ManyMouse > Paddle do Mouse 2 y"
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CAT_PT_BR "Paddle do Mouse 2 y"
-#define DICE_MANYMOUSE_PADDLE2_LABEL_PT_BR NULL
-#define DICE_MANYMOUSE_PADDLE2_INFO_0_PT_BR NULL
+#define DICE_MANYMOUSE_PADDLE2_LABEL_PT_BR "ManyMouse > Usar Mouse para o Paddle 3"
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_PT_BR "Usa um mouse para o Paddle 3."
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_PT_BR "ManyMouse > Paddle do Mouse 3 x"
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_CAT_PT_BR "Paddle do Mouse 3 x"
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_PT_BR "ManyMouse > Paddle do Mouse 3 y"
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CAT_PT_BR "Paddle do Mouse 3 y"
-#define DICE_MANYMOUSE_PADDLE3_LABEL_PT_BR NULL
-#define DICE_MANYMOUSE_PADDLE3_INFO_0_PT_BR NULL
+#define DICE_MANYMOUSE_PADDLE3_LABEL_PT_BR "ManyMouse > Usar Mouse para o Paddle 4"
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_PT_BR "Usa um mouse para o Paddle 4."
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_PT_BR "ManyMouse > Paddle do Mouse 4 x"
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_CAT_PT_BR "Paddle do Mouse 4 x"
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_PT_BR "ManyMouse > Paddle do Mouse 4 y"
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CAT_PT_BR "RetroMouse > Eixo do Mouse para Paddle 1 Horizontal"
-#define DICE_DIPSWITCH_1_LABEL_PT_BR NULL
-#define DICE_DIPSWITCH_1_LABEL_CAT_PT_BR NULL
-#define DICE_DIPSWITCH_1_INFO_0_PT_BR NULL
+#define DICE_DIPSWITCH_1_LABEL_PT_BR "Chave DIP > Chave DIP 1"
+#define DICE_DIPSWITCH_1_LABEL_CAT_PT_BR "Chave DIP 1"
+#define DICE_DIPSWITCH_1_INFO_0_PT_BR "Configuração para a chave DIP 1."
 #define OPTION_VAL_1_PT_BR "padrão"
-#define DICE_DIPSWITCH_2_LABEL_PT_BR NULL
-#define DICE_DIPSWITCH_2_LABEL_CAT_PT_BR NULL
-#define DICE_DIPSWITCH_2_INFO_0_PT_BR NULL
-#define DICE_DIPSWITCH_3_LABEL_PT_BR NULL
-#define DICE_DIPSWITCH_3_LABEL_CAT_PT_BR NULL
-#define DICE_DIPSWITCH_3_INFO_0_PT_BR NULL
-#define DICE_DIPSWITCH16_1_LABEL_PT_BR NULL
-#define DICE_DIPSWITCH16_1_LABEL_CAT_PT_BR NULL
-#define DICE_DIPSWITCH16_1_INFO_0_PT_BR NULL
-#define DICE_DIPSWITCH16_2_LABEL_PT_BR NULL
-#define DICE_DIPSWITCH16_2_LABEL_CAT_PT_BR NULL
-#define DICE_DIPSWITCH16_2_INFO_0_PT_BR NULL
+#define DICE_DIPSWITCH_2_LABEL_PT_BR "Chave DIP > Chave DIP 2"
+#define DICE_DIPSWITCH_2_LABEL_CAT_PT_BR "Chave DIP 2"
+#define DICE_DIPSWITCH_2_INFO_0_PT_BR "Configuração para a chave DIP 2."
+#define DICE_DIPSWITCH_3_LABEL_PT_BR "Chave DIP > Chave DIP 3"
+#define DICE_DIPSWITCH_3_LABEL_CAT_PT_BR "Chave DIP 3"
+#define DICE_DIPSWITCH_3_INFO_0_PT_BR "Configuração para a chave DIP 3."
+#define DICE_DIPSWITCH16_1_LABEL_PT_BR "Chave DIP > Chave DIP Hex 1"
+#define DICE_DIPSWITCH16_1_LABEL_CAT_PT_BR "Chave DIP Hex 1"
+#define DICE_DIPSWITCH16_1_INFO_0_PT_BR "Configuração para a chave DIP de 16 posições número 1."
+#define DICE_DIPSWITCH16_2_LABEL_PT_BR "Chave DIP > Chave DIP Hex 2"
+#define DICE_DIPSWITCH16_2_LABEL_CAT_PT_BR "Chave DIP Hex 2"
+#define DICE_DIPSWITCH16_2_INFO_0_PT_BR "Configuração para a chave DIP de 16 posições número 2."
 
 struct retro_core_option_v2_category option_cats_pt_br[] = {
    {
@@ -25041,25 +25041,25 @@ struct retro_core_options_v2 options_pt_pt = {
 #define CATEGORY_MANYMOUSE_LABEL_RU NULL
 #define CATEGORY_MANYMOUSE_INFO_0_RU "Настройки ManyMouse для ввода с нескольких мышек."
 #define CATEGORY_DIPSWITCH_LABEL_RU "DIP-переключатель"
-#define CATEGORY_DIPSWITCH_INFO_0_RU NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_RU NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_RU NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_RU NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_RU NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_RU NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_RU NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_RU NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CAT_RU NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_INFO_0_RU NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_RU NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CAT_RU NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_INFO_0_RU NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_RU NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CAT_RU NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_INFO_0_RU NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_RU NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_CAT_RU NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_INFO_0_RU NULL
+#define CATEGORY_DIPSWITCH_INFO_0_RU "Настройки DIP-переключателей и потенциометров."
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_RU "Ввод > Исп. указатель мыши для ракетки 1"
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_RU "Исп. указатель мыши для ракетки 1"
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_RU "Использовать системный указатель мыши для управления ракеткой 1. Не позволяет выбирать определённую мышку при наличии нескольких."
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_RU "Ввод > Исп. абсолютное движение джойстика для ракетки"
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_RU "Исп. абсолютное движение джойстика для ракетки"
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_RU "Привязать диапазон джойстика к диапазону ракетки напрямую вместо относительного движения."
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_RU "Ввод > Чувствительность D-Pad для ракетки"
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CAT_RU "Чувствительность D-Pad для ракетки"
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_INFO_0_RU "Чувствительность при использовании D-Pad для ракетки."
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_RU "Ввод > Чувствительность аналог. стика для ракетки"
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CAT_RU "Чувствительность аналог. стика для ракетки"
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_INFO_0_RU "Чувствительность при использовании аналог. стика для ракетки."
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_RU "Ввод > Чувствительность RetroMouse для ракетки"
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CAT_RU "Чувствительность RetroMouse для ракетки"
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_INFO_0_RU "Чувствительность при использовании RetroMouse для ракетки."
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_RU "Ввод > Чувствительность руля"
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_CAT_RU "Чувствительность руля"
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_INFO_0_RU "Чувствительность при использовании d-pad или аналог. стика для руля."
 #define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_RU NULL
 #define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_CAT_RU NULL
 #define DICE_THROTTLE_KEYJOY_SENSITIVITY_INFO_0_RU NULL
