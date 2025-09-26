@@ -778,7 +778,7 @@ struct retro_core_options_v2 options_ar = {
 
 /* RETRO_LANGUAGE_AST */
 
-#define CATEGORY_INPUT_LABEL_AST "Entrada"
+#define CATEGORY_INPUT_LABEL_AST "Controles"
 #define CATEGORY_INPUT_INFO_0_AST NULL
 #define CATEGORY_RETROMOUSE_LABEL_AST NULL
 #define CATEGORY_RETROMOUSE_INFO_0_AST NULL
