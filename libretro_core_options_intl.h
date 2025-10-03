@@ -31098,7 +31098,7 @@ struct retro_core_options_v2 options_val = {
 
 /* RETRO_LANGUAGE_VN */
 
-#define CATEGORY_INPUT_LABEL_VN "Input Driver"
+#define CATEGORY_INPUT_LABEL_VN "Đầu vào"
 #define CATEGORY_INPUT_INFO_0_VN NULL
 #define CATEGORY_RETROMOUSE_LABEL_VN NULL
 #define CATEGORY_RETROMOUSE_INFO_0_VN NULL
