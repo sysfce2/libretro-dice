@@ -31099,76 +31099,76 @@ struct retro_core_options_v2 options_val = {
 /* RETRO_LANGUAGE_VN */
 
 #define CATEGORY_INPUT_LABEL_VN "Đầu vào"
-#define CATEGORY_INPUT_INFO_0_VN NULL
-#define CATEGORY_RETROMOUSE_LABEL_VN NULL
-#define CATEGORY_RETROMOUSE_INFO_0_VN NULL
-#define CATEGORY_MANYMOUSE_LABEL_VN NULL
-#define CATEGORY_MANYMOUSE_INFO_0_VN NULL
-#define CATEGORY_DIPSWITCH_LABEL_VN NULL
-#define CATEGORY_DIPSWITCH_INFO_0_VN NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_VN NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_VN NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_VN NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_VN NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_VN NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_VN NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_VN NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CAT_VN NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_INFO_0_VN NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_VN NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CAT_VN NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_INFO_0_VN NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_VN NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CAT_VN NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_INFO_0_VN NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_VN NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_CAT_VN NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_INFO_0_VN NULL
-#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_VN NULL
-#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_CAT_VN NULL
-#define DICE_THROTTLE_KEYJOY_SENSITIVITY_INFO_0_VN NULL
-#define DICE_RETROMOUSE_PADDLE0_LABEL_VN NULL
-#define DICE_RETROMOUSE_PADDLE0_LABEL_CAT_VN NULL
-#define DICE_RETROMOUSE_PADDLE0_INFO_0_VN NULL
-#define DICE_RETROMOUSE_PADDLE1_LABEL_VN NULL
-#define DICE_RETROMOUSE_PADDLE1_LABEL_CAT_VN NULL
-#define DICE_RETROMOUSE_PADDLE1_INFO_0_VN NULL
-#define DICE_RETROMOUSE_PADDLE2_LABEL_VN NULL
-#define DICE_RETROMOUSE_PADDLE2_LABEL_CAT_VN NULL
-#define DICE_RETROMOUSE_PADDLE2_INFO_0_VN NULL
-#define DICE_RETROMOUSE_PADDLE3_LABEL_VN NULL
-#define DICE_RETROMOUSE_PADDLE3_LABEL_CAT_VN NULL
-#define DICE_RETROMOUSE_PADDLE3_INFO_0_VN NULL
-#define DICE_RETROMOUSE_PADDLE0_X_LABEL_VN NULL
-#define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_VN NULL
-#define DICE_RETROMOUSE_PADDLE0_X_INFO_0_VN NULL
+#define CATEGORY_INPUT_INFO_0_VN "Cấu hình các thiết lập đầu vào riêng cho từng core."
+#define CATEGORY_RETROMOUSE_LABEL_VN "Chuột Retro"
+#define CATEGORY_RETROMOUSE_INFO_0_VN "Cấu hình các thiết lập nhiều chuột cho libretro."
+#define CATEGORY_MANYMOUSE_LABEL_VN "Nhiều chuột"
+#define CATEGORY_MANYMOUSE_INFO_0_VN "Cấu hình các thiết lập nhiều chuột cho ManyMouse."
+#define CATEGORY_DIPSWITCH_LABEL_VN "Công tắc DIP"
+#define CATEGORY_DIPSWITCH_INFO_0_VN "Cấu hình các thiết lập công tắc DIP và biến trở."
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_VN "Đầu vào > Sử dụng con trỏ chuột cho Paddie 1"
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_VN "Sử dụng con trỏ chuột cho Paddle 1"
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_VN "Sử dụng con trỏ chuột hệ thống làm bộ điều khiển Paddie 1. Không cho phép chọn chuột cụ thể nếu có nhiều chuột."
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_VN "Đầu vào > Cần Paddie dùng chuyển động tuyệt đối"
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_VN "Cần điều khiển Paddle sử dụng chuyển động tuyệt đối"
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_VN "Bản đồ trực tiếp phạm vi chuyển động của cần sang phạm vi Paddie, thay vì dựa trên chuyển động tương đối."
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_VN "Độ nhạy D-pad kiểu Paddle"
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CAT_VN "Độ nhạy D-pad kiểu Paddle"
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_INFO_0_VN "Độ nhạy khi sử dụng D-pad để điều khiển cần điều khiển."
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_VN "Đầu vào > Độ nhạy cần điều khiển tương tự của cần điều khiển"
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CAT_VN "Độ nhạy cần điều khiển tương tự của cần điều khiển"
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_INFO_0_VN "Độ nhạy khi sử dụng cần điều khiển tương tự để điều khiển cần điều khiển."
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_VN "Đầu vào > Độ nhạy chuột Retro của cần điều khiển"
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CAT_VN "Độ nhạy chuột Retro của cần điều khiển"
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_INFO_0_VN "Độ nhạy khi sử dụng chuột Retro của cần điều khiển để điều khiển cần điều khiển."
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_VN "Đầu vào > Độ nhạy bánh xe"
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_CAT_VN "Độ nhạy bánh xe"
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_INFO_0_VN "Độ nhạy khi sử dụng D-pad hoặc cần điều khiển tương tự để điều khiển cần điều khiển."
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_VN "Đầu vào > Độ nhạy bướm ga"
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_CAT_VN "Độ nhạy bướm ga"
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_INFO_0_VN "Độ nhạy khi sử dụng D-pad hoặc cần điều khiển tương tự để điều khiển cần điều khiển."
+#define DICE_RETROMOUSE_PADDLE0_LABEL_VN "RetroMouse > Sử dụng chuột cho cần điều khiển 1"
+#define DICE_RETROMOUSE_PADDLE0_LABEL_CAT_VN "Sử dụng chuột cho cần điều khiển 1"
+#define DICE_RETROMOUSE_PADDLE0_INFO_0_VN "Sử dụng một chuột cụ thể cho cần số 1, được chọn theo chỉ số chuột của Cổng 1."
+#define DICE_RETROMOUSE_PADDLE1_LABEL_VN "RetroMouse > Sử dụng chuột cho cần số 2"
+#define DICE_RETROMOUSE_PADDLE1_LABEL_CAT_VN "Sử dụng chuột cho cần số 2"
+#define DICE_RETROMOUSE_PADDLE1_INFO_0_VN "Sử dụng một chuột cụ thể cho cần số 2, được chọn theo chỉ số chuột của Cổng 2."
+#define DICE_RETROMOUSE_PADDLE2_LABEL_VN "RetroMouse > Sử dụng chuột cho cần số 3"
+#define DICE_RETROMOUSE_PADDLE2_LABEL_CAT_VN "Sử dụng chuột cho cần số 3"
+#define DICE_RETROMOUSE_PADDLE2_INFO_0_VN "Sử dụng một chuột cụ thể cho cần số 3, được chọn theo chỉ số chuột của Cổng 3."
+#define DICE_RETROMOUSE_PADDLE3_LABEL_VN "RetroMouse > Sử dụng chuột cho cần số 4"
+#define DICE_RETROMOUSE_PADDLE3_LABEL_CAT_VN "Sử dụng chuột cho cần số 4"
+#define DICE_RETROMOUSE_PADDLE3_INFO_0_VN "Sử dụng một chuột cụ thể cho cần số 4, được chọn theo chỉ số chuột của Cổng 4."
+#define DICE_RETROMOUSE_PADDLE0_X_LABEL_VN "RetroMouse > Trục chuột cho cần số 1 ngang"
+#define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_VN "Trục chuột cho cần số 1 ngang"
+#define DICE_RETROMOUSE_PADDLE0_X_INFO_0_VN "Trục chuột cho người chơi 1, chuyển động ngang trên màn hình."
 #define OPTION_VAL_X_VN NULL
 #define OPTION_VAL_Y_VN NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_VN NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_CAT_VN NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_INFO_0_VN NULL
-#define DICE_RETROMOUSE_PADDLE1_X_LABEL_VN NULL
-#define DICE_RETROMOUSE_PADDLE1_X_LABEL_CAT_VN NULL
-#define DICE_RETROMOUSE_PADDLE1_X_INFO_0_VN NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_VN NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CAT_VN NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_INFO_0_VN NULL
-#define DICE_RETROMOUSE_PADDLE2_X_LABEL_VN NULL
-#define DICE_RETROMOUSE_PADDLE2_X_LABEL_CAT_VN NULL
-#define DICE_RETROMOUSE_PADDLE2_X_INFO_0_VN NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_VN NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_CAT_VN NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_INFO_0_VN NULL
-#define DICE_RETROMOUSE_PADDLE3_X_LABEL_VN NULL
-#define DICE_RETROMOUSE_PADDLE3_X_LABEL_CAT_VN NULL
-#define DICE_RETROMOUSE_PADDLE3_X_INFO_0_VN NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_VN NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_VN NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_VN NULL
-#define DICE_MANYMOUSE_PADDLE0_LABEL_VN NULL
-#define DICE_MANYMOUSE_PADDLE0_INFO_0_VN NULL
-#define DICE_MANYMOUSE_PADDLE0_X_LABEL_VN NULL
-#define DICE_MANYMOUSE_PADDLE0_X_LABEL_CAT_VN NULL
+#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_VN "RetroMouse > Trục Chuột cho Paddle 1 - Dọc"
+#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_CAT_VN "Trục Chuột cho Paddle 1 - Dọc"
+#define DICE_RETROMOUSE_PADDLE0_Y_INFO_0_VN "Trục chuột cho người chơi 1, chuyển động theo chiều dọc trên màn hình."
+#define DICE_RETROMOUSE_PADDLE1_X_LABEL_VN "RetroMouse > Trục Chuột cho Paddle 2 - Ngang"
+#define DICE_RETROMOUSE_PADDLE1_X_LABEL_CAT_VN "Trục Chuột cho Paddle 2 - Ngang"
+#define DICE_RETROMOUSE_PADDLE1_X_INFO_0_VN "Trục chuột cho người chơi 2, chuyển động theo chiều ngang trên màn hình."
+#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_VN "RetroMouse > Trục Chuột cho Paddle 2 - Dọc"
+#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CAT_VN "Trục Chuột cho Paddle 2 - Dọc"
+#define DICE_RETROMOUSE_PADDLE1_Y_INFO_0_VN "Trục chuột cho người chơi 2, chuyển động theo chiều dọc trên màn hình."
+#define DICE_RETROMOUSE_PADDLE2_X_LABEL_VN "RetroMouse > Trục Chuột cho Paddle 3 - Ngang"
+#define DICE_RETROMOUSE_PADDLE2_X_LABEL_CAT_VN "Trục Chuột cho Paddle 3 - Ngang"
+#define DICE_RETROMOUSE_PADDLE2_X_INFO_0_VN "Trục chuột cho người chơi 3, chuyển động theo chiều ngang trên màn hình."
+#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_VN "RetroMouse > Trục Chuột cho Paddle 3 - Dọc"
+#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_CAT_VN "Trục Chuột cho Paddle 3 - Dọc"
+#define DICE_RETROMOUSE_PADDLE2_Y_INFO_0_VN "Trục chuột cho người chơi 3, chuyển động theo chiều dọc trên màn hình."
+#define DICE_RETROMOUSE_PADDLE3_X_LABEL_VN "Chuột Retro > Trục Chuột Cho Thanh Trượt 4 Ngang"
+#define DICE_RETROMOUSE_PADDLE3_X_LABEL_CAT_VN "Trục Chuột Cho Paddle 4 Ngang"
+#define DICE_RETROMOUSE_PADDLE3_X_INFO_0_VN "Trục chuột cho người chơi 4, chuyển động màn hình ngang."
+#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_VN "RetroMouse > Trục Chuột Cho Paddle 4 Dọc"
+#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_VN "Trục Chuột Cho Paddle 4 Dọc"
+#define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_VN "Trục chuột cho người chơi 4, chuyển động màn hình dọc."
+#define DICE_MANYMOUSE_PADDLE0_LABEL_VN "ManyMouse > Sử dụng Chuột Cho Paddle 1"
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_VN "Sử dụng chuột cho Paddle 1."
+#define DICE_MANYMOUSE_PADDLE0_X_LABEL_VN "ManyMouse > Chuột-Paddle 1 x"
+#define DICE_MANYMOUSE_PADDLE0_X_LABEL_CAT_VN "Chuột-Paddle 1 x"
 #define OPTION_VAL_0X_VN NULL
 #define OPTION_VAL_0Y_VN NULL
 #define OPTION_VAL_1X_VN NULL
@@ -31177,42 +31177,42 @@ struct retro_core_options_v2 options_val = {
 #define OPTION_VAL_2Y_VN NULL
 #define OPTION_VAL_3X_VN NULL
 #define OPTION_VAL_3Y_VN NULL
-#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_VN NULL
-#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CAT_VN NULL
-#define DICE_MANYMOUSE_PADDLE1_LABEL_VN NULL
-#define DICE_MANYMOUSE_PADDLE1_INFO_0_VN NULL
-#define DICE_MANYMOUSE_PADDLE1_X_LABEL_VN NULL
-#define DICE_MANYMOUSE_PADDLE1_X_LABEL_CAT_VN NULL
-#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_VN NULL
-#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CAT_VN NULL
-#define DICE_MANYMOUSE_PADDLE2_LABEL_VN NULL
-#define DICE_MANYMOUSE_PADDLE2_INFO_0_VN NULL
-#define DICE_MANYMOUSE_PADDLE2_X_LABEL_VN NULL
-#define DICE_MANYMOUSE_PADDLE2_X_LABEL_CAT_VN NULL
-#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_VN NULL
-#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CAT_VN NULL
-#define DICE_MANYMOUSE_PADDLE3_LABEL_VN NULL
-#define DICE_MANYMOUSE_PADDLE3_INFO_0_VN NULL
-#define DICE_MANYMOUSE_PADDLE3_X_LABEL_VN NULL
-#define DICE_MANYMOUSE_PADDLE3_X_LABEL_CAT_VN NULL
-#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_VN NULL
-#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CAT_VN NULL
-#define DICE_DIPSWITCH_1_LABEL_VN NULL
-#define DICE_DIPSWITCH_1_LABEL_CAT_VN NULL
-#define DICE_DIPSWITCH_1_INFO_0_VN NULL
-#define OPTION_VAL_1_VN NULL
-#define DICE_DIPSWITCH_2_LABEL_VN NULL
-#define DICE_DIPSWITCH_2_LABEL_CAT_VN NULL
-#define DICE_DIPSWITCH_2_INFO_0_VN NULL
-#define DICE_DIPSWITCH_3_LABEL_VN NULL
-#define DICE_DIPSWITCH_3_LABEL_CAT_VN NULL
-#define DICE_DIPSWITCH_3_INFO_0_VN NULL
-#define DICE_DIPSWITCH16_1_LABEL_VN NULL
-#define DICE_DIPSWITCH16_1_LABEL_CAT_VN NULL
-#define DICE_DIPSWITCH16_1_INFO_0_VN NULL
-#define DICE_DIPSWITCH16_2_LABEL_VN NULL
-#define DICE_DIPSWITCH16_2_LABEL_CAT_VN NULL
-#define DICE_DIPSWITCH16_2_INFO_0_VN NULL
+#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_VN "ManyMouse > Chuột-Paddle 1 y"
+#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CAT_VN "Chuột-Paddle 1 y"
+#define DICE_MANYMOUSE_PADDLE1_LABEL_VN "ManyMouse > Dùng Chuột cho Paddle 2"
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_VN "Dùng chuột cho Paddle 2."
+#define DICE_MANYMOUSE_PADDLE1_X_LABEL_VN "ManyMouse > Chuột-Paddle 2 x"
+#define DICE_MANYMOUSE_PADDLE1_X_LABEL_CAT_VN "Chuột-Paddle 2 x"
+#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_VN "ManyMouse > Chuột-Paddle 2 y"
+#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CAT_VN "Chuột-Paddle 2 y"
+#define DICE_MANYMOUSE_PADDLE2_LABEL_VN "ManyMouse > Dùng Chuột cho Paddle 3"
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_VN "Dùng chuột cho Paddle 3."
+#define DICE_MANYMOUSE_PADDLE2_X_LABEL_VN "ManyMouse > Chuột-Paddle 3 x"
+#define DICE_MANYMOUSE_PADDLE2_X_LABEL_CAT_VN "Chuột-Paddle 3 x"
+#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_VN "ManyMouse > Chuột-Paddle 3 y"
+#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CAT_VN "Bàn rê chuột 3 trục Y"
+#define DICE_MANYMOUSE_PADDLE3_LABEL_VN "ManyMouse > Sử dụng chuột cho Bàn rê 4"
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_VN "Sử dụng chuột cho Bàn rê 4."
+#define DICE_MANYMOUSE_PADDLE3_X_LABEL_VN "ManyMouse > Bàn rê chuột 4 trục X"
+#define DICE_MANYMOUSE_PADDLE3_X_LABEL_CAT_VN "Bàn rê chuột 4 trục X"
+#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_VN "ManyMouse > Bàn rê chuột 4 trục Y"
+#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CAT_VN "Bàn rê chuột 4 trục Y"
+#define DICE_DIPSWITCH_1_LABEL_VN "Công tắc DIP > Công tắc DIP 1"
+#define DICE_DIPSWITCH_1_LABEL_CAT_VN "Công tắc DIP 1"
+#define DICE_DIPSWITCH_1_INFO_0_VN "Cài đặt cho công tắc DIP 1."
+#define OPTION_VAL_1_VN "mặc định"
+#define DICE_DIPSWITCH_2_LABEL_VN "Công tắc DIP > Công tắc DIP 2"
+#define DICE_DIPSWITCH_2_LABEL_CAT_VN "Công tắc DIP 2"
+#define DICE_DIPSWITCH_2_INFO_0_VN "Cài đặt cho công tắc DIP 2."
+#define DICE_DIPSWITCH_3_LABEL_VN "Công tắc DIP > Công tắc DIP 3"
+#define DICE_DIPSWITCH_3_LABEL_CAT_VN "Công tắc DIP 3"
+#define DICE_DIPSWITCH_3_INFO_0_VN "Cài đặt cho công tắc DIP số 3."
+#define DICE_DIPSWITCH16_1_LABEL_VN "Công tắc DIP > DIP Switch Hex 1"
+#define DICE_DIPSWITCH16_1_LABEL_CAT_VN "Công tắc DIP Hex 1"
+#define DICE_DIPSWITCH16_1_INFO_0_VN "Cài đặt cho công tắc DIP 16 vị trí số 1."
+#define DICE_DIPSWITCH16_2_LABEL_VN "Công tắc DIP > DIP Switch Hex 2"
+#define DICE_DIPSWITCH16_2_LABEL_CAT_VN "Công tắc DIP Hex 2"
+#define DICE_DIPSWITCH16_2_INFO_0_VN "Cài đặt cho công tắc DIP 16 vị trí số 2."
 
 struct retro_core_option_v2_category option_cats_vn[] = {
    {
