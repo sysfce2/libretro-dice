@@ -53,6 +53,8 @@ pong.dmy in pong.zip --- that works fine as well.)
 |	TV Basketball	|	tvbasketball	|	Midway	|	1974	|		|
 |	Wipe Out	|	wipeout	|	Ramtek	|	1974	|	x	|
 
+Several of these (including Pong and Breakout) are now supported by MAME, but several more are not per the list on http://nonmame.retrogames.com/#discrete_circuitry_miscellaneous .
+
 ## Mouse support
 * Easy: One mouse can be used for Paddle 1.  Use "Core Options -> Use mouse pointer for paddle 1".  You'll still want a keyboard or gamepad handy to have enough buttons.
 
