@@ -25034,7 +25034,7 @@ struct retro_core_options_v2 options_pt_pt = {
 
 /* RETRO_LANGUAGE_RU */
 
-#define CATEGORY_INPUT_LABEL_RU "Ввод"
+#define CATEGORY_INPUT_LABEL_RU "Устройства ввода"
 #define CATEGORY_INPUT_INFO_0_RU "Настройки ввода для ядра."
 #define CATEGORY_RETROMOUSE_LABEL_RU NULL
 #define CATEGORY_RETROMOUSE_INFO_0_RU "Настройки libretro для нескольких мышек."
