@@ -23519,13 +23519,13 @@ struct retro_core_options_v2 options_pl = {
 /* RETRO_LANGUAGE_PT_BR */
 
 #define CATEGORY_INPUT_LABEL_PT_BR "Entrada"
-#define CATEGORY_INPUT_INFO_0_PT_BR "Configurar ajustes de entrada específicas do núcleo."
+#define CATEGORY_INPUT_INFO_0_PT_BR "Altera as configurações de entrada específicas do núcleo."
 #define CATEGORY_RETROMOUSE_LABEL_PT_BR NULL
-#define CATEGORY_RETROMOUSE_INFO_0_PT_BR "Configurar ajustes de múltiplos mouses do libretro."
+#define CATEGORY_RETROMOUSE_INFO_0_PT_BR "Altera as configurações dos múltiplos mouses do libretro."
 #define CATEGORY_MANYMOUSE_LABEL_PT_BR NULL
-#define CATEGORY_MANYMOUSE_INFO_0_PT_BR "Configurar ajustes de múltiplos mouses do ManyMouse."
+#define CATEGORY_MANYMOUSE_INFO_0_PT_BR "Altera as configurações dos múltiplos mouses do ManyMouse."
 #define CATEGORY_DIPSWITCH_LABEL_PT_BR "Chave DIP"
-#define CATEGORY_DIPSWITCH_INFO_0_PT_BR "Configurar ajustes das chaves DIP e dos potenciômetros."
+#define CATEGORY_DIPSWITCH_INFO_0_PT_BR "Altera as configurações das chaves DIP e dos potenciômetros."
 #define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_PT_BR "Entrada > Usar Ponteiro do Mouse para o Paddle 1"
 #define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_PT_BR "Usar Ponteiro do Mouse para o Paddle 1"
 #define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_PT_BR "Usa o ponteiro do mouse do sistema como o controle paddle 1. Não permite escolher um mouse específico se você tiver vários."
