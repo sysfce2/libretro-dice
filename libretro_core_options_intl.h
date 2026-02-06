@@ -5327,19 +5327,19 @@ struct retro_core_options_v2 options_cht = {
 /* RETRO_LANGUAGE_CS */
 
 #define CATEGORY_INPUT_LABEL_CS "Vstup"
-#define CATEGORY_INPUT_INFO_0_CS NULL
+#define CATEGORY_INPUT_INFO_0_CS "Nakonfigurujte nastavení vstupu specifická pro jádro."
 #define CATEGORY_RETROMOUSE_LABEL_CS NULL
-#define CATEGORY_RETROMOUSE_INFO_0_CS NULL
+#define CATEGORY_RETROMOUSE_INFO_0_CS "Nakonfigurujte nastavení libretro pro více myší."
 #define CATEGORY_MANYMOUSE_LABEL_CS NULL
-#define CATEGORY_MANYMOUSE_INFO_0_CS NULL
-#define CATEGORY_DIPSWITCH_LABEL_CS NULL
-#define CATEGORY_DIPSWITCH_INFO_0_CS NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CS NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_CS NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_CS NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CS NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_CS NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_CS NULL
+#define CATEGORY_MANYMOUSE_INFO_0_CS "Nakonfigurujte nastavení pro více myší v ManyMouse."
+#define CATEGORY_DIPSWITCH_LABEL_CS "Přepínač DIP"
+#define CATEGORY_DIPSWITCH_INFO_0_CS "Nastavte přepínač DIP a potenciometr."
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CS "Vstup > Použít ukazatel myši pro pádlo 1"
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_CS "Použít ukazatel myši pro pádlo 1"
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_CS "Použijte ukazatel myši systému jako ovladač pádla 1.  Neumožňuje vybrat konkrétní myš, pokud jich máte několik."
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CS "Vstup > Pádlový joystick využívá absolutní pohyb"
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_CS "Pádlo Joystick využívá absolutní pohyb"
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_CS "Přímo namapujte rozsah pohybu joysticku na rozsah pádla, nikoli relativní pohyby."
 #define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CS NULL
 #define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CAT_CS NULL
 #define DICE_PADDLE_KEYBOARD_SENSITIVITY_INFO_0_CS NULL
@@ -5435,12 +5435,12 @@ struct retro_core_options_v2 options_cht = {
 #define DICE_DIPSWITCH_3_LABEL_CS NULL
 #define DICE_DIPSWITCH_3_LABEL_CAT_CS NULL
 #define DICE_DIPSWITCH_3_INFO_0_CS NULL
-#define DICE_DIPSWITCH16_1_LABEL_CS NULL
-#define DICE_DIPSWITCH16_1_LABEL_CAT_CS NULL
-#define DICE_DIPSWITCH16_1_INFO_0_CS NULL
-#define DICE_DIPSWITCH16_2_LABEL_CS NULL
-#define DICE_DIPSWITCH16_2_LABEL_CAT_CS NULL
-#define DICE_DIPSWITCH16_2_INFO_0_CS NULL
+#define DICE_DIPSWITCH16_1_LABEL_CS "DIP přepínač > DIP přepínač Hex 1"
+#define DICE_DIPSWITCH16_1_LABEL_CAT_CS "DIP přepínač Hex 1"
+#define DICE_DIPSWITCH16_1_INFO_0_CS "Nastavení 16-polohového DIP přepínače číslo 1."
+#define DICE_DIPSWITCH16_2_LABEL_CS "DIP přepínač > DIP přepínač Hex 2"
+#define DICE_DIPSWITCH16_2_LABEL_CAT_CS "DIP přepínač Hex 2"
+#define DICE_DIPSWITCH16_2_INFO_0_CS "Nastavení 16-polohového DIP přepínače číslo 2."
 
 struct retro_core_option_v2_category option_cats_cs[] = {
    {
@@ -25044,7 +25044,7 @@ struct retro_core_options_v2 options_pt_pt = {
 #define CATEGORY_DIPSWITCH_INFO_0_RU "Настройки DIP-переключателей и потенциометров."
 #define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_RU "Ввод > Исп. указатель мыши для ракетки 1"
 #define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_RU "Исп. указатель мыши для ракетки 1"
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_RU "Использовать системный указатель мыши для управления ракеткой 1. Не позволяет выбирать определённую мышку при наличии нескольких."
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_RU "Использовать системный указатель мыши для управления ракеткой 1. Если подключено несколько мышек, то выбрать определённую нельзя."
 #define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_RU "Ввод > Исп. абсолютное движение джойстика для ракетки"
 #define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_RU "Исп. абсолютное движение джойстика для ракетки"
 #define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_RU "Привязать диапазон джойстика к диапазону ракетки напрямую вместо относительного движения."
