@@ -5340,63 +5340,63 @@ struct retro_core_options_v2 options_cht = {
 #define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CS "Vstup > Pádlový joystick využívá absolutní pohyb"
 #define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_CS "Pádlo Joystick využívá absolutní pohyb"
 #define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_CS "Přímo namapujte rozsah pohybu joysticku na rozsah pádla, nikoli relativní pohyby."
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CS NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CAT_CS NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_INFO_0_CS NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CS NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CAT_CS NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_INFO_0_CS NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CS NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CAT_CS NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_INFO_0_CS NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_CS NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_CAT_CS NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_INFO_0_CS NULL
-#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_CS NULL
-#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_CAT_CS NULL
-#define DICE_THROTTLE_KEYJOY_SENSITIVITY_INFO_0_CS NULL
-#define DICE_RETROMOUSE_PADDLE0_LABEL_CS NULL
-#define DICE_RETROMOUSE_PADDLE0_LABEL_CAT_CS NULL
-#define DICE_RETROMOUSE_PADDLE0_INFO_0_CS NULL
-#define DICE_RETROMOUSE_PADDLE1_LABEL_CS NULL
-#define DICE_RETROMOUSE_PADDLE1_LABEL_CAT_CS NULL
-#define DICE_RETROMOUSE_PADDLE1_INFO_0_CS NULL
-#define DICE_RETROMOUSE_PADDLE2_LABEL_CS NULL
-#define DICE_RETROMOUSE_PADDLE2_LABEL_CAT_CS NULL
-#define DICE_RETROMOUSE_PADDLE2_INFO_0_CS NULL
-#define DICE_RETROMOUSE_PADDLE3_LABEL_CS NULL
-#define DICE_RETROMOUSE_PADDLE3_LABEL_CAT_CS NULL
-#define DICE_RETROMOUSE_PADDLE3_INFO_0_CS NULL
-#define DICE_RETROMOUSE_PADDLE0_X_LABEL_CS NULL
-#define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_CS NULL
-#define DICE_RETROMOUSE_PADDLE0_X_INFO_0_CS NULL
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CS "Vstup > Citlivost D-padu pádla"
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CAT_CS "Citlivost D-padu pádla"
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_INFO_0_CS "Citlivost při použití D-padu jako pádla."
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CS "Vstup > Citlivost analogové páčky pádla"
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CAT_CS "Citlivost analogové páčky pádla"
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_INFO_0_CS "Citlivost při použití analogové páčky jako pádla."
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CS "Vstup > Citlivost retro myši pádla"
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CAT_CS "Citlivost retro myši pádla"
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_INFO_0_CS "Citlivost při použití RetroMouse jako pádla."
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_CS "Vstup > Citlivost volantu"
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_CAT_CS "Citlivost volantu"
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_INFO_0_CS "Citlivost při použití D-padu nebo analogové páčky pro volant."
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_CS "Vstup > Citlivost plynového pedálu"
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_CAT_CS "Citlivost plynu"
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_INFO_0_CS "Citlivost při použití D-padu nebo analogové páčky pro ovládání plynu."
+#define DICE_RETROMOUSE_PADDLE0_LABEL_CS "RetroMouse > Použijte myš pro pádlo 1"
+#define DICE_RETROMOUSE_PADDLE0_LABEL_CAT_CS "Použijte myš pro pádlo 1"
+#define DICE_RETROMOUSE_PADDLE0_INFO_0_CS "Použijte speciální myš pro pádlo 1, vybranou podle indexu myši portu 1."
+#define DICE_RETROMOUSE_PADDLE1_LABEL_CS "RetroMouse > Použijte myš pro pádlo 2"
+#define DICE_RETROMOUSE_PADDLE1_LABEL_CAT_CS "Použijte myš pro pádlo 2"
+#define DICE_RETROMOUSE_PADDLE1_INFO_0_CS "Použijte speciální myš pro pádlo 2, vybranou podle indexu myši portu 2."
+#define DICE_RETROMOUSE_PADDLE2_LABEL_CS "RetroMouse > Použijte myš jako pádlo 3"
+#define DICE_RETROMOUSE_PADDLE2_LABEL_CAT_CS "Použijte myš pro pádlo 3"
+#define DICE_RETROMOUSE_PADDLE2_INFO_0_CS "Použijte speciální myš pro pádlo 3, vybranou podle indexu myši portu 3."
+#define DICE_RETROMOUSE_PADDLE3_LABEL_CS "RetroMouse > Použijte myš pro pádlo 4"
+#define DICE_RETROMOUSE_PADDLE3_LABEL_CAT_CS "Použijte myš pro pádlo 4"
+#define DICE_RETROMOUSE_PADDLE3_INFO_0_CS "Použijte speciální myš pro pádlo 4, vybranou podle indexu myši portu 4."
+#define DICE_RETROMOUSE_PADDLE0_X_LABEL_CS "RetroMouse > Osa myši pro pádlo 1 horizontální"
+#define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_CS "Osa myši pro pádlo 1 horizontální"
+#define DICE_RETROMOUSE_PADDLE0_X_INFO_0_CS "Osa myši pro hráče 1, horizontální pohyb obrazovky."
 #define OPTION_VAL_X_CS NULL
 #define OPTION_VAL_Y_CS NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_CS NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_CAT_CS NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_INFO_0_CS NULL
-#define DICE_RETROMOUSE_PADDLE1_X_LABEL_CS NULL
-#define DICE_RETROMOUSE_PADDLE1_X_LABEL_CAT_CS NULL
-#define DICE_RETROMOUSE_PADDLE1_X_INFO_0_CS NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CS NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CAT_CS NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_INFO_0_CS NULL
-#define DICE_RETROMOUSE_PADDLE2_X_LABEL_CS NULL
-#define DICE_RETROMOUSE_PADDLE2_X_LABEL_CAT_CS NULL
-#define DICE_RETROMOUSE_PADDLE2_X_INFO_0_CS NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_CS NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_CAT_CS NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_INFO_0_CS NULL
-#define DICE_RETROMOUSE_PADDLE3_X_LABEL_CS NULL
-#define DICE_RETROMOUSE_PADDLE3_X_LABEL_CAT_CS NULL
-#define DICE_RETROMOUSE_PADDLE3_X_INFO_0_CS NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CS NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_CS NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_CS NULL
-#define DICE_MANYMOUSE_PADDLE0_LABEL_CS NULL
-#define DICE_MANYMOUSE_PADDLE0_INFO_0_CS NULL
-#define DICE_MANYMOUSE_PADDLE0_X_LABEL_CS NULL
-#define DICE_MANYMOUSE_PADDLE0_X_LABEL_CAT_CS NULL
+#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_CS "RetroMouse > Osa myši pro pádlo 1 vertikální"
+#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_CAT_CS "Osa myši pro pádlo 1 vertikální"
+#define DICE_RETROMOUSE_PADDLE0_Y_INFO_0_CS "Osa myši pro hráče 1, vertikální pohyb obrazovky."
+#define DICE_RETROMOUSE_PADDLE1_X_LABEL_CS "RetroMouse > Osa myši pro pádlo 2 horizontální"
+#define DICE_RETROMOUSE_PADDLE1_X_LABEL_CAT_CS "Osa myši pro pádlo 2 horizontální"
+#define DICE_RETROMOUSE_PADDLE1_X_INFO_0_CS "Osa myši pro hráče 2, horizontální pohyb obrazovky."
+#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CS "RetroMouse > Osa myši pro pádlo 2 vertikální"
+#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CAT_CS "Osa myši pro pádlo 2 vertikální"
+#define DICE_RETROMOUSE_PADDLE1_Y_INFO_0_CS "Osa myši pro hráče 2, vertikální pohyb obrazovky."
+#define DICE_RETROMOUSE_PADDLE2_X_LABEL_CS "RetroMouse > Osa myši pro pádlo 3 horizontální"
+#define DICE_RETROMOUSE_PADDLE2_X_LABEL_CAT_CS "Osa myši pro pádlo 3 horizontální"
+#define DICE_RETROMOUSE_PADDLE2_X_INFO_0_CS "Osa myši pro hráče 3, horizontální pohyb obrazovky."
+#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_CS "RetroMouse > Osa myši pro pádlo 3 vertikální"
+#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_CAT_CS "Osa myši pro pádlo 3 vertikální"
+#define DICE_RETROMOUSE_PADDLE2_Y_INFO_0_CS "Osa myši pro hráče 3, vertikální pohyb obrazovky."
+#define DICE_RETROMOUSE_PADDLE3_X_LABEL_CS "RetroMouse > Osa myši pro pádlo 4 horizontální"
+#define DICE_RETROMOUSE_PADDLE3_X_LABEL_CAT_CS "Osa myši pro pádlo 4 horizontální"
+#define DICE_RETROMOUSE_PADDLE3_X_INFO_0_CS "Osa myši pro hráče 4, horizontální pohyb obrazovky."
+#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CS "RetroMouse > Osa myši pro pádlo 4 vertikální"
+#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_CS "Osa myši pro pádlo 4 vertikální"
+#define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_CS "Osa myši pro hráče 4, vertikální pohyb obrazovky."
+#define DICE_MANYMOUSE_PADDLE0_LABEL_CS "Více myší> Použít myš pro pádlo 1"
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_CS "Pro pádlo 1 použijte myš."
+#define DICE_MANYMOUSE_PADDLE0_X_LABEL_CS "Více myší > Myš-pádlo 1 x"
+#define DICE_MANYMOUSE_PADDLE0_X_LABEL_CAT_CS "Myš-pádlo 1 x"
 #define OPTION_VAL_0X_CS NULL
 #define OPTION_VAL_0Y_CS NULL
 #define OPTION_VAL_1X_CS NULL
@@ -5405,36 +5405,36 @@ struct retro_core_options_v2 options_cht = {
 #define OPTION_VAL_2Y_CS NULL
 #define OPTION_VAL_3X_CS NULL
 #define OPTION_VAL_3Y_CS NULL
-#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CS NULL
-#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CAT_CS NULL
-#define DICE_MANYMOUSE_PADDLE1_LABEL_CS NULL
-#define DICE_MANYMOUSE_PADDLE1_INFO_0_CS NULL
-#define DICE_MANYMOUSE_PADDLE1_X_LABEL_CS NULL
-#define DICE_MANYMOUSE_PADDLE1_X_LABEL_CAT_CS NULL
-#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CS NULL
-#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CAT_CS NULL
-#define DICE_MANYMOUSE_PADDLE2_LABEL_CS NULL
-#define DICE_MANYMOUSE_PADDLE2_INFO_0_CS NULL
-#define DICE_MANYMOUSE_PADDLE2_X_LABEL_CS NULL
-#define DICE_MANYMOUSE_PADDLE2_X_LABEL_CAT_CS NULL
-#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CS NULL
-#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CAT_CS NULL
-#define DICE_MANYMOUSE_PADDLE3_LABEL_CS NULL
-#define DICE_MANYMOUSE_PADDLE3_INFO_0_CS NULL
-#define DICE_MANYMOUSE_PADDLE3_X_LABEL_CS NULL
-#define DICE_MANYMOUSE_PADDLE3_X_LABEL_CAT_CS NULL
-#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CS NULL
-#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CAT_CS NULL
-#define DICE_DIPSWITCH_1_LABEL_CS NULL
-#define DICE_DIPSWITCH_1_LABEL_CAT_CS NULL
-#define DICE_DIPSWITCH_1_INFO_0_CS NULL
-#define OPTION_VAL_1_CS NULL
-#define DICE_DIPSWITCH_2_LABEL_CS NULL
-#define DICE_DIPSWITCH_2_LABEL_CAT_CS NULL
-#define DICE_DIPSWITCH_2_INFO_0_CS NULL
-#define DICE_DIPSWITCH_3_LABEL_CS NULL
-#define DICE_DIPSWITCH_3_LABEL_CAT_CS NULL
-#define DICE_DIPSWITCH_3_INFO_0_CS NULL
+#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CS "Více myší > Myš-Paddle 1 y"
+#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CAT_CS "Myš-pádlo 1 y"
+#define DICE_MANYMOUSE_PADDLE1_LABEL_CS "Více myší > Použijte myš pro pádlo 2"
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_CS "Pro pádlo 2 použijte myš."
+#define DICE_MANYMOUSE_PADDLE1_X_LABEL_CS "Více myší > Myš-Pádlo 2 x"
+#define DICE_MANYMOUSE_PADDLE1_X_LABEL_CAT_CS "Myš-Pádlo 2 x"
+#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CS "Více myší > Mouse-Pádlo 2 y"
+#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CAT_CS "Myš-Pádlo 2 y"
+#define DICE_MANYMOUSE_PADDLE2_LABEL_CS "Více myší > Použijte myš jako pádlo 3"
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_CS "Pro pádlo 3 použijte myš."
+#define DICE_MANYMOUSE_PADDLE2_X_LABEL_CS "Více myší > Myš-Pádlo 3 x"
+#define DICE_MANYMOUSE_PADDLE2_X_LABEL_CAT_CS "Myš-Pádlo 3 x"
+#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CS "Více myší > Myš-Pádlo 3 y"
+#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CAT_CS "Myš-Pádlo 3 y"
+#define DICE_MANYMOUSE_PADDLE3_LABEL_CS "Více myší > Použijte myš jako pádlo 4"
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_CS "Pro pádlo 4 použijte myš."
+#define DICE_MANYMOUSE_PADDLE3_X_LABEL_CS "Více myší > Myš-Pádlo 4 x"
+#define DICE_MANYMOUSE_PADDLE3_X_LABEL_CAT_CS "Myš-Pádlo 4 x"
+#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CS "Více myší > Myš-Pádlo 4 y"
+#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CAT_CS "Myš-Pádlo 4 y"
+#define DICE_DIPSWITCH_1_LABEL_CS "DIP přepínač > DIP přepínač 1"
+#define DICE_DIPSWITCH_1_LABEL_CAT_CS "Přepínač DIP 1"
+#define DICE_DIPSWITCH_1_INFO_0_CS "Nastavení DIP přepínače 1."
+#define OPTION_VAL_1_CS "výchozí"
+#define DICE_DIPSWITCH_2_LABEL_CS "DIP přepínač > DIP přepínač 2"
+#define DICE_DIPSWITCH_2_LABEL_CAT_CS "Přepínač DIP 2"
+#define DICE_DIPSWITCH_2_INFO_0_CS "Nastavení DIP přepínače 2."
+#define DICE_DIPSWITCH_3_LABEL_CS "DIP přepínač > DIP přepínač 3"
+#define DICE_DIPSWITCH_3_LABEL_CAT_CS "Přepínač DIP 3"
+#define DICE_DIPSWITCH_3_INFO_0_CS "Nastavení DIP přepínače 3."
 #define DICE_DIPSWITCH16_1_LABEL_CS "DIP přepínač > DIP přepínač Hex 1"
 #define DICE_DIPSWITCH16_1_LABEL_CAT_CS "DIP přepínač Hex 1"
 #define DICE_DIPSWITCH16_1_INFO_0_CS "Nastavení 16-polohového DIP přepínače číslo 1."
