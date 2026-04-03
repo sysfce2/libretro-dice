@@ -28064,6 +28064,764 @@ struct retro_core_options_v2 options_sv = {
    option_defs_sv
 };
 
+/* RETRO_LANGUAGE_TH */
+
+#define CATEGORY_INPUT_LABEL_TH "การควบคุม"
+#define CATEGORY_INPUT_INFO_0_TH NULL
+#define CATEGORY_RETROMOUSE_LABEL_TH NULL
+#define CATEGORY_RETROMOUSE_INFO_0_TH NULL
+#define CATEGORY_MANYMOUSE_LABEL_TH NULL
+#define CATEGORY_MANYMOUSE_INFO_0_TH NULL
+#define CATEGORY_DIPSWITCH_LABEL_TH NULL
+#define CATEGORY_DIPSWITCH_INFO_0_TH NULL
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_TH NULL
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_TH NULL
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_TH NULL
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_TH NULL
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_TH NULL
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_TH NULL
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_TH NULL
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CAT_TH NULL
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_INFO_0_TH NULL
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_TH NULL
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CAT_TH NULL
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_INFO_0_TH NULL
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_TH NULL
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CAT_TH NULL
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_INFO_0_TH NULL
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_TH NULL
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_CAT_TH NULL
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_INFO_0_TH NULL
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_TH NULL
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_CAT_TH NULL
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_INFO_0_TH NULL
+#define DICE_RETROMOUSE_PADDLE0_LABEL_TH NULL
+#define DICE_RETROMOUSE_PADDLE0_LABEL_CAT_TH NULL
+#define DICE_RETROMOUSE_PADDLE0_INFO_0_TH NULL
+#define DICE_RETROMOUSE_PADDLE1_LABEL_TH NULL
+#define DICE_RETROMOUSE_PADDLE1_LABEL_CAT_TH NULL
+#define DICE_RETROMOUSE_PADDLE1_INFO_0_TH NULL
+#define DICE_RETROMOUSE_PADDLE2_LABEL_TH NULL
+#define DICE_RETROMOUSE_PADDLE2_LABEL_CAT_TH NULL
+#define DICE_RETROMOUSE_PADDLE2_INFO_0_TH NULL
+#define DICE_RETROMOUSE_PADDLE3_LABEL_TH NULL
+#define DICE_RETROMOUSE_PADDLE3_LABEL_CAT_TH NULL
+#define DICE_RETROMOUSE_PADDLE3_INFO_0_TH NULL
+#define DICE_RETROMOUSE_PADDLE0_X_LABEL_TH NULL
+#define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_TH NULL
+#define DICE_RETROMOUSE_PADDLE0_X_INFO_0_TH NULL
+#define OPTION_VAL_X_TH NULL
+#define OPTION_VAL_Y_TH NULL
+#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_TH NULL
+#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_CAT_TH NULL
+#define DICE_RETROMOUSE_PADDLE0_Y_INFO_0_TH NULL
+#define DICE_RETROMOUSE_PADDLE1_X_LABEL_TH NULL
+#define DICE_RETROMOUSE_PADDLE1_X_LABEL_CAT_TH NULL
+#define DICE_RETROMOUSE_PADDLE1_X_INFO_0_TH NULL
+#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_TH NULL
+#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CAT_TH NULL
+#define DICE_RETROMOUSE_PADDLE1_Y_INFO_0_TH NULL
+#define DICE_RETROMOUSE_PADDLE2_X_LABEL_TH NULL
+#define DICE_RETROMOUSE_PADDLE2_X_LABEL_CAT_TH NULL
+#define DICE_RETROMOUSE_PADDLE2_X_INFO_0_TH NULL
+#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_TH NULL
+#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_CAT_TH NULL
+#define DICE_RETROMOUSE_PADDLE2_Y_INFO_0_TH NULL
+#define DICE_RETROMOUSE_PADDLE3_X_LABEL_TH NULL
+#define DICE_RETROMOUSE_PADDLE3_X_LABEL_CAT_TH NULL
+#define DICE_RETROMOUSE_PADDLE3_X_INFO_0_TH NULL
+#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_TH NULL
+#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_TH NULL
+#define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_TH NULL
+#define DICE_MANYMOUSE_PADDLE0_LABEL_TH NULL
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_TH NULL
+#define DICE_MANYMOUSE_PADDLE0_X_LABEL_TH NULL
+#define DICE_MANYMOUSE_PADDLE0_X_LABEL_CAT_TH NULL
+#define OPTION_VAL_0X_TH NULL
+#define OPTION_VAL_0Y_TH NULL
+#define OPTION_VAL_1X_TH NULL
+#define OPTION_VAL_1Y_TH NULL
+#define OPTION_VAL_2X_TH NULL
+#define OPTION_VAL_2Y_TH NULL
+#define OPTION_VAL_3X_TH NULL
+#define OPTION_VAL_3Y_TH NULL
+#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_TH NULL
+#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CAT_TH NULL
+#define DICE_MANYMOUSE_PADDLE1_LABEL_TH NULL
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_TH NULL
+#define DICE_MANYMOUSE_PADDLE1_X_LABEL_TH NULL
+#define DICE_MANYMOUSE_PADDLE1_X_LABEL_CAT_TH NULL
+#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_TH NULL
+#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CAT_TH NULL
+#define DICE_MANYMOUSE_PADDLE2_LABEL_TH NULL
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_TH NULL
+#define DICE_MANYMOUSE_PADDLE2_X_LABEL_TH NULL
+#define DICE_MANYMOUSE_PADDLE2_X_LABEL_CAT_TH NULL
+#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_TH NULL
+#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CAT_TH NULL
+#define DICE_MANYMOUSE_PADDLE3_LABEL_TH NULL
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_TH NULL
+#define DICE_MANYMOUSE_PADDLE3_X_LABEL_TH NULL
+#define DICE_MANYMOUSE_PADDLE3_X_LABEL_CAT_TH NULL
+#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_TH NULL
+#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CAT_TH NULL
+#define DICE_DIPSWITCH_1_LABEL_TH NULL
+#define DICE_DIPSWITCH_1_LABEL_CAT_TH NULL
+#define DICE_DIPSWITCH_1_INFO_0_TH NULL
+#define OPTION_VAL_1_TH NULL
+#define DICE_DIPSWITCH_2_LABEL_TH NULL
+#define DICE_DIPSWITCH_2_LABEL_CAT_TH NULL
+#define DICE_DIPSWITCH_2_INFO_0_TH NULL
+#define DICE_DIPSWITCH_3_LABEL_TH NULL
+#define DICE_DIPSWITCH_3_LABEL_CAT_TH NULL
+#define DICE_DIPSWITCH_3_INFO_0_TH NULL
+#define DICE_DIPSWITCH16_1_LABEL_TH NULL
+#define DICE_DIPSWITCH16_1_LABEL_CAT_TH NULL
+#define DICE_DIPSWITCH16_1_INFO_0_TH NULL
+#define DICE_DIPSWITCH16_2_LABEL_TH NULL
+#define DICE_DIPSWITCH16_2_LABEL_CAT_TH NULL
+#define DICE_DIPSWITCH16_2_INFO_0_TH NULL
+
+struct retro_core_option_v2_category option_cats_th[] = {
+   {
+      "input",
+      CATEGORY_INPUT_LABEL_TH,
+      CATEGORY_INPUT_INFO_0_TH
+   },
+   {
+      "retromouse",
+      CATEGORY_RETROMOUSE_LABEL_TH,
+      CATEGORY_RETROMOUSE_INFO_0_TH
+   },
+#ifdef MANYMOUSE
+   {
+      "manymouse",
+      CATEGORY_MANYMOUSE_LABEL_TH,
+      CATEGORY_MANYMOUSE_INFO_0_TH
+   },
+#endif
+   {
+      "dipswitch",
+      CATEGORY_DIPSWITCH_LABEL_TH,
+      CATEGORY_DIPSWITCH_INFO_0_TH
+   },
+   { NULL, NULL, NULL },
+};
+struct retro_core_option_v2_definition option_defs_th[] = {
+   {
+      "dice_use_mouse_pointer_for_paddle_1",
+      DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_TH,
+      DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_TH,
+      DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_TH,
+      NULL,
+      "input",
+      {
+         {"disabled", NULL},
+         {"enabled", NULL},
+         {NULL, NULL},
+      },
+      "disabled"
+   },
+   {
+      "dice_paddle_joystick_absolute",
+      DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_TH,
+      DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_TH,
+      DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_TH,
+      NULL,
+      "input",
+      {
+         {"disabled", NULL},
+         {"enabled", NULL},
+         {NULL, NULL},
+      },
+      "disabled"
+   },
+   {
+      // D-pad but not necessarily keyboard under libretro,
+      // that name comes from the upstream code.
+      "dice_paddle_keyboard_sensitivity",
+      DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_TH,
+      DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CAT_TH,
+      DICE_PADDLE_KEYBOARD_SENSITIVITY_INFO_0_TH,
+      NULL,
+      "input",
+      {
+         {"125", NULL},
+         {"250", NULL},
+         {"375", NULL},
+         {"500", NULL},
+         {NULL, NULL},
+      },
+      "250"
+   },
+   {
+      "dice_paddle_joystick_sensitivity",
+      DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_TH,
+      DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CAT_TH,
+      DICE_PADDLE_JOYSTICK_SENSITIVITY_INFO_0_TH,
+      NULL,
+      "input",
+      {
+         {"125", NULL},
+         {"250", NULL},
+         {"375", NULL},
+         {"500", NULL},
+         {NULL, NULL},
+      },
+      "500"
+   },
+   {
+      "dice_retromouse_paddle_sensitivity",
+      DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_TH,
+      DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CAT_TH,
+      DICE_RETROMOUSE_PADDLE_SENSITIVITY_INFO_0_TH,
+      NULL,
+      "input",
+      {
+         {"25", NULL},
+         {"50", NULL},
+         {"75", NULL},
+         {"100", NULL},
+         {"125", NULL},
+         {"250", NULL},
+         {"375", NULL},
+         {"500", NULL},
+         {NULL, NULL},
+      },
+      "125"
+   },
+   {
+      "dice_wheel_keyjoy_sensitivity",
+      DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_TH,
+      DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_CAT_TH,
+      DICE_WHEEL_KEYJOY_SENSITIVITY_INFO_0_TH,
+      NULL,
+      "input",
+      {
+         {"125", NULL},
+         {"250", NULL},
+         {"375", NULL},
+         {"500", NULL},
+         {NULL, NULL},
+      },
+      "500"
+   },
+   {
+      "dice_throttle_keyjoy_sensitivity",
+      DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_TH,
+      DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_CAT_TH,
+      DICE_THROTTLE_KEYJOY_SENSITIVITY_INFO_0_TH,
+      NULL,
+      "input",
+      {
+         {"125", NULL},
+         {"250", NULL},
+         {"375", NULL},
+         {"500", NULL},
+         {NULL, NULL},
+      },
+      "250"
+   },
+
+   {
+      "dice_retromouse_paddle0",
+      DICE_RETROMOUSE_PADDLE0_LABEL_TH,
+      DICE_RETROMOUSE_PADDLE0_LABEL_CAT_TH,
+      DICE_RETROMOUSE_PADDLE0_INFO_0_TH,
+      NULL,
+      "retromouse",
+      {
+         {"disabled", NULL},
+         {"enabled", NULL},
+         {NULL, NULL},
+      },
+      "disabled"
+   },
+   {
+      "dice_retromouse_paddle1",
+      DICE_RETROMOUSE_PADDLE1_LABEL_TH,
+      DICE_RETROMOUSE_PADDLE1_LABEL_CAT_TH,
+      DICE_RETROMOUSE_PADDLE1_INFO_0_TH,
+      NULL,
+      "retromouse",
+      {
+         {"disabled", NULL},
+         {"enabled", NULL},
+         {NULL, NULL},
+      },
+      "disabled"
+   },
+   {
+      "dice_retromouse_paddle2",
+      DICE_RETROMOUSE_PADDLE2_LABEL_TH,
+      DICE_RETROMOUSE_PADDLE2_LABEL_CAT_TH,
+      DICE_RETROMOUSE_PADDLE2_INFO_0_TH,
+      NULL,
+      "retromouse",
+      {
+         {"disabled", NULL},
+         {"enabled", NULL},
+         {NULL, NULL},
+      },
+      "disabled"
+   },
+   {
+      "dice_retromouse_paddle3",
+      DICE_RETROMOUSE_PADDLE3_LABEL_TH,
+      DICE_RETROMOUSE_PADDLE3_LABEL_CAT_TH,
+      DICE_RETROMOUSE_PADDLE3_INFO_0_TH,
+      NULL,
+      "retromouse",
+      {
+         {"disabled", NULL},
+         {"enabled", NULL},
+         {NULL, NULL},
+      },
+      "disabled"
+   },
+   {
+      "dice_retromouse_paddle0_x",
+      DICE_RETROMOUSE_PADDLE0_X_LABEL_TH,
+      DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_TH,
+      DICE_RETROMOUSE_PADDLE0_X_INFO_0_TH,
+      NULL,
+      "retromouse",
+      {
+         {"x", OPTION_VAL_X_TH},
+         {"y", OPTION_VAL_Y_TH},
+         {NULL, NULL},
+      },
+      "x"
+   },
+   {
+      "dice_retromouse_paddle0_y",
+      DICE_RETROMOUSE_PADDLE0_Y_LABEL_TH,
+      DICE_RETROMOUSE_PADDLE0_Y_LABEL_CAT_TH,
+      DICE_RETROMOUSE_PADDLE0_Y_INFO_0_TH,
+      NULL,
+      "retromouse",
+      {
+         {"x", OPTION_VAL_X_TH},
+         {"y", OPTION_VAL_Y_TH},
+         {NULL, NULL},
+      },
+      "y"
+   },
+   {
+      "dice_retromouse_paddle1_x",
+      DICE_RETROMOUSE_PADDLE1_X_LABEL_TH,
+      DICE_RETROMOUSE_PADDLE1_X_LABEL_CAT_TH,
+      DICE_RETROMOUSE_PADDLE1_X_INFO_0_TH,
+      NULL,
+      "retromouse",
+      {
+         {"x", OPTION_VAL_X_TH},
+         {"y", OPTION_VAL_Y_TH},
+         {NULL, NULL},
+      },
+      "x"
+   },
+   {
+      "dice_retromouse_paddle1_y",
+      DICE_RETROMOUSE_PADDLE1_Y_LABEL_TH,
+      DICE_RETROMOUSE_PADDLE1_Y_LABEL_CAT_TH,
+      DICE_RETROMOUSE_PADDLE1_Y_INFO_0_TH,
+      NULL,
+      "retromouse",
+      {
+         {"x", OPTION_VAL_X_TH},
+         {"y", OPTION_VAL_Y_TH},
+         {NULL, NULL},
+      },
+      "y"
+   },
+   {
+      "dice_retromouse_paddle2_x",
+      DICE_RETROMOUSE_PADDLE2_X_LABEL_TH,
+      DICE_RETROMOUSE_PADDLE2_X_LABEL_CAT_TH,
+      DICE_RETROMOUSE_PADDLE2_X_INFO_0_TH,
+      NULL,
+      "retromouse",
+      {
+         {"x", OPTION_VAL_X_TH},
+         {"y", OPTION_VAL_Y_TH},
+         {NULL, NULL},
+      },
+      "x"
+   },
+   {
+      "dice_retromouse_paddle2_y",
+      DICE_RETROMOUSE_PADDLE2_Y_LABEL_TH,
+      DICE_RETROMOUSE_PADDLE2_Y_LABEL_CAT_TH,
+      DICE_RETROMOUSE_PADDLE2_Y_INFO_0_TH,
+      NULL,
+      "retromouse",
+      {
+         {"x", OPTION_VAL_X_TH},
+         {"y", OPTION_VAL_Y_TH},
+         {NULL, NULL},
+      },
+      "y"
+   },
+   {
+      "dice_retromouse_paddle3_x",
+      DICE_RETROMOUSE_PADDLE3_X_LABEL_TH,
+      DICE_RETROMOUSE_PADDLE3_X_LABEL_CAT_TH,
+      DICE_RETROMOUSE_PADDLE3_X_INFO_0_TH,
+      NULL,
+      "retromouse",
+      {
+         {"x", OPTION_VAL_X_TH},
+         {"y", OPTION_VAL_Y_TH},
+         {NULL, NULL},
+      },
+      "x"
+   },
+   {
+      "dice_retromouse_paddle3_y",
+      DICE_RETROMOUSE_PADDLE3_Y_LABEL_TH,
+      DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_TH,
+      DICE_RETROMOUSE_PADDLE3_Y_INFO_0_TH,
+      NULL,
+      "retromouse",
+      {
+         {"x", OPTION_VAL_X_TH},
+         {"y", OPTION_VAL_Y_TH},
+         {NULL, NULL},
+      },
+      "y"
+   },
+
+#ifdef MANYMOUSE
+   {
+      "dice_manymouse_paddle0",
+      DICE_MANYMOUSE_PADDLE0_LABEL_TH,
+      DICE_RETROMOUSE_PADDLE0_LABEL_CAT_TH,
+      DICE_MANYMOUSE_PADDLE0_INFO_0_TH,
+      NULL,
+      "manymouse",
+      {
+         {"disabled", NULL},
+         {"enabled", NULL},
+         {NULL, NULL},
+      },
+      "disabled"
+   },
+   {
+      "dice_manymouse_paddle0_x",
+      DICE_MANYMOUSE_PADDLE0_X_LABEL_TH,
+      DICE_MANYMOUSE_PADDLE0_X_LABEL_CAT_TH,
+      DICE_RETROMOUSE_PADDLE0_X_INFO_0_TH,
+      NULL,
+      "manymouse",
+      {
+         {"0x", OPTION_VAL_0X_TH},
+         {"0y", OPTION_VAL_0Y_TH},
+         {"1x", OPTION_VAL_1X_TH},
+         {"1y", OPTION_VAL_1Y_TH},
+         {"2x", OPTION_VAL_2X_TH},
+         {"2y", OPTION_VAL_2Y_TH},
+         {"3x", OPTION_VAL_3X_TH},
+         {"3y", OPTION_VAL_3Y_TH},
+         {NULL, NULL},
+      },
+      "0x"
+   },
+   {
+      "dice_manymouse_paddle0_y",
+      DICE_MANYMOUSE_PADDLE0_Y_LABEL_TH,
+      DICE_MANYMOUSE_PADDLE0_Y_LABEL_CAT_TH,
+      DICE_RETROMOUSE_PADDLE0_Y_INFO_0_TH,
+      NULL,
+      "manymouse",
+      {
+         {"0x", OPTION_VAL_0X_TH},
+         {"0y", OPTION_VAL_0Y_TH},
+         {"1x", OPTION_VAL_1X_TH},
+         {"1y", OPTION_VAL_1Y_TH},
+         {"2x", OPTION_VAL_2X_TH},
+         {"2y", OPTION_VAL_2Y_TH},
+         {"3x", OPTION_VAL_3X_TH},
+         {"3y", OPTION_VAL_3Y_TH},
+         {NULL, NULL},
+      },
+      "0y"
+   },
+   {
+      "dice_manymouse_paddle1",
+      DICE_MANYMOUSE_PADDLE1_LABEL_TH,
+      DICE_RETROMOUSE_PADDLE1_LABEL_CAT_TH,
+      DICE_MANYMOUSE_PADDLE1_INFO_0_TH,
+      NULL,
+      "manymouse",
+      {
+         {"disabled", NULL},
+         {"enabled", NULL},
+         {NULL, NULL},
+      },
+      "disabled"
+   },
+   {
+      "dice_manymouse_paddle1_x",
+      DICE_MANYMOUSE_PADDLE1_X_LABEL_TH,
+      DICE_MANYMOUSE_PADDLE1_X_LABEL_CAT_TH,
+      DICE_RETROMOUSE_PADDLE1_X_INFO_0_TH,
+      NULL,
+      "manymouse",
+      {
+         {"0x", OPTION_VAL_0X_TH},
+         {"0y", OPTION_VAL_0Y_TH},
+         {"1x", OPTION_VAL_1X_TH},
+         {"1y", OPTION_VAL_1Y_TH},
+         {"2x", OPTION_VAL_2X_TH},
+         {"2y", OPTION_VAL_2Y_TH},
+         {"3x", OPTION_VAL_3X_TH},
+         {"3y", OPTION_VAL_3Y_TH},
+         {NULL, NULL},
+      },
+      "1x"
+   },
+   {
+      "dice_manymouse_paddle1_y",
+      DICE_MANYMOUSE_PADDLE1_Y_LABEL_TH,
+      DICE_MANYMOUSE_PADDLE1_Y_LABEL_CAT_TH,
+      DICE_RETROMOUSE_PADDLE1_Y_INFO_0_TH,
+      NULL,
+      "manymouse",
+      {
+         {"0x", OPTION_VAL_0X_TH},
+         {"0y", OPTION_VAL_0Y_TH},
+         {"1x", OPTION_VAL_1X_TH},
+         {"1y", OPTION_VAL_1Y_TH},
+         {"2x", OPTION_VAL_2X_TH},
+         {"2y", OPTION_VAL_2Y_TH},
+         {"3x", OPTION_VAL_3X_TH},
+         {"3y", OPTION_VAL_3Y_TH},
+         {NULL, NULL},
+      },
+      "1y"
+   },
+   {
+      "dice_manymouse_paddle2",
+      DICE_MANYMOUSE_PADDLE2_LABEL_TH,
+      DICE_RETROMOUSE_PADDLE2_LABEL_CAT_TH,
+      DICE_MANYMOUSE_PADDLE2_INFO_0_TH,
+      NULL,
+      "manymouse",
+      {
+         {"disabled", NULL},
+         {"enabled", NULL},
+         {NULL, NULL},
+      },
+      "disabled"
+   },
+   {
+      "dice_manymouse_paddle2_x",
+      DICE_MANYMOUSE_PADDLE2_X_LABEL_TH,
+      DICE_MANYMOUSE_PADDLE2_X_LABEL_CAT_TH,
+      DICE_RETROMOUSE_PADDLE2_X_INFO_0_TH,
+      NULL,
+      "manymouse",
+      {
+         {"0x", OPTION_VAL_0X_TH},
+         {"0y", OPTION_VAL_0Y_TH},
+         {"1x", OPTION_VAL_1X_TH},
+         {"1y", OPTION_VAL_1Y_TH},
+         {"2x", OPTION_VAL_2X_TH},
+         {"2y", OPTION_VAL_2Y_TH},
+         {"3x", OPTION_VAL_3X_TH},
+         {"3y", OPTION_VAL_3Y_TH},
+         {NULL, NULL},
+      },
+      "2x"
+   },
+   {
+      "dice_manymouse_paddle2_y",
+      DICE_MANYMOUSE_PADDLE2_Y_LABEL_TH,
+      DICE_MANYMOUSE_PADDLE2_Y_LABEL_CAT_TH,
+      DICE_RETROMOUSE_PADDLE2_Y_INFO_0_TH,
+      NULL,
+      "manymouse",
+      {
+         {"0x", OPTION_VAL_0X_TH},
+         {"0y", OPTION_VAL_0Y_TH},
+         {"1x", OPTION_VAL_1X_TH},
+         {"1y", OPTION_VAL_1Y_TH},
+         {"2x", OPTION_VAL_2X_TH},
+         {"2y", OPTION_VAL_2Y_TH},
+         {"3x", OPTION_VAL_3X_TH},
+         {"3y", OPTION_VAL_3Y_TH},
+         {NULL, NULL},
+      },
+      "2y"
+   },
+   {
+      "dice_manymouse_paddle3",
+      DICE_MANYMOUSE_PADDLE3_LABEL_TH,
+      DICE_RETROMOUSE_PADDLE3_LABEL_CAT_TH,
+      DICE_MANYMOUSE_PADDLE3_INFO_0_TH,
+      NULL,
+      "manymouse",
+      {
+         {"disabled", NULL},
+         {"enabled", NULL},
+         {NULL, NULL},
+      },
+      "disabled"
+   },
+   {
+      "dice_manymouse_paddle3_x",
+      DICE_MANYMOUSE_PADDLE3_X_LABEL_TH,
+      DICE_MANYMOUSE_PADDLE3_X_LABEL_CAT_TH,
+      DICE_RETROMOUSE_PADDLE3_X_INFO_0_TH,
+      NULL,
+      "manymouse",
+      {
+         {"0x", OPTION_VAL_0X_TH},
+         {"0y", OPTION_VAL_0Y_TH},
+         {"1x", OPTION_VAL_1X_TH},
+         {"1y", OPTION_VAL_1Y_TH},
+         {"2x", OPTION_VAL_2X_TH},
+         {"2y", OPTION_VAL_2Y_TH},
+         {"3x", OPTION_VAL_3X_TH},
+         {"3y", OPTION_VAL_3Y_TH},
+         {NULL, NULL},
+      },
+      "3x"
+   },
+   {
+      "dice_manymouse_paddle3_y",
+      DICE_MANYMOUSE_PADDLE3_Y_LABEL_TH,
+      DICE_MANYMOUSE_PADDLE3_Y_LABEL_CAT_TH,
+      DICE_RETROMOUSE_PADDLE3_Y_INFO_0_TH,
+      NULL,
+      "manymouse",
+      {
+         {"0x", OPTION_VAL_0X_TH},
+         {"0y", OPTION_VAL_0Y_TH},
+         {"1x", OPTION_VAL_1X_TH},
+         {"1y", OPTION_VAL_1Y_TH},
+         {"2x", OPTION_VAL_2X_TH},
+         {"2y", OPTION_VAL_2Y_TH},
+         {"3x", OPTION_VAL_3X_TH},
+         {"3y", OPTION_VAL_3Y_TH},
+         {NULL, NULL},
+      },
+      "3y"
+   },
+#endif
+
+   {
+      "dice_dipswitch_1",
+      DICE_DIPSWITCH_1_LABEL_TH,
+      DICE_DIPSWITCH_1_LABEL_CAT_TH,
+      DICE_DIPSWITCH_1_INFO_0_TH,
+      NULL,
+      "dipswitch",
+      {
+         {"-1", OPTION_VAL_1_TH},
+         {"0", NULL},
+         {"1", NULL},
+         {NULL, NULL},
+      },
+      "-1"
+   },
+   {
+      "dice_dipswitch_2",
+      DICE_DIPSWITCH_2_LABEL_TH,
+      DICE_DIPSWITCH_2_LABEL_CAT_TH,
+      DICE_DIPSWITCH_2_INFO_0_TH,
+      NULL,
+      "dipswitch",
+      {
+         {"-1", OPTION_VAL_1_TH},
+         {"0", NULL},
+         {"1", NULL},
+         {NULL, NULL},
+      },
+      "-1"
+   },
+   {
+      "dice_dipswitch_3",
+      DICE_DIPSWITCH_3_LABEL_TH,
+      DICE_DIPSWITCH_3_LABEL_CAT_TH,
+      DICE_DIPSWITCH_3_INFO_0_TH,
+      NULL,
+      "dipswitch",
+      {
+         {"-1", OPTION_VAL_1_TH},
+         {"0", NULL},
+         {"1", NULL},
+         {NULL, NULL},
+      },
+      "-1"
+   },
+   {
+      "dice_dipswitch16_1",
+      DICE_DIPSWITCH16_1_LABEL_TH,
+      DICE_DIPSWITCH16_1_LABEL_CAT_TH,
+      DICE_DIPSWITCH16_1_INFO_0_TH,
+      NULL,
+      "dipswitch",
+      {
+         {"-1", OPTION_VAL_1_TH},
+         {"0", NULL},
+         {"1", NULL},
+         {"2", NULL},
+         {"3", NULL},
+         {"4", NULL},
+         {"5", NULL},
+         {"6", NULL},
+         {"7", NULL},
+         {"8", NULL},
+         {"9", NULL},
+         {"10", NULL},
+         {"11", NULL},
+         {"12", NULL},
+         {"13", NULL},
+         {"14", NULL},
+         {"15", NULL},
+         {NULL, NULL},
+      },
+      "-1"
+   },
+   {
+      "dice_dipswitch16_2",
+      DICE_DIPSWITCH16_2_LABEL_TH,
+      DICE_DIPSWITCH16_2_LABEL_CAT_TH,
+      DICE_DIPSWITCH16_2_INFO_0_TH,
+      NULL,
+      "dipswitch",
+      {
+         {"-1", OPTION_VAL_1_TH},
+         {"0", NULL},
+         {"1", NULL},
+         {"2", NULL},
+         {"3", NULL},
+         {"4", NULL},
+         {"5", NULL},
+         {"6", NULL},
+         {"7", NULL},
+         {"8", NULL},
+         {"9", NULL},
+         {"10", NULL},
+         {"11", NULL},
+         {"12", NULL},
+         {"13", NULL},
+         {"14", NULL},
+         {"15", NULL},
+         {NULL, NULL},
+      },
+      "-1"
+   },
+
+   { NULL, NULL, NULL, NULL, NULL, NULL, {{0}}, NULL },
+};
+struct retro_core_options_v2 options_th = {
+   option_cats_th,
+   option_defs_th
+};
+
 /* RETRO_LANGUAGE_TR */
 
 #define CATEGORY_INPUT_LABEL_TR "Giriş"
