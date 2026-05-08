@@ -28067,74 +28067,74 @@ struct retro_core_options_v2 options_sv = {
 /* RETRO_LANGUAGE_TH */
 
 #define CATEGORY_INPUT_LABEL_TH "การควบคุม"
-#define CATEGORY_INPUT_INFO_0_TH NULL
+#define CATEGORY_INPUT_INFO_0_TH "กำหนดค่าการตั้งค่าอินพุตเฉพาะ core"
 #define CATEGORY_RETROMOUSE_LABEL_TH NULL
-#define CATEGORY_RETROMOUSE_INFO_0_TH NULL
+#define CATEGORY_RETROMOUSE_INFO_0_TH "กำหนดค่าการตั้งค่าเมาส์หลายตัวของ libretro"
 #define CATEGORY_MANYMOUSE_LABEL_TH NULL
-#define CATEGORY_MANYMOUSE_INFO_0_TH NULL
-#define CATEGORY_DIPSWITCH_LABEL_TH NULL
-#define CATEGORY_DIPSWITCH_INFO_0_TH NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_TH NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_TH NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_TH NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_TH NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_TH NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_TH NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_TH NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CAT_TH NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_INFO_0_TH NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_TH NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CAT_TH NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_INFO_0_TH NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_TH NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CAT_TH NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_INFO_0_TH NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_TH NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_CAT_TH NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_INFO_0_TH NULL
-#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_TH NULL
-#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_CAT_TH NULL
-#define DICE_THROTTLE_KEYJOY_SENSITIVITY_INFO_0_TH NULL
-#define DICE_RETROMOUSE_PADDLE0_LABEL_TH NULL
-#define DICE_RETROMOUSE_PADDLE0_LABEL_CAT_TH NULL
-#define DICE_RETROMOUSE_PADDLE0_INFO_0_TH NULL
-#define DICE_RETROMOUSE_PADDLE1_LABEL_TH NULL
-#define DICE_RETROMOUSE_PADDLE1_LABEL_CAT_TH NULL
-#define DICE_RETROMOUSE_PADDLE1_INFO_0_TH NULL
-#define DICE_RETROMOUSE_PADDLE2_LABEL_TH NULL
-#define DICE_RETROMOUSE_PADDLE2_LABEL_CAT_TH NULL
-#define DICE_RETROMOUSE_PADDLE2_INFO_0_TH NULL
-#define DICE_RETROMOUSE_PADDLE3_LABEL_TH NULL
-#define DICE_RETROMOUSE_PADDLE3_LABEL_CAT_TH NULL
-#define DICE_RETROMOUSE_PADDLE3_INFO_0_TH NULL
-#define DICE_RETROMOUSE_PADDLE0_X_LABEL_TH NULL
-#define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_TH NULL
-#define DICE_RETROMOUSE_PADDLE0_X_INFO_0_TH NULL
+#define CATEGORY_MANYMOUSE_INFO_0_TH "กำหนดค่าการตั้งค่าเมาส์หลายตัวของ ManyMouse"
+#define CATEGORY_DIPSWITCH_LABEL_TH "สวิตช์ DIP"
+#define CATEGORY_DIPSWITCH_INFO_0_TH "กำหนดค่าการตั้งค่า DIP switch และโพเทนชิโอมิเตอร์"
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_TH "อินพุต > ใช้ตัวชี้เมาส์สำหรับ Paddle 1"
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_TH "ใช้ตัวชี้เมาส์สำหรับ Paddle 1"
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_TH "ใช้ตัวชี้เมาส์ของระบบเป็นคอนโทรลเลอร์ Paddle 1 ตัวเลือกนี้จะไม่ให้คุณเลือกเมาส์เฉพาะเจาะจงได้หากคุณมีเมาส์หลายตัว"
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_TH "อินพุต > จอยสติ๊ก Paddle ใช้การเคลื่อนที่แบบสัมบูรณ์"
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_TH "ปุ่มควบคุมแบบPaddleใช้การเคลื่อนที่แบบสัมบูรณ์"
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_TH "จับคู่ช่วงการเคลื่อนที่ของจอยสติ๊กกับช่วงของPaddleโดยตรง แทนที่จะเป็นการเคลื่อนที่แบบสัมพัทธ์"
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_TH "อินพุต > ความไวของปุ่มทิศทางแบบPaddle"
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CAT_TH "ความไวของปุ่มทิศทางแบบPaddle"
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_INFO_0_TH "ความไวเมื่อใช้ปุ่มทิศทางกับPaddle"
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_TH "อินพุต > ความไวของอนาล็อกสติ๊กสำหรับPaddle"
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CAT_TH "ความไวของอนาล็อกสติ๊กสำหรับPaddle"
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_INFO_0_TH "ความไวเมื่อใช้อนาล็อกสติ๊กกับPaddle"
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_TH "อินพุต > ความไวของ RetroMouse สำหรับPaddle"
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CAT_TH "ความไวของ RetroMouse สำหรับPaddle"
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_INFO_0_TH "ความไวเมื่อใช้ RetroMouse กับPaddle"
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_TH "อินพุต > ความไวแกนหมุน"
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_CAT_TH "ความไวแกนหมุน"
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_INFO_0_TH "ความไวเมื่อใช้ D-pad หรืออนาล็อกสติ๊กสำหรับแกนหมุน"
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_TH "อินพุต > ความไวคันเร่ง"
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_CAT_TH "ความไวปุ่มคันเร่ง"
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_INFO_0_TH "ความไวเมื่อใช้ D-pad หรืออนาล็อกสติ๊กสำหรับคันเร่ง"
+#define DICE_RETROMOUSE_PADDLE0_LABEL_TH "RetroMouse > ใช้เมาส์สำหรับ Paddle 1"
+#define DICE_RETROMOUSE_PADDLE0_LABEL_CAT_TH "ใช้เมาส์สำหรับ Paddle 1"
+#define DICE_RETROMOUSE_PADDLE0_INFO_0_TH "ใช้เมาส์เฉพาะสำหรับ Paddle 1 ซึ่งเลือกโดยหมายเลขเมาส์ของพอร์ต 1"
+#define DICE_RETROMOUSE_PADDLE1_LABEL_TH "RetroMouse > ใช้เมาส์สำหรับ Paddle 2"
+#define DICE_RETROMOUSE_PADDLE1_LABEL_CAT_TH "ใช้เมาส์สำหรับ Paddle 2"
+#define DICE_RETROMOUSE_PADDLE1_INFO_0_TH "ใช้เมาส์เฉพาะสำหรับ Paddle 2 ซึ่งเลือกโดยหมายเลขเมาส์ของพอร์ต 2"
+#define DICE_RETROMOUSE_PADDLE2_LABEL_TH "RetroMouse > ใช้เมาส์สำหรับ Paddle 3"
+#define DICE_RETROMOUSE_PADDLE2_LABEL_CAT_TH "ใช้เมาส์สำหรับ Paddle 3"
+#define DICE_RETROMOUSE_PADDLE2_INFO_0_TH "ใช้เมาส์เฉพาะสำหรับ Paddle 3 ซึ่งเลือกโดยหมายเลขเมาส์ของพอร์ต 3"
+#define DICE_RETROMOUSE_PADDLE3_LABEL_TH "RetroMouse > ใช้เมาส์สำหรับ Paddle 4"
+#define DICE_RETROMOUSE_PADDLE3_LABEL_CAT_TH "ใช้เมาส์สำหรับ Paddle 4"
+#define DICE_RETROMOUSE_PADDLE3_INFO_0_TH "ใช้เมาส์เฉพาะสำหรับ Paddle 4 ซึ่งเลือกโดยหมายเลขเมาส์ของพอร์ต 4"
+#define DICE_RETROMOUSE_PADDLE0_X_LABEL_TH "RetroMouse > แกนเมาส์สำหรับ Paddle 1 แนวนอน"
+#define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_TH "แกนเมาส์สำหรับ Paddle 1 แนวนอน"
+#define DICE_RETROMOUSE_PADDLE0_X_INFO_0_TH "แกนเมาส์สำหรับผู้เล่น 1 การเคลื่อนที่หน้าจอแนวนอน"
 #define OPTION_VAL_X_TH NULL
 #define OPTION_VAL_Y_TH NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_TH NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_CAT_TH NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_INFO_0_TH NULL
-#define DICE_RETROMOUSE_PADDLE1_X_LABEL_TH NULL
-#define DICE_RETROMOUSE_PADDLE1_X_LABEL_CAT_TH NULL
-#define DICE_RETROMOUSE_PADDLE1_X_INFO_0_TH NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_TH NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CAT_TH NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_INFO_0_TH NULL
-#define DICE_RETROMOUSE_PADDLE2_X_LABEL_TH NULL
-#define DICE_RETROMOUSE_PADDLE2_X_LABEL_CAT_TH NULL
-#define DICE_RETROMOUSE_PADDLE2_X_INFO_0_TH NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_TH NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_CAT_TH NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_INFO_0_TH NULL
-#define DICE_RETROMOUSE_PADDLE3_X_LABEL_TH NULL
-#define DICE_RETROMOUSE_PADDLE3_X_LABEL_CAT_TH NULL
-#define DICE_RETROMOUSE_PADDLE3_X_INFO_0_TH NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_TH NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_TH NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_TH NULL
-#define DICE_MANYMOUSE_PADDLE0_LABEL_TH NULL
-#define DICE_MANYMOUSE_PADDLE0_INFO_0_TH NULL
+#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_TH "RetroMouse > แกนเมาส์สำหรับ Paddle 1 แนวตั้ง"
+#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_CAT_TH "แกนเมาส์สำหรับ Paddle 1 แนวตั้ง"
+#define DICE_RETROMOUSE_PADDLE0_Y_INFO_0_TH "แกนเมาส์สำหรับผู้เล่น 1 การเคลื่อนที่หน้าจอแนวตั้ง"
+#define DICE_RETROMOUSE_PADDLE1_X_LABEL_TH "RetroMouse > แกนเมาส์สำหรับ Paddle 2 แนวนอน"
+#define DICE_RETROMOUSE_PADDLE1_X_LABEL_CAT_TH "แกนเมาส์สำหรับ Paddle 2 แนวนอน"
+#define DICE_RETROMOUSE_PADDLE1_X_INFO_0_TH "แกนเมาส์สำหรับผู้เล่น 2 การเคลื่อนที่หน้าจอแนวนอน"
+#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_TH "RetroMouse > แกนเมาส์สำหรับ Paddle 2 แนวตั้ง"
+#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CAT_TH "แกนเมาส์สำหรับ Paddle 2 แนวตั้ง"
+#define DICE_RETROMOUSE_PADDLE1_Y_INFO_0_TH "แกนเมาส์สำหรับผู้เล่น 2 การเคลื่อนที่หน้าจอแนวตั้ง"
+#define DICE_RETROMOUSE_PADDLE2_X_LABEL_TH "RetroMouse > แกนเมาส์สำหรับ Paddle 3 แนวนอน"
+#define DICE_RETROMOUSE_PADDLE2_X_LABEL_CAT_TH "แกนเมาส์สำหรับ Paddle 3 แนวนอน"
+#define DICE_RETROMOUSE_PADDLE2_X_INFO_0_TH "แกนเมาส์สำหรับผู้เล่น 3 การเคลื่อนที่หน้าจอแนวนอน"
+#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_TH "RetroMouse > แกนเมาส์สำหรับ Paddle 3 แนวตั้ง"
+#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_CAT_TH "แกนเมาส์สำหรับ Paddle 3 แนวตั้ง"
+#define DICE_RETROMOUSE_PADDLE2_Y_INFO_0_TH "แกนเมาส์สำหรับผู้เล่น 3 การเคลื่อนที่หน้าจอแนวตั้ง"
+#define DICE_RETROMOUSE_PADDLE3_X_LABEL_TH "RetroMouse > แกนเมาส์สำหรับ Paddle 4 แนวนอน"
+#define DICE_RETROMOUSE_PADDLE3_X_LABEL_CAT_TH "แกนเมาส์สำหรับ Paddle 4 แนวนอน"
+#define DICE_RETROMOUSE_PADDLE3_X_INFO_0_TH "แกนเมาส์สำหรับผู้เล่น 4 การเคลื่อนที่หน้าจอแนวนอน"
+#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_TH "RetroMouse > แกนเมาส์สำหรับ Paddle 4 แนวตั้ง"
+#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_TH "แกนเมาส์สำหรับ Paddle 4 แนวตั้ง"
+#define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_TH "แกนเมาส์สำหรับผู้เล่น 4 การเคลื่อนที่หน้าจอแนวตั้ง"
+#define DICE_MANYMOUSE_PADDLE0_LABEL_TH "ManyMouse > ใช้เมาส์สำหรับ Paddle 1"
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_TH "ใช้เมาส์สำหรับ Paddle 1"
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_TH NULL
 #define DICE_MANYMOUSE_PADDLE0_X_LABEL_CAT_TH NULL
 #define OPTION_VAL_0X_TH NULL
@@ -28147,40 +28147,40 @@ struct retro_core_options_v2 options_sv = {
 #define OPTION_VAL_3Y_TH NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_TH NULL
 #define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CAT_TH NULL
-#define DICE_MANYMOUSE_PADDLE1_LABEL_TH NULL
-#define DICE_MANYMOUSE_PADDLE1_INFO_0_TH NULL
+#define DICE_MANYMOUSE_PADDLE1_LABEL_TH "ManyMouse > ใช้เมาส์สำหรับ Paddle 2"
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_TH "ใช้เมาส์สำหรับ Paddle 2"
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_TH NULL
 #define DICE_MANYMOUSE_PADDLE1_X_LABEL_CAT_TH NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_TH NULL
 #define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CAT_TH NULL
-#define DICE_MANYMOUSE_PADDLE2_LABEL_TH NULL
-#define DICE_MANYMOUSE_PADDLE2_INFO_0_TH NULL
+#define DICE_MANYMOUSE_PADDLE2_LABEL_TH "ManyMouse > ใช้เมาส์สำหรับ Paddle 3"
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_TH "ใช้เมาส์สำหรับ Paddle 3"
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_TH NULL
 #define DICE_MANYMOUSE_PADDLE2_X_LABEL_CAT_TH NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_TH NULL
 #define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CAT_TH NULL
-#define DICE_MANYMOUSE_PADDLE3_LABEL_TH NULL
-#define DICE_MANYMOUSE_PADDLE3_INFO_0_TH NULL
+#define DICE_MANYMOUSE_PADDLE3_LABEL_TH "ManyMouse > ใช้เมาส์สำหรับ Paddle 4"
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_TH "ใช้เมาส์สำหรับ Paddle 4"
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_TH NULL
 #define DICE_MANYMOUSE_PADDLE3_X_LABEL_CAT_TH NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_TH NULL
 #define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CAT_TH NULL
 #define DICE_DIPSWITCH_1_LABEL_TH NULL
 #define DICE_DIPSWITCH_1_LABEL_CAT_TH NULL
-#define DICE_DIPSWITCH_1_INFO_0_TH NULL
-#define OPTION_VAL_1_TH NULL
+#define DICE_DIPSWITCH_1_INFO_0_TH "การตั้งค่าสำหรับสวิตช์ DIP 1"
+#define OPTION_VAL_1_TH "ค่าเริ่มต้น"
 #define DICE_DIPSWITCH_2_LABEL_TH NULL
 #define DICE_DIPSWITCH_2_LABEL_CAT_TH NULL
-#define DICE_DIPSWITCH_2_INFO_0_TH NULL
+#define DICE_DIPSWITCH_2_INFO_0_TH "การตั้งค่าสำหรับสวิตช์ DIP 2"
 #define DICE_DIPSWITCH_3_LABEL_TH NULL
 #define DICE_DIPSWITCH_3_LABEL_CAT_TH NULL
-#define DICE_DIPSWITCH_3_INFO_0_TH NULL
+#define DICE_DIPSWITCH_3_INFO_0_TH "การตั้งค่าสำหรับสวิตช์ DIP 3"
 #define DICE_DIPSWITCH16_1_LABEL_TH NULL
 #define DICE_DIPSWITCH16_1_LABEL_CAT_TH NULL
-#define DICE_DIPSWITCH16_1_INFO_0_TH NULL
+#define DICE_DIPSWITCH16_1_INFO_0_TH "การตั้งค่าสำหรับสวิตช์ DIP 16 ตำแหน่ง หมายเลข 1"
 #define DICE_DIPSWITCH16_2_LABEL_TH NULL
 #define DICE_DIPSWITCH16_2_LABEL_CAT_TH NULL
-#define DICE_DIPSWITCH16_2_INFO_0_TH NULL
+#define DICE_DIPSWITCH16_2_INFO_0_TH "การตั้งค่าสำหรับสวิตช์ DIP 16 ตำแหน่ง หมายเลข 2"
 
 struct retro_core_option_v2_category option_cats_th[] = {
    {
