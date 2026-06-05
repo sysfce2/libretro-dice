@@ -9874,7 +9874,7 @@ struct retro_core_options_v2 options_en = {
 
 /* RETRO_LANGUAGE_EO */
 
-#define CATEGORY_INPUT_LABEL_EO "Input Driver"
+#define CATEGORY_INPUT_LABEL_EO "Enigpelilo"
 #define CATEGORY_INPUT_INFO_0_EO NULL
 #define CATEGORY_RETROMOUSE_LABEL_EO NULL
 #define CATEGORY_RETROMOUSE_INFO_0_EO NULL
