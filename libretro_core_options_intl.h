@@ -9875,76 +9875,76 @@ struct retro_core_options_v2 options_en = {
 /* RETRO_LANGUAGE_EO */
 
 #define CATEGORY_INPUT_LABEL_EO "Enigo"
-#define CATEGORY_INPUT_INFO_0_EO NULL
+#define CATEGORY_INPUT_INFO_0_EO "Konfiguri enigajn agordojn specifajn de kerno."
 #define CATEGORY_RETROMOUSE_LABEL_EO NULL
-#define CATEGORY_RETROMOUSE_INFO_0_EO NULL
+#define CATEGORY_RETROMOUSE_INFO_0_EO "Konfiguri plurmusajn agordojn de libretro."
 #define CATEGORY_MANYMOUSE_LABEL_EO NULL
-#define CATEGORY_MANYMOUSE_INFO_0_EO NULL
-#define CATEGORY_DIPSWITCH_LABEL_EO NULL
-#define CATEGORY_DIPSWITCH_INFO_0_EO NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_EO NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_EO NULL
-#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_EO NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_EO NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_EO NULL
-#define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_EO NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_EO NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CAT_EO NULL
-#define DICE_PADDLE_KEYBOARD_SENSITIVITY_INFO_0_EO NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_EO NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CAT_EO NULL
-#define DICE_PADDLE_JOYSTICK_SENSITIVITY_INFO_0_EO NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_EO NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CAT_EO NULL
-#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_INFO_0_EO NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_EO NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_CAT_EO NULL
-#define DICE_WHEEL_KEYJOY_SENSITIVITY_INFO_0_EO NULL
-#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_EO NULL
-#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_CAT_EO NULL
-#define DICE_THROTTLE_KEYJOY_SENSITIVITY_INFO_0_EO NULL
-#define DICE_RETROMOUSE_PADDLE0_LABEL_EO NULL
-#define DICE_RETROMOUSE_PADDLE0_LABEL_CAT_EO NULL
-#define DICE_RETROMOUSE_PADDLE0_INFO_0_EO NULL
-#define DICE_RETROMOUSE_PADDLE1_LABEL_EO NULL
-#define DICE_RETROMOUSE_PADDLE1_LABEL_CAT_EO NULL
-#define DICE_RETROMOUSE_PADDLE1_INFO_0_EO NULL
-#define DICE_RETROMOUSE_PADDLE2_LABEL_EO NULL
-#define DICE_RETROMOUSE_PADDLE2_LABEL_CAT_EO NULL
-#define DICE_RETROMOUSE_PADDLE2_INFO_0_EO NULL
-#define DICE_RETROMOUSE_PADDLE3_LABEL_EO NULL
-#define DICE_RETROMOUSE_PADDLE3_LABEL_CAT_EO NULL
-#define DICE_RETROMOUSE_PADDLE3_INFO_0_EO NULL
-#define DICE_RETROMOUSE_PADDLE0_X_LABEL_EO NULL
-#define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_EO NULL
-#define DICE_RETROMOUSE_PADDLE0_X_INFO_0_EO NULL
+#define CATEGORY_MANYMOUSE_INFO_0_EO "Konfiguri plurmusajn agordojn de ManyMouse."
+#define CATEGORY_DIPSWITCH_LABEL_EO "Ŝaltilo DIP"
+#define CATEGORY_DIPSWITCH_INFO_0_EO "Konfiguri agordojn pri ŝaltilo DIP kaj potenciometro."
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_EO "Enigo > Uzi musindikilon por \"paddle\" 1"
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_LABEL_CAT_EO "Uzi muzindikilon por \"paddle\" 1"
+#define DICE_USE_MOUSE_POINTER_FOR_PADDLE_1_INFO_0_EO "Uzi la sisteman musindikilon kiel regilo de \"paddle\" 1. Ĝi ne lasas al vi elekti specifan muson se vi havas pluraj."
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_EO "Enigo > Stirstango de \"paddle\" uzas absolutan movon"
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_LABEL_CAT_EO "Stirstango de \"paddle\" uzas absolutan movon"
+#define DICE_PADDLE_JOYSTICK_ABSOLUTE_INFO_0_EO "Rekte asigni stirstangan movgamon al gamo de \"paddle\", anstataŭ relativaj movoj."
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_EO "Enigo > Direktokruca sentemo de \"paddle\""
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_LABEL_CAT_EO "Direktokruca sentemo de \"Paddle\""
+#define DICE_PADDLE_KEYBOARD_SENSITIVITY_INFO_0_EO "Sentemo kiam uzante direktokrucon kiel \"paddle\"."
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_EO "Enigo > Analogstanga sentemo de \"paddle\""
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_LABEL_CAT_EO "Analogstanga sentemo de \"paddle\""
+#define DICE_PADDLE_JOYSTICK_SENSITIVITY_INFO_0_EO "Sentemo kiam uzante analogstangon por \"paddle\"."
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_EO "Enigo > Sentemo de RetroMouse por \"Paddle\""
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_LABEL_CAT_EO "Sentemo de RetroMouse por \"Paddle\""
+#define DICE_RETROMOUSE_PADDLE_SENSITIVITY_INFO_0_EO "Sentemo kiam uzante RetroMouse por \"paddle\"."
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_EO "Enigo > Direktila sentemo"
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_LABEL_CAT_EO "Direktila sentemo"
+#define DICE_WHEEL_KEYJOY_SENSITIVITY_INFO_0_EO "Sentemo kiam uzante direktokrucon aŭ analogstangon por direktilo."
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_EO "Enigo > Akcelila sentemo"
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_LABEL_CAT_EO "Akcelila sentemo"
+#define DICE_THROTTLE_KEYJOY_SENSITIVITY_INFO_0_EO "Sentemo kiam uzante direktokrucon aŭ analogstangon por akcelilo."
+#define DICE_RETROMOUSE_PADDLE0_LABEL_EO "RetroMouse > Uzi muson por \"paddle\" 1"
+#define DICE_RETROMOUSE_PADDLE0_LABEL_CAT_EO "Uzi muson por \"paddle\" 1"
+#define DICE_RETROMOUSE_PADDLE0_INFO_0_EO "Uzi specifan muson por \"paddle\" 1, elektita de musa indico de konektejo 1."
+#define DICE_RETROMOUSE_PADDLE1_LABEL_EO "RetroMouse > Uzi muson por \"paddle\" 2"
+#define DICE_RETROMOUSE_PADDLE1_LABEL_CAT_EO "Uzi muson por \"paddle\" 2"
+#define DICE_RETROMOUSE_PADDLE1_INFO_0_EO "Uzi specifan muson por \"paddle\" 2, elektita de musa indico de konektejo 2."
+#define DICE_RETROMOUSE_PADDLE2_LABEL_EO "RetroMouse > Uzi muson por \"paddle\" 3"
+#define DICE_RETROMOUSE_PADDLE2_LABEL_CAT_EO "Uzi muson por \"paddle\" 3"
+#define DICE_RETROMOUSE_PADDLE2_INFO_0_EO "Uzi specifan muson por \"paddle\" 3, elektita de musa indico de konektejo 3."
+#define DICE_RETROMOUSE_PADDLE3_LABEL_EO "RetroMouse > Uzi muson por \"paddle\" 4"
+#define DICE_RETROMOUSE_PADDLE3_LABEL_CAT_EO "Uzi muson por \"paddle\" 4"
+#define DICE_RETROMOUSE_PADDLE3_INFO_0_EO "Uzi specifan muson por \"paddle\" 4, elektita de musa indico de konektejo 4."
+#define DICE_RETROMOUSE_PADDLE0_X_LABEL_EO "RetroMouse > Musa akso por horizontalo de \"paddle\" 1"
+#define DICE_RETROMOUSE_PADDLE0_X_LABEL_CAT_EO "Musa akso por horizontalo de \"paddle\" 1"
+#define DICE_RETROMOUSE_PADDLE0_X_INFO_0_EO "Musa akso por ludanto 1, horizontala ekrana movo."
 #define OPTION_VAL_X_EO NULL
 #define OPTION_VAL_Y_EO NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_EO NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_CAT_EO NULL
-#define DICE_RETROMOUSE_PADDLE0_Y_INFO_0_EO NULL
-#define DICE_RETROMOUSE_PADDLE1_X_LABEL_EO NULL
-#define DICE_RETROMOUSE_PADDLE1_X_LABEL_CAT_EO NULL
-#define DICE_RETROMOUSE_PADDLE1_X_INFO_0_EO NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_EO NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CAT_EO NULL
-#define DICE_RETROMOUSE_PADDLE1_Y_INFO_0_EO NULL
-#define DICE_RETROMOUSE_PADDLE2_X_LABEL_EO NULL
-#define DICE_RETROMOUSE_PADDLE2_X_LABEL_CAT_EO NULL
-#define DICE_RETROMOUSE_PADDLE2_X_INFO_0_EO NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_EO NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_CAT_EO NULL
-#define DICE_RETROMOUSE_PADDLE2_Y_INFO_0_EO NULL
-#define DICE_RETROMOUSE_PADDLE3_X_LABEL_EO NULL
-#define DICE_RETROMOUSE_PADDLE3_X_LABEL_CAT_EO NULL
-#define DICE_RETROMOUSE_PADDLE3_X_INFO_0_EO NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_EO NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_EO NULL
-#define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_EO NULL
-#define DICE_MANYMOUSE_PADDLE0_LABEL_EO NULL
-#define DICE_MANYMOUSE_PADDLE0_INFO_0_EO NULL
-#define DICE_MANYMOUSE_PADDLE0_X_LABEL_EO NULL
-#define DICE_MANYMOUSE_PADDLE0_X_LABEL_CAT_EO NULL
+#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_EO "RetroMouse > Musa akso por vertikalo de \"paddle\" 1"
+#define DICE_RETROMOUSE_PADDLE0_Y_LABEL_CAT_EO "Musa akso por vertikalo de \"paddle\" 1"
+#define DICE_RETROMOUSE_PADDLE0_Y_INFO_0_EO "Musa akso por ludanto 1, vertikala ekrana movo."
+#define DICE_RETROMOUSE_PADDLE1_X_LABEL_EO "RetroMouse > Musa akso por horizontalo de \"paddle\" 2"
+#define DICE_RETROMOUSE_PADDLE1_X_LABEL_CAT_EO "Musa akso por horizontalo de \"paddle\" 2"
+#define DICE_RETROMOUSE_PADDLE1_X_INFO_0_EO "Musa akso por ludanto 2, horizontala ekrana movo."
+#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_EO "RetroMouse > Musa akso por vertikalo de \"paddle\" 2"
+#define DICE_RETROMOUSE_PADDLE1_Y_LABEL_CAT_EO "Musa akso por vertikalo de \"paddle\" 2"
+#define DICE_RETROMOUSE_PADDLE1_Y_INFO_0_EO "Musa akso por ludanto 2, vertikala ekrana movo."
+#define DICE_RETROMOUSE_PADDLE2_X_LABEL_EO "RetroMouse > Musa akso por horizontalo de \"paddle\" 3"
+#define DICE_RETROMOUSE_PADDLE2_X_LABEL_CAT_EO "Musa akso por horizontalo de \"paddle\" 3"
+#define DICE_RETROMOUSE_PADDLE2_X_INFO_0_EO "Musa akso por ludanto 3, horizontala ekrana movo."
+#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_EO "RetroMouse > Musa akso por vertikalo de \"paddle\" 3"
+#define DICE_RETROMOUSE_PADDLE2_Y_LABEL_CAT_EO "Musa akso por vertikalo de \"paddle\" 3"
+#define DICE_RETROMOUSE_PADDLE2_Y_INFO_0_EO "Musa akso por ludanto 3, vertikala ekrana movo."
+#define DICE_RETROMOUSE_PADDLE3_X_LABEL_EO "RetroMouse > Musa akso por horizontalo de \"paddle\" 4"
+#define DICE_RETROMOUSE_PADDLE3_X_LABEL_CAT_EO "Musa akso por horizontalo de \"paddle\" 4"
+#define DICE_RETROMOUSE_PADDLE3_X_INFO_0_EO "Musa akso por ludanto 4, horizontala ekrana movo."
+#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_EO "RetroMouse > Musa akso por vertikalo de \"paddle\" 4"
+#define DICE_RETROMOUSE_PADDLE3_Y_LABEL_CAT_EO "Musa akso por vertikalo de \"paddle\" 4"
+#define DICE_RETROMOUSE_PADDLE3_Y_INFO_0_EO "Musa akso por ludanto 4, vertikala ekrana movo."
+#define DICE_MANYMOUSE_PADDLE0_LABEL_EO "ManyMouse > Uzi muson por \"paddle\" 1"
+#define DICE_MANYMOUSE_PADDLE0_INFO_0_EO "Uzi muson por \"paddle\" 1."
+#define DICE_MANYMOUSE_PADDLE0_X_LABEL_EO "ManyMouse > X de Muso-\"paddle\" 1"
+#define DICE_MANYMOUSE_PADDLE0_X_LABEL_CAT_EO "X de Muso-\"paddle\" 1"
 #define OPTION_VAL_0X_EO NULL
 #define OPTION_VAL_0Y_EO NULL
 #define OPTION_VAL_1X_EO NULL
@@ -9953,42 +9953,42 @@ struct retro_core_options_v2 options_en = {
 #define OPTION_VAL_2Y_EO NULL
 #define OPTION_VAL_3X_EO NULL
 #define OPTION_VAL_3Y_EO NULL
-#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_EO NULL
-#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CAT_EO NULL
-#define DICE_MANYMOUSE_PADDLE1_LABEL_EO NULL
-#define DICE_MANYMOUSE_PADDLE1_INFO_0_EO NULL
-#define DICE_MANYMOUSE_PADDLE1_X_LABEL_EO NULL
-#define DICE_MANYMOUSE_PADDLE1_X_LABEL_CAT_EO NULL
-#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_EO NULL
-#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CAT_EO NULL
-#define DICE_MANYMOUSE_PADDLE2_LABEL_EO NULL
-#define DICE_MANYMOUSE_PADDLE2_INFO_0_EO NULL
-#define DICE_MANYMOUSE_PADDLE2_X_LABEL_EO NULL
-#define DICE_MANYMOUSE_PADDLE2_X_LABEL_CAT_EO NULL
-#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_EO NULL
-#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CAT_EO NULL
-#define DICE_MANYMOUSE_PADDLE3_LABEL_EO NULL
-#define DICE_MANYMOUSE_PADDLE3_INFO_0_EO NULL
-#define DICE_MANYMOUSE_PADDLE3_X_LABEL_EO NULL
-#define DICE_MANYMOUSE_PADDLE3_X_LABEL_CAT_EO NULL
-#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_EO NULL
-#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CAT_EO NULL
-#define DICE_DIPSWITCH_1_LABEL_EO NULL
-#define DICE_DIPSWITCH_1_LABEL_CAT_EO NULL
-#define DICE_DIPSWITCH_1_INFO_0_EO NULL
-#define OPTION_VAL_1_EO NULL
-#define DICE_DIPSWITCH_2_LABEL_EO NULL
-#define DICE_DIPSWITCH_2_LABEL_CAT_EO NULL
-#define DICE_DIPSWITCH_2_INFO_0_EO NULL
-#define DICE_DIPSWITCH_3_LABEL_EO NULL
-#define DICE_DIPSWITCH_3_LABEL_CAT_EO NULL
-#define DICE_DIPSWITCH_3_INFO_0_EO NULL
-#define DICE_DIPSWITCH16_1_LABEL_EO NULL
-#define DICE_DIPSWITCH16_1_LABEL_CAT_EO NULL
-#define DICE_DIPSWITCH16_1_INFO_0_EO NULL
-#define DICE_DIPSWITCH16_2_LABEL_EO NULL
-#define DICE_DIPSWITCH16_2_LABEL_CAT_EO NULL
-#define DICE_DIPSWITCH16_2_INFO_0_EO NULL
+#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_EO "ManyMouse > Y de Muso-\"paddle\" 1"
+#define DICE_MANYMOUSE_PADDLE0_Y_LABEL_CAT_EO "Y de Muso-\"paddle\" 1"
+#define DICE_MANYMOUSE_PADDLE1_LABEL_EO "ManyMouse > Uzi muson por \"paddle\" 2"
+#define DICE_MANYMOUSE_PADDLE1_INFO_0_EO "Uzi muson por \"paddle\" 2."
+#define DICE_MANYMOUSE_PADDLE1_X_LABEL_EO "ManyMouse > X de Muso-\"paddle\" 2"
+#define DICE_MANYMOUSE_PADDLE1_X_LABEL_CAT_EO "X de Muso-\"paddle\" 2"
+#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_EO "ManyMouse > Y de Muso-\"paddle\" 2"
+#define DICE_MANYMOUSE_PADDLE1_Y_LABEL_CAT_EO "Y de Muso-\"paddle\" 2"
+#define DICE_MANYMOUSE_PADDLE2_LABEL_EO "ManyMouse > Uzi muson por \"paddle\" 3"
+#define DICE_MANYMOUSE_PADDLE2_INFO_0_EO "Uzi muson por \"paddle\" 3."
+#define DICE_MANYMOUSE_PADDLE2_X_LABEL_EO "ManyMouse > X de Muso-\"paddle\" 3"
+#define DICE_MANYMOUSE_PADDLE2_X_LABEL_CAT_EO "X de Muso-\"paddle\" 3"
+#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_EO "ManyMouse > Y de Muso-\"paddle\" 3"
+#define DICE_MANYMOUSE_PADDLE2_Y_LABEL_CAT_EO "Y de Muso-\"paddle\" 3"
+#define DICE_MANYMOUSE_PADDLE3_LABEL_EO "ManyMouse > Uzi muson por \"paddle\" 4"
+#define DICE_MANYMOUSE_PADDLE3_INFO_0_EO "Uzi muson por \"paddle\" 4."
+#define DICE_MANYMOUSE_PADDLE3_X_LABEL_EO "ManyMouse > X de Muso-\"paddle\" 4"
+#define DICE_MANYMOUSE_PADDLE3_X_LABEL_CAT_EO "X de Muso-\"paddle\" 4"
+#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_EO "ManyMouse > Y de Muso-\"paddle\" 4"
+#define DICE_MANYMOUSE_PADDLE3_Y_LABEL_CAT_EO "Y de Muso-\"paddle\" 4"
+#define DICE_DIPSWITCH_1_LABEL_EO "Ŝaltilo DIP > Ŝaltilo DIP 1"
+#define DICE_DIPSWITCH_1_LABEL_CAT_EO "Ŝaltilo DIP 1"
+#define DICE_DIPSWITCH_1_INFO_0_EO "Agordo por ŝaltilo DIP 1."
+#define OPTION_VAL_1_EO "defaŭlta"
+#define DICE_DIPSWITCH_2_LABEL_EO "Ŝaltilo DIP > Ŝaltilo DIP 2"
+#define DICE_DIPSWITCH_2_LABEL_CAT_EO "Ŝaltilo DIP 2"
+#define DICE_DIPSWITCH_2_INFO_0_EO "Agordo por ŝaltilo DIP 2."
+#define DICE_DIPSWITCH_3_LABEL_EO "Ŝaltilo DIP > Ŝaltilo DIP 3"
+#define DICE_DIPSWITCH_3_LABEL_CAT_EO "Ŝaltilo DIP 3"
+#define DICE_DIPSWITCH_3_INFO_0_EO "Agordo por ŝaltilo DIP 3."
+#define DICE_DIPSWITCH16_1_LABEL_EO "Ŝaltilo DIP > Deksesuma ŝaltilo DIP 1"
+#define DICE_DIPSWITCH16_1_LABEL_CAT_EO "Deksesuma ŝaltilo DIP 1"
+#define DICE_DIPSWITCH16_1_INFO_0_EO "Agordo por deksesuma ŝaltilo DIP numero 1."
+#define DICE_DIPSWITCH16_2_LABEL_EO "Ŝaltilo DIP > Deksesuma ŝaltilo DIP 2"
+#define DICE_DIPSWITCH16_2_LABEL_CAT_EO "Deksesuma ŝaltilo DIP 2"
+#define DICE_DIPSWITCH16_2_INFO_0_EO "Agordo por deksesuma ŝaltilo DIP numero 2."
 
 struct retro_core_option_v2_category option_cats_eo[] = {
    {
